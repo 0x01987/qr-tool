@@ -1,7 +1,7 @@
 # QR Tool – Free QR Code Generator
 
 Live site:
-https://0x01987.github.io/qr-tool/
+https://instantqr.io
 
 A clean, browser-based QR Code Generator supporting:
 
