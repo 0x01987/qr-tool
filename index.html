@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QR Code Generator</title>
+  <meta name="description" content="Clean QR Code Generator for Text/URL and Wi-Fi. Download as PNG." />
+  <style>
+    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    body { margin:0; background:#0b0f19; color:#e7eaf2; }
+    .wrap { max-width: 920px; margin:0 auto; padding: 22px; }
+    .card {
+      background:#121a2a; border:1px solid #22304e; border-radius:18px;
+      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    h1{ margin:0; font-size:24px; }
+    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
+
+    .grid{ display:grid; grid-template-columns: 1.2fr .8fr; gap:14px; margin-top:14px; }
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+
+    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; }
+    label{ display:block; font-size:12px; color:#b8c0d6; margin-bottom:6px; }
+    input, select, textarea{
+      width:100%; padding:12px 10px; border-radius:14px;
+      border:1px solid #2a3a5f; background:#0b1222; color:#e7eaf2; outline:none;
+    }
+    textarea{ min-height:110px; resize:vertical; }
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    @media (max-width: 520px){ .row{ grid-template-columns: 1fr; } }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    button{
+      border:0; border-radius:14px; padding:12px 14px;
+      background:#3b82f6; color:white; font-weight:800; cursor:pointer;
+    }
+    button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
+
+    .qrWrap{
+      width:320px; max-width:100%;
+      aspect-ratio:1/1;
+      border-radius:16px;
+      background:#0b1222;
+      border:1px dashed rgba(184,192,214,.35);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+      padding:10px;
+    }
+    .preview{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .hint{ color:#b8c0d6; font-size:12px; text-align:center; }
+    .tiny{ color:#8ea0c8; font-size:12px; }
+    .error{ color:#ff9fb3; font-size:12px; margin-top:8px; display:none; }
+
+    .pillbar{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .pill{
+      padding:7px 10px; border-radius:999px;
+      background:#0b1222; border:1px solid #2a3a5f;
+      color:#b8c0d6; font-size:12px; cursor:pointer; user-select:none;
+    }
+    .pill.active{ border-color:#3b82f6; color:#e7eaf2; }
+    code{ color:#cfe0ff; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <div>
+          <h1>QR Code Generator</h1>
+          <div class="sub">Text/URL + Wi-Fi QR codes. Download as PNG.</div>
+        </div>
+      </header>
+
+      <div class="grid">
+        <!-- Controls -->
+        <div class="box">
+          <label>Type</label>
+          <div class="pillbar" id="typeBar">
+            <div class="pill active" data-type="text">Text / URL</div>
+            <div class="pill" data-type="wifi">Wi-Fi</div>
+          </div>
+
+          <!-- TEXT/URL -->
+          <div id="textForm">
+            <label for="text">Text or URL</label>
+            <textarea id="text" placeholder="https://example.com&#10;or any text"></textarea>
+          </div>
+
+          <!-- WIFI -->
+          <div id="wifiForm" style="display:none;">
+            <div class="row">
+              <div>
+                <label for="ssid">Wi-Fi name (SSID)</label>
+                <input id="ssid" type="text" placeholder="MyWiFi" />
+              </div>
+              <div>
+                <label for="security">Security</label>
+                <select id="security">
+                  <option value="WPA" selected>WPA/WPA2/WPA3</option>
+                  <option value="WEP">WEP</option>
+                  <option value="nopass">No password</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top:12px;">
+              <div>
+                <label for="password">Password</label>
+                <input id="password" type="text" placeholder="••••••••" />
+              </div>
+              <div>
+                <label for="hidden">Hidden network</label>
+                <select id="hidden">
+                  <option value="false" selected>No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="tiny" style="margin-top:8px;">
+              Format: <code>WIFI:T:WPA;S:SSID;P:password;H:false;;</code>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:12px;">
+            <div>
+              <label for="size">Size (px)</label>
+              <input id="size" type="number" min="128" max="1024" value="320" />
+            </div>
+            <div>
+              <label for="level">Error correction</label>
+              <select id="level">
+                <option value="L">L (smallest)</option>
+                <option value="M" selected>M (recommended)</option>
+                <option value="Q">Q</option>
+                <option value="H">H (best)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="generateBtn">Generate</button>
+            <button class="secondary" id="downloadBtn">Download PNG</button>
+            <button class="secondary" id="clearBtn">Clear</button>
+          </div>
+
+          <div class="error" id="error"></div>
+        </div>
+
+        <!-- Preview -->
+        <div class="box preview">
+          <div class="qrWrap" id="qrWrap">
+            <div class="hint">Your QR code will appear here.</div>
+          </div>
+          <div class="hint">Tip: test-scan before printing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+
+  <script>
+    const pills = Array.from(document.querySelectorAll(".pill"));
+    const textForm = document.getElementById("textForm");
+    const wifiForm = document.getElementById("wifiForm");
+
+    const textEl = document.getElementById("text");
+    const ssidEl = document.getElementById("ssid");
+    const secEl = document.getElementById("security");
+    const passEl = document.getElementById("password");
+    const hiddenEl = document.getElementById("hidden");
+
+    const sizeEl = document.getElementById("size");
+    const levelEl = document.getElementById("level");
+
+    const generateBtn = document.getElementById("generateBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
+    const qrWrap = document.getElementById("qrWrap");
+    const errorEl = document.getElementById("error");
+
+    let currentType = "text";
+    let lastCanvas = null;
+    let lastPayload = "";
+
+    function setType(t){
+      currentType = t;
+      pills.forEach(p => p.classList.toggle("active", p.dataset.type === t));
+      textForm.style.display = t === "text" ? "block" : "none";
+      wifiForm.style.display = t === "wifi" ? "block" : "none";
+      hideError();
+    }
+
+    function hideError(){ errorEl.style.display = "none"; errorEl.textContent = ""; }
+    function showError(msg){ errorEl.textContent = msg; errorEl.style.display = "block"; }
+
+    function escWifi(s){
+      // Escape \ ; , : and " as seen in common Wi-Fi QR implementations
+      return (s || "").replace(/([\\;,:"])/g, "\\$1");
+    }
+
+    function buildPayload(){
+      if(currentType === "text"){
+        const v = (textEl.value || "").trim();
+        if(!v) throw new Error("Enter text or a URL.");
+        return v;
+      }
+
+      // Wi-Fi
+      const ssid = (ssidEl.value || "").trim();
+      if(!ssid) throw new Error("Enter Wi-Fi name (SSID).");
+
+      const sec = secEl.value; // WPA | WEP | nopass
+      const hidden = hiddenEl.value; // true | false
+      const pass = (passEl.value || "").trim();
+
+      if(sec !== "nopass" && !pass) throw new Error("Enter Wi-Fi password (or choose No password).");
+
+      return `WIFI:T:${sec};S:${escWifi(ssid)};P:${escWifi(pass)};H:${hidden};;`;
+    }
+
+    function clearQR(){
+      qrWrap.innerHTML = `<div class="hint">Your QR code will appear here.</div>`;
+      lastCanvas = null;
+      lastPayload = "";
+    }
+
+    function generate(){
+      hideError();
+      try{
+        if(typeof QRious === "undefined"){
+          throw new Error("QR library failed to load. If you’re offline or blocked, download qrious.min.js and host it locally.");
+        }
+
+        const payload = buildPayload();
+        const size = Math.max(128, Math.min(1024, parseInt(sizeEl.value || "320", 10)));
+        const level = levelEl.value;
+
+        clearQR();
+
+        const qr = new QRious({
+          value: payload,
+          size: size,
+          level: level
+        });
+
+        const canvas = qr.canvas;
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.borderRadius = "12px";
+        canvas.style.background = "#ffffff";
+
+        qrWrap.innerHTML = "";
+        qrWrap.appendChild(canvas);
+
+        lastCanvas = canvas;
+        lastPayload = payload;
+      }catch(err){
+        showError(err.message || "Could not generate QR code.");
+      }
+    }
+
+    function downloadPNG(){
+      hideError();
+      if(!lastCanvas){
+        showError("Generate a QR code first.");
+        return;
+      }
+      const a = document.createElement("a");
+      a.download = "qr-code.png";
+      a.href = lastCanvas.toDataURL("image/png");
+      a.click();
+    }
+
+    function clearAll(){
+      hideError();
+      textEl.value = "";
+      ssidEl.value = "";
+      passEl.value = "";
+      secEl.value = "WPA";
+      hiddenEl.value = "false";
+      sizeEl.value = "320";
+      levelEl.value = "M";
+      clearQR();
+    }
+
+    // Events
+    document.getElementById("typeBar").addEventListener("click", (e) => {
+      const pill = e.target.closest(".pill");
+      if(!pill) return;
+      setType(pill.dataset.type);
+    });
+
+    generateBtn.addEventListener("click", generate);
+    downloadBtn.addEventListener("click", downloadPNG);
+    clearBtn.addEventListener("click", clearAll);
+
+    // Enter generates (Ctrl+Enter in textarea)
+    document.addEventListener("keydown", (e) => {
+      if(e.target && e.target.tagName === "TEXTAREA"){
+        if(e.key === "Enter" && (e.ctrlKey || e.metaKey)) generate();
+        return;
+      }
+      if(e.key === "Enter") generate();
+    });
+
+    // Init
+    setType("text");
+  </script>
+</body>
+</html>
