@@ -14,7 +14,7 @@ If you discover a security vulnerability, please do **not** open a public issue.
 
 Instead:
 
-- Email: your-email@example.com  
+- Email: 0x01987db@gmail.com  
 OR  
 - Open a private security advisory via GitHub
 
