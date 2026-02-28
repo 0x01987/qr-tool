@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Create a WiFi QR Code | Free WiFi QR Code Generator | InstantQR.io</title>
+
+  <meta name="description"
+        content="Create a WiFi QR code for guests to scan and join instantly. Free WiFi QR code generator for WPA/WPA2/WPA3, WEP, or no password. Download as PNG." />
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <header>
+        <div>
+          <h1>Create a WiFi QR Code</h1>
+          <div class="sub">
+            Let guests scan your QR code to join Wi-Fi without typing the password.
+          </div>
+        </div>
+
+        <div class="footerLinks" style="margin-top:0;">
+          <a href="/">Home</a>
+        </div>
+      </header>
+
+      <!-- SEO Content Block -->
+      <div class="infoMid">
+        <h2>Step-by-step: Create a WiFi QR Code</h2>
+        <ol>
+          <li>Enter your Wi-Fi name (SSID).</li>
+          <li>Select your security type (usually <strong>WPA</strong>).</li>
+          <li>Enter your Wi-Fi password (unless you choose “No password”).</li>
+          <li>Click <strong>Generate</strong> and download the PNG.</li>
+        </ol>
+
+        <h2>Where to use it</h2>
+        <ul>
+          <li>Home guest access (print and place near the router)</li>
+          <li>Airbnb / rentals (welcome card)</li>
+          <li>Cafes and restaurants (counter sign)</li>
+          <li>Offices (reception desk)</li>
+          <li>Events (check-in table)</li>
+        </ul>
+
+        <h2>Tips for best results</h2>
+        <ul>
+          <li>Use at least <strong>320px</strong> for phone scanning.</li>
+          <li>Choose error correction <strong>M</strong> or <strong>H</strong> if printing.</li>
+          <li>Always test-scan before printing many copies.</li>
+        </ul>
+
+        <p class="tiny">
+          Privacy note: InstantQR generates QR codes locally in your browser — we do not store your Wi-Fi details.
+        </p>
+      </div>
+
+      <div class="grid">
+
+        <!-- Controls -->
+        <div class="box">
+          <label>Type</label>
+          <div class="pillbar" id="typeBar">
+            <div class="pill" data-type="text">Text / URL</div>
+            <div class="pill active" data-type="wifi">Wi-Fi</div>
+          </div>
+
+          <!-- TEXT/URL (HIDDEN BY DEFAULT) -->
+          <div id="textForm" style="display:none;">
+            <label for="text">Text or URL</label>
+            <textarea id="text" placeholder="https://example.com&#10;or any text"></textarea>
+          </div>
+
+          <!-- WIFI (VISIBLE BY DEFAULT) -->
+          <div id="wifiForm">
+            <div class="row">
+              <div>
+                <label for="ssid">Wi-Fi name (SSID)</label>
+                <input id="ssid" type="text" placeholder="MyWiFi" />
+              </div>
+              <div>
+                <label for="security">Security</label>
+                <select id="security">
+                  <option value="WPA" selected>WPA/WPA2/WPA3</option>
+                  <option value="WEP">WEP</option>
+                  <option value="nopass">No password</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top:12px;">
+              <div>
+                <label for="password">Password</label>
+                <input id="password" type="text" placeholder="••••••••" />
+              </div>
+              <div>
+                <label for="hidden">Hidden network</label>
+                <select id="hidden">
+                  <option value="false" selected>No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="tiny" style="margin-top:8px;">
+              Format: <code>WIFI:T:WPA;S:SSID;P:password;H:false;;</code>
+            </div>
+          </div>
+
+          <!-- SIZE + ERROR CORRECTION -->
+          <div class="row" style="margin-top:12px;">
+            <div>
+              <label for="size">Size (px)</label>
+              <input id="size" type="number" min="128" max="1024" value="320" />
+            </div>
+            <div>
+              <label for="level">Error correction</label>
+              <select id="level">
+                <option value="L">L (smallest)</option>
+                <option value="M" selected>M (recommended)</option>
+                <option value="Q">Q</option>
+                <option value="H">H (best)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="generateBtn">Generate</button>
+            <button class="secondary" id="downloadBtn">Download PNG</button>
+            <button class="secondary" id="clearBtn">Clear</button>
+          </div>
+
+          <div class="error" id="error"></div>
+        </div>
+
+        <!-- Preview -->
+        <div class="box preview">
+          <div class="qrWrap" id="qrWrap">
+            <div class="hint">Your QR code will appear here.</div>
+          </div>
+          <div class="hint">Tip: test-scan before printing.</div>
+        </div>
+
+      </div>
+
+      <!-- Footer Links -->
+      <div class="footerLinks">
+        <a href="/about.html">About</a> ·
+        <a href="/privacy.html">Privacy</a> ·
+        <a href="/terms.html">Terms</a> ·
+        <a href="/contact.html">Contact</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QR Library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+
+  <!-- Your shared JS -->
+  <script src="/app.js"></script>
+
+  <script>
+    // Force Wi-Fi mode on this page
+    setType("wifi");
+  </script>
+
+</body>
+</html>
