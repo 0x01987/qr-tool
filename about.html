@@ -1,38 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>About | InstantQR</title>
-  <meta name="description" content="Learn about InstantQR, a free online QR code generator for URLs, WiFi, and text.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About | InstantQR.io</title>
+  <meta name="description" content="About InstantQR.io — a clean, fast QR code generator for Text/URL and Wi-Fi." />
+  <style>
+    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    body { margin:0; background:#0b0f19; color:#e7eaf2; }
+    .wrap { max-width: 920px; margin:0 auto; padding: 22px; }
+    .card {
+      background:#121a2a; border:1px solid #22304e; border-radius:18px;
+      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    h1{ margin:0; font-size:24px; }
+    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
+
+    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; margin-top:14px; }
+    h2{ margin:12px 0 8px; font-size:16px; }
+    p, li{ color:#b8c0d6; font-size:13px; line-height:1.7; }
+    ul{ margin:8px 0 0; padding-left:18px; }
+
+    .topnav{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top:10px;
+    }
+    .linkbtn{
+      display:inline-block; padding:10px 12px; border-radius:12px;
+      background:#0b1222; border:1px solid #2a3a5f;
+      color:#cfe0ff; text-decoration:none; font-weight:700; font-size:12px;
+    }
+    .linkbtn:hover{ border-color:#3b82f6; }
+
+    .footerLinks{
+      margin-top:14px;
+      text-align:center;
+      color:#8ea0c8;
+      font-size:12px;
+    }
+    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
+    code{ color:#cfe0ff; }
+  </style>
 </head>
 <body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <div>
+          <h1>About InstantQR.io</h1>
+          <div class="sub">Fast, clean QR codes — right in your browser.</div>
+        </div>
+        <div class="topnav">
+          <a class="linkbtn" href="/">← Back to Generator</a>
+        </div>
+      </header>
 
-<h1>About InstantQR</h1>
+      <div class="box">
+        <h2>What is InstantQR?</h2>
+        <p>
+          InstantQR.io is a lightweight QR code generator for <strong>Text/URL</strong> and <strong>Wi-Fi</strong>.
+          It’s designed to be simple, quick, and usable on mobile and desktop.
+        </p>
 
-<p>InstantQR is a free online QR code generator designed to make creating QR codes fast, simple, and accessible to everyone.</p>
+        <h2>Privacy-first</h2>
+        <p>
+          QR generation happens locally in your browser. We don’t ask you to create an account and we don’t store
+          the data you type into the generator.
+        </p>
 
-<p>Our tool allows you to generate QR codes for:</p>
-<ul>
-  <li>Website URLs</li>
-  <li>WiFi networks</li>
-  <li>Text messages</li>
-  <li>Business use cases</li>
-</ul>
+        <h2>Common uses</h2>
+        <ul>
+          <li>Share a website or menu link</li>
+          <li>Create Wi-Fi QR codes for guests</li>
+          <li>Add QR codes to flyers, business cards, and events</li>
+        </ul>
 
-<p>InstantQR runs entirely in your browser. We do not store or save the QR codes you generate.</p>
+        <h2>Feedback</h2>
+        <p>
+          Have an idea or found an issue? Visit the <a href="/contact.html" style="color:#cfe0ff;">Contact</a> page.
+        </p>
+      </div>
 
-<p>Our mission is to provide a clean, secure, and easy-to-use QR code generator for individuals and businesses.</p>
-
-<p>If you have suggestions or feedback, feel free to contact us.</p>
-
-<footer>
-  <hr>
-  <a href="/">Home</a> |
-  <a href="/privacy.html">Privacy Policy</a> |
-  <a href="/terms.html">Terms</a> |
-  <a href="/contact.html">Contact</a>
-</footer>
-
+      <div class="footerLinks">
+        <a href="/about.html">About</a> ·
+        <a href="/privacy.html">Privacy</a> ·
+        <a href="/terms.html">Terms</a> ·
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
