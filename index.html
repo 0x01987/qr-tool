@@ -23,6 +23,56 @@
       background:#121a2a; border:1px solid #22304e; border-radius:18px;
       padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
     }
+
+    /* NEW: Top nav */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+    .brand{
+      display:flex;
+      align-items:baseline;
+      gap:10px;
+      text-decoration:none;
+      color:#e7eaf2;
+    }
+    .brand strong{
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+    .brand span{
+      color:#8ea0c8;
+      font-size:12px;
+    }
+    .toolnav{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .toolnav a{
+      padding:8px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid #2a3a5f;
+      color:#b8c0d6;
+      font-size:12px;
+      text-decoration:none;
+      font-weight:700;
+    }
+    .toolnav a:hover{
+      border-color:#3b82f6;
+      color:#e7eaf2;
+    }
+    .toolnav a.active{
+      border-color:#3b82f6;
+      color:#e7eaf2;
+    }
+
     header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
     h1{ margin:0; font-size:24px; }
     .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
@@ -106,6 +156,20 @@
 <body>
   <div class="wrap">
     <div class="card">
+
+      <!-- NEW: Top navigation -->
+      <div class="topbar">
+        <a class="brand" href="/">
+          <strong>InstantQR</strong>
+          <span>privacy-first tools</span>
+        </a>
+
+        <nav class="toolnav" aria-label="Tools">
+          <a class="active" href="/">QR Generator</a>
+          <a href="/password.html">Password Generator</a>
+        </nav>
+      </div>
+
       <header>
         <div>
           <h1>QR Code Generator</h1>
@@ -221,31 +285,33 @@
 
       <!-- Footer navigation (required pages for AdSense readiness) -->
       <div class="infoMid">
-  <h2>QR Code Tools</h2>
-  <ul>
-    <li><a href="/wifi-qr-code-generator.html">Generate a WiFi QR Code</a></li>
-    <li><a href="/url-qr-code-generator.html">Create a QR Code for a Website</a></li>
-    <li><a href="/create-qr-code-for-wifi.html">Step-by-Step WiFi QR Guide</a></li>
-  </ul>
-</div>
+        <h2>QR Code Tools</h2>
+        <ul>
+          <li><a href="/wifi-qr-code-generator.html">Generate a WiFi QR Code</a></li>
+          <li><a href="/url-qr-code-generator.html">Create a QR Code for a Website</a></li>
+          <li><a href="/create-qr-code-for-wifi.html">Step-by-Step WiFi QR Guide</a></li>
+        </ul>
+      </div>
+
       <div class="footerLinks">
+        <!-- SEO Tool Links -->
+        <div style="margin-bottom:8px;">
+          <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+          <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
+          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a>
+        </div>
 
-  <!-- SEO Tool Links -->
-  <div style="margin-bottom:8px;">
-    <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
-    <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
-    <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a>
+        <!-- Policy Links -->
+        <div>
+          <a href="/about.html">About</a> ·
+          <a href="/privacy.html">Privacy</a> ·
+          <a href="/terms.html">Terms</a> ·
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+
+    </div>
   </div>
-
-  <!-- Policy Links -->
-  <div>
-    <a href="/about.html">About</a> ·
-    <a href="/privacy.html">Privacy</a> ·
-    <a href="/terms.html">Terms</a> ·
-    <a href="/contact.html">Contact</a>
-  </div>
-
-</div>
 
   <!-- QR library -->
   <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
@@ -392,6 +458,3 @@
   </script>
 </body>
 </html>
-
-
-
