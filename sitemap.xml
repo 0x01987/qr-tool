@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main -->
+  <url>
+    <loc>https://instantqr.io/</loc>
+  </url>
+
+  <!-- SEO Pages -->
+  <url>
+    <loc>https://instantqr.io/wifi-qr-code-generator.html</loc>
+  </url>
+  <url>
+    <loc>https://instantqr.io/url-qr-code-generator.html</loc>
+  </url>
+  <url>
+    <loc>https://instantqr.io/create-qr-code-for-wifi.html</loc>
+  </url>
+
+  <!-- Policy Pages -->
+  <url>
+    <loc>https://instantqr.io/about.html</loc>
+  </url>
+  <url>
+    <loc>https://instantqr.io/privacy.html</loc>
+  </url>
+  <url>
+    <loc>https://instantqr.io/terms.html</loc>
+  </url>
+  <url>
+    <loc>https://instantqr.io/contact.html</loc>
+  </url>
+
+</urlset>
