@@ -1,6 +1,7 @@
 InstantQR – Privacy-First Online Tools
 
 🌐 Live Site: https://instantqr.io
+
 InstantQR is a lightweight, browser-based utility platform focused on privacy-first tools that run entirely in your browser.
 
 No accounts.
@@ -16,8 +17,8 @@ Wi-Fi networks (WPA / WEP / Open)
 Adjustable size (128–1024px)
 Error correction levels
 PNG download
+All QR generation happens locally using client-side JavaScript.
 
-# All QR generation happens locally using client-side JavaScript.
 # 🔐 Password Generator
 
 Generate secure passwords instantly with:
@@ -27,8 +28,7 @@ Ambiguous character filtering (O/0, l/1, I)
 Presets (PIN, Memorable, Max Strength)
 Entropy strength estimation
 One-click copy
-
-# Passwords are generated locally using the Web Crypto API.
+Passwords are generated locally using the Web Crypto API.
 Nothing is transmitted or stored.
 
 # 🛡 Privacy Principles
