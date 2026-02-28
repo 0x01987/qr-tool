@@ -101,6 +101,7 @@ code{ color:#cfe0ff; }
 }
 .linkbtn:hover{ border-color:#3b82f6; }
 
+/* Password Generator
 .page-title { margin: 0 0 10px; font-size: clamp(1.8rem, 3vw, 2.4rem); }
 
 .brand-text { font-weight: 900; letter-spacing: 0.3px; color: #fff; }
