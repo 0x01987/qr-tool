@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Free URL QR Code Generator | Create Website QR Code | InstantQR.io</title>
+
+  <meta name="description"
+        content="Generate a QR code for any website URL instantly. Create free URL QR codes online and download as PNG. No signup required. Fast and secure." />
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <header>
+        <div>
+          <h1>URL QR Code Generator</h1>
+          <div class="sub">
+            Create a QR code for any website link. Scan and open instantly.
+          </div>
+        </div>
+
+        <div class="footerLinks" style="margin-top:0;">
+          <a href="/">Home</a>
+        </div>
+      </header>
+
+      <!-- SEO Content Block -->
+      <div class="infoMid">
+        <h2>How to Create a QR Code for a Website</h2>
+        <ol>
+          <li>Enter your website URL in the box below.</li>
+          <li>Click <strong>Generate</strong>.</li>
+          <li>Download your QR code as a PNG image.</li>
+        </ol>
+
+        <p>
+          Use this free URL QR code generator to share websites,
+          landing pages, restaurant menus, event pages, or social profiles.
+          Anyone can scan the code with their phone camera.
+        </p>
+
+        <h2>Why Use a URL QR Code?</h2>
+        <ul>
+          <li>Share links instantly without typing</li>
+          <li>Print on flyers, posters, or business cards</li>
+          <li>Track marketing campaigns (using your own tracking link)</li>
+          <li>Make offline promotions interactive</li>
+        </ul>
+      </div>
+
+      <div class="grid">
+
+        <!-- Controls -->
+        <div class="box">
+
+          <label>Type</label>
+          <div class="pillbar" id="typeBar">
+            <div class="pill active" data-type="text">Text / URL</div>
+            <div class="pill" data-type="wifi">Wi-Fi</div>
+          </div>
+
+          <!-- TEXT/URL FORM (VISIBLE BY DEFAULT) -->
+          <div id="textForm">
+            <label for="text">Website URL</label>
+            <textarea id="text" placeholder="https://example.com"></textarea>
+          </div>
+
+          <!-- WIFI FORM (HIDDEN BY DEFAULT) -->
+          <div id="wifiForm" style="display:none;">
+            <div class="row">
+              <div>
+                <label for="ssid">Wi-Fi name (SSID)</label>
+                <input id="ssid" type="text" placeholder="MyWiFi" />
+              </div>
+              <div>
+                <label for="security">Security</label>
+                <select id="security">
+                  <option value="WPA" selected>WPA/WPA2/WPA3</option>
+                  <option value="WEP">WEP</option>
+                  <option value="nopass">No password</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top:12px;">
+              <div>
+                <label for="password">Password</label>
+                <input id="password" type="text" placeholder="••••••••" />
+              </div>
+              <div>
+                <label for="hidden">Hidden network</label>
+                <select id="hidden">
+                  <option value="false" selected>No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- SIZE + ERROR CORRECTION -->
+          <div class="row" style="margin-top:12px;">
+            <div>
+              <label for="size">Size (px)</label>
+              <input id="size" type="number" min="128" max="1024" value="320" />
+            </div>
+            <div>
+              <label for="level">Error correction</label>
+              <select id="level">
+                <option value="L">L (smallest)</option>
+                <option value="M" selected>M (recommended)</option>
+                <option value="Q">Q</option>
+                <option value="H">H (best)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="generateBtn">Generate</button>
+            <button class="secondary" id="downloadBtn">Download PNG</button>
+            <button class="secondary" id="clearBtn">Clear</button>
+          </div>
+
+          <div class="error" id="error"></div>
+        </div>
+
+        <!-- Preview -->
+        <div class="box preview">
+          <div class="qrWrap" id="qrWrap">
+            <div class="hint">Your QR code will appear here.</div>
+          </div>
+          <div class="hint">
+            Tip: test-scan before printing or publishing.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Links -->
+      <div class="footerLinks">
+        <a href="/about.html">About</a> ·
+        <a href="/privacy.html">Privacy</a> ·
+        <a href="/terms.html">Terms</a> ·
+        <a href="/contact.html">Contact</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QR Library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+
+  <!-- Your shared JS -->
+  <script src="/app.js"></script>
+
+  <script>
+    // Force Text/URL mode on this page
+    setType("text");
+  </script>
+
+</body>
+</html>
