@@ -2,18 +2,19 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
 
-  gtag('config', 'G-6213N2G8R2');
-</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>QR Code Generator</title>
+  <title>InstantQR | QR Code Generator</title>
   <meta name="description" content="Clean QR Code Generator for Text/URL and Wi-Fi. Download as PNG." />
+
   <style>
     :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
     body { margin:0; background:#0b0f19; color:#e7eaf2; }
@@ -69,6 +70,36 @@
     }
     .pill.active{ border-color:#3b82f6; color:#e7eaf2; }
     code{ color:#cfe0ff; }
+
+    /* Mid-page content block (AdSense/SEO-friendly) */
+    .infoMid{
+      margin-top:14px;
+      background:#0e1525;
+      border:1px solid #2a3a5f;
+      border-radius:16px;
+      padding:14px;
+    }
+    .infoMid h2{
+      margin:12px 0 6px;
+      font-size:16px;
+    }
+    .infoMid p, .infoMid li{
+      color:#b8c0d6;
+      font-size:13px;
+      line-height:1.6;
+    }
+    .infoMid ol{ padding-left:18px; margin:8px 0 0; }
+    .infoMid strong{ color:#e7eaf2; }
+
+    /* Footer links */
+    .footerLinks{
+      margin-top:14px;
+      text-align:center;
+      color:#8ea0c8;
+      font-size:12px;
+    }
+    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
   </style>
 </head>
 
@@ -81,6 +112,27 @@
           <div class="sub">Text/URL + Wi-Fi QR codes. Download as PNG.</div>
         </div>
       </header>
+
+      <!-- MIDDLE-OF-PAGE CONTENT (SEO + AdSense approval helper) -->
+      <div class="infoMid">
+        <h2>What is a QR Code?</h2>
+        <p>
+          A QR code (Quick Response code) is a scannable barcode that stores information like website URLs,
+          Wi-Fi credentials, or text. Most modern smartphone cameras can scan QR codes instantly.
+        </p>
+
+        <h2>How to Use This Tool</h2>
+        <ol>
+          <li>Select the QR type (Text/URL or Wi-Fi).</li>
+          <li>Enter your information.</li>
+          <li>Click <strong>Generate</strong>.</li>
+          <li>Click <strong>Download PNG</strong>.</li>
+        </ol>
+
+        <h2>FAQ</h2>
+        <p><strong>Is this free?</strong><br>Yes — InstantQR is free to use.</p>
+        <p><strong>Do you store my data?</strong><br>No. QR generation happens locally in your browser.</p>
+      </div>
 
       <div class="grid">
         <!-- Controls -->
@@ -166,6 +218,14 @@
           <div class="hint">Tip: test-scan before printing.</div>
         </div>
       </div>
+
+      <!-- Footer navigation (required pages for AdSense readiness) -->
+      <div class="footerLinks">
+        <a href="/about.html">About</a> ·
+        <a href="/privacy.html">Privacy</a> ·
+        <a href="/terms.html">Terms</a> ·
+        <a href="/contact.html">Contact</a>
+      </div>
     </div>
   </div>
 
@@ -195,7 +255,6 @@
 
     let currentType = "text";
     let lastCanvas = null;
-    let lastPayload = "";
 
     function setType(t){
       currentType = t;
@@ -209,7 +268,6 @@
     function showError(msg){ errorEl.textContent = msg; errorEl.style.display = "block"; }
 
     function escWifi(s){
-      // Escape \ ; , : and " as seen in common Wi-Fi QR implementations
       return (s || "").replace(/([\\;,:"])/g, "\\$1");
     }
 
@@ -220,7 +278,6 @@
         return v;
       }
 
-      // Wi-Fi
       const ssid = (ssidEl.value || "").trim();
       if(!ssid) throw new Error("Enter Wi-Fi name (SSID).");
 
@@ -236,7 +293,6 @@
     function clearQR(){
       qrWrap.innerHTML = `<div class="hint">Your QR code will appear here.</div>`;
       lastCanvas = null;
-      lastPayload = "";
     }
 
     function generate(){
@@ -252,11 +308,7 @@
 
         clearQR();
 
-        const qr = new QRious({
-          value: payload,
-          size: size,
-          level: level
-        });
+        const qr = new QRious({ value: payload, size, level });
 
         const canvas = qr.canvas;
         canvas.style.width = "100%";
@@ -268,7 +320,6 @@
         qrWrap.appendChild(canvas);
 
         lastCanvas = canvas;
-        lastPayload = payload;
       }catch(err){
         showError(err.message || "Could not generate QR code.");
       }
@@ -309,7 +360,7 @@
     downloadBtn.addEventListener("click", downloadPNG);
     clearBtn.addEventListener("click", clearAll);
 
-    // Enter generates (Ctrl+Enter in textarea)
+    // Enter generates (Ctrl+Enter in textarea); otherwise Enter generates
     document.addEventListener("keydown", (e) => {
       if(e.target && e.target.tagName === "TEXTAREA"){
         if(e.key === "Enter" && (e.ctrlKey || e.metaKey)) generate();
@@ -321,22 +372,5 @@
     // Init
     setType("text");
   </script>
-  <hr>
-<h2>What is a QR Code?</h2>
-<p>A QR code (Quick Response code) is a type of barcode that stores information such as website URLs, WiFi credentials, or text. Users can scan QR codes using their smartphone camera.</p>
-
-<h2>How to Use InstantQR</h2>
-<ol>
-<li>Select the QR type (URL, WiFi, Text).</li>
-<li>Enter your information.</li>
-<li>Click generate.</li>
-<li>Download your QR code image.</li>
-</ol>
-
-<h2>Frequently Asked Questions</h2>
-<p><strong>Is InstantQR free?</strong><br>Yes, it is completely free to use.</p>
-
-<p><strong>Do you store my QR data?</strong><br>No. Everything runs in your browser.</p>
 </body>
 </html>
-
