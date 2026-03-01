@@ -12,8 +12,8 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>JSON Formatter & JSON to CSV | InstantQR</title>
-  <meta name="description" content="Format, validate, and minify JSON instantly. Convert JSON to CSV in your browser. Privacy-first: everything runs locally." />
+  <title>JSON Formatter & JSON ↔ CSV | InstantQR</title>
+  <meta name="description" content="Format, validate, and minify JSON instantly. Convert JSON to CSV and CSV to JSON in your browser. Privacy-first: everything runs locally." />
   <meta name="robots" content="index,follow" />
 
   <style>
@@ -57,7 +57,7 @@
 
     textarea{
       width:100%;
-      min-height: 320px;
+      min-height: 300px;
       resize: vertical;
       padding:12px 10px;
       border-radius:14px;
@@ -161,39 +161,38 @@
       <header>
         <div>
           <h1>JSON Formatter</h1>
-          <div class="sub">Format, validate, minify JSON — plus convert JSON → CSV. Everything runs locally in your browser.</div>
+          <div class="sub">Format, validate, minify JSON — convert JSON → CSV and CSV → JSON. Everything runs locally in your browser.</div>
         </div>
       </header>
 
       <div class="grid">
-        <!-- Input -->
+        <!-- Left column (Input + tools) -->
         <div class="box">
-          <label for="inputJson">Input JSON</label>
-          <textarea id="inputJson" placeholder='Paste JSON here...'></textarea>
+          <label for="inputJson">Input</label>
+          <textarea id="inputJson" placeholder='Paste JSON or CSV here...'></textarea>
 
           <div class="row">
-            <button id="formatBtn" type="button">Format</button>
-            <button class="secondary" id="minifyBtn" type="button">Minify</button>
-            <button class="secondary" id="validateBtn" type="button">Validate</button>
+            <button id="formatBtn" type="button">Format JSON</button>
+            <button class="secondary" id="minifyBtn" type="button">Minify JSON</button>
+            <button class="secondary" id="validateBtn" type="button">Validate JSON</button>
             <button class="ghost" id="sampleBtn" type="button">Sample</button>
             <button class="ghost" id="clearBtn" type="button">Clear</button>
 
-            <label class="pill" title="Auto-format after you stop typing (safe).">
+            <label class="pill" title="Auto-format JSON after you stop typing (safe).">
               <input id="autoFormat" type="checkbox" />
-              Auto-format
+              Auto-format JSON
             </label>
           </div>
 
           <div class="status" aria-live="polite">
             <div class="tiny">Status</div>
-            <div id="statusLine" class="hint">Paste JSON, then click Format / Validate.</div>
+            <div id="statusLine" class="hint">Paste JSON (or CSV), then use the buttons below.</div>
           </div>
 
           <hr class="divider" />
-
           <h2 class="sectionTitle">JSON → CSV Converter</h2>
           <div class="hint" style="margin-top:6px;">
-            Best for JSON arrays of objects (example: <code>[{"a":1},{"a":2}]</code>). Nested objects can be flattened or stored as JSON strings.
+            Best for JSON arrays of objects. Nested objects can be flattened or stored as JSON strings.
           </div>
 
           <div class="row">
@@ -206,7 +205,7 @@
               Flatten keys
             </label>
 
-            <label class="pill" title="CSV delimiter">
+            <label class="pill" title="Delimiter used for CSV">
               Delimiter
               <select id="delimiter">
                 <option value=",">Comma (,)</option>
@@ -216,14 +215,37 @@
             </label>
           </div>
 
+          <hr class="divider" />
+          <h2 class="sectionTitle">CSV → JSON Converter</h2>
+          <div class="hint" style="margin-top:6px;">
+            Paste CSV with headers in the first row (example: <code>name,age</code>).
+            This will output a JSON array of objects.
+          </div>
+
+          <div class="row">
+            <button id="toJsonBtn" type="button">Convert to JSON</button>
+            <button class="secondary" id="copyCsvJsonBtn" type="button">Copy JSON</button>
+            <button class="secondary" id="downloadCsvJsonBtn" type="button">Download JSON</button>
+
+            <label class="pill" title="Trim spaces around cells">
+              <input id="trimCells" type="checkbox" checked />
+              Trim cells
+            </label>
+
+            <label class="pill" title="Try to detect numbers/booleans/null">
+              <input id="inferTypes" type="checkbox" checked />
+              Infer types
+            </label>
+          </div>
+
           <div class="tiny" style="margin-top:8px;">
-            Note: CSV is a “flat” format. Arrays/objects will be JSON-stringified if not flattened.
+            Note: CSV parsing supports quoted fields (commas inside quotes) and newlines inside quotes.
           </div>
         </div>
 
-        <!-- Output -->
+        <!-- Right column (Outputs) -->
         <div class="box">
-          <label for="outputJson">Formatted / Minified Output</label>
+          <label for="outputJson">Formatted / Minified JSON Output</label>
           <textarea id="outputJson" readonly placeholder="Formatted / minified JSON will appear here..."></textarea>
 
           <div class="row">
@@ -235,10 +257,15 @@
           <hr class="divider" />
 
           <label for="csvOutput">CSV Output</label>
-          <textarea id="csvOutput" readonly placeholder="CSV will appear here after conversion..."></textarea>
+          <textarea id="csvOutput" readonly placeholder="CSV will appear here after JSON → CSV..."></textarea>
+
+          <hr class="divider" />
+
+          <label for="csvJsonOutput">CSV → JSON Output</label>
+          <textarea id="csvJsonOutput" readonly placeholder="JSON will appear here after CSV → JSON..."></textarea>
 
           <div class="tiny" style="margin-top:10px;">
-            Privacy: formatting and conversion run in your browser. No JSON is uploaded to InstantQR servers.
+            Privacy: formatting and conversion run in your browser. No data is uploaded to InstantQR servers.
           </div>
         </div>
       </div>
@@ -264,6 +291,7 @@
     const inputEl = document.getElementById("inputJson");
     const outputEl = document.getElementById("outputJson");
     const csvEl = document.getElementById("csvOutput");
+    const csvJsonEl = document.getElementById("csvJsonOutput");
     const statusLine = document.getElementById("statusLine");
 
     const formatBtn = document.getElementById("formatBtn");
@@ -282,6 +310,12 @@
     const flattenEl = document.getElementById("flatten");
     const delimiterEl = document.getElementById("delimiter");
 
+    const toJsonBtn = document.getElementById("toJsonBtn");
+    const copyCsvJsonBtn = document.getElementById("copyCsvJsonBtn");
+    const downloadCsvJsonBtn = document.getElementById("downloadCsvJsonBtn");
+    const trimCellsEl = document.getElementById("trimCells");
+    const inferTypesEl = document.getElementById("inferTypes");
+
     const autoFormatEl = document.getElementById("autoFormat");
     let autoTimer = null;
 
@@ -296,14 +330,9 @@
       return JSON.parse(trimmed);
     }
 
-    function formatJson(obj){
-      return JSON.stringify(obj, null, 2);
-    }
-    function minifyJson(obj){
-      return JSON.stringify(obj);
-    }
+    function formatJson(obj){ return JSON.stringify(obj, null, 2); }
+    function minifyJson(obj){ return JSON.stringify(obj); }
 
-    // Best-effort error location for "position N"
     function getLineColFromPos(text, pos){
       const upTo = text.slice(0, Math.max(0, pos));
       const lines = upTo.split("\n");
@@ -396,7 +425,7 @@
       setStatus("Downloaded formatted.json", "ok");
     }
 
-    // ----- JSON -> CSV -----
+    // ---------- JSON -> CSV ----------
     function isPlainObject(v){
       return v && typeof v === "object" && !Array.isArray(v);
     }
@@ -407,7 +436,6 @@
         if(isPlainObject(v)){
           flattenObject(v, key, out);
         }else if(Array.isArray(v)){
-          // arrays: stringify
           out[key] = JSON.stringify(v);
         }else{
           out[key] = v;
@@ -427,10 +455,7 @@
     function csvEscape(value, delim){
       if(value === null || value === undefined) return "";
       let s = (typeof value === "string") ? value : String(value);
-
-      // normalize line breaks
       s = s.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-
       const needsQuotes = s.includes('"') || s.includes("\n") || s.includes(delim);
       if(s.includes('"')) s = s.replace(/"/g, '""');
       return needsQuotes ? `"${s}"` : s;
@@ -438,21 +463,17 @@
 
     function jsonToCsv(data, { flatten=true, delimiter="," }){
       let arr = data;
-
-      // allow single object -> treat as array of one
       if(isPlainObject(arr)) arr = [arr];
       if(!Array.isArray(arr)) throw new Error("JSON → CSV expects an array of objects (or a single object).");
 
-      // filter only objects
-      const objRows = arr.map((row, idx) => {
-        if(!isPlainObject(row)) {
-          // stringify non-objects into a single-column CSV
-          return { value: JSON.stringify(row) };
-        }
-        return flatten ? flattenObject(row) : Object.fromEntries(Object.entries(row).map(([k,v]) => {
-          if(isPlainObject(v) || Array.isArray(v)) return [k, JSON.stringify(v)];
-          return [k, v];
-        }));
+      const objRows = arr.map((row) => {
+        if(!isPlainObject(row)) return { value: JSON.stringify(row) };
+        return flatten
+          ? flattenObject(row)
+          : Object.fromEntries(Object.entries(row).map(([k,v]) => {
+              if(isPlainObject(v) || Array.isArray(v)) return [k, JSON.stringify(v)];
+              return [k, v];
+            }));
       });
 
       const headers = collectHeaders(objRows);
@@ -461,8 +482,7 @@
       const lines = [];
       lines.push(headers.map(h => csvEscape(h, delimiter)).join(delimiter));
       for(const row of objRows){
-        const line = headers.map(h => csvEscape(row[h], delimiter)).join(delimiter);
-        lines.push(line);
+        lines.push(headers.map(h => csvEscape(row[h], delimiter)).join(delimiter));
       }
       return lines.join("\n");
     }
@@ -481,34 +501,157 @@
       }
     }
 
-    function loadSample(){
-      // CSV-friendly sample (array of objects with nested fields)
-      const sample = [
-        {
-          id: 1,
-          tool: "QR Generator",
-          category: "utilities",
-          url: "https://instantqr.io/",
-          stats: { users: 8, active: true }
-        },
-        {
-          id: 2,
-          tool: "Password Generator",
-          category: "security",
-          url: "https://instantqr.io/password.html",
-          stats: { users: 3, active: true }
+    // ---------- CSV -> JSON ----------
+    // Robust CSV parser (supports quotes, commas/newlines inside quotes)
+    function parseCSV(text, delimiter){
+      const rows = [];
+      let row = [];
+      let field = "";
+      let inQuotes = false;
+
+      for(let i=0; i<text.length; i++){
+        const c = text[i];
+
+        if(inQuotes){
+          if(c === '"'){
+            const next = text[i+1];
+            if(next === '"'){ field += '"'; i++; }
+            else { inQuotes = false; }
+          }else{
+            field += c;
+          }
+          continue;
         }
+
+        if(c === '"'){
+          inQuotes = true;
+          continue;
+        }
+
+        if(c === delimiter){
+          row.push(field);
+          field = "";
+          continue;
+        }
+
+        if(c === "\n"){
+          row.push(field);
+          rows.push(row);
+          row = [];
+          field = "";
+          continue;
+        }
+
+        if(c === "\r"){
+          // ignore; handle CRLF
+          continue;
+        }
+
+        field += c;
+      }
+
+      // last field
+      row.push(field);
+      rows.push(row);
+
+      // drop trailing empty last row (common when file ends with newline)
+      if(rows.length && rows[rows.length-1].length === 1 && rows[rows.length-1][0] === ""){
+        rows.pop();
+      }
+      return rows;
+    }
+
+    function inferValue(v){
+      if(v === null || v === undefined) return v;
+      const s = String(v);
+      if(s === "") return "";
+      const t = s.trim();
+
+      if(t === "null") return null;
+      if(t === "true") return true;
+      if(t === "false") return false;
+
+      // number (int/float)
+      if(/^-?\d+(\.\d+)?$/.test(t)){
+        const n = Number(t);
+        if(Number.isFinite(n)) return n;
+      }
+
+      // try JSON object/array
+      if((t.startsWith("{") && t.endsWith("}")) || (t.startsWith("[") && t.endsWith("]"))){
+        try { return JSON.parse(t); } catch {}
+      }
+
+      return s;
+    }
+
+    function doToJson(){
+      const raw = (inputEl.value || "");
+      const delim = delimiterEl.value === "\\t" ? "\t" : delimiterEl.value;
+
+      try{
+        const rows = parseCSV(raw, delim);
+        if(rows.length < 1) throw new Error("CSV is empty.");
+
+        const headers = rows[0].map(h => trimCellsEl.checked ? h.trim() : h);
+        if(headers.length === 0 || headers.every(h => !h)) throw new Error("Missing CSV header row.");
+
+        const out = [];
+        for(let r=1; r<rows.length; r++){
+          const cols = rows[r];
+          // skip completely empty rows
+          if(cols.every(c => (c || "").trim() === "")) continue;
+
+          const obj = {};
+          for(let c=0; c<headers.length; c++){
+            const key = headers[c] || `col_${c+1}`;
+            let val = cols[c] ?? "";
+            if(trimCellsEl.checked) val = String(val).trim();
+            obj[key] = inferTypesEl.checked ? inferValue(val) : val;
+          }
+          out.push(obj);
+        }
+
+        const json = JSON.stringify(out, null, 2);
+        csvJsonEl.value = json;
+        setStatus("Converted CSV → JSON ✔", "ok");
+      }catch(err){
+        csvJsonEl.value = "";
+        setStatus("CSV → JSON error: " + (err.message || String(err)), "error");
+      }
+    }
+
+    function loadSample(){
+      // Put JSON sample in input, and also show CSV sample in CSV output areas
+      const sample = [
+        { id: 1, tool: "QR Generator", users: 8, active: true, meta: { tier: "free" } },
+        { id: 2, tool: "Password Generator", users: 3, active: true, meta: { tier: "free" } }
       ];
+
       inputEl.value = JSON.stringify(sample, null, 2);
+      outputEl.value = inputEl.value;
+
       doValidate();
       doToCsv();
-      outputEl.value = inputEl.value;
+
+      // Also show an example CSV (so user sees both)
+      const exampleCsv = "id,tool,users,active\n1,QR Generator,8,true\n2,Password Generator,3,true";
+      csvEl.value = exampleCsv;
+
+      // and auto convert that CSV example into JSON in the CSV->JSON box
+      inputEl.value = exampleCsv;
+      doToJson();
+
+      // restore JSON sample back to input (nice UX)
+      inputEl.value = JSON.stringify(sample, null, 2);
+      setStatus("Sample loaded (JSON + CSV examples).", "ok");
     }
 
     function clearAll(){
       inputEl.value = "";
       outputEl.value = "";
       csvEl.value = "";
+      csvJsonEl.value = "";
       setStatus("Cleared.", "hint");
     }
 
@@ -559,9 +702,25 @@
       setStatus("Downloaded data.csv ✔", "ok");
     });
 
+    toJsonBtn.addEventListener("click", doToJson);
+
+    copyCsvJsonBtn.addEventListener("click", () =>
+      copyText(csvJsonEl.value, copyCsvJsonBtn, "Copied!", "Copy JSON")
+    );
+
+    downloadCsvJsonBtn.addEventListener("click", () => {
+      const text = csvJsonEl.value || "";
+      if(!text){
+        setStatus("Nothing to download. Convert to JSON first.", "error");
+        return;
+      }
+      downloadFile(text, "data.json", "application/json");
+      setStatus("Downloaded data.json ✔", "ok");
+    });
+
     inputEl.addEventListener("input", scheduleAuto);
 
-    // Tab inserts 2 spaces
+    // Tab inserts 2 spaces in the input textarea
     inputEl.addEventListener("keydown", (e) => {
       if(e.key === "Tab"){
         e.preventDefault();
