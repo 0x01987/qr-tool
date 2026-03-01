@@ -12,8 +12,8 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>JSON Formatter | InstantQR</title>
-  <meta name="description" content="Format, validate, and minify JSON instantly. Privacy-first: everything runs locally in your browser." />
+  <title>JSON Formatter & JSON to CSV | InstantQR</title>
+  <meta name="description" content="Format, validate, and minify JSON instantly. Convert JSON to CSV in your browser. Privacy-first: everything runs locally." />
   <meta name="robots" content="index,follow" />
 
   <style>
@@ -57,7 +57,7 @@
 
     textarea{
       width:100%;
-      min-height: 360px;
+      min-height: 320px;
       resize: vertical;
       padding:12px 10px;
       border-radius:14px;
@@ -87,7 +87,16 @@
       background:#0b1222; border:1px solid #2a3a5f;
       color:#b8c0d6; font-size:12px; user-select:none;
     }
-    .pill input{ margin:0; }
+    .pill input, .pill select{ margin:0; }
+    .pill select{
+      border:1px solid #2a3a5f;
+      background:#0b1222;
+      color:#e7eaf2;
+      border-radius:10px;
+      padding:6px 8px;
+      font-size:12px;
+      outline:none;
+    }
 
     .hint{ color:#b8c0d6; font-size:12px; line-height:1.55; }
     .tiny{ color:#8ea0c8; font-size:12px; }
@@ -103,6 +112,21 @@
       display:flex;
       flex-direction:column;
       gap:6px;
+    }
+
+    .divider{
+      margin-top:16px;
+      margin-bottom:6px;
+      height:1px;
+      background:#22304e;
+      border:0;
+    }
+
+    .sectionTitle{
+      margin:0;
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:.2px;
     }
 
     .footerLinks{
@@ -137,7 +161,7 @@
       <header>
         <div>
           <h1>JSON Formatter</h1>
-          <div class="sub">Format, validate, and minify JSON instantly — runs locally in your browser.</div>
+          <div class="sub">Format, validate, minify JSON — plus convert JSON → CSV. Everything runs locally in your browser.</div>
         </div>
       </header>
 
@@ -164,21 +188,57 @@
             <div class="tiny">Status</div>
             <div id="statusLine" class="hint">Paste JSON, then click Format / Validate.</div>
           </div>
+
+          <hr class="divider" />
+
+          <h2 class="sectionTitle">JSON → CSV Converter</h2>
+          <div class="hint" style="margin-top:6px;">
+            Best for JSON arrays of objects (example: <code>[{"a":1},{"a":2}]</code>). Nested objects can be flattened or stored as JSON strings.
+          </div>
+
+          <div class="row">
+            <button id="toCsvBtn" type="button">Convert to CSV</button>
+            <button class="secondary" id="copyCsvBtn" type="button">Copy CSV</button>
+            <button class="secondary" id="downloadCsvBtn" type="button">Download CSV</button>
+
+            <label class="pill" title="Flatten nested objects into dot-keys like user.name">
+              <input id="flatten" type="checkbox" checked />
+              Flatten keys
+            </label>
+
+            <label class="pill" title="CSV delimiter">
+              Delimiter
+              <select id="delimiter">
+                <option value=",">Comma (,)</option>
+                <option value="\\t">Tab (TSV)</option>
+                <option value=";">Semicolon (;)</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="tiny" style="margin-top:8px;">
+            Note: CSV is a “flat” format. Arrays/objects will be JSON-stringified if not flattened.
+          </div>
         </div>
 
         <!-- Output -->
         <div class="box">
-          <label for="outputJson">Output</label>
+          <label for="outputJson">Formatted / Minified Output</label>
           <textarea id="outputJson" readonly placeholder="Formatted / minified JSON will appear here..."></textarea>
 
           <div class="row">
             <button id="copyFormattedBtn" type="button">Copy Output</button>
             <button class="secondary" id="copyMinifiedBtn" type="button">Copy Minified</button>
-            <button class="secondary" id="downloadBtn" type="button">Download .json</button>
+            <button class="secondary" id="downloadJsonBtn" type="button">Download .json</button>
           </div>
 
+          <hr class="divider" />
+
+          <label for="csvOutput">CSV Output</label>
+          <textarea id="csvOutput" readonly placeholder="CSV will appear here after conversion..."></textarea>
+
           <div class="tiny" style="margin-top:10px;">
-            Privacy: formatting and validation run in your browser. No JSON is uploaded to InstantQR servers.
+            Privacy: formatting and conversion run in your browser. No JSON is uploaded to InstantQR servers.
           </div>
         </div>
       </div>
@@ -203,6 +263,7 @@
   <script>
     const inputEl = document.getElementById("inputJson");
     const outputEl = document.getElementById("outputJson");
+    const csvEl = document.getElementById("csvOutput");
     const statusLine = document.getElementById("statusLine");
 
     const formatBtn = document.getElementById("formatBtn");
@@ -213,7 +274,13 @@
 
     const copyFormattedBtn = document.getElementById("copyFormattedBtn");
     const copyMinifiedBtn = document.getElementById("copyMinifiedBtn");
-    const downloadBtn = document.getElementById("downloadBtn");
+    const downloadJsonBtn = document.getElementById("downloadJsonBtn");
+
+    const toCsvBtn = document.getElementById("toCsvBtn");
+    const copyCsvBtn = document.getElementById("copyCsvBtn");
+    const downloadCsvBtn = document.getElementById("downloadCsvBtn");
+    const flattenEl = document.getElementById("flatten");
+    const delimiterEl = document.getElementById("delimiter");
 
     const autoFormatEl = document.getElementById("autoFormat");
     let autoTimer = null;
@@ -232,12 +299,11 @@
     function formatJson(obj){
       return JSON.stringify(obj, null, 2);
     }
-
     function minifyJson(obj){
       return JSON.stringify(obj);
     }
 
-    // Try to give a line/column hint using error position (best-effort)
+    // Best-effort error location for "position N"
     function getLineColFromPos(text, pos){
       const upTo = text.slice(0, Math.max(0, pos));
       const lines = upTo.split("\n");
@@ -245,10 +311,8 @@
       const col = lines[lines.length - 1].length + 1;
       return { line, col };
     }
-
     function tryExplainJsonError(text, err){
       const msg = String(err && err.message ? err.message : err);
-      // Common V8 format: "Unexpected token ... in JSON at position N"
       const m = msg.match(/position\s+(\d+)/i);
       if(m){
         const pos = Number(m[1]);
@@ -264,8 +328,7 @@
       const raw = inputEl.value || "";
       try{
         const obj = parseJsonOrThrow(raw);
-        const pretty = formatJson(obj);
-        outputEl.value = pretty;
+        outputEl.value = formatJson(obj);
         setStatus("Valid JSON ✔ Formatted output generated.", "ok");
       }catch(err){
         outputEl.value = "";
@@ -277,8 +340,7 @@
       const raw = inputEl.value || "";
       try{
         const obj = parseJsonOrThrow(raw);
-        const mini = minifyJson(obj);
-        outputEl.value = mini;
+        outputEl.value = minifyJson(obj);
         setStatus("Valid JSON ✔ Minified output generated.", "ok");
       }catch(err){
         outputEl.value = "";
@@ -303,7 +365,6 @@
         btn.textContent = okLabel;
         setTimeout(()=> btn.textContent = baseLabel, 1200);
       }catch{
-        // fallback
         const t = document.createElement("textarea");
         t.value = text;
         document.body.appendChild(t);
@@ -315,47 +376,142 @@
       }
     }
 
+    function downloadFile(text, filename, mime){
+      const blob = new Blob([text], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
     function downloadJson(){
       const text = outputEl.value || "";
       if(!text){
         setStatus("Nothing to download. Format or minify first.", "error");
         return;
       }
-      const blob = new Blob([text], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "formatted.json";
-      a.click();
-      URL.revokeObjectURL(url);
+      downloadFile(text, "formatted.json", "application/json");
       setStatus("Downloaded formatted.json", "ok");
     }
 
+    // ----- JSON -> CSV -----
+    function isPlainObject(v){
+      return v && typeof v === "object" && !Array.isArray(v);
+    }
+
+    function flattenObject(obj, prefix="", out={}){
+      for(const [k, v] of Object.entries(obj || {})){
+        const key = prefix ? `${prefix}.${k}` : k;
+        if(isPlainObject(v)){
+          flattenObject(v, key, out);
+        }else if(Array.isArray(v)){
+          // arrays: stringify
+          out[key] = JSON.stringify(v);
+        }else{
+          out[key] = v;
+        }
+      }
+      return out;
+    }
+
+    function collectHeaders(rows){
+      const set = new Set();
+      for(const r of rows){
+        for(const k of Object.keys(r)) set.add(k);
+      }
+      return Array.from(set);
+    }
+
+    function csvEscape(value, delim){
+      if(value === null || value === undefined) return "";
+      let s = (typeof value === "string") ? value : String(value);
+
+      // normalize line breaks
+      s = s.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+
+      const needsQuotes = s.includes('"') || s.includes("\n") || s.includes(delim);
+      if(s.includes('"')) s = s.replace(/"/g, '""');
+      return needsQuotes ? `"${s}"` : s;
+    }
+
+    function jsonToCsv(data, { flatten=true, delimiter="," }){
+      let arr = data;
+
+      // allow single object -> treat as array of one
+      if(isPlainObject(arr)) arr = [arr];
+      if(!Array.isArray(arr)) throw new Error("JSON → CSV expects an array of objects (or a single object).");
+
+      // filter only objects
+      const objRows = arr.map((row, idx) => {
+        if(!isPlainObject(row)) {
+          // stringify non-objects into a single-column CSV
+          return { value: JSON.stringify(row) };
+        }
+        return flatten ? flattenObject(row) : Object.fromEntries(Object.entries(row).map(([k,v]) => {
+          if(isPlainObject(v) || Array.isArray(v)) return [k, JSON.stringify(v)];
+          return [k, v];
+        }));
+      });
+
+      const headers = collectHeaders(objRows);
+      if(headers.length === 0) throw new Error("No fields found to convert.");
+
+      const lines = [];
+      lines.push(headers.map(h => csvEscape(h, delimiter)).join(delimiter));
+      for(const row of objRows){
+        const line = headers.map(h => csvEscape(row[h], delimiter)).join(delimiter);
+        lines.push(line);
+      }
+      return lines.join("\n");
+    }
+
+    function doToCsv(){
+      const raw = inputEl.value || "";
+      try{
+        const obj = parseJsonOrThrow(raw);
+        const delim = delimiterEl.value === "\\t" ? "\t" : delimiterEl.value;
+        const csv = jsonToCsv(obj, { flatten: flattenEl.checked, delimiter: delim });
+        csvEl.value = csv;
+        setStatus("Converted JSON → CSV ✔", "ok");
+      }catch(err){
+        csvEl.value = "";
+        setStatus("CSV error: " + (err.message || tryExplainJsonError(raw, err)), "error");
+      }
+    }
+
     function loadSample(){
-      const sample = {
-        app: "InstantQR",
-        tool: "JSON Formatter",
-        timestamp: new Date().toISOString(),
-        user: { id: 123, name: "Alex", active: true },
-        tags: ["tools", "privacy", "fast"],
-        settings: { theme: "dark", indent: 2 },
-        items: [
-          { id: 1, name: "QR Generator" },
-          { id: 2, name: "Password Generator" },
-          { id: 3, name: "Unit Converter" }
-        ]
-      };
-      inputEl.value = JSON.stringify(sample);
-      doFormat();
+      // CSV-friendly sample (array of objects with nested fields)
+      const sample = [
+        {
+          id: 1,
+          tool: "QR Generator",
+          category: "utilities",
+          url: "https://instantqr.io/",
+          stats: { users: 8, active: true }
+        },
+        {
+          id: 2,
+          tool: "Password Generator",
+          category: "security",
+          url: "https://instantqr.io/password.html",
+          stats: { users: 3, active: true }
+        }
+      ];
+      inputEl.value = JSON.stringify(sample, null, 2);
+      doValidate();
+      doToCsv();
+      outputEl.value = inputEl.value;
     }
 
     function clearAll(){
       inputEl.value = "";
       outputEl.value = "";
+      csvEl.value = "";
       setStatus("Cleared.", "hint");
     }
 
-    // Auto-format (debounced)
     function scheduleAuto(){
       if(!autoFormatEl.checked) return;
       clearTimeout(autoTimer);
@@ -372,23 +528,40 @@
     copyFormattedBtn.addEventListener("click", () =>
       copyText(outputEl.value, copyFormattedBtn, "Copied!", "Copy Output")
     );
+
     copyMinifiedBtn.addEventListener("click", () => {
       const raw = inputEl.value || "";
       try{
         const obj = parseJsonOrThrow(raw);
         const mini = minifyJson(obj);
         copyText(mini, copyMinifiedBtn, "Copied!", "Copy Minified");
-        setStatus("Copied minified JSON.", "ok");
+        setStatus("Copied minified JSON ✔", "ok");
       }catch(err){
         setStatus("Invalid JSON: " + tryExplainJsonError(raw, err), "error");
       }
     });
 
-    downloadBtn.addEventListener("click", downloadJson);
+    downloadJsonBtn.addEventListener("click", downloadJson);
+
+    toCsvBtn.addEventListener("click", doToCsv);
+
+    copyCsvBtn.addEventListener("click", () =>
+      copyText(csvEl.value, copyCsvBtn, "Copied!", "Copy CSV")
+    );
+
+    downloadCsvBtn.addEventListener("click", () => {
+      const text = csvEl.value || "";
+      if(!text){
+        setStatus("Nothing to download. Convert to CSV first.", "error");
+        return;
+      }
+      downloadFile(text, "data.csv", "text/csv");
+      setStatus("Downloaded data.csv ✔", "ok");
+    });
 
     inputEl.addEventListener("input", scheduleAuto);
 
-    // Nice: Tab inserts 2 spaces in textarea
+    // Tab inserts 2 spaces
     inputEl.addEventListener("keydown", (e) => {
       if(e.key === "Tab"){
         e.preventDefault();
