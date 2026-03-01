@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IP Lookup | InstantQR</title>
+  <meta name="description" content="Find your public IP address and basic network details instantly. Simple, fast, and privacy-first." />
+  <meta name="robots" content="index,follow" />
+
+  <style>
+    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    body { margin:0; background:#0b0f19; color:#e7eaf2; }
+    .wrap { max-width: 920px; margin:0 auto; padding: 22px; }
+    .card {
+      background:#121a2a; border:1px solid #22304e; border-radius:18px;
+      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap; margin-bottom:14px;
+    }
+    .brand{
+      display:flex; align-items:baseline; gap:10px;
+      text-decoration:none; color:#e7eaf2;
+    }
+    .brand strong{ font-size:16px; letter-spacing:.2px; }
+    .brand span{ color:#8ea0c8; font-size:12px; }
+
+    .toolnav{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .toolnav a{
+      padding:8px 10px; border-radius:999px;
+      background:#0b1222; border:1px solid #2a3a5f;
+      color:#b8c0d6; font-size:12px; text-decoration:none; font-weight:700;
+    }
+    .toolnav a:hover{ border-color:#3b82f6; color:#e7eaf2; }
+    .toolnav a.active{ border-color:#3b82f6; color:#e7eaf2; }
+
+    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    h1{ margin:0; font-size:24px; }
+    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
+
+    .grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:14px; margin-top:14px; }
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+
+    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; }
+    label{ display:block; font-size:12px; color:#b8c0d6; margin-bottom:6px; }
+    input{
+      width:100%; padding:12px 10px; border-radius:14px;
+      border:1px solid #2a3a5f; background:#0b1222; color:#e7eaf2; outline:none;
+    }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    button{
+      border:0; border-radius:14px; padding:12px 14px;
+      background:#3b82f6; color:white; font-weight:800; cursor:pointer;
+    }
+    button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
+
+    .resultBox{
+      margin-top:12px;
+      padding:12px;
+      border-radius:14px;
+      background:#0b1222;
+      border:1px dashed rgba(184,192,214,.35);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .big{
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:.2px;
+      word-break: break-word;
+    }
+    .hint{ color:#b8c0d6; font-size:12px; line-height:1.55; }
+    .tiny{ color:#8ea0c8; font-size:12px; }
+    .kv{ display:grid; grid-template-columns: 140px 1fr; gap:8px; }
+    @media (max-width: 520px){ .kv{ grid-template-columns: 1fr; } }
+    .k{ color:#8ea0c8; font-size:12px; }
+    .v{ color:#e7eaf2; font-size:12px; word-break: break-word; }
+
+    .footerLinks{
+      margin-top:14px;
+      text-align:center;
+      color:#8ea0c8;
+      font-size:12px;
+    }
+    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <div class="topbar">
+        <a class="brand" href="/">
+          <strong>InstantQR</strong>
+          <span>privacy-first tools</span>
+        </a>
+        <nav class="toolnav" aria-label="Tools">
+          <a href="/">QR Generator</a>
+          <a href="/password.html">Password Generator</a>
+          <a href="/unit-converter.html">Unit Converter</a>
+          <a class="active" href="/ip-lookup.html">IP Lookup</a>
+        </nav>
+      </div>
+
+      <header>
+        <div>
+          <h1>IP Lookup</h1>
+          <div class="sub">See your public IP address and basic network details.</div>
+        </div>
+      </header>
+
+      <div class="grid">
+        <!-- Main -->
+        <div class="box">
+          <label for="ipInput">Lookup an IP (optional)</label>
+          <input id="ipInput" placeholder="Leave blank to detect your IP automatically" />
+
+          <div class="actions">
+            <button id="lookupBtn" type="button">Lookup</button>
+            <button class="secondary" id="copyBtn" type="button">Copy IP</button>
+            <button class="secondary" id="refreshBtn" type="button">Refresh</button>
+          </div>
+
+          <div class="resultBox" aria-live="polite">
+            <div class="hint">Public IP</div>
+            <div class="big" id="ipText">—</div>
+
+            <div class="kv">
+              <div class="k">Location</div>
+              <div class="v" id="locText">—</div>
+
+              <div class="k">ISP / Org</div>
+              <div class="v" id="ispText">—</div>
+
+              <div class="k">Timezone</div>
+              <div class="v" id="tzText">—</div>
+
+              <div class="k">ASN</div>
+              <div class="v" id="asnText">—</div>
+            </div>
+
+            <div class="tiny" id="noteText"></div>
+          </div>
+
+          <div class="tiny" style="margin-top:10px;">
+            Privacy note: IP lookup requires calling a third-party IP service to return your IP + approximate location.
+            We do not store results on our servers.
+          </div>
+        </div>
+
+        <!-- Info -->
+        <div class="box">
+          <div class="hint"><strong>What is a public IP?</strong><br>Your public IP is the address your network uses on the internet.</div>
+          <div class="hint" style="margin-top:10px;"><strong>Accuracy:</strong><br>Location is approximate (usually city/region), not exact.</div>
+          <div class="hint" style="margin-top:10px;"><strong>Tip:</strong><br>If you use a VPN, this will show the VPN IP.</div>
+
+          <div style="margin-top:14px;">
+            <h2 style="margin:0 0 6px; font-size:16px;">FAQ</h2>
+            <p class="hint" style="line-height:1.6; margin:0;">
+              <strong>Does this reveal my exact address?</strong> No.<br>
+              <strong>Can I lookup any IP?</strong> Yes (if supported by the API).<br>
+              <strong>Is it free?</strong> Yes.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footerLinks">
+        <div style="margin-bottom:8px;">
+          <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+          <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
+          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a>
+        </div>
+        <div>
+          <a href="/about.html">About</a> ·
+          <a href="/privacy.html">Privacy</a> ·
+          <a href="/terms.html">Terms</a> ·
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const ipInput = document.getElementById("ipInput");
+    const ipText = document.getElementById("ipText");
+    const locText = document.getElementById("locText");
+    const ispText = document.getElementById("ispText");
+    const tzText = document.getElementById("tzText");
+    const asnText = document.getElementById("asnText");
+    const noteText = document.getElementById("noteText");
+
+    const lookupBtn = document.getElementById("lookupBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const refreshBtn = document.getElementById("refreshBtn");
+
+    function setLoading(msg){
+      ipText.textContent = msg || "Loading…";
+      locText.textContent = "—";
+      ispText.textContent = "—";
+      tzText.textContent = "—";
+      asnText.textContent = "—";
+      noteText.textContent = "";
+    }
+
+    function setError(msg){
+      ipText.textContent = "—";
+      noteText.textContent = msg || "Could not fetch IP info.";
+    }
+
+    function safe(s){ return (s === null || s === undefined || s === "") ? "—" : String(s); }
+
+    // ipapi.co supports both "your ip" and specific IP lookups
+    // Example:
+    //  - https://ipapi.co/json/
+    //  - https://ipapi.co/8.8.8.8/json/
+    async function fetchIpInfo(targetIp){
+      const url = targetIp
+        ? `https://ipapi.co/${encodeURIComponent(targetIp)}/json/`
+        : `https://ipapi.co/json/`;
+
+      const res = await fetch(url, { cache: "no-store" });
+      if(!res.ok) throw new Error("Network error");
+      const data = await res.json();
+
+      // ipapi returns { error: true, reason: "..."} for invalid lookups
+      if(data.error){
+        throw new Error(data.reason || "Invalid IP or lookup blocked.");
+      }
+      return data;
+    }
+
+    function render(data){
+      const ip = safe(data.ip);
+      ipText.textContent = ip;
+
+      const locParts = [data.city, data.region, data.country_name].filter(Boolean);
+      locText.textContent = locParts.length ? locParts.join(", ") : "—";
+
+      // ISP / Org
+      ispText.textContent = safe(data.org || data.asn || data.network);
+
+      tzText.textContent = safe(data.timezone);
+      asnText.textContent = safe(data.asn);
+
+      noteText.textContent = `Source: ipapi.co`;
+    }
+
+    async function lookup(){
+      const targetIp = (ipInput.value || "").trim();
+      setLoading("Loading…");
+      try{
+        const data = await fetchIpInfo(targetIp || null);
+        render(data);
+      }catch(err){
+        setError(err.message);
+      }
+    }
+
+    async function copyIp(){
+      const ip = (ipText.textContent || "").trim();
+      if(!ip || ip === "—" || ip.toLowerCase().includes("loading")) return;
+      try{
+        await navigator.clipboard.writeText(ip);
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => copyBtn.textContent = "Copy IP", 1200);
+      }catch{
+        // fallback
+        const temp = document.createElement("textarea");
+        temp.value = ip;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => copyBtn.textContent = "Copy IP", 1200);
+      }
+    }
+
+    lookupBtn.addEventListener("click", lookup);
+    refreshBtn.addEventListener("click", () => { ipInput.value = ""; lookup(); });
+    copyBtn.addEventListener("click", copyIp);
+
+    // Init
+    lookup();
+  </script>
+</body>
+</html>
