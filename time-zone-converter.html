@@ -13,7 +13,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Time Zone Converter | InstantQR</title>
-  <meta name="description" content="Convert times between time zones instantly. Supports 400+ IANA time zones. Privacy-first: runs locally in your browser." />
+  <meta name="description" content="Convert times between time zones instantly. Supports IANA time zones. Privacy-first: runs locally in your browser." />
   <meta name="robots" content="index,follow" />
 
   <style>
@@ -261,11 +261,12 @@
     }
 
     function getAllTimeZones(){
-      // Modern browsers support this:
       if (typeof Intl.supportedValuesOf === "function") {
-        try { return Intl.supportedValuesOf("timeZone"); } catch {}
+        try {
+          const z = Intl.supportedValuesOf("timeZone");
+          if (Array.isArray(z) && z.length) return z;
+        } catch {}
       }
-      // Fallback: show common list only
       return COMMON_TZ;
     }
 
@@ -283,14 +284,12 @@
 
     function setNow(){
       const now = new Date();
-      // local date/time pickers reflect user local time
       dateEl.value = `${now.getFullYear()}-${pad2(now.getMonth()+1)}-${pad2(now.getDate())}`;
       timeEl.value = `${pad2(now.getHours())}:${pad2(now.getMinutes())}`;
       setStatus("Loaded current local date/time.", "ok");
       convert();
     }
 
-    // Format a given Date in a specific timezone
     function formatInTZ(date, timeZone){
       const fmt = new Intl.DateTimeFormat(undefined, {
         timeZone,
@@ -301,8 +300,6 @@
       return fmt.format(date);
     }
 
-    // Get zone offset in minutes at a given instant (Date) for an IANA timezone
-    // We extract the GMT offset from timeZoneName: 'shortOffset' if available.
     function getOffsetMinutes(date, timeZone){
       const parts = new Intl.DateTimeFormat("en-US", {
         timeZone,
@@ -311,7 +308,6 @@
       }).formatToParts(date);
       const tzPart = parts.find(p => p.type === "timeZoneName");
       if(!tzPart) return 0;
-      // examples: "GMT-7", "GMT+05:30"
       const m = tzPart.value.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/);
       if(!m) return 0;
       const sign = m[1] === "-" ? -1 : 1;
@@ -320,16 +316,11 @@
       return sign * (hh*60 + mm);
     }
 
-    // Construct an instant from user-entered date/time interpreted in "fromTz"
-    // Approach: iterative correction using offsets.
     function dateTimeInZoneToInstant(dateStr, timeStr, timeZone){
       const [Y,M,D] = dateStr.split("-").map(Number);
       const [h,m] = timeStr.split(":").map(Number);
 
-      // initial guess: treat as UTC
       let guess = new Date(Date.UTC(Y, M-1, D, h, m, 0));
-
-      // refine 3 times (enough for DST transitions)
       for(let i=0; i<3; i++){
         const off = getOffsetMinutes(guess, timeZone);
         const desiredUTC = Date.UTC(Y, M-1, D, h, m, 0) - off*60*1000;
@@ -342,8 +333,8 @@
       const now = new Date();
       const f = fromEl.value;
       const t = toEl.value;
-      fromNow.textContent = `Now: ${formatInTZ(now, f)}`;
-      toNow.textContent = `Now: ${formatInTZ(now, t)}`;
+      fromNow.textContent = f ? `Now: ${formatInTZ(now, f)}` : "Now: —";
+      toNow.textContent = t ? `Now: ${formatInTZ(now, t)}` : "Now: —";
     }
 
     function convert(){
@@ -354,6 +345,10 @@
 
       if(!dateStr || !timeStr){
         setStatus("Please choose a date and time.", "error");
+        return;
+      }
+      if(!fromTz || !toTz){
+        setStatus("Please select both time zones.", "error");
         return;
       }
 
@@ -376,10 +371,17 @@
         const mm = abs % 60;
         diffOut.textContent = `${sign}${hh}h ${mm}m`;
 
-        fromMeta.textContent = `${fromTz} (UTC${offFrom>=0?"+":""}${(offFrom/60).toFixed(mm?2:0)})`;
-        toMeta.textContent = `${toTz} (UTC${offTo>=0?"+":""}${(offTo/60).toFixed(mm?2:0)})`;
+        // show UTC offsets cleanly
+        const fmtOff = (mins) => {
+          const s = mins >= 0 ? "+" : "-";
+          const a = Math.abs(mins);
+          const h = Math.floor(a/60);
+          const m = a%60;
+          return `UTC${s}${h}${m?(":" + String(m).padStart(2,"0")):""}`;
+        };
 
-        // DST hint (simple)
+        fromMeta.textContent = `${fromTz} (${fmtOff(offFrom)})`;
+        toMeta.textContent = `${toTz} (${fmtOff(offTo)})`;
         dstOut.textContent = `Offsets at this time: ${fromTz}=${offFrom} min, ${toTz}=${offTo} min`;
 
         setStatus("Converted ✔", "ok");
@@ -406,15 +408,18 @@
       const a = fromEl.value;
       fromEl.value = toEl.value;
       toEl.value = a;
+
+      // If swap produced empty (edge case), force valid options
+      if(!fromEl.value && fromEl.options.length) fromEl.selectedIndex = 0;
+      if(!toEl.value && toEl.options.length) toEl.selectedIndex = 0;
+
       setStatus("Swapped time zones.", "ok");
       convert();
     }
 
-    // Init
     (function init(){
       const zones = getAllTimeZones();
 
-      // Prefer common zones at top, then the rest
       const set = new Set(zones);
       const ordered = [
         ...COMMON_TZ.filter(z => set.has(z)),
@@ -424,11 +429,17 @@
       fillSelect(fromEl, ordered);
       fillSelect(toEl, ordered);
 
-      // defaults
       const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
-      fromEl.value = localTz;
-      // common “target” default
-      toEl.value = localTz === "America/Phoenix" ? "UTC" : "America/Phoenix";
+
+      // ensure selected values exist in the dropdown
+      fromEl.value = ordered.includes(localTz) ? localTz : "UTC";
+
+      let target = (fromEl.value === "America/Phoenix") ? "UTC" : "America/Phoenix";
+      if(!ordered.includes(target)) target = ordered.includes("UTC") ? "UTC" : (ordered[0] || "UTC");
+      toEl.value = target;
+
+      if(!fromEl.value && fromEl.options.length) fromEl.selectedIndex = 0;
+      if(!toEl.value && toEl.options.length) toEl.selectedIndex = 0;
 
       setNow();
       updateNowLabels();
