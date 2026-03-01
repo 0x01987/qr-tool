@@ -13,7 +13,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>IP Lookup | InstantQR</title>
-  <meta name="description" content="Find your public IP address and basic network details instantly. Simple, fast, and privacy-first." />
+  <meta name="description" content="Find your public IPv4/IPv6 address and basic network details instantly. Simple, fast, and privacy-first." />
   <meta name="robots" content="index,follow" />
 
   <style>
@@ -25,6 +25,7 @@
       padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
     }
 
+    /* Top nav (matches your theme) */
     .topbar{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; flex-wrap:wrap; margin-bottom:14px;
@@ -66,6 +67,9 @@
     }
     button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
 
+    .hint{ color:#b8c0d6; font-size:12px; line-height:1.55; }
+    .tiny{ color:#8ea0c8; font-size:12px; }
+
     .resultBox{
       margin-top:12px;
       padding:12px;
@@ -76,14 +80,7 @@
       flex-direction:column;
       gap:10px;
     }
-    .big{
-      font-size:18px;
-      font-weight:900;
-      letter-spacing:.2px;
-      word-break: break-word;
-    }
-    .hint{ color:#b8c0d6; font-size:12px; line-height:1.55; }
-    .tiny{ color:#8ea0c8; font-size:12px; }
+
     .kv{ display:grid; grid-template-columns: 140px 1fr; gap:8px; }
     @media (max-width: 520px){ .kv{ grid-template-columns: 1fr; } }
     .k{ color:#8ea0c8; font-size:12px; }
@@ -97,6 +94,14 @@
     }
     .footerLinks a{ color:#cfe0ff; text-decoration:none; }
     .footerLinks a:hover{ text-decoration:underline; }
+
+    .warn{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid #2a3a5f;
+      background:#0e1525;
+    }
   </style>
 </head>
 
@@ -120,7 +125,7 @@
       <header>
         <div>
           <h1>IP Lookup</h1>
-          <div class="sub">See your public IP address and basic network details.</div>
+          <div class="sub">Shows your public IPv4/IPv6 separately + basic network details.</div>
         </div>
       </header>
 
@@ -128,19 +133,25 @@
         <!-- Main -->
         <div class="box">
           <label for="ipInput">Lookup an IP (optional)</label>
-          <input id="ipInput" placeholder="Leave blank to detect your IP automatically" />
+          <input id="ipInput" placeholder="Leave blank to detect your IP automatically (IPv4/IPv6)" />
 
           <div class="actions">
             <button id="lookupBtn" type="button">Lookup</button>
-            <button class="secondary" id="copyBtn" type="button">Copy IP</button>
+            <button class="secondary" id="copyIpBtn" type="button">Copy IP</button>
+            <button class="secondary" id="copyDetailsBtn" type="button">Copy Details</button>
             <button class="secondary" id="refreshBtn" type="button">Refresh</button>
           </div>
 
           <div class="resultBox" aria-live="polite">
-            <div class="hint">Public IP</div>
-            <div class="big" id="ipText">—</div>
+            <div class="hint">Your Public IP</div>
 
             <div class="kv">
+              <div class="k">IPv4</div>
+              <div class="v" id="ip4Text">—</div>
+
+              <div class="k">IPv6</div>
+              <div class="v" id="ip6Text">—</div>
+
               <div class="k">Location</div>
               <div class="v" id="locText">—</div>
 
@@ -157,23 +168,26 @@
             <div class="tiny" id="noteText"></div>
           </div>
 
-          <div class="tiny" style="margin-top:10px;">
-            Privacy note: IP lookup requires calling a third-party IP service to return your IP + approximate location.
-            We do not store results on our servers.
+          <div class="warn">
+            <div class="tiny">
+              <strong>Privacy note:</strong> IP lookup requires calling third-party IP providers to return your IP and approximate location.
+              InstantQR does not store results on any server.
+              If you see “Failed to fetch”, it’s usually an adblocker/privacy extension or a network/VPN block.
+            </div>
           </div>
         </div>
 
         <!-- Info -->
         <div class="box">
-          <div class="hint"><strong>What is a public IP?</strong><br>Your public IP is the address your network uses on the internet.</div>
-          <div class="hint" style="margin-top:10px;"><strong>Accuracy:</strong><br>Location is approximate (usually city/region), not exact.</div>
-          <div class="hint" style="margin-top:10px;"><strong>Tip:</strong><br>If you use a VPN, this will show the VPN IP.</div>
+          <div class="hint"><strong>What is a public IP?</strong><br>Your public IP is your network’s address on the internet.</div>
+          <div class="hint" style="margin-top:10px;"><strong>Accuracy:</strong><br>Location is approximate (city/region), not exact.</div>
+          <div class="hint" style="margin-top:10px;"><strong>VPN:</strong><br>If you use a VPN, you’ll see the VPN IP.</div>
 
           <div style="margin-top:14px;">
             <h2 style="margin:0 0 6px; font-size:16px;">FAQ</h2>
             <p class="hint" style="line-height:1.6; margin:0;">
-              <strong>Does this reveal my exact address?</strong> No.<br>
-              <strong>Can I lookup any IP?</strong> Yes (if supported by the API).<br>
+              <strong>Does this reveal my address?</strong> No.<br>
+              <strong>Can I lookup any IP?</strong> Yes (if supported by providers).<br>
               <strong>Is it free?</strong> Yes.
             </p>
           </div>
@@ -199,7 +213,9 @@
 
   <script>
     const ipInput = document.getElementById("ipInput");
-    const ipText = document.getElementById("ipText");
+
+    const ip4Text = document.getElementById("ip4Text");
+    const ip6Text = document.getElementById("ip6Text");
     const locText = document.getElementById("locText");
     const ispText = document.getElementById("ispText");
     const tzText = document.getElementById("tzText");
@@ -207,97 +223,244 @@
     const noteText = document.getElementById("noteText");
 
     const lookupBtn = document.getElementById("lookupBtn");
-    const copyBtn = document.getElementById("copyBtn");
+    const copyIpBtn = document.getElementById("copyIpBtn");
+    const copyDetailsBtn = document.getElementById("copyDetailsBtn");
     const refreshBtn = document.getElementById("refreshBtn");
 
-    function setLoading(msg){
-      ipText.textContent = msg || "Loading…";
+    let lastResult = null; // for "Copy Details"
+
+    function setLoading(msg) {
+      ip4Text.textContent = msg || "Loading…";
+      ip6Text.textContent = msg || "Loading…";
       locText.textContent = "—";
       ispText.textContent = "—";
       tzText.textContent = "—";
       asnText.textContent = "—";
       noteText.textContent = "";
+      lastResult = null;
     }
 
-    function setError(msg){
-      ipText.textContent = "—";
-      noteText.textContent = msg || "Could not fetch IP info.";
+    function setError(msg) {
+      ip4Text.textContent = "—";
+      ip6Text.textContent = "—";
+      locText.textContent = "—";
+      ispText.textContent = "—";
+      tzText.textContent = "—";
+      asnText.textContent = "—";
+      noteText.textContent = msg || "Failed to fetch.";
+      lastResult = null;
     }
 
-    function safe(s){ return (s === null || s === undefined || s === "") ? "—" : String(s); }
-
-    // ipapi.co supports both "your ip" and specific IP lookups
-    // Example:
-    //  - https://ipapi.co/json/
-    //  - https://ipapi.co/8.8.8.8/json/
-    async function fetchIpInfo(targetIp){
-      const url = targetIp
-        ? `https://ipapi.co/${encodeURIComponent(targetIp)}/json/`
-        : `https://ipapi.co/json/`;
-
+    async function fetchJson(url) {
       const res = await fetch(url, { cache: "no-store" });
-      if(!res.ok) throw new Error("Network error");
-      const data = await res.json();
-
-      // ipapi returns { error: true, reason: "..."} for invalid lookups
-      if(data.error){
-        throw new Error(data.reason || "Invalid IP or lookup blocked.");
-      }
-      return data;
+      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+      return await res.json();
     }
 
-    function render(data){
-      const ip = safe(data.ip);
-      ipText.textContent = ip;
+    async function fetchText(url) {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+      return (await res.text()).trim();
+    }
 
-      const locParts = [data.city, data.region, data.country_name].filter(Boolean);
+    // --- Public IP detection (multiple fallbacks) ---
+    async function getIPv4() {
+      const providers = [
+        async () => (await fetchJson("https://api.ipify.org?format=json")).ip,
+        async () => await fetchText("https://ipv4.icanhazip.com/"),
+        async () => await fetchText("https://ifconfig.me/ip"),
+      ];
+      let lastErr;
+      for (const p of providers) {
+        try {
+          const ip = await p();
+          if (ip && ip.includes(".")) return ip;
+        } catch (e) { lastErr = e; }
+      }
+      throw lastErr || new Error("IPv4 blocked by network/extension.");
+    }
+
+    async function getIPv6() {
+      const providers = [
+        async () => (await fetchJson("https://api64.ipify.org?format=json")).ip,
+        async () => await fetchText("https://ipv6.icanhazip.com/"),
+      ];
+      let lastErr;
+      for (const p of providers) {
+        try {
+          const ip = await p();
+          if (ip && ip.includes(":")) return ip;
+        } catch (e) { lastErr = e; }
+      }
+      // Not all networks support IPv6, so don't throw
+      return null;
+    }
+
+    // --- Geo lookup with multiple provider fallbacks ---
+    async function geoLookup(ip) {
+      const providers = [
+        // Provider 1: ipwho.is
+        async () => {
+          const d = await fetchJson(`https://ipwho.is/${encodeURIComponent(ip)}`);
+          if (d && d.success === false) throw new Error(d.message || "ipwho.is blocked");
+          return {
+            provider: "ipwho.is",
+            city: d.city,
+            region: d.region,
+            country: d.country,
+            isp: d.connection?.isp,
+            org: d.connection?.org,
+            asn: d.connection?.asn,
+            timezone: d.timezone?.id,
+          };
+        },
+        // Provider 2: ipapi.co
+        async () => {
+          const d = await fetchJson(`https://ipapi.co/${encodeURIComponent(ip)}/json/`);
+          if (d && d.error) throw new Error(d.reason || "ipapi blocked");
+          return {
+            provider: "ipapi.co",
+            city: d.city,
+            region: d.region,
+            country: d.country_name,
+            isp: d.org,
+            org: d.org,
+            asn: d.asn,
+            timezone: d.timezone,
+          };
+        },
+        // Provider 3: ipinfo.io (no key; may rate-limit)
+        async () => {
+          const d = await fetchJson(`https://ipinfo.io/${encodeURIComponent(ip)}/json`);
+          return {
+            provider: "ipinfo.io",
+            city: d.city,
+            region: d.region,
+            country: d.country,
+            isp: d.org,
+            org: d.org,
+            asn: (d.org && d.org.match(/AS\\d+/)) ? d.org.match(/AS\\d+/)[0] : null,
+            timezone: d.timezone,
+          };
+        },
+      ];
+
+      let lastErr;
+      for (const p of providers) {
+        try { return await p(); }
+        catch (e) { lastErr = e; }
+      }
+      throw lastErr || new Error("Geo lookup blocked.");
+    }
+
+    function safe(v) {
+      return (v === null || v === undefined || v === "") ? "—" : String(v);
+    }
+
+    function render(result) {
+      const { ip4, ip6, geo } = result;
+
+      ip4Text.textContent = safe(ip4);
+      ip6Text.textContent = ip6 ? safe(ip6) : "Not available";
+
+      const locParts = [geo.city, geo.region, geo.country].filter(Boolean);
       locText.textContent = locParts.length ? locParts.join(", ") : "—";
 
-      // ISP / Org
-      ispText.textContent = safe(data.org || data.asn || data.network);
+      ispText.textContent = safe(geo.isp || geo.org);
+      tzText.textContent = safe(geo.timezone);
+      asnText.textContent = safe(geo.asn);
 
-      tzText.textContent = safe(data.timezone);
-      asnText.textContent = safe(data.asn);
-
-      noteText.textContent = `Source: ipapi.co`;
+      noteText.textContent = `Geo source: ${geo.provider}`;
     }
 
-    async function lookup(){
-      const targetIp = (ipInput.value || "").trim();
+    function isLikelyIp(str) {
+      const s = (str || "").trim();
+      if (!s) return false;
+      // loose validation for v4/v6
+      const v4 = /^\\d{1,3}(\\.\\d{1,3}){3}$/;
+      const v6 = /^[0-9a-fA-F:]+$/;
+      return v4.test(s) || (s.includes(":") && v6.test(s));
+    }
+
+    async function lookup() {
+      const manualIp = (ipInput.value || "").trim();
       setLoading("Loading…");
-      try{
-        const data = await fetchIpInfo(targetIp || null);
-        render(data);
-      }catch(err){
-        setError(err.message);
+
+      try {
+        if (manualIp) {
+          if (!isLikelyIp(manualIp)) throw new Error("Enter a valid IPv4 or IPv6 address (or leave blank).");
+          const geo = await geoLookup(manualIp);
+          const result = {
+            ip4: manualIp.includes(".") ? manualIp : null,
+            ip6: manualIp.includes(":") ? manualIp : null,
+            geo
+          };
+          lastResult = result;
+          render(result);
+          return;
+        }
+
+        const [v4, v6] = await Promise.allSettled([getIPv4(), getIPv6()]);
+        const ip4 = (v4.status === "fulfilled") ? v4.value : null;
+        const ip6 = (v6.status === "fulfilled") ? v6.value : null;
+
+        if (!ip4) throw new Error("Could not detect IPv4 (likely blocked by an extension/VPN/network).");
+
+        const geo = await geoLookup(ip4);
+        const result = { ip4, ip6, geo };
+        lastResult = result;
+        render(result);
+
+      } catch (err) {
+        setError(err.message || "Failed to fetch.");
       }
     }
 
-    async function copyIp(){
-      const ip = (ipText.textContent || "").trim();
-      if(!ip || ip === "—" || ip.toLowerCase().includes("loading")) return;
-      try{
-        await navigator.clipboard.writeText(ip);
-        copyBtn.textContent = "Copied!";
-        setTimeout(() => copyBtn.textContent = "Copy IP", 1200);
-      }catch{
-        // fallback
-        const temp = document.createElement("textarea");
-        temp.value = ip;
-        document.body.appendChild(temp);
-        temp.select();
+    async function copyText(txt, btnEl, okLabel, baseLabel) {
+      try {
+        await navigator.clipboard.writeText(txt);
+        btnEl.textContent = okLabel;
+        setTimeout(() => (btnEl.textContent = baseLabel), 1200);
+      } catch {
+        const t = document.createElement("textarea");
+        t.value = txt;
+        document.body.appendChild(t);
+        t.select();
         document.execCommand("copy");
-        document.body.removeChild(temp);
-        copyBtn.textContent = "Copied!";
-        setTimeout(() => copyBtn.textContent = "Copy IP", 1200);
+        document.body.removeChild(t);
+        btnEl.textContent = okLabel;
+        setTimeout(() => (btnEl.textContent = baseLabel), 1200);
       }
     }
+
+    function buildDetailsText(r) {
+      const lines = [];
+      lines.push("InstantQR — IP Lookup");
+      lines.push(`IPv4: ${r.ip4 || "—"}`);
+      lines.push(`IPv6: ${r.ip6 || "Not available"}`);
+      lines.push(`Location: ${locText.textContent}`);
+      lines.push(`ISP/Org: ${ispText.textContent}`);
+      lines.push(`Timezone: ${tzText.textContent}`);
+      lines.push(`ASN: ${asnText.textContent}`);
+      lines.push(noteText.textContent || "");
+      return lines.join("\\n");
+    }
+
+    copyIpBtn.addEventListener("click", () => {
+      const ip = (ip4Text.textContent || "").trim();
+      if (!ip || ip === "—" || ip.toLowerCase().includes("loading")) return;
+      copyText(ip, copyIpBtn, "Copied!", "Copy IP");
+    });
+
+    copyDetailsBtn.addEventListener("click", () => {
+      if (!lastResult) return;
+      copyText(buildDetailsText(lastResult), copyDetailsBtn, "Copied!", "Copy Details");
+    });
 
     lookupBtn.addEventListener("click", lookup);
     refreshBtn.addEventListener("click", () => { ipInput.value = ""; lookup(); });
-    copyBtn.addEventListener("click", copyIp);
 
-    // Init
+    // Auto-run on load
     lookup();
   </script>
 </body>
