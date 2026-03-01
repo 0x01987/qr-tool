@@ -16,10 +16,10 @@
   </url>
    <!-- Unit Converter -->
   <url>
-  <loc>https://instantqr.io/unit-converter.html</loc>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
+    <loc>https://instantqr.io/unit-converter.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <!-- SEO Tool Pages -->
   <url>
