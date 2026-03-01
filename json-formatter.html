@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JSON Formatter | InstantQR</title>
+  <meta name="description" content="Format, validate, and minify JSON instantly. Privacy-first: everything runs locally in your browser." />
+  <meta name="robots" content="index,follow" />
+
+  <style>
+    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    body { margin:0; background:#0b0f19; color:#e7eaf2; }
+    .wrap { max-width: 1100px; margin:0 auto; padding: 22px; }
+    .card {
+      background:#121a2a; border:1px solid #22304e; border-radius:18px;
+      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap; margin-bottom:14px;
+    }
+    .brand{
+      display:flex; align-items:baseline; gap:10px;
+      text-decoration:none; color:#e7eaf2;
+    }
+    .brand strong{ font-size:16px; letter-spacing:.2px; }
+    .brand span{ color:#8ea0c8; font-size:12px; }
+
+    .toolnav{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .toolnav a{
+      padding:8px 10px; border-radius:999px;
+      background:#0b1222; border:1px solid #2a3a5f;
+      color:#b8c0d6; font-size:12px; text-decoration:none; font-weight:700;
+    }
+    .toolnav a:hover{ border-color:#3b82f6; color:#e7eaf2; }
+    .toolnav a.active{ border-color:#3b82f6; color:#e7eaf2; }
+
+    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    h1{ margin:0; font-size:24px; }
+    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
+
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-top:14px; }
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+
+    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; }
+    label{ display:block; font-size:12px; color:#b8c0d6; margin-bottom:6px; }
+
+    textarea{
+      width:100%;
+      min-height: 360px;
+      resize: vertical;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid #2a3a5f;
+      background:#0b1222;
+      color:#e7eaf2;
+      outline:none;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre;
+      tab-size: 2;
+    }
+
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px; }
+
+    button{
+      border:0; border-radius:14px; padding:12px 14px;
+      background:#3b82f6; color:white; font-weight:800; cursor:pointer;
+    }
+    button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
+    button.ghost{ background:#0b1222; border:1px solid #2a3a5f; color:#b8c0d6; }
+
+    .pill{
+      display:flex; align-items:center; gap:8px;
+      padding:7px 10px; border-radius:999px;
+      background:#0b1222; border:1px solid #2a3a5f;
+      color:#b8c0d6; font-size:12px; user-select:none;
+    }
+    .pill input{ margin:0; }
+
+    .hint{ color:#b8c0d6; font-size:12px; line-height:1.55; }
+    .tiny{ color:#8ea0c8; font-size:12px; }
+    .error{ color:#ff9fb3; font-size:12px; }
+    .ok{ color:#9fffb8; font-size:12px; }
+
+    .status{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px dashed rgba(184,192,214,.35);
+      background:#0b1222;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .footerLinks{
+      margin-top:14px;
+      text-align:center;
+      color:#8ea0c8;
+      font-size:12px;
+    }
+    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <div class="topbar">
+        <a class="brand" href="/">
+          <strong>InstantQR</strong>
+          <span>privacy-first tools</span>
+        </a>
+        <nav class="toolnav" aria-label="Tools">
+          <a href="/">QR Generator</a>
+          <a href="/password.html">Password Generator</a>
+          <a href="/unit-converter.html">Unit Converter</a>
+          <a href="/ip-lookup.html">IP Lookup</a>
+          <a class="active" href="/json-formatter.html">JSON Formatter</a>
+        </nav>
+      </div>
+
+      <header>
+        <div>
+          <h1>JSON Formatter</h1>
+          <div class="sub">Format, validate, and minify JSON instantly — runs locally in your browser.</div>
+        </div>
+      </header>
+
+      <div class="grid">
+        <!-- Input -->
+        <div class="box">
+          <label for="inputJson">Input JSON</label>
+          <textarea id="inputJson" placeholder='Paste JSON here...'></textarea>
+
+          <div class="row">
+            <button id="formatBtn" type="button">Format</button>
+            <button class="secondary" id="minifyBtn" type="button">Minify</button>
+            <button class="secondary" id="validateBtn" type="button">Validate</button>
+            <button class="ghost" id="sampleBtn" type="button">Sample</button>
+            <button class="ghost" id="clearBtn" type="button">Clear</button>
+
+            <label class="pill" title="Auto-format after you stop typing (safe).">
+              <input id="autoFormat" type="checkbox" />
+              Auto-format
+            </label>
+          </div>
+
+          <div class="status" aria-live="polite">
+            <div class="tiny">Status</div>
+            <div id="statusLine" class="hint">Paste JSON, then click Format / Validate.</div>
+          </div>
+        </div>
+
+        <!-- Output -->
+        <div class="box">
+          <label for="outputJson">Output</label>
+          <textarea id="outputJson" readonly placeholder="Formatted / minified JSON will appear here..."></textarea>
+
+          <div class="row">
+            <button id="copyFormattedBtn" type="button">Copy Output</button>
+            <button class="secondary" id="copyMinifiedBtn" type="button">Copy Minified</button>
+            <button class="secondary" id="downloadBtn" type="button">Download .json</button>
+          </div>
+
+          <div class="tiny" style="margin-top:10px;">
+            Privacy: formatting and validation run in your browser. No JSON is uploaded to InstantQR servers.
+          </div>
+        </div>
+      </div>
+
+      <div class="footerLinks">
+        <div style="margin-bottom:8px;">
+          <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+          <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
+          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a>
+        </div>
+        <div>
+          <a href="/about.html">About</a> ·
+          <a href="/privacy.html">Privacy</a> ·
+          <a href="/terms.html">Terms</a> ·
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const inputEl = document.getElementById("inputJson");
+    const outputEl = document.getElementById("outputJson");
+    const statusLine = document.getElementById("statusLine");
+
+    const formatBtn = document.getElementById("formatBtn");
+    const minifyBtn = document.getElementById("minifyBtn");
+    const validateBtn = document.getElementById("validateBtn");
+    const sampleBtn = document.getElementById("sampleBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
+    const copyFormattedBtn = document.getElementById("copyFormattedBtn");
+    const copyMinifiedBtn = document.getElementById("copyMinifiedBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    const autoFormatEl = document.getElementById("autoFormat");
+    let autoTimer = null;
+
+    function setStatus(msg, type="hint"){
+      statusLine.className = type;
+      statusLine.textContent = msg;
+    }
+
+    function parseJsonOrThrow(text){
+      const trimmed = (text || "").trim();
+      if(!trimmed) throw new Error("Input is empty. Paste JSON first.");
+      return JSON.parse(trimmed);
+    }
+
+    function formatJson(obj){
+      return JSON.stringify(obj, null, 2);
+    }
+
+    function minifyJson(obj){
+      return JSON.stringify(obj);
+    }
+
+    // Try to give a line/column hint using error position (best-effort)
+    function getLineColFromPos(text, pos){
+      const upTo = text.slice(0, Math.max(0, pos));
+      const lines = upTo.split("\n");
+      const line = lines.length;
+      const col = lines[lines.length - 1].length + 1;
+      return { line, col };
+    }
+
+    function tryExplainJsonError(text, err){
+      const msg = String(err && err.message ? err.message : err);
+      // Common V8 format: "Unexpected token ... in JSON at position N"
+      const m = msg.match(/position\s+(\d+)/i);
+      if(m){
+        const pos = Number(m[1]);
+        if(Number.isFinite(pos)){
+          const lc = getLineColFromPos(text, pos);
+          return `${msg} (line ${lc.line}, column ${lc.col})`;
+        }
+      }
+      return msg;
+    }
+
+    function doFormat(){
+      const raw = inputEl.value || "";
+      try{
+        const obj = parseJsonOrThrow(raw);
+        const pretty = formatJson(obj);
+        outputEl.value = pretty;
+        setStatus("Valid JSON ✔ Formatted output generated.", "ok");
+      }catch(err){
+        outputEl.value = "";
+        setStatus("Invalid JSON: " + tryExplainJsonError(raw, err), "error");
+      }
+    }
+
+    function doMinify(){
+      const raw = inputEl.value || "";
+      try{
+        const obj = parseJsonOrThrow(raw);
+        const mini = minifyJson(obj);
+        outputEl.value = mini;
+        setStatus("Valid JSON ✔ Minified output generated.", "ok");
+      }catch(err){
+        outputEl.value = "";
+        setStatus("Invalid JSON: " + tryExplainJsonError(raw, err), "error");
+      }
+    }
+
+    function doValidate(){
+      const raw = inputEl.value || "";
+      try{
+        parseJsonOrThrow(raw);
+        setStatus("Valid JSON ✔", "ok");
+      }catch(err){
+        setStatus("Invalid JSON: " + tryExplainJsonError(raw, err), "error");
+      }
+    }
+
+    async function copyText(text, btn, okLabel, baseLabel){
+      if(!text) return;
+      try{
+        await navigator.clipboard.writeText(text);
+        btn.textContent = okLabel;
+        setTimeout(()=> btn.textContent = baseLabel, 1200);
+      }catch{
+        // fallback
+        const t = document.createElement("textarea");
+        t.value = text;
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand("copy");
+        document.body.removeChild(t);
+        btn.textContent = okLabel;
+        setTimeout(()=> btn.textContent = baseLabel, 1200);
+      }
+    }
+
+    function downloadJson(){
+      const text = outputEl.value || "";
+      if(!text){
+        setStatus("Nothing to download. Format or minify first.", "error");
+        return;
+      }
+      const blob = new Blob([text], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "formatted.json";
+      a.click();
+      URL.revokeObjectURL(url);
+      setStatus("Downloaded formatted.json", "ok");
+    }
+
+    function loadSample(){
+      const sample = {
+        app: "InstantQR",
+        tool: "JSON Formatter",
+        timestamp: new Date().toISOString(),
+        user: { id: 123, name: "Alex", active: true },
+        tags: ["tools", "privacy", "fast"],
+        settings: { theme: "dark", indent: 2 },
+        items: [
+          { id: 1, name: "QR Generator" },
+          { id: 2, name: "Password Generator" },
+          { id: 3, name: "Unit Converter" }
+        ]
+      };
+      inputEl.value = JSON.stringify(sample);
+      doFormat();
+    }
+
+    function clearAll(){
+      inputEl.value = "";
+      outputEl.value = "";
+      setStatus("Cleared.", "hint");
+    }
+
+    // Auto-format (debounced)
+    function scheduleAuto(){
+      if(!autoFormatEl.checked) return;
+      clearTimeout(autoTimer);
+      autoTimer = setTimeout(() => doFormat(), 450);
+    }
+
+    // Events
+    formatBtn.addEventListener("click", doFormat);
+    minifyBtn.addEventListener("click", doMinify);
+    validateBtn.addEventListener("click", doValidate);
+    sampleBtn.addEventListener("click", loadSample);
+    clearBtn.addEventListener("click", clearAll);
+
+    copyFormattedBtn.addEventListener("click", () =>
+      copyText(outputEl.value, copyFormattedBtn, "Copied!", "Copy Output")
+    );
+    copyMinifiedBtn.addEventListener("click", () => {
+      const raw = inputEl.value || "";
+      try{
+        const obj = parseJsonOrThrow(raw);
+        const mini = minifyJson(obj);
+        copyText(mini, copyMinifiedBtn, "Copied!", "Copy Minified");
+        setStatus("Copied minified JSON.", "ok");
+      }catch(err){
+        setStatus("Invalid JSON: " + tryExplainJsonError(raw, err), "error");
+      }
+    });
+
+    downloadBtn.addEventListener("click", downloadJson);
+
+    inputEl.addEventListener("input", scheduleAuto);
+
+    // Nice: Tab inserts 2 spaces in textarea
+    inputEl.addEventListener("keydown", (e) => {
+      if(e.key === "Tab"){
+        e.preventDefault();
+        const start = inputEl.selectionStart;
+        const end = inputEl.selectionEnd;
+        const val = inputEl.value;
+        inputEl.value = val.substring(0, start) + "  " + val.substring(end);
+        inputEl.selectionStart = inputEl.selectionEnd = start + 2;
+        scheduleAuto();
+      }
+    });
+  </script>
+</body>
+</html>
