@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) - keep consistent across pages -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Unit Converter | InstantQR</title>
+  <meta name="description" content="Convert units instantly: cups to grams, oz to g, lbs to kg, inches to cm, °F to °C, gallons to liters, and more." />
+  <meta name="robots" content="index,follow" />
+
+  <style>
+    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    body { margin:0; background:#0b0f19; color:#e7eaf2; }
+    .wrap { max-width: 920px; margin:0 auto; padding: 22px; }
+    .card {
+      background:#121a2a; border:1px solid #22304e; border-radius:18px;
+      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+
+    /* Top nav (same style as your index/password) */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap; margin-bottom:14px;
+    }
+    .brand{
+      display:flex; align-items:baseline; gap:10px;
+      text-decoration:none; color:#e7eaf2;
+    }
+    .brand strong{ font-size:16px; letter-spacing:.2px; }
+    .brand span{ color:#8ea0c8; font-size:12px; }
+
+    .toolnav{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .toolnav a{
+      padding:8px 10px; border-radius:999px;
+      background:#0b1222; border:1px solid #2a3a5f;
+      color:#b8c0d6; font-size:12px; text-decoration:none; font-weight:700;
+    }
+    .toolnav a:hover{ border-color:#3b82f6; color:#e7eaf2; }
+    .toolnav a.active{ border-color:#3b82f6; color:#e7eaf2; }
+
+    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    h1{ margin:0; font-size:24px; }
+    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
+
+    .grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:14px; margin-top:14px; }
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+
+    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; }
+    label{ display:block; font-size:12px; color:#b8c0d6; margin-bottom:6px; }
+    input, select{
+      width:100%; padding:12px 10px; border-radius:14px;
+      border:1px solid #2a3a5f; background:#0b1222; color:#e7eaf2; outline:none;
+    }
+
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    @media (max-width: 520px){ .row{ grid-template-columns: 1fr; } }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    button{
+      border:0; border-radius:14px; padding:12px 14px;
+      background:#3b82f6; color:white; font-weight:800; cursor:pointer;
+    }
+    button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
+
+    .pillbar{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .pill{
+      padding:7px 10px; border-radius:999px;
+      background:#0b1222; border:1px solid #2a3a5f;
+      color:#b8c0d6; font-size:12px; cursor:pointer; user-select:none;
+      display:flex; align-items:center; gap:8px;
+    }
+    .pill.active{ border-color:#3b82f6; color:#e7eaf2; }
+
+    .hint{ color:#b8c0d6; font-size:12px; }
+    .tiny{ color:#8ea0c8; font-size:12px; margin-top:10px; }
+    code{ color:#cfe0ff; }
+
+    .resultBox{
+      margin-top:12px;
+      padding:12px;
+      border-radius:14px;
+      background:#0b1222;
+      border:1px dashed rgba(184,192,214,.35);
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .big{
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+
+    .footerLinks{
+      margin-top:14px;
+      text-align:center;
+      color:#8ea0c8;
+      font-size:12px;
+    }
+    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <div class="topbar">
+        <a class="brand" href="/">
+          <strong>InstantQR</strong>
+          <span>privacy-first tools</span>
+        </a>
+        <nav class="toolnav" aria-label="Tools">
+          <a href="/">QR Generator</a>
+          <a href="/password.html">Password Generator</a>
+          <a class="active" href="/unit-converter.html">Unit Converter</a>
+        </nav>
+      </div>
+
+      <header>
+        <div>
+          <h1>Unit Converter</h1>
+          <div class="sub">Instant conversions for everyday use. Runs locally in your browser.</div>
+        </div>
+      </header>
+
+      <div class="grid">
+        <!-- Controls -->
+        <div class="box">
+          <label>Converter</label>
+          <div class="pillbar" id="convBar">
+            <div class="pill active" data-conv="length">Length</div>
+            <div class="pill" data-conv="weight">Weight</div>
+            <div class="pill" data-conv="temperature">Temperature</div>
+            <div class="pill" data-conv="volume">Volume</div>
+            <div class="pill" data-conv="speed">Speed</div>
+          </div>
+
+          <div class="row" style="margin-top:12px;">
+            <div>
+              <label for="fromValue">Value</label>
+              <input id="fromValue" inputmode="decimal" placeholder="Enter a number (e.g., 12.5)" />
+            </div>
+            <div>
+              <label for="precision">Precision</label>
+              <select id="precision">
+                <option value="2">2 decimals</option>
+                <option value="3">3 decimals</option>
+                <option value="4">4 decimals</option>
+                <option value="0">No decimals</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:12px;">
+            <div>
+              <label for="fromUnit">From</label>
+              <select id="fromUnit"></select>
+            </div>
+            <div>
+              <label for="toUnit">To</label>
+              <select id="toUnit"></select>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="convertBtn" type="button">Convert</button>
+            <button class="secondary" id="swapBtn" type="button">Swap</button>
+            <button class="secondary" id="clearBtn" type="button">Clear</button>
+          </div>
+
+          <div class="resultBox" aria-live="polite">
+            <div class="hint">Result</div>
+            <div class="big" id="resultText">—</div>
+            <div class="tiny" id="formulaText"></div>
+          </div>
+
+          <div class="tiny">
+            Popular: <code>in → cm</code>, <code>lbs → kg</code>, <code>°F → °C</code>, <code>oz → g</code>, <code>gallons → liters</code>.
+          </div>
+        </div>
+
+        <!-- Info / SEO -->
+        <div class="box">
+          <div class="hint"><strong>Fast + private:</strong> conversions happen locally. No form submissions.</div>
+
+          <div style="margin-top:12px;">
+            <label>Quick presets</label>
+            <div class="pillbar" id="presetBar">
+              <div class="pill" data-preset="in_cm">Inches → cm</div>
+              <div class="pill" data-preset="cm_in">cm → Inches</div>
+              <div class="pill" data-preset="lb_kg">lbs → kg</div>
+              <div class="pill" data-preset="kg_lb">kg → lbs</div>
+              <div class="pill" data-preset="f_c">°F → °C</div>
+              <div class="pill" data-preset="c_f">°C → °F</div>
+              <div class="pill" data-preset="oz_g">oz → g</div>
+              <div class="pill" data-preset="gal_l">gallons → liters</div>
+              <div class="pill" data-preset="mph_kmh">mph → km/h</div>
+            </div>
+          </div>
+
+          <div style="margin-top:14px;">
+            <h2 style="margin:0 0 6px; font-size:16px;">FAQ</h2>
+            <p class="hint" style="line-height:1.6; margin:0;">
+              <strong>Is this free?</strong> Yes.<br>
+              <strong>Do you store values?</strong> No.<br>
+              <strong>Does it work offline?</strong> Yes once loaded.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footerLinks">
+        <div style="margin-bottom:8px;">
+          <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+          <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
+          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a>
+        </div>
+        <div>
+          <a href="/about.html">About</a> ·
+          <a href="/privacy.html">Privacy</a> ·
+          <a href="/terms.html">Terms</a> ·
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ---------- Converters ----------
+    const converters = {
+      length: {
+        label: "Length",
+        units: [
+          { key: "in",  name: "Inches (in)",      factorToBase: 0.0254 },   // base = meters
+          { key: "ft",  name: "Feet (ft)",        factorToBase: 0.3048 },
+          { key: "yd",  name: "Yards (yd)",       factorToBase: 0.9144 },
+          { key: "mi",  name: "Miles (mi)",       factorToBase: 1609.344 },
+          { key: "mm",  name: "Millimeters (mm)", factorToBase: 0.001 },
+          { key: "cm",  name: "Centimeters (cm)", factorToBase: 0.01 },
+          { key: "m",   name: "Meters (m)",       factorToBase: 1 },
+          { key: "km",  name: "Kilometers (km)",  factorToBase: 1000 },
+        ],
+        convert: (v, from, to) => v * from.factorToBase / to.factorToBase,
+        formula: (v, from, to) => `${v} ${from.key} → ${to.key} (meters base)`,
+      },
+
+      weight: {
+        label: "Weight",
+        units: [
+          { key: "oz", name: "Ounces (oz)", factorToBase: 28.349523125 }, // base = grams
+          { key: "lb", name: "Pounds (lbs)", factorToBase: 453.59237 },
+          { key: "g",  name: "Grams (g)", factorToBase: 1 },
+          { key: "kg", name: "Kilograms (kg)", factorToBase: 1000 },
+        ],
+        convert: (v, from, to) => v * from.factorToBase / to.factorToBase,
+        formula: (v, from, to) => `${v} ${from.key} → ${to.key} (grams base)`,
+      },
+
+      volume: {
+        label: "Volume",
+        units: [
+          { key: "tsp", name: "Teaspoons (tsp)", factorToBase: 4.92892159375 }, // base = mL
+          { key: "tbsp",name: "Tablespoons (tbsp)", factorToBase: 14.78676478125 },
+          { key: "floz",name: "Fluid ounces (fl oz)", factorToBase: 29.5735295625 },
+          { key: "cup", name: "Cups (US)", factorToBase: 236.5882365 },
+          { key: "pt",  name: "Pints (US)", factorToBase: 473.176473 },
+          { key: "qt",  name: "Quarts (US)", factorToBase: 946.352946 },
+          { key: "gal", name: "Gallons (US)", factorToBase: 3785.411784 },
+          { key: "ml",  name: "Milliliters (mL)", factorToBase: 1 },
+          { key: "l",   name: "Liters (L)", factorToBase: 1000 },
+        ],
+        convert: (v, from, to) => v * from.factorToBase / to.factorToBase,
+        formula: (v, from, to) => `${v} ${from.key} → ${to.key} (mL base)`,
+      },
+
+      speed: {
+        label: "Speed",
+        units: [
+          { key: "mph", name: "Miles per hour (mph)", factorToBase: 0.44704 }, // base = m/s
+          { key: "kmh", name: "Kilometers per hour (km/h)", factorToBase: 0.2777777777778 },
+          { key: "ms",  name: "Meters per second (m/s)", factorToBase: 1 },
+        ],
+        convert: (v, from, to) => v * from.factorToBase / to.factorToBase,
+        formula: (v, from, to) => `${v} ${from.key} → ${to.key} (m/s base)`,
+      },
+
+      temperature: {
+        label: "Temperature",
+        units: [
+          { key: "f", name: "Fahrenheit (°F)" },
+          { key: "c", name: "Celsius (°C)" },
+          { key: "k", name: "Kelvin (K)" },
+        ],
+        convert: (v, from, to) => {
+          // Convert from -> Celsius -> to
+          const toC = (value, unit) => {
+            if (unit.key === "c") return value;
+            if (unit.key === "f") return (value - 32) * 5/9;
+            if (unit.key === "k") return value - 273.15;
+          };
+          const fromC = (valueC, unit) => {
+            if (unit.key === "c") return valueC;
+            if (unit.key === "f") return (valueC * 9/5) + 32;
+            if (unit.key === "k") return valueC + 273.15;
+          };
+          return fromC(toC(v, from), to);
+        },
+        formula: (v, from, to) => `${v} ${from.key.toUpperCase()} → ${to.key.toUpperCase()} (via °C)`,
+      },
+    };
+
+    // ---------- UI wiring ----------
+    const convBar = document.getElementById("convBar");
+    const presetBar = document.getElementById("presetBar");
+    const fromValueEl = document.getElementById("fromValue");
+    const precisionEl = document.getElementById("precision");
+    const fromUnitEl = document.getElementById("fromUnit");
+    const toUnitEl = document.getElementById("toUnit");
+    const resultTextEl = document.getElementById("resultText");
+    const formulaTextEl = document.getElementById("formulaText");
+
+    const convertBtn = document.getElementById("convertBtn");
+    const swapBtn = document.getElementById("swapBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
+    let currentConvKey = "length";
+
+    function setActivePills(container, activeMatchFn){
+      container.querySelectorAll(".pill").forEach(p => p.classList.toggle("active", activeMatchFn(p)));
+    }
+
+    function fillUnits(){
+      const conv = converters[currentConvKey];
+      fromUnitEl.innerHTML = "";
+      toUnitEl.innerHTML = "";
+
+      conv.units.forEach(u => {
+        const o1 = document.createElement("option");
+        o1.value = u.key;
+        o1.textContent = u.name;
+        fromUnitEl.appendChild(o1);
+
+        const o2 = document.createElement("option");
+        o2.value = u.key;
+        o2.textContent = u.name;
+        toUnitEl.appendChild(o2);
+      });
+
+      // Default pairs per converter
+      const defaults = {
+        length: ["in", "cm"],
+        weight: ["lb", "kg"],
+        temperature: ["f", "c"],
+        volume: ["cup", "g"] // will be corrected below (volume is not grams)
+      };
+
+      // Better defaults
+      if(currentConvKey === "volume"){ fromUnitEl.value = "gal"; toUnitEl.value = "l"; }
+      else if(currentConvKey === "length"){ fromUnitEl.value = "in"; toUnitEl.value = "cm"; }
+      else if(currentConvKey === "weight"){ fromUnitEl.value = "lb"; toUnitEl.value = "kg"; }
+      else if(currentConvKey === "speed"){ fromUnitEl.value = "mph"; toUnitEl.value = "kmh"; }
+      else if(currentConvKey === "temperature"){ fromUnitEl.value = "f"; toUnitEl.value = "c"; }
+
+      render();
+    }
+
+    function parseNumber(val){
+      // allow commas
+      const cleaned = String(val || "").trim().replace(/,/g, "");
+      const n = Number(cleaned);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function formatNumber(n){
+      const p = Number(precisionEl.value || 2);
+      if(p === 0) return String(Math.round(n));
+      return n.toFixed(p);
+    }
+
+    function getUnit(conv, key){
+      return conv.units.find(u => u.key === key);
+    }
+
+    function render(){
+      const val = parseNumber(fromValueEl.value);
+      if(val === null){
+        resultTextEl.textContent = "—";
+        formulaTextEl.textContent = "Enter a valid number to convert.";
+        return;
+      }
+
+      const conv = converters[currentConvKey];
+      const from = getUnit(conv, fromUnitEl.value);
+      const to = getUnit(conv, toUnitEl.value);
+
+      const out = conv.convert(val, from, to);
+      resultTextEl.textContent = `${formatNumber(out)} ${to.key}`;
+      formulaTextEl.textContent = conv.formula(val, from, to);
+    }
+
+    // Events
+    convBar.addEventListener("click", (e) => {
+      const pill = e.target.closest(".pill");
+      if(!pill) return;
+      currentConvKey = pill.dataset.conv;
+      setActivePills(convBar, p => p.dataset.conv === currentConvKey);
+      fillUnits();
+    });
+
+    presetBar.addEventListener("click", (e) => {
+      const pill = e.target.closest(".pill");
+      if(!pill) return;
+      const preset = pill.dataset.preset;
+
+      // Presets map
+      const apply = {
+        in_cm: () => { currentConvKey="length"; setActivePills(convBar, p => p.dataset.conv==="length"); fillUnits(); fromUnitEl.value="in"; toUnitEl.value="cm"; },
+        cm_in: () => { currentConvKey="length"; setActivePills(convBar, p => p.dataset.conv==="length"); fillUnits(); fromUnitEl.value="cm"; toUnitEl.value="in"; },
+        lb_kg: () => { currentConvKey="weight"; setActivePills(convBar, p => p.dataset.conv==="weight"); fillUnits(); fromUnitEl.value="lb"; toUnitEl.value="kg"; },
+        kg_lb: () => { currentConvKey="weight"; setActivePills(convBar, p => p.dataset.conv==="weight"); fillUnits(); fromUnitEl.value="kg"; toUnitEl.value="lb"; },
+        f_c:   () => { currentConvKey="temperature"; setActivePills(convBar, p => p.dataset.conv==="temperature"); fillUnits(); fromUnitEl.value="f"; toUnitEl.value="c"; },
+        c_f:   () => { currentConvKey="temperature"; setActivePills(convBar, p => p.dataset.conv==="temperature"); fillUnits(); fromUnitEl.value="c"; toUnitEl.value="f"; },
+        oz_g:  () => { currentConvKey="weight"; setActivePills(convBar, p => p.dataset.conv==="weight"); fillUnits(); fromUnitEl.value="oz"; toUnitEl.value="g"; },
+        gal_l: () => { currentConvKey="volume"; setActivePills(convBar, p => p.dataset.conv==="volume"); fillUnits(); fromUnitEl.value="gal"; toUnitEl.value="l"; },
+        mph_kmh:()=> { currentConvKey="speed"; setActivePills(convBar, p => p.dataset.conv==="speed"); fillUnits(); fromUnitEl.value="mph"; toUnitEl.value="kmh"; },
+      };
+
+      if(apply[preset]) apply[preset]();
+      render();
+    });
+
+    convertBtn.addEventListener("click", render);
+    swapBtn.addEventListener("click", () => {
+      const a = fromUnitEl.value;
+      fromUnitEl.value = toUnitEl.value;
+      toUnitEl.value = a;
+      render();
+    });
+    clearBtn.addEventListener("click", () => {
+      fromValueEl.value = "";
+      render();
+    });
+
+    [fromValueEl, precisionEl, fromUnitEl, toUnitEl].forEach(el => {
+      el.addEventListener("input", render);
+      el.addEventListener("change", render);
+    });
+
+    // Init
+    fillUnits();
+  </script>
+</body>
+</html>
