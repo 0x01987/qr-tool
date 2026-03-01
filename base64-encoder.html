@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Base64 Encoder / Decoder | InstantQR</title>
+  <meta name="description" content="Encode and decode Base64 instantly (text and files). Privacy-first: everything runs locally in your browser." />
+  <meta name="robots" content="index,follow" />
+
+  <style>
+    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    body { margin:0; background:#0b0f19; color:#e7eaf2; }
+    .wrap { max-width: 1100px; margin:0 auto; padding: 22px; }
+    .card {
+      background:#121a2a; border:1px solid #22304e; border-radius:18px;
+      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap; margin-bottom:14px;
+    }
+    .brand{
+      display:flex; align-items:baseline; gap:10px;
+      text-decoration:none; color:#e7eaf2;
+    }
+    .brand strong{ font-size:16px; letter-spacing:.2px; }
+    .brand span{ color:#8ea0c8; font-size:12px; }
+
+    .toolnav{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .toolnav a{
+      padding:8px 10px; border-radius:999px;
+      background:#0b1222; border:1px solid #2a3a5f;
+      color:#b8c0d6; font-size:12px; text-decoration:none; font-weight:700;
+    }
+    .toolnav a:hover{ border-color:#3b82f6; color:#e7eaf2; }
+    .toolnav a.active{ border-color:#3b82f6; color:#e7eaf2; }
+
+    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    h1{ margin:0; font-size:24px; }
+    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
+
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-top:14px; }
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+
+    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; }
+    label{ display:block; font-size:12px; color:#b8c0d6; margin-bottom:6px; }
+
+    textarea, input, select{
+      width:100%;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid #2a3a5f;
+      background:#0b1222;
+      color:#e7eaf2;
+      outline:none;
+      font-size:14px;
+    }
+    textarea{
+      min-height: 260px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre;
+      tab-size: 2;
+    }
+
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px; }
+    .row2{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:10px; }
+    @media (max-width: 520px){ .row2{ grid-template-columns: 1fr; } }
+
+    button{
+      border:0; border-radius:14px; padding:12px 14px;
+      background:#3b82f6; color:white; font-weight:800; cursor:pointer;
+    }
+    button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
+    button.ghost{ background:#0b1222; border:1px solid #2a3a5f; color:#b8c0d6; }
+    button:disabled{ opacity:.55; cursor:not-allowed; }
+
+    .pill{
+      display:flex; align-items:center; gap:8px;
+      padding:7px 10px; border-radius:999px;
+      background:#0b1222; border:1px solid #2a3a5f;
+      color:#b8c0d6; font-size:12px; user-select:none;
+    }
+    .pill input{ margin:0; }
+
+    .hint{ color:#b8c0d6; font-size:12px; line-height:1.55; }
+    .tiny{ color:#8ea0c8; font-size:12px; }
+    .error{ color:#ff9fb3; font-size:12px; }
+    .ok{ color:#9fffb8; font-size:12px; }
+
+    .status{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px dashed rgba(184,192,214,.35);
+      background:#0b1222;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .dropZone{
+      border-radius: 16px;
+      transition: box-shadow .15s ease, border-color .15s ease;
+    }
+    .dropZone.dragover{
+      box-shadow: 0 0 0 2px rgba(59,130,246,.35);
+      border-color:#3b82f6;
+    }
+
+    .footerLinks{
+      margin-top:14px;
+      text-align:center;
+      color:#8ea0c8;
+      font-size:12px;
+    }
+    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <div class="topbar">
+        <a class="brand" href="/">
+          <strong>InstantQR</strong>
+          <span>privacy-first tools</span>
+        </a>
+        <nav class="toolnav" aria-label="Tools">
+          <a href="/">QR Generator</a>
+          <a href="/password.html">Password Generator</a>
+          <a href="/unit-converter.html">Unit Converter</a>
+          <a href="/ip-lookup.html">IP Lookup</a>
+          <a href="/json-formatter.html">JSON Formatter</a>
+          <a href="/time-zone-converter.html">Time Zone Converter</a>
+          <a class="active" href="/base64-encoder.html">Base64 Encoder</a>
+        </nav>
+      </div>
+
+      <header>
+        <div>
+          <h1>Base64 Encoder / Decoder</h1>
+          <div class="sub">Encode/decode Base64 for text and files. Everything runs locally in your browser.</div>
+        </div>
+      </header>
+
+      <div class="grid">
+        <!-- Left: Input -->
+        <div class="box dropZone" id="dropZone">
+          <label for="input">Input (Text or Base64)</label>
+          <textarea id="input" placeholder="Paste text OR Base64 here..."></textarea>
+
+          <div class="row2">
+            <div>
+              <label for="mode">Mode</label>
+              <select id="mode">
+                <option value="encode" selected>Encode (Text → Base64)</option>
+                <option value="decode">Decode (Base64 → Text)</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="fileMode">File mode</label>
+              <select id="fileMode">
+                <option value="raw" selected>Raw Base64 (no data: prefix)</option>
+                <option value="dataurl">Data URL (data:mime;base64,...)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <button id="runBtn" type="button">Run</button>
+            <button class="secondary" id="swapBtn" type="button">Swap Input/Output</button>
+            <button class="ghost" id="sampleBtn" type="button">Sample</button>
+            <button class="ghost" id="clearBtn" type="button">Clear</button>
+
+            <label class="pill" title="Ignore whitespace when decoding Base64">
+              <input id="ignoreWs" type="checkbox" checked />
+              Ignore whitespace
+            </label>
+          </div>
+
+          <hr style="margin:16px 0 10px; height:1px; background:#22304e; border:0;" />
+
+          <h2 style="margin:0; font-size:16px; font-weight:900;">File → Base64</h2>
+          <div class="hint" style="margin-top:6px;">
+            Upload or drag & drop a file here. We’ll convert it to Base64 locally.
+          </div>
+
+          <div class="row">
+            <button class="secondary" id="uploadBtn" type="button">Upload File</button>
+            <input id="fileInput" type="file" hidden />
+            <button class="secondary" id="copyFileB64Btn" type="button">Copy Base64</button>
+            <button class="secondary" id="downloadB64Btn" type="button">Download .txt</button>
+          </div>
+
+          <div class="tiny" style="margin-top:8px;" id="fileInfo">No file loaded.</div>
+
+          <hr style="margin:16px 0 10px; height:1px; background:#22304e; border:0;" />
+
+          <h2 style="margin:0; font-size:16px; font-weight:900;">Base64 → Download File</h2>
+          <div class="hint" style="margin-top:6px;">
+            Paste Base64 (raw or data URL) into Input, then click “Download File”.
+          </div>
+
+          <div class="row2">
+            <div>
+              <label for="outFilename">Filename</label>
+              <input id="outFilename" type="text" value="file.bin" />
+            </div>
+            <div>
+              <label for="outMime">MIME type (optional)</label>
+              <input id="outMime" type="text" placeholder="e.g. image/png" />
+            </div>
+          </div>
+
+          <div class="row">
+            <button id="downloadFileBtn" type="button">Download File</button>
+          </div>
+
+          <div class="status" aria-live="polite">
+            <div class="tiny">Status</div>
+            <div id="statusLine" class="hint">Paste text/Base64 or upload a file to begin.</div>
+          </div>
+
+          <div class="tiny" style="margin-top:10px;">
+            Tip: Drag & drop a file anywhere in this left box.
+          </div>
+        </div>
+
+        <!-- Right: Output -->
+        <div class="box">
+          <label for="output">Output</label>
+          <textarea id="output" readonly placeholder="Output will appear here..."></textarea>
+
+          <div class="row">
+            <button id="copyOutBtn" type="button">Copy Output</button>
+            <button class="secondary" id="downloadOutBtn" type="button">Download Output</button>
+          </div>
+
+          <div class="hint" style="margin-top:10px;">
+            Privacy-first: encoding/decoding happens in your browser. No data is uploaded to InstantQR servers.
+          </div>
+        </div>
+      </div>
+
+      <div class="footerLinks">
+        <div style="margin-bottom:8px;">
+          <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+          <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
+          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a>
+        </div>
+        <div>
+          <a href="/about.html">About</a> ·
+          <a href="/privacy.html">Privacy</a> ·
+          <a href="/terms.html">Terms</a> ·
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const inputEl = document.getElementById("input");
+    const outputEl = document.getElementById("output");
+    const modeEl = document.getElementById("mode");
+    const fileModeEl = document.getElementById("fileMode");
+    const ignoreWsEl = document.getElementById("ignoreWs");
+
+    const runBtn = document.getElementById("runBtn");
+    const swapBtn = document.getElementById("swapBtn");
+    const sampleBtn = document.getElementById("sampleBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
+    const copyOutBtn = document.getElementById("copyOutBtn");
+    const downloadOutBtn = document.getElementById("downloadOutBtn");
+
+    const uploadBtn = document.getElementById("uploadBtn");
+    const fileInput = document.getElementById("fileInput");
+    const copyFileB64Btn = document.getElementById("copyFileB64Btn");
+    const downloadB64Btn = document.getElementById("downloadB64Btn");
+    const fileInfo = document.getElementById("fileInfo");
+
+    const outFilenameEl = document.getElementById("outFilename");
+    const outMimeEl = document.getElementById("outMime");
+    const downloadFileBtn = document.getElementById("downloadFileBtn");
+
+    const statusLine = document.getElementById("statusLine");
+    const dropZone = document.getElementById("dropZone");
+
+    let lastFileBase64 = "";
+    let lastFileDataUrl = "";
+    let lastFileName = "";
+    let lastFileType = "";
+
+    function setStatus(msg, type="hint"){
+      statusLine.className = type;
+      statusLine.textContent = msg;
+    }
+
+    // UTF-8 safe Base64
+    function base64EncodeUtf8(str){
+      const bytes = new TextEncoder().encode(str);
+      let bin = "";
+      const chunk = 0x8000;
+      for(let i=0; i<bytes.length; i+=chunk){
+        bin += String.fromCharCode(...bytes.slice(i, i+chunk));
+      }
+      return btoa(bin);
+    }
+
+    function base64DecodeUtf8(b64){
+      const bin = atob(b64);
+      const bytes = new Uint8Array(bin.length);
+      for(let i=0; i<bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      return new TextDecoder().decode(bytes);
+    }
+
+    function normalizeB64(raw){
+      let s = (raw || "").trim();
+      if(ignoreWsEl.checked) s = s.replace(/\s+/g, "");
+      return s;
+    }
+
+    function isDataUrl(s){
+      return /^data:[^;]+;base64,/.test(s);
+    }
+
+    function splitDataUrl(s){
+      // data:mime;base64,XXXX
+      const m = s.match(/^data:([^;]+);base64,(.*)$/s);
+      if(!m) return null;
+      return { mime: m[1], b64: m[2] };
+    }
+
+    function run(){
+      const raw = inputEl.value || "";
+      const mode = modeEl.value;
+
+      try{
+        if(mode === "encode"){
+          const b64 = base64EncodeUtf8(raw);
+          outputEl.value = b64;
+          setStatus("Encoded text → Base64 ✔", "ok");
+        }else{
+          const cleaned = normalizeB64(raw);
+          // allow data URL pasted even in decode mode
+          let b64 = cleaned;
+          if(isDataUrl(cleaned)){
+            const parts = splitDataUrl(cleaned);
+            if(parts) b64 = normalizeB64(parts.b64);
+          }
+          const text = base64DecodeUtf8(b64);
+          outputEl.value = text;
+          setStatus("Decoded Base64 → text ✔", "ok");
+        }
+      }catch(e){
+        outputEl.value = "";
+        setStatus("Error: " + (e.message || String(e)), "error");
+      }
+    }
+
+    async function copyText(text, btn, okLabel, baseLabel){
+      if(!text) return;
+      try{
+        await navigator.clipboard.writeText(text);
+        btn.textContent = okLabel;
+        setTimeout(()=> btn.textContent = baseLabel, 1200);
+      }catch{
+        const t = document.createElement("textarea");
+        t.value = text;
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand("copy");
+        document.body.removeChild(t);
+        btn.textContent = okLabel;
+        setTimeout(()=> btn.textContent = baseLabel, 1200);
+      }
+    }
+
+    function downloadText(text, filename){
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function swapIO(){
+      const a = inputEl.value;
+      inputEl.value = outputEl.value;
+      outputEl.value = a;
+      setStatus("Swapped input/output.", "ok");
+    }
+
+    function loadSample(){
+      inputEl.value = "Hello InstantQR 👋 — encode me to Base64!";
+      modeEl.value = "encode";
+      run();
+    }
+
+    function clearAll(){
+      inputEl.value = "";
+      outputEl.value = "";
+      lastFileBase64 = "";
+      lastFileDataUrl = "";
+      lastFileName = "";
+      lastFileType = "";
+      fileInfo.textContent = "No file loaded.";
+      setStatus("Cleared.", "hint");
+    }
+
+    // ----- File -> Base64 -----
+    async function fileToBase64(file){
+      const buf = await file.arrayBuffer();
+      const bytes = new Uint8Array(buf);
+
+      // Convert bytes -> base64
+      let bin = "";
+      const chunk = 0x8000;
+      for(let i=0; i<bytes.length; i+=chunk){
+        bin += String.fromCharCode(...bytes.slice(i, i+chunk));
+      }
+      return btoa(bin);
+    }
+
+    async function handleFile(file){
+      if(!file) return;
+      lastFileName = file.name || "file.bin";
+      lastFileType = file.type || "";
+      fileInfo.textContent = `Loading: ${lastFileName} (${(file.size/1024).toFixed(1)} KB) …`;
+
+      try{
+        const b64 = await fileToBase64(file);
+        lastFileBase64 = b64;
+
+        const mime = lastFileType || "application/octet-stream";
+        lastFileDataUrl = `data:${mime};base64,${b64}`;
+
+        const mode = fileModeEl.value; // raw | dataurl
+        const out = (mode === "dataurl") ? lastFileDataUrl : lastFileBase64;
+
+        outputEl.value = out;
+        fileInfo.textContent = `Loaded: ${lastFileName} (${(file.size/1024).toFixed(1)} KB) • MIME: ${mime || "unknown"}`;
+
+        // suggest filename in download section
+        outFilenameEl.value = lastFileName || "file.bin";
+        if(lastFileType) outMimeEl.value = lastFileType;
+
+        setStatus("File → Base64 ✔", "ok");
+      }catch(e){
+        fileInfo.textContent = "No file loaded.";
+        setStatus("File error: " + (e.message || String(e)), "error");
+      }
+    }
+
+    // Base64 -> file
+    function base64ToBytes(b64){
+      const bin = atob(b64);
+      const bytes = new Uint8Array(bin.length);
+      for(let i=0; i<bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      return bytes;
+    }
+
+    function downloadBytes(bytes, filename, mime){
+      const blob = new Blob([bytes], { type: mime || "application/octet-stream" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename || "file.bin";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function downloadFileFromInput(){
+      const raw = inputEl.value || "";
+      if(!raw.trim()){
+        setStatus("Paste Base64 (or a data URL) into Input first.", "error");
+        return;
+      }
+
+      try{
+        let mime = (outMimeEl.value || "").trim();
+        let b64 = normalizeB64(raw);
+
+        if(isDataUrl(b64)){
+          const parts = splitDataUrl(b64);
+          if(!parts) throw new Error("Invalid data URL.");
+          mime = mime || parts.mime;
+          b64 = normalizeB64(parts.b64);
+        }
+
+        const bytes = base64ToBytes(b64);
+        const name = (outFilenameEl.value || "file.bin").trim() || "file.bin";
+        downloadBytes(bytes, name, mime || "application/octet-stream");
+        setStatus("Downloaded file ✔", "ok");
+      }catch(e){
+        setStatus("Download error: " + (e.message || String(e)), "error");
+      }
+    }
+
+    // Drag & drop
+    function prevent(e){ e.preventDefault(); e.stopPropagation(); }
+    dropZone.addEventListener("dragenter", (e)=>{ prevent(e); dropZone.classList.add("dragover"); });
+    dropZone.addEventListener("dragover", (e)=>{ prevent(e); dropZone.classList.add("dragover"); });
+    dropZone.addEventListener("dragleave", (e)=>{ prevent(e); dropZone.classList.remove("dragover"); });
+    dropZone.addEventListener("drop", async (e)=>{
+      prevent(e);
+      dropZone.classList.remove("dragover");
+      const file = e.dataTransfer?.files?.[0];
+      if(file) await handleFile(file);
+      else setStatus("No file detected.", "error");
+    });
+
+    // Events
+    runBtn.addEventListener("click", run);
+    swapBtn.addEventListener("click", swapIO);
+    sampleBtn.addEventListener("click", loadSample);
+    clearBtn.addEventListener("click", clearAll);
+
+    copyOutBtn.addEventListener("click", () => copyText(outputEl.value, copyOutBtn, "Copied!", "Copy Output"));
+    downloadOutBtn.addEventListener("click", () => {
+      const text = outputEl.value || "";
+      if(!text){ setStatus("Nothing to download.", "error"); return; }
+      downloadText(text, "output.txt");
+      setStatus("Downloaded output.txt ✔", "ok");
+    });
+
+    uploadBtn.addEventListener("click", () => fileInput.click());
+    fileInput.addEventListener("change", async () => {
+      const file = fileInput.files?.[0];
+      await handleFile(file);
+      fileInput.value = "";
+    });
+
+    fileModeEl.addEventListener("change", () => {
+      // if a file is already loaded, refresh output format
+      if(lastFileBase64){
+        outputEl.value = (fileModeEl.value === "dataurl") ? lastFileDataUrl : lastFileBase64;
+        setStatus("Updated file output format.", "ok");
+      }
+    });
+
+    copyFileB64Btn.addEventListener("click", () => {
+      const text = (fileModeEl.value === "dataurl") ? lastFileDataUrl : lastFileBase64;
+      if(!text){ setStatus("Upload a file first.", "error"); return; }
+      copyText(text, copyFileB64Btn, "Copied!", "Copy Base64");
+      setStatus("Copied file Base64 ✔", "ok");
+    });
+
+    downloadB64Btn.addEventListener("click", () => {
+      const text = (fileModeEl.value === "dataurl") ? lastFileDataUrl : lastFileBase64;
+      if(!text){ setStatus("Upload a file first.", "error"); return; }
+      const name = (lastFileName ? (lastFileName + ".base64.txt") : "file.base64.txt");
+      downloadText(text, name);
+      setStatus("Downloaded Base64 text ✔", "ok");
+    });
+
+    downloadFileBtn.addEventListener("click", downloadFileFromInput);
+
+    // Auto run when mode changes (optional nice UX)
+    modeEl.addEventListener("change", () => {
+      if((inputEl.value || "").trim()) run();
+    });
+
+    // Init sample
+    loadSample();
+  </script>
+</body>
+</html>
