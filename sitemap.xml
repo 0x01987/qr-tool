@@ -22,21 +22,27 @@
   </url>
    <!-- IP Look Up -->
   <url>
-  <loc>https://instantqr.io/ip-lookup.html</loc>
-  <changefreq>monthly</changefreq>
-  <priority>0.7</priority>
+    <loc>https://instantqr.io/ip-lookup.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
    <!-- JSON Formatter -->
   <url>
-  <loc>https://instantqr.io/json-formatter.html</loc>
-  <changefreq>monthly</changefreq>
-  <priority>0.7</priority>
+    <loc>https://instantqr.io/json-formatter.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <!-- Time zone Converter -->
   <url>
-  <loc>https://instantqr.io/time-zone-converter.html</loc>
-  <changefreq>weekly</changefreq>
-  <priority>0.7</priority>
+    <loc>https://instantqr.io/time-zone-converter.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+   <!-- Base64 Encoder -->
+  <url>
+    <loc>https://instantqr.io/base64-encoder.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <!-- SEO Tool Pages -->
   <url>
