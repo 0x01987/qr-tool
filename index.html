@@ -24,7 +24,7 @@
       padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
     }
 
-    /* NEW: Top nav */
+    /* Top nav */
     .topbar{
       display:flex;
       align-items:center;
@@ -141,6 +141,87 @@
     .infoMid ol{ padding-left:18px; margin:8px 0 0; }
     .infoMid strong{ color:#e7eaf2; }
 
+    /* Tools hub (auto-rendered) */
+    .toolsHub{
+      margin-top:14px;
+      background:#0e1525;
+      border:1px solid #2a3a5f;
+      border-radius:16px;
+      padding:14px;
+    }
+    .toolsHubHeader{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .toolsHubHeader h2{
+      margin:0;
+      font-size:16px;
+    }
+    .toolsGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      margin-top:10px;
+    }
+    @media (max-width: 860px){ .toolsGrid{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px){ .toolsGrid{ grid-template-columns: 1fr; } }
+
+    .toolCard{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:14px;
+      background:#0b1222;
+      border:1px solid #2a3a5f;
+      text-decoration:none;
+      color:#e7eaf2;
+    }
+    .toolCard:hover{
+      border-color:#3b82f6;
+    }
+    .toolIcon{
+      width:38px;height:38px;
+      border-radius:12px;
+      display:grid;place-items:center;
+      background:rgba(59,130,246,.12);
+      border:1px solid rgba(59,130,246,.25);
+      flex:0 0 auto;
+      font-size:18px;
+    }
+    .toolMeta{min-width:0}
+    .toolTitle{
+      font-weight:900;
+      font-size:13px;
+      margin:0;
+      line-height:1.2;
+    }
+    .toolDesc{
+      margin:6px 0 0;
+      color:#b8c0d6;
+      font-size:12px;
+      line-height:1.45;
+    }
+    .toolTags{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .toolTag{
+      padding:4px 8px;
+      border-radius:999px;
+      background:#0e1525;
+      border:1px solid #2a3a5f;
+      color:#8ea0c8;
+      font-size:11px;
+      font-weight:800;
+    }
+
     /* Footer links */
     .footerLinks{
       margin-top:14px;
@@ -157,7 +238,7 @@
   <div class="wrap">
     <div class="card">
 
-      <!-- NEW: Top navigation -->
+      <!-- Top navigation -->
       <div class="topbar">
         <a class="brand" href="/">
           <strong>InstantQR</strong>
@@ -179,116 +260,62 @@
 
       <header>
         <div>
-          <h1>QR Code Generator</h1>
-          <div class="sub">Text/URL + Wi-Fi QR codes. Download as PNG.</div>
+          <h1>InstantQR.io</h1>
+          <div class="sub">Text/URL + Wi-Fi QR codes and other tools.</div>
         </div>
       </header>
 
-      <!-- MIDDLE-OF-PAGE CONTENT (SEO + AdSense approval helper) -->
+      <!-- UPDATED: Platform overview (InstantQR Tools) -->
       <div class="infoMid">
-        <h2>What is a QR Code?</h2>
+        <h2>InstantQR Tools</h2>
+        <p><strong>Privacy-first online utilities that run entirely in your browser.</strong></p>
         <p>
-          A QR code (Quick Response code) is a scannable barcode that stores information like website URLs,
-          Wi-Fi credentials, or text. Most modern smartphone cameras can scan QR codes instantly.
+          InstantQR is a collection of fast, lightweight web tools designed to work locally —
+          no accounts, no uploads, and no unnecessary tracking.
         </p>
 
-        <h2>How to Use This Tool</h2>
+        <h2>What is InstantQR?</h2>
+        <p>InstantQR provides everyday utility tools including:</p>
+        <ul>
+          <li>🔳 <strong>QR Code Generators</strong> (URL, Text, Wi-Fi)</li>
+          <li>🔐 <strong>Secure Password Generator</strong></li>
+          <li>📏 <strong>Unit Converter</strong></li>
+          <li>🌍 <strong>World Clock</strong> &amp; <strong>Time Zone Converter</strong></li>
+          <li>🧩 <strong>JSON Formatter</strong></li>
+          <li>🌐 <strong>IP Lookup</strong></li>
+          <li>🧱 <strong>Base64 Encoder / Decoder</strong></li>
+          <li>⏳ <strong>Countdown Timer</strong></li>
+        </ul>
+
+        <h2>How to Use InstantQR Tools</h2>
         <ol>
-          <li>Select the QR type (Text/URL or Wi-Fi).</li>
-          <li>Enter your information.</li>
-          <li>Click <strong>Generate</strong>.</li>
-          <li>Click <strong>Download PNG</strong>.</li>
+          <li>Choose the tool you need.</li>
+          <li>Enter your input or settings.</li>
+          <li>Generate or calculate instantly.</li>
+          <li>Copy or download your result.</li>
         </ol>
+        <p class="tiny">Most tools run entirely in your browser using client-side JavaScript.</p>
 
         <h2>FAQ</h2>
-        <p><strong>Is this free?</strong><br>Yes — InstantQR is free to use.</p>
-        <p><strong>Do you store my data?</strong><br>No. QR generation happens locally in your browser.</p>
+        <p><strong>Is InstantQR free?</strong><br>Yes — all tools are completely free to use.</p>
+        <p><strong>Do you store my data?</strong><br>No. InstantQR tools run locally in your browser. We do not store passwords, QR content, or user input.</p>
+        <p><strong>Do I need to create an account?</strong><br>No signup or login is required.</p>
+        <p><strong>Does this work on mobile?</strong><br>Yes. InstantQR is mobile-friendly and works on modern browsers.</p>
+      </div>
+
+      <!-- Tools Hub (auto-rendered from TOOLS list) -->
+      <div class="toolsHub" id="toolsHub">
+        <div class="toolsHubHeader">
+          <div>
+            <h2>All InstantQR Tools</h2>
+            <p class="tiny" style="margin:6px 0 0;">Fast, privacy-first tools — runs locally in your browser.</p>
+          </div>
+          <div class="tiny" id="toolsCount"></div>
+        </div>
+        <div class="toolsGrid" id="toolsGrid"></div>
       </div>
 
       <div class="grid">
-        <!-- Controls -->
-        <div class="box">
-          <label>Type</label>
-          <div class="pillbar" id="typeBar">
-            <div class="pill active" data-type="text">Text / URL</div>
-            <div class="pill" data-type="wifi">Wi-Fi</div>
-          </div>
-
-          <!-- TEXT/URL -->
-          <div id="textForm">
-            <label for="text">Text or URL</label>
-            <textarea id="text" placeholder="https://example.com&#10;or any text"></textarea>
-          </div>
-
-          <!-- WIFI -->
-          <div id="wifiForm" style="display:none;">
-            <div class="row">
-              <div>
-                <label for="ssid">Wi-Fi name (SSID)</label>
-                <input id="ssid" type="text" placeholder="MyWiFi" />
-              </div>
-              <div>
-                <label for="security">Security</label>
-                <select id="security">
-                  <option value="WPA" selected>WPA/WPA2/WPA3</option>
-                  <option value="WEP">WEP</option>
-                  <option value="nopass">No password</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="row" style="margin-top:12px;">
-              <div>
-                <label for="password">Password</label>
-                <input id="password" type="text" placeholder="••••••••" />
-              </div>
-              <div>
-                <label for="hidden">Hidden network</label>
-                <select id="hidden">
-                  <option value="false" selected>No</option>
-                  <option value="true">Yes</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="tiny" style="margin-top:8px;">
-              Format: <code>WIFI:T:WPA;S:SSID;P:password;H:false;;</code>
-            </div>
-          </div>
-
-          <div class="row" style="margin-top:12px;">
-            <div>
-              <label for="size">Size (px)</label>
-              <input id="size" type="number" min="128" max="1024" value="320" />
-            </div>
-            <div>
-              <label for="level">Error correction</label>
-              <select id="level">
-                <option value="L">L (smallest)</option>
-                <option value="M" selected>M (recommended)</option>
-                <option value="Q">Q</option>
-                <option value="H">H (best)</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="actions">
-            <button id="generateBtn">Generate</button>
-            <button class="secondary" id="downloadBtn">Download PNG</button>
-            <button class="secondary" id="clearBtn">Clear</button>
-          </div>
-
-          <div class="error" id="error"></div>
-        </div>
-
-        <!-- Preview -->
-        <div class="box preview">
-          <div class="qrWrap" id="qrWrap">
-            <div class="hint">Your QR code will appear here.</div>
-          </div>
-          <div class="hint">Tip: test-scan before printing.</div>
-        </div>
-      </div>
 
       <!-- Footer navigation (required pages for AdSense readiness) -->
       <div class="infoMid">
@@ -323,6 +350,7 @@
   <!-- QR library -->
   <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 
+  <!-- Existing QR Generator Logic (unchanged) -->
   <script>
     const pills = Array.from(document.querySelectorAll(".pill"));
     const textForm = document.getElementById("textForm");
@@ -463,12 +491,43 @@
     // Init
     setType("text");
   </script>
+
+  <!-- Tools Hub Renderer (new, safe: separate scope + no conflicts) -->
+  <script>
+  (() => {
+    const TOOLS = [
+      { title:"URL QR Code Generator", href:"/url-qr-code-generator.html", icon:"🔗", tags:["QR","URL"], desc:"Create a QR code for any website link and download as PNG." },
+      { title:"Wi-Fi QR Code Generator", href:"/wifi-qr-code-generator.html", icon:"📶", tags:["QR","Wi-Fi"], desc:"Generate a Wi-Fi QR code so others can connect instantly." },
+      { title:"Password Generator", href:"/password.html", icon:"🔐", tags:["Security","Local"], desc:"Generate strong passwords locally using secure randomness." },
+      { title:"Unit Converter", href:"/unit-converter.html", icon:"📏", tags:["Convert","Units"], desc:"Quick conversions for common units and measurements." },
+      { title:"IP Lookup", href:"/ip-lookup.html", icon:"🌐", tags:["Network","IP"], desc:"Look up IP address details for troubleshooting and awareness." },
+      { title:"JSON Formatter", href:"/json-formatter.html", icon:"🧩", tags:["Dev","JSON"], desc:"Format and validate JSON with instant structured output." },
+      { title:"Time Zone Converter", href:"/time-zone-converter.html", icon:"🕒", tags:["Time","IANA"], desc:"Convert times between time zones instantly." },
+      { title:"Base64 Encoder", href:"/base64-encoder.html", icon:"🧱", tags:["Dev","Encode"], desc:"Encode and decode Base64 locally in your browser." },
+      { title:"World Clock", href:"/world-clock.html", icon:"🌍", tags:["Time","Live"], desc:"Live world clocks across time zones with a clean UI." },
+      { title:"Countdown Timer", href:"/countdown-timer.html", icon:"⏳", tags:["Timer","Calc"], desc:"Countdowns and time calculations in a simple tool." }
+    ];
+
+    const grid = document.getElementById("toolsGrid");
+    const count = document.getElementById("toolsCount");
+    if(!grid) return;
+
+    grid.innerHTML = TOOLS.map(t => {
+      const tags = (t.tags || []).map(x => `<span class="toolTag">${x}</span>`).join("");
+      return `
+        <a class="toolCard" href="${t.href}" aria-label="Open ${t.title}">
+          <div class="toolIcon" aria-hidden="true">${t.icon}</div>
+          <div class="toolMeta">
+            <div class="toolTitle">${t.title}</div>
+            <div class="toolDesc">${t.desc}</div>
+            <div class="toolTags">${tags}</div>
+          </div>
+        </a>
+      `;
+    }).join("");
+
+    if(count) count.textContent = `${TOOLS.length} tools available`;
+  })();
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
