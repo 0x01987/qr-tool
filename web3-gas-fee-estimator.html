@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gas Fee Estimator | InstantQR</title>
+  <meta name="description" content="Estimate EVM gas fees (slow/standard/fast) using live JSON-RPC data. Runs locally in your browser." />
+  <meta name="robots" content="index,follow" />
+
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#111826;
+      --card2:#0f1623;
+      --text:#e8eef7;
+      --muted:#a6b1c2;
+      --line:#223047;
+      --accent:#4cc3ff;
+      --good:#34d399;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);}
+    a{color:inherit}
+
+    .wrap{max-width:980px;margin:0 auto;padding:22px 16px 40px;}
+    header{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{
+      width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c5cff);
+      display:grid;place-items:center;font-weight:800;color:#081018;
+    }
+    h1{font-size:20px;margin:0}
+    .sub{color:var(--muted);font-size:13px;margin-top:4px}
+
+    .grid{display:grid;gap:12px}
+    .panel{
+      background:linear-gradient(180deg,var(--card),var(--card2));
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px;
+    }
+    .row{display:grid;grid-template-columns: 1fr 1fr; gap:12px}
+    @media (max-width:820px){ .row{grid-template-columns:1fr} }
+
+    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+    select,input,button{
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0b1220;
+      color:var(--text);
+      outline:none;
+    }
+    input::placeholder{color:#64748b}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .actions button{width:auto;cursor:pointer}
+    .btn{
+      background:linear-gradient(135deg,var(--accent),#7c5cff);
+      border:none;color:#081018;font-weight:800;
+    }
+    .btn2{
+      background:#0b1220;border:1px solid var(--line);color:var(--text);
+    }
+    .pill{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:6px 10px;border:1px solid var(--line);border-radius:999px;
+      color:var(--muted);font-size:12px;background:#0b1220;
+    }
+    .statusDot{width:8px;height:8px;border-radius:50%;background:var(--warn)}
+
+    .cards{display:grid;grid-template-columns: repeat(3,1fr); gap:12px}
+    @media (max-width:820px){ .cards{grid-template-columns:1fr} }
+    .card{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background:#0b1220;
+    }
+    .tier{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+    .tier b{font-size:14px}
+    .badge{font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+    .kv{display:grid;grid-template-columns: 1fr auto; gap:8px; margin:6px 0; font-size:13px}
+    .kv span{color:var(--muted)}
+
+    /* big gas result green */
+    .big{
+      font-size:18px;
+      font-weight:900;
+      margin-top:6px;
+      color: var(--good);
+      text-shadow: 0 0 8px rgba(52,211,153,0.55);
+    }
+
+    .foot{color:var(--muted);font-size:12px;line-height:1.45;margin-top:10px}
+    .mono{font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+
+    /* Footer helpers */
+    .footerLinks a{ text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
+    .footerCenter{ text-align:center; }
+    .footerCenter a{ text-decoration:none; }
+    .footerCenter a:hover{ text-decoration:underline; }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logo">⛽</div>
+      <div>
+        <h1>Gas Fee Estimator</h1>
+        <div class="sub">Live EIP-1559 estimates (Slow / Standard / Fast). Runs locally in your browser.</div>
+      </div>
+    </div>
+    <div class="pill" id="statusPill">
+      <span class="statusDot" id="statusDot"></span>
+      <span id="statusText">Idle</span>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="panel">
+      <div class="row">
+        <div>
+          <label for="network">Network</label>
+          <select id="network"></select>
+        </div>
+        <div>
+          <label for="gasUnits">Gas units (used to estimate total cost)</label>
+          <input id="gasUnits" type="number" min="1" step="1" value="21000" />
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px;">
+        <div>
+          <label for="rpcUrl">RPC URL (editable)</label>
+          <input id="rpcUrl" type="url" placeholder="https://…" />
+          <div class="foot">Tip: public RPCs are rate-limited. If you get errors, paste an Alchemy/Infura/QuickNode endpoint.</div>
+        </div>
+        <div>
+          <label>Actions</label>
+          <div class="actions">
+            <button class="btn" id="refreshBtn" type="button">Refresh</button>
+            <button class="btn2" id="testBtn" type="button">Test RPC</button>
+
+            <label class="pill" style="cursor:pointer;">
+              <input id="autoRefresh" type="checkbox" style="width:auto;margin:0 6px 0 0;">
+              Auto refresh (15s)
+            </label>
+          </div>
+          <div class="foot" id="lastUpdated">Last updated: —</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="cards">
+        <div class="card" id="slowCard">
+          <div class="tier">
+            <b>Slow</b>
+            <span class="badge">Budget</span>
+          </div>
+          <div class="kv"><span>Max fee</span><b class="mono" id="slowMax">—</b></div>
+          <div class="kv"><span>Priority fee</span><b class="mono" id="slowTip">—</b></div>
+          <div class="kv"><span>Estimated total</span><b class="mono" id="slowTotal">—</b></div>
+          <div class="big mono" id="slowNative">—</div>
+          <div class="foot">Uses lower percentile tip from recent blocks.</div>
+        </div>
+
+        <div class="card" id="stdCard">
+          <div class="tier">
+            <b>Standard</b>
+            <span class="badge">Recommended</span>
+          </div>
+          <div class="kv"><span>Max fee</span><b class="mono" id="stdMax">—</b></div>
+          <div class="kv"><span>Priority fee</span><b class="mono" id="stdTip">—</b></div>
+          <div class="kv"><span>Estimated total</span><b class="mono" id="stdTotal">—</b></div>
+          <div class="big mono" id="stdNative">—</div>
+          <div class="foot">Uses median tip from recent blocks.</div>
+        </div>
+
+        <div class="card" id="fastCard">
+          <div class="tier">
+            <b>Fast</b>
+            <span class="badge">High priority</span>
+          </div>
+          <div class="kv"><span>Max fee</span><b class="mono" id="fastMax">—</b></div>
+          <div class="kv"><span>Priority fee</span><b class="mono" id="fastTip">—</b></div>
+          <div class="kv"><span>Estimated total</span><b class="mono" id="fastTotal">—</b></div>
+          <div class="big mono" id="fastNative">—</div>
+          <div class="foot">Uses higher percentile tip from recent blocks.</div>
+        </div>
+      </div>
+
+      <div class="foot" style="margin-top:12px;">
+        <b>How it works:</b> we query <span class="mono">eth_feeHistory</span> to estimate priority fees and read the latest base fee.
+        If a chain/RPC doesn’t support fee history, we fall back to <span class="mono">eth_gasPrice</span>.
+      </div>
+    </div>
+
+    <!-- FOOTER PANEL (tools + centered policy links) -->
+    <div class="panel">
+      <div class="foot footerLinks">
+        <b>InstantQR tools:</b>
+        <a href="/index.html">Home</a> ·
+        <a href="/url-qr-code-generator.html">URL QR</a> ·
+        <a href="/wifi-qr-code-generator.html">Wi-Fi QR</a> ·
+        <a href="/password.html">Password</a> ·
+        <a href="/unit-converter.html">Unit Converter</a> ·
+        <a href="/ip-lookup.html">IP Lookup</a> ·
+        <a href="/json-formatter.html">JSON Formatter</a> ·
+        <a href="/time-zone-converter.html">Time Zone Converter</a> ·
+        <a href="/base64-encoder.html">Base64 Encoder</a> ·
+        <a href="/world-clock.html">World Clock</a> ·
+        <a href="/countdown-timer.html">Countdown Timer</a>
+
+        <div class="foot footerCenter" style="margin-top:10px;">
+          <a href="/about.html">About</a> ·
+          <a href="/privacy.html">Privacy</a> ·
+          <a href="/terms.html">Terms</a> ·
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(() => {
+  const NETWORKS = [
+    { key:"eth",  name:"Ethereum",     chainId:1,     symbol:"ETH",  rpc:"https://ethereum.publicnode.com" },
+    { key:"arb",  name:"Arbitrum One", chainId:42161, symbol:"ARB",  rpc:"https://arb1.arbitrum.io/rpc" },
+    { key:"op",   name:"Optimism",     chainId:10,    symbol:"OP",   rpc:"https://mainnet.optimism.io" },
+    { key:"base", name:"Base",         chainId:8453,  symbol:"BASE", rpc:"https://mainnet.base.org" },
+    { key:"poly", name:"Polygon PoS",  chainId:137,   symbol:"POL",  rpc:"https://polygon-bor.publicnode.com" }
+  ];
+
+  const els = {
+    network: document.getElementById("network"),
+    gasUnits: document.getElementById("gasUnits"),
+    rpcUrl: document.getElementById("rpcUrl"),
+    refreshBtn: document.getElementById("refreshBtn"),
+    testBtn: document.getElementById("testBtn"),
+    autoRefresh: document.getElementById("autoRefresh"),
+    statusDot: document.getElementById("statusDot"),
+    statusText: document.getElementById("statusText"),
+    lastUpdated: document.getElementById("lastUpdated"),
+
+    slowMax: document.getElementById("slowMax"),
+    slowTip: document.getElementById("slowTip"),
+    slowTotal: document.getElementById("slowTotal"),
+    slowNative: document.getElementById("slowNative"),
+
+    stdMax: document.getElementById("stdMax"),
+    stdTip: document.getElementById("stdTip"),
+    stdTotal: document.getElementById("stdTotal"),
+    stdNative: document.getElementById("stdNative"),
+
+    fastMax: document.getElementById("fastMax"),
+    fastTip: document.getElementById("fastTip"),
+    fastTotal: document.getElementById("fastTotal"),
+    fastNative: document.getElementById("fastNative")
+  };
+
+  let timer = null;
+  let rpcId = 1;
+
+  function setStatus(kind, text){
+    const colors = { ok:"#34d399", warn:"#fbbf24", bad:"#fb7185", idle:"#fbbf24" };
+    els.statusDot.style.background = colors[kind] || colors.idle;
+    els.statusText.textContent = text;
+  }
+
+  function gweiFromWei(weiBigInt){
+    const gwei = Number(weiBigInt) / 1e9;
+    if (!Number.isFinite(gwei)) return "—";
+    return gwei.toFixed(2) + " gwei";
+  }
+
+  function formatNative(weiBigInt, symbol){
+    const val = Number(weiBigInt) / 1e18;
+    if (!Number.isFinite(val)) return "—";
+    const out = val >= 1 ? val.toFixed(6) : val.toPrecision(6);
+    return `${out} ${symbol}`;
+  }
+
+  async function rpcCall(url, method, params){
+    const body = { jsonrpc: "2.0", id: rpcId++, method, params };
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "content-type":"application/json" },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error.message || "RPC error");
+    return data.result;
+  }
+
+  function median(arr){
+    const a = [...arr].sort((x,y)=> (x<y?-1:x>y?1:0));
+    const mid = Math.floor(a.length/2);
+    return a.length % 2 ? a[mid] : (a[mid-1] + a[mid]) / 2n;
+  }
+
+  async function estimateFees(rpcUrl){
+    const blockCount = "0x14";
+    const newest = "latest";
+    const percentiles = [10, 50, 90];
+
+    try{
+      const fh = await rpcCall(rpcUrl, "eth_feeHistory", [blockCount, newest, percentiles]);
+
+      const baseFees = fh.baseFeePerGas.map(x => BigInt(x));
+      const nextBaseFee = baseFees[baseFees.length - 1];
+
+      const rewards = fh.reward.map(row => row.map(x => BigInt(x)));
+      const p10 = rewards.map(r => r[0]);
+      const p50 = rewards.map(r => r[1]);
+      const p90 = rewards.map(r => r[2]);
+
+      const tipSlow = median(p10);
+      const tipStd  = median(p50);
+      const tipFast = median(p90);
+
+      const maxSlow = nextBaseFee * 2n + tipSlow;
+      const maxStd  = nextBaseFee * 2n + tipStd;
+      const maxFast = nextBaseFee * 2n + tipFast;
+
+      return {
+        mode: "eip1559",
+        tiers: {
+          slow: { maxFee: maxSlow, tip: tipSlow },
+          std:  { maxFee: maxStd,  tip: tipStd  },
+          fast: { maxFee: maxFast, tip: tipFast }
+        }
+      };
+    }catch(e){
+      const gp = await rpcCall(rpcUrl, "eth_gasPrice", []);
+      const gasPrice = BigInt(gp);
+      const slow = gasPrice;
+      const std  = (gasPrice * 12n) / 10n;
+      const fast = (gasPrice * 15n) / 10n;
+      return {
+        mode: "legacy",
+        tiers: {
+          slow: { maxFee: slow, tip: 0n },
+          std:  { maxFee: std,  tip: 0n },
+          fast: { maxFee: fast, tip: 0n }
+        }
+      };
+    }
+  }
+
+  function updateUI(fees){
+    const gasUnits = Math.max(1, parseInt(els.gasUnits.value || "21000", 10));
+    const gas = BigInt(gasUnits);
+    const net = NETWORKS.find(n => n.key === els.network.value) || NETWORKS[0];
+    const sym = net.symbol;
+
+    function setTier(prefix, tier){
+      const totalWei = gas * tier.maxFee;
+
+      // using existing ids directly (no string building mistakes)
+      if(prefix === "slow"){
+        els.slowMax.textContent = gweiFromWei(tier.maxFee);
+        els.slowTip.textContent = tier.tip ? gweiFromWei(tier.tip) : "—";
+        els.slowTotal.textContent = gweiFromWei(totalWei / gas);
+        els.slowNative.textContent = formatNative(totalWei, sym);
+      }
+      if(prefix === "std"){
+        els.stdMax.textContent = gweiFromWei(tier.maxFee);
+        els.stdTip.textContent = tier.tip ? gweiFromWei(tier.tip) : "—";
+        els.stdTotal.textContent = gweiFromWei(totalWei / gas);
+        els.stdNative.textContent = formatNative(totalWei, sym);
+      }
+      if(prefix === "fast"){
+        els.fastMax.textContent = gweiFromWei(tier.maxFee);
+        els.fastTip.textContent = tier.tip ? gweiFromWei(tier.tip) : "—";
+        els.fastTotal.textContent = gweiFromWei(totalWei / gas);
+        els.fastNative.textContent = formatNative(totalWei, sym);
+      }
+    }
+
+    setTier("slow", fees.tiers.slow);
+    setTier("std",  fees.tiers.std);
+    setTier("fast", fees.tiers.fast);
+
+    els.lastUpdated.textContent = `Last updated: ${new Date().toLocaleString()}`;
+  }
+
+  async function testRpc(){
+    setStatus("warn","Testing RPC…");
+    try{
+      const url = els.rpcUrl.value.trim();
+      if(!url) throw new Error("Enter an RPC URL");
+      const chainIdHex = await rpcCall(url, "eth_chainId", []);
+      const chainId = parseInt(chainIdHex, 16);
+      setStatus("ok", `RPC OK (chainId ${chainId})`);
+    }catch(e){
+      setStatus("bad", `RPC error: ${e.message}`);
+    }
+  }
+
+  async function refresh(){
+    setStatus("warn","Fetching gas data…");
+    try{
+      const url = els.rpcUrl.value.trim();
+      if(!url) throw new Error("Enter an RPC URL");
+      const fees = await estimateFees(url);
+      updateUI(fees);
+      const net = NETWORKS.find(n => n.key === els.network.value) || NETWORKS[0];
+      setStatus("ok", `${net.name}: updated`);
+    }catch(e){
+      setStatus("bad", `Failed: ${e.message}`);
+    }
+  }
+
+  function populateNetworks(){
+    els.network.innerHTML = NETWORKS.map(n => `<option value="${n.key}">${n.name}</option>`).join("");
+    els.network.value = "eth";
+    const net = NETWORKS.find(n => n.key === els.network.value);
+    els.rpcUrl.value = net ? net.rpc : "";
+  }
+
+  function setAutoRefresh(on){
+    if (timer) { clearInterval(timer); timer = null; }
+    if (on) timer = setInterval(refresh, 15000);
+  }
+
+  els.network.addEventListener("change", () => {
+    const net = NETWORKS.find(n => n.key === els.network.value);
+    els.rpcUrl.value = net ? net.rpc : "";
+    refresh();
+  });
+
+  els.gasUnits.addEventListener("input", () => refresh());
+  els.refreshBtn.addEventListener("click", refresh);
+  els.testBtn.addEventListener("click", testRpc);
+  els.autoRefresh.addEventListener("change", (e) => setAutoRefresh(e.target.checked));
+
+  populateNetworks();
+  setStatus("idle","Ready");
+  refresh();
+})();
+</script>
+</body>
+</html>
