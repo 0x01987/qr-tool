@@ -262,7 +262,7 @@
 (() => {
   // ========= Utilities =========
   const $ = (id) => document.getElementById(id);
-  const LS_KEY = "instantqr_world_clock_v1";
+  const LS_KEY = "instantqr_world_clock_v2";      // bumped version because IDs changed
   const LS_FMT = "instantqr_world_clock_fmt_v1";
 
   function toast(msg){
@@ -286,150 +286,184 @@
     try { return JSON.parse(s); } catch { return fallback; }
   }
 
-  function uniqBy(arr, keyFn){
-    const seen = new Set();
-    const out = [];
-    for(const x of arr){
-      const k = keyFn(x);
-      if(seen.has(k)) continue;
-      seen.add(k);
-      out.push(x);
-    }
-    return out;
+  function uniq(arr){
+    return Array.from(new Set(arr));
   }
 
-  // ========= City database (curated, lightweight, production-ready) =========
-  // NOTE: This is intentionally curated (fast, low-maintenance, high value).
-  // You can expand this list over time without breaking URLs or saved state.
-  const CITIES = [
-    // North America
-    { id:"phoenix", name:"Phoenix", region:"AZ, USA", tz:"America/Phoenix" },
-    { id:"los-angeles", name:"Los Angeles", region:"CA, USA", tz:"America/Los_Angeles" },
-    { id:"san-francisco", name:"San Francisco", region:"CA, USA", tz:"America/Los_Angeles" },
-    { id:"denver", name:"Denver", region:"CO, USA", tz:"America/Denver" },
-    { id:"chicago", name:"Chicago", region:"IL, USA", tz:"America/Chicago" },
-    { id:"dallas", name:"Dallas", region:"TX, USA", tz:"America/Chicago" },
-    { id:"new-york", name:"New York", region:"NY, USA", tz:"America/New_York" },
-    { id:"toronto", name:"Toronto", region:"Canada", tz:"America/Toronto" },
-    { id:"vancouver", name:"Vancouver", region:"Canada", tz:"America/Vancouver" },
-    { id:"mexico-city", name:"Mexico City", region:"Mexico", tz:"America/Mexico_City" },
-
-    // South America
-    { id:"sao-paulo", name:"São Paulo", region:"Brazil", tz:"America/Sao_Paulo" },
-    { id:"buenos-aires", name:"Buenos Aires", region:"Argentina", tz:"America/Argentina/Buenos_Aires" },
-    { id:"santiago", name:"Santiago", region:"Chile", tz:"America/Santiago" },
-    { id:"lima", name:"Lima", region:"Peru", tz:"America/Lima" },
-
-    // Europe
-    { id:"london", name:"London", region:"UK", tz:"Europe/London" },
-    { id:"dublin", name:"Dublin", region:"Ireland", tz:"Europe/Dublin" },
-    { id:"paris", name:"Paris", region:"France", tz:"Europe/Paris" },
-    { id:"amsterdam", name:"Amsterdam", region:"Netherlands", tz:"Europe/Amsterdam" },
-    { id:"berlin", name:"Berlin", region:"Germany", tz:"Europe/Berlin" },
-    { id:"madrid", name:"Madrid", region:"Spain", tz:"Europe/Madrid" },
-    { id:"rome", name:"Rome", region:"Italy", tz:"Europe/Rome" },
-    { id:"zurich", name:"Zürich", region:"Switzerland", tz:"Europe/Zurich" },
-    { id:"stockholm", name:"Stockholm", region:"Sweden", tz:"Europe/Stockholm" },
-    { id:"athens", name:"Athens", region:"Greece", tz:"Europe/Athens" },
-    { id:"istanbul", name:"Istanbul", region:"Türkiye", tz:"Europe/Istanbul" },
-    { id:"moscow", name:"Moscow", region:"Russia", tz:"Europe/Moscow" },
-
-    // Africa
-    { id:"cairo", name:"Cairo", region:"Egypt", tz:"Africa/Cairo" },
-    { id:"lagos", name:"Lagos", region:"Nigeria", tz:"Africa/Lagos" },
-    { id:"nairobi", name:"Nairobi", region:"Kenya", tz:"Africa/Nairobi" },
-    { id:"johannesburg", name:"Johannesburg", region:"South Africa", tz:"Africa/Johannesburg" },
-
-    // Middle East
-    { id:"dubai", name:"Dubai", region:"UAE", tz:"Asia/Dubai" },
-    { id:"riyadh", name:"Riyadh", region:"Saudi Arabia", tz:"Asia/Riyadh" },
-    { id:"jerusalem", name:"Jerusalem", region:"Israel", tz:"Asia/Jerusalem" },
-
-    // Asia
-    { id:"mumbai", name:"Mumbai", region:"India", tz:"Asia/Kolkata" },
-    { id:"delhi", name:"Delhi", region:"India", tz:"Asia/Kolkata" },
-    { id:"karachi", name:"Karachi", region:"Pakistan", tz:"Asia/Karachi" },
-    { id:"dhaka", name:"Dhaka", region:"Bangladesh", tz:"Asia/Dhaka" },
-    { id:"bangkok", name:"Bangkok", region:"Thailand", tz:"Asia/Bangkok" },
-    { id:"singapore", name:"Singapore", region:"Singapore", tz:"Asia/Singapore" },
-    { id:"hong-kong", name:"Hong Kong", region:"China", tz:"Asia/Hong_Kong" },
-    { id:"shanghai", name:"Shanghai", region:"China", tz:"Asia/Shanghai" },
-    { id:"beijing", name:"Beijing", region:"China", tz:"Asia/Shanghai" },
-    { id:"seoul", name:"Seoul", region:"South Korea", tz:"Asia/Seoul" },
-    { id:"tokyo", name:"Tokyo", region:"Japan", tz:"Asia/Tokyo" },
-    { id:"taipei", name:"Taipei", region:"Taiwan", tz:"Asia/Taipei" },
-    { id:"manila", name:"Manila", region:"Philippines", tz:"Asia/Manila" },
-    { id:"jakarta", name:"Jakarta", region:"Indonesia", tz:"Asia/Jakarta" },
-
-    // Oceania
-    { id:"perth", name:"Perth", region:"Australia", tz:"Australia/Perth" },
-    { id:"sydney", name:"Sydney", region:"Australia", tz:"Australia/Sydney" },
-    { id:"melbourne", name:"Melbourne", region:"Australia", tz:"Australia/Melbourne" },
-    { id:"auckland", name:"Auckland", region:"New Zealand", tz:"Pacific/Auckland" },
-
-    // UTC
-    { id:"utc", name:"UTC", region:"Coordinated Universal Time", tz:"UTC" }
-  ];
-
-  // ========= State =========
-  const defaultSelected = ["phoenix","new-york","london","utc","tokyo"];
-
-  let selectedIds = loadSelectedFromURL() || loadSelectedFromLS() || [...defaultSelected];
-  selectedIds = sanitizeSelected(selectedIds);
-
-  let timeFormat = localStorage.getItem(LS_FMT) || "12"; // "12" or "24"
-  $("timeFormat").value = (timeFormat === "24") ? "24" : "12";
-
-  // ========= Search + Suggest =========
-  const searchEl = $("citySearch");
-  const listEl = $("suggestList");
+  function escapeHTML(s){
+    return String(s).replace(/[&<>"']/g, (m) => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[m]));
+  }
 
   function normalize(s){
     return (s || "").toLowerCase()
       .normalize("NFD").replace(/[\u0300-\u036f]/g,"")  // strip accents
-      .replace(/[^a-z0-9\s\-]/g,"")
+      .replace(/[^a-z0-9\s\-\/_]/g,"")
       .trim();
   }
 
+  // ========= Build ALL time zones (IANA) =========
+  function getAllTimeZones(){
+    // Modern browsers:
+    if (Intl && typeof Intl.supportedValuesOf === "function"){
+      const zones = Intl.supportedValuesOf("timeZone");
+      // Ensure UTC present (should be)
+      if (!zones.includes("UTC")) zones.unshift("UTC");
+      return zones;
+    }
+
+    // Fallback list if supportedValuesOf is missing (older browsers)
+    // Keep your original curated list as fallback, PLUS Cambodia.
+    return [
+      "UTC",
+      "America/Phoenix",
+      "America/Los_Angeles",
+      "America/Denver",
+      "America/Chicago",
+      "America/New_York",
+      "America/Toronto",
+      "Europe/London",
+      "Europe/Paris",
+      "Europe/Berlin",
+      "Asia/Tokyo",
+      "Asia/Seoul",
+      "Asia/Singapore",
+      "Asia/Bangkok",
+      "Asia/Phnom_Penh",
+      "Australia/Sydney"
+    ];
+  }
+
+  const TIMEZONES = getAllTimeZones();
+  const TZ_SET = new Set(TIMEZONES);
+
+  // Create display metadata from timezone string
+  function tzToEntry(tz){
+    // tz: "Asia/Phnom_Penh"
+    if (tz === "UTC") return { id:"UTC", name:"UTC", region:"Coordinated Universal Time", tz:"UTC" };
+
+    const parts = tz.split("/");
+    const region = parts[0] || "Other";
+    const cityRaw = parts[parts.length - 1] || tz;
+    const city = cityRaw.replace(/_/g, " ");
+    return { id: tz, name: city, region, tz };
+  }
+
+  // For fast lookups
+  function getEntryById(id){
+    if (!id) return null;
+    // preserve case; IDs are actual tz names (e.g., "Asia/Phnom_Penh")
+    if (!TZ_SET.has(id)) return null;
+    return tzToEntry(id);
+  }
+
+  // ========= State =========
+  const searchEl = $("citySearch");
+  const listEl = $("suggestList");
+  const gridEl = $("clockGrid");
+
+  // Default clocks: local tz + a few popular ones + Cambodia
+  const localTZ = (() => {
+    try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; }
+    catch { return "UTC"; }
+  })();
+
+  const defaultSelected = uniq([
+    localTZ,
+    "UTC",
+    "America/New_York",
+    "Europe/London",
+    "Asia/Tokyo",
+    "Asia/Phnom_Penh"
+  ].filter(tz => TZ_SET.has(tz)));
+
+  let timeFormat = localStorage.getItem(LS_FMT) || "12"; // "12" or "24"
+  $("timeFormat").value = (timeFormat === "24") ? "24" : "12";
+
+  function sanitizeSelected(ids){
+    const cleaned = [];
+    for (const id of (ids || [])){
+      if (typeof id !== "string") continue;
+      // keep exact case as in IANA list
+      if (TZ_SET.has(id)) cleaned.push(id);
+    }
+    return uniq(cleaned).slice(0, 24); // allow more now since list is big
+  }
+
+  function loadSelectedFromLS(){
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return null;
+    const arr = safeJSONParse(raw, null);
+    return Array.isArray(arr) ? arr : null;
+  }
+
+  function loadSelectedFromURL(){
+    const u = new URL(location.href);
+    const cities = u.searchParams.get("cities");
+    const fmt = u.searchParams.get("fmt");
+    if (fmt === "24" || fmt === "12"){
+      timeFormat = fmt;
+      localStorage.setItem(LS_FMT, timeFormat);
+      $("timeFormat").value = fmt;
+    }
+    if (!cities) return null;
+
+    // decode and split
+    const ids = cities.split(",").map(s => decodeURIComponent(s.trim())).filter(Boolean);
+    return ids.length ? ids : null;
+  }
+
+  let selectedIds = sanitizeSelected(loadSelectedFromURL() || loadSelectedFromLS() || defaultSelected);
+
+  function saveSelected(){
+    localStorage.setItem(LS_KEY, JSON.stringify(selectedIds));
+  }
+
+  // ========= Suggestions (search ALL time zones) =========
   function getSuggestions(q){
     const nq = normalize(q);
-    if(!nq) return [];
+    if (!nq) return [];
+
+    // We build a small scored list by scanning timezones.
+    // This is fine for a few hundred zones; still fast in browser.
     const parts = nq.split(/\s+/).filter(Boolean);
 
-    const scored = CITIES.map(c => {
-      const hay = normalize(`${c.name} ${c.region} ${c.tz}`);
-      let score = 0;
-      for(const p of parts){
-        if(hay.startsWith(p)) score += 3;
-        if(hay.includes(p)) score += 2;
-      }
-      // boost exact city name match
-      if(normalize(c.name) === nq) score += 10;
-      // small penalty for already selected
-      if(selectedIds.includes(c.id)) score -= 1;
-      return { c, score };
-    })
-    .filter(x => x.score > 0)
-    .sort((a,b) => b.score - a.score)
-    .slice(0, 10)
-    .map(x => x.c);
+    const scored = [];
+    for (const tz of TIMEZONES){
+      const entry = tzToEntry(tz);
+      const hay = normalize(`${entry.name} ${entry.region} ${entry.tz}`);
 
-    return scored;
+      let score = 0;
+      for (const p of parts){
+        if (hay.startsWith(p)) score += 4;
+        if (hay.includes(p)) score += 2;
+      }
+      // boost direct tz match typing
+      if (normalize(entry.tz) === nq) score += 12;
+      // small penalty if already selected
+      if (selectedIds.includes(entry.id)) score -= 1;
+
+      if (score > 0) scored.push({ entry, score });
+    }
+
+    scored.sort((a,b) => b.score - a.score);
+    return scored.slice(0, 12).map(x => x.entry);
   }
 
   function renderSuggestions(items){
-    if(!items.length){
+    if (!items.length){
       listEl.style.display = "none";
       listEl.innerHTML = "";
       return;
     }
-    listEl.innerHTML = items.map(c => `
-      <div class="suggestItem" role="option" data-id="${c.id}">
+    listEl.innerHTML = items.map(e => `
+      <div class="suggestItem" role="option" data-id="${escapeHTML(e.id)}">
         <div style="min-width:0">
-          <b>${escapeHTML(c.name)}</b>
-          <div><span>${escapeHTML(c.region)}</span></div>
+          <b>${escapeHTML(e.name)}</b>
+          <div><span>${escapeHTML(e.region)}</span></div>
         </div>
-        <span class="mono">${escapeHTML(c.tz)}</span>
+        <span class="mono">${escapeHTML(e.tz)}</span>
       </div>
     `).join("");
     listEl.style.display = "block";
@@ -439,21 +473,8 @@
     listEl.style.display = "none";
   }
 
-  function escapeHTML(s){
-    return String(s).replace(/[&<>"']/g, (m) => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-    }[m]));
-  }
-
-  searchEl.addEventListener("input", () => {
-    const items = getSuggestions(searchEl.value);
-    renderSuggestions(items);
-  });
-
-  searchEl.addEventListener("focus", () => {
-    const items = getSuggestions(searchEl.value);
-    renderSuggestions(items);
-  });
+  searchEl.addEventListener("input", () => renderSuggestions(getSuggestions(searchEl.value)));
+  searchEl.addEventListener("focus", () => renderSuggestions(getSuggestions(searchEl.value)));
 
   document.addEventListener("click", (e) => {
     if(!e.target.closest(".suggest")) hideSuggestions();
@@ -463,28 +484,22 @@
     const item = e.target.closest(".suggestItem");
     if(!item) return;
     const id = item.getAttribute("data-id");
-    addCity(id);
+    addTZ(id);
   });
 
   searchEl.addEventListener("keydown", (e) => {
-    if(e.key === "Enter"){
+    if (e.key === "Enter"){
       e.preventDefault();
       const items = getSuggestions(searchEl.value);
-      if(items.length){
-        addCity(items[0].id);
-      }else{
-        toast("No match");
-      }
+      if (items.length) addTZ(items[0].id);
+      else toast("No match");
     }
-    if(e.key === "Escape"){
-      hideSuggestions();
-    }
+    if (e.key === "Escape") hideSuggestions();
   });
 
   // ========= Time Formatting =========
   function buildTimeFormatters(){
     const hour12 = (timeFormat !== "24");
-    // Use Intl.DateTimeFormat so DST, locales, and timezone rules are correct.
     return {
       time: (tz) => new Intl.DateTimeFormat(undefined, {
         timeZone: tz,
@@ -499,12 +514,6 @@
         year: "numeric",
         month: "short",
         day: "2-digit"
-      }),
-      weekdayHour: (tz) => new Intl.DateTimeFormat(undefined, {
-        timeZone: tz,
-        weekday: "short",
-        hour: "2-digit",
-        hour12,
       })
     };
   }
@@ -517,62 +526,36 @@
   });
 
   // ========= Business Hours Indicator =========
-  // 9:00–17:00 local time in each city:
-  // - GREEN: within business hours
-  // - YELLOW: early/late (7–9 or 17–19)
-  // - RED: off hours
   function getBusinessStatus(now, tz){
-    // Get local hour in that timezone reliably using formatToParts
     const parts = new Intl.DateTimeFormat("en-US", { timeZone: tz, hour: "2-digit", hour12: false }).formatToParts(now);
     const hourPart = parts.find(p => p.type === "hour");
     const h = hourPart ? parseInt(hourPart.value, 10) : NaN;
 
-    if(Number.isNaN(h)) return { cls:"warn", label:"Time unavailable" };
-
-    if(h >= 9 && h < 17) return { cls:"good", label:"Business hours" };
-    if((h >= 7 && h < 9) || (h >= 17 && h < 19)) return { cls:"warn", label:"Edge hours" };
+    if (Number.isNaN(h)) return { cls:"warn", label:"Time unavailable" };
+    if (h >= 9 && h < 17) return { cls:"good", label:"Business hours" };
+    if ((h >= 7 && h < 9) || (h >= 17 && h < 19)) return { cls:"warn", label:"Edge hours" };
     return { cls:"bad", label:"Off hours" };
   }
 
   // ========= Render Grid =========
-  const gridEl = $("clockGrid");
-
-  function getCityById(id){
-    return CITIES.find(c => c.id === id) || null;
-  }
-
-  function sanitizeSelected(ids){
-    const valid = ids
-      .map(String)
-      .map(s => s.trim())
-      .filter(Boolean)
-      .map(s => s.toLowerCase())
-      .filter(id => getCityById(id));
-    return uniqBy(valid, x => x).slice(0, 18); // keep it reasonable
-  }
-
-  function saveSelected(){
-    localStorage.setItem(LS_KEY, JSON.stringify(selectedIds));
-  }
-
   function renderGrid(){
     const now = new Date();
     const fmt = buildTimeFormatters();
 
     const cards = selectedIds.map(id => {
-      const city = getCityById(id);
-      if(!city) return "";
-      const timeStr = fmt.time(city.tz).format(now);
-      const dateStr = fmt.date(city.tz).format(now);
+      const entry = getEntryById(id);
+      if(!entry) return "";
 
-      const bs = getBusinessStatus(now, city.tz);
+      const timeStr = fmt.time(entry.tz).format(now);
+      const dateStr = fmt.date(entry.tz).format(now);
+      const bs = getBusinessStatus(now, entry.tz);
 
       return `
-        <div class="card" data-id="${city.id}">
+        <div class="card" data-id="${escapeHTML(entry.id)}">
           <div class="topline">
             <div class="city">
-              <b title="${escapeHTML(city.name)}">${escapeHTML(city.name)}</b>
-              <small title="${escapeHTML(city.region)}">${escapeHTML(city.region)} · <span class="mono">${escapeHTML(city.tz)}</span></small>
+              <b title="${escapeHTML(entry.name)}">${escapeHTML(entry.name)}</b>
+              <small title="${escapeHTML(entry.region)}">${escapeHTML(entry.region)} · <span class="mono">${escapeHTML(entry.tz)}</span></small>
             </div>
             <button class="btnMini" data-action="remove" title="Remove">✕</button>
           </div>
@@ -595,32 +578,29 @@
       `;
     }).join("");
 
-    gridEl.innerHTML = cards || `<div class="foot">No clocks selected. Add a city above.</div>`;
+    gridEl.innerHTML = cards || `<div class="foot">No clocks selected. Add a time zone above.</div>`;
 
-    // update status dot if running
     $("statusDot").style.background = "var(--good)";
     $("statusText").textContent = "Running";
   }
 
-  // Live tick (every second, but render only the time parts)
-  // Optimization: update existing DOM instead of rebuilding everything every tick.
   function tick(){
     const now = new Date();
     const fmt = buildTimeFormatters();
 
     for(const id of selectedIds){
-      const city = getCityById(id);
-      if(!city) continue;
-      const card = gridEl.querySelector(`.card[data-id="${CSS.escape(city.id)}"]`);
+      const entry = getEntryById(id);
+      if(!entry) continue;
+
+      const card = gridEl.querySelector(`.card[data-id="${CSS.escape(entry.id)}"]`);
       if(!card) continue;
 
       const tEl = card.querySelector(`[data-field="time"]`);
       const dEl = card.querySelector(`[data-field="date"]`);
-      if(tEl) tEl.textContent = fmt.time(city.tz).format(now);
-      if(dEl) dEl.textContent = fmt.date(city.tz).format(now);
+      if(tEl) tEl.textContent = fmt.time(entry.tz).format(now);
+      if(dEl) dEl.textContent = fmt.date(entry.tz).format(now);
 
-      // business status (hour-level) still cheap to update once per tick
-      const bs = getBusinessStatus(now, city.tz);
+      const bs = getBusinessStatus(now, entry.tz);
       const chip = card.querySelector(".chip .dot");
       const chipLabel = card.querySelector(".chip");
       if(chip){
@@ -628,7 +608,6 @@
         chip.classList.add(bs.cls);
       }
       if(chipLabel){
-        // keep dot + label; rebuild minimal
         chipLabel.innerHTML = `<span class="dot ${bs.cls}"></span> ${escapeHTML(bs.label)}`;
       }
     }
@@ -638,12 +617,14 @@
   gridEl.addEventListener("click", (e) => {
     const btn = e.target.closest("button[data-action]");
     if(!btn) return;
+
     const action = btn.getAttribute("data-action");
     const card = e.target.closest(".card");
     if(!card) return;
+
     const id = card.getAttribute("data-id");
-    const city = getCityById(id);
-    if(!city) return;
+    const entry = getEntryById(id);
+    if(!entry) return;
 
     if(action === "remove"){
       selectedIds = selectedIds.filter(x => x !== id);
@@ -655,27 +636,26 @@
     if(action === "copy"){
       const now = new Date();
       const fmt = buildTimeFormatters();
-      const timeStr = fmt.time(city.tz).format(now);
-      const dateStr = fmt.date(city.tz).format(now);
-      copyText(`${city.name} — ${timeStr} (${dateStr}) · ${city.tz}`);
+      const timeStr = fmt.time(entry.tz).format(now);
+      const dateStr = fmt.date(entry.tz).format(now);
+      copyText(`${entry.name} — ${timeStr} (${dateStr}) · ${entry.tz}`);
     }
 
     if(action === "open"){
-      // Open a prefilled time-zone-converter page if you want,
-      // but we keep it simple: open your own time-zone converter (user can use it for deeper conversion).
-      // You can later enhance by passing query params.
       window.open("/time-zone-converter.html", "_blank", "noopener");
     }
   });
 
-  function addCity(id){
-    const city = getCityById(id);
-    if(!city){ toast("Unknown city"); return; }
+  function addTZ(id){
+    // id should be an IANA tz string (e.g., "Asia/Phnom_Penh")
+    if(!TZ_SET.has(id)){ toast("Unknown time zone"); return; }
     if(selectedIds.includes(id)){ toast("Already added"); return; }
+
     selectedIds.push(id);
     selectedIds = sanitizeSelected(selectedIds);
     saveSelected();
     renderGrid();
+
     toast("Added");
     searchEl.value = "";
     hideSuggestions();
@@ -688,7 +668,7 @@
     const ids = sanitizeSelected(selectedIds);
     const fmt = (timeFormat === "24") ? "24" : "12";
     const q = new URLSearchParams();
-    q.set("cities", ids.join(","));
+    q.set("cities", ids.map(encodeURIComponent).join(","));
     q.set("fmt", fmt);
     return `${base}?${q.toString()}`;
   }
@@ -705,36 +685,12 @@
     localStorage.setItem(LS_FMT, timeFormat);
     $("timeFormat").value = "12";
     saveSelected();
-    // clear URL query without reload
     history.replaceState({}, "", location.pathname);
     renderGrid();
     toast("Reset");
   });
 
-  // ========= Load from URL / Local Storage =========
-  function loadSelectedFromLS(){
-    const raw = localStorage.getItem(LS_KEY);
-    if(!raw) return null;
-    const arr = safeJSONParse(raw, null);
-    return Array.isArray(arr) ? arr : null;
-  }
-
-  function loadSelectedFromURL(){
-    const u = new URL(location.href);
-    const cities = u.searchParams.get("cities");
-    const fmt = u.searchParams.get("fmt");
-    if(fmt === "24" || fmt === "12"){
-      timeFormat = fmt;
-      localStorage.setItem(LS_FMT, timeFormat);
-    }
-    if(!cities) return null;
-    const ids = cities.split(",").map(s => s.trim()).filter(Boolean);
-    return ids.length ? ids : null;
-  }
-
   // ========= Init =========
-  // Ensure Intl supports time zones (should in modern browsers)
-  // If not, show a gentle warning.
   try{
     new Intl.DateTimeFormat(undefined, { timeZone: "UTC" }).format(new Date());
   }catch(e){
@@ -742,11 +698,9 @@
     $("statusText").textContent = "Timezone support missing";
   }
 
-  // Save sanitized state back
   saveSelected();
   renderGrid();
   setInterval(tick, 1000);
-
 })();
 </script>
 </body>
