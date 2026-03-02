@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>World Clock | InstantQR</title>
+  <meta name="description" content="World Clock with live time for major cities. Add/remove clocks, 12/24-hour toggle, business hours indicator, and copy time. Privacy-first: runs locally in your browser." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/world-clock.html" />
+
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#111826;
+      --card2:#0f1623;
+      --text:#e8eef7;
+      --muted:#a6b1c2;
+      --line:#223047;
+      --accent:#4cc3ff;
+      --good:#34d399;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);}
+    a{color:inherit}
+    .wrap{max-width:1040px;margin:0 auto;padding:22px 16px 44px;}
+    header{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{
+      width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c5cff);
+      display:grid;place-items:center;font-weight:900;color:#081018;
+    }
+    h1{font-size:20px;margin:0}
+    .sub{color:var(--muted);font-size:13px;margin-top:4px;line-height:1.35}
+
+    .grid{display:grid;gap:12px}
+    .panel{
+      background:linear-gradient(180deg,var(--card),var(--card2));
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px;
+    }
+
+    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+    input,select,button{
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0b1220;
+      color:var(--text);
+      outline:none;
+    }
+    input::placeholder{color:#64748b}
+    button{cursor:pointer}
+    .btn{
+      background:linear-gradient(135deg,var(--accent),#7c5cff);
+      border:none;color:#081018;font-weight:900;
+    }
+    .btn2{
+      background:#0b1220;border:1px solid var(--line);color:var(--text);
+    }
+
+    .row{display:grid;grid-template-columns: 1.4fr .8fr .8fr; gap:12px}
+    @media (max-width:900px){ .row{grid-template-columns:1fr} }
+
+    .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .actions button{width:auto}
+
+    .pill{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:6px 10px;border:1px solid var(--line);border-radius:999px;
+      color:var(--muted);font-size:12px;background:#0b1220;
+    }
+    .statusDot{width:8px;height:8px;border-radius:50%;background:var(--good)}
+    .mono{font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    .foot{color:var(--muted);font-size:12px;line-height:1.45;margin-top:10px}
+
+    .suggest{
+      position:relative;
+    }
+    .suggestList{
+      position:absolute;left:0;right:0;top:100%;
+      background:#0b1220;border:1px solid var(--line);
+      border-radius:12px;margin-top:8px;
+      overflow:hidden;display:none;
+      max-height:280px;overflow-y:auto;
+      z-index:10;
+    }
+    .suggestItem{
+      padding:10px 12px;cursor:pointer;
+      display:flex;justify-content:space-between;gap:12px;
+      border-top:1px solid rgba(34,48,71,0.55);
+    }
+    .suggestItem:first-child{border-top:none}
+    .suggestItem:hover{background:#0f1a2e}
+    .suggestItem b{font-size:13px}
+    .suggestItem span{font-size:12px;color:var(--muted)}
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width:980px){ .cards{grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width:640px){ .cards{grid-template-columns: 1fr;} }
+
+    .card{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background:#0b1220;
+    }
+
+    .topline{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+    .city{
+      display:flex;flex-direction:column;gap:2px;min-width:0;
+    }
+    .city b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .city small{color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .chipRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;border:1px solid var(--line);
+      font-size:12px;color:var(--muted);background:#0b1220;
+    }
+    .dot{width:8px;height:8px;border-radius:50%;}
+    .dot.good{background:var(--good)}
+    .dot.warn{background:var(--warn)}
+    .dot.bad{background:var(--bad)}
+    .time{
+      font-size:30px;font-weight:950;letter-spacing:0.4px;line-height:1.05;
+      margin-top:10px;
+    }
+    .date{color:var(--muted);font-size:12px;margin-top:6px}
+    .btnRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .btnRow button{flex:1}
+    .btnMini{
+      padding:9px 10px;border-radius:12px;border:1px solid var(--line);
+      background:#0b1220;color:var(--text);font-weight:700;
+    }
+
+    .toast{
+      position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
+      background:#0b1220; border:1px solid var(--line);
+      color:var(--text); padding:10px 12px; border-radius:999px;
+      font-size:13px; display:none;
+      z-index:50;
+    }
+
+    .kbd{
+      font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      border:1px solid var(--line);
+      padding:2px 6px;border-radius:8px;color:var(--muted);font-size:12px;
+      background:#0b1220;
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Does this world clock run locally?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. The world clock runs entirely in your browser using built-in time zone support. No login is required."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can I add or remove cities?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. You can add cities from the search box and remove any clock. Your selected clocks are saved in your browser."}
+      },
+      {
+        "@type":"Question",
+        "name":"What are business hours?",
+        "acceptedAnswer":{"@type":"Answer","text":"Business hours are shown as an indicator for 9:00–17:00 local time in each city, to help schedule calls and meetings."}
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logo">🌍</div>
+      <div>
+        <h1>World Clock</h1>
+        <div class="sub">Live clocks for major cities. Add/remove clocks, 12/24-hour toggle, business-hours indicator, and copy time. Privacy-first: runs locally.</div>
+      </div>
+    </div>
+    <div class="pill">
+      <span class="statusDot" id="statusDot"></span>
+      <span id="statusText">Running</span>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="panel">
+      <div class="row">
+        <div class="suggest">
+          <label for="citySearch">Add a city</label>
+          <input id="citySearch" type="text" placeholder="Search: Tokyo, London, New York, Phoenix…" autocomplete="off" />
+          <div class="suggestList" id="suggestList" role="listbox" aria-label="City suggestions"></div>
+          <div class="foot">Tip: Type a city then press <span class="kbd">Enter</span>. Your selection is saved locally in this browser.</div>
+        </div>
+
+        <div>
+          <label for="timeFormat">Time format</label>
+          <select id="timeFormat">
+            <option value="12">12-hour (AM/PM)</option>
+            <option value="24">24-hour</option>
+          </select>
+          <div class="foot">Affects how time displays on all clocks.</div>
+        </div>
+
+        <div>
+          <label>Actions</label>
+          <div class="actions">
+            <button class="btn" id="shareBtn" type="button">Share Selected</button>
+            <button class="btn2" id="resetBtn" type="button">Reset</button>
+          </div>
+          <div class="foot" id="shareHint">Share creates a link with your selected cities.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="cards" id="clockGrid"></div>
+      <div class="foot" style="margin-top:12px;">
+        <b>InstantQR tools:</b>
+        <a href="/index.html">Home</a> ·
+        <a href="/time-zone-converter.html">Time Zone Converter</a> ·
+        <a href="/countdown-timer.html">Countdown Timer</a> ·
+        <a href="/unit-converter.html">Unit Converter</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  // ========= Utilities =========
+  const $ = (id) => document.getElementById(id);
+  const LS_KEY = "instantqr_world_clock_v1";
+  const LS_FMT = "instantqr_world_clock_fmt_v1";
+
+  function toast(msg){
+    const el = $("toast");
+    el.textContent = msg;
+    el.style.display = "block";
+    clearTimeout(el._t);
+    el._t = setTimeout(()=> el.style.display="none", 1600);
+  }
+
+  async function copyText(text){
+    try{
+      await navigator.clipboard.writeText(text);
+      toast("Copied!");
+    }catch(e){
+      toast("Copy failed");
+    }
+  }
+
+  function safeJSONParse(s, fallback){
+    try { return JSON.parse(s); } catch { return fallback; }
+  }
+
+  function uniqBy(arr, keyFn){
+    const seen = new Set();
+    const out = [];
+    for(const x of arr){
+      const k = keyFn(x);
+      if(seen.has(k)) continue;
+      seen.add(k);
+      out.push(x);
+    }
+    return out;
+  }
+
+  // ========= City database (curated, lightweight, production-ready) =========
+  // NOTE: This is intentionally curated (fast, low-maintenance, high value).
+  // You can expand this list over time without breaking URLs or saved state.
+  const CITIES = [
+    // North America
+    { id:"phoenix", name:"Phoenix", region:"AZ, USA", tz:"America/Phoenix" },
+    { id:"los-angeles", name:"Los Angeles", region:"CA, USA", tz:"America/Los_Angeles" },
+    { id:"san-francisco", name:"San Francisco", region:"CA, USA", tz:"America/Los_Angeles" },
+    { id:"denver", name:"Denver", region:"CO, USA", tz:"America/Denver" },
+    { id:"chicago", name:"Chicago", region:"IL, USA", tz:"America/Chicago" },
+    { id:"dallas", name:"Dallas", region:"TX, USA", tz:"America/Chicago" },
+    { id:"new-york", name:"New York", region:"NY, USA", tz:"America/New_York" },
+    { id:"toronto", name:"Toronto", region:"Canada", tz:"America/Toronto" },
+    { id:"vancouver", name:"Vancouver", region:"Canada", tz:"America/Vancouver" },
+    { id:"mexico-city", name:"Mexico City", region:"Mexico", tz:"America/Mexico_City" },
+
+    // South America
+    { id:"sao-paulo", name:"São Paulo", region:"Brazil", tz:"America/Sao_Paulo" },
+    { id:"buenos-aires", name:"Buenos Aires", region:"Argentina", tz:"America/Argentina/Buenos_Aires" },
+    { id:"santiago", name:"Santiago", region:"Chile", tz:"America/Santiago" },
+    { id:"lima", name:"Lima", region:"Peru", tz:"America/Lima" },
+
+    // Europe
+    { id:"london", name:"London", region:"UK", tz:"Europe/London" },
+    { id:"dublin", name:"Dublin", region:"Ireland", tz:"Europe/Dublin" },
+    { id:"paris", name:"Paris", region:"France", tz:"Europe/Paris" },
+    { id:"amsterdam", name:"Amsterdam", region:"Netherlands", tz:"Europe/Amsterdam" },
+    { id:"berlin", name:"Berlin", region:"Germany", tz:"Europe/Berlin" },
+    { id:"madrid", name:"Madrid", region:"Spain", tz:"Europe/Madrid" },
+    { id:"rome", name:"Rome", region:"Italy", tz:"Europe/Rome" },
+    { id:"zurich", name:"Zürich", region:"Switzerland", tz:"Europe/Zurich" },
+    { id:"stockholm", name:"Stockholm", region:"Sweden", tz:"Europe/Stockholm" },
+    { id:"athens", name:"Athens", region:"Greece", tz:"Europe/Athens" },
+    { id:"istanbul", name:"Istanbul", region:"Türkiye", tz:"Europe/Istanbul" },
+    { id:"moscow", name:"Moscow", region:"Russia", tz:"Europe/Moscow" },
+
+    // Africa
+    { id:"cairo", name:"Cairo", region:"Egypt", tz:"Africa/Cairo" },
+    { id:"lagos", name:"Lagos", region:"Nigeria", tz:"Africa/Lagos" },
+    { id:"nairobi", name:"Nairobi", region:"Kenya", tz:"Africa/Nairobi" },
+    { id:"johannesburg", name:"Johannesburg", region:"South Africa", tz:"Africa/Johannesburg" },
+
+    // Middle East
+    { id:"dubai", name:"Dubai", region:"UAE", tz:"Asia/Dubai" },
+    { id:"riyadh", name:"Riyadh", region:"Saudi Arabia", tz:"Asia/Riyadh" },
+    { id:"jerusalem", name:"Jerusalem", region:"Israel", tz:"Asia/Jerusalem" },
+
+    // Asia
+    { id:"mumbai", name:"Mumbai", region:"India", tz:"Asia/Kolkata" },
+    { id:"delhi", name:"Delhi", region:"India", tz:"Asia/Kolkata" },
+    { id:"karachi", name:"Karachi", region:"Pakistan", tz:"Asia/Karachi" },
+    { id:"dhaka", name:"Dhaka", region:"Bangladesh", tz:"Asia/Dhaka" },
+    { id:"bangkok", name:"Bangkok", region:"Thailand", tz:"Asia/Bangkok" },
+    { id:"singapore", name:"Singapore", region:"Singapore", tz:"Asia/Singapore" },
+    { id:"hong-kong", name:"Hong Kong", region:"China", tz:"Asia/Hong_Kong" },
+    { id:"shanghai", name:"Shanghai", region:"China", tz:"Asia/Shanghai" },
+    { id:"beijing", name:"Beijing", region:"China", tz:"Asia/Shanghai" },
+    { id:"seoul", name:"Seoul", region:"South Korea", tz:"Asia/Seoul" },
+    { id:"tokyo", name:"Tokyo", region:"Japan", tz:"Asia/Tokyo" },
+    { id:"taipei", name:"Taipei", region:"Taiwan", tz:"Asia/Taipei" },
+    { id:"manila", name:"Manila", region:"Philippines", tz:"Asia/Manila" },
+    { id:"jakarta", name:"Jakarta", region:"Indonesia", tz:"Asia/Jakarta" },
+
+    // Oceania
+    { id:"perth", name:"Perth", region:"Australia", tz:"Australia/Perth" },
+    { id:"sydney", name:"Sydney", region:"Australia", tz:"Australia/Sydney" },
+    { id:"melbourne", name:"Melbourne", region:"Australia", tz:"Australia/Melbourne" },
+    { id:"auckland", name:"Auckland", region:"New Zealand", tz:"Pacific/Auckland" },
+
+    // UTC
+    { id:"utc", name:"UTC", region:"Coordinated Universal Time", tz:"UTC" }
+  ];
+
+  // ========= State =========
+  const defaultSelected = ["phoenix","new-york","london","utc","tokyo"];
+
+  let selectedIds = loadSelectedFromURL() || loadSelectedFromLS() || [...defaultSelected];
+  selectedIds = sanitizeSelected(selectedIds);
+
+  let timeFormat = localStorage.getItem(LS_FMT) || "12"; // "12" or "24"
+  $("timeFormat").value = (timeFormat === "24") ? "24" : "12";
+
+  // ========= Search + Suggest =========
+  const searchEl = $("citySearch");
+  const listEl = $("suggestList");
+
+  function normalize(s){
+    return (s || "").toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g,"")  // strip accents
+      .replace(/[^a-z0-9\s\-]/g,"")
+      .trim();
+  }
+
+  function getSuggestions(q){
+    const nq = normalize(q);
+    if(!nq) return [];
+    const parts = nq.split(/\s+/).filter(Boolean);
+
+    const scored = CITIES.map(c => {
+      const hay = normalize(`${c.name} ${c.region} ${c.tz}`);
+      let score = 0;
+      for(const p of parts){
+        if(hay.startsWith(p)) score += 3;
+        if(hay.includes(p)) score += 2;
+      }
+      // boost exact city name match
+      if(normalize(c.name) === nq) score += 10;
+      // small penalty for already selected
+      if(selectedIds.includes(c.id)) score -= 1;
+      return { c, score };
+    })
+    .filter(x => x.score > 0)
+    .sort((a,b) => b.score - a.score)
+    .slice(0, 10)
+    .map(x => x.c);
+
+    return scored;
+  }
+
+  function renderSuggestions(items){
+    if(!items.length){
+      listEl.style.display = "none";
+      listEl.innerHTML = "";
+      return;
+    }
+    listEl.innerHTML = items.map(c => `
+      <div class="suggestItem" role="option" data-id="${c.id}">
+        <div style="min-width:0">
+          <b>${escapeHTML(c.name)}</b>
+          <div><span>${escapeHTML(c.region)}</span></div>
+        </div>
+        <span class="mono">${escapeHTML(c.tz)}</span>
+      </div>
+    `).join("");
+    listEl.style.display = "block";
+  }
+
+  function hideSuggestions(){
+    listEl.style.display = "none";
+  }
+
+  function escapeHTML(s){
+    return String(s).replace(/[&<>"']/g, (m) => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[m]));
+  }
+
+  searchEl.addEventListener("input", () => {
+    const items = getSuggestions(searchEl.value);
+    renderSuggestions(items);
+  });
+
+  searchEl.addEventListener("focus", () => {
+    const items = getSuggestions(searchEl.value);
+    renderSuggestions(items);
+  });
+
+  document.addEventListener("click", (e) => {
+    if(!e.target.closest(".suggest")) hideSuggestions();
+  });
+
+  listEl.addEventListener("click", (e) => {
+    const item = e.target.closest(".suggestItem");
+    if(!item) return;
+    const id = item.getAttribute("data-id");
+    addCity(id);
+  });
+
+  searchEl.addEventListener("keydown", (e) => {
+    if(e.key === "Enter"){
+      e.preventDefault();
+      const items = getSuggestions(searchEl.value);
+      if(items.length){
+        addCity(items[0].id);
+      }else{
+        toast("No match");
+      }
+    }
+    if(e.key === "Escape"){
+      hideSuggestions();
+    }
+  });
+
+  // ========= Time Formatting =========
+  function buildTimeFormatters(){
+    const hour12 = (timeFormat !== "24");
+    // Use Intl.DateTimeFormat so DST, locales, and timezone rules are correct.
+    return {
+      time: (tz) => new Intl.DateTimeFormat(undefined, {
+        timeZone: tz,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12
+      }),
+      date: (tz) => new Intl.DateTimeFormat(undefined, {
+        timeZone: tz,
+        weekday: "short",
+        year: "numeric",
+        month: "short",
+        day: "2-digit"
+      }),
+      weekdayHour: (tz) => new Intl.DateTimeFormat(undefined, {
+        timeZone: tz,
+        weekday: "short",
+        hour: "2-digit",
+        hour12,
+      })
+    };
+  }
+
+  $("timeFormat").addEventListener("change", () => {
+    timeFormat = $("timeFormat").value === "24" ? "24" : "12";
+    localStorage.setItem(LS_FMT, timeFormat);
+    toast("Updated");
+    renderGrid();
+  });
+
+  // ========= Business Hours Indicator =========
+  // 9:00–17:00 local time in each city:
+  // - GREEN: within business hours
+  // - YELLOW: early/late (7–9 or 17–19)
+  // - RED: off hours
+  function getBusinessStatus(now, tz){
+    // Get local hour in that timezone reliably using formatToParts
+    const parts = new Intl.DateTimeFormat("en-US", { timeZone: tz, hour: "2-digit", hour12: false }).formatToParts(now);
+    const hourPart = parts.find(p => p.type === "hour");
+    const h = hourPart ? parseInt(hourPart.value, 10) : NaN;
+
+    if(Number.isNaN(h)) return { cls:"warn", label:"Time unavailable" };
+
+    if(h >= 9 && h < 17) return { cls:"good", label:"Business hours" };
+    if((h >= 7 && h < 9) || (h >= 17 && h < 19)) return { cls:"warn", label:"Edge hours" };
+    return { cls:"bad", label:"Off hours" };
+  }
+
+  // ========= Render Grid =========
+  const gridEl = $("clockGrid");
+
+  function getCityById(id){
+    return CITIES.find(c => c.id === id) || null;
+  }
+
+  function sanitizeSelected(ids){
+    const valid = ids
+      .map(String)
+      .map(s => s.trim())
+      .filter(Boolean)
+      .map(s => s.toLowerCase())
+      .filter(id => getCityById(id));
+    return uniqBy(valid, x => x).slice(0, 18); // keep it reasonable
+  }
+
+  function saveSelected(){
+    localStorage.setItem(LS_KEY, JSON.stringify(selectedIds));
+  }
+
+  function renderGrid(){
+    const now = new Date();
+    const fmt = buildTimeFormatters();
+
+    const cards = selectedIds.map(id => {
+      const city = getCityById(id);
+      if(!city) return "";
+      const timeStr = fmt.time(city.tz).format(now);
+      const dateStr = fmt.date(city.tz).format(now);
+
+      const bs = getBusinessStatus(now, city.tz);
+
+      return `
+        <div class="card" data-id="${city.id}">
+          <div class="topline">
+            <div class="city">
+              <b title="${escapeHTML(city.name)}">${escapeHTML(city.name)}</b>
+              <small title="${escapeHTML(city.region)}">${escapeHTML(city.region)} · <span class="mono">${escapeHTML(city.tz)}</span></small>
+            </div>
+            <button class="btnMini" data-action="remove" title="Remove">✕</button>
+          </div>
+
+          <div class="chipRow">
+            <span class="chip" title="Business-hours indicator (9:00–17:00 local time)">
+              <span class="dot ${bs.cls}"></span>
+              ${escapeHTML(bs.label)}
+            </span>
+          </div>
+
+          <div class="time mono" data-field="time">${escapeHTML(timeStr)}</div>
+          <div class="date" data-field="date">${escapeHTML(dateStr)}</div>
+
+          <div class="btnRow">
+            <button class="btnMini" data-action="copy">Copy</button>
+            <button class="btnMini" data-action="open">Open</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    gridEl.innerHTML = cards || `<div class="foot">No clocks selected. Add a city above.</div>`;
+
+    // update status dot if running
+    $("statusDot").style.background = "var(--good)";
+    $("statusText").textContent = "Running";
+  }
+
+  // Live tick (every second, but render only the time parts)
+  // Optimization: update existing DOM instead of rebuilding everything every tick.
+  function tick(){
+    const now = new Date();
+    const fmt = buildTimeFormatters();
+
+    for(const id of selectedIds){
+      const city = getCityById(id);
+      if(!city) continue;
+      const card = gridEl.querySelector(`.card[data-id="${CSS.escape(city.id)}"]`);
+      if(!card) continue;
+
+      const tEl = card.querySelector(`[data-field="time"]`);
+      const dEl = card.querySelector(`[data-field="date"]`);
+      if(tEl) tEl.textContent = fmt.time(city.tz).format(now);
+      if(dEl) dEl.textContent = fmt.date(city.tz).format(now);
+
+      // business status (hour-level) still cheap to update once per tick
+      const bs = getBusinessStatus(now, city.tz);
+      const chip = card.querySelector(".chip .dot");
+      const chipLabel = card.querySelector(".chip");
+      if(chip){
+        chip.classList.remove("good","warn","bad");
+        chip.classList.add(bs.cls);
+      }
+      if(chipLabel){
+        // keep dot + label; rebuild minimal
+        chipLabel.innerHTML = `<span class="dot ${bs.cls}"></span> ${escapeHTML(bs.label)}`;
+      }
+    }
+  }
+
+  // ========= Card Actions =========
+  gridEl.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-action]");
+    if(!btn) return;
+    const action = btn.getAttribute("data-action");
+    const card = e.target.closest(".card");
+    if(!card) return;
+    const id = card.getAttribute("data-id");
+    const city = getCityById(id);
+    if(!city) return;
+
+    if(action === "remove"){
+      selectedIds = selectedIds.filter(x => x !== id);
+      saveSelected();
+      renderGrid();
+      toast("Removed");
+    }
+
+    if(action === "copy"){
+      const now = new Date();
+      const fmt = buildTimeFormatters();
+      const timeStr = fmt.time(city.tz).format(now);
+      const dateStr = fmt.date(city.tz).format(now);
+      copyText(`${city.name} — ${timeStr} (${dateStr}) · ${city.tz}`);
+    }
+
+    if(action === "open"){
+      // Open a prefilled time-zone-converter page if you want,
+      // but we keep it simple: open your own time-zone converter (user can use it for deeper conversion).
+      // You can later enhance by passing query params.
+      window.open("/time-zone-converter.html", "_blank", "noopener");
+    }
+  });
+
+  function addCity(id){
+    const city = getCityById(id);
+    if(!city){ toast("Unknown city"); return; }
+    if(selectedIds.includes(id)){ toast("Already added"); return; }
+    selectedIds.push(id);
+    selectedIds = sanitizeSelected(selectedIds);
+    saveSelected();
+    renderGrid();
+    toast("Added");
+    searchEl.value = "";
+    hideSuggestions();
+    searchEl.focus();
+  }
+
+  // ========= Share / Reset =========
+  function buildShareURL(){
+    const base = `${location.origin}${location.pathname}`;
+    const ids = sanitizeSelected(selectedIds);
+    const fmt = (timeFormat === "24") ? "24" : "12";
+    const q = new URLSearchParams();
+    q.set("cities", ids.join(","));
+    q.set("fmt", fmt);
+    return `${base}?${q.toString()}`;
+  }
+
+  $("shareBtn").addEventListener("click", async () => {
+    const url = buildShareURL();
+    await copyText(url);
+    $("shareHint").textContent = "Copied share link to clipboard.";
+  });
+
+  $("resetBtn").addEventListener("click", () => {
+    selectedIds = [...defaultSelected];
+    timeFormat = "12";
+    localStorage.setItem(LS_FMT, timeFormat);
+    $("timeFormat").value = "12";
+    saveSelected();
+    // clear URL query without reload
+    history.replaceState({}, "", location.pathname);
+    renderGrid();
+    toast("Reset");
+  });
+
+  // ========= Load from URL / Local Storage =========
+  function loadSelectedFromLS(){
+    const raw = localStorage.getItem(LS_KEY);
+    if(!raw) return null;
+    const arr = safeJSONParse(raw, null);
+    return Array.isArray(arr) ? arr : null;
+  }
+
+  function loadSelectedFromURL(){
+    const u = new URL(location.href);
+    const cities = u.searchParams.get("cities");
+    const fmt = u.searchParams.get("fmt");
+    if(fmt === "24" || fmt === "12"){
+      timeFormat = fmt;
+      localStorage.setItem(LS_FMT, timeFormat);
+    }
+    if(!cities) return null;
+    const ids = cities.split(",").map(s => s.trim()).filter(Boolean);
+    return ids.length ? ids : null;
+  }
+
+  // ========= Init =========
+  // Ensure Intl supports time zones (should in modern browsers)
+  // If not, show a gentle warning.
+  try{
+    new Intl.DateTimeFormat(undefined, { timeZone: "UTC" }).format(new Date());
+  }catch(e){
+    $("statusDot").style.background = "var(--bad)";
+    $("statusText").textContent = "Timezone support missing";
+  }
+
+  // Save sanitized state back
+  saveSelected();
+  renderGrid();
+  setInterval(tick, 1000);
+
+})();
+</script>
+</body>
+</html>
