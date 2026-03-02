@@ -122,10 +122,11 @@
     }
 
     .topline{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-    .city{display:flex;flex-direction:column;gap:2px;min-width:0;}
+    .city{
+      display:flex;flex-direction:column;gap:2px;min-width:0;
+    }
     .city b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .city small{color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
     .chipRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
     .chip{
       display:inline-flex;align-items:center;gap:8px;
@@ -136,10 +137,11 @@
     .dot.good{background:var(--good)}
     .dot.warn{background:var(--warn)}
     .dot.bad{background:var(--bad)}
-
-    .time{font-size:30px;font-weight:950;letter-spacing:0.4px;line-height:1.05;margin-top:10px;}
+    .time{
+      font-size:30px;font-weight:950;letter-spacing:0.4px;line-height:1.05;
+      margin-top:10px;
+    }
     .date{color:var(--muted);font-size:12px;margin-top:6px}
-
     .btnRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
     .btnRow button{flex:1}
     .btnMini{
@@ -161,6 +163,13 @@
       padding:2px 6px;border-radius:8px;color:var(--muted);font-size:12px;
       background:#0b1220;
     }
+
+    /* Footer helpers */
+    .footerLinks a{ text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
+    .footerCenter{ text-align:center; }
+    .footerCenter a{ color:inherit; text-decoration:none; }
+    .footerCenter a:hover{ text-decoration:underline; }
   </style>
 
   <script type="application/ld+json">
@@ -195,7 +204,7 @@
       <div class="logo">🌍</div>
       <div>
         <h1>World Clock</h1>
-        <div class="sub">Live clocks for major cities (and all time zones). Add/remove clocks, 12/24-hour toggle, business-hours indicator, and copy time. Privacy-first: runs locally.</div>
+        <div class="sub">Live clocks for major cities. Add/remove clocks, 12/24-hour toggle, business-hours indicator, and copy time. Privacy-first: runs locally.</div>
       </div>
     </div>
     <div class="pill">
@@ -208,10 +217,10 @@
     <div class="panel">
       <div class="row">
         <div class="suggest">
-          <label for="citySearch">Add a city / timezone</label>
-          <input id="citySearch" type="text" placeholder="Search: Phnom Penh, Tokyo, London, America/New_York…" autocomplete="off" />
-          <div class="suggestList" id="suggestList" role="listbox" aria-label="City suggestions"></div>
-          <div class="foot">Tip: Type a city or timezone then press <span class="kbd">Enter</span>. Your selection is saved locally in this browser.</div>
+          <label for="citySearch">Add a city / time zone</label>
+          <input id="citySearch" type="text" placeholder="Search: Phnom Penh, Tokyo, London, New York, America/Phoenix…" autocomplete="off" />
+          <div class="suggestList" id="suggestList" role="listbox" aria-label="Time zone suggestions"></div>
+          <div class="foot">Tip: Type a time zone then press <span class="kbd">Enter</span>. Saved locally in this browser.</div>
         </div>
 
         <div>
@@ -234,11 +243,13 @@
       </div>
     </div>
 
-    <!-- CLOCK GRID PANEL (this was missing in your broken version) -->
     <div class="panel">
       <div class="cards" id="clockGrid"></div>
+    </div>
 
-      <div class="foot" style="margin-top:12px;">
+    <!-- FOOTER PANEL -->
+    <div class="panel">
+      <div class="foot footerLinks">
         <b>InstantQR tools:</b>
         <a href="/index.html">Home</a> ·
         <a href="/url-qr-code-generator.html">URL QR</a> ·
@@ -249,15 +260,16 @@
         <a href="/json-formatter.html">JSON Formatter</a> ·
         <a href="/time-zone-converter.html">Time Zone Converter</a> ·
         <a href="/base64-encoder.html">Base64 Encoder</a> ·
-        <a href="/countdown-timer.html">Countdown Timer</a> ·
-        <a class="active" href="/world-clock.html">World Clock</a>
-      </div>
+        <a class="active" href="/world-clock.html">World Clock</a> ·
+        <a href="/countdown-timer.html">Countdown Timer</a>
 
-      <div class="foot" style="margin-top:10px;">
-        <a href="/about.html">About</a> ·
-        <a href="/privacy.html">Privacy</a> ·
-        <a href="/terms.html">Terms</a> ·
-        <a href="/contact.html">Contact</a>
+        <!-- CENTERED POLICY LINKS (requested) -->
+        <div class="foot footerCenter" style="margin-top:10px;">
+          <a href="/about.html">About</a> ·
+          <a href="/privacy.html">Privacy</a> ·
+          <a href="/terms.html">Terms</a> ·
+          <a href="/contact.html">Contact</a>
+        </div>
       </div>
     </div>
 
@@ -311,14 +323,14 @@
       .trim();
   }
 
-  // ========= Get ALL IANA time zones =========
+  // ========= Build ALL time zones (IANA) =========
   function getAllTimeZones(){
     if (Intl && typeof Intl.supportedValuesOf === "function"){
       const zones = Intl.supportedValuesOf("timeZone");
       if (!zones.includes("UTC")) zones.unshift("UTC");
       return zones;
     }
-    // Fallback if supportedValuesOf is missing
+    // Fallback list (older browsers)
     return [
       "UTC",
       "America/Phoenix",
@@ -342,9 +354,9 @@
   const TIMEZONES = getAllTimeZones();
   const TZ_SET = new Set(TIMEZONES);
 
-  // Build display metadata from timezone string
   function tzToEntry(tz){
     if (tz === "UTC") return { id:"UTC", name:"UTC", region:"Coordinated Universal Time", tz:"UTC" };
+
     const parts = tz.split("/");
     const region = parts[0] || "Other";
     const cityRaw = parts[parts.length - 1] || tz;
@@ -358,12 +370,11 @@
     return tzToEntry(id);
   }
 
-  // ========= Elements =========
+  // ========= State =========
   const searchEl = $("citySearch");
   const listEl = $("suggestList");
   const gridEl = $("clockGrid");
 
-  // ========= Default clocks =========
   const localTZ = (() => {
     try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; }
     catch { return "UTC"; }
@@ -407,9 +418,7 @@
       $("timeFormat").value = fmt;
     }
     if (!cities) return null;
-
-    // cities are plain tz strings separated by commas
-    const ids = cities.split(",").map(s => s.trim()).filter(Boolean);
+    const ids = cities.split(",").map(s => decodeURIComponent(s.trim())).filter(Boolean);
     return ids.length ? ids : null;
   }
 
@@ -419,7 +428,7 @@
     localStorage.setItem(LS_KEY, JSON.stringify(selectedIds));
   }
 
-  // ========= Suggestions =========
+  // ========= Suggestions (search ALL time zones) =========
   function getSuggestions(q){
     const nq = normalize(q);
     if (!nq) return [];
@@ -661,7 +670,7 @@
     const ids = sanitizeSelected(selectedIds);
     const fmt = (timeFormat === "24") ? "24" : "12";
     const q = new URLSearchParams();
-    q.set("cities", ids.join(",")); // no double-encoding
+    q.set("cities", ids.map(encodeURIComponent).join(","));
     q.set("fmt", fmt);
     return `${base}?${q.toString()}`;
   }
