@@ -53,8 +53,15 @@
   <!-- world Clock -->
   <url>
     <loc>https://instantqr.io/world-clock.html</loc>
-     <changefreq>weekly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <!-- web3-gas-fee-estimator -->
+  <url>
+    <loc>https://instantqr.io/web3-gas-fee-estimator.html</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <!-- SEO Tool Pages -->
   <url>
