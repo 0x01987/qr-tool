@@ -63,6 +63,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <!-- crypto-profit-calculator -->
+   <url>
+    <loc>https://instantqr.io/crypto-profit-calculator.html</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <!-- SEO Tool Pages -->
   <url>
     <loc>https://instantqr.io/wifi-qr-code-generator.html</loc>
