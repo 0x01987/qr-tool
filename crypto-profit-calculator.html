@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G-6213N2G8R2"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -338,27 +338,16 @@
       margin-top: 18px;
       align-items: start;
     }
-    footer{
-      margin-top: 22px;
-      color: rgba(255,255,255,.55);
-      font-size: 12px;
+
+    /* ✅ FooterLinks (matches your index.html styling expectations) */
+    .footerLinks{
+      margin-top:14px;
       text-align:center;
+      color: rgba(255,255,255,.55);
+      font-size:12px;
     }
-    .smallLinks{
-      margin-top: 8px;
-      display:flex;
-      gap: 10px;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
-    .smallLinks a{
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      color: rgba(255,255,255,.70);
-    }
-    .smallLinks a:hover{ background: rgba(255,255,255,.06); }
+    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
 
     @media (max-width: 920px){
       .heroGrid, .twoCols{ grid-template-columns: 1fr; }
@@ -408,7 +397,8 @@
 <body>
   <header>
     <div class="nav">
-      <a class="brand" href="/" aria-label="InstantQR home">
+      <!-- ✅ REPLACED: qr-code-generator.html -> url-qr-code-generator.html -->
+      <a class="brand" href="/url-qr-code-generator.html" aria-label="InstantQR home">
         <div class="logo" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M7 7h4v4H7V7Zm6 0h4v4h-4V7ZM7 13h4v4H7v-4Zm8 0h2v2h-2v-2Zm-2 2h2v2h-2v-2Zm2 2h2v2h-2v-2Z" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -416,8 +406,10 @@
         </div>
         <span>InstantQR</span>
       </a>
-      <nav class="navlinks" aria-label="Site">
-        <a class="chip" href="/qr-code-generator.html">QR Generator</a>
+
+      <nav class="navlinks" aria-label="Tools">
+        <a class="chip" href="/url-qr-code-generator.html">URL QR Generator</a>
+        <a class="chip" href="/wifi-qr-code-generator.html">WiFi QR Generator</a>
         <a class="chip" href="/password.html">Password Generator</a>
         <a class="chip" href="/unit-converter.html">Unit Converter</a>
         <a class="chip" href="/web3-gas-fee-estimator.html">Gas Estimator</a>
@@ -706,7 +698,7 @@
                 <p style="margin:0 0 10px;">
                   <b>Gross P/L</b> = (Sell Price − Buy Price) × Quantity<br/>
                   <b>Fees</b> can be flat or percent, applied to buy and sell totals.<br/>
-                  <b>Net P/L</b> = Gross P/L − Total Fees (buy fee + sell fee)<br/>
+                  <b>Net P/L</b> = Net Proceeds − Cost Basis<br/>
                   <b>ROI</b> = Net P/L ÷ Cost Basis × 100%
                 </p>
                 <p style="margin:0;">
@@ -729,14 +721,26 @@
       </div>
     </section>
 
-    <footer>
-      <div>© <span id="year"></span> InstantQR.io — Free tools that run fast and respect privacy.</div>
-      <div class="smallLinks" aria-label="More tools">
-        <a href="/web3-gas-fee-estimator.html">Web3 Gas Fee Estimator</a>
-        <a href="/unit-converter.html">Unit Converter</a>
-        <a href="/password.html">Password Generator</a>
+    <!-- ✅ ADDED: footerLinks block (exactly as requested) -->
+    <div class="footerLinks">
+      <!-- SEO Tool Links -->
+      <div style="margin-bottom:8px;">
+        <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+        <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
+        <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
+        <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
+        <!-- ✅ NEW -->
+        <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
       </div>
-    </footer>
+
+      <!-- Policy Links -->
+      <div>
+        <a href="/about.html">About</a> ·
+        <a href="/privacy.html">Privacy</a> ·
+        <a href="/terms.html">Terms</a> ·
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
   </main>
 
   <script>
@@ -760,7 +764,6 @@
           maximumFractionDigits: d
         }).format(amount);
       }catch{
-        // fallback if currency code invalid
         return (amount || 0).toFixed(d);
       }
     }
@@ -846,12 +849,10 @@
       const bp = safeNum(buyPrice.value);
       const sp = safeNum(sellPrice.value);
 
-      // Validate required
       const hasPrices = bp > 0 && sp > 0;
 
       // Determine quantity
       let qty = 0;
-
       if(mode === "qty"){
         qty = safeNum(quantity.value);
       }else{
@@ -870,7 +871,7 @@
       const gross = (sp - bp) * qty;
       const basis = buyTotal + buyFee;
       const proceeds = sellTotal - sellFee;
-      const net = proceeds - basis; // equivalent to gross - fees when fees computed on totals
+      const net = proceeds - basis;
 
       const roiPct = (basis > 0) ? (net / basis * 100) : (hasPrices ? 0 : NaN);
 
@@ -878,16 +879,7 @@
       const tr = safeNum(taxRate.value);
       const taxEst = (net > 0 && tr > 0) ? (net * (tr / 100)) : 0;
 
-      // Breakeven sell price:
-      // Solve for sp such that net ≈ 0:
-      // proceeds(sp) - basis = 0
-      // proceeds = sp*qty - sellFee(sp*qty)
-      // sellFee is either:
-      //  - pct: sp*qty*(pct/100)
-      //  - flat: flat
-      //  - none: 0
-      // => sp*qty*(1 - pct) - flat = basis
-      // => sp = (basis + flat) / (qty*(1 - pct))
+      // Break-even sell price
       let be = 0;
       const q = qty;
       if(q > 0){
@@ -932,7 +924,7 @@
 
       // Bar
       const capped = clamp(roiPct || 0, -200, 200);
-      const width = Math.abs(capped) / 200 * 100; // 0..100
+      const width = Math.abs(capped) / 200 * 100;
       barPct.textContent = formatPct(roiPct || 0);
       if(capped >= 0){
         barLabel.textContent = "Net performance (profit)";
@@ -943,7 +935,7 @@
       }
       barFill.style.width = `${width}%`;
 
-      // Minimal status
+      // Status
       const sym = (asset.value || "").trim().toUpperCase();
       if(hasPrices && qty > 0){
         const qtyText = (mode === "qty") ? `${qty}` : `${qty.toFixed(8)}`;
@@ -952,14 +944,14 @@
         statusMsg.textContent = "Enter buy price, sell price, and quantity (or investment) to see results.";
       }
 
-      // Update fee/tax pill label hints
+      // Fee pill label hints
       const feeHint = [];
       if(buyFeeType.value !== "none") feeHint.push("buy");
       if(sellFeeType.value !== "none") feeHint.push("sell");
       feesPill.textContent = feeHint.length ? feeHint.join(" + ") : "None";
       taxPill.style.opacity = (safeNum(taxRate.value) > 0) ? 1 : 0.65;
 
-      // Persist share state (without spamming history)
+      // Persist share state
       updateUrl(false);
     }
 
@@ -972,10 +964,6 @@
       qtyWrap.style.display = isQty ? "" : "none";
       invWrap.style.display = isQty ? "none" : "";
 
-      // KPI mode
-      $("kpiMode").textContent = isQty ? "Quantity" : "Investment";
-
-      // Recalc
       calculate();
     }
 
@@ -1034,7 +1022,7 @@
       taxRate.value = p.get("tax") || "";
       decimals.value = p.get("dec") || decimals.value;
 
-      setMode(mode); // sets UI + calculates
+      setMode(mode);
     }
 
     // ---- Copy helpers ----
@@ -1043,7 +1031,6 @@
         await navigator.clipboard.writeText(txt);
         return true;
       }catch{
-        // fallback
         const ta = document.createElement("textarea");
         ta.value = txt;
         ta.style.position = "fixed";
@@ -1061,16 +1048,14 @@
       }
     }
 
-    $("copyLinkBtn").addEventListener("click", async () => {
+    document.getElementById("copyLinkBtn").addEventListener("click", async () => {
       updateUrl(true);
       const ok = await copyText(location.href);
       statusMsg.textContent = ok ? "Share link copied." : "Could not copy link. You can manually copy the URL.";
     });
 
-    $("copySummaryBtn").addEventListener("click", async () => {
+    document.getElementById("copySummaryBtn").addEventListener("click", async () => {
       const sym = (asset.value || "").trim().toUpperCase();
-      const cur = currency.value || "USD";
-      const dec = decimals.value || "2";
 
       const summary =
 `${sym ? sym + " " : ""}Crypto Profit / ROI (InstantQR)
@@ -1088,7 +1073,7 @@ Link: ${location.href}`;
       statusMsg.textContent = ok ? "Results copied." : "Could not copy results.";
     });
 
-    $("resetBtn").addEventListener("click", () => {
+    document.getElementById("resetBtn").addEventListener("click", () => {
       asset.value = "";
       currency.value = "USD";
       buyPrice.value = "";
@@ -1115,7 +1100,6 @@ Link: ${location.href}`;
     inputs.forEach(el => el.addEventListener("change", calculate));
 
     // Init
-    $("year").textContent = new Date().getFullYear();
     loadFromUrl();
     calculate();
   </script>
