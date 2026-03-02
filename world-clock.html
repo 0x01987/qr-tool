@@ -87,9 +87,7 @@
     .mono{font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
     .foot{color:var(--muted);font-size:12px;line-height:1.45;margin-top:10px}
 
-    .suggest{
-      position:relative;
-    }
+    .suggest{ position:relative; }
     .suggestList{
       position:absolute;left:0;right:0;top:100%;
       background:#0b1220;border:1px solid var(--line);
@@ -124,11 +122,10 @@
     }
 
     .topline{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-    .city{
-      display:flex;flex-direction:column;gap:2px;min-width:0;
-    }
+    .city{display:flex;flex-direction:column;gap:2px;min-width:0;}
     .city b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .city small{color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
     .chipRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
     .chip{
       display:inline-flex;align-items:center;gap:8px;
@@ -139,11 +136,10 @@
     .dot.good{background:var(--good)}
     .dot.warn{background:var(--warn)}
     .dot.bad{background:var(--bad)}
-    .time{
-      font-size:30px;font-weight:950;letter-spacing:0.4px;line-height:1.05;
-      margin-top:10px;
-    }
+
+    .time{font-size:30px;font-weight:950;letter-spacing:0.4px;line-height:1.05;margin-top:10px;}
     .date{color:var(--muted);font-size:12px;margin-top:6px}
+
     .btnRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
     .btnRow button{flex:1}
     .btnMini{
@@ -199,7 +195,7 @@
       <div class="logo">🌍</div>
       <div>
         <h1>World Clock</h1>
-        <div class="sub">Live clocks for major cities. Add/remove clocks, 12/24-hour toggle, business-hours indicator, and copy time. Privacy-first: runs locally.</div>
+        <div class="sub">Live clocks for major cities (and all time zones). Add/remove clocks, 12/24-hour toggle, business-hours indicator, and copy time. Privacy-first: runs locally.</div>
       </div>
     </div>
     <div class="pill">
@@ -212,10 +208,10 @@
     <div class="panel">
       <div class="row">
         <div class="suggest">
-          <label for="citySearch">Add a city</label>
-          <input id="citySearch" type="text" placeholder="Search: Tokyo, London, New York, Phoenix…" autocomplete="off" />
+          <label for="citySearch">Add a city / timezone</label>
+          <input id="citySearch" type="text" placeholder="Search: Phnom Penh, Tokyo, London, America/New_York…" autocomplete="off" />
           <div class="suggestList" id="suggestList" role="listbox" aria-label="City suggestions"></div>
-          <div class="foot">Tip: Type a city then press <span class="kbd">Enter</span>. Your selection is saved locally in this browser.</div>
+          <div class="foot">Tip: Type a city or timezone then press <span class="kbd">Enter</span>. Your selection is saved locally in this browser.</div>
         </div>
 
         <div>
@@ -233,14 +229,16 @@
             <button class="btn" id="shareBtn" type="button">Share Selected</button>
             <button class="btn2" id="resetBtn" type="button">Reset</button>
           </div>
-          <div class="foot" id="shareHint">Share creates a link with your selected cities.</div>
+          <div class="foot" id="shareHint">Share creates a link with your selected time zones.</div>
         </div>
       </div>
     </div>
 
-<!-- FOOTER PANEL -->
+    <!-- CLOCK GRID PANEL (this was missing in your broken version) -->
     <div class="panel">
-      <div class="foot footerLinks">
+      <div class="cards" id="clockGrid"></div>
+
+      <div class="foot" style="margin-top:12px;">
         <b>InstantQR tools:</b>
         <a href="/index.html">Home</a> ·
         <a href="/url-qr-code-generator.html">URL QR</a> ·
@@ -251,14 +249,15 @@
         <a href="/json-formatter.html">JSON Formatter</a> ·
         <a href="/time-zone-converter.html">Time Zone Converter</a> ·
         <a href="/base64-encoder.html">Base64 Encoder</a> ·
-        <a href="/world-clock.html">World Clock</a> ·
-        <a class="active" href="/countdown-timer.html">Countdown Timer</a>
-        <div style="margin-top:10px;">
-          <a href="/about.html">About</a> ·
-          <a href="/privacy.html">Privacy</a> ·
-          <a href="/terms.html">Terms</a> ·
-          <a href="/contact.html">Contact</a>
-        </div>
+        <a href="/countdown-timer.html">Countdown Timer</a> ·
+        <a class="active" href="/world-clock.html">World Clock</a>
+      </div>
+
+      <div class="foot" style="margin-top:10px;">
+        <a href="/about.html">About</a> ·
+        <a href="/privacy.html">Privacy</a> ·
+        <a href="/terms.html">Terms</a> ·
+        <a href="/contact.html">Contact</a>
       </div>
     </div>
 
@@ -267,12 +266,11 @@
 
 <div class="toast" id="toast"></div>
 
-
 <script>
 (() => {
   // ========= Utilities =========
   const $ = (id) => document.getElementById(id);
-  const LS_KEY = "instantqr_world_clock_v2";      // bumped version because IDs changed
+  const LS_KEY = "instantqr_world_clock_v2";
   const LS_FMT = "instantqr_world_clock_fmt_v1";
 
   function toast(msg){
@@ -308,23 +306,19 @@
 
   function normalize(s){
     return (s || "").toLowerCase()
-      .normalize("NFD").replace(/[\u0300-\u036f]/g,"")  // strip accents
+      .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
       .replace(/[^a-z0-9\s\-\/_]/g,"")
       .trim();
   }
 
-  // ========= Build ALL time zones (IANA) =========
+  // ========= Get ALL IANA time zones =========
   function getAllTimeZones(){
-    // Modern browsers:
     if (Intl && typeof Intl.supportedValuesOf === "function"){
       const zones = Intl.supportedValuesOf("timeZone");
-      // Ensure UTC present (should be)
       if (!zones.includes("UTC")) zones.unshift("UTC");
       return zones;
     }
-
-    // Fallback list if supportedValuesOf is missing (older browsers)
-    // Keep your original curated list as fallback, PLUS Cambodia.
+    // Fallback if supportedValuesOf is missing
     return [
       "UTC",
       "America/Phoenix",
@@ -348,11 +342,9 @@
   const TIMEZONES = getAllTimeZones();
   const TZ_SET = new Set(TIMEZONES);
 
-  // Create display metadata from timezone string
+  // Build display metadata from timezone string
   function tzToEntry(tz){
-    // tz: "Asia/Phnom_Penh"
     if (tz === "UTC") return { id:"UTC", name:"UTC", region:"Coordinated Universal Time", tz:"UTC" };
-
     const parts = tz.split("/");
     const region = parts[0] || "Other";
     const cityRaw = parts[parts.length - 1] || tz;
@@ -360,20 +352,18 @@
     return { id: tz, name: city, region, tz };
   }
 
-  // For fast lookups
   function getEntryById(id){
     if (!id) return null;
-    // preserve case; IDs are actual tz names (e.g., "Asia/Phnom_Penh")
     if (!TZ_SET.has(id)) return null;
     return tzToEntry(id);
   }
 
-  // ========= State =========
+  // ========= Elements =========
   const searchEl = $("citySearch");
   const listEl = $("suggestList");
   const gridEl = $("clockGrid");
 
-  // Default clocks: local tz + a few popular ones + Cambodia
+  // ========= Default clocks =========
   const localTZ = (() => {
     try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; }
     catch { return "UTC"; }
@@ -388,17 +378,16 @@
     "Asia/Phnom_Penh"
   ].filter(tz => TZ_SET.has(tz)));
 
-  let timeFormat = localStorage.getItem(LS_FMT) || "12"; // "12" or "24"
+  let timeFormat = localStorage.getItem(LS_FMT) || "12";
   $("timeFormat").value = (timeFormat === "24") ? "24" : "12";
 
   function sanitizeSelected(ids){
     const cleaned = [];
     for (const id of (ids || [])){
       if (typeof id !== "string") continue;
-      // keep exact case as in IANA list
       if (TZ_SET.has(id)) cleaned.push(id);
     }
-    return uniq(cleaned).slice(0, 24); // allow more now since list is big
+    return uniq(cleaned).slice(0, 24);
   }
 
   function loadSelectedFromLS(){
@@ -419,8 +408,8 @@
     }
     if (!cities) return null;
 
-    // decode and split
-    const ids = cities.split(",").map(s => decodeURIComponent(s.trim())).filter(Boolean);
+    // cities are plain tz strings separated by commas
+    const ids = cities.split(",").map(s => s.trim()).filter(Boolean);
     return ids.length ? ids : null;
   }
 
@@ -430,13 +419,10 @@
     localStorage.setItem(LS_KEY, JSON.stringify(selectedIds));
   }
 
-  // ========= Suggestions (search ALL time zones) =========
+  // ========= Suggestions =========
   function getSuggestions(q){
     const nq = normalize(q);
     if (!nq) return [];
-
-    // We build a small scored list by scanning timezones.
-    // This is fine for a few hundred zones; still fast in browser.
     const parts = nq.split(/\s+/).filter(Boolean);
 
     const scored = [];
@@ -449,9 +435,7 @@
         if (hay.startsWith(p)) score += 4;
         if (hay.includes(p)) score += 2;
       }
-      // boost direct tz match typing
       if (normalize(entry.tz) === nq) score += 12;
-      // small penalty if already selected
       if (selectedIds.includes(entry.id)) score -= 1;
 
       if (score > 0) scored.push({ entry, score });
@@ -657,7 +641,6 @@
   });
 
   function addTZ(id){
-    // id should be an IANA tz string (e.g., "Asia/Phnom_Penh")
     if(!TZ_SET.has(id)){ toast("Unknown time zone"); return; }
     if(selectedIds.includes(id)){ toast("Already added"); return; }
 
@@ -678,7 +661,7 @@
     const ids = sanitizeSelected(selectedIds);
     const fmt = (timeFormat === "24") ? "24" : "12";
     const q = new URLSearchParams();
-    q.set("cities", ids.map(encodeURIComponent).join(","));
+    q.set("cities", ids.join(",")); // no double-encoding
     q.set("fmt", fmt);
     return `${base}?${q.toString()}`;
   }
