@@ -255,8 +255,10 @@
           <a href="/base64-encoder.html">Base64 Encoder</a>
           <a href="/countdown-timer.html">Countdown Timer</a>
           <a href="/world-clock.html">World Clock</a>
-          <!-- ✅ NEW -->
+          <!-- ✅ Web3 -->
           <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a>
+          <!-- ✅ NEW -->
+          <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
         </nav>
       </div>
 
@@ -287,8 +289,10 @@
           <li>🌐 <strong>IP Lookup</strong></li>
           <li>🧱 <strong>Base64 Encoder / Decoder</strong></li>
           <li>⏳ <strong>Countdown Timer</strong></li>
-          <!-- ✅ NEW -->
+          <!-- ✅ Web3 -->
           <li>⛽ <strong>Web3 Gas Fee Estimator</strong></li>
+          <!-- ✅ NEW -->
+          <li>📈 <strong>Crypto Profit / ROI Calculator</strong></li>
         </ul>
 
         <h2>How to Use InstantQR Tools</h2>
@@ -337,8 +341,9 @@
           <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
           <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
           <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
+          <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
           <!-- ✅ NEW -->
-          <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a>
+          <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
         </div>
 
         <!-- Policy Links -->
@@ -498,7 +503,7 @@
     setType("text");
   </script>
 
-  <!-- Tools Hub Renderer (updated: adds Gas Fee Estimator) -->
+  <!-- Tools Hub Renderer (updated: adds Gas Fee Estimator + Crypto Profit Calculator) -->
   <script>
   (() => {
     const TOOLS = [
@@ -512,7 +517,8 @@
       { title:"Base64 Encoder", href:"/base64-encoder.html", icon:"🧱", tags:["Dev","Encode"], desc:"Encode and decode Base64 locally in your browser." },
       { title:"World Clock", href:"/world-clock.html", icon:"🌍", tags:["Time","Live"], desc:"Live world clocks across time zones with a clean UI." },
       { title:"Countdown Timer", href:"/countdown-timer.html", icon:"⏳", tags:["Timer","Calc"], desc:"Countdowns and time calculations in a simple tool." },
-      { title:"Web3 Gas Fee Estimator", href:"/web3-gas-fee-estimator.html", icon:"⛽", tags:["Web3","EVM"], desc:"Estimate EVM gas fees (slow/standard/fast) using live JSON-RPC data." }
+      { title:"Web3 Gas Fee Estimator", href:"/web3-gas-fee-estimator.html", icon:"⛽", tags:["Web3","EVM"], desc:"Estimate EVM gas fees (slow/standard/fast) using live JSON-RPC data." },
+      { title:"Crypto Profit / ROI Calculator", href:"/crypto-profit-calculator.html", icon:"📈", tags:["Web3","ROI"], desc:"Calculate crypto profit/loss, ROI %, break-even, and optional fees/taxes." }
     ];
 
     const grid = document.getElementById("toolsGrid");
