@@ -24,12 +24,11 @@
   <meta property="og:description" content="Free, privacy-first online tools. No signup required." />
   <meta property="og:url" content="https://instantqr.io/" />
 
-  <link rel="icon" href="/assets/instantqr-logo.svg" />
+  <link rel="icon" href="/favicon.ico" />
 
   <style>
     :root{
       --bg:#0b1220;
-      --panel:#0f1a2e;
       --text:#e7eefc;
       --muted:#a9b7d6;
       --brand:#3b82f6;
@@ -54,6 +53,7 @@
     a{color:inherit; text-decoration:none}
     a:hover{text-decoration:underline}
     .wrap{max-width:var(--max); margin:0 auto; padding:20px}
+
     .topbar{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
@@ -67,14 +67,11 @@
       display:flex; align-items:center; justify-content:space-between; gap:14px;
     }
     .brand{
-      display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px;
+      display:flex; align-items:center; gap:10px;
+      font-weight:700; letter-spacing:.2px;
     }
-    .logo{
-      width:34px; height:34px; border-radius:12px;
-      background: linear-gradient(135deg, rgba(59,130,246,1), rgba(34,197,94,1));
-      box-shadow: 0 8px 18px rgba(59,130,246,.25);
-      flex:0 0 auto;
-    }
+    .brand img{display:block; height:34px; width:auto}
+
     nav{display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
     nav a{
       color:var(--muted);
@@ -87,6 +84,7 @@
       background: rgba(255,255,255,.06);
       text-decoration:none;
     }
+
     .cta{
       display:inline-flex; align-items:center; justify-content:center;
       padding:10px 14px;
@@ -107,6 +105,7 @@
     }
     .cta.primary:hover{filter:brightness(1.05); text-decoration:none}
     .cta.ghost:hover{background: rgba(255,255,255,.10); text-decoration:none}
+
     .hero{padding:44px 0 22px;}
     .heroGrid{
       display:grid;
@@ -171,6 +170,7 @@
     }
     .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px}
     .miniNote{margin-top:12px; font-size:13px; color: var(--muted)}
+
     .searchBox{
       background: linear-gradient(180deg, rgba(15,26,46,.75), rgba(15,26,46,.45));
       border: 1px solid var(--border);
@@ -196,13 +196,11 @@
       font-size:14px;
     }
     .input::placeholder{color: rgba(233,238,252,.55)}
+
     .section{padding: 18px 0}
-    .section h2{
-      margin: 0 0 10px;
-      font-size: 22px;
-      letter-spacing:-.2px;
-    }
+    .section h2{margin: 0 0 10px; font-size: 22px; letter-spacing:-.2px;}
     .section p{margin: 0 0 12px; color:var(--muted); line-height:1.55}
+
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -238,6 +236,7 @@
       white-space:nowrap;
     }
     .cardDesc{color:var(--muted); font-size:13px; line-height:1.45}
+
     .why{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -252,24 +251,19 @@
     }
     .whyBox h3{margin:0 0 6px; font-size:16px}
     .whyBox ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.6}
+
     .faq{
       border-radius: var(--radius2);
       border: 1px solid var(--border);
       background: rgba(255,255,255,.04);
       padding:18px;
     }
-    details{
-      border-top: 1px solid rgba(255,255,255,.10);
-      padding: 12px 0;
-    }
+    details{border-top: 1px solid rgba(255,255,255,.10); padding: 12px 0;}
     details:first-child{border-top:0; padding-top:0}
-    summary{
-      cursor:pointer;
-      font-weight:700;
-      list-style:none;
-    }
+    summary{cursor:pointer; font-weight:700; list-style:none;}
     summary::-webkit-details-marker{display:none}
     .faq p{margin:8px 0 0; color:var(--muted); line-height:1.55}
+
     .footer{
       margin-top: 22px;
       padding: 18px 0 36px;
@@ -277,17 +271,12 @@
       color: var(--muted);
       font-size: 13px;
     }
-    .footerLinks{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
+    .footerLinks{display:flex; flex-direction:column; gap:10px;}
     .footerLinks a{color: var(--muted)}
     .footerLinks a:hover{color: var(--text); text-decoration:none}
-    .footRow{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap;
-    }
+    .footRow{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap;}
     .small{font-size:12px; color:rgba(233,238,252,.55)}
+
     @media (max-width: 920px){
       .heroGrid{grid-template-columns: 1fr}
       .grid{grid-template-columns: repeat(2, 1fr)}
@@ -350,18 +339,28 @@
     ]
   }
   </script>
+
+  <!-- ✅ Organization Logo Schema (helps brand trust) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "InstantQR",
+    "url": "https://instantqr.io",
+    "logo": "https://instantqr.io/assets/instantqr-logo.svg"
+  }
+  </script>
 </head>
 
 <body>
   <!-- Top Bar -->
- <a class="brand" href="/" aria-label="InstantQR Home" style="display:flex;align-items:center;gap:10px;">
-  <img 
-    src="/assets/instantqr-logo.svg" 
-    alt="InstantQR Logo"
-    style="height:34px;"
-  />
-  <span style="font-weight:700;">InstantQR</span>
-</a>
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="/" aria-label="InstantQR Home">
+        <!-- ✅ REAL LOGO -->
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+        <span>InstantQR</span>
+      </a>
 
       <nav aria-label="Primary">
         <a href="#tools">Tools</a>
@@ -426,7 +425,7 @@
       <h2>Popular Tools</h2>
       <p>Simple, fast, and designed for real-world use cases. Pick a tool and get results instantly.</p>
 
-      <!-- ✅ UPDATED TOOL GRID WITH ICONS -->
+      <!-- ✅ TOOL GRID WITH ICONS -->
       <div class="grid" id="toolGrid">
 
         <a class="card" href="/wifi-qr-code-generator.html" data-tags="qr wifi qrcode internet router ssid">
@@ -537,27 +536,6 @@
       </div>
     </section>
 
-    <!-- SEO / INTERNAL LINKS -->
-    <section class="section" aria-label="Explore more tools">
-      <h2>Explore More</h2>
-      <p>Popular categories and quick links to help you find the right utility faster.</p>
-
-      <div class="grid">
-        <a class="card" href="/wifi-qr-code-generator.html">
-          <div class="cardTitle"><span>🔳 Free QR Code Generator</span><span class="badge">QR</span></div>
-          <div class="cardDesc">Generate QR codes online instantly for WiFi and URLs.</div>
-        </a>
-        <a class="card" href="/unit-converter.html">
-          <div class="cardTitle"><span>🧮 Conversion Tools</span><span class="badge">Converter</span></div>
-          <div class="cardDesc">Everyday conversions in one clean interface.</div>
-        </a>
-        <a class="card" href="/web3-gas-fee-estimator.html">
-          <div class="cardTitle"><span>🪙 Crypto Utilities</span><span class="badge">Crypto</span></div>
-          <div class="cardDesc">Gas fees, profit calculators, and more for traders.</div>
-        </a>
-      </div>
-    </section>
-
     <!-- FAQ -->
     <section id="faq" class="section" aria-label="FAQ">
       <h2>FAQ</h2>
@@ -592,32 +570,24 @@
       </div>
     </section>
 
-<!-- FOOTER -->
-<footer class="footer" aria-label="Footer">
-  <div class="footRow">
-    <div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-        
-        <img 
-          src="/assets/instantqr-logo.svg" 
-          alt="InstantQR Free Online Tools Logo"
-          style="height:28px;"
-        />
+    <!-- FOOTER -->
+    <footer class="footer" aria-label="Footer">
+      <div class="footRow">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <!-- ✅ REAL LOGO -->
+            <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" style="height:28px;width:auto;display:block;" />
+            <strong style="color:var(--text);font-size:16px;">InstantQR</strong>
+          </div>
 
-        <strong style="color:var(--text);font-size:16px;">
-          InstantQR
-        </strong>
+          <div class="small">
+            InstantQR.io provides free privacy-first web tools for QR codes, crypto, security, and conversions.
+          </div>
 
-      </div>
-
-      <div class="small">
-        InstantQR.io provides free privacy-first web tools for QR codes, crypto, security, and conversions.
-      </div>
-
-      <div class="small" style="margin-top:8px;">
-        © <span id="year"></span> InstantQR.io. All rights reserved.
-      </div>
-    </div>
+          <div class="small" style="margin-top:8px;">
+            © <span id="year"></span> InstantQR.io. All rights reserved.
+          </div>
+        </div>
 
         <div class="footerLinks">
           <div style="margin-bottom:8px;">
@@ -658,16 +628,3 @@
       cards.forEach(c => {
         const text = (c.innerText + ' ' + (c.getAttribute('data-tags') || '')).toLowerCase();
         c.style.display = text.includes(q) ? '' : 'none';
-      });
-      document.getElementById('tools').scrollIntoView({behavior:'smooth', block:'start'});
-    }
-
-    btn.addEventListener('click', doSearch);
-    input.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter') doSearch();
-    });
-  </script>
-</body>
-</html>
-
-
