@@ -12,63 +12,225 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>IP Lookup | InstantQR</title>
-  <meta name="description" content="Find your public IPv4/IPv6 address and basic network details instantly. Simple, fast, and privacy-first." />
+
+  <title>IP Lookup | What Is My IP Address (IPv4/IPv6) | InstantQR.io</title>
+  <meta name="description" content="Find your public IPv4 and IPv6 address instantly, plus basic network details like approximate location, ISP, timezone, and ASN. Privacy-first and fast." />
   <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/ip-lookup.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="IP Lookup | InstantQR.io" />
+  <meta property="og:description" content="Find your public IPv4/IPv6 instantly + basic network details. Privacy-first." />
+  <meta property="og:url" content="https://instantqr.io/ip-lookup.html" />
+
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- ✅ Structured Data: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"IP Lookup",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Web",
+    "url":"https://instantqr.io/ip-lookup.html",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io",
+      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <!-- ✅ FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is a public IP address?",
+        "acceptedAnswer":{"@type":"Answer","text":"A public IP address is your network’s address on the internet. Websites and services use it to send data back to your device or router."}
+      },
+      {
+        "@type":"Question",
+        "name":"Does this IP lookup show my exact address?",
+        "acceptedAnswer":{"@type":"Answer","text":"No. Location is approximate (typically city/region) and does not reveal your exact street address."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why does my IP change when I use a VPN?",
+        "acceptedAnswer":{"@type":"Answer","text":"A VPN routes your traffic through its servers, so websites see the VPN server IP instead of your home or mobile network IP."}
+      },
+      {
+        "@type":"Question",
+        "name":"Do you store my IP address?",
+        "acceptedAnswer":{"@type":"Answer","text":"InstantQR does not intentionally store lookup results on a server. IP lookup requires contacting third-party providers to return IP and approximate network details."}
+      }
+    ]
+  }
+  </script>
 
   <style>
-    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
-    body { margin:0; background:#0b0f19; color:#e7eaf2; }
-    .wrap { max-width: 920px; margin:0 auto; padding: 22px; }
-    .card {
-      background:#121a2a; border:1px solid #22304e; border-radius:18px;
-      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    :root{
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      --bg:#0b0f19;
+      --card:#121a2a;
+      --panel:#0e1525;
+      --border:#22304e;
+      --border2:#2a3a5f;
+      --text:#e7eaf2;
+      --muted:#b8c0d6;
+      --muted2:#8ea0c8;
+      --link:#cfe0ff;
+      --brand:#3b82f6;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:16px;
+      --max: 980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:
+        radial-gradient(900px 540px at 12% 8%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px;}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
     }
 
-    /* Top nav (matches your theme) */
+    /* Topbar (homepage-like) */
     .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; flex-wrap:wrap; margin-bottom:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:2px 2px 10px;
+      border-bottom:1px solid rgba(34,48,78,.55);
+      margin-bottom:12px;
     }
     .brand{
-      display:flex; align-items:baseline; gap:10px;
-      text-decoration:none; color:#e7eaf2;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:900;
+      letter-spacing:-.2px;
     }
-    .brand strong{ font-size:16px; letter-spacing:.2px; }
-    .brand span{ color:#8ea0c8; font-size:12px; }
+    .brand img{ height:30px; width:auto; display:block; }
 
-    .toolnav{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
-    .toolnav a{
-      padding:8px 10px; border-radius:999px;
-      background:#0b1222; border:1px solid #2a3a5f;
-      color:#b8c0d6; font-size:12px; text-decoration:none; font-weight:700;
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
     }
-    .toolnav a:hover{ border-color:#3b82f6; color:#e7eaf2; }
-    .toolnav a.active{ border-color:#3b82f6; color:#e7eaf2; }
+    .nav a{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--link);
+      text-decoration:none;
+      font-weight:800;
+      font-size:12px;
+      user-select:none;
+    }
+    .nav a:hover{ border-color: rgba(59,130,246,.85); }
+    .nav a.active{ border-color: rgba(59,130,246,.95); }
 
-    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    h1{ margin:0; font-size:24px; }
-    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
+    /* Hero */
+    .hero{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .hero h1{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-.3px;
+      max-width: 28ch;
+    }
+    .hero p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+      max-width: 78ch;
+    }
+    .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .badge{
+      padding:7px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--muted);
+      font-size:12px;
+      user-select:none;
+    }
 
-    .grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:14px; margin-top:14px; }
+    .grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:14px; margin-top:14px; align-items:start; }
     @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
 
-    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; }
-    label{ display:block; font-size:12px; color:#b8c0d6; margin-bottom:6px; }
+    .box{ background:var(--panel); border:1px solid var(--border2); border-radius:var(--radius2); padding:14px; }
+    label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
     input{
-      width:100%; padding:12px 10px; border-radius:14px;
-      border:1px solid #2a3a5f; background:#0b1222; color:#e7eaf2; outline:none;
+      width:100%;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid var(--border2);
+      background:#0b1222;
+      color:var(--text);
+      outline:none;
+    }
+    input:focus{
+      border-color: rgba(59,130,246,.85);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
     }
 
     .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
     button{
-      border:0; border-radius:14px; padding:12px 14px;
-      background:#3b82f6; color:white; font-weight:800; cursor:pointer;
+      border:0;
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--brand);
+      color:white;
+      font-weight:900;
+      cursor:pointer;
     }
-    button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
+    button:hover{ filter:brightness(1.05); }
+    button.secondary{
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--text);
+      font-weight:800;
+    }
+    button.secondary:hover{ border-color: rgba(59,130,246,.7); }
 
-    .hint{ color:#b8c0d6; font-size:12px; line-height:1.55; }
-    .tiny{ color:#8ea0c8; font-size:12px; }
+    .hint{ color:var(--muted); font-size:12px; line-height:1.65; }
+    .tiny{ color:var(--muted2); font-size:12px; }
 
     .resultBox{
       margin-top:12px;
@@ -83,25 +245,26 @@
 
     .kv{ display:grid; grid-template-columns: 140px 1fr; gap:8px; }
     @media (max-width: 520px){ .kv{ grid-template-columns: 1fr; } }
-    .k{ color:#8ea0c8; font-size:12px; }
-    .v{ color:#e7eaf2; font-size:12px; word-break: break-word; }
-
-    .footerLinks{
-      margin-top:14px;
-      text-align:center;
-      color:#8ea0c8;
-      font-size:12px;
-    }
-    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
-    .footerLinks a:hover{ text-decoration:underline; }
+    .k{ color:var(--muted2); font-size:12px; }
+    .v{ color:var(--text); font-size:12px; word-break: break-word; }
 
     .warn{
       margin-top:10px;
       padding:10px 12px;
       border-radius:14px;
-      border:1px solid #2a3a5f;
-      background:#0e1525;
+      border:1px solid var(--border2);
+      background: var(--panel);
     }
+
+    .footerLinks{
+      margin-top:14px;
+      text-align:center;
+      color:var(--muted2);
+      font-size:12px;
+    }
+    .footerLinks a{ color:var(--link); text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
+    code{ color:var(--link); }
   </style>
 </head>
 
@@ -109,46 +272,58 @@
   <div class="wrap">
     <div class="card">
 
+      <!-- Topbar -->
       <div class="topbar">
-        <a class="brand" href="/">
-          <strong>InstantQR</strong>
-          <span>privacy-first tools</span>
+        <a class="brand" href="/" aria-label="InstantQR Home">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+          <span>InstantQR</span>
         </a>
-        <nav class="toolnav" aria-label="Tools">
+
+        <nav class="nav" aria-label="Tools">
           <a href="/">QR Generator</a>
-          <a href="/password.html">Password Generator</a>
+          <a href="/password.html">Password</a>
           <a href="/unit-converter.html">Unit Converter</a>
           <a class="active" href="/ip-lookup.html">IP Lookup</a>
-          <a href="/json-formatter.html">JSON Formatter</a>
-          <a href="/time-zone-converter.html">Time Zone Converter</a>
-          <a href="/base64-encoder.html">Base64 Encoder</a>
-          <a href="/countdown-timer.html">Countdown Timer</a>
-          <a href="world-clock.html">World Clock</a>
+          <a href="/json-formatter.html">JSON</a>
+          <a href="/time-zone-converter.html">Time Zone</a>
+          <a href="/base64-encoder.html">Base64</a>
+          <a href="/countdown-timer.html">Countdown</a>
+          <a href="/world-clock.html">World Clock</a>
         </nav>
       </div>
 
-      <header>
+      <!-- Hero -->
+      <section class="hero">
         <div>
           <h1>IP Lookup</h1>
-          <div class="sub">Shows your public IPv4/IPv6 separately + basic network details.</div>
+          <p>
+            Find your public IPv4 and IPv6 address instantly, plus basic network details like approximate location,
+            ISP/org, timezone, and ASN.
+          </p>
+          <div class="badges" aria-label="Highlights">
+            <span class="badge">⚡ Fast</span>
+            <span class="badge">🧭 Approx location</span>
+            <span class="badge">🔒 Privacy-first</span>
+            <span class="badge">✅ Free</span>
+          </div>
         </div>
-      </header>
+      </section>
 
       <div class="grid">
         <!-- Main -->
         <div class="box">
           <label for="ipInput">Lookup an IP (optional)</label>
-          <input id="ipInput" placeholder="Leave blank to detect your IP automatically (IPv4/IPv6)" />
+          <input id="ipInput" inputmode="text" placeholder="Leave blank to detect your IP automatically (IPv4/IPv6)" />
 
           <div class="actions">
             <button id="lookupBtn" type="button">Lookup</button>
-            <button class="secondary" id="copyIpBtn" type="button">Copy IP</button>
+            <button class="secondary" id="copyIpBtn" type="button">Copy IPv4</button>
             <button class="secondary" id="copyDetailsBtn" type="button">Copy Details</button>
             <button class="secondary" id="refreshBtn" type="button">Refresh</button>
           </div>
 
           <div class="resultBox" aria-live="polite">
-            <div class="hint">Your Public IP</div>
+            <div class="hint">Results</div>
 
             <div class="kv">
               <div class="k">IPv4</div>
@@ -175,26 +350,30 @@
 
           <div class="warn">
             <div class="tiny">
-              <strong>Privacy note:</strong> IP lookup requires calling third-party IP providers to return your IP and approximate location.
-              InstantQR does not store results on any server.
-              If you see “Failed to fetch”, it’s usually an adblocker/privacy extension or a network/VPN block.
+              <strong>Privacy note:</strong> IP lookup requires calling third-party IP providers to return your IP and approximate
+              network details. InstantQR does not intentionally store results on a server.
+              If you see <em>“Failed to fetch”</em>, it’s usually an adblocker/privacy extension, VPN, or network policy blocking requests.
             </div>
           </div>
         </div>
 
-        <!-- Info -->
+        <!-- Info / SEO -->
         <div class="box">
           <div class="hint"><strong>What is a public IP?</strong><br>Your public IP is your network’s address on the internet.</div>
           <div class="hint" style="margin-top:10px;"><strong>Accuracy:</strong><br>Location is approximate (city/region), not exact.</div>
-          <div class="hint" style="margin-top:10px;"><strong>VPN:</strong><br>If you use a VPN, you’ll see the VPN IP.</div>
+          <div class="hint" style="margin-top:10px;"><strong>VPN:</strong><br>If you use a VPN, you’ll see the VPN’s IP.</div>
 
           <div style="margin-top:14px;">
-            <h2 style="margin:0 0 6px; font-size:16px;">FAQ</h2>
-            <p class="hint" style="line-height:1.6; margin:0;">
+            <div style="font-weight:900;">FAQ</div>
+            <div class="hint" style="margin-top:8px;">
               <strong>Does this reveal my address?</strong> No.<br>
               <strong>Can I lookup any IP?</strong> Yes (if supported by providers).<br>
               <strong>Is it free?</strong> Yes.
-            </p>
+            </div>
+          </div>
+
+          <div class="tiny" style="margin-top:12px;">
+            Related: <a href="/json-formatter.html">JSON Formatter</a> · <a href="/base64-encoder.html">Base64 Encoder</a>
           </div>
         </div>
       </div>
@@ -203,13 +382,16 @@
         <div style="margin-bottom:8px;">
           <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
           <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
-          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a>
+          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
+          <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
+          <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
         </div>
         <div>
           <a href="/about.html">About</a> ·
           <a href="/privacy.html">Privacy</a> ·
           <a href="/terms.html">Terms</a> ·
-          <a href="/contact.html">Contact</a>
+          <a href="/contact.html">Contact</a> ·
+          <a href="/sitemap.xml">Sitemap</a>
         </div>
       </div>
 
@@ -232,7 +414,7 @@
     const copyDetailsBtn = document.getElementById("copyDetailsBtn");
     const refreshBtn = document.getElementById("refreshBtn");
 
-    let lastResult = null; // for "Copy Details"
+    let lastResult = null;
 
     function setLoading(msg) {
       ip4Text.textContent = msg || "Loading…";
@@ -268,7 +450,7 @@
       return (await res.text()).trim();
     }
 
-    // --- Public IP detection (multiple fallbacks) ---
+    // --- Public IP detection (fallbacks) ---
     async function getIPv4() {
       const providers = [
         async () => (await fetchJson("https://api.ipify.org?format=json")).ip,
@@ -297,14 +479,12 @@
           if (ip && ip.includes(":")) return ip;
         } catch (e) { lastErr = e; }
       }
-      // Not all networks support IPv6, so don't throw
-      return null;
+      return null; // IPv6 may not exist on some networks
     }
 
     // --- Geo lookup with multiple provider fallbacks ---
     async function geoLookup(ip) {
       const providers = [
-        // Provider 1: ipwho.is
         async () => {
           const d = await fetchJson(`https://ipwho.is/${encodeURIComponent(ip)}`);
           if (d && d.success === false) throw new Error(d.message || "ipwho.is blocked");
@@ -319,7 +499,6 @@
             timezone: d.timezone?.id,
           };
         },
-        // Provider 2: ipapi.co
         async () => {
           const d = await fetchJson(`https://ipapi.co/${encodeURIComponent(ip)}/json/`);
           if (d && d.error) throw new Error(d.reason || "ipapi blocked");
@@ -334,7 +513,6 @@
             timezone: d.timezone,
           };
         },
-        // Provider 3: ipinfo.io (no key; may rate-limit)
         async () => {
           const d = await fetchJson(`https://ipinfo.io/${encodeURIComponent(ip)}/json`);
           return {
@@ -344,7 +522,7 @@
             country: d.country,
             isp: d.org,
             org: d.org,
-            asn: (d.org && d.org.match(/AS\\d+/)) ? d.org.match(/AS\\d+/)[0] : null,
+            asn: (d.org && d.org.match(/AS\d+/)) ? d.org.match(/AS\d+/)[0] : null,
             timezone: d.timezone,
           };
         },
@@ -381,8 +559,7 @@
     function isLikelyIp(str) {
       const s = (str || "").trim();
       if (!s) return false;
-      // loose validation for v4/v6
-      const v4 = /^\\d{1,3}(\\.\\d{1,3}){3}$/;
+      const v4 = /^\d{1,3}(\.\d{1,3}){3}$/;
       const v6 = /^[0-9a-fA-F:]+$/;
       return v4.test(s) || (s.includes(":") && v6.test(s));
     }
@@ -447,14 +624,14 @@
       lines.push(`ISP/Org: ${ispText.textContent}`);
       lines.push(`Timezone: ${tzText.textContent}`);
       lines.push(`ASN: ${asnText.textContent}`);
-      lines.push(noteText.textContent || "");
-      return lines.join("\\n");
+      if (noteText.textContent) lines.push(noteText.textContent);
+      return lines.join("\n");
     }
 
     copyIpBtn.addEventListener("click", () => {
       const ip = (ip4Text.textContent || "").trim();
       if (!ip || ip === "—" || ip.toLowerCase().includes("loading")) return;
-      copyText(ip, copyIpBtn, "Copied!", "Copy IP");
+      copyText(ip, copyIpBtn, "Copied!", "Copy IPv4");
     });
 
     copyDetailsBtn.addEventListener("click", () => {
