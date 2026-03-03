@@ -11,536 +11,656 @@
   </script>
 
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>InstantQR | Free QR Code Generator Online | WiFi & URL QR | InstantQR.io</title>
-  <meta name="description" content="Generate free QR codes instantly. Create WiFi, URL, and text QR codes online. Download as PNG. No signup required." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>InstantQR | Free Online Tools (QR, Converters, Crypto & Security) | InstantQR.io</title>
+  <meta name="description" content="InstantQR.io provides free, privacy-first online tools: QR code generators (WiFi & URL), unit converter, password generator, IP lookup, world clock, Web3 gas estimator, and more. No signup required." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="InstantQR | Free Online Tools (QR, Converters, Crypto & Security)" />
+  <meta property="og:description" content="Free, privacy-first online tools. No signup required." />
+  <meta property="og:url" content="https://instantqr.io/" />
+
+  <!-- Favicons (update if you have them) -->
+  <link rel="icon" href="/favicon.ico" />
 
   <style>
-    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
-    body { margin:0; background:#0b0f19; color:#e7eaf2; }
-    .wrap { max-width: 920px; margin:0 auto; padding: 22px; }
-    .card {
-      background:#121a2a; border:1px solid #22304e; border-radius:18px;
-      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a2e;
+      --panel2:#0d172a;
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --brand:#3b82f6;
+      --brand2:#22c55e;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 22px;
+      --max: 1100px;
     }
-
-    /* Top nav */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(59,130,246,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(34,197,94,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+    }
+    a{color:inherit; text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:20px}
     .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:14px;
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 11, 20, .55);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
     }
     .brand{
-      display:flex;
-      align-items:baseline;
-      gap:10px;
-      text-decoration:none;
-      color:#e7eaf2;
+      display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px;
     }
-    .brand strong{
-      font-size:16px;
-      letter-spacing:.2px;
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(59,130,246,1), rgba(34,197,94,1));
+      box-shadow: 0 8px 18px rgba(59,130,246,.25);
+      flex:0 0 auto;
     }
-    .brand span{
-      color:#8ea0c8;
-      font-size:12px;
-    }
-    .toolnav{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .toolnav a{
+    nav{display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    nav a{
+      color:var(--muted);
+      font-size:14px;
       padding:8px 10px;
-      border-radius:999px;
-      background:#0b1222;
-      border:1px solid #2a3a5f;
-      color:#b8c0d6;
-      font-size:12px;
+      border-radius:12px;
+    }
+    nav a:hover{
+      color:var(--text);
+      background: rgba(255,255,255,.06);
       text-decoration:none;
-      font-weight:700;
     }
-    .toolnav a:hover{
-      border-color:#3b82f6;
-      color:#e7eaf2;
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius: 999px;
+      font-weight:600;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      gap:8px;
+      white-space:nowrap;
     }
-    .toolnav a.active{
-      border-color:#3b82f6;
-      color:#e7eaf2;
+    .cta.primary{
+      border: 0;
+      background: linear-gradient(135deg, rgba(59,130,246,1), rgba(59,130,246,.78));
+      box-shadow: 0 14px 28px rgba(59,130,246,.22);
     }
-
-    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    h1{ margin:0; font-size:24px; }
-    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
-
-    .grid{ display:grid; grid-template-columns: 1.2fr .8fr; gap:14px; margin-top:14px; }
-    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
-
-    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; }
-    label{ display:block; font-size:12px; color:#b8c0d6; margin-bottom:6px; }
-    input, select, textarea{
-      width:100%; padding:12px 10px; border-radius:14px;
-      border:1px solid #2a3a5f; background:#0b1222; color:#e7eaf2; outline:none;
+    .cta.primary:hover{filter:brightness(1.05); text-decoration:none}
+    .cta.ghost:hover{background: rgba(255,255,255,.10); text-decoration:none}
+    .hero{
+      padding:44px 0 22px;
     }
-    textarea{ min-height:110px; resize:vertical; }
-    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-    @media (max-width: 520px){ .row{ grid-template-columns: 1fr; } }
-
-    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
-    button{
-      border:0; border-radius:14px; padding:12px 14px;
-      background:#3b82f6; color:white; font-weight:800; cursor:pointer;
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
     }
-    button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
-
-    .qrWrap{
-      width:320px; max-width:100%;
-      aspect-ratio:1/1;
-      border-radius:16px;
-      background:#0b1222;
-      border:1px dashed rgba(184,192,214,.35);
-      display:flex; align-items:center; justify-content:center;
+    .heroCard{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding:26px;
+      position:relative;
       overflow:hidden;
-      padding:10px;
     }
-    .preview{ display:flex; flex-direction:column; align-items:center; gap:10px; }
-    .hint{ color:#b8c0d6; font-size:12px; text-align:center; }
-    .tiny{ color:#8ea0c8; font-size:12px; }
-    .error{ color:#ff9fb3; font-size:12px; margin-top:8px; display:none; }
-
-    .pillbar{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .heroCard:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(700px 280px at 20% 20%, rgba(59,130,246,.20), transparent 60%),
+                  radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.16), transparent 55%);
+      pointer-events:none;
+    }
+    .heroCard > *{position:relative}
     .pill{
-      padding:7px 10px; border-radius:999px;
-      background:#0b1222; border:1px solid #2a3a5f;
-      color:#b8c0d6; font-size:12px; cursor:pointer; user-select:none;
-    }
-    .pill.active{ border-color:#3b82f6; color:#e7eaf2; }
-    code{ color:#cfe0ff; }
-
-    /* Mid-page content block (AdSense/SEO-friendly) */
-    .infoMid{
-      margin-top:14px;
-      background:#0e1525;
-      border:1px solid #2a3a5f;
-      border-radius:16px;
-      padding:14px;
-    }
-    .infoMid h2{
-      margin:12px 0 6px;
-      font-size:16px;
-    }
-    .infoMid p, .infoMid li{
-      color:#b8c0d6;
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
       font-size:13px;
-      line-height:1.6;
+      width: fit-content;
     }
-    .infoMid ol{ padding-left:18px; margin:8px 0 0; }
-    .infoMid strong{ color:#e7eaf2; }
-
-    /* Tools hub (auto-rendered) */
-    .toolsHub{
-      margin-top:14px;
-      background:#0e1525;
-      border:1px solid #2a3a5f;
-      border-radius:16px;
-      padding:14px;
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height:1.05;
+      letter-spacing:-.6px;
     }
-    .toolsHubHeader{
+    .sub{
+      margin:0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height:1.45;
+      max-width: 60ch;
+    }
+    .bullets{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin: 14px 0 18px;
+      padding:0;
+      list-style:none;
+    }
+    .bullets li{
+      display:flex; align-items:center; gap:8px;
+      font-size:14px;
+      color: var(--text);
+      padding:9px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.10);
+    }
+    .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px}
+    .miniNote{margin-top:12px; font-size:13px; color: var(--muted)}
+    .searchBox{
+      background: linear-gradient(180deg, rgba(15,26,46,.75), rgba(15,26,46,.45));
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      padding:20px;
+      box-shadow: var(--shadow);
       display:flex;
-      align-items:flex-end;
+      flex-direction:column;
       justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:10px;
+      gap:14px;
     }
-    .toolsHubHeader h2{
-      margin:0;
-      font-size:16px;
+    .searchTitle{font-weight:700; font-size:15px}
+    .searchDesc{color:var(--muted); font-size:13px; line-height:1.4}
+    .searchRow{display:flex; gap:10px}
+    .input{
+      flex:1;
+      padding:12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      color: var(--text);
+      outline:none;
+      font-size:14px;
     }
-    .toolsGrid{
+    .input::placeholder{color: rgba(233,238,252,.55)}
+    .section{padding: 18px 0}
+    .section h2{
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing:-.2px;
+    }
+    .section p{margin: 0 0 12px; color:var(--muted); line-height:1.55}
+    .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap:10px;
-      margin-top:10px;
+      gap:12px;
     }
-    @media (max-width: 860px){ .toolsGrid{ grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 520px){ .toolsGrid{ grid-template-columns: 1fr; } }
-
-    .toolCard{
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:16px;
+      min-height: 120px;
       display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding:12px;
-      border-radius:14px;
-      background:#0b1222;
-      border:1px solid #2a3a5f;
+      flex-direction:column;
+      gap:8px;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.06);
       text-decoration:none;
-      color:#e7eaf2;
     }
-    .toolCard:hover{
-      border-color:#3b82f6;
+    .cardTitle{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      font-weight:700;
     }
-    .toolIcon{
-      width:38px;height:38px;
-      border-radius:12px;
-      display:grid;place-items:center;
-      background:rgba(59,130,246,.12);
-      border:1px solid rgba(59,130,246,.25);
-      flex:0 0 auto;
-      font-size:18px;
-    }
-    .toolMeta{min-width:0}
-    .toolTitle{
-      font-weight:900;
-      font-size:13px;
-      margin:0;
-      line-height:1.2;
-    }
-    .toolDesc{
-      margin:6px 0 0;
-      color:#b8c0d6;
+    .badge{
       font-size:12px;
-      line-height:1.45;
-    }
-    .toolTags{
-      display:flex;
-      gap:6px;
-      flex-wrap:wrap;
-      margin-top:8px;
-    }
-    .toolTag{
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.10);
       padding:4px 8px;
-      border-radius:999px;
-      background:#0e1525;
-      border:1px solid #2a3a5f;
-      color:#8ea0c8;
-      font-size:11px;
-      font-weight:800;
+      border-radius: 999px;
+      white-space:nowrap;
     }
-
-    /* Footer links */
+    .cardDesc{color:var(--muted); font-size:13px; line-height:1.45}
+    .why{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top: 12px;
+    }
+    .whyBox{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:16px;
+    }
+    .whyBox h3{margin:0 0 6px; font-size:16px}
+    .whyBox ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.6}
+    .faq{
+      border-radius: var(--radius2);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:18px;
+    }
+    details{
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding: 12px 0;
+    }
+    details:first-child{border-top:0; padding-top:0}
+    summary{
+      cursor:pointer;
+      font-weight:700;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    .faq p{margin:8px 0 0; color:var(--muted); line-height:1.55}
+    .footer{
+      margin-top: 22px;
+      padding: 18px 0 36px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 13px;
+    }
     .footerLinks{
-      margin-top:14px;
-      text-align:center;
-      color:#8ea0c8;
-      font-size:12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
-    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
-    .footerLinks a:hover{ text-decoration:underline; }
+    .footerLinks a{color: var(--muted)}
+    .footerLinks a:hover{color: var(--text); text-decoration:none}
+    .footRow{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    }
+    .small{font-size:12px; color:rgba(233,238,252,.55)}
+    @media (max-width: 920px){
+      .heroGrid{grid-template-columns: 1fr}
+      .grid{grid-template-columns: repeat(2, 1fr)}
+      nav{display:none}
+    }
+    @media (max-width: 560px){
+      .grid{grid-template-columns: 1fr}
+      .searchRow{flex-direction:column}
+      .cta{width:100%}
+      .actions .cta{flex:1}
+    }
   </style>
+
+  <!-- ✅ FAQ Schema (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is InstantQR.io free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. InstantQR.io provides free online tools including QR generators, converters, and utility tools with no signup required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you store my QR codes, passwords, or input data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "InstantQR is privacy-first. Our tools are designed to run locally in your browser where possible, and we do not intentionally store your generated QR codes or sensitive inputs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which QR codes can I generate on InstantQR?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can generate WiFi QR codes and URL QR codes, and download them as images for printing, sharing, or signage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use InstantQR tools on mobile?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. InstantQR is mobile-friendly and works on iOS, Android, tablets, and desktops."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What other tools are available besides QR generators?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "InstantQR includes tools like a unit converter, password generator, IP lookup, Web3 gas fee estimator, crypto profit calculator, world clock, and more."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="card">
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="/" aria-label="InstantQR Home">
+        <span class="logo" aria-hidden="true"></span>
+        <span>InstantQR</span>
+      </a>
 
-      <!-- Top navigation -->
-      <div class="topbar">
-        <a class="brand" href="/">
-          <strong>InstantQR</strong>
-          <span>privacy-first tools</span>
+      <nav aria-label="Primary">
+        <a href="#tools">Tools</a>
+        <a href="#why">Why InstantQR</a>
+        <a href="#faq">FAQ</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+
+      <a class="cta primary" href="#tools">Explore Tools →</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero">
+      <div class="heroGrid">
+        <div class="heroCard">
+          <div class="pill">⚡ Fast • 🔒 Privacy-First • ✅ No Signup</div>
+
+          <h1>Free Online Tools for QR Codes, Conversions, Crypto & Security</h1>
+          <p class="sub">
+            Generate <strong>WiFi</strong> and <strong>URL QR codes</strong>, convert units, estimate Web3 gas fees,
+            check IP details, and more — built for speed, simplicity, and trust.
+          </p>
+
+          <ul class="bullets">
+            <li>✅ 14+ free tools</li>
+            <li>🔒 Privacy-first design</li>
+            <li>📱 Mobile-friendly</li>
+            <li>🚀 Instant results</li>
+          </ul>
+
+          <div class="actions">
+            <a class="cta primary" href="/wifi-qr-code-generator.html">Generate WiFi QR</a>
+            <a class="cta ghost" href="/url-qr-code-generator.html">Generate URL QR</a>
+            <a class="cta ghost" href="/unit-converter.html">Unit Converter</a>
+          </div>
+
+          <div class="miniNote">Tip: Bookmark InstantQR for quick daily utilities.</div>
+        </div>
+
+        <!-- Quick Finder -->
+        <aside class="searchBox" aria-label="Tool Finder">
+          <div>
+            <div class="searchTitle">Find a tool in 2 seconds</div>
+            <p class="searchDesc">Type “qr”, “password”, “ip”, “gas”, “convert”, “clock” and jump straight to it.</p>
+          </div>
+
+          <div class="searchRow">
+            <input id="toolSearch" class="input" placeholder="Search tools… (e.g., QR, gas, password)" autocomplete="off" />
+            <button class="cta primary" id="searchBtn" type="button">Search</button>
+          </div>
+
+          <div class="small" id="searchHint">Popular: QR • Password • Unit Converter • IP Lookup • Gas Estimator</div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- TOOLS -->
+    <section id="tools" class="section" aria-label="Tools">
+      <h2>Popular Tools</h2>
+      <p>Simple, fast, and designed for real-world use cases. Pick a tool and get results instantly.</p>
+
+      <div class="grid" id="toolGrid">
+        <!-- QR -->
+        <a class="card" href="/wifi-qr-code-generator.html" data-tags="qr wifi qrcode internet router ssid">
+          <div class="cardTitle">
+            <span>WiFi QR Generator</span>
+            <span class="badge">QR</span>
+          </div>
+          <div class="cardDesc">Create a scannable WiFi QR code so guests can connect instantly — no typing.</div>
         </a>
 
-        <nav class="toolnav" aria-label="Tools">
-          <a class="active" href="/">QR Generator</a>
-          <a href="/password.html">Password Generator</a>
-          <a href="/unit-converter.html">Unit Converter</a>
-          <a href="/ip-lookup.html">IP Lookup</a>
-          <a href="/json-formatter.html">JSON Formatter</a>
-          <a href="/time-zone-converter.html">Time Zone Converter</a>
-          <a href="/base64-encoder.html">Base64 Encoder</a>
-          <a href="/countdown-timer.html">Countdown Timer</a>
-          <a href="/world-clock.html">World Clock</a>
-          <!-- ✅ Web3 -->
-          <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a>
-          <!-- ✅ NEW -->
-          <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
-        </nav>
-      </div>
-
-      <header>
-        <div>
-          <h1>InstantQR.io</h1>
-          <div class="sub">Text/URL + Wi-Fi QR codes and other tools</div>
-        </div>
-      </header>
-
-      <!-- UPDATED: Platform overview (InstantQR Tools) -->
-      <div class="infoMid">
-        <h2>InstantQR Tools</h2>
-        <p><strong>Privacy-first online utilities that run entirely in your browser.</strong></p>
-        <p>
-          InstantQR is a collection of fast, lightweight web tools designed to work locally —
-          no accounts, no uploads, and no unnecessary tracking.
-        </p>
-
-        <h2>What is InstantQR?</h2>
-        <p>InstantQR provides everyday utility tools including:</p>
-        <ul>
-          <li>🔳 <strong>QR Code Generators</strong> (URL, Text, Wi-Fi)</li>
-          <li>🔐 <strong>Secure Password Generator</strong></li>
-          <li>📏 <strong>Unit Converter</strong></li>
-          <li>🌍 <strong>World Clock</strong> &amp; <strong>Time Zone Converter</strong></li>
-          <li>🧩 <strong>JSON Formatter</strong></li>
-          <li>🌐 <strong>IP Lookup</strong></li>
-          <li>🧱 <strong>Base64 Encoder / Decoder</strong></li>
-          <li>⏳ <strong>Countdown Timer</strong></li>
-          <!-- ✅ Web3 -->
-          <li>⛽ <strong>Web3 Gas Fee Estimator</strong></li>
-          <!-- ✅ NEW -->
-          <li>📈 <strong>Crypto Profit / ROI Calculator</strong></li>
-        </ul>
-
-        <h2>How to Use InstantQR Tools</h2>
-        <ol>
-          <li>Choose the tool you need.</li>
-          <li>Enter your input or settings.</li>
-          <li>Generate or calculate instantly.</li>
-          <li>Copy or download your result.</li>
-        </ol>
-        <p class="tiny">Most tools run entirely in your browser using client-side JavaScript.</p>
-
-        <h2>FAQ</h2>
-        <p><strong>Is InstantQR free?</strong><br>Yes — all tools are completely free to use.</p>
-        <p><strong>Do you store my data?</strong><br>No. InstantQR tools run locally in your browser. We do not store passwords, QR content, or user input.</p>
-        <p><strong>Do I need to create an account?</strong><br>No signup or login is required.</p>
-        <p><strong>Does this work on mobile?</strong><br>Yes. InstantQR is mobile-friendly and works on modern browsers.</p>
-      </div>
-
-      <!-- Tools Hub (auto-rendered from TOOLS list) -->
-      <div class="toolsHub" id="toolsHub">
-        <div class="toolsHubHeader">
-          <div>
-            <h2>All InstantQR Tools</h2>
-            <p class="tiny" style="margin:6px 0 0;">Fast, privacy-first tools — runs locally in your browser.</p>
+        <a class="card" href="/url-qr-code-generator.html" data-tags="qr url link qrcode website">
+          <div class="cardTitle">
+            <span>URL QR Generator</span>
+            <span class="badge">QR</span>
           </div>
-          <div class="tiny" id="toolsCount"></div>
-        </div>
-        <div class="toolsGrid" id="toolsGrid"></div>
+          <div class="cardDesc">Turn any link into a QR code for menus, flyers, business cards, and signage.</div>
+        </a>
+
+        <a class="card" href="/create-qr-code-for-wifi.html" data-tags="qr wifi create how to">
+          <div class="cardTitle">
+            <span>Create WiFi QR Code</span>
+            <span class="badge">Guide</span>
+          </div>
+          <div class="cardDesc">A simple page focused on generating WiFi QR codes with clear steps and tips.</div>
+        </a>
+
+        <!-- Utilities -->
+        <a class="card" href="/password.html" data-tags="password generator secure random">
+          <div class="cardTitle">
+            <span>Password Generator</span>
+            <span class="badge">Security</span>
+          </div>
+          <div class="cardDesc">Generate strong, random passwords for accounts, apps, and security best practices.</div>
+        </a>
+
+        <a class="card" href="/unit-converter.html" data-tags="convert converter unit kg lbs mph kmh inches cm">
+          <div class="cardTitle">
+            <span>Unit Converter</span>
+            <span class="badge">Converter</span>
+          </div>
+          <div class="cardDesc">Quick conversions for everyday use: lbs↔kg, mph↔km/h, inches↔cm, °F↔°C, and more.</div>
+        </a>
+
+        <a class="card" href="/ip-lookup.html" data-tags="ip lookup address geolocation asn isp">
+          <div class="cardTitle">
+            <span>IP Lookup</span>
+            <span class="badge">Network</span>
+          </div>
+          <div class="cardDesc">Check public IP details fast for troubleshooting, security checks, and diagnostics.</div>
+        </a>
+
+        <!-- Crypto -->
+        <a class="card" href="/web3-gas-fee-estimator.html" data-tags="web3 gas fee estimator ethereum polygon base">
+          <div class="cardTitle">
+            <span>Web3 Gas Fee Estimator</span>
+            <span class="badge">Crypto</span>
+          </div>
+          <div class="cardDesc">Estimate transaction fees and understand gas costs across popular networks.</div>
+        </a>
+
+        <a class="card" href="/crypto-profit-calculator.html" data-tags="crypto profit calculator roi pnl">
+          <div class="cardTitle">
+            <span>Crypto Profit Calculator</span>
+            <span class="badge">Crypto</span>
+          </div>
+          <div class="cardDesc">Calculate profit/loss, ROI, and break-even prices to plan smarter trades.</div>
+        </a>
+
+        <!-- Time -->
+        <a class="card" href="/world-clock.html" data-tags="world clock time zones converter timezone">
+          <div class="cardTitle">
+            <span>World Clock</span>
+            <span class="badge">Time</span>
+          </div>
+          <div class="cardDesc">Compare times across major cities and time zones — perfect for scheduling.</div>
+        </a>
       </div>
+
+      <div class="actions" style="margin-top:14px;">
+        <a class="cta ghost" href="/about.html">Learn about InstantQR</a>
+        <a class="cta ghost" href="/contact.html">Contact</a>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section id="why" class="section" aria-label="Why InstantQR">
+      <h2>Why InstantQR?</h2>
+      <p>
+        InstantQR is built for people who want quick results without clutter.
+        Our focus is simple: fast tools, clean UX, and a privacy-first approach.
+      </p>
+
+      <div class="why">
+        <div class="whyBox">
+          <h3>Built for speed</h3>
+          <ul>
+            <li>Lightweight pages that load quickly</li>
+            <li>Simple UI that gets you to the result</li>
+            <li>Works smoothly on mobile</li>
+          </ul>
+        </div>
+        <div class="whyBox">
+          <h3>Privacy-first</h3>
+          <ul>
+            <li>Designed to run locally in your browser where possible</li>
+            <li>No account needed</li>
+            <li>Clear policy pages for transparency</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO / INTERNAL LINKS -->
+    <section class="section" aria-label="Explore more tools">
+      <h2>Explore More</h2>
+      <p>Popular categories and quick links to help you find the right utility faster.</p>
 
       <div class="grid">
-
-      <!-- Footer navigation (required pages for AdSense readiness) -->
-      <div class="infoMid">
-        <h2>QR Code Tools</h2>
-        <ul>
-          <li><a href="/wifi-qr-code-generator.html">Generate a WiFi QR Code</a></li>
-          <li><a href="/url-qr-code-generator.html">Create a QR Code for a Website</a></li>
-          <li><a href="/create-qr-code-for-wifi.html">Step-by-Step WiFi QR Guide</a></li>
-        </ul>
-      </div>
-
-      <div class="footerLinks">
-        <!-- SEO Tool Links -->
-        <div style="margin-bottom:8px;">
-          <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
-          <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
-          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
-          <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
-          <!-- ✅ NEW -->
-          <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
-        </div>
-
-        <!-- Policy Links -->
-        <div>
-          <a href="/about.html">About</a> ·
-          <a href="/privacy.html">Privacy</a> ·
-          <a href="/terms.html">Terms</a> ·
-          <a href="/contact.html">Contact</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- QR library -->
-  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
-
-  <!-- Existing QR Generator Logic (unchanged) -->
-  <script>
-    const pills = Array.from(document.querySelectorAll(".pill"));
-    const textForm = document.getElementById("textForm");
-    const wifiForm = document.getElementById("wifiForm");
-
-    const textEl = document.getElementById("text");
-    const ssidEl = document.getElementById("ssid");
-    const secEl = document.getElementById("security");
-    const passEl = document.getElementById("password");
-    const hiddenEl = document.getElementById("hidden");
-
-    const sizeEl = document.getElementById("size");
-    const levelEl = document.getElementById("level");
-
-    const generateBtn = document.getElementById("generateBtn");
-    const downloadBtn = document.getElementById("downloadBtn");
-    const clearBtn = document.getElementById("clearBtn");
-
-    const qrWrap = document.getElementById("qrWrap");
-    const errorEl = document.getElementById("error");
-
-    let currentType = "text";
-    let lastCanvas = null;
-
-    function setType(t){
-      currentType = t;
-      pills.forEach(p => p.classList.toggle("active", p.dataset.type === t));
-      textForm.style.display = t === "text" ? "block" : "none";
-      wifiForm.style.display = t === "wifi" ? "block" : "none";
-      hideError();
-    }
-
-    function hideError(){ errorEl.style.display = "none"; errorEl.textContent = ""; }
-    function showError(msg){ errorEl.textContent = msg; errorEl.style.display = "block"; }
-
-    function escWifi(s){
-      return (s || "").replace(/([\\;,:"])/g, "\\$1");
-    }
-
-    function buildPayload(){
-      if(currentType === "text"){
-        const v = (textEl.value || "").trim();
-        if(!v) throw new Error("Enter text or a URL.");
-        return v;
-      }
-
-      const ssid = (ssidEl.value || "").trim();
-      if(!ssid) throw new Error("Enter Wi-Fi name (SSID).");
-
-      const sec = secEl.value; // WPA | WEP | nopass
-      const hidden = hiddenEl.value; // true | false
-      const pass = (passEl.value || "").trim();
-
-      if(sec !== "nopass" && !pass) throw new Error("Enter Wi-Fi password (or choose No password).");
-
-      return `WIFI:T:${sec};S:${escWifi(ssid)};P:${escWifi(pass)};H:${hidden};;`;
-    }
-
-    function clearQR(){
-      qrWrap.innerHTML = `<div class="hint">Your QR code will appear here.</div>`;
-      lastCanvas = null;
-    }
-
-    function generate(){
-      hideError();
-      try{
-        if(typeof QRious === "undefined"){
-          throw new Error("QR library failed to load. If you’re offline or blocked, download qrious.min.js and host it locally.");
-        }
-
-        const payload = buildPayload();
-        const size = Math.max(128, Math.min(1024, parseInt(sizeEl.value || "320", 10)));
-        const level = levelEl.value;
-
-        clearQR();
-
-        const qr = new QRious({ value: payload, size, level });
-
-        const canvas = qr.canvas;
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.style.borderRadius = "12px";
-        canvas.style.background = "#ffffff";
-
-        qrWrap.innerHTML = "";
-        qrWrap.appendChild(canvas);
-
-        lastCanvas = canvas;
-      }catch(err){
-        showError(err.message || "Could not generate QR code.");
-      }
-    }
-
-    function downloadPNG(){
-      hideError();
-      if(!lastCanvas){
-        showError("Generate a QR code first.");
-        return;
-      }
-      const a = document.createElement("a");
-      a.download = "qr-code.png";
-      a.href = lastCanvas.toDataURL("image/png");
-      a.click();
-    }
-
-    function clearAll(){
-      hideError();
-      textEl.value = "";
-      ssidEl.value = "";
-      passEl.value = "";
-      secEl.value = "WPA";
-      hiddenEl.value = "false";
-      sizeEl.value = "320";
-      levelEl.value = "M";
-      clearQR();
-    }
-
-    // Events
-    document.getElementById("typeBar")?.addEventListener("click", (e) => {
-      const pill = e.target.closest(".pill");
-      if(!pill) return;
-      setType(pill.dataset.type);
-    });
-
-    generateBtn?.addEventListener("click", generate);
-    downloadBtn?.addEventListener("click", downloadPNG);
-    clearBtn?.addEventListener("click", clearAll);
-
-    // Enter generates (Ctrl+Enter in textarea); otherwise Enter generates
-    document.addEventListener("keydown", (e) => {
-      if(e.target && e.target.tagName === "TEXTAREA"){
-        if(e.key === "Enter" && (e.ctrlKey || e.metaKey)) generate();
-        return;
-      }
-      if(e.key === "Enter") generate();
-    });
-
-    // Init
-    setType("text");
-  </script>
-
-  <!-- Tools Hub Renderer (updated: adds Gas Fee Estimator + Crypto Profit Calculator) -->
-  <script>
-  (() => {
-    const TOOLS = [
-      { title:"URL QR Code Generator", href:"/url-qr-code-generator.html", icon:"🔗", tags:["QR","URL"], desc:"Create a QR code for any website link and download as PNG." },
-      { title:"Wi-Fi QR Code Generator", href:"/wifi-qr-code-generator.html", icon:"📶", tags:["QR","Wi-Fi"], desc:"Generate a Wi-Fi QR code so others can connect instantly." },
-      { title:"Password Generator", href:"/password.html", icon:"🔐", tags:["Security","Local"], desc:"Generate strong passwords locally using secure randomness." },
-      { title:"Unit Converter", href:"/unit-converter.html", icon:"📏", tags:["Convert","Units"], desc:"Quick conversions for common units and measurements." },
-      { title:"IP Lookup", href:"/ip-lookup.html", icon:"🌐", tags:["Network","IP"], desc:"Look up IP address details for troubleshooting and awareness." },
-      { title:"JSON Formatter", href:"/json-formatter.html", icon:"🧩", tags:["Dev","JSON"], desc:"Format and validate JSON with instant structured output." },
-      { title:"Time Zone Converter", href:"/time-zone-converter.html", icon:"🕒", tags:["Time","IANA"], desc:"Convert times between time zones instantly." },
-      { title:"Base64 Encoder", href:"/base64-encoder.html", icon:"🧱", tags:["Dev","Encode"], desc:"Encode and decode Base64 locally in your browser." },
-      { title:"World Clock", href:"/world-clock.html", icon:"🌍", tags:["Time","Live"], desc:"Live world clocks across time zones with a clean UI." },
-      { title:"Countdown Timer", href:"/countdown-timer.html", icon:"⏳", tags:["Timer","Calc"], desc:"Countdowns and time calculations in a simple tool." },
-      { title:"Web3 Gas Fee Estimator", href:"/web3-gas-fee-estimator.html", icon:"⛽", tags:["Web3","EVM"], desc:"Estimate EVM gas fees (slow/standard/fast) using live JSON-RPC data." },
-      { title:"Crypto Profit / ROI Calculator", href:"/crypto-profit-calculator.html", icon:"📈", tags:["Web3","ROI"], desc:"Calculate crypto profit/loss, ROI %, break-even, and optional fees/taxes." }
-    ];
-
-    const grid = document.getElementById("toolsGrid");
-    const count = document.getElementById("toolsCount");
-    if(!grid) return;
-
-    grid.innerHTML = TOOLS.map(t => {
-      const tags = (t.tags || []).map(x => `<span class="toolTag">${x}</span>`).join("");
-      return `
-        <a class="toolCard" href="${t.href}" aria-label="Open ${t.title}">
-          <div class="toolIcon" aria-hidden="true">${t.icon}</div>
-          <div class="toolMeta">
-            <div class="toolTitle">${t.title}</div>
-            <div class="toolDesc">${t.desc}</div>
-            <div class="toolTags">${tags}</div>
-          </div>
+        <a class="card" href="/wifi-qr-code-generator.html">
+          <div class="cardTitle"><span>Free QR Code Generator</span><span class="badge">QR</span></div>
+          <div class="cardDesc">Generate QR codes online instantly for WiFi and URLs.</div>
         </a>
-      `;
-    }).join("");
+        <a class="card" href="/unit-converter.html">
+          <div class="cardTitle"><span>Conversion Tools</span><span class="badge">Converter</span></div>
+          <div class="cardDesc">Everyday conversions in one clean interface.</div>
+        </a>
+        <a class="card" href="/web3-gas-fee-estimator.html">
+          <div class="cardTitle"><span>Crypto Utilities</span><span class="badge">Crypto</span></div>
+          <div class="cardDesc">Gas fees, profit calculators, and more for traders.</div>
+        </a>
+      </div>
+    </section>
 
-    if(count) count.textContent = `${TOOLS.length} tools available`;
-  })();
+    <!-- FAQ -->
+    <section id="faq" class="section" aria-label="FAQ">
+      <h2>FAQ</h2>
+      <div class="faq">
+        <details open>
+          <summary>Is InstantQR.io free to use?</summary>
+          <p>Yes — all tools on InstantQR.io are free and available without creating an account.</p>
+        </details>
+
+        <details>
+          <summary>Do you store my QR codes, passwords, or input data?</summary>
+          <p>
+            InstantQR is privacy-first. Our tools are designed to run locally in your browser where possible,
+            and we do not intentionally store generated QR codes or sensitive inputs.
+          </p>
+        </details>
+
+        <details>
+          <summary>Which QR codes can I generate on InstantQR?</summary>
+          <p>You can generate WiFi and URL QR codes and download them for printing and sharing.</p>
+        </details>
+
+        <details>
+          <summary>Can I use InstantQR tools on mobile?</summary>
+          <p>Yes. InstantQR is mobile-friendly and works on iOS, Android, tablets, and desktop browsers.</p>
+        </details>
+
+        <details>
+          <summary>What other tools are available besides QR generators?</summary>
+          <p>We offer utilities like a unit converter, password generator, IP lookup, world clock, Web3 gas estimator, crypto profit calculator, and more.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" aria-label="Footer">
+      <div class="footRow">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <span class="logo" aria-hidden="true" style="width:28px;height:28px;border-radius:10px;"></span>
+            <strong style="color:var(--text)">InstantQR</strong>
+          </div>
+          <div class="small">
+            InstantQR.io provides free privacy-first web tools for QR codes, crypto, security, and conversions.
+          </div>
+          <div class="small" style="margin-top:8px;">
+            © <span id="year"></span> InstantQR.io. All rights reserved.
+          </div>
+        </div>
+
+        <div class="footerLinks">
+          <!-- SEO Tool Links -->
+          <div style="margin-bottom:8px;">
+            <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+            <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
+            <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
+            <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
+            <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+          </div>
+
+          <!-- Policy Links -->
+          <div>
+            <a href="/about.html">About</a> ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/terms.html">Terms</a> ·
+            <a href="/contact.html">Contact</a> ·
+            <a href="/sitemap.xml">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple tool search (client-side)
+    const input = document.getElementById('toolSearch');
+    const btn = document.getElementById('searchBtn');
+    const cards = Array.from(document.querySelectorAll('#toolGrid a.card'));
+
+    function doSearch(){
+      const q = (input.value || '').trim().toLowerCase();
+      if(!q){
+        cards.forEach(c => c.style.display = '');
+        return;
+      }
+      cards.forEach(c => {
+        const text = (c.innerText + ' ' + (c.getAttribute('data-tags') || '')).toLowerCase();
+        c.style.display = text.includes(q) ? '' : 'none';
+      });
+      // Scroll to tools when searching
+      document.getElementById('tools').scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    btn.addEventListener('click', doSearch);
+    input.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter') doSearch();
+    });
   </script>
 </body>
 </html>
