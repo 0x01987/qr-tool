@@ -3,91 +3,219 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact | InstantQR.io</title>
-  <meta name="description" content="Contact InstantQR.io" />
-  <style>
-    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
-    body { margin:0; background:#0b0f19; color:#e7eaf2; }
-    .wrap { max-width: 920px; margin:0 auto; padding: 22px; }
-    .card {
-      background:#121a2a; border:1px solid #22304e; border-radius:18px;
-      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
-    }
-    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    h1{ margin:0; font-size:24px; }
-    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
 
-    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; margin-top:14px; }
-    h2{ margin:12px 0 8px; font-size:16px; }
-    p, li{ color:#b8c0d6; font-size:13px; line-height:1.7; }
+  <title>Contact InstantQR | Support, Feedback & Feature Requests</title>
+  <meta name="description" content="Contact InstantQR.io for support, feedback, bug reports, and feature requests. Email us or open an issue on GitHub." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/contact.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contact InstantQR | Support, Feedback & Feature Requests" />
+  <meta property="og:description" content="Contact InstantQR.io for support, feedback, bug reports, and feature requests." />
+  <meta property="og:url" content="https://instantqr.io/contact.html" />
+
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- ✅ Organization Schema (brand trust + SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"InstantQR",
+    "url":"https://instantqr.io",
+    "logo":"https://instantqr.io/assets/instantqr-logo.svg",
+    "contactPoint":[
+      {
+        "@type":"ContactPoint",
+        "contactType":"customer support",
+        "email":"0x01987db@gmail.com",
+        "availableLanguage":["en"]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ✅ Contact Page Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ContactPage",
+    "name":"Contact InstantQR",
+    "url":"https://instantqr.io/contact.html",
+    "description":"Contact InstantQR.io for support, feedback, bug reports, and feature requests.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      --bg:#0b0f19;
+      --card:#121a2a;
+      --panel:#0e1525;
+      --border:#22304e;
+      --border2:#2a3a5f;
+      --text:#e7eaf2;
+      --muted:#b8c0d6;
+      --muted2:#8ea0c8;
+      --link:#cfe0ff;
+      --brand:#3b82f6;
+      --radius:18px;
+      --radius2:16px;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --max: 920px;
+    }
+    body { margin:0; background:var(--bg); color:var(--text); }
+    .wrap { max-width: var(--max); margin:0 auto; padding: 22px; }
+    .card {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+    header{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .brandRow{ display:flex; align-items:center; gap:10px; }
+    .logoImg{ height:30px; width:auto; display:block; }
+
+    h1{ margin:0; font-size:26px; letter-spacing:-.2px; }
+    .sub{ margin:6px 0 0; color:var(--muted); font-size:13px; }
 
     .topnav{
       display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-      margin-top:10px;
     }
     .linkbtn{
       display:inline-block; padding:10px 12px; border-radius:12px;
-      background:#0b1222; border:1px solid #2a3a5f;
-      color:#cfe0ff; text-decoration:none; font-weight:700; font-size:12px;
+      background:#0b1222; border:1px solid var(--border2);
+      color:var(--link); text-decoration:none; font-weight:700; font-size:12px;
     }
-    .linkbtn:hover{ border-color:#3b82f6; }
+    .linkbtn:hover{ border-color:var(--brand); }
 
-    .contactCard{
+    .box{
+      background:var(--panel);
+      border:1px solid var(--border2);
+      border-radius:var(--radius2);
+      padding:16px;
+      margin-top:14px;
+    }
+    h2{ margin:16px 0 8px; font-size:16px; }
+    p, li{ color:var(--muted); font-size:13px; line-height:1.75; }
+
+    .contactGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
       margin-top:10px;
-      padding:12px;
+    }
+    .contactCard{
+      padding:14px;
       border-radius:14px;
       background:#0b1222;
-      border:1px solid #2a3a5f;
+      border:1px solid var(--border2);
     }
-    .contactCard code{ color:#cfe0ff; }
+    .contactTitle{
+      font-weight:800;
+      margin:0 0 6px;
+      font-size:13px;
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .contactCard code{ color:var(--link); }
+    .hint{
+      margin:8px 0 0;
+      color:var(--muted2);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
 
     .footerLinks{
       margin-top:14px;
       text-align:center;
-      color:#8ea0c8;
+      color:var(--muted2);
       font-size:12px;
     }
-    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
+    .footerLinks a{ color:var(--link); text-decoration:none; }
     .footerLinks a:hover{ text-decoration:underline; }
+
+    @media (max-width: 640px){
+      .contactGrid{ grid-template-columns: 1fr; }
+      h1{ font-size:24px; }
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="card">
       <header>
-        <div>
-          <h1>Contact</h1>
-          <div class="sub">Questions, feedback, or feature requests.</div>
+        <div class="brandRow">
+          <img class="logoImg" src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+          <div>
+            <h1>Contact InstantQR</h1>
+            <div class="sub">Support, feedback, bug reports, and feature requests.</div>
+          </div>
         </div>
+
         <div class="topnav">
-          <a class="linkbtn" href="/">← Back to Generator</a>
+          <a class="linkbtn" href="/">← Back to Home</a>
+          <a class="linkbtn" href="/about.html">About</a>
         </div>
       </header>
 
       <div class="box">
-        <h2>Email</h2>
-        <p>For support or feedback, reach out here:</p>
-        <div class="contactCard">
-          <p style="margin:0;"><strong>0x01987db@gmail.com</strong></p>
-          <p style="margin:8px 0 0; color:#8ea0c8; font-size:12px;">
-            Tip: include your device/browser and what you were trying to do.
-          </p>
+        <h2>How to reach us</h2>
+        <p>
+          If you need help, spot a bug, or want a new tool added, use the options below.
+          For faster support, include your device, browser, and the page URL you were using.
+        </p>
+
+        <div class="contactGrid">
+          <!-- Email -->
+          <div class="contactCard">
+            <div class="contactTitle">✉️ Email</div>
+            <p style="margin:0;"><strong>0x01987db@gmail.com</strong></p>
+            <p class="hint">
+              Tip: include your device/browser and steps to reproduce the issue.
+            </p>
+          </div>
+
+          <!-- GitHub -->
+          <div class="contactCard">
+            <div class="contactTitle">🧩 GitHub</div>
+            <p style="margin:0;">
+              Repo: <code>https://github.com/0x01987/qr-tool</code>
+            </p>
+            <p class="hint">
+              Prefer public tracking? Open an issue with screenshots if possible.
+            </p>
+          </div>
         </div>
 
-        <h2>GitHub</h2>
-        <p>
-          If you prefer, you can also open an issue on the project repository.
-        </p>
-        <div class="contactCard">
-          <p style="margin:0;">Repo: <code>https://github.com/0x01987/qr-tool</code></p>
-        </div>
+        <h2>Common requests</h2>
+        <ul>
+          <li>Report a broken tool or bug</li>
+          <li>Request a new tool (examples + keywords help)</li>
+          <li>Suggest copy/SEO improvements</li>
+          <li>Partnerships or feature collaboration</li>
+        </ul>
       </div>
 
       <div class="footerLinks">
         <a href="/about.html">About</a> ·
         <a href="/privacy.html">Privacy</a> ·
         <a href="/terms.html">Terms</a> ·
-        <a href="/contact.html">Contact</a>
+        <a href="/contact.html">Contact</a> ·
+        <a href="/sitemap.xml">Sitemap</a>
       </div>
     </div>
   </div>
