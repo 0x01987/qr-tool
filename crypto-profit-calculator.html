@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <title>Crypto Profit Calculator (ROI) | Profit/Loss, Fees, Break-even | InstantQR.io</title>
-  <meta name="description" content="Free crypto profit & ROI calculator. Enter buy price, sell price, and quantity or investment to instantly see profit/loss, ROI %, break-even price, fees, and tax estimate. Privacy-first: runs locally in your browser." />
+  <meta name="description" content="Free crypto profit & ROI calculator. Enter buy price, sell price, and quantity or investment to instantly see profit/loss, ROI %, break-even price, fees, and tax estimate. Plus a live ticker of major crypto & stocks. Privacy-first." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://instantqr.io/crypto-profit-calculator.html" />
   <link rel="icon" href="/favicon.ico" />
@@ -22,7 +22,7 @@
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Crypto Profit Calculator (ROI) | InstantQR.io" />
-  <meta property="og:description" content="Instant crypto profit/loss + ROI with fees and break-even. Privacy-first." />
+  <meta property="og:description" content="Instant crypto profit/loss + ROI with fees and break-even. Includes a live crypto + stock ticker." />
   <meta property="og:url" content="https://instantqr.io/crypto-profit-calculator.html" />
   <meta name="twitter:card" content="summary" />
 
@@ -129,7 +129,7 @@
       flex-wrap:wrap;
       padding:2px 2px 10px;
       border-bottom:1px solid rgba(34,48,78,.55);
-      margin-bottom:12px;
+      margin-bottom:10px;
     }
     .brand{
       display:flex;
@@ -163,6 +163,107 @@
     }
     .nav a:hover{ border-color: rgba(59,130,246,.85); }
     .nav a.active{ border-color: rgba(59,130,246,.95); }
+
+    /* ✅ Live ticker */
+    .ticker{
+      border:1px solid var(--border2);
+      background:#0b1222;
+      border-radius:16px;
+      overflow:hidden;
+      margin: 6px 0 14px;
+    }
+    .tickerTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 12px;
+      border-bottom:1px solid rgba(184,192,214,.10);
+      flex-wrap:wrap;
+    }
+    .tickerTitle{
+      font-weight:900;
+      letter-spacing:-.1px;
+      font-size:12px;
+      color:var(--muted);
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .tickerTitle .dot{
+      width:8px;height:8px;border-radius:50%;
+      background: var(--warn);
+    }
+    .tickerMeta{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      color:var(--muted2);
+      font-size:12px;
+    }
+    .tickerBtn{
+      cursor:pointer;
+      border:1px solid rgba(184,192,214,.22);
+      background: rgba(184,192,214,.08);
+      color: var(--text);
+      padding:7px 10px;
+      border-radius:12px;
+      font-weight:900;
+      font-size:12px;
+      user-select:none;
+    }
+    .tickerBtn:hover{ border-color: rgba(59,130,246,.65); }
+
+    .marquee{
+      position:relative;
+      overflow:hidden;
+      mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+    }
+    .track{
+      display:flex;
+      gap:12px;
+      padding:10px 12px;
+      width:max-content;
+      animation: scroll 26s linear infinite;
+      will-change: transform;
+    }
+    .marquee:hover .track{ animation-play-state: paused; }
+    @media (prefers-reduced-motion: reduce){
+      .track{ animation:none; }
+      .marquee{ mask-image:none; -webkit-mask-image:none; }
+    }
+    @keyframes scroll{
+      from{ transform: translateX(0); }
+      to{ transform: translateX(-50%); }
+    }
+    .pillTick{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid rgba(184,192,214,.18);
+      background: rgba(184,192,214,.08);
+      border-radius: 999px;
+      padding:8px 10px;
+      font-size:12px;
+      color:var(--text);
+      white-space:nowrap;
+    }
+    .pillTick .sym{ font-weight:900; letter-spacing:.2px; }
+    .pillTick .price{ color: var(--text); font-weight:900; }
+    .pillTick .chg{
+      font-weight:900;
+      display:inline-flex;
+      gap:6px;
+      align-items:center;
+    }
+    .chg.up{ color: var(--good); }
+    .chg.down{ color: var(--bad); }
+    .arrow{
+      width:12px; height:12px; display:inline-block;
+      vertical-align:-2px;
+    }
 
     /* Hero */
     .hero{
@@ -417,6 +518,25 @@
         </nav>
       </div>
 
+      <!-- ✅ Live ticker (crypto + stocks) -->
+      <div class="ticker" role="region" aria-label="Live crypto and stock ticker">
+        <div class="tickerTop">
+          <div class="tickerTitle">
+            <span class="dot" id="tickerDot"></span>
+            Live prices (USD)
+          </div>
+          <div class="tickerMeta">
+            <span id="tickerUpdated">Updated: —</span>
+            <button class="tickerBtn" id="tickerRefresh" type="button">Refresh</button>
+          </div>
+        </div>
+
+        <div class="marquee">
+          <!-- We duplicate the track in JS for seamless looping -->
+          <div class="track" id="tickerTrack" aria-live="polite"></div>
+        </div>
+      </div>
+
       <!-- Hero -->
       <section class="hero">
         <div>
@@ -660,6 +780,233 @@
   </div>
 
   <script>
+  // ✅ Adds: live sliding ticker (crypto + stocks) with green/red + arrows
+  // Crypto: CoinGecko simple/price (USD + 24h change)
+  // Stocks: Stooq daily (close vs open) via r.jina.ai proxy for CORS
+  (() => {
+    const $ = (id) => document.getElementById(id);
+
+    // --- Ticker config
+    const CRYPTO = [
+      { id:"bitcoin",  sym:"BTC" },
+      { id:"ethereum", sym:"ETH" },
+      { id:"solana",   sym:"SOL" },
+      { id:"binancecoin", sym:"BNB" },
+      { id:"ripple",   sym:"XRP" },
+      { id:"cardano",  sym:"ADA" },
+      { id:"dogecoin", sym:"DOGE" },
+      { id:"avalanche-2", sym:"AVAX" },
+      { id:"chainlink", sym:"LINK" },
+      { id:"matic-network", sym:"MATIC" }
+    ];
+    const STOCKS = [
+      { sym:"AAPL",  stooq:"aapl.us" },
+      { sym:"MSFT",  stooq:"msft.us" },
+      { sym:"NVDA",  stooq:"nvda.us" },
+      { sym:"AMZN",  stooq:"amzn.us" },
+      { sym:"GOOGL", stooq:"googl.us" },
+      { sym:"TSLA",  stooq:"tsla.us" },
+      { sym:"META",  stooq:"meta.us" },
+      { sym:"SPY",   stooq:"spy.us" },
+      { sym:"QQQ",   stooq:"qqq.us" }
+    ];
+
+    const track = $("tickerTrack");
+    const dot = $("tickerDot");
+    const updated = $("tickerUpdated");
+    const refreshBtn = $("tickerRefresh");
+
+    let timer = null;
+    let inflight = new AbortController();
+
+    function setTickerStatus(kind){
+      // kind: ok | warn | bad
+      if(kind === "ok") dot.style.background = "var(--good)";
+      else if(kind === "bad") dot.style.background = "var(--bad)";
+      else dot.style.background = "var(--warn)";
+    }
+
+    function fmtUSD(n){
+      if (!Number.isFinite(n)) return "—";
+      try{ return new Intl.NumberFormat(undefined,{style:"currency",currency:"USD"}).format(n); }
+      catch{ return "$" + n.toFixed(2); }
+    }
+
+    function arrowSvg(dir){
+      // inline svg for speed (no external icons)
+      if(dir === "up"){
+        return `<svg class="arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 5l7 7-1.8 1.8L13.2 9.6V20h-2.4V9.6L6.8 13.8 5 12l7-7z" fill="currentColor"></path>
+        </svg>`;
+      }
+      return `<svg class="arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 19l-7-7 1.8-1.8L10.8 14.4V4h2.4v10.4l4-4.2L19 12l-7 7z" fill="currentColor"></path>
+      </svg>`;
+    }
+
+    function pillHTML({ label, price, pct }){
+      const up = Number.isFinite(pct) && pct >= 0;
+      const down = Number.isFinite(pct) && pct < 0;
+      const cls = up ? "up" : down ? "down" : "";
+      const pctTxt = Number.isFinite(pct) ? `${pct >= 0 ? "+" : ""}${pct.toFixed(2)}%` : "—";
+      const icon = up ? arrowSvg("up") : down ? arrowSvg("down") : "";
+      return `
+        <span class="pillTick">
+          <span class="sym">${label}</span>
+          <span class="price">${price}</span>
+          <span class="chg ${cls}">${icon}<span>${pctTxt}</span></span>
+        </span>
+      `;
+    }
+
+    // --- fetch helpers (with timeout)
+    function anySignal(signals){
+      const ctrl = new AbortController();
+      const onAbort = () => ctrl.abort();
+      signals.forEach(sig => {
+        if(!sig) return;
+        if(sig.aborted) ctrl.abort();
+        else sig.addEventListener("abort", onAbort, { once:true });
+      });
+      return ctrl.signal;
+    }
+    function withTimeout(ms){
+      const ac = new AbortController();
+      const t = setTimeout(() => ac.abort(), ms);
+      return { signal: ac.signal, cancel: () => clearTimeout(t) };
+    }
+    async function fetchJson(url, signal){
+      const res = await fetch(url, { cache:"no-store", signal });
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      return await res.json();
+    }
+    async function fetchText(url, signal){
+      const res = await fetch(url, { cache:"no-store", signal });
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      return await res.text();
+    }
+
+    async function getCrypto(){
+      const ids = CRYPTO.map(x => x.id).join(",");
+      const url =
+        "https://api.coingecko.com/api/v3/simple/price" +
+        `?ids=${encodeURIComponent(ids)}` +
+        "&vs_currencies=usd" +
+        "&include_24hr_change=true";
+
+      const to = withTimeout(6500);
+      const sig = anySignal([inflight.signal, to.signal]);
+      try{
+        const d = await fetchJson(url, sig);
+        return CRYPTO.map(c => {
+          const row = d[c.id] || {};
+          const price = Number(row.usd);
+          const pct = Number(row.usd_24h_change);
+          return { label: c.sym, price: fmtUSD(price), pct: Number.isFinite(pct) ? pct : NaN };
+        });
+      } finally {
+        to.cancel();
+      }
+    }
+
+    async function getOneStock(s){
+      // Stooq daily CSV: Symbol,Date,Time,Open,High,Low,Close,Volume
+      const stooqUrl = `http://stooq.com/q/l/?s=${encodeURIComponent(s.stooq)}&f=sd2t2ohlcv&h&e=csv`;
+      const url = `https://r.jina.ai/${stooqUrl}`;
+
+      const to = withTimeout(6500);
+      const sig = anySignal([inflight.signal, to.signal]);
+      try{
+        const txt = await fetchText(url, sig);
+        const lines = txt.trim().split(/\r?\n/);
+        if(lines.length < 2) throw new Error("No data");
+        const cols = lines[1].split(",");
+        const open = Number(cols[3]);
+        const close = Number(cols[6]);
+        const pct = (open > 0 && Number.isFinite(open) && Number.isFinite(close))
+          ? ((close - open) / open * 100)
+          : NaN;
+        return { label: s.sym, price: fmtUSD(close), pct };
+      } finally {
+        to.cancel();
+      }
+    }
+
+    async function getStocks(){
+      // small concurrency for speed + less proxy stress
+      const concurrency = 4;
+      const queue = [...STOCKS];
+      const out = [];
+      const workers = Array.from({length: concurrency}, async () => {
+        while(queue.length){
+          const item = queue.shift();
+          if(!item) return;
+          try{
+            out.push(await getOneStock(item));
+          }catch{
+            out.push({ label: item.sym, price: "—", pct: NaN });
+          }
+        }
+      });
+      await Promise.all(workers);
+      // keep original order
+      const order = new Map(STOCKS.map((s,i)=>[s.sym,i]));
+      out.sort((a,b)=>(order.get(a.label)??999)-(order.get(b.label)??999));
+      return out;
+    }
+
+    function renderTicker(items){
+      const html = items.map(pillHTML).join("");
+      // Duplicate content for seamless marquee loop (CSS scroll uses -50%)
+      track.innerHTML = html + html;
+
+      // If content width is small, slow down and avoid jumpy feel
+      // (optional: we could adjust animation duration; keep simple/fast)
+    }
+
+    async function refreshTicker(){
+      // cancel in-flight, fast UX
+      try{ inflight.abort(); }catch{}
+      inflight = new AbortController();
+
+      setTickerStatus("warn");
+      updated.textContent = "Updated: fetching…";
+
+      const started = performance.now();
+      try{
+        const [c, s] = await Promise.all([
+          getCrypto().catch(()=>[]),
+          getStocks().catch(()=>[])
+        ]);
+        const items = [...c, ...s];
+        renderTicker(items);
+
+        const ms = Math.round(performance.now() - started);
+        updated.textContent = `Updated: ${new Date().toLocaleTimeString()} • ${ms}ms`;
+        setTickerStatus("ok");
+      }catch{
+        track.innerHTML = `<span class="pillTick">Failed to load prices. Try refresh.</span>`;
+        updated.textContent = "Updated: failed";
+        setTickerStatus("bad");
+      }
+    }
+
+    refreshBtn.addEventListener("click", refreshTicker);
+
+    // Auto-refresh every 30s (lightweight)
+    function startAuto(){
+      if(timer) clearInterval(timer);
+      timer = setInterval(refreshTicker, 30000);
+    }
+
+    // Init ticker
+    startAuto();
+    refreshTicker();
+  })();
+  </script>
+
+  <script>
+  // --- Your existing profit calculator logic (unchanged) ---
   // Fast loading + responsive: keep everything local, debounce URL updates, and avoid heavy work on every keystroke.
   (() => {
     const $ = (id) => document.getElementById(id);
