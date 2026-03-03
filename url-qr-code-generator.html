@@ -82,6 +82,21 @@
     ]
   }
   </script>
+
+  <!-- ✅ Small, page-specific polish (safe even with shared style.css) -->
+  <style>
+    /* If style.css already defines these, this won't hurt — it only improves focus states. */
+    textarea:focus, input:focus, select:focus{
+      outline:none;
+      border-color: rgba(59,130,246,.85) !important;
+      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+    }
+    .topBrand{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    }
+    .topBrand img{ height:30px; width:auto; display:block; }
+    .tiny{ font-size:12px; color:#8ea0c8; }
+  </style>
 </head>
 
 <body>
@@ -89,8 +104,8 @@
     <div class="card">
 
       <header>
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" style="height:30px;width:auto;" />
+        <div class="topBrand">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
           <div>
             <h1>URL QR Code Generator</h1>
             <div class="sub">Create a QR code for any website link. Scan and open instantly.</div>
@@ -140,7 +155,13 @@
           <!-- TEXT/URL FORM (VISIBLE BY DEFAULT) -->
           <div id="textForm">
             <label for="text">Website URL</label>
-            <textarea id="text" placeholder="https://example.com" inputmode="url"></textarea>
+            <textarea
+              id="text"
+              placeholder="https://example.com"
+              inputmode="url"
+              autocomplete="off"
+              spellcheck="false"
+            ></textarea>
             <div class="tiny" style="margin-top:8px;">
               Tip: include <code>https://</code> for best compatibility.
             </div>
@@ -235,12 +256,28 @@
     // Force Text/URL mode on this page (expects app.js to expose setType)
     if (typeof setType === "function") setType("text");
 
-    // Nice UX: auto-generate when user pastes a URL (optional, safe)
+    // ✅ Fix: auto-generate after paste (and after manual typing pause)
     const textEl = document.getElementById('text');
     const genBtn = document.getElementById('generateBtn');
-    if (textEl && genBtn) {
+
+    function safeAutoGenerate(){
+      if (!textEl || !genBtn) return;
+      const v = (textEl.value || '').trim();
+      if (!v) return;
+      genBtn.click();
+    }
+
+    if (textEl) {
+      // Paste → generate
       textEl.addEventListener('paste', () => {
-        setTimeout(() => genBtn.click(), 50);
+        setTimeout(safeAutoGenerate, 60);
+      });
+
+      // Typing pause → generate (debounced)
+      let t = null;
+      textEl.addEventListener('input', () => {
+        clearTimeout(t);
+        t = setTimeout(safeAutoGenerate, 450);
       });
     }
   </script>
