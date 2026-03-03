@@ -211,8 +211,8 @@
       color: var(--muted);
       white-space: nowrap;
     }
-    .pillSmall.ok{ border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.10); color: #bff7e0; }
-    .pillSmall.bad{ border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.10); color: #ffd1da; }
+    .pillSmall.ok{ border-color: rgba(52,211,153,.45); background: rgba(52,211,153,.14); color: #eafff3; }
+    .pillSmall.bad{ border-color: rgba(251,113,133,.45); background: rgba(251,113,133,.14); color: #ffe8ec; }
 
     .tickerTrack{
       display:flex;
@@ -270,16 +270,17 @@
       font-size: 13px;
       letter-spacing: .15px;
       font-variant-numeric: tabular-nums;
-      color: var(--text);
       line-height: 1.1;
+      color: var(--text);
     }
 
-    /* ✅ Price text color */
-    .price.upText { color: #bff7e0; }
-    .price.downText { color: #ffd1da; }
+    /* ✅ SOLID colors (not pastel) */
+    .price.upText { color: #00ff88; }   /* solid green */
+    .price.downText { color: #ff2d55; } /* solid red */
     .price.flatText { color: var(--text); }
-    .sym.upText { color: #bff7e0; }
-    .sym.downText { color: #ffd1da; }
+
+    .sym.upText { color: #00ff88; }
+    .sym.downText { color: #ff2d55; }
     .sym.flatText { color: var(--text); }
 
     .chg{
@@ -294,22 +295,22 @@
       gap:6px;
       line-height: 1.1;
     }
-    .chg.up{ border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.10); color: #bff7e0; }
-    .chg.down{ border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.10); color: #ffd1da; }
+    .chg.up{ border-color: rgba(0,255,136,.35); background: rgba(0,255,136,.10); color: #00ff88; }
+    .chg.down{ border-color: rgba(255,45,85,.35); background: rgba(255,45,85,.10); color: #ff2d55; }
     .chg.flat{ border-color: rgba(184,192,214,.22); background: rgba(184,192,214,.08); color: var(--muted); }
 
     /* ✅ Tiny flash effect on updates */
     .flashUp{ animation: flashUp .55s ease-out; }
     .flashDown{ animation: flashDown .55s ease-out; }
     @keyframes flashUp{
-      0%{ box-shadow: 0 0 0 rgba(52,211,153,0); transform: translateY(0); }
-      30%{ box-shadow: 0 0 0 6px rgba(52,211,153,.16); transform: translateY(-1px); }
-      100%{ box-shadow: 0 0 0 rgba(52,211,153,0); transform: translateY(0); }
+      0%{ box-shadow: 0 0 0 rgba(0,255,136,0); transform: translateY(0); }
+      30%{ box-shadow: 0 0 0 6px rgba(0,255,136,.18); transform: translateY(-1px); }
+      100%{ box-shadow: 0 0 0 rgba(0,255,136,0); transform: translateY(0); }
     }
     @keyframes flashDown{
-      0%{ box-shadow: 0 0 0 rgba(251,113,133,0); transform: translateY(0); }
-      30%{ box-shadow: 0 0 0 6px rgba(251,113,133,.14); transform: translateY(-1px); }
-      100%{ box-shadow: 0 0 0 rgba(251,113,133,0); transform: translateY(0); }
+      0%{ box-shadow: 0 0 0 rgba(255,45,85,0); transform: translateY(0); }
+      30%{ box-shadow: 0 0 0 6px rgba(255,45,85,.16); transform: translateY(-1px); }
+      100%{ box-shadow: 0 0 0 rgba(255,45,85,0); transform: translateY(0); }
     }
 
     /* Hero */
@@ -822,7 +823,6 @@
   </div>
 
   <script>
-  // ✅ Calculator + Live Ticker (CoinGecko via CF Worker + Stooq)
   (() => {
     const $ = (id) => document.getElementById(id);
     const clamp = (n,a,b) => Math.min(b, Math.max(a,n));
@@ -832,11 +832,10 @@
     };
 
     // =========================
-    // ✅ LIVE PRICES TICKER
+    // ✅ LIVE PRICES TICKER (robust route detection + parsing)
     // =========================
     const WORKER_BASE = "https://instantqr-prices.0x01987db.workers.dev";
 
-    // IMPORTANT: Worker /crypto expects symbols like BTC,ETH,... (NOT BTCUSDT)
     const CRYPTO_SYMBOLS = ["BTC","ETH","SOL","XRP","ADA","DOGE","MATIC"];
     const STOCK_SYMBOLS  = ["AAPL.US","MSFT.US","NVDA.US","AMZN.US","GOOGL.US","TSLA.US","META.US","SPY.US","QQQ.US"];
 
@@ -872,7 +871,6 @@
     function escapeHtml(s){
       return String(s).replace(/[&<>"']/g, (m) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[m]));
     }
-
     function fmtPrice(p){
       if (!Number.isFinite(p)) return "—";
       if (p < 1) return fmtUSD4.format(p);
@@ -900,7 +898,7 @@
     }
 
     function applyFlash(key, dir){
-      const el = tickerTrack.querySelector(`.tick[data-key="${CSS.escape(key)}"]`);
+      const el = tickerTrack.querySelector(\`.tick[data-key="\${CSS.escape(key)}"]\`);
       if(!el) return;
       el.classList.remove("flashUp","flashDown");
       void el.offsetWidth;
@@ -908,61 +906,94 @@
       if(dir === "down") el.classList.add("flashDown");
     }
 
-    async function fetchJson(url, timeoutMs=4500){
+    async function fetchText(url, timeoutMs=6000){
       const ctrl = new AbortController();
       const t = setTimeout(() => ctrl.abort(), timeoutMs);
       try{
         const res = await fetch(url, { signal: ctrl.signal, cache: "no-store" });
-        if(!res.ok){
-          const txt = await res.text().catch(()=> "");
-          throw new Error(`HTTP ${res.status} ${txt.slice(0,120)}`);
-        }
-        return await res.json();
+        const txt = await res.text().catch(()=> "");
+        return { ok: res.ok, status: res.status, text: txt };
       } finally {
         clearTimeout(t);
       }
     }
 
-    async function loadPricesOnce(){
-      const [c, s] = await Promise.all([
-        fetchJson(`${WORKER_BASE}/crypto?symbols=${encodeURIComponent(CRYPTO_SYMBOLS.join(","))}`),
-        fetchJson(`${WORKER_BASE}/stooq?symbols=${encodeURIComponent(STOCK_SYMBOLS.join(","))}`)
-      ]);
+    function tryParseJson(text){
+      try { return JSON.parse(text); } catch { return null; }
+    }
 
-      // Worker crypto returns: { prices: { BTC: <num>, ... } }
-      // Worker stocks returns: { prices: { "AAPL.US": <num>, ... } }
-      const out = new Map();
+    function extractPricesMap(json){
+      // supports:
+      // 1) { prices: { SYM: 123 } }
+      // 2) { data: { prices: {...} } } or { data: {...} }
+      // 3) raw map { SYM: 123 }
+      if(!json || typeof json !== "object") return null;
 
-      const cPrices = (c && c.prices) ? c.prices : {};
-      for(const sym of CRYPTO_SYMBOLS){
-        const p = Number(cPrices[sym]);
-        if(Number.isFinite(p) && p > 0) out.set(sym, p);
+      if(json.prices && typeof json.prices === "object") return json.prices;
+
+      if(json.data && typeof json.data === "object"){
+        if(json.data.prices && typeof json.data.prices === "object") return json.data.prices;
+        return json.data;
       }
 
-      const sPrices = (s && s.prices) ? s.prices : {};
-      for(const sym of STOCK_SYMBOLS){
-        const p = Number(sPrices[sym.toUpperCase()] ?? sPrices[sym] ?? sPrices[sym.toLowerCase()]);
-        if(Number.isFinite(p) && p > 0){
-          const short = sym.split(".")[0].toUpperCase();
-          out.set(short, p);
+      // raw map
+      return json;
+    }
+
+    // Route fallbacks (because your Worker may not be /crypto + /stooq exactly)
+    const CRYPTO_ROUTES = [
+      (syms) => `${WORKER_BASE}/crypto?symbols=${encodeURIComponent(syms.join(","))}`,
+      (syms) => `${WORKER_BASE}/api/crypto?symbols=${encodeURIComponent(syms.join(","))}`,
+      (syms) => `${WORKER_BASE}/prices?symbols=${encodeURIComponent(syms.join(","))}&type=crypto`,
+      (syms) => `${WORKER_BASE}/?type=crypto&symbols=${encodeURIComponent(syms.join(","))}`
+    ];
+    const STOCK_ROUTES = [
+      (syms) => `${WORKER_BASE}/stooq?symbols=${encodeURIComponent(syms.join(","))}`,
+      (syms) => `${WORKER_BASE}/api/stooq?symbols=${encodeURIComponent(syms.join(","))}`,
+      (syms) => `${WORKER_BASE}/stocks?symbols=${encodeURIComponent(syms.join(","))}`,
+      (syms) => `${WORKER_BASE}/?type=stocks&symbols=${encodeURIComponent(syms.join(","))}`
+    ];
+
+    async function fetchWithFallback(routes, symbols){
+      let lastErr = null;
+      for(const makeUrl of routes){
+        const url = makeUrl(symbols);
+        const res = await fetchText(url);
+        const json = tryParseJson(res.text);
+        if(res.ok && json){
+          const map = extractPricesMap(json);
+          if(map && typeof map === "object"){
+            return { map, url };
+          }
+          lastErr = `Bad JSON shape from ${url}`;
+        }else{
+          // if Worker returns JSON error, show it
+          lastErr = `HTTP ${res.status} from ${url} :: ${res.text.slice(0,160)}`;
         }
       }
-
-      return out;
+      throw new Error(lastErr || "Worker fetch failed");
     }
 
     function renderTicker(pricesMap){
       const parts = [];
       for(const t of ORDER){
-        const price = pricesMap.get(t.key);
-        const prev = priceState.get(t.key);
+        // support key lookup for stocks: AAPL vs AAPL.US etc
+        const candidates = t.kind === "stock"
+          ? [t.q, t.q.toUpperCase(), t.q.toLowerCase(), t.key, t.key.toUpperCase(), t.key.toLowerCase()]
+          : [t.q, t.q.toUpperCase(), t.q.toLowerCase()];
 
+        let price = NaN;
+        for(const c of candidates){
+          const v = Number(pricesMap[c]);
+          if(Number.isFinite(v) && v > 0){ price = v; break; }
+        }
+
+        const prev = priceState.get(t.key);
         let dir = "flat";
         if(Number.isFinite(price) && Number.isFinite(prev)){
           if(price > prev) dir = "up";
           else if(price < prev) dir = "down";
         }
-
         if(Number.isFinite(price)) priceState.set(t.key, price);
 
         parts.push(buildTick({
@@ -976,8 +1007,6 @@
           requestAnimationFrame(() => applyFlash(t.key, dir));
         }
       }
-
-      // duplicate for seamless marquee
       tickerTrack.innerHTML = parts.join("") + parts.join("");
     }
 
@@ -992,8 +1021,15 @@
         tickStatus.textContent = "Updating…";
         tickStatus.className = "pillSmall";
 
-        const m = await loadPricesOnce();
-        renderTicker(m);
+        const [cryptoRes, stockRes] = await Promise.all([
+          fetchWithFallback(CRYPTO_ROUTES, CRYPTO_SYMBOLS),
+          fetchWithFallback(STOCK_ROUTES, STOCK_SYMBOLS)
+        ]);
+
+        // Merge maps (stocks + crypto)
+        const merged = { ...(cryptoRes.map || {}), ...(stockRes.map || {}) };
+
+        renderTicker(merged);
 
         tickStatus.textContent = "Live";
         tickStatus.className = "pillSmall ok";
@@ -1006,14 +1042,18 @@
         tickStatus.className = "pillSmall bad";
         tickDot.style.background = "var(--bad)";
         tickDot.style.boxShadow = "0 0 10px rgba(251,113,133,.22)";
-        // console.log("ticker error", e);
+        // To debug quickly in devtools:
+        console.log("Ticker error:", e?.message || e);
       }finally{
         inFlight = false;
       }
     }
 
     function startTicker(){
+      // initial placeholders render (so it never looks broken)
+      renderTicker({});
       tickLoop();
+
       if(tickTimer) clearInterval(tickTimer);
       tickTimer = setInterval(tickLoop, refreshMs);
 
