@@ -416,9 +416,18 @@
 
     let lastResult = null;
 
-    function setLoading(msg) {
-      ip4Text.textContent = msg || "Loading…";
-      ip6Text.textContent = msg || "Loading…";
+    // -------- Speed knobs --------
+    const TIMEOUT_FAST_MS = 1800;   // fast try
+    const TIMEOUT_GEO_MS  = 2200;   // geo providers
+    const TIMEOUT_SLOW_MS = 3500;   // slower fallbacks
+    const CACHE_TTL_MS    = 10 * 60 * 1000; // 10 minutes
+
+    // -------- UI helpers --------
+    function safe(v) { return (v === null || v === undefined || v === "") ? "—" : String(v); }
+
+    function setLoading() {
+      ip4Text.textContent = "Loading…";
+      ip6Text.textContent = "Loading…";
       locText.textContent = "—";
       ispText.textContent = "—";
       tzText.textContent = "—";
@@ -438,24 +447,67 @@
       lastResult = null;
     }
 
-    async function fetchJson(url) {
-      const res = await fetch(url, { cache: "no-store" });
-      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
-      return await res.json();
+    function renderPartial({ ip4, ip6 }) {
+      if (ip4 !== undefined) ip4Text.textContent = ip4 ? safe(ip4) : "—";
+      if (ip6 !== undefined) ip6Text.textContent = (ip6 === "Loading…") ? "Loading…" : (ip6 ? safe(ip6) : "Not available");
     }
 
-    async function fetchText(url) {
-      const res = await fetch(url, { cache: "no-store" });
-      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
-      return (await res.text()).trim();
+    function renderGeo(geo) {
+      const locParts = [geo.city, geo.region, geo.country].filter(Boolean);
+      locText.textContent = locParts.length ? locParts.join(", ") : "—";
+      ispText.textContent = safe(geo.isp || geo.org);
+      tzText.textContent = safe(geo.timezone);
+      asnText.textContent = safe(geo.asn);
+      noteText.textContent = geo.provider ? `Geo source: ${geo.provider}` : "";
     }
 
-    // --- Public IP detection (fallbacks) ---
-    async function getIPv4() {
+    // -------- Fetch with timeout + abort --------
+    async function fetchWithTimeout(url, { timeoutMs = TIMEOUT_FAST_MS, as = "json" } = {}) {
+      const controller = new AbortController();
+      const t = setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const res = await fetch(url, { cache: "no-store", signal: controller.signal });
+        if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+        if (as === "text") return (await res.text()).trim();
+        return await res.json();
+      } catch (e) {
+        // Normalize AbortError into a readable error
+        if (e && (e.name === "AbortError")) throw new Error("Request timed out.");
+        throw e;
+      } finally {
+        clearTimeout(t);
+      }
+    }
+
+    // -------- Cache (sessionStorage) --------
+    function cacheGet(key) {
+      try {
+        const raw = sessionStorage.getItem(key);
+        if (!raw) return null;
+        const obj = JSON.parse(raw);
+        if (!obj || !obj.t || !("v" in obj)) return null;
+        if ((Date.now() - obj.t) > CACHE_TTL_MS) return null;
+        return obj.v;
+      } catch { return null; }
+    }
+
+    function cacheSet(key, value) {
+      try {
+        sessionStorage.setItem(key, JSON.stringify({ t: Date.now(), v: value }));
+      } catch {}
+    }
+
+    // -------- IP detection (fast-first) --------
+    async function getIPv4Fast() {
+      const d = await fetchWithTimeout("https://api.ipify.org?format=json", { timeoutMs: TIMEOUT_FAST_MS, as: "json" });
+      if (!d || !d.ip || !d.ip.includes(".")) throw new Error("IPv4 not available");
+      return d.ip;
+    }
+
+    async function getIPv4Fallback() {
       const providers = [
-        async () => (await fetchJson("https://api.ipify.org?format=json")).ip,
-        async () => await fetchText("https://ipv4.icanhazip.com/"),
-        async () => await fetchText("https://ifconfig.me/ip"),
+        () => fetchWithTimeout("https://ipv4.icanhazip.com/", { timeoutMs: TIMEOUT_SLOW_MS, as: "text" }),
+        () => fetchWithTimeout("https://ifconfig.me/ip", { timeoutMs: TIMEOUT_SLOW_MS, as: "text" })
       ];
       let lastErr;
       for (const p of providers) {
@@ -467,40 +519,69 @@
       throw lastErr || new Error("IPv4 blocked by network/extension.");
     }
 
-    async function getIPv6() {
-      const providers = [
-        async () => (await fetchJson("https://api64.ipify.org?format=json")).ip,
-        async () => await fetchText("https://ipv6.icanhazip.com/"),
-      ];
-      let lastErr;
-      for (const p of providers) {
-        try {
-          const ip = await p();
-          if (ip && ip.includes(":")) return ip;
-        } catch (e) { lastErr = e; }
+    async function getIPv4() {
+      const cached = cacheGet("ip4");
+      if (cached) return cached;
+
+      try {
+        const ip = await getIPv4Fast();
+        cacheSet("ip4", ip);
+        return ip;
+      } catch {
+        const ip = await getIPv4Fallback();
+        cacheSet("ip4", ip);
+        return ip;
       }
-      return null; // IPv6 may not exist on some networks
     }
 
-    // --- Geo lookup with multiple provider fallbacks ---
-    async function geoLookup(ip) {
+    async function getIPv6NonBlocking() {
+      const cached = cacheGet("ip6");
+      if (cached) return cached;
+
+      try {
+        const d = await fetchWithTimeout("https://api64.ipify.org?format=json", { timeoutMs: TIMEOUT_FAST_MS, as: "json" });
+        const ip = d && d.ip && d.ip.includes(":") ? d.ip : null;
+        if (ip) cacheSet("ip6", ip);
+        return ip || null;
+      } catch {
+        try {
+          const ip = await fetchWithTimeout("https://ipv6.icanhazip.com/", { timeoutMs: TIMEOUT_FAST_MS, as: "text" });
+          const v = (ip && ip.includes(":")) ? ip : null;
+          if (v) cacheSet("ip6", v);
+          return v;
+        } catch {
+          return null;
+        }
+      }
+    }
+
+    // -------- Geo lookup (fast-first) --------
+    async function geoLookupFast(ip) {
+      const cached = cacheGet("geo:" + ip);
+      if (cached) return cached;
+
+      const d = await fetchWithTimeout(`https://ipwho.is/${encodeURIComponent(ip)}`, { timeoutMs: TIMEOUT_GEO_MS, as: "json" });
+      if (d && d.success === false) throw new Error(d.message || "ipwho.is blocked");
+
+      const geo = {
+        provider: "ipwho.is",
+        city: d.city,
+        region: d.region,
+        country: d.country,
+        isp: d.connection?.isp,
+        org: d.connection?.org,
+        asn: d.connection?.asn,
+        timezone: d.timezone?.id
+      };
+
+      cacheSet("geo:" + ip, geo);
+      return geo;
+    }
+
+    async function geoLookupFallback(ip) {
       const providers = [
         async () => {
-          const d = await fetchJson(`https://ipwho.is/${encodeURIComponent(ip)}`);
-          if (d && d.success === false) throw new Error(d.message || "ipwho.is blocked");
-          return {
-            provider: "ipwho.is",
-            city: d.city,
-            region: d.region,
-            country: d.country,
-            isp: d.connection?.isp,
-            org: d.connection?.org,
-            asn: d.connection?.asn,
-            timezone: d.timezone?.id,
-          };
-        },
-        async () => {
-          const d = await fetchJson(`https://ipapi.co/${encodeURIComponent(ip)}/json/`);
+          const d = await fetchWithTimeout(`https://ipapi.co/${encodeURIComponent(ip)}/json/`, { timeoutMs: TIMEOUT_SLOW_MS, as: "json" });
           if (d && d.error) throw new Error(d.reason || "ipapi blocked");
           return {
             provider: "ipapi.co",
@@ -510,11 +591,11 @@
             isp: d.org,
             org: d.org,
             asn: d.asn,
-            timezone: d.timezone,
+            timezone: d.timezone
           };
         },
         async () => {
-          const d = await fetchJson(`https://ipinfo.io/${encodeURIComponent(ip)}/json`);
+          const d = await fetchWithTimeout(`https://ipinfo.io/${encodeURIComponent(ip)}/json`, { timeoutMs: TIMEOUT_SLOW_MS, as: "json" });
           return {
             provider: "ipinfo.io",
             city: d.city,
@@ -523,9 +604,9 @@
             isp: d.org,
             org: d.org,
             asn: (d.org && d.org.match(/AS\d+/)) ? d.org.match(/AS\d+/)[0] : null,
-            timezone: d.timezone,
+            timezone: d.timezone
           };
-        },
+        }
       ];
 
       let lastErr;
@@ -536,26 +617,17 @@
       throw lastErr || new Error("Geo lookup blocked.");
     }
 
-    function safe(v) {
-      return (v === null || v === undefined || v === "") ? "—" : String(v);
+    async function geoLookup(ip) {
+      try {
+        return await geoLookupFast(ip);
+      } catch {
+        const geo = await geoLookupFallback(ip);
+        cacheSet("geo:" + ip, geo);
+        return geo;
+      }
     }
 
-    function render(result) {
-      const { ip4, ip6, geo } = result;
-
-      ip4Text.textContent = safe(ip4);
-      ip6Text.textContent = ip6 ? safe(ip6) : "Not available";
-
-      const locParts = [geo.city, geo.region, geo.country].filter(Boolean);
-      locText.textContent = locParts.length ? locParts.join(", ") : "—";
-
-      ispText.textContent = safe(geo.isp || geo.org);
-      tzText.textContent = safe(geo.timezone);
-      asnText.textContent = safe(geo.asn);
-
-      noteText.textContent = `Geo source: ${geo.provider}`;
-    }
-
+    // -------- Validation --------
     function isLikelyIp(str) {
       const s = (str || "").trim();
       if (!s) return false;
@@ -564,40 +636,56 @@
       return v4.test(s) || (s.includes(":") && v6.test(s));
     }
 
+    // -------- Main lookup (FAST UX) --------
     async function lookup() {
       const manualIp = (ipInput.value || "").trim();
-      setLoading("Loading…");
+      setLoading();
 
       try {
         if (manualIp) {
           if (!isLikelyIp(manualIp)) throw new Error("Enter a valid IPv4 or IPv6 address (or leave blank).");
+
+          renderPartial({
+            ip4: manualIp.includes(".") ? manualIp : null,
+            ip6: manualIp.includes(":") ? manualIp : null
+          });
+
           const geo = await geoLookup(manualIp);
-          const result = {
+          renderGeo(geo);
+
+          lastResult = {
             ip4: manualIp.includes(".") ? manualIp : null,
             ip6: manualIp.includes(":") ? manualIp : null,
             geo
           };
-          lastResult = result;
-          render(result);
           return;
         }
 
-        const [v4, v6] = await Promise.allSettled([getIPv4(), getIPv6()]);
-        const ip4 = (v4.status === "fulfilled") ? v4.value : null;
-        const ip6 = (v6.status === "fulfilled") ? v6.value : null;
+        // 1) IPv4 ASAP
+        const ip4 = await getIPv4();
+        renderPartial({ ip4, ip6: "Loading…" });
 
-        if (!ip4) throw new Error("Could not detect IPv4 (likely blocked by an extension/VPN/network).");
+        // 2) Geo + IPv6 concurrently
+        const geoPromise = geoLookup(ip4);
+        const ip6Promise = getIPv6NonBlocking();
 
-        const geo = await geoLookup(ip4);
-        const result = { ip4, ip6, geo };
-        lastResult = result;
-        render(result);
+        // 3) Render IPv6 when ready (non-blocking)
+        ip6Promise.then(ip6 => renderPartial({ ip6 })).catch(() => renderPartial({ ip6: null }));
+
+        // 4) Render geo when ready
+        const geo = await geoPromise;
+        renderGeo(geo);
+
+        // 5) Snapshot for copy
+        const ip6 = await ip6Promise.catch(() => null);
+        lastResult = { ip4, ip6, geo };
 
       } catch (err) {
         setError(err.message || "Failed to fetch.");
       }
     }
 
+    // -------- Copy helpers --------
     async function copyText(txt, btnEl, okLabel, baseLabel) {
       try {
         await navigator.clipboard.writeText(txt);
@@ -640,7 +728,10 @@
     });
 
     lookupBtn.addEventListener("click", lookup);
-    refreshBtn.addEventListener("click", () => { ipInput.value = ""; lookup(); });
+    refreshBtn.addEventListener("click", () => {
+      ipInput.value = "";
+      lookup();
+    });
 
     // Auto-run on load
     lookup();
