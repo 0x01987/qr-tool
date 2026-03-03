@@ -24,7 +24,10 @@
   <meta property="og:description" content="Free, privacy-first online tools. No signup required." />
   <meta property="og:url" content="https://instantqr.io/" />
 
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+<link rel="alternate icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+<meta name="theme-color" content="#0b0f19" />
 
   <style>
     :root{
@@ -628,3 +631,4 @@
       cards.forEach(c => {
         const text = (c.innerText + ' ' + (c.getAttribute('data-tags') || '')).toLowerCase();
         c.style.display = text.includes(q) ? '' : 'none';
+
