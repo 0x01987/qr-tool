@@ -3,35 +3,120 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About | InstantQR.io</title>
-  <meta name="description" content="About InstantQR.io — a clean, fast QR code generator for Text/URL and Wi-Fi." />
+
+  <title>About InstantQR | Free QR Code Generator & Online Tools</title>
+  <meta name="description" content="Learn about InstantQR.io — a free, privacy-first platform for QR code generators (WiFi & URL), converters, crypto tools, and security utilities. Fast, clean, and no signup required." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/about.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About InstantQR | Free QR Code Generator & Online Tools" />
+  <meta property="og:description" content="InstantQR.io is a free, privacy-first tool hub for QR codes, converters, crypto tools, and security utilities." />
+  <meta property="og:url" content="https://instantqr.io/about.html" />
+
+  <!-- Optional favicon -->
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- ✅ Organization Schema (brand trust + SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "InstantQR",
+    "url": "https://instantqr.io",
+    "logo": "https://instantqr.io/assets/instantqr-logo.svg",
+    "sameAs": []
+  }
+  </script>
+
+  <!-- ✅ About Page / WebPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"About InstantQR",
+    "url":"https://instantqr.io/about.html",
+    "description":"InstantQR.io is a free, privacy-first platform for QR code generators (WiFi & URL), converters, crypto tools, and security utilities.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
   <style>
-    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
-    body { margin:0; background:#0b0f19; color:#e7eaf2; }
-    .wrap { max-width: 920px; margin:0 auto; padding: 22px; }
+    :root {
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      --bg:#0b0f19;
+      --card:#121a2a;
+      --panel:#0e1525;
+      --border:#22304e;
+      --border2:#2a3a5f;
+      --text:#e7eaf2;
+      --muted:#b8c0d6;
+      --link:#cfe0ff;
+      --brand:#3b82f6;
+      --radius:18px;
+      --radius2:16px;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --max: 920px;
+    }
+    body { margin:0; background:var(--bg); color:var(--text); }
+    .wrap { max-width: var(--max); margin:0 auto; padding: 22px; }
+
     .card {
-      background:#121a2a; border:1px solid #22304e; border-radius:18px;
-      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
     }
-    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    h1{ margin:0; font-size:24px; }
-    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
 
-    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; margin-top:14px; }
-    h2{ margin:12px 0 8px; font-size:16px; }
-    p, li{ color:#b8c0d6; font-size:13px; line-height:1.7; }
-    ul{ margin:8px 0 0; padding-left:18px; }
+    header{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .brandRow{ display:flex; align-items:center; gap:10px; }
+    .logoImg{ height:30px; width:auto; display:block; }
 
-    .topnav{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-      margin-top:10px;
-    }
+    h1{ margin:0; font-size:26px; letter-spacing:-.2px; }
+    .sub{ margin:6px 0 0; color:var(--muted); font-size:13px; }
+
+    .topnav{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
     .linkbtn{
       display:inline-block; padding:10px 12px; border-radius:12px;
-      background:#0b1222; border:1px solid #2a3a5f;
-      color:#cfe0ff; text-decoration:none; font-weight:700; font-size:12px;
+      background:#0b1222; border:1px solid var(--border2);
+      color:var(--link); text-decoration:none; font-weight:700; font-size:12px;
     }
-    .linkbtn:hover{ border-color:#3b82f6; }
+    .linkbtn:hover{ border-color:var(--brand); }
+
+    .box{
+      background:var(--panel);
+      border:1px solid var(--border2);
+      border-radius:var(--radius2);
+      padding:16px;
+      margin-top:14px;
+    }
+    h2{ margin:16px 0 8px; font-size:16px; }
+    p, li{ color:var(--muted); font-size:13px; line-height:1.75; }
+    ul{ margin:8px 0 0; padding-left:18px; }
+
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .miniCard{
+      background:#0b1222;
+      border:1px solid var(--border2);
+      border-radius:14px;
+      padding:12px;
+    }
+    .miniTitle{ font-weight:800; color:var(--text); font-size:13px; margin-bottom:6px; }
+    .miniText{ color:var(--muted); font-size:13px; line-height:1.65; margin:0; }
 
     .footerLinks{
       margin-top:14px;
@@ -39,55 +124,109 @@
       color:#8ea0c8;
       font-size:12px;
     }
-    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
-    .footerLinks a:hover{ text-decoration:underline; }
-    code{ color:#cfe0ff; }
+    .footerLinks a{ color:var(--link); }
+    code{ color:var(--link); }
+
+    @media (max-width: 640px){
+      .grid{ grid-template-columns: 1fr; }
+      h1{ font-size:24px; }
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="card">
       <header>
         <div>
-          <h1>About InstantQR.io</h1>
-          <div class="sub">Fast, clean QR codes — right in your browser.</div>
+          <div class="brandRow">
+            <img class="logoImg" src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+            <div>
+              <h1>About InstantQR</h1>
+              <div class="sub">Free, privacy-first online tools — fast, clean, and no signup required.</div>
+            </div>
+          </div>
         </div>
+
         <div class="topnav">
-          <a class="linkbtn" href="/">← Back to Generator</a>
+          <a class="linkbtn" href="/">← Back to Home</a>
+          <a class="linkbtn" href="/contact.html">Contact</a>
         </div>
       </header>
 
       <div class="box">
-        <h2>What is InstantQR?</h2>
+        <h2>What is InstantQR.io?</h2>
         <p>
-          InstantQR.io is a lightweight QR code generator for <strong>Text/URL</strong> and <strong>Wi-Fi</strong>.
-          It’s designed to be simple, quick, and usable on mobile and desktop.
+          <strong>InstantQR.io</strong> is a free, lightweight tool hub built to help you get quick results without clutter.
+          We offer a <strong>QR code generator</strong> (WiFi and URL), plus practical utilities like converters, crypto calculators,
+          and security tools — designed to work smoothly on both mobile and desktop.
         </p>
+
+        <h2>What you can do on InstantQR</h2>
+        <div class="grid">
+          <div class="miniCard">
+            <div class="miniTitle">🔳 QR Code Generators</div>
+            <p class="miniText">
+              Create <strong>WiFi QR codes</strong> for guests and <strong>URL QR codes</strong> for websites, menus, flyers, and business cards.
+            </p>
+          </div>
+          <div class="miniCard">
+            <div class="miniTitle">📏 Converters & Everyday Tools</div>
+            <p class="miniText">
+              Convert common units quickly and use simple utilities that save time — built for speed and clarity.
+            </p>
+          </div>
+          <div class="miniCard">
+            <div class="miniTitle">⛽ Crypto & Web3 Utilities</div>
+            <p class="miniText">
+              Estimate gas fees and calculate crypto profit/loss with straightforward tools made for traders and builders.
+            </p>
+          </div>
+          <div class="miniCard">
+            <div class="miniTitle">🔐 Security Utilities</div>
+            <p class="miniText">
+              Generate strong passwords and use privacy-minded tools for everyday online safety.
+            </p>
+          </div>
+        </div>
 
         <h2>Privacy-first</h2>
         <p>
-          QR generation happens locally in your browser. We don’t ask you to create an account and we don’t store
-          the data you type into the generator.
+          We aim to keep InstantQR <strong>privacy-first</strong>. Many tools are designed to run locally in your browser.
+          We don’t require accounts and we don’t intentionally store sensitive inputs such as WiFi details, passwords, or text you enter.
         </p>
 
-        <h2>Common uses</h2>
+        <h2>Who InstantQR is for</h2>
         <ul>
-          <li>Share a website or menu link</li>
-          <li>Create Wi-Fi QR codes for guests</li>
-          <li>Add QR codes to flyers, business cards, and events</li>
+          <li>Small businesses creating QR codes for menus, signs, and promotions</li>
+          <li>Events and venues sharing WiFi access instantly</li>
+          <li>Creators and teams needing fast conversions and time tools</li>
+          <li>Crypto users estimating gas and calculating trade outcomes</li>
         </ul>
 
-        <h2>Feedback</h2>
+        <h2>Support & feedback</h2>
         <p>
-          Have an idea or found an issue? Visit the <a href="/contact.html" style="color:#cfe0ff;">Contact</a> page.
+          Have an idea, found an issue, or want a new tool added? Visit our
+          <a href="/contact.html">Contact</a> page and send us a message.
         </p>
+
+        <h2>Quick links</h2>
+        <ul>
+          <li><a href="/wifi-qr-code-generator.html">WiFi QR Generator</a></li>
+          <li><a href="/url-qr-code-generator.html">URL QR Generator</a></li>
+          <li><a href="/unit-converter.html">Unit Converter</a></li>
+          <li><a href="/web3-gas-fee-estimator.html">Web3 Gas Fee Estimator</a></li>
+          <li><a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms of Service</a></li>
+        </ul>
       </div>
 
       <div class="footerLinks">
         <a href="/about.html">About</a> ·
         <a href="/privacy.html">Privacy</a> ·
         <a href="/terms.html">Terms</a> ·
-        <a href="/contact.html">Contact</a>
+        <a href="/contact.html">Contact</a> ·
+        <a href="/sitemap.xml">Sitemap</a>
       </div>
     </div>
   </div>
