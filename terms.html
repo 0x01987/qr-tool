@@ -3,89 +3,206 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Terms | InstantQR.io</title>
-  <meta name="description" content="Terms of Service for InstantQR.io" />
-  <style>
-    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
-    body { margin:0; background:#0b0f19; color:#e7eaf2; }
-    .wrap { max-width: 920px; margin:0 auto; padding: 22px; }
-    .card {
-      background:#121a2a; border:1px solid #22304e; border-radius:18px;
-      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
-    }
-    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    h1{ margin:0; font-size:24px; }
-    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
 
-    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; margin-top:14px; }
-    h2{ margin:12px 0 8px; font-size:16px; }
-    p, li{ color:#b8c0d6; font-size:13px; line-height:1.7; }
-    ul{ margin:8px 0 0; padding-left:18px; }
-    .tiny{ color:#8ea0c8; font-size:12px; }
+  <title>Terms of Service | InstantQR.io</title>
+  <meta name="description" content="Terms of Service for InstantQR.io. Read rules for using our QR code generators and free online tools, including acceptable use, disclaimers, and limitation of liability." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/terms.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Terms of Service | InstantQR.io" />
+  <meta property="og:description" content="Rules for using InstantQR.io, including acceptable use, disclaimers, and limitation of liability." />
+  <meta property="og:url" content="https://instantqr.io/terms.html" />
+
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- ✅ Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"InstantQR",
+    "url":"https://instantqr.io",
+    "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+  }
+  </script>
+
+  <!-- ✅ Terms Page Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Terms of Service",
+    "url":"https://instantqr.io/terms.html",
+    "description":"Terms of Service for InstantQR.io.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      --bg:#0b0f19;
+      --card:#121a2a;
+      --panel:#0e1525;
+      --border:#22304e;
+      --border2:#2a3a5f;
+      --text:#e7eaf2;
+      --muted:#b8c0d6;
+      --muted2:#8ea0c8;
+      --link:#cfe0ff;
+      --brand:#3b82f6;
+      --radius:18px;
+      --radius2:16px;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --max: 920px;
+    }
+    body { margin:0; background:var(--bg); color:var(--text); }
+    .wrap { max-width: var(--max); margin:0 auto; padding: 22px; }
+
+    .card {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+
+    header{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .brandRow{ display:flex; align-items:center; gap:10px; }
+    .logoImg{ height:30px; width:auto; display:block; }
+
+    h1{ margin:0; font-size:26px; }
+    .sub{ margin:6px 0 0; color:var(--muted); font-size:13px; }
 
     .topnav{
       display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-      margin-top:10px;
     }
     .linkbtn{
       display:inline-block; padding:10px 12px; border-radius:12px;
-      background:#0b1222; border:1px solid #2a3a5f;
-      color:#cfe0ff; text-decoration:none; font-weight:700; font-size:12px;
+      background:#0b1222; border:1px solid var(--border2);
+      color:var(--link); text-decoration:none; font-weight:700; font-size:12px;
     }
-    .linkbtn:hover{ border-color:#3b82f6; }
+    .linkbtn:hover{ border-color:var(--brand); }
+
+    .box{
+      background:var(--panel);
+      border:1px solid var(--border2);
+      border-radius:var(--radius2);
+      padding:16px;
+      margin-top:14px;
+    }
+    h2{ margin:18px 0 8px; font-size:16px; }
+    p, li{ color:var(--muted); font-size:13px; line-height:1.8; }
+    ul{ margin:8px 0 0; padding-left:18px; }
+    .tiny{ color:var(--muted2); font-size:12px; }
+
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .callout{
+      margin-top:10px;
+      padding:12px;
+      border-radius:14px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.75;
+    }
 
     .footerLinks{
       margin-top:14px;
       text-align:center;
-      color:#8ea0c8;
+      color:var(--muted2);
       font-size:12px;
     }
-    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
-    .footerLinks a:hover{ text-decoration:underline; }
+    .footerLinks a{ color:var(--link); }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="card">
       <header>
-        <div>
-          <h1>Terms of Service</h1>
-          <div class="sub">Rules for using InstantQR.io.</div>
+        <div class="brandRow">
+          <img class="logoImg" src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+          <div>
+            <h1>Terms of Service</h1>
+            <div class="sub">Rules for using InstantQR.io and our free online tools.</div>
+          </div>
         </div>
+
         <div class="topnav">
-          <a class="linkbtn" href="/">← Back to Generator</a>
+          <a class="linkbtn" href="/">← Back to Home</a>
+          <a class="linkbtn" href="/privacy.html">Privacy</a>
+          <a class="linkbtn" href="/contact.html">Contact</a>
         </div>
       </header>
 
       <div class="box">
-        <p class="tiny"><strong>Effective:</strong> February 27, 2026</p>
+        <p class="tiny"><strong>Effective Date:</strong> February 27, 2026</p>
 
-        <h2>Use of the service</h2>
+        <div class="callout">
+          By accessing or using InstantQR.io, you agree to these Terms of Service. If you do not agree, please do not use the website.
+        </div>
+
+        <h2>1. Service description</h2>
         <p>
-          InstantQR.io is provided for lawful use only. You agree not to use the site to generate or distribute QR codes
-          that promote illegal activity, malware, phishing, or harmful content.
+          InstantQR.io provides free online tools, including QR code generators (such as WiFi QR and URL QR),
+          converters, and other utilities. These tools are provided for general informational and productivity purposes.
         </p>
 
-        <h2>No warranties</h2>
+        <h2>2. Acceptable use</h2>
+        <p>You agree to use InstantQR.io only for lawful purposes and in a way that does not harm others or the service. You agree not to:</p>
+        <ul>
+          <li>Use the site to generate or distribute QR codes that promote illegal activity, malware, phishing, scams, or harmful content</li>
+          <li>Attempt to interfere with the site’s security, availability, or performance (including automated abuse or denial-of-service)</li>
+          <li>Use the site to violate the rights of others, including intellectual property or privacy rights</li>
+          <li>Misrepresent your identity or attempt to access restricted areas of the service</li>
+        </ul>
+
+        <h2>3. No warranties</h2>
         <p>
-          The service is provided “as is” and “as available,” without warranties of any kind. We do not guarantee the accuracy,
-          reliability, or availability of the service.
+          InstantQR.io is provided on an “as is” and “as available” basis. To the fullest extent permitted by law,
+          we disclaim all warranties, express or implied, including warranties of merchantability, fitness for a particular purpose,
+          and non-infringement. We do not guarantee that the service will be uninterrupted, error-free, or secure.
         </p>
 
-        <h2>Limitation of liability</h2>
+        <h2>4. Limitation of liability</h2>
         <p>
-          To the fullest extent permitted by law, InstantQR.io will not be liable for any indirect, incidental, special, or consequential
-          damages arising from your use of the service.
+          To the fullest extent permitted by law, InstantQR.io and its operators will not be liable for any indirect, incidental,
+          special, consequential, or punitive damages, or any loss of profits, data, use, goodwill, or other intangible losses,
+          resulting from (a) your access to or use of the service, (b) inability to access or use the service, or (c) any content
+          generated or shared using the service.
         </p>
 
-        <h2>Changes</h2>
+        <h2>5. Third-party services and links</h2>
         <p>
-          We may update these Terms from time to time. Continued use of the site after changes are posted means you accept the updated Terms.
+          InstantQR.io may include links to third-party websites or services. We do not control and are not responsible for their content,
+          policies, or practices. Your use of third-party services is at your own risk.
         </p>
 
-        <h2>Contact</h2>
+        <h2>6. Advertising</h2>
         <p>
-          Questions? Visit <a href="/contact.html" style="color:#cfe0ff;">Contact</a>.
+          We may display advertisements through third-party networks such as Google AdSense. Ads may be personalized or contextual,
+          and may use cookies or similar technologies in accordance with our <a href="/privacy.html">Privacy Policy</a>.
+        </p>
+
+        <h2>7. Changes to these terms</h2>
+        <p>
+          We may update these Terms from time to time. The effective date will be updated when changes are made.
+          Continued use of InstantQR.io after changes are posted means you accept the updated Terms.
+        </p>
+
+        <h2>8. Contact</h2>
+        <p>
+          Questions about these Terms? Please visit our <a href="/contact.html">Contact</a> page.
         </p>
       </div>
 
@@ -93,7 +210,8 @@
         <a href="/about.html">About</a> ·
         <a href="/privacy.html">Privacy</a> ·
         <a href="/terms.html">Terms</a> ·
-        <a href="/contact.html">Contact</a>
+        <a href="/contact.html">Contact</a> ·
+        <a href="/sitemap.xml">Sitemap</a>
       </div>
     </div>
   </div>
