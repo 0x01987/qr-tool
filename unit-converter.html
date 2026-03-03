@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) - keep consistent across pages -->
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,52 +12,202 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Unit Converter | InstantQR</title>
-  <meta name="description" content="Convert units instantly: cups to grams, oz to g, lbs to kg, inches to cm, °F to °C, gallons to liters, and more." />
+
+  <title>Unit Converter | Length, Weight, Temperature, Volume, Speed | InstantQR.io</title>
+  <meta name="description" content="Convert units instantly: inches to cm, lbs to kg, °F to °C, oz to g, gallons to liters, mph to km/h, and more. Privacy-first: runs locally in your browser." />
   <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/unit-converter.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Unit Converter | InstantQR.io" />
+  <meta property="og:description" content="Convert units instantly. Privacy-first: runs locally in your browser." />
+  <meta property="og:url" content="https://instantqr.io/unit-converter.html" />
+
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- ✅ Structured Data: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Unit Converter",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Web",
+    "url":"https://instantqr.io/unit-converter.html",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io",
+      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <!-- ✅ FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Is this unit converter free to use?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. The InstantQR unit converter is free to use."}
+      },
+      {
+        "@type":"Question",
+        "name":"Do you store my values or conversions?",
+        "acceptedAnswer":{"@type":"Answer","text":"No. Conversions run locally in your browser and we do not intentionally store the values you enter."}
+      },
+      {
+        "@type":"Question",
+        "name":"Does the unit converter work offline?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. Once the page is loaded, it can continue to work offline in most browsers."}
+      },
+      {
+        "@type":"Question",
+        "name":"What are the most common conversions?",
+        "acceptedAnswer":{"@type":"Answer","text":"Popular conversions include inches to centimeters, pounds to kilograms, Fahrenheit to Celsius, ounces to grams, gallons to liters, and mph to km/h."}
+      }
+    ]
+  }
+  </script>
 
   <style>
-    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
-    body { margin:0; background:#0b0f19; color:#e7eaf2; }
-    .wrap { max-width: 920px; margin:0 auto; padding: 22px; }
-    .card {
-      background:#121a2a; border:1px solid #22304e; border-radius:18px;
-      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    :root{
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      --bg:#0b0f19;
+      --card:#121a2a;
+      --panel:#0e1525;
+      --border:#22304e;
+      --border2:#2a3a5f;
+      --text:#e7eaf2;
+      --muted:#b8c0d6;
+      --muted2:#8ea0c8;
+      --link:#cfe0ff;
+      --brand:#3b82f6;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:16px;
+      --max: 980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:
+        radial-gradient(900px 540px at 12% 8%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px;}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
     }
 
-    /* Top nav (same style as your index/password) */
+    /* Topbar (homepage-like) */
     .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; flex-wrap:wrap; margin-bottom:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:2px 2px 10px;
+      border-bottom:1px solid rgba(34,48,78,.55);
+      margin-bottom:12px;
     }
     .brand{
-      display:flex; align-items:baseline; gap:10px;
-      text-decoration:none; color:#e7eaf2;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:900;
+      letter-spacing:-.2px;
     }
-    .brand strong{ font-size:16px; letter-spacing:.2px; }
-    .brand span{ color:#8ea0c8; font-size:12px; }
+    .brand img{ height:30px; width:auto; display:block; }
 
-    .toolnav{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
-    .toolnav a{
-      padding:8px 10px; border-radius:999px;
-      background:#0b1222; border:1px solid #2a3a5f;
-      color:#b8c0d6; font-size:12px; text-decoration:none; font-weight:700;
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
     }
-    .toolnav a:hover{ border-color:#3b82f6; color:#e7eaf2; }
-    .toolnav a.active{ border-color:#3b82f6; color:#e7eaf2; }
+    .nav a{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--link);
+      text-decoration:none;
+      font-weight:800;
+      font-size:12px;
+      user-select:none;
+    }
+    .nav a:hover{ border-color: rgba(59,130,246,.85); }
+    .nav a.active{ border-color: rgba(59,130,246,.95); }
 
-    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    h1{ margin:0; font-size:24px; }
-    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
+    /* Hero */
+    .hero{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .hero h1{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-.3px;
+      max-width: 28ch;
+    }
+    .hero p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+      max-width: 78ch;
+    }
+    .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .badge{
+      padding:7px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--muted);
+      font-size:12px;
+      user-select:none;
+    }
 
-    .grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:14px; margin-top:14px; }
+    .grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:14px; margin-top:14px; align-items:start; }
     @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
 
-    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; }
-    label{ display:block; font-size:12px; color:#b8c0d6; margin-bottom:6px; }
+    .box{ background:var(--panel); border:1px solid var(--border2); border-radius:var(--radius2); padding:14px; }
+    label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
     input, select{
-      width:100%; padding:12px 10px; border-radius:14px;
-      border:1px solid #2a3a5f; background:#0b1222; color:#e7eaf2; outline:none;
+      width:100%;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid var(--border2);
+      background:#0b1222;
+      color:var(--text);
+      outline:none;
+    }
+    input:focus, select:focus{
+      border-color: rgba(59,130,246,.85);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
     }
 
     .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
@@ -65,23 +215,42 @@
 
     .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
     button{
-      border:0; border-radius:14px; padding:12px 14px;
-      background:#3b82f6; color:white; font-weight:800; cursor:pointer;
+      border:0;
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--brand);
+      color:white;
+      font-weight:900;
+      cursor:pointer;
     }
-    button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
+    button:hover{ filter:brightness(1.05); }
+    button.secondary{
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--text);
+      font-weight:800;
+    }
+    button.secondary:hover{ border-color: rgba(59,130,246,.7); }
 
     .pillbar{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
     .pill{
-      padding:7px 10px; border-radius:999px;
-      background:#0b1222; border:1px solid #2a3a5f;
-      color:#b8c0d6; font-size:12px; cursor:pointer; user-select:none;
-      display:flex; align-items:center; gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--muted);
+      font-size:12px;
+      cursor:pointer;
+      user-select:none;
+      display:flex;
+      align-items:center;
+      gap:8px;
     }
-    .pill.active{ border-color:#3b82f6; color:#e7eaf2; }
+    .pill.active{ border-color: rgba(59,130,246,.95); color:var(--text); }
 
-    .hint{ color:#b8c0d6; font-size:12px; }
-    .tiny{ color:#8ea0c8; font-size:12px; margin-top:10px; }
-    code{ color:#cfe0ff; }
+    .hint{ color:var(--muted); font-size:12px; line-height:1.65; }
+    .tiny{ color:var(--muted2); font-size:12px; margin-top:10px; }
+    code{ color:var(--link); }
 
     .resultBox{
       margin-top:12px;
@@ -99,13 +268,21 @@
       letter-spacing:.2px;
     }
 
+    .callout{
+      margin-top:12px;
+      padding:12px;
+      border-radius:14px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+    }
+
     .footerLinks{
       margin-top:14px;
       text-align:center;
-      color:#8ea0c8;
+      color:var(--muted2);
       font-size:12px;
     }
-    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
+    .footerLinks a{ color:var(--link); text-decoration:none; }
     .footerLinks a:hover{ text-decoration:underline; }
   </style>
 </head>
@@ -114,30 +291,42 @@
   <div class="wrap">
     <div class="card">
 
+      <!-- Topbar -->
       <div class="topbar">
-        <a class="brand" href="/">
-          <strong>InstantQR</strong>
-          <span>privacy-first tools</span>
+        <a class="brand" href="/" aria-label="InstantQR Home">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+          <span>InstantQR</span>
         </a>
-        <nav class="toolnav" aria-label="Tools">
+
+        <nav class="nav" aria-label="Tools">
           <a href="/">QR Generator</a>
-          <a href="/password.html">Password Generator</a>
+          <a href="/password.html">Password</a>
           <a class="active" href="/unit-converter.html">Unit Converter</a>
           <a href="/ip-lookup.html">IP Lookup</a>
           <a href="/json-formatter.html">JSON Formatter</a>
-          <a href="/time-zone-converter.html">Time Zone Converter</a>
-          <a href="/base64-encoder.html">Base64 Encoder</a>
-          <a href="/countdown-timer.html">Countdown Timer</a>
+          <a href="/time-zone-converter.html">Time Zone</a>
+          <a href="/base64-encoder.html">Base64</a>
+          <a href="/countdown-timer.html">Countdown</a>
           <a href="/world-clock.html">World Clock</a>
         </nav>
       </div>
 
-      <header>
+      <!-- Hero -->
+      <section class="hero">
         <div>
           <h1>Unit Converter</h1>
-          <div class="sub">Instant conversions for everyday use. Runs locally in your browser.</div>
+          <p>
+            Instant conversions for everyday use. Convert length, weight, temperature, volume, and speed.
+            Privacy-first: runs locally in your browser.
+          </p>
+          <div class="badges" aria-label="Highlights">
+            <span class="badge">⚡ Fast</span>
+            <span class="badge">🔒 Local</span>
+            <span class="badge">📱 Mobile friendly</span>
+            <span class="badge">✅ No signup</span>
+          </div>
         </div>
-      </header>
+      </section>
 
       <div class="grid">
         <!-- Controls -->
@@ -191,7 +380,7 @@
           </div>
 
           <div class="tiny">
-            Popular: <code>in → cm</code>, <code>lbs → kg</code>, <code>°F → °C</code>, <code>oz → g</code>, <code>gallons → liters</code>.
+            Popular: <code>in → cm</code>, <code>lbs → kg</code>, <code>°F → °C</code>, <code>oz → g</code>, <code>gal → L</code>, <code>mph → km/h</code>.
           </div>
         </div>
 
@@ -199,9 +388,9 @@
         <div class="box">
           <div class="hint"><strong>Fast + private:</strong> conversions happen locally. No form submissions.</div>
 
-          <div style="margin-top:12px;">
-            <label>Quick presets</label>
-            <div class="pillbar" id="presetBar">
+          <div class="callout" style="margin-top:12px;">
+            <label style="margin:0 0 8px;">Quick presets</label>
+            <div class="pillbar" id="presetBar" style="margin-top:0;">
               <div class="pill" data-preset="in_cm">Inches → cm</div>
               <div class="pill" data-preset="cm_in">cm → Inches</div>
               <div class="pill" data-preset="lb_kg">lbs → kg</div>
@@ -215,12 +404,16 @@
           </div>
 
           <div style="margin-top:14px;">
-            <h2 style="margin:0 0 6px; font-size:16px;">FAQ</h2>
-            <p class="hint" style="line-height:1.6; margin:0;">
+            <div style="font-weight:900;">FAQ</div>
+            <div class="hint" style="margin-top:8px;">
               <strong>Is this free?</strong> Yes.<br>
               <strong>Do you store values?</strong> No.<br>
               <strong>Does it work offline?</strong> Yes once loaded.
-            </p>
+            </div>
+          </div>
+
+          <div class="tiny" style="margin-top:12px;">
+            Related: <a href="/time-zone-converter.html">Time Zone Converter</a> · <a href="/world-clock.html">World Clock</a>
           </div>
         </div>
       </div>
@@ -229,13 +422,16 @@
         <div style="margin-bottom:8px;">
           <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
           <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
-          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a>
+          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
+          <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
+          <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
         </div>
         <div>
           <a href="/about.html">About</a> ·
           <a href="/privacy.html">Privacy</a> ·
           <a href="/terms.html">Terms</a> ·
-          <a href="/contact.html">Contact</a>
+          <a href="/contact.html">Contact</a> ·
+          <a href="/sitemap.xml">Sitemap</a>
         </div>
       </div>
 
@@ -265,7 +461,7 @@
         label: "Weight",
         units: [
           { key: "oz", name: "Ounces (oz)", factorToBase: 28.349523125 }, // base = grams
-          { key: "lb", name: "Pounds (lbs)", factorToBase: 453.59237 },
+          { key: "lb", name: "Pounds (lb)", factorToBase: 453.59237 },
           { key: "g",  name: "Grams (g)", factorToBase: 1 },
           { key: "kg", name: "Kilograms (kg)", factorToBase: 1000 },
         ],
@@ -309,7 +505,6 @@
           { key: "k", name: "Kelvin (K)" },
         ],
         convert: (v, from, to) => {
-          // Convert from -> Celsius -> to
           const toC = (value, unit) => {
             if (unit.key === "c") return value;
             if (unit.key === "f") return (value - 32) * 5/9;
@@ -363,15 +558,7 @@
         toUnitEl.appendChild(o2);
       });
 
-      // Default pairs per converter
-      const defaults = {
-        length: ["in", "cm"],
-        weight: ["lb", "kg"],
-        temperature: ["f", "c"],
-        volume: ["cup", "g"] // will be corrected below (volume is not grams)
-      };
-
-      // Better defaults
+      // Good defaults
       if(currentConvKey === "volume"){ fromUnitEl.value = "gal"; toUnitEl.value = "l"; }
       else if(currentConvKey === "length"){ fromUnitEl.value = "in"; toUnitEl.value = "cm"; }
       else if(currentConvKey === "weight"){ fromUnitEl.value = "lb"; toUnitEl.value = "kg"; }
@@ -382,7 +569,6 @@
     }
 
     function parseNumber(val){
-      // allow commas
       const cleaned = String(val || "").trim().replace(/,/g, "");
       const n = Number(cleaned);
       return Number.isFinite(n) ? n : null;
@@ -429,7 +615,6 @@
       if(!pill) return;
       const preset = pill.dataset.preset;
 
-      // Presets map
       const apply = {
         in_cm: () => { currentConvKey="length"; setActivePills(convBar, p => p.dataset.conv==="length"); fillUnits(); fromUnitEl.value="in"; toUnitEl.value="cm"; },
         cm_in: () => { currentConvKey="length"; setActivePills(convBar, p => p.dataset.conv==="length"); fillUnits(); fromUnitEl.value="cm"; toUnitEl.value="in"; },
