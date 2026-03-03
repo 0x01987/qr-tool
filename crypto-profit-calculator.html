@@ -120,7 +120,7 @@
       box-shadow:var(--shadow);
     }
 
-    /* Topbar */
+    /* Topbar (matches your other pages) */
     .topbar{
       display:flex;
       align-items:center;
@@ -164,126 +164,158 @@
     .nav a:hover{ border-color: rgba(59,130,246,.85); }
     .nav a.active{ border-color: rgba(59,130,246,.95); }
 
-    /* ✅ LIVE TICKER */
-    .tickerWrap{
-      margin: 8px 0 14px;
-      border:1px solid var(--border2);
+    /* ✅ Live prices ticker */
+    .tickerBar{
+      margin: 12px 0 0;
+      border: 1px solid var(--border2);
+      background: #0b1222;
       border-radius: 14px;
-      background:#0b1222;
-      overflow:hidden;
+      overflow: hidden;
     }
     .tickerTop{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      padding:10px 12px;
-      border-bottom:1px solid rgba(42,58,95,.55);
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(42,58,95,.55);
     }
     .tickerTitle{
-      font-weight:900;
-      font-size:12px;
-      color:var(--muted);
-      letter-spacing:.2px;
       display:flex;
       align-items:center;
-      gap:8px;
+      gap:10px;
+      font-weight: 900;
+      letter-spacing: -.1px;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
     }
-    .liveDot{
-      width:8px;height:8px;border-radius:999px;background:var(--good);
-      box-shadow: 0 0 14px rgba(52,211,153,.65);
+    .dot{
+      width:8px;height:8px;border-radius:999px;background:var(--warn);
+      box-shadow: 0 0 10px rgba(251,191,36,.30);
     }
     .tickerMeta{
-      font-size:12px;
-      color:var(--muted2);
       display:flex;
-      gap:10px;
       align-items:center;
+      gap:10px;
+      color: var(--muted2);
+      font-size: 12px;
       flex-wrap:wrap;
       justify-content:flex-end;
     }
-    .tinyBtn{
-      border:1px solid var(--border2);
-      background: rgba(255,255,255,.03);
-      color: var(--text);
+    .pillSmall{
+      font-size: 11px;
+      padding: 4px 8px;
       border-radius: 999px;
-      padding: 6px 10px;
-      font-weight:900;
-      font-size:12px;
-      cursor:pointer;
+      border: 1px solid rgba(184,192,214,.22);
+      background: rgba(184,192,214,.08);
+      color: var(--muted);
+      white-space: nowrap;
     }
-    .tinyBtn:hover{ border-color: rgba(59,130,246,.85); }
+    .pillSmall.ok{ border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.10); color: #bff7e0; }
+    .pillSmall.bad{ border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.10); color: #ffd1da; }
 
-    .tickerRail{
-      position:relative;
-      overflow:hidden;
-      padding: 10px 0;
-    }
-    .tickerRow{
+    .tickerTrack{
       display:flex;
       gap:10px;
-      align-items:center;
-      width:max-content;
+      padding: 10px 0;
       will-change: transform;
-      animation: tickerMove 34s linear infinite;
-      padding-left: 12px;
+      animation: scrollLeft 28s linear infinite;
     }
-    .tickerRail:hover .tickerRow{ animation-play-state: paused; }
+    .tickerBar:hover .tickerTrack{ animation-play-state: paused; }
 
-    @keyframes tickerMove{
-      from{ transform: translateX(0); }
-      to{ transform: translateX(-50%); }
+    @keyframes scrollLeft{
+      0%{ transform: translateX(0); }
+      100%{ transform: translateX(-50%); }
     }
 
     .tick{
+      flex: 0 0 auto;
+      min-width: 168px;
+      border: 1px solid rgba(42,58,95,.55);
+      background: rgba(14,21,37,.55);
+      border-radius: 14px;
+      padding: 10px 12px;
       display:flex;
       align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border:1px solid rgba(42,58,95,.75);
-      background: rgba(0,0,0,.18);
-      min-width: 190px;
       justify-content:space-between;
-      white-space:nowrap;
+      gap:10px;
     }
-    .tick .left{
-      display:flex; flex-direction:column; gap:2px;
+    .left{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width: 64px;
     }
     .sym{
-      font-weight:1000;
-      font-size:12px;
-      letter-spacing:.2px;
+      font-weight: 950;
+      letter-spacing: .2px;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.1;
     }
     .src{
-      font-size:11px;
+      font-size: 11px;
       color: var(--muted2);
+      line-height: 1.1;
     }
     .right{
+      text-align:right;
       display:flex;
+      flex-direction:column;
+      gap:4px;
       align-items:flex-end;
-      gap:8px;
-      font-variant-numeric: tabular-nums;
     }
     .price{
-      font-weight:1000;
-      font-size:13px;
+      font-weight: 950;
+      font-size: 13px;
+      letter-spacing: .15px;
+      font-variant-numeric: tabular-nums;
+      color: var(--text);
+      line-height: 1.1;
     }
+
+    /* ✅ Price text color */
+    .price.upText { color: #bff7e0; }
+    .price.downText { color: #ffd1da; }
+    .price.flatText { color: var(--text); }
+
+    /* ✅ Optional: also color the symbol a bit */
+    .sym.upText { color: #bff7e0; }
+    .sym.downText { color: #ffd1da; }
+    .sym.flatText { color: var(--text); }
+
     .chg{
-      font-weight:1000;
-      font-size:12px;
-      padding: 3px 8px;
+      font-size: 11px;
+      padding: 3px 7px;
       border-radius: 999px;
-      border:1px solid rgba(184,192,214,.28);
-      background: rgba(184,192,214,.10);
+      border: 1px solid rgba(184,192,214,.22);
+      background: rgba(184,192,214,.08);
+      color: var(--muted);
       display:inline-flex;
       align-items:center;
       gap:6px;
+      line-height: 1.1;
     }
-    .up{ color:#bff7e0; border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.12); }
-    .down{ color:#ffd1da; border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.12); }
-    .flat{ color: var(--muted); }
+    .chg.up{ border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.10); color: #bff7e0; }
+    .chg.down{ border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.10); color: #ffd1da; }
+    .chg.flat{ border-color: rgba(184,192,214,.22); background: rgba(184,192,214,.08); color: var(--muted); }
 
+    /* ✅ Tiny flash effect on updates */
+    .flashUp{ animation: flashUp .55s ease-out; }
+    .flashDown{ animation: flashDown .55s ease-out; }
+    @keyframes flashUp{
+      0%{ box-shadow: 0 0 0 rgba(52,211,153,0); transform: translateY(0); }
+      30%{ box-shadow: 0 0 0 6px rgba(52,211,153,.16); transform: translateY(-1px); }
+      100%{ box-shadow: 0 0 0 rgba(52,211,153,0); transform: translateY(0); }
+    }
+    @keyframes flashDown{
+      0%{ box-shadow: 0 0 0 rgba(251,113,133,0); transform: translateY(0); }
+      30%{ box-shadow: 0 0 0 6px rgba(251,113,133,.14); transform: translateY(-1px); }
+      100%{ box-shadow: 0 0 0 rgba(251,113,133,0); transform: translateY(0); }
+    }
+
+    /* Hero */
     .hero{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
@@ -428,6 +460,7 @@
 
     .note{ margin-top:10px; color:var(--muted); font-size:12px; line-height:1.6; }
 
+    /* Results */
     .barWrap{
       border:1px solid var(--border2);
       background:#0b1222;
@@ -503,6 +536,7 @@
       line-height:1.65;
     }
 
+    /* Footer (matches your other pages) */
     .footerLinks{
       margin-top:14px;
       text-align:center;
@@ -510,10 +544,6 @@
       font-size:12px;
     }
     .footerLinks a{ color:var(--link); }
-
-    @media (prefers-reduced-motion: reduce){
-      .tickerRow{ animation: none; }
-    }
   </style>
 </head>
 
@@ -538,19 +568,22 @@
         </nav>
       </div>
 
-      <!-- ✅ LIVE PRICES TICKER (NO NEW PAGE) -->
-      <div class="tickerWrap" aria-label="Live crypto and stock prices">
+      <!-- ✅ Live Prices Ticker (same page, no new route) -->
+      <div class="tickerBar" role="region" aria-label="Live prices ticker">
         <div class="tickerTop">
-          <div class="tickerTitle"><span class="liveDot" aria-hidden="true"></span> LIVE prices</div>
+          <div class="tickerTitle">
+            <span class="dot" id="tickDot"></span>
+            <span>Live Prices</span>
+          </div>
           <div class="tickerMeta">
-            <span id="tickerStatus">Loading…</span>
-            <button class="tinyBtn" id="tickerRefreshBtn" type="button">Refresh</button>
+            <span class="pillSmall" id="tickStatus">Connecting…</span>
+            <span class="pillSmall" id="tickUpdated">Updated: —</span>
           </div>
         </div>
-        <div class="tickerRail">
-          <div class="tickerRow" id="tickerRow">
-            <!-- JS injects items -->
-          </div>
+
+        <!-- Two tracks for seamless loop -->
+        <div style="overflow:hidden;">
+          <div class="tickerTrack" id="tickerTrack"></div>
         </div>
       </div>
 
@@ -797,207 +830,8 @@
   </div>
 
   <script>
+  // ✅ Full working code: calculator + live ticker (CF Worker proxy) + red/green + arrows + tiny flash
   (() => {
-    // ============================
-    // ✅ LIVE TICKER (FAST + WORKING)
-    // ============================
-    const WORKER_BASE = "https://instantqr-prices.0x01987db.workers.dev";
-
-    // Stooq stock symbols:
-    // US stocks use: aapl.us, msft.us, nvda.us, amzn.us, googl.us, tsla.us, meta.us
-    // ETFs: spy.us, qqq.us
-    // NOTE: Polygon is NOT MATIC on stooq (that would be a crypto). We'll show POL/MATIC via CoinGecko.
-    const STOCKS = [
-      { key:"AAPL", stooq:"aapl.us", name:"Apple", src:"Stooq" },
-      { key:"MSFT", stooq:"msft.us", name:"Microsoft", src:"Stooq" },
-      { key:"NVDA", stooq:"nvda.us", name:"NVIDIA", src:"Stooq" },
-      { key:"AMZN", stooq:"amzn.us", name:"Amazon", src:"Stooq" },
-      { key:"GOOGL", stooq:"googl.us", name:"Alphabet", src:"Stooq" },
-      { key:"TSLA", stooq:"tsla.us", name:"Tesla", src:"Stooq" },
-      { key:"META", stooq:"meta.us", name:"Meta", src:"Stooq" },
-      { key:"SPY",  stooq:"spy.us",  name:"SPY", src:"Stooq" },
-      { key:"QQQ",  stooq:"qqq.us",  name:"QQQ", src:"Stooq" }
-    ];
-
-    // CoinGecko crypto ids: https://www.coingecko.com/api/documentations/v3
-    const CRYPTOS = [
-      { key:"BTC", cg:"bitcoin", name:"Bitcoin", src:"CoinGecko" },
-      { key:"ETH", cg:"ethereum", name:"Ethereum", src:"CoinGecko" },
-      { key:"SOL", cg:"solana", name:"Solana", src:"CoinGecko" },
-      { key:"XRP", cg:"ripple", name:"XRP", src:"CoinGecko" },
-      { key:"ADA", cg:"cardano", name:"Cardano", src:"CoinGecko" },
-      { key:"POL", cg:"polygon-ecosystem-token", name:"Polygon (POL)", src:"CoinGecko" } // new Polygon token
-      // If you want legacy MATIC too, add: { key:"MATIC", cg:"matic-network", ... }
-    ];
-
-    const tickerRow = document.getElementById("tickerRow");
-    const tickerStatus = document.getElementById("tickerStatus");
-    const tickerRefreshBtn = document.getElementById("tickerRefreshBtn");
-
-    const fmtUSD = new Intl.NumberFormat(undefined, { style:"currency", currency:"USD", maximumFractionDigits: 6 });
-    const fmtPct = new Intl.NumberFormat(undefined, { style:"percent", maximumFractionDigits: 2 });
-    const fmtNum = new Intl.NumberFormat(undefined, { maximumFractionDigits: 6 });
-
-    // Cache last price to color + arrow
-    const lastPrice = new Map(); // key => number
-
-    function escapeHtml(s){
-      return String(s).replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
-    }
-
-    function buildTick({key, price, changeDir, src}){
-      const arrow = changeDir === "up" ? "▲" : changeDir === "down" ? "▼" : "•";
-      const cls = changeDir === "up" ? "chg up" : changeDir === "down" ? "chg down" : "chg flat";
-      const priceStr = (price >= 1000) ? fmtUSD.format(price) : fmtUSD.format(price); // keep USD
-      return `
-        <div class="tick" data-key="${escapeHtml(key)}">
-          <div class="left">
-            <div class="sym">${escapeHtml(key)}</div>
-            <div class="src">${escapeHtml(src)}</div>
-          </div>
-          <div class="right">
-            <div class="price">${priceStr}</div>
-            <div class="${cls}"><span aria-hidden="true">${arrow}</span></div>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderTicker(items){
-      // Duplicate the row to create seamless loop (50% keyframes)
-      const html = items.map(buildTick).join("");
-      tickerRow.innerHTML = html + html;
-    }
-
-    function setStatus(text){ tickerStatus.textContent = text; }
-
-    function getDir(key, newPrice){
-      const prev = lastPrice.get(key);
-      if (typeof prev !== "number" || !Number.isFinite(prev)) {
-        lastPrice.set(key, newPrice);
-        return "flat";
-      }
-      const dir = newPrice > prev ? "up" : newPrice < prev ? "down" : "flat";
-      lastPrice.set(key, newPrice);
-      return dir;
-    }
-
-    // ---- Stock: Stooq CSV via Worker ----
-    // Stooq CSV header:
-    // Symbol,Date,Time,Open,High,Low,Close,Volume
-    function parseStooqCSV(text){
-      const lines = text.trim().split(/\r?\n/);
-      if (lines.length < 2) return null;
-      const cols = lines[1].split(",");
-      // Close is index 6
-      const closeStr = cols[6];
-      const close = Number(closeStr);
-      if (!Number.isFinite(close)) return null;
-      return close;
-    }
-
-    async function fetchStock(stooqSymbol){
-      // Add cache-buster so client doesn't reuse an old cached browser response
-      const u = `${WORKER_BASE}/stooq?s=${encodeURIComponent(stooqSymbol)}&t=${Date.now()}`;
-      const res = await fetch(u, { method:"GET", cache:"no-store" });
-      if (!res.ok) throw new Error(`Stock HTTP ${res.status}`);
-      const txt = await res.text();
-      const price = parseStooqCSV(txt);
-      if (price === null) throw new Error("Bad stock CSV");
-      return price;
-    }
-
-    // ---- Crypto: CoinGecko Simple Price ----
-    async function fetchCryptoMap(ids){
-      // CoinGecko has rate limits; keep refresh reasonable (10-20s).
-      // Using only USD.
-      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(ids.join(","))}&vs_currencies=usd`;
-      const res = await fetch(url, { method:"GET", cache:"no-store" });
-      if (!res.ok) throw new Error(`Crypto HTTP ${res.status}`);
-      const data = await res.json();
-      return data; // { bitcoin: {usd:...}, ...}
-    }
-
-    let tickerTimer = null;
-    let isFetching = false;
-    let refreshMs = 15000; // ✅ fast but safe. You can push to 8000, but CoinGecko may rate-limit.
-
-    async function refreshTicker(){
-      if (isFetching) return;
-      isFetching = true;
-      const started = Date.now();
-      setStatus("Updating…");
-
-      try{
-        // Crypto in one request (fast)
-        const cryptoIds = CRYPTOS.map(c => c.cg);
-        const cryptoData = await fetchCryptoMap(cryptoIds);
-
-        // Stocks in parallel (but limit concurrency)
-        const stockPromises = STOCKS.map(async (s) => {
-          try{
-            const p = await fetchStock(s.stooq);
-            return { key:s.key, price:p, src:s.src };
-          }catch{
-            return { key:s.key, price: NaN, src:s.src };
-          }
-        });
-        const stocks = await Promise.all(stockPromises);
-
-        const cryptos = CRYPTOS.map(c => {
-          const usd = cryptoData?.[c.cg]?.usd;
-          return { key:c.key, price: Number(usd), src:c.src };
-        });
-
-        const all = [...cryptos, ...stocks]
-          .filter(x => Number.isFinite(x.price))
-          .map(x => ({
-            ...x,
-            changeDir: getDir(x.key, x.price)
-          }));
-
-        // If nothing loaded, show error
-        if (!all.length){
-          renderTicker([{ key:"LIVE", price:0, changeDir:"flat", src:"No data" }]);
-          setStatus("No data (check APIs)");
-        }else{
-          renderTicker(all);
-          const ms = Date.now() - started;
-          setStatus(`Updated • ${new Date().toLocaleTimeString()} • ${ms}ms`);
-        }
-      }catch(e){
-        setStatus(`Error: ${e.message}`);
-      }finally{
-        isFetching = false;
-      }
-    }
-
-    function startTicker(){
-      if (tickerTimer) clearInterval(tickerTimer);
-      tickerTimer = setInterval(refreshTicker, refreshMs);
-    }
-
-    // Manual refresh
-    tickerRefreshBtn.addEventListener("click", () => refreshTicker());
-
-    // Initial load
-    refreshTicker();
-    startTicker();
-
-    // If tab is hidden, slow down (saves API limits)
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden){
-        refreshMs = 45000;
-      }else{
-        refreshMs = 15000;
-        refreshTicker();
-      }
-      startTicker();
-    });
-
-    // ============================
-    // ✅ PROFIT CALCULATOR (YOUR EXISTING LOGIC)
-    // ============================
     const $ = (id) => document.getElementById(id);
     const clamp = (n,a,b) => Math.min(b, Math.max(a,n));
     const safeNum = (v) => {
@@ -1005,6 +839,208 @@
       return Number.isFinite(n) ? n : 0;
     };
 
+    // =========================
+    // ✅ LIVE PRICES TICKER
+    // =========================
+    const WORKER_BASE = "https://instantqr-prices.0x01987db.workers.dev";
+    const TICKERS = [
+      // Crypto (use USD pairs)
+      { key:"BTC", kind:"crypto", q:"BTCUSDT" },
+      { key:"ETH", kind:"crypto", q:"ETHUSDT" },
+      { key:"SOL", kind:"crypto", q:"SOLUSDT" },
+      { key:"XRP", kind:"crypto", q:"XRPUSDT" },
+      { key:"ADA", kind:"crypto", q:"ADAUSDT" },
+      { key:"DOGE", kind:"crypto", q:"DOGEUSDT" },
+      // The user listed MATIC; it’s now POL on many venues, but still widely shown as MATIC
+      { key:"MATIC", kind:"crypto", q:"MATICUSDT" },
+
+      // Stocks/ETFs
+      { key:"AAPL", kind:"stock", q:"AAPL.US" },
+      { key:"MSFT", kind:"stock", q:"MSFT.US" },
+      { key:"NVDA", kind:"stock", q:"NVDA.US" },
+      { key:"AMZN", kind:"stock", q:"AMZN.US" },
+      { key:"GOOGL", kind:"stock", q:"GOOGL.US" },
+      { key:"TSLA", kind:"stock", q:"TSLA.US" },
+      { key:"META", kind:"stock", q:"META.US" },
+      { key:"SPY", kind:"stock", q:"SPY.US" },
+      { key:"QQQ", kind:"stock", q:"QQQ.US" }
+    ];
+
+    const tickerTrack = $("tickerTrack");
+    const tickStatus = $("tickStatus");
+    const tickUpdated = $("tickUpdated");
+    const tickDot = $("tickDot");
+
+    const fmtUSD = new Intl.NumberFormat(undefined, { style:"currency", currency:"USD", maximumFractionDigits: 2 });
+    const fmtUSD4 = new Intl.NumberFormat(undefined, { style:"currency", currency:"USD", maximumFractionDigits: 4 });
+
+    const priceState = new Map(); // key -> lastPrice
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, (m) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[m]));
+    }
+
+    function priceFormatterFor(key, price){
+      // show more precision for cheap coins
+      if (price < 1) return fmtUSD4;
+      return fmtUSD;
+    }
+
+    function buildTick({key, price, changeDir, src}){
+      const arrow = changeDir === "up" ? "▲" : changeDir === "down" ? "▼" : "•";
+      const cls = changeDir === "up" ? "chg up" : changeDir === "down" ? "chg down" : "chg flat";
+      const priceCls = changeDir === "up" ? "price upText" : changeDir === "down" ? "price downText" : "price flatText";
+      const symCls = changeDir === "up" ? "sym upText" : changeDir === "down" ? "sym downText" : "sym flatText";
+
+      const fmt = priceFormatterFor(key, price);
+      const priceStr = fmt.format(price);
+
+      return `
+        <div class="tick" data-key="${escapeHtml(key)}">
+          <div class="left">
+            <div class="${symCls}">${escapeHtml(key)}</div>
+            <div class="src">${escapeHtml(src)}</div>
+          </div>
+          <div class="right">
+            <div class="${priceCls}">${priceStr}</div>
+            <div class="${cls}"><span aria-hidden="true">${arrow}</span></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function applyFlash(key, dir){
+      const el = tickerTrack.querySelector(`.tick[data-key="${CSS.escape(key)}"]`);
+      if(!el) return;
+      el.classList.remove("flashUp","flashDown");
+      // force reflow so animation restarts
+      void el.offsetWidth;
+      if(dir === "up") el.classList.add("flashUp");
+      if(dir === "down") el.classList.add("flashDown");
+    }
+
+    async function fetchJson(url, timeoutMs=3500){
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), timeoutMs);
+      try{
+        const res = await fetch(url, { signal: ctrl.signal, cache: "no-store" });
+        if(!res.ok) throw new Error(`HTTP ${res.status}`);
+        return await res.json();
+      } finally {
+        clearTimeout(t);
+      }
+    }
+
+    // Worker endpoints expected:
+    // - /crypto?symbols=BTCUSDT,ETHUSDT   -> { prices: { BTCUSDT: 65000.12, ... } }
+    // - /stooq?symbols=AAPL.US,MSFT.US   -> { prices: { "AAPL.US": 123.45, ... } }
+    async function loadPricesOnce(){
+      const cryptos = TICKERS.filter(t => t.kind==="crypto").map(t => t.q);
+      const stocks  = TICKERS.filter(t => t.kind==="stock").map(t => t.q);
+
+      const [c, s] = await Promise.all([
+        fetchJson(`${WORKER_BASE}/crypto?symbols=${encodeURIComponent(cryptos.join(","))}`),
+        fetchJson(`${WORKER_BASE}/stooq?symbols=${encodeURIComponent(stocks.join(","))}`)
+      ]);
+
+      const out = new Map(); // key -> price
+      if(c && c.prices){
+        for(const t of TICKERS.filter(x=>x.kind==="crypto")){
+          const p = Number(c.prices[t.q]);
+          if(Number.isFinite(p) && p>0) out.set(t.key, p);
+        }
+      }
+      if(s && s.prices){
+        for(const t of TICKERS.filter(x=>x.kind==="stock")){
+          const p = Number(s.prices[t.q]);
+          if(Number.isFinite(p) && p>0) out.set(t.key, p);
+        }
+      }
+      return out;
+    }
+
+    function renderTicker(pricesMap){
+      const parts = [];
+      for(const t of TICKERS){
+        const price = pricesMap.get(t.key);
+        if(!Number.isFinite(price)){
+          parts.push(buildTick({ key:t.key, price:0, changeDir:"flat", src: t.kind==="crypto" ? "crypto" : "stooq" })
+            .replace(/\$0\.00|\$0\.0000/g, "—"));
+          continue;
+        }
+
+        const prev = priceState.get(t.key);
+        let dir = "flat";
+        if(Number.isFinite(prev)){
+          if(price > prev) dir = "up";
+          else if(price < prev) dir = "down";
+        }
+        priceState.set(t.key, price);
+
+        parts.push(buildTick({ key:t.key, price, changeDir:dir, src: t.kind==="crypto" ? "crypto" : "stooq" }));
+
+        // flash after DOM updated (next frame)
+        if(dir !== "flat"){
+          requestAnimationFrame(() => applyFlash(t.key, dir));
+        }
+      }
+
+      // Duplicate for seamless marquee loop (track scrolls -50%)
+      const html = parts.join("") + parts.join("");
+      tickerTrack.innerHTML = html;
+    }
+
+    let tickTimer = null;
+    let refreshMs = 2500; // fast, but not insane
+    let inFlight = false;
+
+    async function tickLoop(){
+      if(inFlight) return;
+      inFlight = true;
+      try{
+        tickStatus.textContent = "Updating…";
+        tickStatus.className = "pillSmall";
+
+        const m = await loadPricesOnce();
+        renderTicker(m);
+
+        tickStatus.textContent = "Live";
+        tickStatus.className = "pillSmall ok";
+        tickUpdated.textContent = `Updated: ${new Date().toLocaleTimeString()}`;
+
+        tickDot.style.background = "var(--good)";
+        tickDot.style.boxShadow = "0 0 10px rgba(52,211,153,.30)";
+      }catch(e){
+        tickStatus.textContent = "Error (retrying)";
+        tickStatus.className = "pillSmall bad";
+        tickDot.style.background = "var(--bad)";
+        tickDot.style.boxShadow = "0 0 10px rgba(251,113,133,.22)";
+      }finally{
+        inFlight = false;
+      }
+    }
+
+    function startTicker(){
+      tickLoop();
+      if(tickTimer) clearInterval(tickTimer);
+      tickTimer = setInterval(tickLoop, refreshMs);
+
+      document.addEventListener("visibilitychange", () => {
+        // pause/reduce refresh when tab hidden
+        if(document.hidden){
+          if(tickTimer) clearInterval(tickTimer);
+          tickTimer = setInterval(tickLoop, 8000);
+        }else{
+          if(tickTimer) clearInterval(tickTimer);
+          tickTimer = setInterval(tickLoop, refreshMs);
+          tickLoop();
+        }
+      }, { passive:true });
+    }
+
+    // =========================
+    // ✅ CALCULATOR (your existing logic)
+    // =========================
     const modeQtyBtn = $("modeQty");
     const modeInvBtn = $("modeInv");
     const qtyWrap = $("qtyWrap");
@@ -1135,6 +1171,7 @@
 
       const bp = safeNum(buyPrice.value);
       const sp = safeNum(sellPrice.value);
+
       const qty = getQty(bp);
 
       const buyTotal = bp * qty;
@@ -1344,8 +1381,10 @@ Link: ${location.href}`;
       el.addEventListener("change", calculate, { passive:true });
     });
 
+    // Init calculator + ticker
     loadFromUrl();
     calculate();
+    startTicker();
   })();
   </script>
 </body>
