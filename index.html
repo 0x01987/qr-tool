@@ -24,18 +24,15 @@
   <meta property="og:description" content="Free, privacy-first online tools. No signup required." />
   <meta property="og:url" content="https://instantqr.io/" />
 
-  <!-- Favicons (update if you have them) -->
   <link rel="icon" href="/favicon.ico" />
 
   <style>
     :root{
       --bg:#0b1220;
       --panel:#0f1a2e;
-      --panel2:#0d172a;
       --text:#e7eefc;
       --muted:#a9b7d6;
       --brand:#3b82f6;
-      --brand2:#22c55e;
       --border: rgba(255,255,255,.10);
       --shadow: 0 12px 40px rgba(0,0,0,.45);
       --radius: 18px;
@@ -101,6 +98,7 @@
       text-decoration:none;
       gap:8px;
       white-space:nowrap;
+      cursor:pointer;
     }
     .cta.primary{
       border: 0;
@@ -109,9 +107,7 @@
     }
     .cta.primary:hover{filter:brightness(1.05); text-decoration:none}
     .cta.ghost:hover{background: rgba(255,255,255,.10); text-decoration:none}
-    .hero{
-      padding:44px 0 22px;
-    }
+    .hero{padding:44px 0 22px;}
     .heroGrid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
@@ -428,11 +424,12 @@
       <h2>Popular Tools</h2>
       <p>Simple, fast, and designed for real-world use cases. Pick a tool and get results instantly.</p>
 
+      <!-- ✅ UPDATED TOOL GRID WITH ICONS -->
       <div class="grid" id="toolGrid">
-        <!-- QR -->
+
         <a class="card" href="/wifi-qr-code-generator.html" data-tags="qr wifi qrcode internet router ssid">
           <div class="cardTitle">
-            <span>WiFi QR Generator</span>
+            <span>📶 WiFi QR Generator</span>
             <span class="badge">QR</span>
           </div>
           <div class="cardDesc">Create a scannable WiFi QR code so guests can connect instantly — no typing.</div>
@@ -440,7 +437,7 @@
 
         <a class="card" href="/url-qr-code-generator.html" data-tags="qr url link qrcode website">
           <div class="cardTitle">
-            <span>URL QR Generator</span>
+            <span>🔗 URL QR Generator</span>
             <span class="badge">QR</span>
           </div>
           <div class="cardDesc">Turn any link into a QR code for menus, flyers, business cards, and signage.</div>
@@ -448,16 +445,15 @@
 
         <a class="card" href="/create-qr-code-for-wifi.html" data-tags="qr wifi create how to">
           <div class="cardTitle">
-            <span>Create WiFi QR Code</span>
+            <span>📡 Create WiFi QR Code</span>
             <span class="badge">Guide</span>
           </div>
-          <div class="cardDesc">A simple page focused on generating WiFi QR codes with clear steps and tips.</div>
+          <div class="cardDesc">Step-by-step page focused on generating WiFi QR codes with clear instructions.</div>
         </a>
 
-        <!-- Utilities -->
         <a class="card" href="/password.html" data-tags="password generator secure random">
           <div class="cardTitle">
-            <span>Password Generator</span>
+            <span>🔐 Password Generator</span>
             <span class="badge">Security</span>
           </div>
           <div class="cardDesc">Generate strong, random passwords for accounts, apps, and security best practices.</div>
@@ -465,7 +461,7 @@
 
         <a class="card" href="/unit-converter.html" data-tags="convert converter unit kg lbs mph kmh inches cm">
           <div class="cardTitle">
-            <span>Unit Converter</span>
+            <span>📏 Unit Converter</span>
             <span class="badge">Converter</span>
           </div>
           <div class="cardDesc">Quick conversions for everyday use: lbs↔kg, mph↔km/h, inches↔cm, °F↔°C, and more.</div>
@@ -473,16 +469,15 @@
 
         <a class="card" href="/ip-lookup.html" data-tags="ip lookup address geolocation asn isp">
           <div class="cardTitle">
-            <span>IP Lookup</span>
+            <span>🌍 IP Lookup</span>
             <span class="badge">Network</span>
           </div>
-          <div class="cardDesc">Check public IP details fast for troubleshooting, security checks, and diagnostics.</div>
+          <div class="cardDesc">Check public IP details fast for troubleshooting and security checks.</div>
         </a>
 
-        <!-- Crypto -->
         <a class="card" href="/web3-gas-fee-estimator.html" data-tags="web3 gas fee estimator ethereum polygon base">
           <div class="cardTitle">
-            <span>Web3 Gas Fee Estimator</span>
+            <span>⛽ Web3 Gas Fee Estimator</span>
             <span class="badge">Crypto</span>
           </div>
           <div class="cardDesc">Estimate transaction fees and understand gas costs across popular networks.</div>
@@ -490,20 +485,20 @@
 
         <a class="card" href="/crypto-profit-calculator.html" data-tags="crypto profit calculator roi pnl">
           <div class="cardTitle">
-            <span>Crypto Profit Calculator</span>
+            <span>📈 Crypto Profit Calculator</span>
             <span class="badge">Crypto</span>
           </div>
           <div class="cardDesc">Calculate profit/loss, ROI, and break-even prices to plan smarter trades.</div>
         </a>
 
-        <!-- Time -->
         <a class="card" href="/world-clock.html" data-tags="world clock time zones converter timezone">
           <div class="cardTitle">
-            <span>World Clock</span>
+            <span>🕒 World Clock</span>
             <span class="badge">Time</span>
           </div>
           <div class="cardDesc">Compare times across major cities and time zones — perfect for scheduling.</div>
         </a>
+
       </div>
 
       <div class="actions" style="margin-top:14px;">
@@ -547,15 +542,15 @@
 
       <div class="grid">
         <a class="card" href="/wifi-qr-code-generator.html">
-          <div class="cardTitle"><span>Free QR Code Generator</span><span class="badge">QR</span></div>
+          <div class="cardTitle"><span>🔳 Free QR Code Generator</span><span class="badge">QR</span></div>
           <div class="cardDesc">Generate QR codes online instantly for WiFi and URLs.</div>
         </a>
         <a class="card" href="/unit-converter.html">
-          <div class="cardTitle"><span>Conversion Tools</span><span class="badge">Converter</span></div>
+          <div class="cardTitle"><span>🧮 Conversion Tools</span><span class="badge">Converter</span></div>
           <div class="cardDesc">Everyday conversions in one clean interface.</div>
         </a>
         <a class="card" href="/web3-gas-fee-estimator.html">
-          <div class="cardTitle"><span>Crypto Utilities</span><span class="badge">Crypto</span></div>
+          <div class="cardTitle"><span>🪙 Crypto Utilities</span><span class="badge">Crypto</span></div>
           <div class="cardDesc">Gas fees, profit calculators, and more for traders.</div>
         </a>
       </div>
@@ -612,7 +607,6 @@
         </div>
 
         <div class="footerLinks">
-          <!-- SEO Tool Links -->
           <div style="margin-bottom:8px;">
             <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
             <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
@@ -621,7 +615,6 @@
             <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
           </div>
 
-          <!-- Policy Links -->
           <div>
             <a href="/about.html">About</a> ·
             <a href="/privacy.html">Privacy</a> ·
@@ -653,7 +646,6 @@
         const text = (c.innerText + ' ' + (c.getAttribute('data-tags') || '')).toLowerCase();
         c.style.display = text.includes(q) ? '' : 'none';
       });
-      // Scroll to tools when searching
       document.getElementById('tools').scrollIntoView({behavior:'smooth', block:'start'});
     }
 
