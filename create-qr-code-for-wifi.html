@@ -1,24 +1,286 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) - keep if your site uses it globally -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Create a WiFi QR Code | Free WiFi QR Code Generator | InstantQR.io</title>
-  <meta name="description" content="Create a WiFi QR code for guests to scan and join instantly. Free WiFi QR code generator for WPA/WPA2/WPA3, WEP, or no password. Download as PNG." />
+  <title>Create a WiFi QR Code | WiFi QR Generator (SSID + Password) | InstantQR.io</title>
+  <meta name="description" content="Create a WiFi QR code for guests to scan and join instantly. Enter SSID + password, choose security (WPA/WEP/open), generate and download a PNG. Free & privacy-first." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://instantqr.io/create-qr-code-for-wifi.html" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Create a WiFi QR Code | InstantQR.io" />
-  <meta property="og:description" content="Create a WiFi QR code for guests to scan and join instantly. Download as PNG. Free and privacy-first." />
+  <meta property="og:description" content="Create a WiFi QR code for guests to scan and join instantly. Free & privacy-first. Download as PNG." />
   <meta property="og:url" content="https://instantqr.io/create-qr-code-for-wifi.html" />
 
   <link rel="icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/style.css" />
 
-  <!-- ✅ Structured Data: WebPage (guide-style page) -->
+  <style>
+    :root{
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      --bg:#0b0f19;
+      --card:#121a2a;
+      --panel:#0e1525;
+      --border:#22304e;
+      --border2:#2a3a5f;
+      --text:#e7eaf2;
+      --muted:#b8c0d6;
+      --muted2:#8ea0c8;
+      --link:#cfe0ff;
+      --brand:#3b82f6;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:16px;
+      --max: 980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:
+        radial-gradient(900px 540px at 12% 8%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px;}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Topbar (matches homepage style pattern) */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:2px 2px 10px;
+      border-bottom:1px solid rgba(34,48,78,.55);
+      margin-bottom:12px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:900;
+      letter-spacing:-.2px;
+    }
+    .brand img{ height:30px; width:auto; display:block; }
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .nav a{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--link);
+      text-decoration:none;
+      font-weight:800;
+      font-size:12px;
+      user-select:none;
+    }
+    .nav a:hover{ border-color: rgba(59,130,246,.85); }
+
+    /* Hero */
+    .hero{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .hero h1{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-.3px;
+      max-width: 22ch;
+    }
+    .hero p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+      max-width: 70ch;
+    }
+    .badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .badge{
+      padding:7px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--muted);
+      font-size:12px;
+      user-select:none;
+    }
+
+    /* Sections */
+    .info{
+      margin-top:14px;
+      background:var(--panel);
+      border:1px solid var(--border2);
+      border-radius:var(--radius2);
+      padding:14px;
+    }
+    .info h2{ margin:0 0 8px; font-size:16px; }
+    .info p, .info li{ color:var(--muted); font-size:13px; line-height:1.7; }
+    .info ol, .info ul{ padding-left:18px; margin:8px 0 0; }
+    .tiny{ color:var(--muted2); font-size:12px; }
+
+    /* Tool UI */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      margin-top:14px;
+      align-items:start;
+    }
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+
+    .box{
+      background:var(--panel);
+      border:1px solid var(--border2);
+      border-radius:var(--radius2);
+      padding:14px;
+    }
+    label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
+    input, select, textarea{
+      width:100%;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid var(--border2);
+      background:#0b1222;
+      color:var(--text);
+      outline:none;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(59,130,246,.85);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+    }
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    @media (max-width: 520px){ .row{ grid-template-columns: 1fr; } }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    button{
+      border:0;
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--brand);
+      color:white;
+      font-weight:900;
+      cursor:pointer;
+    }
+    button:hover{ filter:brightness(1.05); }
+    button.secondary{
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--text);
+      font-weight:800;
+    }
+    button.secondary:hover{ border-color: rgba(59,130,246,.7); }
+
+    .qrWrap{
+      width:320px;
+      max-width:100%;
+      aspect-ratio:1/1;
+      border-radius:16px;
+      background:#0b1222;
+      border:1px dashed rgba(184,192,214,.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:10px;
+    }
+    .preview{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .hint{ color:var(--muted); font-size:12px; text-align:center; }
+
+    .error{
+      color:#ff9fb3;
+      font-size:12px;
+      margin-top:8px;
+      display:none;
+    }
+
+    .pillbar{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .pill{
+      padding:7px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--muted);
+      font-size:12px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .pill.active{ border-color: rgba(59,130,246,.9); color:var(--text); }
+
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    code{ color:var(--link); }
+
+    .faq{
+      margin-top:14px;
+      background:var(--panel);
+      border:1px solid var(--border2);
+      border-radius:var(--radius2);
+      padding:14px;
+    }
+    .faq h2{ margin:0 0 10px; font-size:16px; }
+    details{
+      background:#0b1222;
+      border:1px solid var(--border2);
+      border-radius:14px;
+      padding:10px 12px;
+      margin-top:10px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:900;
+      color:var(--text);
+      list-style:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details p{ margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.7; }
+
+    .footerLinks{
+      margin-top:14px;
+      text-align:center;
+      color:var(--muted2);
+      font-size:12px;
+    }
+    .footerLinks a{ color:var(--link); text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
+  </style>
+
+  <!-- ✅ Structured Data: WebPage -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -26,17 +288,8 @@
     "name":"Create a WiFi QR Code",
     "url":"https://instantqr.io/create-qr-code-for-wifi.html",
     "description":"Step-by-step guide to create a WiFi QR code for guests to scan and join instantly.",
-    "isPartOf":{
-      "@type":"WebSite",
-      "name":"InstantQR",
-      "url":"https://instantqr.io/"
-    },
-    "publisher":{
-      "@type":"Organization",
-      "name":"InstantQR",
-      "url":"https://instantqr.io",
-      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
-    }
+    "isPartOf":{"@type":"WebSite","name":"InstantQR","url":"https://instantqr.io/"},
+    "publisher":{"@type":"Organization","name":"InstantQR","url":"https://instantqr.io","logo":"https://instantqr.io/assets/instantqr-logo.svg"}
   }
   </script>
 
@@ -49,106 +302,80 @@
       {
         "@type":"Question",
         "name":"What is a WiFi QR code?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"A WiFi QR code stores your network name (SSID), password, and security type so guests can scan to connect without typing."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"A WiFi QR code contains your SSID, password, and security type so guests can scan to connect without typing."}
       },
       {
         "@type":"Question",
-        "name":"Which security type should I select?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Most modern networks use WPA/WPA2/WPA3. Choose WEP only for older routers. Choose No password only for open networks."
-        }
+        "name":"Which security type should I choose?",
+        "acceptedAnswer":{"@type":"Answer","text":"Most networks use WPA/WPA2/WPA3. Choose WEP only for older routers. Choose No password only for open networks."}
       },
       {
         "@type":"Question",
         "name":"Does InstantQR store my WiFi password?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"InstantQR is privacy-first. The generator is designed to run locally in your browser where possible and does not intentionally store WiFi credentials."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"InstantQR is privacy-first. The generator is designed to run locally in your browser where possible and does not intentionally store WiFi credentials."}
       },
       {
         "@type":"Question",
         "name":"What size should I use for printing?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Use at least 320px for easy scanning. For printed signs, 512px or larger can improve reliability."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"Use at least 320px for easy scanning. For posters/signs, 512px or larger can improve reliability."}
       }
     ]
   }
   </script>
-
-  <!-- ✅ Small page-specific polish (safe with style.css) -->
-  <style>
-    .topBrand{
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-    }
-    .topBrand img{height:30px;width:auto;display:block;}
-    textarea:focus, input:focus, select:focus{
-      outline:none;
-      border-color: rgba(59,130,246,.85) !important;
-      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
-    }
-    .tiny{ font-size:12px; color:#8ea0c8; }
-  </style>
 </head>
 
 <body>
   <div class="wrap">
     <div class="card">
 
-      <header>
-        <div class="topBrand">
+      <!-- Topbar -->
+      <div class="topbar">
+        <a class="brand" href="/" aria-label="InstantQR Home">
           <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
-          <div>
-            <h1>Create a WiFi QR Code</h1>
-            <div class="sub">Let guests scan your QR code to join Wi-Fi without typing the password.</div>
-          </div>
-        </div>
+          <span>InstantQR</span>
+        </a>
 
-        <div class="footerLinks" style="margin-top:0;">
-          <a href="/">Home</a> ·
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="/">Home</a>
           <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a>
-        </div>
-      </header>
-
-      <!-- SEO Content Block -->
-      <div class="infoMid">
-        <h2>Step-by-step: Create a WiFi QR Code</h2>
-        <ol>
-          <li>Enter your Wi-Fi name (SSID).</li>
-          <li>Select your security type (usually <strong>WPA</strong>).</li>
-          <li>Enter your Wi-Fi password (unless you choose “No password”).</li>
-          <li>Click <strong>Generate</strong> and download the PNG.</li>
-        </ol>
-
-        <h2>Where to use it</h2>
-        <ul>
-          <li>Home guest access (print and place near the router)</li>
-          <li>Airbnb / rentals (welcome card)</li>
-          <li>Cafes and restaurants (counter sign)</li>
-          <li>Offices (reception desk)</li>
-          <li>Events (check-in table)</li>
-        </ul>
-
-        <h2>Tips for best results</h2>
-        <ul>
-          <li>Use at least <strong>320px</strong> for phone scanning (512px+ for posters/signs).</li>
-          <li>Choose error correction <strong>M</strong> (recommended) or <strong>H</strong> for printing.</li>
-          <li>Always test-scan before printing many copies.</li>
-        </ul>
-
-        <p class="tiny">
-          Privacy note: InstantQR generates QR codes locally in your browser where possible — we do not intentionally store your Wi-Fi details.
-        </p>
+          <a href="/url-qr-code-generator.html">URL QR Generator</a>
+        </nav>
       </div>
 
-      <div class="grid">
+      <!-- Hero -->
+      <section class="hero">
+        <div>
+          <h1>Create a WiFi QR Code</h1>
+          <p>
+            Let guests connect to your Wi-Fi by scanning a QR code — no typing needed.
+            Enter your SSID and password, choose security, generate, and download as PNG.
+          </p>
+          <div class="badges" aria-label="Highlights">
+            <span class="badge">⚡ Fast</span>
+            <span class="badge">🔒 Privacy-first</span>
+            <span class="badge">📱 iPhone & Android</span>
+            <span class="badge">⬇️ PNG Download</span>
+          </div>
+        </div>
+      </section>
 
+      <!-- Guide -->
+      <section class="info" aria-label="How to create a WiFi QR code">
+        <h2>Step-by-step</h2>
+        <ol>
+          <li>Enter your Wi-Fi name (SSID).</li>
+          <li>Select security type (usually <strong>WPA/WPA2/WPA3</strong>).</li>
+          <li>Enter your Wi-Fi password (unless open network).</li>
+          <li>Click <strong>Generate</strong> and download your PNG.</li>
+        </ol>
+
+        <div class="tiny" style="margin-top:10px;">
+          Privacy note: QR generation is designed to run locally in your browser where possible — we do not intentionally store your Wi-Fi details.
+        </div>
+      </section>
+
+      <!-- Tool -->
+      <div class="grid">
         <!-- Controls -->
         <div class="box">
           <label>Type</label>
@@ -157,13 +384,13 @@
             <div class="pill active" data-type="wifi">Wi-Fi</div>
           </div>
 
-          <!-- TEXT/URL (HIDDEN BY DEFAULT) -->
+          <!-- TEXT/URL (HIDDEN) -->
           <div id="textForm" style="display:none;">
             <label for="text">Text or URL</label>
             <textarea id="text" placeholder="https://example.com&#10;or any text"></textarea>
           </div>
 
-          <!-- WIFI (VISIBLE BY DEFAULT) -->
+          <!-- WIFI -->
           <div id="wifiForm">
             <div class="row">
               <div>
@@ -185,7 +412,7 @@
                 <label for="password">Password</label>
                 <input id="password" type="password" placeholder="••••••••" autocomplete="off" />
                 <div class="tiny" style="margin-top:6px;">
-                  <label style="display:flex;gap:8px;align-items:center;margin:0;">
+                  <label style="display:flex;gap:8px;align-items:center;margin:0;color:var(--muted);">
                     <input id="showPass" type="checkbox" style="width:auto;margin:0;" />
                     Show password
                   </label>
@@ -200,7 +427,7 @@
               </div>
             </div>
 
-            <div class="tiny" style="margin-top:8px;">
+            <div class="tiny" style="margin-top:10px;">
               Format: <code>WIFI:T:WPA;S:SSID;P:password;H:false;;</code>
             </div>
           </div>
@@ -236,19 +463,61 @@
           <div class="qrWrap" id="qrWrap">
             <div class="hint">Your WiFi QR code will appear here.</div>
           </div>
-          <div class="hint">Tip: test-scan before printing.</div>
+          <div class="hint">Tip: test-scan before printing or sharing.</div>
         </div>
-
       </div>
 
-      <!-- Footer Links -->
+      <!-- Extra SEO sections -->
+      <section class="info" aria-label="Where to use WiFi QR codes">
+        <h2>Where to use a WiFi QR code</h2>
+        <ul>
+          <li>Home guest Wi-Fi (print and place near the router)</li>
+          <li>Airbnb / rentals (welcome card)</li>
+          <li>Cafes and restaurants (counter sign)</li>
+          <li>Offices (reception desk)</li>
+          <li>Events (check-in table)</li>
+        </ul>
+
+        <h2 style="margin-top:16px;">Tips for best results</h2>
+        <ul>
+          <li>Use at least <strong>320px</strong> (512px+ for posters/signs).</li>
+          <li>Choose error correction <strong>M</strong> or <strong>H</strong> for printed materials.</li>
+          <li>SSID is case-sensitive — double-check spelling.</li>
+        </ul>
+      </section>
+
+      <!-- FAQ UI (matches brand + helps SEO via on-page content too) -->
+      <section class="faq" aria-label="Frequently asked questions">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>What is a WiFi QR code?</summary>
+          <p>A WiFi QR code stores your SSID, password, and security type so guests can scan to connect instantly.</p>
+        </details>
+
+        <details>
+          <summary>Does InstantQR store my WiFi password?</summary>
+          <p>No. This tool is designed to run locally in your browser where possible and does not intentionally store WiFi credentials.</p>
+        </details>
+
+        <details>
+          <summary>Which security type should I choose?</summary>
+          <p>Most networks use WPA/WPA2/WPA3. Choose WEP only for older routers. Choose “No password” only for open networks.</p>
+        </details>
+
+        <details>
+          <summary>What size should I use for printing?</summary>
+          <p>Use at least 320px for easy scanning. For posters, 512px or larger can improve reliability.</p>
+        </details>
+      </section>
+
       <div class="footerLinks">
         <a href="/about.html">About</a> ·
         <a href="/privacy.html">Privacy</a> ·
         <a href="/terms.html">Terms</a> ·
-        <a href="/contact.html">Contact</a>
+        <a href="/contact.html">Contact</a> ·
+        <a href="/sitemap.xml">Sitemap</a>
       </div>
-
     </div>
   </div>
 
