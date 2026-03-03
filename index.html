@@ -354,12 +354,14 @@
 
 <body>
   <!-- Top Bar -->
-  <header class="topbar">
-    <div class="inner">
-      <a class="brand" href="/" aria-label="InstantQR Home">
-        <span class="logo" aria-hidden="true"></span>
-        <span>InstantQR</span>
-      </a>
+ <a class="brand" href="/" aria-label="InstantQR Home" style="display:flex;align-items:center;gap:10px;">
+  <img 
+    src="/assets/instantqr-logo.svg" 
+    alt="InstantQR Logo"
+    style="height:34px;"
+  />
+  <span style="font-weight:700;">InstantQR</span>
+</a>
 
       <nav aria-label="Primary">
         <a href="#tools">Tools</a>
@@ -590,21 +592,32 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="footer" aria-label="Footer">
-      <div class="footRow">
-        <div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-            <span class="logo" aria-hidden="true" style="width:28px;height:28px;border-radius:10px;"></span>
-            <strong style="color:var(--text)">InstantQR</strong>
-          </div>
-          <div class="small">
-            InstantQR.io provides free privacy-first web tools for QR codes, crypto, security, and conversions.
-          </div>
-          <div class="small" style="margin-top:8px;">
-            © <span id="year"></span> InstantQR.io. All rights reserved.
-          </div>
-        </div>
+<!-- FOOTER -->
+<footer class="footer" aria-label="Footer">
+  <div class="footRow">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        
+        <img 
+          src="/assets/instantqr-logo.svg" 
+          alt="InstantQR Free Online Tools Logo"
+          style="height:28px;"
+        />
+
+        <strong style="color:var(--text);font-size:16px;">
+          InstantQR
+        </strong>
+
+      </div>
+
+      <div class="small">
+        InstantQR.io provides free privacy-first web tools for QR codes, crypto, security, and conversions.
+      </div>
+
+      <div class="small" style="margin-top:8px;">
+        © <span id="year"></span> InstantQR.io. All rights reserved.
+      </div>
+    </div>
 
         <div class="footerLinks">
           <div style="margin-bottom:8px;">
@@ -656,4 +669,5 @@
   </script>
 </body>
 </html>
+
 
