@@ -6,9 +6,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Internet Speed Test | InstantQR</title>
-<meta name="description" content="Run a quick internet speed test directly in your browser. Measure download speed and latency instantly.">
 
-<link rel="icon" href="/assets/instantqr-logo.svg">
+<meta name="description" content="Run a quick internet speed test directly in your browser. Measure download speed and latency instantly.">
 
 <style>
 
@@ -32,42 +31,37 @@ color:var(--text);
 .wrap{
 max-width:var(--max);
 margin:auto;
-padding:20px;
-}
-
-h1{
-font-size:32px;
-margin-bottom:10px;
-}
-
-.sub{
-color:var(--muted);
-margin-bottom:20px;
+padding:30px;
+text-align:center;
 }
 
 .panel{
 background:rgba(255,255,255,.04);
 border:1px solid var(--border);
 border-radius:var(--radius);
-padding:24px;
-text-align:center;
+padding:30px;
+}
+
+h1{
+margin-bottom:10px;
+}
+
+.sub{
+color:var(--muted);
+margin-bottom:25px;
 }
 
 .metrics{
 display:flex;
 justify-content:center;
 gap:40px;
-margin-top:20px;
 flex-wrap:wrap;
-}
-
-.metric{
-text-align:center;
+margin-top:25px;
 }
 
 .metric h2{
 font-size:34px;
-margin:6px 0;
+margin:5px 0;
 }
 
 .metric span{
@@ -76,8 +70,7 @@ font-size:14px;
 }
 
 button{
-margin-top:20px;
-padding:12px 20px;
+padding:12px 22px;
 border-radius:999px;
 border:0;
 background:var(--brand);
@@ -128,34 +121,53 @@ opacity:.9;
 
 async function runTest(){
 
-document.getElementById("download").innerText="Testing...";
+document.getElementById("download").innerText="...";
 document.getElementById("ping").innerText="...";
+
+
+// PING TEST
+let pingStart = performance.now();
+
+await fetch("https://speed.cloudflare.com/__down?bytes=10000");
+
+let pingEnd = performance.now();
+
+let ping = Math.round(pingEnd - pingStart);
+
+document.getElementById("ping").innerText = ping;
+
+
+// DOWNLOAD TEST
+
+const testFile = "https://speed.cloudflare.com/__down?bytes=50000000";
 
 let start = performance.now();
 
-await fetch("https://speed.hetzner.de/1MB.bin?"+Math.random());
+const response = await fetch(testFile);
+
+const reader = response.body.getReader();
+
+let received = 0;
+
+while(true){
+
+const {done,value} = await reader.read();
+
+if(done) break;
+
+received += value.length;
+
+}
 
 let end = performance.now();
 
-let ping = Math.round(end-start);
+let duration = (end-start)/1000;
 
-document.getElementById("ping").innerText=ping;
+let bits = received * 8;
 
-let downloadStart = performance.now();
+let speed = bits / duration / 1000000;
 
-let response = await fetch("https://speed.hetzner.de/10MB.bin?"+Math.random());
-
-let blob = await response.blob();
-
-let downloadEnd = performance.now();
-
-let duration=(downloadEnd-downloadStart)/1000;
-
-let bits=blob.size*8;
-
-let speed=bits/duration/1000000;
-
-document.getElementById("download").innerText=speed.toFixed(1);
+document.getElementById("download").innerText = speed.toFixed(1);
 
 }
 
