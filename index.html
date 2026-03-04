@@ -13,21 +13,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>InstantQR | Free Online Tools (QR, Converters, Crypto & Security) | InstantQR.io</title>
-  <meta name="description" content="InstantQR.io provides free, privacy-first online tools: QR code generators (WiFi & URL), unit converter, password generator, IP lookup, world clock, Web3 gas estimator, and more. No signup required." />
+  <title>InstantQR | Free Online Tools (QR, Converters, Crypto, Security & AI) | InstantQR.io</title>
+  <meta name="description" content="InstantQR.io provides free, privacy-first online tools: QR code generators (WiFi & URL), AI image detector, unit converter, password generator, IP lookup, world clock, Web3 gas estimator, crypto profit calculator, and more. No signup required." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://instantqr.io/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="InstantQR | Free Online Tools (QR, Converters, Crypto & Security)" />
+  <meta property="og:title" content="InstantQR | Free Online Tools (QR, Converters, Crypto, Security & AI)" />
   <meta property="og:description" content="Free, privacy-first online tools. No signup required." />
   <meta property="og:url" content="https://instantqr.io/" />
 
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
-<link rel="alternate icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
-<meta name="theme-color" content="#0b0f19" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <meta name="theme-color" content="#0b0f19" />
 
   <style>
     :root{
@@ -304,15 +304,15 @@
         "name": "Is InstantQR.io free to use?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. InstantQR.io provides free online tools including QR generators, converters, and utility tools with no signup required."
+          "text": "Yes. InstantQR.io provides free online tools including QR generators, converters, AI utilities, and more with no signup required."
         }
       },
       {
         "@type": "Question",
-        "name": "Do you store my QR codes, passwords, or input data?",
+        "name": "Do you store my QR codes, passwords, input data, or uploaded files?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "InstantQR is privacy-first. Our tools are designed to run locally in your browser where possible, and we do not intentionally store your generated QR codes or sensitive inputs."
+          "text": "InstantQR is privacy-first. Our tools are designed to run locally in your browser where possible. We do not intentionally store generated QR codes, sensitive inputs, or uploaded files."
         }
       },
       {
@@ -333,17 +333,17 @@
       },
       {
         "@type": "Question",
-        "name": "What other tools are available besides QR generators?",
+        "name": "What tools are available on InstantQR?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "InstantQR includes tools like a unit converter, password generator, IP lookup, Web3 gas fee estimator, crypto profit calculator, world clock, and more."
+          "text": "InstantQR includes QR generators, an AI Image Detector, a unit converter, password generator, IP lookup, world clock, Web3 gas fee estimator, crypto profit calculator, and more."
         }
       }
     ]
   }
   </script>
 
-  <!-- ✅ Organization Logo Schema (helps brand trust) -->
+  <!-- ✅ Organization Logo Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -360,7 +360,6 @@
   <header class="topbar">
     <div class="inner">
       <a class="brand" href="/" aria-label="InstantQR Home">
-        <!-- ✅ REAL LOGO -->
         <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
         <span>InstantQR</span>
       </a>
@@ -384,10 +383,10 @@
         <div class="heroCard">
           <div class="pill">⚡ Fast • 🔒 Privacy-First • ✅ No Signup</div>
 
-          <h1>Free Online Tools for QR Codes, Conversions, Crypto & Security</h1>
+          <h1>Free Online Tools for QR Codes, Conversions, Crypto, Security & AI</h1>
           <p class="sub">
             Generate <strong>WiFi</strong> and <strong>URL QR codes</strong>, convert units, estimate Web3 gas fees,
-            check IP details, and more — built for speed, simplicity, and trust.
+            check IP details, detect AI-generated images, and more — built for speed, simplicity, and trust.
           </p>
 
           <ul class="bullets">
@@ -400,7 +399,7 @@
           <div class="actions">
             <a class="cta primary" href="/wifi-qr-code-generator.html">Generate WiFi QR</a>
             <a class="cta ghost" href="/url-qr-code-generator.html">Generate URL QR</a>
-            <a class="cta ghost" href="/unit-converter.html">Unit Converter</a>
+            <a class="cta ghost" href="/ai-image-detector.html">AI Image Detector</a>
           </div>
 
           <div class="miniNote">Tip: Bookmark InstantQR for quick daily utilities.</div>
@@ -410,15 +409,15 @@
         <aside class="searchBox" aria-label="Tool Finder">
           <div>
             <div class="searchTitle">Find a tool in 2 seconds</div>
-            <p class="searchDesc">Type “qr”, “password”, “ip”, “gas”, “convert”, “clock” and jump straight to it.</p>
+            <p class="searchDesc">Type “qr”, “ai”, “password”, “ip”, “gas”, “convert”, “clock” and jump straight to it.</p>
           </div>
 
           <div class="searchRow">
-            <input id="toolSearch" class="input" placeholder="Search tools… (e.g., QR, gas, password)" autocomplete="off" />
+            <input id="toolSearch" class="input" placeholder="Search tools… (e.g., AI, QR, gas, password)" autocomplete="off" />
             <button class="cta primary" id="searchBtn" type="button">Search</button>
           </div>
 
-          <div class="small" id="searchHint">Popular: QR • Password • Unit Converter • IP Lookup • Gas Estimator</div>
+          <div class="small" id="searchHint">Popular: AI Image Detector • QR • Password • Unit Converter • IP Lookup • Gas Estimator</div>
         </aside>
       </div>
     </section>
@@ -428,8 +427,16 @@
       <h2>Popular Tools</h2>
       <p>Simple, fast, and designed for real-world use cases. Pick a tool and get results instantly.</p>
 
-      <!-- ✅ TOOL GRID WITH ICONS -->
       <div class="grid" id="toolGrid">
+
+        <!-- ✅ NEW TOOL -->
+        <a class="card" href="/ai-image-detector.html" data-tags="ai image detector deepfake photo authenticity checker fake generated midjourney stable diffusion dall-e">
+          <div class="cardTitle">
+            <span>🧠 AI Image Detector</span>
+            <span class="badge">AI</span>
+          </div>
+          <div class="cardDesc">Check if an image is AI-generated. Privacy-first: runs locally in your browser — no uploads.</div>
+        </a>
 
         <a class="card" href="/wifi-qr-code-generator.html" data-tags="qr wifi qrcode internet router ssid">
           <div class="cardTitle">
@@ -549,10 +556,10 @@
         </details>
 
         <details>
-          <summary>Do you store my QR codes, passwords, or input data?</summary>
+          <summary>Do you store my QR codes, passwords, input data, or uploaded files?</summary>
           <p>
             InstantQR is privacy-first. Our tools are designed to run locally in your browser where possible,
-            and we do not intentionally store generated QR codes or sensitive inputs.
+            and we do not intentionally store generated QR codes, sensitive inputs, or uploaded files.
           </p>
         </details>
 
@@ -568,7 +575,7 @@
 
         <details>
           <summary>What other tools are available besides QR generators?</summary>
-          <p>We offer utilities like a unit converter, password generator, IP lookup, world clock, Web3 gas estimator, crypto profit calculator, and more.</p>
+          <p>We offer utilities like an AI Image Detector, unit converter, password generator, IP lookup, world clock, Web3 gas estimator, crypto profit calculator, and more.</p>
         </details>
       </div>
     </section>
@@ -578,13 +585,12 @@
       <div class="footRow">
         <div>
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-            <!-- ✅ REAL LOGO -->
             <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" style="height:28px;width:auto;display:block;" />
             <strong style="color:var(--text);font-size:16px;">InstantQR</strong>
           </div>
 
           <div class="small">
-            InstantQR.io provides free privacy-first web tools for QR codes, crypto, security, and conversions.
+            InstantQR.io provides free privacy-first web tools for QR codes, crypto, security, AI, and conversions.
           </div>
 
           <div class="small" style="margin-top:8px;">
@@ -594,6 +600,7 @@
 
         <div class="footerLinks">
           <div style="margin-bottom:8px;">
+            <a href="/ai-image-detector.html">AI Image Detector</a> ·
             <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
             <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
             <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
@@ -631,4 +638,14 @@
       cards.forEach(c => {
         const text = (c.innerText + ' ' + (c.getAttribute('data-tags') || '')).toLowerCase();
         c.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
 
+    btn.addEventListener('click', doSearch);
+    input.addEventListener('input', doSearch);
+    input.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter'){ e.preventDefault(); doSearch(); }
+    });
+  </script>
+</body>
+</html>
