@@ -1,177 +1,625 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<title>Internet Speed Test | InstantQR</title>
+  <title>Free Internet Speed Test | Check Download Speed & Ping | InstantQR</title>
+  <meta name="description" content="Run a fast, privacy-first Internet Speed Test in your browser. Measure download speed (Mbps) and ping (ms) instantly with a clean speedometer UI. No signup." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/internet-speed-test.html" />
 
-<meta name="description" content="Run a quick internet speed test directly in your browser. Measure download speed and latency instantly.">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free Internet Speed Test | Check Download Speed & Ping | InstantQR" />
+  <meta property="og:description" content="Fast, clean, privacy-first speed test. Measure download speed (Mbps) and ping (ms) instantly." />
+  <meta property="og:url" content="https://instantqr.io/internet-speed-test.html" />
 
-<style>
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <meta name="theme-color" content="#0b0f19" />
 
-:root{
---bg:#0b1220;
---text:#e7eefc;
---muted:#a9b7d6;
---brand:#3b82f6;
---border:rgba(255,255,255,.1);
---radius:18px;
---max:1000px;
-}
+  <!-- ✅ FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Is this speed test free?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. InstantQR Internet Speed Test is 100% free to use with no signup required."}
+      },
+      {
+        "@type":"Question",
+        "name":"Do you store my speed test results?",
+        "acceptedAnswer":{"@type":"Answer","text":"No. This tool runs in your browser and does not intentionally store your results. It only downloads test data to measure speed."}
+      },
+      {
+        "@type":"Question",
+        "name":"What does Mbps mean?",
+        "acceptedAnswer":{"@type":"Answer","text":"Mbps means megabits per second. It’s a common unit for internet download speed."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why is my speed different each test?",
+        "acceptedAnswer":{"@type":"Answer","text":"Results vary based on Wi-Fi signal quality, network congestion, VPNs, device performance, and distance to the test server."}
+      }
+    ]
+  }
+  </script>
 
-body{
-margin:0;
-font-family:system-ui;
-background:linear-gradient(180deg,#0b1220,#060912);
-color:var(--text);
-}
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --brand:#3b82f6;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 22px;
+      --max: 1100px;
+      --good: rgba(34,197,94,1);
+      --goodSoft: rgba(34,197,94,.10);
+      --warn: rgba(241,196,15,1);
+      --bad: rgba(255,92,122,1);
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(59,130,246,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(34,197,94,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+    }
+    a{color:inherit; text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:20px}
 
-.wrap{
-max-width:var(--max);
-margin:auto;
-padding:30px;
-text-align:center;
-}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 11, 20, .55);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700; letter-spacing:.2px;
+    }
+    .brand img{display:block; height:34px; width:auto}
 
-.panel{
-background:rgba(255,255,255,.04);
-border:1px solid var(--border);
-border-radius:var(--radius);
-padding:30px;
-}
+    nav{display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    nav a:hover{
+      color:var(--text);
+      background: rgba(255,255,255,.06);
+      text-decoration:none;
+    }
 
-h1{
-margin-bottom:10px;
-}
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius: 999px;
+      font-weight:600;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      gap:8px;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .cta.primary{
+      border: 0;
+      background: linear-gradient(135deg, rgba(59,130,246,1), rgba(59,130,246,.78));
+      box-shadow: 0 14px 28px rgba(59,130,246,.22);
+    }
+    .cta.primary:hover{filter:brightness(1.05); text-decoration:none}
+    .cta.ghost:hover{background: rgba(255,255,255,.10); text-decoration:none}
+    .cta:disabled{opacity:.55; cursor:not-allowed}
 
-.sub{
-color:var(--muted);
-margin-bottom:25px;
-}
+    .hero{padding:34px 0 12px;}
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .heroCard{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(700px 280px at 20% 20%, rgba(59,130,246,.20), transparent 60%),
+                  radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.16), transparent 55%);
+      pointer-events:none;
+    }
+    .heroCard > *{position:relative}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size:13px;
+      width: fit-content;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height:1.05;
+      letter-spacing:-.6px;
+    }
+    .sub{
+      margin:0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height:1.45;
+      max-width: 70ch;
+    }
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+    .hint{
+      font-size:12px;
+      color:rgba(233,238,252,.55);
+      line-height:1.55;
+      margin-top:10px;
+    }
 
-.metrics{
-display:flex;
-justify-content:center;
-gap:40px;
-flex-wrap:wrap;
-margin-top:25px;
-}
+    .panel{
+      background: linear-gradient(180deg, rgba(15,26,46,.75), rgba(15,26,46,.45));
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      padding:20px;
+      box-shadow: var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
 
-.metric h2{
-font-size:34px;
-margin:5px 0;
-}
+    .resultsGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .metric{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-height: 92px;
+    }
+    .metric .k{font-size:12px;color:var(--muted)}
+    .metric .v{
+      font-size:26px;
+      font-weight:900;
+      letter-spacing:-.4px;
+    }
+    .metric .u{font-size:12px;color:rgba(233,238,252,.55)}
+    .goodText{color: var(--good)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;}
 
-.metric span{
-color:var(--muted);
-font-size:14px;
-}
+    .status{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      border-radius: 16px;
+      padding:14px;
+      line-height:1.5;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .status strong{color:var(--text)}
 
-button{
-padding:12px 22px;
-border-radius:999px;
-border:0;
-background:var(--brand);
-color:white;
-font-weight:600;
-cursor:pointer;
-}
+    /* Gauge */
+    .gaugeWrap{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .gHeader{
+      display:flex; justify-content:space-between; align-items:flex-end; gap:10px;
+      margin-bottom:10px;
+    }
+    .gTitle{font-weight:800; font-size:14px}
+    .gSub{font-size:12px;color:rgba(233,238,252,.55)}
+    .gauge{
+      width:100%;
+      max-width: 420px;
+      margin:0 auto;
+      aspect-ratio: 2 / 1;
+      position:relative;
+    }
+    .gauge svg{width:100%; height:100%; display:block}
+    .needle{
+      transform-origin: 50% 100%;
+      transform: rotate(-90deg);
+      transition: transform 420ms cubic-bezier(.2,.9,.2,1);
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,.45));
+    }
+    .centerDot{
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,.45));
+    }
+    .ticks{
+      display:flex; justify-content:space-between;
+      color: rgba(233,238,252,.55);
+      font-size:12px;
+      margin-top:-6px;
+      padding:0 6px;
+    }
 
-button:hover{
-opacity:.9;
-}
+    .footer{
+      margin-top: 22px;
+      padding: 18px 0 36px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footerLinks{display:flex; flex-direction:column; gap:10px;}
+    .footerLinks a{color: var(--muted)}
+    .footerLinks a:hover{color: var(--text); text-decoration:none}
+    .footRow{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+    .small{font-size:12px; color:rgba(233,238,252,.55)}
 
-</style>
+    .miniGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .box{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:16px;
+    }
+    .box h2{margin:0 0 6px; font-size:16px}
+    .box ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.6}
+    .box p{margin:0; color:var(--muted); line-height:1.55}
+
+    @media (max-width: 920px){
+      .heroGrid{grid-template-columns: 1fr}
+      nav{display:none}
+    }
+    @media (max-width: 640px){
+      .resultsGrid{grid-template-columns: 1fr}
+      .row .cta{width:100%}
+      .miniGrid{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 
 <body>
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="/" aria-label="InstantQR Home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+        <span>InstantQR</span>
+      </a>
 
-<div class="wrap">
+      <nav aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/internet-speed-test.html">Speed Test</a>
+        <a href="/ip-lookup.html">IP Lookup</a>
+        <a href="/password-leak-checker.html">Password Leak</a>
+        <a href="/unit-converter.html">Unit Converter</a>
+      </nav>
 
-<h1>Internet Speed Test</h1>
-<p class="sub">Quickly measure your internet download speed and latency.</p>
+      <a class="cta primary" href="#run">Start Test →</a>
+    </div>
+  </header>
 
-<div class="panel">
+  <main class="wrap">
+    <section class="hero" aria-label="Internet Speed Test">
+      <div class="heroGrid">
+        <div class="heroCard">
+          <div class="pill">⚡ Fast • 🔒 Privacy-First • 📱 Mobile-Friendly</div>
 
-<button onclick="runTest()">Start Speed Test</button>
+          <h1>Free Internet Speed Test</h1>
+          <p class="sub">
+            Check your <strong>download speed</strong> (Mbps) and <strong>ping</strong> (ms) instantly with a clean speedometer UI.
+            No signup. Results are computed in your browser.
+          </p>
 
-<div class="metrics">
+          <div class="row" id="run">
+            <button class="cta primary" id="startBtn" type="button">Start Speed Test</button>
+            <button class="cta ghost" id="stopBtn" type="button" disabled>Stop</button>
+            <button class="cta ghost" id="resetBtn" type="button">Reset</button>
+          </div>
 
-<div class="metric">
-<span>Download</span>
-<h2 id="download">—</h2>
-<span>Mbps</span>
-</div>
+          <div class="hint">
+            Accuracy note: speed varies with Wi-Fi strength, VPNs, background downloads, and server distance.
+            For best results, pause streaming and run the test twice.
+          </div>
+        </div>
 
-<div class="metric">
-<span>Ping</span>
-<h2 id="ping">—</h2>
-<span>ms</span>
-</div>
+        <aside class="panel" aria-label="Results">
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-end;">
+            <div>
+              <div style="font-weight:900;font-size:15px;">Results</div>
+              <div class="hint" style="margin:6px 0 0;">Powered by a public test endpoint. No account required.</div>
+            </div>
+            <div class="hint mono" id="serverHint">Server: Cloudflare</div>
+          </div>
 
-</div>
+          <div class="gaugeWrap" aria-label="Speedometer">
+            <div class="gHeader">
+              <div>
+                <div class="gTitle">Download Speed</div>
+                <div class="gSub">Live estimate (Mbps)</div>
+              </div>
+              <div class="mono goodText" style="font-weight:900;font-size:14px;">
+                <span id="dlLive">—</span> Mbps
+              </div>
+            </div>
 
-</div>
+            <div class="gauge">
+              <!-- Semi-circle gauge -->
+              <svg viewBox="0 0 300 150" role="img" aria-label="Speed gauge">
+                <!-- track -->
+                <path d="M 30 150 A 120 120 0 0 1 270 150"
+                      fill="none" stroke="rgba(255,255,255,.12)" stroke-width="18" stroke-linecap="round"/>
+                <!-- progress -->
+                <path id="gArc" d="M 30 150 A 120 120 0 0 1 270 150"
+                      fill="none" stroke="rgba(59,130,246,.95)" stroke-width="18" stroke-linecap="round"
+                      stroke-dasharray="380" stroke-dashoffset="380"/>
+                <!-- needle -->
+                <g class="needle" id="needle" transform="rotate(-90 150 150)">
+                  <line x1="150" y1="150" x2="150" y2="44" stroke="rgba(233,238,252,.92)" stroke-width="4" stroke-linecap="round"/>
+                </g>
+                <circle class="centerDot" cx="150" cy="150" r="10" fill="rgba(233,238,252,.92)"/>
+              </svg>
+            </div>
+            <div class="ticks">
+              <span>0</span><span>50</span><span>100</span><span>250+</span>
+            </div>
+          </div>
 
-</div>
+          <div class="resultsGrid">
+            <div class="metric">
+              <div class="k">Download</div>
+              <div class="v goodText"><span id="dl">—</span></div>
+              <div class="u">Mbps</div>
+            </div>
+            <div class="metric">
+              <div class="k">Ping (Latency)</div>
+              <div class="v"><span id="ping">—</span></div>
+              <div class="u">ms</div>
+            </div>
+          </div>
 
-<script>
+          <div class="status" id="status">
+            <strong>Ready.</strong><br/>Press <b>Start Speed Test</b>.
+          </div>
+        </aside>
+      </div>
 
-async function runTest(){
+      <div class="miniGrid">
+        <div class="box">
+          <h2>How this speed test works</h2>
+          <ul>
+            <li><b>Ping</b> is measured by timing a small request.</li>
+            <li><b>Download</b> is measured by streaming test data and timing total bytes.</li>
+            <li>Results are approximate (browser-based), but great for quick checks.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h2>Privacy-first</h2>
+          <p>
+            No signup and no personal data required. This tool does not intentionally store results.
+            It only downloads test data to estimate speed and latency.
+          </p>
+        </div>
+      </div>
+    </section>
 
-document.getElementById("download").innerText="...";
-document.getElementById("ping").innerText="...";
+    <footer class="footer" aria-label="Footer">
+      <div class="footRow">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" style="height:28px;width:auto;display:block;" />
+            <strong style="color:var(--text);font-size:16px;">InstantQR</strong>
+          </div>
 
+          <div class="small">
+            InstantQR.io provides free privacy-first web tools for QR codes, crypto, security, AI, and conversions.
+          </div>
 
-// PING TEST
-let pingStart = performance.now();
+          <div class="small" style="margin-top:8px;">
+            © <span id="year"></span> InstantQR.io. All rights reserved.
+          </div>
+        </div>
 
-await fetch("https://speed.cloudflare.com/__down?bytes=10000");
+        <div class="footerLinks">
+          <div style="margin-bottom:8px;">
+            <a href="/internet-speed-test.html">Internet Speed Test</a> ·
+            <a href="/ip-lookup.html">IP Lookup</a> ·
+            <a href="/password.html">Password Generator</a> ·
+            <a href="/password-leak-checker.html">Password Leak Checker</a>
+          </div>
 
-let pingEnd = performance.now();
+          <div>
+            <a href="/about.html">About</a> ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/terms.html">Terms</a> ·
+            <a href="/contact.html">Contact</a> ·
+            <a href="/sitemap.xml">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
 
-let ping = Math.round(pingEnd - pingStart);
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-document.getElementById("ping").innerText = ping;
+    const ui = {
+      dl: document.getElementById('dl'),
+      dlLive: document.getElementById('dlLive'),
+      ping: document.getElementById('ping'),
+      status: document.getElementById('status'),
+      start: document.getElementById('startBtn'),
+      stop: document.getElementById('stopBtn'),
+      reset: document.getElementById('resetBtn'),
+      arc: document.getElementById('gArc'),
+      needle: document.getElementById('needle')
+    };
 
+    let stopFlag = false;
 
-// DOWNLOAD TEST
+    function setStatus(html){
+      ui.status.innerHTML = html;
+    }
 
-const testFile = "https://speed.cloudflare.com/__down?bytes=50000000";
+    function clamp(n,a,b){ return Math.max(a, Math.min(b, n)); }
 
-let start = performance.now();
+    // Map Mbps to gauge: 0..250 (cap), scaled to 0..180deg
+    function setGauge(mbps){
+      const max = 250;
+      const v = clamp(mbps, 0, max);
+      const pct = v / max; // 0..1
+      const arcLen = 380; // matches stroke-dasharray
+      ui.arc.style.strokeDasharray = arcLen;
+      ui.arc.style.strokeDashoffset = String(arcLen - (arcLen * pct));
 
-const response = await fetch(testFile);
+      const deg = -90 + (180 * pct); // -90..+90
+      ui.needle.style.transform = `rotate(${deg}deg)`;
+    }
 
-const reader = response.body.getReader();
+    async function pingTest(){
+      const url = "https://speed.cloudflare.com/__down?bytes=10000&rand=" + Math.random();
+      const t0 = performance.now();
+      await fetch(url, { cache: "no-store" });
+      const t1 = performance.now();
+      return Math.round(t1 - t0);
+    }
 
-let received = 0;
+    async function downloadTest(){
+      // 25MB is usually fast enough for stable results and quick completion.
+      // Increase bytes for high-speed connections, but keep it snappy.
+      const url = "https://speed.cloudflare.com/__down?bytes=25000000&rand=" + Math.random();
+      const start = performance.now();
+      const res = await fetch(url, { cache: "no-store" });
 
-while(true){
+      if (!res.body) throw new Error("Streaming not supported");
 
-const {done,value} = await reader.read();
+      const reader = res.body.getReader();
+      let received = 0;
+      let lastUi = start;
 
-if(done) break;
+      while (!stopFlag) {
+        const { done, value } = await reader.read();
+        if (done) break;
 
-received += value.length;
+        received += value.length;
 
-}
+        const now = performance.now();
+        if (now - lastUi > 250) {
+          const secs = (now - start) / 1000;
+          const mbps = (received * 8) / secs / 1e6;
+          ui.dlLive.textContent = mbps.toFixed(1);
+          setGauge(mbps);
+          lastUi = now;
+        }
+      }
 
-let end = performance.now();
+      const end = performance.now();
+      const secs = (end - start) / 1000;
+      if (secs <= 0 || received <= 0) return NaN;
+      return (received * 8) / secs / 1e6;
+    }
 
-let duration = (end-start)/1000;
+    function resetUI(){
+      stopFlag = false;
+      ui.dl.textContent = "—";
+      ui.dlLive.textContent = "—";
+      ui.ping.textContent = "—";
+      setGauge(0);
+      setStatus("<strong>Ready.</strong><br/>Press <b>Start Speed Test</b>.");
+      ui.start.disabled = false;
+      ui.stop.disabled = true;
+    }
 
-let bits = received * 8;
+    async function run(){
+      resetUI();
+      ui.start.disabled = true;
+      ui.stop.disabled = false;
 
-let speed = bits / duration / 1000000;
+      try{
+        setStatus("<strong>Measuring ping…</strong><br/>Timing a small request.");
+        const ping = await pingTest();
+        ui.ping.textContent = String(ping);
 
-document.getElementById("download").innerText = speed.toFixed(1);
+        if (stopFlag) return;
 
-}
+        setStatus("<strong>Measuring download…</strong><br/>Streaming test data for a quick estimate.");
+        ui.dlLive.textContent = "0.0";
+        setGauge(0);
 
-</script>
+        const dl = await downloadTest();
+        if (stopFlag) return;
 
+        ui.dl.textContent = Number.isFinite(dl) ? dl.toFixed(1) : "—";
+        ui.dlLive.textContent = Number.isFinite(dl) ? dl.toFixed(1) : "—";
+        setGauge(Number.isFinite(dl) ? dl : 0);
+
+        setStatus("<strong>Done.</strong><br/>Run it again to compare Wi-Fi vs LTE or different rooms.");
+      } catch (e){
+        setStatus("<strong>Test failed.</strong><br/>Your browser/network blocked the test request. Try again or disable VPN.");
+      } finally {
+        ui.start.disabled = false;
+        ui.stop.disabled = true;
+      }
+    }
+
+    ui.start.addEventListener('click', run);
+    ui.stop.addEventListener('click', () => {
+      stopFlag = true;
+      ui.stop.disabled = true;
+      setStatus("<strong>Stopped.</strong><br/>You can start again anytime.");
+    });
+    ui.reset.addEventListener('click', resetUI);
+
+    // init
+    resetUI();
+  </script>
 </body>
 </html>
