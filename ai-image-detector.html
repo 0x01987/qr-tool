@@ -1,1 +1,797 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
 
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Image Detector (Free Online Tool) | InstantQR</title>
+  <meta name="description" content="Check if an image is AI-generated. Privacy-first AI image detector runs locally in your browser—no uploads. Fast, responsive, and free." />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="AI Image Detector (Free Online Tool) | InstantQR" />
+  <meta property="og:description" content="Check if an image is AI-generated. Privacy-first: runs locally in your browser, no uploads." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://instantqr.io/ai-image-detector.html" />
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Does InstantQR upload my image?",
+        "acceptedAnswer":{"@type":"Answer","text":"No. This AI Image Detector runs locally in your browser. Your image is not uploaded to any server."}
+      },
+      {
+        "@type":"Question",
+        "name":"How accurate is an AI image detector?",
+        "acceptedAnswer":{"@type":"Answer","text":"No detector is perfect. This tool provides an AI-likelihood score using on-device checks (metadata + visual heuristics). Use results as a signal, not definitive proof."}
+      },
+      {
+        "@type":"Question",
+        "name":"Can it detect deepfake images?",
+        "acceptedAnswer":{"@type":"Answer","text":"It can flag common AI-generation indicators, but deepfake detection is complex. For high-stakes verification, combine multiple tools and sources."}
+      },
+      {
+        "@type":"Question",
+        "name":"What image types are supported?",
+        "acceptedAnswer":{"@type":"Answer","text":"PNG, JPG/JPEG, and WEBP are supported in modern browsers."}
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2f;
+      --card2:#0c1527;
+      --text:#eaf1ff;
+      --muted:#a9b7d6;
+      --line:rgba(255,255,255,.08);
+      --brand:#4aa3ff;
+      --good:#2ecc71;
+      --warn:#f1c40f;
+      --bad:#ff5c7a;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(1000px 700px at 20% -10%, rgba(74,163,255,.18), transparent 55%),
+                     radial-gradient(900px 650px at 90% 0%, rgba(255,92,122,.14), transparent 50%),
+                     var(--bg); color:var(--text);}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px 14px 40px}
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:10px 10px 16px;border-bottom:1px solid var(--line);
+      position:sticky;top:0;background:rgba(11,18,32,.72);backdrop-filter: blur(10px); z-index:10;
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{
+      width:34px;height:34px;border-radius:10px;
+      background:linear-gradient(135deg, rgba(74,163,255,.95), rgba(74,163,255,.35));
+      display:grid;place-items:center;box-shadow:0 10px 25px rgba(74,163,255,.18);
+      overflow:hidden;
+    }
+    .logo svg{width:26px;height:26px;opacity:.95}
+    .brand h1{font-size:14px;margin:0;letter-spacing:.2px}
+    nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .nav a{
+      font-size:12px;color:var(--muted);padding:8px 10px;border:1px solid var(--line);
+      border-radius:12px;background:rgba(255,255,255,.03);
+    }
+    .nav a:hover{border-color:rgba(74,163,255,.35);color:var(--text)}
+    .hero{padding:22px 10px 16px}
+    .kicker{display:inline-flex;gap:8px;align-items:center;
+      font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;
+      padding:6px 10px;background:rgba(255,255,255,.03)}
+    .kicker b{color:var(--text)}
+    .hero h2{margin:12px 0 6px;font-size:28px;line-height:1.15}
+    .hero p{margin:0;color:var(--muted);max-width:850px;line-height:1.55}
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:start}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} header{position:static;background:transparent;backdrop-filter:none}}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line); border-radius:18px; box-shadow: var(--shadow);
+    }
+    .card .hd{padding:14px 14px 0}
+    .card .hd h3{margin:0;font-size:14px}
+    .card .hd p{margin:6px 0 0;color:var(--muted);font-size:12px;line-height:1.45}
+    .card .bd{padding:14px}
+    .drop{
+      border:1px dashed rgba(255,255,255,.16);
+      border-radius:16px;background:rgba(255,255,255,.02);
+      padding:18px;display:grid;place-items:center;gap:10px;
+      min-height:210px;
+    }
+    .drop.drag{border-color:rgba(74,163,255,.55);background:rgba(74,163,255,.08)}
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    button, .btn{
+      appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.05);
+      color:var(--text);padding:10px 12px;border-radius:14px;font-weight:600;
+      cursor:pointer;font-size:13px;
+    }
+    button:hover,.btn:hover{border-color:rgba(74,163,255,.35)}
+    .btn.primary{background:linear-gradient(135deg, rgba(74,163,255,.95), rgba(74,163,255,.45)); border-color:transparent}
+    .btn.primary:hover{filter:brightness(1.03)}
+    .btn.ghost{background:transparent}
+    input[type="file"]{display:none}
+    .preview{
+      width:100%;display:grid;grid-template-columns: 150px 1fr;gap:12px;align-items:center;
+      border-top:1px solid var(--line); padding-top:14px; margin-top:14px;
+    }
+    @media (max-width:520px){ .preview{grid-template-columns:1fr} }
+    .thumb{
+      width:150px;height:150px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(255,255,255,.03);overflow:hidden;display:grid;place-items:center;
+    }
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .meta{color:var(--muted);font-size:12px;line-height:1.5}
+    .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .pill{
+      font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);
+      background:rgba(255,255,255,.03);color:var(--muted)
+    }
+    .scorebox{display:grid;gap:12px}
+    .score{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03)
+    }
+    .score .label{display:grid;gap:3px}
+    .score .label b{font-size:13px}
+    .score .label span{font-size:12px;color:var(--muted)}
+    .meter{height:10px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;border:1px solid var(--line)}
+    .bar{height:100%;width:0%}
+    .status{
+      font-size:12px;border:1px solid var(--line);border-radius:14px;padding:10px 12px;
+      background:rgba(255,255,255,.03);color:var(--muted);line-height:1.45
+    }
+    .list{margin:0;padding-left:16px;color:var(--muted);font-size:12px;line-height:1.6}
+    .small{font-size:12px;color:var(--muted);line-height:1.55}
+    .footer{margin-top:18px;padding:18px 10px 0;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+    .footerLinks a{color:var(--muted)}
+    .footerLinks a:hover{color:var(--text)}
+    .sep{opacity:.45;margin:0 6px}
+    .note{
+      margin-top:10px;padding:10px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      color:var(--muted);font-size:12px;line-height:1.5
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;font-size:12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);padding:6px 10px;background:rgba(255,255,255,.03);color:var(--muted)
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.25)}
+    .dot.good{background:rgba(46,204,113,.9)}
+    .dot.warn{background:rgba(241,196,15,.95)}
+    .dot.bad{background:rgba(255,92,122,.95)}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- simple QR-ish mark -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="7" height="7" rx="2" fill="white" opacity=".95"/>
+            <rect x="14" y="3" width="7" height="7" rx="2" fill="white" opacity=".85"/>
+            <rect x="3" y="14" width="7" height="7" rx="2" fill="white" opacity=".80"/>
+            <rect x="14" y="14" width="3" height="3" rx="1" fill="white" opacity=".70"/>
+            <rect x="18" y="14" width="3" height="7" rx="1.5" fill="white" opacity=".55"/>
+          </svg>
+        </div>
+        <h1>InstantQR</h1>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/url-qr-code-generator.html">URL QR</a>
+        <a href="/wifi-qr-code-generator.html">WiFi QR</a>
+        <a href="/crypto-profit-calculator.html">Crypto Profit</a>
+        <a href="/unit-converter.html">Unit Converter</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <span class="kicker">🔒 <b>Privacy-first</b> • Runs locally • No uploads</span>
+      <h2>AI Image Detector (Free Online Tool)</h2>
+      <p>
+        Check if an image is AI generated. This tool analyzes your image <b>in your browser</b> using metadata checks and lightweight visual heuristics.
+        Nothing is uploaded—fast, responsive, and built for privacy.
+      </p>
+    </section>
+
+    <section class="grid">
+      <!-- LEFT: Upload + Preview -->
+      <div class="card">
+        <div class="hd">
+          <h3>Upload an image</h3>
+          <p>PNG / JPG / JPEG / WEBP. Drag & drop or choose a file. Processing stays on your device.</p>
+        </div>
+        <div class="bd">
+          <div id="drop" class="drop" role="button" tabindex="0" aria-label="Upload image area">
+            <div class="badge"><span class="dot good"></span> Local analysis only</div>
+            <div class="btnrow">
+              <label class="btn primary" for="file">Choose Image</label>
+              <button class="btn ghost" id="demoBtn" type="button">Use Demo Image</button>
+              <button class="btn ghost" id="clearBtn" type="button" disabled>Clear</button>
+            </div>
+            <div class="small">Tip: On mobile, tap “Choose Image”. On desktop, you can drag a file here.</div>
+            <input id="file" type="file" accept="image/png,image/jpeg,image/jpg,image/webp" />
+          </div>
+
+          <div id="preview" class="preview" style="display:none;">
+            <div class="thumb"><img id="img" alt="Uploaded preview" /></div>
+            <div>
+              <div class="meta">
+                <div><b id="fname" style="color:var(--text)"></b></div>
+                <div id="finfo"></div>
+                <div id="fmeta" style="margin-top:6px;"></div>
+              </div>
+              <div class="pillrow" id="tags"></div>
+              <div class="note">
+                <b style="color:var(--text)">Important:</b> This provides a likelihood score, not a guarantee.
+                Edited photos, screenshots, and re-compressed images can reduce accuracy.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Results -->
+      <div class="card">
+        <div class="hd">
+          <h3>Result</h3>
+          <p>AI-likelihood score + explanations (metadata + visual signals). No network calls.</p>
+        </div>
+        <div class="bd">
+          <div class="scorebox">
+            <div class="score">
+              <div class="label">
+                <b id="scoreTitle">Awaiting image…</b>
+                <span id="scoreSub">Upload an image to analyze.</span>
+              </div>
+              <div style="min-width:84px;text-align:right;">
+                <div id="scorePct" style="font-weight:800;font-size:18px;">—</div>
+                <div style="font-size:11px;color:var(--muted)">AI likelihood</div>
+              </div>
+            </div>
+
+            <div class="meter" aria-label="AI likelihood meter">
+              <div id="bar" class="bar"></div>
+            </div>
+
+            <div id="status" class="status">
+              <b style="color:var(--text)">Privacy:</b> your image never leaves your device. Analysis runs locally in your browser.
+            </div>
+
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0 8px;">
+                <b style="font-size:13px;">Signals</b>
+                <span class="small" id="sigCount">0 signals</span>
+              </div>
+              <ul class="list" id="signals">
+                <li>Upload an image to see detected signals.</li>
+              </ul>
+            </div>
+
+            <div>
+              <b style="font-size:13px;">How it works</b>
+              <p class="small" style="margin:6px 0 0;">
+                We check (1) metadata indicators (EXIF / software tags), and (2) fast visual heuristics (noise, edges, compression patterns).
+                This is designed to be lightweight and private—no server required.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div class="footerLinks">
+        <div style="margin-bottom:8px;">
+          <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a><span class="sep">·</span>
+          <a href="/url-qr-code-generator.html">URL QR Generator</a><span class="sep">·</span>
+          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a><span class="sep">·</span>
+          <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a><span class="sep">·</span>
+          <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+        </div>
+        <div>
+          <a href="/about.html">About</a><span class="sep">·</span>
+          <a href="/privacy.html">Privacy</a><span class="sep">·</span>
+          <a href="/terms.html">Terms</a><span class="sep">·</span>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+
+      <p style="margin:12px 0 0;">
+        © <span id="yr"></span> InstantQR. Fast tools. Privacy-first.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // ---------- Utilities ----------
+    const $ = (id) => document.getElementById(id);
+    const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+
+    function formatBytes(bytes){
+      if (!Number.isFinite(bytes)) return "";
+      const units = ["B","KB","MB","GB"];
+      let i = 0, n = bytes;
+      while (n >= 1024 && i < units.length-1){ n/=1024; i++; }
+      return `${n.toFixed(i===0?0:2)} ${units[i]}`;
+    }
+
+    function setBar(pct, tone){
+      const bar = $("bar");
+      bar.style.width = `${pct}%`;
+      // no fixed palette; use CSS vars only
+      if (tone === "good") bar.style.background = "rgba(46,204,113,.95)";
+      else if (tone === "warn") bar.style.background = "rgba(241,196,15,.95)";
+      else bar.style.background = "rgba(255,92,122,.95)";
+    }
+
+    function setResult(pct, title, sub, tone){
+      $("scorePct").textContent = `${pct}%`;
+      $("scoreTitle").textContent = title;
+      $("scoreSub").textContent = sub;
+      setBar(pct, tone);
+    }
+
+    function setSignals(items){
+      const ul = $("signals");
+      ul.innerHTML = "";
+      if (!items.length){
+        ul.innerHTML = "<li>No strong signals detected. This does not prove the image is real—only that obvious indicators were not found.</li>";
+      } else {
+        for (const it of items){
+          const li = document.createElement("li");
+          li.textContent = it;
+          ul.appendChild(li);
+        }
+      }
+      $("sigCount").textContent = `${items.length} signal${items.length===1?"":"s"}`;
+    }
+
+    function setTags(tags){
+      const wrap = $("tags");
+      wrap.innerHTML = "";
+      for (const t of tags){
+        const s = document.createElement("span");
+        s.className = "pill";
+        s.textContent = t;
+        wrap.appendChild(s);
+      }
+    }
+
+    // ---------- Minimal EXIF parser (privacy-first, fast) ----------
+    // Reads a few common tags from JPEG APP1 EXIF only (no external libs).
+    // If not present or non-JPEG, returns {} quickly.
+    function readExifBasic(arrayBuffer){
+      try{
+        const dv = new DataView(arrayBuffer);
+        // JPEG SOI
+        if (dv.getUint16(0, false) !== 0xFFD8) return {};
+        let offset = 2;
+        const len = dv.byteLength;
+
+        while (offset < len){
+          if (dv.getUint8(offset) !== 0xFF) break;
+          const marker = dv.getUint8(offset + 1);
+          // APP1
+          if (marker === 0xE1){
+            const segLen = dv.getUint16(offset + 2, false);
+            const start = offset + 4;
+            // "Exif\0\0"
+            if (dv.getUint32(start, false) !== 0x45786966) return {};
+            const tiff = start + 6;
+
+            const endian = dv.getUint16(tiff, false);
+            const le = (endian === 0x4949);
+            const getU16 = (o) => dv.getUint16(o, le);
+            const getU32 = (o) => dv.getUint32(o, le);
+
+            const magic = getU16(tiff + 2);
+            if (magic !== 42) return {};
+
+            const ifd0Offset = getU32(tiff + 4);
+            const ifd0 = tiff + ifd0Offset;
+            const entries = getU16(ifd0);
+
+            const tags = {};
+            const readAscii = (valOffset, count) => {
+              const o = tiff + valOffset;
+              const bytes = new Uint8Array(arrayBuffer, o, Math.min(count, 256));
+              let s = "";
+              for (let i=0;i<bytes.length;i++){
+                if (bytes[i] === 0) break;
+                s += String.fromCharCode(bytes[i]);
+              }
+              return s.trim();
+            };
+
+            for (let i=0;i<entries;i++){
+              const e = ifd0 + 2 + i*12;
+              const tag = getU16(e);
+              const type = getU16(e+2);
+              const count = getU32(e+4);
+              const value = getU32(e+8);
+
+              // Only ASCII type=2
+              if (type !== 2) continue;
+
+              // Tag IDs we care about:
+              // 0x010F Make, 0x0110 Model, 0x0131 Software, 0x9003 DateTimeOriginal (often in EXIF IFD not IFD0)
+              if (tag === 0x010F) tags.make = readAscii(value, count);
+              if (tag === 0x0110) tags.model = readAscii(value, count);
+              if (tag === 0x0131) tags.software = readAscii(value, count);
+            }
+
+            // Try EXIF SubIFD pointer (0x8769) to get DateTimeOriginal (0x9003)
+            // We do a second pass to find 0x8769
+            let exifPtr = null;
+            for (let i=0;i<entries;i++){
+              const e = ifd0 + 2 + i*12;
+              const tag = getU16(e);
+              const type = getU16(e+2);
+              const value = getU32(e+8);
+              if (tag === 0x8769){ exifPtr = value; break; }
+            }
+            if (exifPtr){
+              const exifIfd = tiff + exifPtr;
+              const exifEntries = getU16(exifIfd);
+              for (let i=0;i<exifEntries;i++){
+                const e = exifIfd + 2 + i*12;
+                const tag = getU16(e);
+                const type = getU16(e+2);
+                const count = getU32(e+4);
+                const value = getU32(e+8);
+                if (type === 2 && tag === 0x9003){
+                  tags.dateTimeOriginal = readAscii(value, count);
+                  break;
+                }
+              }
+            }
+
+            return tags;
+          } else {
+            // Skip segment
+            const segLen = dv.getUint16(offset + 2, false);
+            offset += 2 + segLen;
+          }
+        }
+        return {};
+      } catch (e){
+        return {};
+      }
+    }
+
+    // ---------- Visual heuristics (fast, local) ----------
+    // Produces signals + a score (0-100 AI likelihood) from lightweight checks.
+    async function analyzeImage(imgEl, file, arrayBuffer){
+      const signals = [];
+      let score = 0;
+
+      // 1) Metadata / EXIF
+      const type = (file.type || "").toLowerCase();
+      const isJpeg = type.includes("jpeg") || type.includes("jpg");
+      let exif = {};
+      if (isJpeg && arrayBuffer) exif = readExifBasic(arrayBuffer);
+
+      const exifSoftware = (exif.software || "").toLowerCase();
+      const knownAiSoftware = [
+        "midjourney","stable diffusion","comfyui","automatic1111","a1111",
+        "dall","openai","sdxl","dreamstudio","lexica","novelai","diffusion"
+      ];
+      const foundAiSoftware = knownAiSoftware.find(k => exifSoftware.includes(k));
+
+      if (foundAiSoftware){
+        signals.push(`Metadata “Software” tag mentions: ${exif.software}`);
+        score += 45;
+      } else if (isJpeg){
+        // EXIF often stripped; not proof, but mild signal
+        if (!exif.make && !exif.model && !exif.software && !exif.dateTimeOriginal){
+          signals.push("No common EXIF camera/software tags found (often stripped by AI tools or re-exports).");
+          score += 10;
+        }
+      }
+
+      // 2) Resolution patterns (common generator sizes)
+      const w = imgEl.naturalWidth, h = imgEl.naturalHeight;
+      const common = new Set([
+        "1024x1024","768x768","512x512","2048x2048",
+        "1024x1536","1536x1024","1024x1792","1792x1024",
+        "1152x896","896x1152","1216x832","832x1216",
+        "1344x768","768x1344","1536x640","640x1536"
+      ]);
+      const key = `${w}x${h}`;
+      if (common.has(key)){
+        signals.push(`Resolution matches a common AI-generation size (${key}).`);
+        score += 14;
+      }
+
+      // 3) Fast canvas checks: edge density + noise estimate
+      // Keep it fast: downscale to max 256px on longest side.
+      const maxSide = 256;
+      const scale = Math.min(1, maxSide / Math.max(w, h));
+      const cw = Math.max(1, Math.round(w * scale));
+      const ch = Math.max(1, Math.round(h * scale));
+
+      const canvas = document.createElement("canvas");
+      canvas.width = cw; canvas.height = ch;
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      ctx.drawImage(imgEl, 0, 0, cw, ch);
+      const { data } = ctx.getImageData(0, 0, cw, ch);
+
+      // Compute:
+      // - edge density via simple gradient threshold
+      // - noise via local intensity variance approximation
+      let edges = 0, samples = 0;
+      let sumVar = 0;
+
+      // Work on a sparse grid for speed
+      const step = 2;
+      for (let y=1; y<ch-1; y+=step){
+        for (let x=1; x<cw-1; x+=step){
+          const i = (y*cw + x)*4;
+          // luminance
+          const L  = 0.2126*data[i] + 0.7152*data[i+1] + 0.0722*data[i+2];
+
+          const il = (y*cw + (x-1))*4;
+          const ir = (y*cw + (x+1))*4;
+          const iu = ((y-1)*cw + x)*4;
+          const id = ((y+1)*cw + x)*4;
+
+          const Ll = 0.2126*data[il] + 0.7152*data[il+1] + 0.0722*data[il+2];
+          const Lr = 0.2126*data[ir] + 0.7152*data[ir+1] + 0.0722*data[ir+2];
+          const Lu = 0.2126*data[iu] + 0.7152*data[iu+1] + 0.0722*data[iu+2];
+          const Ld = 0.2126*data[id] + 0.7152*data[id+1] + 0.0722*data[id+2];
+
+          const gx = Math.abs(Lr - Ll);
+          const gy = Math.abs(Ld - Lu);
+          const g = gx + gy;
+
+          // edge threshold tuned for downscaled image
+          if (g > 60) edges++;
+
+          // local variance proxy
+          const mean = (Ll + Lr + Lu + Ld + L) / 5;
+          const v = ( (Ll-mean)**2 + (Lr-mean)**2 + (Lu-mean)**2 + (Ld-mean)**2 + (L-mean)**2 ) / 5;
+          sumVar += v;
+          samples++;
+        }
+      }
+
+      const edgeDensity = edges / Math.max(1, samples);        // 0..1
+      const noise = Math.sqrt(sumVar / Math.max(1, samples));  // typical 0..50+
+
+      // Interpret heuristics (these are best-effort signals, not definitive)
+      if (edgeDensity > 0.22 && noise < 10){
+        signals.push("High sharp-edge density with low noise (can appear in AI renders or heavy upscales).");
+        score += 12;
+      }
+      if (noise < 6){
+        signals.push("Very low image noise (can indicate synthetic generation or strong denoising).");
+        score += 8;
+      }
+      if (noise > 22){
+        signals.push("High noise level (often natural photos, but can be added artificially).");
+        score -= 6;
+      }
+
+      // 4) File context signals
+      const sizeMB = file.size / (1024*1024);
+      if (w >= 3000 || h >= 3000){
+        // Many AI images are smaller; large res leans real-ish but not always
+        score -= 4;
+      }
+      if (sizeMB < 0.12 && (w*h) > 800*800){
+        signals.push("Unusually small file size for its resolution (strong compression can mask details).");
+        score += 6;
+      }
+
+      // Clamp & label
+      score = clamp(Math.round(score), 0, 100);
+
+      let tone = "good";
+      let title = "Likely real / unclear";
+      let sub = "No strong AI indicators found. This is not proof—use as a signal.";
+      if (score >= 70){
+        tone = "bad";
+        title = "Likely AI-generated";
+        sub = "Multiple indicators suggest synthetic generation.";
+      } else if (score >= 40){
+        tone = "warn";
+        title = "Possibly AI-generated";
+        sub = "Some indicators found. Consider checking source/context.";
+      }
+
+      // Add gentle disclaimer signal when EXIF explicitly shows camera
+      const makeModel = [exif.make, exif.model].filter(Boolean).join(" ");
+      if (makeModel){
+        signals.push(`Camera tags found: ${makeModel} (leans toward real photo, but can be edited or spoofed).`);
+        score = clamp(score - 8, 0, 100);
+        if (score < 40){ tone="good"; title="Likely real / unclear"; sub="Camera metadata found and few AI signals. Still not definitive."; }
+      }
+
+      // Update labels if score changed
+      if (score >= 70){ tone="bad"; title="Likely AI-generated"; sub="Multiple indicators suggest synthetic generation."; }
+      else if (score >= 40){ tone="warn"; title="Possibly AI-generated"; sub="Some indicators found. Consider checking source/context."; }
+      else { tone="good"; title="Likely real / unclear"; sub="No strong AI indicators found. This is not proof—use as a signal."; }
+
+      return { score, title, sub, tone, signals, exif };
+    }
+
+    // ---------- UI wiring ----------
+    const drop = $("drop");
+    const fileInput = $("file");
+    const img = $("img");
+    const preview = $("preview");
+    const clearBtn = $("clearBtn");
+    const demoBtn = $("demoBtn");
+
+    function resetUI(){
+      preview.style.display = "none";
+      img.src = "";
+      $("fname").textContent = "";
+      $("finfo").textContent = "";
+      $("fmeta").textContent = "";
+      setTags([]);
+      setResult(0, "Awaiting image…", "Upload an image to analyze.", "good");
+      $("scorePct").textContent = "—";
+      $("bar").style.width = "0%";
+      setSignals([]);
+      clearBtn.disabled = true;
+      fileInput.value = "";
+    }
+
+    async function handleFile(file){
+      if (!file) return;
+      const ok = /image\/(png|jpeg|jpg|webp)/i.test(file.type);
+      if (!ok){
+        alert("Please upload a PNG, JPG/JPEG, or WEBP image.");
+        return;
+      }
+
+      clearBtn.disabled = false;
+
+      // Preview
+      $("fname").textContent = file.name || "image";
+      $("finfo").textContent = `${(file.type || "image").toUpperCase()} • ${formatBytes(file.size)}`;
+
+      const url = URL.createObjectURL(file);
+      img.src = url;
+
+      // We read bytes for EXIF (JPEG only), but do not upload anywhere.
+      let buf = null;
+      try { buf = await file.arrayBuffer(); } catch(e){ buf = null; }
+
+      preview.style.display = "grid";
+      setTags([ "Privacy-first", "Local analysis", "No uploads" ]);
+      setResult(0, "Analyzing…", "Running local checks (metadata + visual signals)…", "warn");
+      setSignals(["Analyzing image locally…"]);
+
+      // Wait for image decode
+      await img.decode().catch(()=>{});
+
+      // Run analysis in idle time if available
+      const run = async () => {
+        const res = await analyzeImage(img, file, buf);
+        setResult(res.score, res.title, res.sub, res.tone);
+        setSignals(res.signals);
+
+        // Metadata display (basic)
+        const exif = res.exif || {};
+        const parts = [];
+        if (exif.dateTimeOriginal) parts.push(`Date: ${exif.dateTimeOriginal}`);
+        if (exif.software) parts.push(`Software: ${exif.software}`);
+        if (exif.make || exif.model) parts.push(`Camera: ${(exif.make||"").trim()} ${(exif.model||"").trim()}`.trim());
+        $("fmeta").textContent = parts.length ? ("Metadata: " + parts.join(" • ")) : "Metadata: No common EXIF fields detected (or not a JPEG).";
+
+        // Add contextual tags
+        const tags = ["Fast", "Responsive", "Local-only"];
+        if (res.score >= 70) tags.push("Likely AI");
+        else if (res.score >= 40) tags.push("Possibly AI");
+        else tags.push("Unclear / Likely real");
+        setTags(tags);
+
+        // Cleanup object URL
+        setTimeout(()=>URL.revokeObjectURL(url), 1500);
+      };
+
+      if ("requestIdleCallback" in window){
+        requestIdleCallback(run, { timeout: 900 });
+      } else {
+        setTimeout(run, 50);
+      }
+    }
+
+    // Drag & Drop
+    ["dragenter","dragover"].forEach(evt => {
+      drop.addEventListener(evt, (e) => {
+        e.preventDefault(); e.stopPropagation();
+        drop.classList.add("drag");
+      });
+    });
+    ["dragleave","drop"].forEach(evt => {
+      drop.addEventListener(evt, (e) => {
+        e.preventDefault(); e.stopPropagation();
+        drop.classList.remove("drag");
+      });
+    });
+    drop.addEventListener("drop", (e) => {
+      const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if (f) handleFile(f);
+    });
+
+    // Click / keyboard open
+    drop.addEventListener("click", (e) => {
+      // Don't trigger when clicking buttons/labels
+      const t = e.target;
+      if (t && (t.tagName === "BUTTON" || t.tagName === "LABEL" || t.closest("button") || t.closest("label"))) return;
+      fileInput.click();
+    });
+    drop.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        fileInput.click();
+      }
+    });
+
+    fileInput.addEventListener("change", () => handleFile(fileInput.files[0]));
+
+    clearBtn.addEventListener("click", () => resetUI());
+
+    demoBtn.addEventListener("click", async () => {
+      // privacy-first demo generated locally: draw a synthetic gradient + shapes
+      const c = document.createElement("canvas");
+      c.width = 1024; c.height = 1024;
+      const ctx = c.getContext("2d");
+      const g = ctx.createLinearGradient(0,0,1024,1024);
+      g.addColorStop(0, "rgba(74,163,255,1)");
+      g.addColorStop(1, "rgba(255,92,122,1)");
+      ctx.fillStyle = g;
+      ctx.fillRect(0,0,1024,1024);
+      ctx.fillStyle = "rgba(255,255,255,.10)";
+      for (let i=0;i<40;i++){
+        ctx.beginPath();
+        ctx.arc(Math.random()*1024, Math.random()*1024, 40+Math.random()*120, 0, Math.PI*2);
+        ctx.fill();
+      }
+      ctx.fillStyle = "rgba(0,0,0,.25)";
+      ctx.fillRect(70, 760, 880, 170);
+      ctx.fillStyle = "rgba(255,255,255,.92)";
+      ctx.font = "700 42px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+      ctx.fillText("DEMO IMAGE (local)", 110, 845);
+      ctx.font = "500 22px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+      ctx.fillText("This sample is generated in your browser. No downloads, no uploads.", 110, 890);
+
+      const blob = await new Promise(res => c.toBlob(res, "image/png", 0.92));
+      const demoFile = new File([blob], "instantqr-demo.png", { type: "image/png" });
+      handleFile(demoFile);
+    });
+
+    $("yr").textContent = new Date().getFullYear();
+
+    // init
+    resetUI();
+  </script>
+</body>
+</html>
