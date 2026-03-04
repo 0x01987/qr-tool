@@ -1,642 +1,165 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
-  </script>
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>Internet Speed Test (Fast & Clean) | InstantQR</title>
-  <meta name="description" content="Run a fast internet speed test in your browser. Measure download speed, upload speed, and latency (ping). Clean, responsive UI built for speed." />
-  <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://instantqr.io/internet-speed-test.html" />
+<title>Internet Speed Test | InstantQR</title>
+<meta name="description" content="Run a quick internet speed test directly in your browser. Measure download speed and latency instantly.">
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Internet Speed Test (Fast & Clean) | InstantQR" />
-  <meta property="og:description" content="Measure download, upload, and latency in your browser. Clean and responsive speed test." />
-  <meta property="og:url" content="https://instantqr.io/internet-speed-test.html" />
+<link rel="icon" href="/assets/instantqr-logo.svg">
 
-  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
-  <link rel="alternate icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
-  <meta name="theme-color" content="#0b0f19" />
+<style>
 
-  <style>
-    :root{
-      --bg:#0b1220;
-      --text:#e7eefc;
-      --muted:#a9b7d6;
-      --brand:#3b82f6;
-      --border: rgba(255,255,255,.10);
-      --shadow: 0 12px 40px rgba(0,0,0,.45);
-      --radius: 18px;
-      --radius2: 22px;
-      --max: 1100px;
-      color-scheme: dark;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 700px at 15% 10%, rgba(59,130,246,.22), transparent 55%),
-        radial-gradient(1000px 600px at 85% 15%, rgba(34,197,94,.12), transparent 50%),
-        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
-        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
-    }
-    a{color:inherit; text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max); margin:0 auto; padding:20px}
+:root{
+--bg:#0b1220;
+--text:#e7eefc;
+--muted:#a9b7d6;
+--brand:#3b82f6;
+--border:rgba(255,255,255,.1);
+--radius:18px;
+--max:1000px;
+}
 
-    .topbar{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: rgba(7, 11, 20, .55);
-      border-bottom: 1px solid var(--border);
-    }
-    .topbar .inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 20px;
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:700; letter-spacing:.2px;
-    }
-    .brand img{display:block; height:34px; width:auto}
+body{
+margin:0;
+font-family:system-ui;
+background:linear-gradient(180deg,#0b1220,#060912);
+color:var(--text);
+}
 
-    nav{display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
-    nav a{
-      color:var(--muted);
-      font-size:14px;
-      padding:8px 10px;
-      border-radius:12px;
-    }
-    nav a:hover{
-      color:var(--text);
-      background: rgba(255,255,255,.06);
-      text-decoration:none;
-    }
+.wrap{
+max-width:var(--max);
+margin:auto;
+padding:20px;
+}
 
-    .cta{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 14px;
-      border-radius: 999px;
-      font-weight:600;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      text-decoration:none;
-      gap:8px;
-      white-space:nowrap;
-      cursor:pointer;
-    }
-    .cta.primary{
-      border: 0;
-      background: linear-gradient(135deg, rgba(59,130,246,1), rgba(59,130,246,.78));
-      box-shadow: 0 14px 28px rgba(59,130,246,.22);
-    }
-    .cta.primary:hover{filter:brightness(1.05); text-decoration:none}
-    .cta.ghost:hover{background: rgba(255,255,255,.10); text-decoration:none}
-    .cta:disabled{
-      opacity:.55;
-      cursor:not-allowed;
-      filter:none;
-    }
+h1{
+font-size:32px;
+margin-bottom:10px;
+}
 
-    .hero{padding:34px 0 12px;}
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    .heroCard{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border: 1px solid var(--border);
-      border-radius: var(--radius2);
-      box-shadow: var(--shadow);
-      padding:26px;
-      position:relative;
-      overflow:hidden;
-    }
-    .heroCard:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(700px 280px at 20% 20%, rgba(59,130,246,.20), transparent 60%),
-                  radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
-      pointer-events:none;
-    }
-    .heroCard > *{position:relative}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      color: var(--muted);
-      font-size:13px;
-      width: fit-content;
-    }
-    h1{
-      margin:14px 0 10px;
-      font-size: clamp(28px, 4vw, 40px);
-      line-height:1.05;
-      letter-spacing:-.6px;
-    }
-    .sub{
-      margin:0 0 18px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height:1.45;
-      max-width: 70ch;
-    }
+.sub{
+color:var(--muted);
+margin-bottom:20px;
+}
 
-    .panel{
-      background: linear-gradient(180deg, rgba(15,26,46,.75), rgba(15,26,46,.45));
-      border: 1px solid var(--border);
-      border-radius: var(--radius2);
-      padding:20px;
-      box-shadow: var(--shadow);
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      gap:14px;
-    }
+.panel{
+background:rgba(255,255,255,.04);
+border:1px solid var(--border);
+border-radius:var(--radius);
+padding:24px;
+text-align:center;
+}
 
-    .metrics{
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap:12px;
-    }
-    .metric{
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      padding:14px;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      min-height: 92px;
-    }
-    .metric .k{font-size:12px;color:var(--muted)}
-    .metric .v{
-      font-size:22px;
-      font-weight:800;
-      letter-spacing:-.3px;
-    }
-    .metric .u{font-size:12px;color:rgba(233,238,252,.55)}
-    .metric.small .v{font-size:18px}
+.metrics{
+display:flex;
+justify-content:center;
+gap:40px;
+margin-top:20px;
+flex-wrap:wrap;
+}
 
-    .meter{
-      height:10px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      overflow:hidden;
-    }
-    .bar{height:100%; width:0%; background: rgba(59,130,246,.95)}
+.metric{
+text-align:center;
+}
 
-    .hint{
-      font-size:12px;
-      color:rgba(233,238,252,.55);
-      line-height:1.55;
-    }
+.metric h2{
+font-size:34px;
+margin:6px 0;
+}
 
-    .status{
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.14);
-      border-radius: 16px;
-      padding:14px;
-      line-height:1.5;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .status strong{color:var(--text)}
+.metric span{
+color:var(--muted);
+font-size:14px;
+}
 
-    .row{display:flex; gap:10px; flex-wrap:wrap}
-    .row .cta{flex:0 0 auto}
-    .row .cta.primary{min-width: 160px}
+button{
+margin-top:20px;
+padding:12px 20px;
+border-radius:999px;
+border:0;
+background:var(--brand);
+color:white;
+font-weight:600;
+cursor:pointer;
+}
 
-    .miniGrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      margin-top:12px;
-    }
-    .box{
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      padding:16px;
-    }
-    .box h3{margin:0 0 6px; font-size:16px}
-    .box ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.6}
-    .box p{margin:0; color:var(--muted); line-height:1.55}
+button:hover{
+opacity:.9;
+}
 
-    .footer{
-      margin-top: 22px;
-      padding: 18px 0 36px;
-      border-top: 1px solid rgba(255,255,255,.10);
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .footerLinks{display:flex; flex-direction:column; gap:10px;}
-    .footerLinks a{color: var(--muted)}
-    .footerLinks a:hover{color: var(--text); text-decoration:none}
-    .footRow{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap;}
-    .small{font-size:12px; color:rgba(233,238,252,.55)}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;}
-
-    @media (max-width: 920px){
-      .heroGrid{grid-template-columns: 1fr}
-      nav{display:none}
-      .metrics{grid-template-columns: 1fr 1fr 1fr}
-    }
-    @media (max-width: 640px){
-      .metrics{grid-template-columns: 1fr}
-      .row .cta{width:100%}
-      .miniGrid{grid-template-columns:1fr}
-    }
-  </style>
+</style>
 </head>
 
 <body>
-  <!-- Top Bar -->
-  <header class="topbar">
-    <div class="inner">
-      <a class="brand" href="/" aria-label="InstantQR Home">
-        <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
-        <span>InstantQR</span>
-      </a>
 
-      <nav aria-label="Primary">
-        <a href="/">Home</a>
-        <a href="/internet-speed-test.html">Speed Test</a>
-        <a href="/ip-lookup.html">IP Lookup</a>
-        <a href="/unit-converter.html">Unit Converter</a>
-        <a href="/password-leak-checker.html">Password Leak</a>
-      </nav>
+<div class="wrap">
 
-      <a class="cta primary" href="#run">Start Test →</a>
-    </div>
-  </header>
+<h1>Internet Speed Test</h1>
+<p class="sub">Quickly measure your internet download speed and latency.</p>
 
-  <main class="wrap">
-    <section class="hero" aria-label="Hero">
-      <div class="heroGrid">
-        <div class="heroCard">
-          <div class="pill">⚡ Fast • 📱 Mobile-Friendly • 🧪 Clean Results</div>
+<div class="panel">
 
-          <h1>Internet Speed Test</h1>
-          <p class="sub">
-            Measure <strong>download</strong>, <strong>upload</strong>, and <strong>latency</strong> right in your browser.
-            Clean UI, quick test, and transparent results.
-          </p>
+<button onclick="runTest()">Start Speed Test</button>
 
-          <div class="row" id="run">
-            <button class="cta primary" id="startBtn" type="button">Start Speed Test</button>
-            <button class="cta ghost" id="stopBtn" type="button" disabled>Stop</button>
-            <button class="cta ghost" id="resetBtn" type="button">Reset</button>
-          </div>
+<div class="metrics">
 
-          <div class="hint" style="margin-top:10px;">
-            Note: Browser speed tests are approximate and depend on your device, Wi-Fi quality, VPNs, and server distance.
-            For best results, stop downloads/streams during the test.
-          </div>
-        </div>
+<div class="metric">
+<span>Download</span>
+<h2 id="download">—</h2>
+<span>Mbps</span>
+</div>
 
-        <aside class="panel" aria-label="Results Panel">
-          <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-end;">
-            <div>
-              <div style="font-weight:800;font-size:15px;">Results</div>
-              <div class="hint">Real-time estimates while the test runs.</div>
-            </div>
-            <div class="hint mono" id="serverHint">Server: auto</div>
-          </div>
+<div class="metric">
+<span>Ping</span>
+<h2 id="ping">—</h2>
+<span>ms</span>
+</div>
 
-          <div class="metrics">
-            <div class="metric">
-              <div class="k">Download</div>
-              <div class="v"><span id="dl">—</span></div>
-              <div class="u">Mbps</div>
-            </div>
-            <div class="metric">
-              <div class="k">Upload</div>
-              <div class="v"><span id="ul">—</span></div>
-              <div class="u">Mbps</div>
-            </div>
-            <div class="metric small">
-              <div class="k">Latency (Ping)</div>
-              <div class="v"><span id="ping">—</span></div>
-              <div class="u">ms</div>
-            </div>
-          </div>
+</div>
 
-          <div>
-            <div class="hint" style="display:flex;justify-content:space-between;gap:10px;margin:8px 0 6px;">
-              <span>Progress</span>
-              <span id="phase" class="mono">idle</span>
-            </div>
-            <div class="meter" aria-label="Progress meter">
-              <div class="bar" id="bar"></div>
-            </div>
-          </div>
+</div>
 
-          <div class="status" id="status">
-            <strong>Ready.</strong><br/>
-            Press <b>Start Speed Test</b> to begin.
-          </div>
-        </aside>
-      </div>
+</div>
 
-      <div class="miniGrid">
-        <div class="box">
-          <h3>How it works</h3>
-          <ul>
-            <li>Ping is measured by timing small requests.</li>
-            <li>Download uses multiple cache-busted fetches to estimate throughput.</li>
-            <li>Upload uses timed POST requests to estimate upstream speed.</li>
-          </ul>
-        </div>
-        <div class="box">
-          <h3>Privacy note</h3>
-          <p>
-            This tool does not ask for personal data. It runs in your browser and performs network requests only to measure speed.
-            No results are saved by InstantQR.
-          </p>
-        </div>
-      </div>
-    </section>
+<script>
 
-    <footer class="footer" aria-label="Footer">
-      <div class="footRow">
-        <div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-            <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" style="height:28px;width:auto;display:block;" />
-            <strong style="color:var(--text);font-size:16px;">InstantQR</strong>
-          </div>
+async function runTest(){
 
-          <div class="small">
-            InstantQR.io provides free privacy-first web tools for QR codes, crypto, security, AI, and conversions.
-          </div>
+document.getElementById("download").innerText="Testing...";
+document.getElementById("ping").innerText="...";
 
-          <div class="small" style="margin-top:8px;">
-            © <span id="year"></span> InstantQR.io. All rights reserved.
-          </div>
-        </div>
+let start = performance.now();
 
-        <div class="footerLinks">
-          <div style="margin-bottom:8px;">
-            <a href="/internet-speed-test.html">Internet Speed Test</a> ·
-            <a href="/ip-lookup.html">IP Lookup</a> ·
-            <a href="/password.html">Password Generator</a> ·
-            <a href="/password-leak-checker.html">Password Leak Checker</a>
-          </div>
+await fetch("https://speed.hetzner.de/1MB.bin?"+Math.random());
 
-          <div>
-            <a href="/about.html">About</a> ·
-            <a href="/privacy.html">Privacy</a> ·
-            <a href="/terms.html">Terms</a> ·
-            <a href="/contact.html">Contact</a> ·
-            <a href="/sitemap.xml">Sitemap</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </main>
+let end = performance.now();
 
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+let ping = Math.round(end-start);
 
-    // --- Speed Test Implementation (client-side estimates) ---
-    // Note: A perfect speed test requires dedicated servers (like Ookla).
-    // This is a clean, lightweight estimator using fetch timing to your own domain.
-    // ✅ Best practice: host /speedtest/ files on your CDN/origin for consistent results.
-    //
-    // This implementation:
-    // - Ping: small HEAD requests
-    // - Download: fetch a cache-busted file multiple times
-    // - Upload: POST random bytes to an endpoint
-    //
-    // If you DON'T have upload endpoint, upload will fall back to "N/A".
-    //
-    // Recommended to add:
-    //   GET  /speedtest/5MB.bin   (static file)
-    //   GET  /speedtest/1MB.bin
-    //   POST /speedtest/upload    (discard body; respond 204)
-    //
-    // If these don't exist, it will use a generic approach that may be less accurate.
+document.getElementById("ping").innerText=ping;
 
-    const ui = {
-      dl: document.getElementById('dl'),
-      ul: document.getElementById('ul'),
-      ping: document.getElementById('ping'),
-      phase: document.getElementById('phase'),
-      bar: document.getElementById('bar'),
-      status: document.getElementById('status'),
-      start: document.getElementById('startBtn'),
-      stop: document.getElementById('stopBtn'),
-      reset: document.getElementById('resetBtn'),
-      serverHint: document.getElementById('serverHint')
-    };
+let downloadStart = performance.now();
 
-    let ctrl = { stop:false, controller:null };
+let response = await fetch("https://speed.hetzner.de/10MB.bin?"+Math.random());
 
-    function setStatus(html){
-      ui.status.innerHTML = html;
-    }
-    function setPhase(p){ ui.phase.textContent = p; }
-    function setProgress(pct){ ui.bar.style.width = Math.max(0,Math.min(100,pct)) + "%"; }
-    function fmt(n, d=1){
-      if (!Number.isFinite(n)) return "—";
-      return n.toFixed(d);
-    }
+let blob = await response.blob();
 
-    function resetUI(){
-      ui.dl.textContent = "—";
-      ui.ul.textContent = "—";
-      ui.ping.textContent = "—";
-      setPhase("idle");
-      setProgress(0);
-      setStatus("<strong>Ready.</strong><br/>Press <b>Start Speed Test</b> to begin.");
-      ui.start.disabled = false;
-      ui.stop.disabled = true;
-      ctrl.stop = false;
-      if (ctrl.controller) try{ ctrl.controller.abort(); } catch(e){}
-      ctrl.controller = null;
-    }
+let downloadEnd = performance.now();
 
-    async function measurePing(url, rounds=5){
-      const times = [];
-      for (let i=0;i<rounds;i++){
-        if (ctrl.stop) break;
-        const t0 = performance.now();
-        const res = await fetch(url + (url.includes("?") ? "&" : "?") + "p=" + Math.random(), {
-          method: "HEAD",
-          cache: "no-store",
-          mode: "no-cors" // allows even if headers restricted; timing still works
-        }).catch(()=>null);
-        const t1 = performance.now();
-        if (res !== null) times.push(t1 - t0);
-      }
-      if (!times.length) return NaN;
-      times.sort((a,b)=>a-b);
-      const mid = times[Math.floor(times.length/2)];
-      return Math.round(mid);
-    }
+let duration=(downloadEnd-downloadStart)/1000;
 
-    async function downloadMbps(url, durationMs=4500){
-      // Keep fetching for a time window; estimate Mbps from bytes/time.
-      let bytes = 0;
-      const start = performance.now();
-      let lastUpdate = start;
+let bits=blob.size*8;
 
-      while (!ctrl.stop && (performance.now() - start) < durationMs){
-        const bust = (url.includes("?") ? "&" : "?") + "r=" + Math.random();
-        const t0 = performance.now();
-        const res = await fetch(url + bust, { cache: "no-store" });
-        const buf = await res.arrayBuffer();
-        const t1 = performance.now();
+let speed=bits/duration/1000000;
 
-        bytes += buf.byteLength;
+document.getElementById("download").innerText=speed.toFixed(1);
 
-        // update UI ~ every 400ms
-        if (t1 - lastUpdate > 400){
-          const elapsed = (t1 - start) / 1000;
-          const mbps = (bytes * 8) / elapsed / 1e6;
-          ui.dl.textContent = fmt(mbps, 1);
-          lastUpdate = t1;
-        }
-      }
+}
 
-      const end = performance.now();
-      const elapsed = (end - start) / 1000;
-      if (elapsed <= 0 || bytes <= 0) return NaN;
-      return (bytes * 8) / elapsed / 1e6;
-    }
+</script>
 
-    function randomBytes(size){
-      const arr = new Uint8Array(size);
-      crypto.getRandomValues(arr);
-      return arr;
-    }
-
-    async function uploadMbps(url, durationMs=3800){
-      // Repeated POSTs to measure throughput.
-      // If endpoint not available, will error and return NaN.
-      let bytes = 0;
-      const start = performance.now();
-      let lastUpdate = start;
-
-      const payload = randomBytes(256 * 1024); // 256KB per post
-
-      while (!ctrl.stop && (performance.now() - start) < durationMs){
-        const t0 = performance.now();
-        const res = await fetch(url + (url.includes("?") ? "&" : "?") + "r=" + Math.random(), {
-          method: "POST",
-          body: payload,
-          headers: { "Content-Type": "application/octet-stream" },
-          cache: "no-store"
-        });
-        // Even if server returns something small, the upload already happened.
-        await res.arrayBuffer().catch(()=>null);
-        const t1 = performance.now();
-
-        bytes += payload.byteLength;
-
-        if (t1 - lastUpdate > 400){
-          const elapsed = (t1 - start) / 1000;
-          const mbps = (bytes * 8) / elapsed / 1e6;
-          ui.ul.textContent = fmt(mbps, 1);
-          lastUpdate = t1;
-        }
-      }
-
-      const end = performance.now();
-      const elapsed = (end - start) / 1000;
-      if (elapsed <= 0 || bytes <= 0) return NaN;
-      return (bytes * 8) / elapsed / 1e6;
-    }
-
-    async function run(){
-      resetUI();
-      ui.start.disabled = true;
-      ui.stop.disabled = false;
-      ctrl.stop = false;
-
-      // Configure endpoints (best if you add these static files / endpoint)
-      const dlFile = "/speedtest/5MB.bin";     // TODO: create this file (or change path)
-      const pingUrl = "/";                     // HEAD to your own origin
-      const uploadUrl = "/speedtest/upload";   // TODO: create upload endpoint (optional)
-
-      ui.serverHint.textContent = "Server: instantqr.io";
-
-      try{
-        setPhase("ping");
-        setProgress(10);
-        setStatus("<strong>Measuring latency…</strong><br/>Running quick ping checks.");
-        const ping = await measurePing(pingUrl, 6);
-        ui.ping.textContent = Number.isFinite(ping) ? ping : "—";
-
-        if (ctrl.stop) return;
-
-        setPhase("download");
-        setProgress(30);
-        setStatus("<strong>Measuring download…</strong><br/>Fetching test data to estimate throughput.");
-        const dl = await downloadMbps(dlFile, 5200);
-        ui.dl.textContent = Number.isFinite(dl) ? fmt(dl, 1) : "—";
-
-        if (ctrl.stop) return;
-
-        setPhase("upload");
-        setProgress(70);
-        setStatus("<strong>Measuring upload…</strong><br/>Uploading test data to estimate throughput.");
-        let ul = NaN;
-        try{
-          ul = await uploadMbps(uploadUrl, 3800);
-        } catch (e){
-          ul = NaN;
-        }
-        ui.ul.textContent = Number.isFinite(ul) ? fmt(ul, 1) : "N/A";
-
-        if (ctrl.stop) return;
-
-        setPhase("done");
-        setProgress(100);
-        setStatus("<strong>Done.</strong><br/>Run again to compare results across networks (Wi-Fi vs LTE).");
-        ui.stop.disabled = true;
-        ui.start.disabled = false;
-      } catch (e){
-        setPhase("error");
-        setProgress(0);
-        setStatus("<strong>Test failed.</strong><br/>This can happen if the speedtest file/endpoint is missing. See the notes in the code to set up /speedtest/ files.");
-        ui.stop.disabled = true;
-        ui.start.disabled = false;
-      }
-    }
-
-    ui.start.addEventListener('click', run);
-    ui.stop.addEventListener('click', () => {
-      ctrl.stop = true;
-      ui.stop.disabled = true;
-      setPhase("stopped");
-      setStatus("<strong>Stopped.</strong><br/>You can start again anytime.");
-    });
-    ui.reset.addEventListener('click', resetUI);
-
-    resetUI();
-  </script>
 </body>
 </html>
