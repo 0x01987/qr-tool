@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>2048 Mini | InstantQR</title>
+  <meta name="description" content="Play 2048 Mini: swipe to combine tiles and reach 2048. Fast, mobile-friendly, privacy-first." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/2048-mini.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <meta name="theme-color" content="#0b0f19" />
+
+  <style>
+    :root{
+      --bg:#0b1220; --text:#e7eefc; --muted:#a9b7d6;
+      --border:rgba(255,255,255,.10); --shadow:0 12px 40px rgba(0,0,0,.45);
+      --radius:20px; --max:980px;
+      --panel:rgba(255,255,255,.05);
+      --tile:rgba(0,0,0,.18);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(59,130,246,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(34,197,94,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+      min-height:100vh;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:18px}
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 11, 20, .55);
+      border-bottom:1px solid var(--border);
+    }
+    header .inner{
+      max-width:var(--max);margin:0 auto;padding:14px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900}
+    .brand img{height:32px}
+    nav{display:flex;gap:10px;flex-wrap:wrap}
+    nav a{color:var(--muted);font-size:14px;padding:8px 10px;border-radius:12px}
+    nav a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+    @media(max-width:560px){nav{display:none}}
+
+    .card{
+      margin-top:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .top{padding:16px 16px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+    h1{margin:0 0 6px;font-size:clamp(22px,3.2vw,32px)}
+    .sub{margin:0;color:var(--muted);line-height:1.5}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px 16px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:10px 14px;border-radius:999px;font-weight:800;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);color:var(--text);
+      cursor:pointer;user-select:none;
+    }
+    .btn.primary{
+      border:0;
+      background: linear-gradient(135deg, rgba(59,130,246,1), rgba(59,130,246,.78));
+      box-shadow: 0 14px 28px rgba(59,130,246,.22);
+    }
+    .stats{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+    .pill{padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.12)}
+    .gridWrap{display:flex;justify-content:center;padding:14px 16px 18px}
+    .board{
+      width:min(420px, 92vw);
+      aspect-ratio:1/1;
+      padding:12px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.18);
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      touch-action: none;
+      user-select:none;
+    }
+    .cell{
+      border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:900;
+      font-size: clamp(18px, 4.5vw, 34px);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .hint{padding:0 16px 16px;color:var(--muted);font-size:13px;line-height:1.5}
+    .toast{
+      position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+      background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.12);
+      color:var(--text);padding:10px 14px;border-radius:999px;
+      box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .15s ease;
+    }
+    .toast.show{opacity:1}
+  </style>
+</head>
+<body>
+<header>
+  <div class="inner">
+    <a class="brand" href="/" aria-label="InstantQR Home">
+      <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+      <span>InstantQR</span>
+    </a>
+    <nav>
+      <a href="/tools.html">All Tools</a>
+      <a href="/games.html">Games</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card" aria-label="2048 Mini">
+    <div class="top">
+      <h1>2048 Mini</h1>
+      <p class="sub">Swipe (or use arrow keys) to combine tiles. Reach <strong>2048</strong>.</p>
+    </div>
+
+    <div class="row">
+      <div class="stats">
+        <span class="pill">Score: <strong id="score">0</strong></span>
+        <span class="pill">Best: <strong id="best">0</strong></span>
+      </div>
+      <div class="stats">
+        <button class="btn primary" id="newBtn" type="button">New Game</button>
+        <button class="btn" id="undoBtn" type="button">Undo</button>
+      </div>
+    </div>
+
+    <div class="gridWrap">
+      <div class="board" id="board" role="application" aria-label="2048 Board"></div>
+    </div>
+
+    <div class="hint">
+      Mobile: swipe anywhere on the board.<br>
+      Desktop: arrow keys. Undo is one-step.
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  const boardEl = document.getElementById('board');
+  const scoreEl = document.getElementById('score');
+  const bestEl  = document.getElementById('best');
+  const newBtn  = document.getElementById('newBtn');
+  const undoBtn = document.getElementById('undoBtn');
+
+  const toastEl = document.getElementById('toast');
+  const toast = (msg) => {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(window.__t);
+    window.__t = setTimeout(() => toastEl.classList.remove('show'), 1200);
+  };
+
+  let grid, score, best;
+  let prevState = null;
+
+  const KEY_BEST = "instantqr_2048_best";
+
+  function loadBest(){
+    const v = Number(localStorage.getItem(KEY_BEST) || '0');
+    return Number.isFinite(v) ? v : 0;
+  }
+  function saveBest(v){
+    localStorage.setItem(KEY_BEST, String(v));
+  }
+
+  function emptyGrid(){
+    return Array.from({length:4}, () => Array(4).fill(0));
+  }
+  function cloneState(){
+    return { grid: grid.map(r => r.slice()), score, best };
+  }
+  function restoreState(st){
+    grid = st.grid.map(r => r.slice());
+    score = st.score;
+    best = st.best;
+    render();
+  }
+
+  function addRandomTile(){
+    const empties = [];
+    for(let r=0;r<4;r++){
+      for(let c=0;c<4;c++){
+        if(grid[r][c] === 0) empties.push([r,c]);
+      }
+    }
+    if(!empties.length) return false;
+    const [r,c] = empties[Math.floor(Math.random()*empties.length)];
+    grid[r][c] = Math.random() < 0.9 ? 2 : 4;
+    return true;
+  }
+
+  function startGame(){
+    grid = emptyGrid();
+    score = 0;
+    best = loadBest();
+    prevState = null;
+    addRandomTile(); addRandomTile();
+    render();
+    toast('New game');
+  }
+
+  function tileStyle(v){
+    // Keep it lightweight: compute a nice alpha based on log2
+    if(v === 0) return { bg:'rgba(255,255,255,.06)', border:'rgba(255,255,255,.10)', color:'var(--text)' };
+    const k = Math.min(11, Math.max(1, Math.log2(v))); // 2..2048 => 1..11
+    const a = 0.10 + k * 0.03; // 0.13..0.43
+    return { bg:`rgba(59,130,246,${a})`, border:'rgba(255,255,255,.14)', color:'#e7eefc' };
+  }
+
+  function render(){
+    boardEl.innerHTML = '';
+    for(let r=0;r<4;r++){
+      for(let c=0;c<4;c++){
+        const v = grid[r][c];
+        const d = document.createElement('div');
+        d.className = 'cell';
+        const s = tileStyle(v);
+        d.style.background = s.bg;
+        d.style.borderColor = s.border;
+        d.style.color = s.color;
+        d.textContent = v === 0 ? '' : String(v);
+        boardEl.appendChild(d);
+      }
+    }
+    scoreEl.textContent = score;
+    bestEl.textContent = best;
+  }
+
+  function compressLine(line){
+    const nums = line.filter(x => x !== 0);
+    const out = [];
+    let gained = 0;
+    for(let i=0;i<nums.length;i++){
+      if(i < nums.length-1 && nums[i] === nums[i+1]){
+        const merged = nums[i]*2;
+        out.push(merged);
+        gained += merged;
+        i++;
+      } else {
+        out.push(nums[i]);
+      }
+    }
+    while(out.length < 4) out.push(0);
+    return { out, gained };
+  }
+
+  function move(dir){
+    const before = cloneState();
+    let moved = false;
+    let gainedTotal = 0;
+
+    const get = (r,c) => grid[r][c];
+    const set = (r,c,v) => { grid[r][c] = v; };
+
+    function handleLine(getCell, setCell){
+      const line = [getCell(0), getCell(1), getCell(2), getCell(3)];
+      const { out, gained } = compressLine(line);
+      gainedTotal += gained;
+      for(let i=0;i<4;i++){
+        if(out[i] !== line[i]) moved = true;
+        setCell(i, out[i]);
+      }
+    }
+
+    if(dir === 'left'){
+      for(let r=0;r<4;r++){
+        handleLine(i => get(r,i), (i,v)=> set(r,i,v));
+      }
+    } else if(dir === 'right'){
+      for(let r=0;r<4;r++){
+        handleLine(i => get(r,3-i), (i,v)=> set(r,3-i,v));
+      }
+    } else if(dir === 'up'){
+      for(let c=0;c<4;c++){
+        handleLine(i => get(i,c), (i,v)=> set(i,c,v));
+      }
+    } else if(dir === 'down'){
+      for(let c=0;c<4;c++){
+        handleLine(i => get(3-i,c), (i,v)=> set(3-i,c,v));
+      }
+    }
+
+    if(!moved) return;
+
+    prevState = before;
+    score += gainedTotal;
+
+    if(score > best){
+      best = score;
+      saveBest(best);
+    }
+
+    addRandomTile();
+    render();
+
+    if(has2048()){
+      toast('Nice! 2048 reached.');
+    } else if(isGameOver()){
+      toast('Game over');
+    }
+  }
+
+  function has2048(){
+    for(let r=0;r<4;r++) for(let c=0;c<4;c++) if(grid[r][c] === 2048) return true;
+    return false;
+  }
+
+  function isGameOver(){
+    // if any empty
+    for(let r=0;r<4;r++) for(let c=0;c<4;c++) if(grid[r][c] === 0) return false;
+    // any mergeable
+    for(let r=0;r<4;r++){
+      for(let c=0;c<4;c++){
+        const v = grid[r][c];
+        if((r<3 && grid[r+1][c]===v) || (c<3 && grid[r][c+1]===v)) return false;
+      }
+    }
+    return true;
+  }
+
+  // Keyboard
+  window.addEventListener('keydown', (e) => {
+    const k = e.key;
+    if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(k)) e.preventDefault();
+    if(k === 'ArrowLeft') move('left');
+    if(k === 'ArrowRight') move('right');
+    if(k === 'ArrowUp') move('up');
+    if(k === 'ArrowDown') move('down');
+  }, { passive:false });
+
+  // Touch swipe
+  let sx=0, sy=0, active=false;
+  boardEl.addEventListener('pointerdown', (e) => {
+    active = true;
+    sx = e.clientX; sy = e.clientY;
+    boardEl.setPointerCapture(e.pointerId);
+  });
+  boardEl.addEventListener('pointerup', (e) => {
+    if(!active) return;
+    active = false;
+    const dx = e.clientX - sx;
+    const dy = e.clientY - sy;
+    const ax = Math.abs(dx), ay = Math.abs(dy);
+    if(Math.max(ax,ay) < 24) return;
+
+    if(ax > ay){
+      move(dx > 0 ? 'right' : 'left');
+    } else {
+      move(dy > 0 ? 'down' : 'up');
+    }
+  });
+
+  newBtn.addEventListener('click', startGame);
+  undoBtn.addEventListener('click', () => {
+    if(!prevState){ toast('Nothing to undo'); return; }
+    restoreState(prevState);
+    prevState = null;
+    toast('Undone');
+  });
+
+  startGame();
+})();
+</script>
+</body>
+</html>
