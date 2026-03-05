@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Guides & Tutorials | InstantQR</title>
+  <meta name="description" content="InstantQR Guides: learn QR codes, DNS, WHOIS, cybersecurity basics, crypto tools, and SEO tips. Simple, practical tutorials designed to pair with our free tools." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/guides.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Guides & Tutorials | InstantQR" />
+  <meta property="og:description" content="Practical guides that pair with InstantQR’s free tools: QR, DNS, WHOIS, security, crypto, and more." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://instantqr.io/guides.html" />
+
+  <!-- Twitter/X -->
+  <meta name="twitter:card" content="summary" />
+
+  <!-- Breadcrumb structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Guides","item":"https://instantqr.io/guides.html"}
+    ]
+  }
+  </script>
+
+  <!-- CollectionPage structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    "name":"InstantQR Guides & Tutorials",
+    "description":"Guides that explain QR codes, DNS, WHOIS, security, crypto, and SEO—paired with InstantQR tools.",
+    "url":"https://instantqr.io/guides.html"
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(0,0,0,.22);
+      --line:rgba(255,255,255,.10);
+      --text:#eaf2ff;
+      --muted:rgba(234,242,255,.72);
+      --brand:#1f6feb;
+      --good:#2ecc71;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      color:var(--text);
+      background:radial-gradient(1200px 600px at 50% -10%, #152b55 0%, var(--bg) 60%);
+    }
+    .wrap{max-width:1100px;margin:0 auto;padding:18px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);}
+    .brand img{width:30px;height:30px}
+    .brand span{font-weight:800;letter-spacing:.2px}
+    nav a{color:var(--muted);text-decoration:none;margin-left:12px;font-size:14px}
+    nav a:hover{color:var(--text)}
+
+    .hero{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      box-shadow:var(--shadow);
+      margin-bottom:16px;
+    }
+    .hero h1{margin:0 0 6px;font-size:24px}
+    .hero p{margin:0;color:var(--muted);line-height:1.55}
+    .searchRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    input{
+      flex:1;
+      min-width: 240px;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.20);
+      color:var(--text);
+      outline:none;
+      font-size:16px;
+    }
+    input:focus{
+      border-color:rgba(31,111,235,.55);
+      box-shadow:0 0 0 3px rgba(31,111,235,.18);
+    }
+    .btn{
+      appearance:none;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-weight:800;
+      color:var(--text);
+      background:rgba(255,255,255,.08);
+    }
+    .btn.primary{background:var(--brand);border-color:rgba(31,111,235,.55)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:7px 10px;
+      background:rgba(255,255,255,.06);
+      font-size:13px;
+      color:var(--muted);
+      text-decoration:none;
+      cursor:pointer;
+      user-select:none;
+    }
+    .chip:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+    .chip.active{border-color:rgba(31,111,235,.55); color:var(--text); background:rgba(31,111,235,.14);}
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr;} }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+    .card h2{margin:0 0 10px;font-size:18px}
+    .list{margin:0;padding-left:18px}
+    .list li{margin:8px 0;color:var(--muted);line-height:1.45}
+    .list a{color:var(--text);text-decoration:none}
+    .list a:hover{text-decoration:underline}
+    .meta{display:block;font-size:12px;color:rgba(234,242,255,.6);margin-top:4px}
+
+    .cta{
+      margin-top:16px;
+      background:linear-gradient(135deg, rgba(31,111,235,.25), rgba(46,204,113,.12));
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+    .cta h3{margin:0 0 6px;font-size:18px}
+    .cta p{margin:0;color:var(--muted);line-height:1.55}
+    .cta .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+
+    .footerLinks{margin-top:14px;font-size:14px;color:var(--muted)}
+    .footerLinks a{color:var(--muted);text-decoration:none}
+    .footerLinks a:hover{color:var(--text)}
+    .hr{height:1px;background:var(--line);margin:14px 0}
+
+    /* small helper text */
+    .note{margin-top:10px;color:rgba(234,242,255,.62);font-size:13px;line-height:1.55}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <!-- Header -->
+    <header>
+      <a class="brand" href="/">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <span>InstantQR</span>
+      </a>
+      <nav>
+        <a href="/tools.html">Tools</a>
+        <a href="/games.html">Games</a>
+        <a href="/guides.html" aria-current="page" style="color:var(--text);font-weight:800;">Guides</a>
+        <a href="/privacy.html">Privacy</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Guides & Tutorials</h1>
+      <p>
+        Practical, privacy-first guides that pair with InstantQR’s free tools. Learn QR, DNS, WHOIS, security, crypto, and SEO basics—fast.
+      </p>
+
+      <div class="searchRow">
+        <input id="q" placeholder="Search guides (e.g., DNS, QR, WHOIS, password, gas fee)..." aria-label="Search guides" />
+        <button class="btn primary" id="clear">Clear</button>
+      </div>
+
+      <div class="chips" aria-label="Guide categories">
+        <span class="chip active" data-filter="all">All</span>
+        <span class="chip" data-filter="qr">QR</span>
+        <span class="chip" data-filter="network">Network</span>
+        <span class="chip" data-filter="security">Security</span>
+        <span class="chip" data-filter="crypto">Crypto</span>
+        <span class="chip" data-filter="seo">SEO</span>
+        <span class="chip" data-filter="dev">Dev</span>
+      </div>
+
+      <div class="note">
+        Tip: each guide links to a related tool so you can apply what you learn immediately.
+      </div>
+    </section>
+
+    <!-- Lists -->
+    <section class="grid" id="grid">
+      <!-- QR -->
+      <div class="card" data-cat="qr">
+        <h2>QR Guides</h2>
+        <ul class="list">
+          <li>
+            <a href="/guides/how-to-create-wifi-qr-code.html">How to Create a WiFi QR Code</a>
+            <span class="meta">Pairs with: <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a></span>
+          </li>
+          <li>
+            <a href="/guides/how-to-create-url-qr-code.html">How to Create a URL QR Code</a>
+            <span class="meta">Pairs with: <a href="/url-qr-code-generator.html">URL QR Generator</a></span>
+          </li>
+          <li>
+            <a href="/guides/qr-code-best-practices.html">QR Code Best Practices (Scan Rate Tips)</a>
+            <span class="meta">Pairs with: <a href="/url-qr-code-generator.html">URL QR Generator</a></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Network -->
+      <div class="card" data-cat="network">
+        <h2>Network & Domain Guides</h2>
+        <ul class="list">
+          <li>
+            <a href="/guides/what-is-dns-lookup.html">What Is a DNS Lookup?</a>
+            <span class="meta">Pairs with: <a href="/dns-lookup.html">DNS Lookup</a></span>
+          </li>
+          <li>
+            <a href="/guides/what-is-whois-lookup.html">What Is WHOIS Lookup?</a>
+            <span class="meta">Pairs with: <a href="/whois-lookup.html">WHOIS Lookup</a></span>
+          </li>
+          <li>
+            <a href="/guides/dns-propagation-explained.html">DNS Propagation Explained (How Long It Takes)</a>
+            <span class="meta">Pairs with: <a href="/dns-lookup.html">DNS Lookup</a></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Security -->
+      <div class="card" data-cat="security">
+        <h2>Security Guides</h2>
+        <ul class="list">
+          <li>
+            <a href="/guides/how-to-generate-a-secure-password.html">How to Generate a Secure Password</a>
+            <span class="meta">Pairs with: <a href="/password.html">Password Generator</a></span>
+          </li>
+          <li>
+            <a href="/guides/what-is-a-password-leak.html">What Is a Password Leak Check?</a>
+            <span class="meta">Pairs with: <a href="/password-leak-checker.html">Password Leak Checker</a></span>
+          </li>
+          <li>
+            <a href="/guides/password-security-checklist.html">Password Security Checklist (Quick)</a>
+            <span class="meta">Pairs with: <a href="/password.html">Password Generator</a></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Crypto -->
+      <div class="card" data-cat="crypto">
+        <h2>Crypto Guides</h2>
+        <ul class="list">
+          <li>
+            <a href="/guides/how-to-calculate-crypto-profit.html">How to Calculate Crypto Profit (Accurately)</a>
+            <span class="meta">Pairs with: <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a></span>
+          </li>
+          <li>
+            <a href="/guides/what-is-a-gas-fee.html">What Is a Gas Fee in Web3?</a>
+            <span class="meta">Pairs with: <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a></span>
+          </li>
+          <li>
+            <a href="/guides/crypto-fees-and-taxes-basics.html">Crypto Fees & Taxes Basics (Beginner)</a>
+            <span class="meta">Pairs with: <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- SEO -->
+      <div class="card" data-cat="seo">
+        <h2>SEO Guides</h2>
+        <ul class="list">
+          <li>
+            <a href="/guides/meta-title-description-best-practices.html">Meta Title & Description Best Practices</a>
+            <span class="meta">Pairs with: <a href="/meta-tag-preview.html">Meta Tag Preview</a> (recommended)</span>
+          </li>
+          <li>
+            <a href="/guides/robots-txt-basics.html">Robots.txt Basics (Allow vs Disallow)</a>
+            <span class="meta">Pairs with: <a href="/robots-txt-tester.html">Robots.txt Tester</a> (recommended)</span>
+          </li>
+          <li>
+            <a href="/guides/how-to-fix-canonical-issues.html">How to Fix Canonical Tag Issues</a>
+            <span class="meta">Pairs with: <a href="/canonical-checker.html">Canonical Checker</a> (recommended)</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Dev -->
+      <div class="card" data-cat="dev">
+        <h2>Developer Guides</h2>
+        <ul class="list">
+          <li>
+            <a href="/guides/what-is-base64.html">What Is Base64 Encoding?</a>
+            <span class="meta">Pairs with: <a href="/base64-encoder.html">Base64 Encoder</a></span>
+          </li>
+          <li>
+            <a href="/guides/what-is-json-formatting.html">What Is JSON Formatting (and why it matters)?</a>
+            <span class="meta">Pairs with: <a href="/json-formatter.html">JSON Formatter</a></span>
+          </li>
+          <li>
+            <a href="/guides/unix-timestamp-explained.html">Unix Timestamp Explained</a>
+            <span class="meta">Pairs with: <a href="/unix-timestamp-converter.html">Timestamp Converter</a> (recommended)</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <h3>Want faster growth?</h3>
+      <p>
+        Each new tool should ship with a matching guide. This helps Google understand topical authority and increases internal linking.
+      </p>
+      <div class="row">
+        <a class="btn primary" href="/tools.html" style="text-decoration:none;display:inline-block;">Browse Tools</a>
+        <a class="btn" href="/contact.html" style="text-decoration:none;display:inline-block;">Request a Guide</a>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <!-- Footer Links -->
+    <div class="footerLinks">
+      <div style="margin-bottom:8px;">
+        <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+        <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
+        <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
+        <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
+        <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+      </div>
+      <div>
+        <a href="/about.html">About</a> ·
+        <a href="/privacy.html">Privacy</a> ·
+        <a href="/terms.html">Terms</a> ·
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const q = document.getElementById('q');
+  const clear = document.getElementById('clear');
+  const chips = Array.from(document.querySelectorAll('.chip'));
+  const cards = Array.from(document.querySelectorAll('#grid .card'));
+
+  let activeFilter = 'all';
+
+  function normalize(s){ return String(s||'').toLowerCase().trim(); }
+
+  function apply(){
+    const term = normalize(q.value);
+    cards.forEach(card => {
+      const cat = card.getAttribute('data-cat');
+      const matchesFilter = (activeFilter === 'all') || (cat === activeFilter);
+      const text = normalize(card.innerText);
+      const matchesSearch = !term || text.includes(term);
+
+      card.style.display = (matchesFilter && matchesSearch) ? 'block' : 'none';
+    });
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.getAttribute('data-filter');
+      apply();
+    });
+  });
+
+  q.addEventListener('input', apply);
+  clear.addEventListener('click', () => { q.value=''; apply(); q.focus(); });
+
+  // If URL has ?q=... or ?cat=...
+  const params = new URLSearchParams(location.search);
+  const cat = params.get('cat');
+  const term = params.get('q');
+
+  if (cat){
+    const target = chips.find(c => c.getAttribute('data-filter') === cat);
+    if (target) target.click();
+  }
+  if (term){
+    q.value = term;
+    apply();
+  } else {
+    apply();
+  }
+})();
+</script>
+</body>
+</html>
