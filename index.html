@@ -1,19 +1,27 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- =========================
+       Analytics / Monetization
+       ========================= -->
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+  <!-- Google AdSense (keep in <head> for AdSense) -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
+  <!-- =========================
+       Core SEO / Meta
+       ========================= -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
@@ -24,10 +32,22 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
   <meta property="og:title" content="InstantQR | Free Online Tools (QR, Converters, Crypto, Security & More)" />
   <meta property="og:description" content="Free, privacy-first online tools. No signup required." />
   <meta property="og:url" content="https://instantqr.io/" />
+  <!-- GUIDE: Host a 1200x630 image at /assets/og-instantqr.png (or update this URL) -->
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="InstantQR | Free Online Tools" />
+  <meta name="twitter:description" content="Fast, privacy-first tools for QR, conversions, crypto, security, time — and mini-games." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <!-- Icons -->
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
@@ -36,6 +56,15 @@
   <!-- Performance: warm connections -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+
+  <!-- Performance: preload logo for faster first paint -->
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+
+  <!-- Optional: prefetch key pages (small performance win) -->
+  <link rel="prefetch" href="/tools.html" as="document">
+  <link rel="prefetch" href="/games.html" as="document">
 
   <style>
     :root{
@@ -49,7 +78,9 @@
       --radius: 18px;
       --radius2: 22px;
       --max: 1120px;
+      --focus: 0 0 0 3px rgba(105,166,255,.35);
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -64,8 +95,27 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
+
     a{color:inherit; text-decoration:none}
     a:hover{text-decoration:underline}
+
+    /* A11y: skip link */
+    .skip{
+      position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip:focus{
+      left:12px; top:12px; width:auto; height:auto;
+      padding:10px 12px;
+      border-radius:12px;
+      background: rgba(0,0,0,.75);
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: var(--shadow);
+      z-index: 9999;
+    }
+
+    /* Focus */
+    :focus-visible{ outline: none; box-shadow: var(--focus); border-radius: 12px; }
+
     .wrap{max-width:var(--max); margin:0 auto; padding:20px}
 
     /* Top Bar */
@@ -86,6 +136,7 @@
       font-weight:800; letter-spacing:.2px;
     }
     .brandRow img{display:block; height:34px; width:auto}
+
     nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
     nav a{
       color:var(--muted);
@@ -112,6 +163,7 @@
       white-space:nowrap;
       cursor:pointer;
       transition: transform .12s ease, filter .12s ease, background .12s ease;
+      user-select: none;
     }
     .cta:hover{ transform: translateY(-1px); text-decoration:none; }
     .cta.primary{
@@ -121,6 +173,7 @@
     }
     .cta.primary:hover{ filter:brightness(1.06); }
     .cta.ghost:hover{ background: rgba(255,255,255,.10); }
+    .cta:active{ transform: translateY(0px) scale(.99); }
 
     /* Hero */
     .hero{padding:44px 0 18px;}
@@ -217,12 +270,23 @@
     .input::placeholder{color: rgba(233,238,252,.55)}
     .hint{font-size:12px; color: rgba(233,238,252,.60); line-height:1.45}
 
+    .noResults{
+      margin-top: 6px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      color: rgba(233,238,252,.80);
+      font-size: 13px;
+      display: none;
+    }
+
     /* Sections */
     .section{padding: 14px 0}
     .section h2{margin: 0 0 10px; font-size: 22px; letter-spacing:-.25px;}
     .section p{margin: 0 0 12px; color:var(--muted); line-height:1.6}
 
-    /* Tools grid (polished + fast) */
+    /* Tools grid */
     .toolControls{
       display:flex; gap:10px; align-items:center; flex-wrap:wrap;
       margin: 12px 0 12px;
@@ -385,7 +449,37 @@
     }
   </style>
 
-  <!-- ✅ FAQ Schema (JSON-LD) -->
+  <!-- =========================
+       Structured Data (JSON-LD)
+       ========================= -->
+
+  <!-- ✅ WebSite + SearchAction schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"InstantQR",
+    "url":"https://instantqr.io/",
+    "potentialAction": {
+      "@type":"SearchAction",
+      "target":"https://instantqr.io/tools.html?q={search_term_string}",
+      "query-input":"required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- ✅ Organization schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"InstantQR",
+    "url":"https://instantqr.io",
+    "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+  }
+  </script>
+
+  <!-- ✅ FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -397,20 +491,11 @@
     ]
   }
   </script>
-
-  <!-- ✅ Organization Logo Schema -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"InstantQR",
-    "url":"https://instantqr.io",
-    "logo":"https://instantqr.io/assets/instantqr-logo.svg"
-  }
-  </script>
 </head>
 
 <body>
+  <a class="skip" href="#main">Skip to content</a>
+
   <!-- Top Bar -->
   <header class="topbar">
     <div class="inner">
@@ -433,7 +518,7 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main id="main" class="wrap">
     <!-- HERO -->
     <section class="hero" aria-label="Hero">
       <div class="heroGrid">
@@ -471,12 +556,23 @@
           </div>
 
           <div class="searchRow">
-            <input id="toolSearch" class="input" placeholder="Search tools… (e.g., speed, qr, password, cups, mph)" autocomplete="off" />
-            <button class="cta primary" id="searchBtn" type="button">Search</button>
+            <input
+              id="toolSearch"
+              class="input"
+              placeholder="Search tools… (e.g., speed, qr, password, cups, mph)"
+              autocomplete="off"
+              inputmode="search"
+              aria-label="Search tools"
+            />
+            <button class="cta primary" id="searchBtn" type="button" aria-label="Search tools button">Search</button>
           </div>
 
           <div class="hint" id="searchHint">
             Popular: Speed Test • WiFi QR • URL QR • Password • IP Lookup • Conversions
+          </div>
+
+          <div class="noResults" id="noResults" role="status" aria-live="polite">
+            No results. Try: “qr”, “speed”, “password”, “cups”, “mph”, “ip”.
           </div>
 
           <div class="pillLink">
@@ -843,36 +939,55 @@
     </footer>
   </main>
 
-  <script>
+  <!-- JS: defer for performance -->
+  <script defer>
     // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if(yearEl) yearEl.textContent = new Date().getFullYear();
 
     // Fast client-side tool search + category filter
     const input = document.getElementById('toolSearch');
     const btn = document.getElementById('searchBtn');
     const cat = document.getElementById('cat');
+    const grid = document.getElementById('toolGrid');
     const cards = Array.from(document.querySelectorAll('#toolGrid a.tool'));
+    const noResults = document.getElementById('noResults');
 
     function applyFilters(){
-      const q = (input.value || '').trim().toLowerCase();
-      const c = (cat.value || 'all');
+      const q = (input?.value || '').trim().toLowerCase();
+      const c = (cat?.value || 'all');
+
+      let shown = 0;
 
       for(const el of cards){
         const tags = ((el.getAttribute('data-tags') || '') + ' ' + (el.innerText || '')).toLowerCase();
         const okQ = !q || tags.includes(q);
         const okC = (c === 'all') || (el.getAttribute('data-cat') === c);
-        el.classList.toggle('hidden', !(okQ && okC));
+
+        const visible = (okQ && okC);
+        el.classList.toggle('hidden', !visible);
+        if(visible) shown++;
+      }
+
+      if(noResults){
+        noResults.style.display = shown === 0 ? 'block' : 'none';
       }
     }
 
-    btn.addEventListener('click', applyFilters);
-    input.addEventListener('input', applyFilters);
-    input.addEventListener('keydown', (e) => {
+    btn?.addEventListener('click', applyFilters);
+    input?.addEventListener('input', applyFilters);
+    input?.addEventListener('keydown', (e) => {
       if(e.key === 'Enter'){ e.preventDefault(); applyFilters(); }
     });
-    cat.addEventListener('change', applyFilters);
+    cat?.addEventListener('change', applyFilters);
 
     applyFilters();
   </script>
+
+  <noscript>
+    <div style="max-width:1120px;margin:16px auto;padding:14px 16px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(0,0,0,.25);color:rgba(233,238,252,.85);">
+      JavaScript is disabled. Some features (like search/filter) may not work, but you can still browse tools via <a href="/tools.html" style="text-decoration:underline;">tools.html</a>.
+    </div>
+  </noscript>
 </body>
 </html>
