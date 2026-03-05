@@ -25,157 +25,105 @@ crossorigin="anonymous"></script>
 <link rel="icon" href="/assets/instantqr-logo.svg">
 
 <style>
-
 :root{
---bg:#0b1220;
---card:#111a2b;
---text:#e7eefc;
---muted:#9db0d1;
---border:rgba(255,255,255,.08);
---radius:16px;
---max:1100px;
+  --bg:#0b1220;
+  --card:#111a2b;
+  --text:#e7eefc;
+  --muted:#9db0d1;
+  --border:rgba(255,255,255,.08);
+  --radius:16px;
+  --max:1100px;
 }
-
 *{box-sizing:border-box}
-
 body{
-margin:0;
-font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-background:var(--bg);
-color:var(--text);
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  background:var(--bg);
+  color:var(--text);
 }
-
-.wrap{
-max-width:var(--max);
-margin:auto;
-padding:24px;
-}
-
+.wrap{max-width:var(--max); margin:auto; padding:24px;}
 header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-margin-bottom:30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:30px;
 }
-
-.logo{
-display:flex;
-align-items:center;
-gap:10px;
-font-weight:700;
-}
-
-.logo img{
-height:32px;
-}
-
+.logo{display:flex; align-items:center; gap:10px; font-weight:800;}
+.logo img{height:32px;}
 nav a{
-color:var(--muted);
-margin-left:14px;
-font-size:14px;
-text-decoration:none;
+  color:var(--muted);
+  margin-left:14px;
+  font-size:14px;
+  text-decoration:none;
 }
-
-nav a:hover{
-color:white;
-}
-
-h1{
-font-size:34px;
-margin-bottom:6px;
-}
-
-p{
-color:var(--muted);
-}
-
-.search{
-margin-top:18px;
-}
-
+nav a:hover{color:white}
+h1{font-size:34px; margin:0 0 6px}
+p{color:var(--muted); margin:0}
+.search{margin-top:18px}
 .search input{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:1px solid var(--border);
-background:#08101d;
-color:white;
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#08101d;
+  color:white;
 }
-
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-gap:16px;
-margin-top:26px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:16px;
+  margin-top:26px;
 }
-
 .card{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:var(--radius);
-padding:18px;
-display:flex;
-gap:14px;
-align-items:center;
-text-decoration:none;
-color:inherit;
-transition:.15s;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
+  display:flex;
+  gap:14px;
+  align-items:center;
+  text-decoration:none;
+  color:inherit;
+  transition:.15s;
 }
-
 .card:hover{
-transform:translateY(-3px);
-border-color:#3b82f6;
+  transform:translateY(-3px);
+  border-color:#3b82f6;
 }
-
 .icon{
-font-size:28px;
-width:46px;
-height:46px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:rgba(255,255,255,.06);
-border-radius:12px;
+  font-size:28px;
+  width:46px;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.06);
+  border-radius:12px;
 }
-
-.cardTitle{
-font-weight:700;
-font-size:15px;
-}
-
-.cardDesc{
-font-size:13px;
-color:var(--muted);
-margin-top:4px;
-}
-
+.cardTitle{font-weight:800; font-size:15px;}
+.cardDesc{font-size:13px; color:var(--muted); margin-top:4px;}
 .badge{
-font-size:11px;
-padding:4px 7px;
-background:rgba(255,255,255,.06);
-border-radius:6px;
-color:var(--muted);
-margin-left:auto;
+  font-size:11px;
+  padding:4px 7px;
+  background:rgba(255,255,255,.06);
+  border-radius:6px;
+  color:var(--muted);
+  margin-left:auto;
+  white-space:nowrap;
 }
-
 footer{
-margin-top:40px;
-padding-top:20px;
-border-top:1px solid var(--border);
-font-size:13px;
-color:var(--muted);
+  margin-top:40px;
+  padding-top:20px;
+  border-top:1px solid var(--border);
+  font-size:13px;
+  color:var(--muted);
 }
-
-footer a{
-color:var(--muted);
-text-decoration:none;
-margin-right:10px;
+footer a{color:var(--muted); text-decoration:none; margin-right:10px;}
+footer a:hover{color:white}
+@media (max-width:520px){
+  nav{display:none}
+  h1{font-size:30px}
 }
-
-footer a:hover{
-color:white;
-}
-
 </style>
 
 </head>
@@ -185,219 +133,245 @@ color:white;
 <div class="wrap">
 
 <header>
+  <div class="logo">
+    <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+    <span>InstantQR</span>
+  </div>
 
-<div class="logo">
-<img src="/assets/instantqr-logo.svg">
-<span>InstantQR</span>
-</div>
-
-<nav>
-<a href="/">Home</a>
-<a href="/tools.html">Tools</a>
-<a href="/about.html">About</a>
-<a href="/contact.html">Contact</a>
-</nav>
-
+  <nav>
+    <a href="/">Home</a>
+    <a href="/tools.html">Tools</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
 </header>
 
 <h1>All InstantQR Tools</h1>
 <p>Fast, privacy-first utilities for everyday tasks.</p>
 
 <div class="search">
-<input id="search" placeholder="Search tools (QR, convert, JSON, speed...)">
+  <input id="search" placeholder="Search tools (QR, JSON, UUID, hash, regex, speed...)">
 </div>
 
 <div class="grid" id="grid">
 
 <!-- NETWORK -->
-
-<a class="card" href="/internet-speed-test.html" data-tags="speed internet wifi">
-<div class="icon">⚡</div>
-<div>
-<div class="cardTitle">Internet Speed Test</div>
-<div class="cardDesc">Check download speed and latency.</div>
-</div>
-<span class="badge">Network</span>
+<a class="card" href="/internet-speed-test.html" data-tags="speed internet wifi network ping latency mbps">
+  <div class="icon">⚡</div>
+  <div>
+    <div class="cardTitle">Internet Speed Test</div>
+    <div class="cardDesc">Check download speed and latency.</div>
+  </div>
+  <span class="badge">Network</span>
 </a>
 
-<a class="card" href="/ip-lookup.html" data-tags="ip lookup address network">
-<div class="icon">🌍</div>
-<div>
-<div class="cardTitle">IP Lookup</div>
-<div class="cardDesc">Find IP location and ISP info.</div>
-</div>
-<span class="badge">Network</span>
+<a class="card" href="/ip-lookup.html" data-tags="ip lookup address network isp asn">
+  <div class="icon">🌍</div>
+  <div>
+    <div class="cardTitle">IP Lookup</div>
+    <div class="cardDesc">Find IP location and ISP info.</div>
+  </div>
+  <span class="badge">Network</span>
 </a>
 
 <!-- QR -->
-
-<a class="card" href="/wifi-qr-code-generator.html" data-tags="qr wifi">
-<div class="icon">📶</div>
-<div>
-<div class="cardTitle">WiFi QR Generator</div>
-<div class="cardDesc">Generate QR codes for WiFi networks.</div>
-</div>
-<span class="badge">QR</span>
+<a class="card" href="/wifi-qr-code-generator.html" data-tags="qr wifi generator ssid password">
+  <div class="icon">📶</div>
+  <div>
+    <div class="cardTitle">WiFi QR Generator</div>
+    <div class="cardDesc">Generate QR codes for WiFi networks.</div>
+  </div>
+  <span class="badge">QR</span>
 </a>
 
-<a class="card" href="/url-qr-code-generator.html" data-tags="qr url link">
-<div class="icon">🔗</div>
-<div>
-<div class="cardTitle">URL QR Generator</div>
-<div class="cardDesc">Convert links into QR codes.</div>
-</div>
-<span class="badge">QR</span>
+<a class="card" href="/url-qr-code-generator.html" data-tags="qr url link generator website">
+  <div class="icon">🔗</div>
+  <div>
+    <div class="cardTitle">URL QR Generator</div>
+    <div class="cardDesc">Convert links into QR codes.</div>
+  </div>
+  <span class="badge">QR</span>
 </a>
 
-<a class="card" href="/create-qr-code-for-wifi.html" data-tags="qr wifi guide">
-<div class="icon">📡</div>
-<div>
-<div class="cardTitle">Create WiFi QR</div>
-<div class="cardDesc">Guide for creating WiFi QR codes.</div>
-</div>
-<span class="badge">QR</span>
+<a class="card" href="/create-qr-code-for-wifi.html" data-tags="qr wifi guide how to">
+  <div class="icon">📡</div>
+  <div>
+    <div class="cardTitle">Create WiFi QR</div>
+    <div class="cardDesc">Guide for creating WiFi QR codes.</div>
+  </div>
+  <span class="badge">QR</span>
 </a>
 
 <!-- SECURITY -->
-
-<a class="card" href="/password.html" data-tags="password generator">
-<div class="icon">🔐</div>
-<div>
-<div class="cardTitle">Password Generator</div>
-<div class="cardDesc">Generate secure passwords.</div>
-</div>
-<span class="badge">Security</span>
+<a class="card" href="/password.html" data-tags="password generator secure random">
+  <div class="icon">🔐</div>
+  <div>
+    <div class="cardTitle">Password Generator</div>
+    <div class="cardDesc">Generate secure passwords.</div>
+  </div>
+  <span class="badge">Security</span>
 </a>
 
-<a class="card" href="/password-leak-checker.html" data-tags="password breach security">
-<div class="icon">🛡</div>
-<div>
-<div class="cardTitle">Password Leak Checker</div>
-<div class="cardDesc">Check if password appears in breaches.</div>
-</div>
-<span class="badge">Security</span>
+<a class="card" href="/password-leak-checker.html" data-tags="password breach security leak checker pwned">
+  <div class="icon">🛡</div>
+  <div>
+    <div class="cardTitle">Password Leak Checker</div>
+    <div class="cardDesc">Check if a password appears in breaches.</div>
+  </div>
+  <span class="badge">Security</span>
 </a>
 
 <!-- CONVERTERS -->
-
-<a class="card" href="/unit-converter.html" data-tags="unit converter">
-<div class="icon">📏</div>
-<div>
-<div class="cardTitle">Unit Converter</div>
-<div class="cardDesc">Convert measurements quickly.</div>
-</div>
-<span class="badge">Converter</span>
+<a class="card" href="/unit-converter.html" data-tags="unit converter convert kg lbs mph kmh inches cm">
+  <div class="icon">📏</div>
+  <div>
+    <div class="cardTitle">Unit Converter</div>
+    <div class="cardDesc">Convert measurements quickly.</div>
+  </div>
+  <span class="badge">Converter</span>
 </a>
 
 <!-- TIME -->
-
-<a class="card" href="/world-clock.html" data-tags="clock time">
-<div class="icon">🕒</div>
-<div>
-<div class="cardTitle">World Clock</div>
-<div class="cardDesc">Compare global time zones.</div>
-</div>
-<span class="badge">Time</span>
+<a class="card" href="/world-clock.html" data-tags="clock world time zones timezone">
+  <div class="icon">🕒</div>
+  <div>
+    <div class="cardTitle">World Clock</div>
+    <div class="cardDesc">Compare global time zones.</div>
+  </div>
+  <span class="badge">Time</span>
 </a>
 
-<a class="card" href="/time-zone-converter.html" data-tags="timezone converter">
-<div class="icon">🌐</div>
-<div>
-<div class="cardTitle">Time Zone Converter</div>
-<div class="cardDesc">Convert between time zones.</div>
-</div>
-<span class="badge">Time</span>
+<a class="card" href="/time-zone-converter.html" data-tags="timezone converter time zone convert">
+  <div class="icon">🌐</div>
+  <div>
+    <div class="cardTitle">Time Zone Converter</div>
+    <div class="cardDesc">Convert between time zones.</div>
+  </div>
+  <span class="badge">Time</span>
 </a>
 
 <a class="card" href="/countdown-timer.html" data-tags="timer countdown">
-<div class="icon">⏳</div>
-<div>
-<div class="cardTitle">Countdown Timer</div>
-<div class="cardDesc">Create countdown timers easily.</div>
-</div>
-<span class="badge">Time</span>
+  <div class="icon">⏳</div>
+  <div>
+    <div class="cardTitle">Countdown Timer</div>
+    <div class="cardDesc">Create countdown timers easily.</div>
+  </div>
+  <span class="badge">Time</span>
 </a>
 
 <!-- CRYPTO -->
-
-<a class="card" href="/crypto-profit-calculator.html" data-tags="crypto profit calculator">
-<div class="icon">📈</div>
-<div>
-<div class="cardTitle">Crypto Profit Calculator</div>
-<div class="cardDesc">Calculate crypto profit and ROI.</div>
-</div>
-<span class="badge">Crypto</span>
+<a class="card" href="/crypto-profit-calculator.html" data-tags="crypto profit calculator roi pnl">
+  <div class="icon">📈</div>
+  <div>
+    <div class="cardTitle">Crypto Profit Calculator</div>
+    <div class="cardDesc">Calculate crypto profit and ROI.</div>
+  </div>
+  <span class="badge">Crypto</span>
 </a>
 
-<a class="card" href="/web3-gas-fee-estimator.html" data-tags="gas web3 ethereum">
-<div class="icon">⛽</div>
-<div>
-<div class="cardTitle">Web3 Gas Fee Estimator</div>
-<div class="cardDesc">Estimate Ethereum gas costs.</div>
-</div>
-<span class="badge">Crypto</span>
+<a class="card" href="/web3-gas-fee-estimator.html" data-tags="gas web3 ethereum fee estimator">
+  <div class="icon">⛽</div>
+  <div>
+    <div class="cardTitle">Web3 Gas Fee Estimator</div>
+    <div class="cardDesc">Estimate transaction fees and gas.</div>
+  </div>
+  <span class="badge">Crypto</span>
 </a>
 
-<!-- DEV -->
-
-<a class="card" href="/json-formatter.html" data-tags="json formatter dev">
-<div class="icon">🧾</div>
-<div>
-<div class="cardTitle">JSON Formatter</div>
-<div class="cardDesc">Format and validate JSON.</div>
-</div>
-<span class="badge">Dev</span>
+<!-- DEV (existing) -->
+<a class="card" href="/json-formatter.html" data-tags="json formatter validate prettify dev developer">
+  <div class="icon">🧾</div>
+  <div>
+    <div class="cardTitle">JSON Formatter</div>
+    <div class="cardDesc">Format and validate JSON instantly.</div>
+  </div>
+  <span class="badge">Dev</span>
 </a>
 
-<a class="card" href="/base64-encoder.html" data-tags="base64 encode decode dev">
-<div class="icon">🧬</div>
-<div>
-<div class="cardTitle">Base64 Encoder</div>
-<div class="cardDesc">Encode or decode Base64.</div>
-</div>
-<span class="badge">Dev</span>
+<a class="card" href="/base64-encoder.html" data-tags="base64 encoder decoder encode decode dev developer">
+  <div class="icon">🧬</div>
+  <div>
+    <div class="cardTitle">Base64 Encoder</div>
+    <div class="cardDesc">Encode or decode Base64 data.</div>
+  </div>
+  <span class="badge">Dev</span>
+</a>
+
+<!-- DEV (new) -->
+<a class="card" href="/uuid-generator.html" data-tags="uuid generator v4 rfc4122 guid dev developer">
+  <div class="icon">🧩</div>
+  <div>
+    <div class="cardTitle">UUID Generator</div>
+    <div class="cardDesc">Generate UUID v4 identifiers instantly.</div>
+  </div>
+  <span class="badge">Dev</span>
+</a>
+
+<a class="card" href="/jwt-decoder.html" data-tags="jwt decoder json web token decode header payload dev developer">
+  <div class="icon">🔐</div>
+  <div>
+    <div class="cardTitle">JWT Decoder</div>
+    <div class="cardDesc">Decode JWT header and payload (no verification).</div>
+  </div>
+  <span class="badge">Dev</span>
+</a>
+
+<a class="card" href="/timestamp-converter.html" data-tags="timestamp converter unix epoch seconds milliseconds dev developer">
+  <div class="icon">⏱️</div>
+  <div>
+    <div class="cardTitle">Timestamp Converter</div>
+    <div class="cardDesc">Convert Unix timestamps ↔ human dates.</div>
+  </div>
+  <span class="badge">Dev</span>
+</a>
+
+<a class="card" href="/regex-tester.html" data-tags="regex tester regular expression replace match groups flags dev developer">
+  <div class="icon">🔎</div>
+  <div>
+    <div class="cardTitle">Regex Tester</div>
+    <div class="cardDesc">Test regex matches and replacements.</div>
+  </div>
+  <span class="badge">Dev</span>
+</a>
+
+<a class="card" href="/hash-generator.html" data-tags="hash generator sha256 sha1 sha512 webcrypto checksum dev developer">
+  <div class="icon">#️⃣</div>
+  <div>
+    <div class="cardTitle">Hash Generator</div>
+    <div class="cardDesc">Generate SHA hashes locally (WebCrypto).</div>
+  </div>
+  <span class="badge">Dev</span>
 </a>
 
 </div>
 
 <footer>
-
-<div>
-<a href="/privacy.html">Privacy</a>
-<a href="/terms.html">Terms</a>
-<a href="/contact.html">Contact</a>
-<a href="/sitemap.xml">Sitemap</a>
-</div>
-
-<div style="margin-top:8px;">
-© <span id="year"></span> InstantQR.io
-</div>
-
+  <div>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/sitemap.xml">Sitemap</a>
+  </div>
+  <div style="margin-top:8px;">
+    © <span id="year"></span> InstantQR.io
+  </div>
 </footer>
 
 </div>
 
 <script>
+document.getElementById("year").textContent = new Date().getFullYear();
 
-document.getElementById("year").textContent=new Date().getFullYear()
+const search = document.getElementById("search");
+const cards = document.querySelectorAll(".card");
 
-const search=document.getElementById("search")
-const cards=document.querySelectorAll(".card")
-
-search.addEventListener("input",()=>{
-
-let q=search.value.toLowerCase()
-
-cards.forEach(card=>{
-
-let text=card.dataset.tags+card.innerText.toLowerCase()
-
-card.style.display=text.includes(q)?"flex":"none"
-
-})
-
-})
-
+search.addEventListener("input", () => {
+  const q = (search.value || "").toLowerCase().trim();
+  cards.forEach(card => {
+    const text = (card.dataset.tags + " " + card.innerText).toLowerCase();
+    card.style.display = text.includes(q) ? "flex" : "none";
+  });
+});
 </script>
 
 </body>
