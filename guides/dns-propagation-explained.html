@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>DNS Propagation Explained | What It Is, How Long It Takes & Why It Happens | InstantQR.io</title>
+  <meta name="description" content="Learn what DNS propagation is, how it works, why changes take time, what TTL means, and how to check DNS updates after changing nameservers, A records, MX records, CNAME, or TXT records." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/dns-propagation-explained.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="DNS Propagation Explained | InstantQR.io" />
+  <meta property="og:description" content="What DNS propagation is, how long it takes, and how to verify your DNS changes." />
+  <meta property="og:url" content="https://instantqr.io/dns-propagation-explained.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DNS Propagation Explained | InstantQR.io" />
+  <meta name="twitter:description" content="Understand DNS propagation, TTL, DNS caches, and how to verify DNS changes." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <meta name="theme-color" content="#0b0f19" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:rgba(255,255,255,.05);
+      --panel-2:rgba(255,255,255,.04);
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --brand:#69a6ff;
+      --brand-2:#8db9ff;
+      --ok:#19c37d;
+      --warn:#ffcc66;
+      --border:rgba(255,255,255,.10);
+      --shadow:0 14px 40px rgba(0,0,0,.38);
+      --radius:18px;
+      --radius-lg:24px;
+      --max:1120px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.12), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.10), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:20px}
+    .skip{
+      position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;
+    }
+    .skip:focus{
+      left:12px;top:12px;width:auto;height:auto;padding:10px 12px;border-radius:12px;
+      background:#0f1728;border:1px solid var(--border);z-index:9999;
+    }
+
+    /* Topbar */
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(10px);
+      background:rgba(7,11,20,.58);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brandRow{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .brandRow img{height:34px;width:auto}
+    nav{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    nav a:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      cursor:pointer;
+      transition:transform .12s ease, filter .12s ease, background .12s ease;
+      white-space:nowrap;
+    }
+    .cta:hover{transform:translateY(-1px);text-decoration:none}
+    .cta.primary{
+      border:0;
+      background:linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
+      box-shadow:0 14px 28px rgba(105,166,255,.22);
+    }
+    .cta.primary:hover{filter:brightness(1.06)}
+    .cta.ghost:hover{background:rgba(255,255,255,.10)}
+
+    /* Hero */
+    .hero{padding:34px 0 10px}
+    .heroCard{
+      border:1px solid var(--border);
+      border-radius:var(--radius-lg);
+      padding:28px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute;inset:-2px;
+      background:
+        radial-gradient(780px 260px at 18% 18%, rgba(105,166,255,.18), transparent 62%),
+        radial-gradient(520px 220px at 82% 40%, rgba(25,195,125,.10), transparent 55%);
+      pointer-events:none;
+    }
+    .heroCard > *{position:relative}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      width:fit-content;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-size:13px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:clamp(30px, 4vw, 46px);
+      line-height:1.05;
+      letter-spacing:-.7px;
+    }
+    .sub{
+      margin:0 0 18px;
+      max-width:72ch;
+      color:var(--muted);
+      font-size:16px;
+    }
+    .heroActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    /* Layout */
+    .contentGrid{
+      display:grid;
+      grid-template-columns: minmax(0,1fr) 300px;
+      gap:18px;
+      margin-top:18px;
+    }
+    .article, .tocCard, .callout, .faq, .miniCard{
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .article{
+      padding:22px;
+    }
+    .tocCard{
+      position:sticky;
+      top:88px;
+      padding:16px;
+      height:fit-content;
+      background:linear-gradient(180deg, rgba(15,26,46,.75), rgba(15,26,46,.48));
+    }
+    .tocTitle{
+      font-size:15px;
+      font-weight:800;
+      margin:0 0 10px;
+    }
+    .tocList{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .tocList a{
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+      display:block;
+    }
+    .tocList a:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .section{
+      margin-top:26px;
+    }
+    .section:first-child{margin-top:0}
+    h2{
+      margin:0 0 10px;
+      font-size:28px;
+      line-height:1.15;
+      letter-spacing:-.35px;
+    }
+    h3{
+      margin:18px 0 8px;
+      font-size:20px;
+      line-height:1.2;
+      letter-spacing:-.2px;
+    }
+    p{
+      margin:0 0 14px;
+      color:var(--muted);
+    }
+    ul,ol{
+      margin:0 0 16px 20px;
+      color:var(--muted);
+    }
+    li{margin:6px 0}
+    strong{color:var(--text)}
+    code{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+      padding:2px 6px;
+      border-radius:8px;
+      color:var(--text);
+      font-size:.95em;
+    }
+
+    .infoGrid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin:16px 0;
+    }
+    .miniCard{
+      padding:16px;
+      background:var(--panel-2);
+    }
+    .miniCard h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .miniCard p{
+      margin:0;
+      font-size:14px;
+    }
+
+    .callout{
+      padding:16px;
+      margin:16px 0;
+      background:linear-gradient(180deg, rgba(25,195,125,.10), rgba(25,195,125,.04));
+    }
+    .callout.warn{
+      background:linear-gradient(180deg, rgba(255,204,102,.10), rgba(255,204,102,.04));
+    }
+    .calloutTitle{
+      font-weight:800;
+      margin:0 0 6px;
+      font-size:15px;
+    }
+    .callout p:last-child{margin-bottom:0}
+
+    .tableWrap{
+      overflow:auto;
+      border:1px solid var(--border);
+      border-radius:16px;
+      margin:16px 0;
+      background:rgba(255,255,255,.03);
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:720px;
+    }
+    th,td{
+      padding:12px 14px;
+      text-align:left;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+      vertical-align:top;
+    }
+    th{
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+      font-size:14px;
+    }
+    tr:last-child td{border-bottom:0}
+
+    .steps{
+      display:grid;
+      gap:12px;
+      margin:14px 0 16px;
+    }
+    .step{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px;
+      background:rgba(255,255,255,.03);
+    }
+    .stepNum{
+      width:34px;height:34px;
+      display:grid;place-items:center;
+      border-radius:50%;
+      flex:0 0 auto;
+      background:rgba(105,166,255,.14);
+      border:1px solid rgba(255,255,255,.10);
+      font-weight:800;
+      color:var(--brand-2);
+    }
+    .step h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .step p{margin:0}
+
+    .faq{
+      padding:18px;
+      margin-top:26px;
+    }
+    details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    details:first-child{border-top:0;padding-top:0}
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    .faq p{margin:8px 0 0}
+
+    .related{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+    .related a{
+      display:block;
+      padding:16px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      transition:transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .related a:hover{
+      transform:translateY(-2px);
+      text-decoration:none;
+      background:rgba(255,255,255,.06);
+      border-color:rgba(105,166,255,.35);
+    }
+    .related strong{
+      display:block;
+      margin-bottom:6px;
+    }
+    .related span{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    /* Footer */
+    .footer{
+      margin-top:26px;
+      padding:18px 0 36px;
+      border-top:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .footRow{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .footerLinks{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .footerLinks a{color:var(--muted)}
+    .footerLinks a:hover{color:var(--text);text-decoration:none}
+    .small{font-size:12px;color:rgba(233,238,252,.55)}
+
+    @media (max-width: 980px){
+      .contentGrid{grid-template-columns:1fr}
+      .tocCard{position:static}
+      nav{display:none}
+      .infoGrid{grid-template-columns:1fr}
+    }
+    @media (max-width: 640px){
+      .heroCard,.article,.tocCard,.faq{padding:18px}
+      .related{grid-template-columns:1fr}
+      .cta{width:100%}
+      .heroActions .cta{flex:1}
+    }
+  </style>
+
+  <!-- Article schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"DNS Propagation Explained",
+    "description":"What DNS propagation is, how it works, how long it takes, what TTL means, and how to verify DNS changes.",
+    "author":{
+      "@type":"Organization",
+      "name":"InstantQR"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://instantqr.io/assets/instantqr-logo.svg"
+      }
+    },
+    "mainEntityOfPage":"https://instantqr.io/dns-propagation-explained.html"
+  }
+  </script>
+
+  <!-- FAQ schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is DNS propagation?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"DNS propagation is the time it takes for DNS changes to update across DNS resolvers and caches around the world after you modify a DNS record or nameserver."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How long does DNS propagation take?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"It can take a few minutes to up to 48 hours depending on the record type, TTL settings, resolver caching, ISP behavior, and whether you changed nameservers or individual records."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does DNS propagation affect everyone at the same time?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. Different resolvers and internet providers refresh cached DNS data at different times, so some users may see the new record earlier while others still see the old one."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Breadcrumb schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"DNS Propagation Explained",
+        "item":"https://instantqr.io/dns-propagation-explained.html"
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="inner">
+      <a class="brandRow" href="/" aria-label="InstantQR Home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+        <span>InstantQR</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <a href="/tools.html">All Tools</a>
+        <a href="/games.html">Games</a>
+        <a href="/dns-lookup.html">DNS Lookup</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+
+      <a class="cta primary" href="/dns-lookup.html">Open DNS Lookup →</a>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero" aria-label="Hero">
+      <div class="heroCard">
+        <div class="pill">🌐 DNS Guide • ⚡ Beginner Friendly • 🔍 SEO + Troubleshooting</div>
+        <h1>DNS Propagation Explained</h1>
+        <p class="sub">
+          When you change your domain’s DNS settings, the update does not appear everywhere instantly.
+          This delay is called <strong>DNS propagation</strong>. Below is a clear explanation of what it means,
+          why it happens, how long it usually takes, and how to confirm your DNS changes are live.
+        </p>
+
+        <div class="heroActions">
+          <a class="cta primary" href="/dns-lookup.html">Try DNS Lookup</a>
+          <a class="cta ghost" href="#what-is-dns-propagation">Start Reading</a>
+          <a class="cta ghost" href="/tools.html">More Tools</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="contentGrid">
+      <article class="article">
+        <section class="section" id="what-is-dns-propagation">
+          <h2>What is DNS propagation?</h2>
+          <p>
+            <strong>DNS propagation</strong> is the period of time it takes for updated DNS information
+            to spread across the internet after you change a DNS setting for your domain.
+          </p>
+          <p>
+            For example, if you update your domain’s <code>A</code> record to point to a new server,
+            some people may reach the new server quickly while others still reach the old one for a while.
+            That is because DNS answers are cached by many systems between the user and your domain.
+          </p>
+
+          <div class="infoGrid">
+            <div class="miniCard">
+              <h3>DNS</h3>
+              <p>The system that translates domain names like <strong>instantqr.io</strong> into IP addresses.</p>
+            </div>
+            <div class="miniCard">
+              <h3>Propagation</h3>
+              <p>The time it takes for updated DNS records to be seen by resolvers across different regions.</p>
+            </div>
+            <div class="miniCard">
+              <h3>Result</h3>
+              <p>Some users see the new record first, while others may still see the old one temporarily.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="why-it-happens">
+          <h2>Why does DNS propagation happen?</h2>
+          <p>
+            DNS propagation happens because DNS is designed to be efficient. Instead of asking authoritative
+            DNS servers for the same answer every single time, recursive resolvers and local devices cache results
+            for a set amount of time.
+          </p>
+          <p>
+            That means when you change a DNS record, caches around the world do not all refresh at the exact same moment.
+            Each resolver updates on its own timeline.
+          </p>
+
+          <div class="callout">
+            <div class="calloutTitle">Simple version</div>
+            <p>
+              DNS changes are not “slow” because something is broken. They are delayed because older answers may still be
+              stored in DNS caches until they expire and refresh.
+            </p>
+          </div>
+        </section>
+
+        <section class="section" id="how-dns-caching-works">
+          <h2>How DNS caching works</h2>
+          <p>Here is the basic flow:</p>
+
+          <div class="steps">
+            <div class="step">
+              <div class="stepNum">1</div>
+              <div>
+                <h3>You visit a domain</h3>
+                <p>Your device, browser, router, ISP, or DNS resolver may ask for the domain’s DNS record.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="stepNum">2</div>
+              <div>
+                <h3>The answer gets cached</h3>
+                <p>The resolver saves that answer for a set period based on the record’s TTL.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="stepNum">3</div>
+              <div>
+                <h3>You change the DNS record</h3>
+                <p>The authoritative DNS zone is updated, but cached copies elsewhere may still hold the old answer.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="stepNum">4</div>
+              <div>
+                <h3>Caches expire and refresh</h3>
+                <p>As caches expire, resolvers request the updated record and users begin seeing the new result.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="how-long-it-takes">
+          <h2>How long does DNS propagation take?</h2>
+          <p>
+            DNS propagation can take anywhere from a few minutes to as long as 24 to 48 hours.
+            The exact time depends on the type of change, cache behavior, and TTL settings.
+          </p>
+
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Change Type</th>
+                  <th>Typical Time</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>A / AAAA record</strong></td>
+                  <td>Minutes to 24 hours</td>
+                  <td>Can be faster if TTL is low and resolvers refresh quickly.</td>
+                </tr>
+                <tr>
+                  <td><strong>CNAME record</strong></td>
+                  <td>Minutes to 24 hours</td>
+                  <td>Often similar to A record timing.</td>
+                </tr>
+                <tr>
+                  <td><strong>MX record</strong></td>
+                  <td>Minutes to 48 hours</td>
+                  <td>Email routing changes may take longer to appear globally.</td>
+                </tr>
+                <tr>
+                  <td><strong>TXT record</strong></td>
+                  <td>Minutes to 24 hours</td>
+                  <td>Used for SPF, DKIM, verification, and other ownership checks.</td>
+                </tr>
+                <tr>
+                  <td><strong>Nameserver change</strong></td>
+                  <td>Up to 48 hours</td>
+                  <td>Often the slowest type because delegation data must refresh widely.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout warn">
+            <div class="calloutTitle">Important</div>
+            <p>
+              “Up to 48 hours” is a common rule of thumb, but many updates complete much sooner.
+              The key point is that not every user or resolver updates at the same time.
+            </p>
+          </div>
+        </section>
+
+        <section class="section" id="what-is-ttl">
+          <h2>What is TTL in DNS?</h2>
+          <p>
+            <strong>TTL</strong> stands for <strong>Time To Live</strong>. It tells resolvers how long they are allowed
+            to cache a DNS record before checking again for an updated answer.
+          </p>
+          <p>
+            For example, a TTL of <code>300</code> means a resolver may keep that DNS answer for about 5 minutes.
+            A TTL of <code>3600</code> means about 1 hour.
+          </p>
+
+          <div class="infoGrid">
+            <div class="miniCard">
+              <h3>Low TTL</h3>
+              <p>Faster updates, but more frequent DNS lookups.</p>
+            </div>
+            <div class="miniCard">
+              <h3>High TTL</h3>
+              <p>More caching efficiency, but slower visible changes.</p>
+            </div>
+            <div class="miniCard">
+              <h3>Best use</h3>
+              <p>Lower TTL before migrations, cutovers, or important DNS changes.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="what-affects-speed">
+          <h2>What affects DNS propagation speed?</h2>
+          <ul>
+            <li><strong>TTL value:</strong> Lower TTLs generally allow faster refreshes.</li>
+            <li><strong>Resolver caching behavior:</strong> Some public and ISP resolvers refresh more quickly than others.</li>
+            <li><strong>Browser or device cache:</strong> Your local system may still hold old DNS results.</li>
+            <li><strong>Nameserver changes:</strong> These often take longer than simple record edits.</li>
+            <li><strong>Registrar and DNS host updates:</strong> Some control panel changes apply almost instantly, others take time.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="how-to-check">
+          <h2>How to check if DNS has propagated</h2>
+          <p>
+            The best way to verify propagation is to compare the DNS record you expect with the result being returned
+            from different locations or resolvers.
+          </p>
+
+          <h3>Ways to check</h3>
+          <ul>
+            <li>Use a DNS lookup tool to check <code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>MX</code>, or <code>TXT</code> records.</li>
+            <li>Test with public resolvers such as Google DNS or Cloudflare DNS.</li>
+            <li>Clear your browser, OS, or local DNS cache if you suspect you are seeing an old result.</li>
+            <li>Verify the record at the authoritative DNS provider if possible.</li>
+          </ul>
+
+          <div class="callout">
+            <div class="calloutTitle">Practical tip</div>
+            <p>
+              If your DNS panel shows the new value but your domain still behaves like the old one, the most common cause is caching,
+              not a failed DNS update.
+            </p>
+          </div>
+        </section>
+
+        <section class="section" id="common-scenarios">
+          <h2>Common DNS propagation scenarios</h2>
+
+          <h3>Website moved to a new server</h3>
+          <p>
+            You update the <code>A</code> record to a new IP address. Some visitors reach the new server immediately.
+            Others still reach the old server until their cached answer expires.
+          </p>
+
+          <h3>Email provider changed</h3>
+          <p>
+            You update <code>MX</code> records. Some senders route to the new mail system first, while others may still
+            route using old cached data temporarily.
+          </p>
+
+          <h3>Domain verification for a service</h3>
+          <p>
+            You add a <code>TXT</code> record for Google, Microsoft, or another platform. The service may not detect it
+            immediately if its resolver still sees an older DNS state.
+          </p>
+
+          <h3>Nameservers changed</h3>
+          <p>
+            This can take longer than editing a normal record because the internet must update which authoritative nameservers
+            are responsible for your domain.
+          </p>
+        </section>
+
+        <section class="section" id="reduce-delay">
+          <h2>How to reduce DNS propagation delays</h2>
+          <ol>
+            <li><strong>Lower TTL ahead of time.</strong> Do this before a planned migration or DNS cutover.</li>
+            <li><strong>Double-check the new record values.</strong> Small mistakes can look like propagation delays.</li>
+            <li><strong>Keep the old service active during transition.</strong> Useful for websites and mail routing.</li>
+            <li><strong>Use DNS lookup tools from multiple resolvers.</strong> This confirms whether the issue is global or local.</li>
+            <li><strong>Allow enough time.</strong> Not all resolvers refresh simultaneously.</li>
+          </ol>
+        </section>
+
+        <section class="section" id="myths">
+          <h2>Common DNS propagation myths</h2>
+
+          <h3>“DNS propagation means my DNS is broken”</h3>
+          <p>
+            Not necessarily. In many cases, the DNS change is correct, but cached results have not fully expired yet.
+          </p>
+
+          <h3>“Everyone sees the new DNS at once”</h3>
+          <p>
+            No. Different networks, devices, browsers, and recursive resolvers may refresh at different times.
+          </p>
+
+          <h3>“Propagation always takes 48 hours”</h3>
+          <p>
+            No. Many changes complete much sooner. Forty-eight hours is just a cautious upper range often used in support docs.
+          </p>
+        </section>
+
+        <section class="section" id="summary">
+          <h2>DNS propagation summary</h2>
+          <p>
+            DNS propagation is the delay between making a DNS change and having that change seen everywhere online.
+            It happens because of DNS caching and TTL behavior across devices, browsers, ISPs, and public resolvers.
+          </p>
+          <p>
+            Most changes resolve faster than the maximum warning you often hear, but temporary inconsistency is normal.
+            When troubleshooting, verify your records, compare results across resolvers, and allow time for caches to refresh.
+          </p>
+        </section>
+
+        <section class="faq" id="faq">
+          <h2 style="margin-top:0">FAQ</h2>
+
+          <details open>
+            <summary>What is DNS propagation?</summary>
+            <p>It is the time it takes for DNS changes to be reflected across cached DNS systems on the internet.</p>
+          </details>
+
+          <details>
+            <summary>How long does DNS propagation take?</summary>
+            <p>It may take a few minutes to up to 48 hours depending on TTL, resolver behavior, and the type of DNS change.</p>
+          </details>
+
+          <details>
+            <summary>Why do some people see the change before others?</summary>
+            <p>Because different resolvers and devices refresh cached DNS data at different times.</p>
+          </details>
+
+          <details>
+            <summary>Does clearing my cache help?</summary>
+            <p>It can help locally if your browser, operating system, or router is using an old cached DNS answer.</p>
+          </details>
+
+          <details>
+            <summary>Are nameserver changes slower than record changes?</summary>
+            <p>Often yes. Nameserver updates can take longer because delegation information needs to refresh broadly.</p>
+          </details>
+        </section>
+
+        <section class="section" id="related">
+          <h2>Related pages</h2>
+          <div class="related">
+            <a href="/dns-lookup.html">
+              <strong>DNS Lookup Tool</strong>
+              <span>Check A, AAAA, MX, TXT, CNAME, NS, and more.</span>
+            </a>
+            <a href="/tools.html">
+              <strong>All Tools</strong>
+              <span>Browse your full InstantQR tools library.</span>
+            </a>
+          </div>
+        </section>
+      </article>
+
+      <aside class="tocCard" aria-label="Table of contents">
+        <div class="tocTitle">On this page</div>
+        <ul class="tocList">
+          <li><a href="#what-is-dns-propagation">What is DNS propagation?</a></li>
+          <li><a href="#why-it-happens">Why it happens</a></li>
+          <li><a href="#how-dns-caching-works">How caching works</a></li>
+          <li><a href="#how-long-it-takes">How long it takes</a></li>
+          <li><a href="#what-is-ttl">What TTL means</a></li>
+          <li><a href="#what-affects-speed">What affects speed</a></li>
+          <li><a href="#how-to-check">How to check</a></li>
+          <li><a href="#common-scenarios">Common scenarios</a></li>
+          <li><a href="#reduce-delay">Reduce delays</a></li>
+          <li><a href="#myths">Myths</a></li>
+          <li><a href="#summary">Summary</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+
+        <div style="margin-top:14px;">
+          <a class="cta primary" href="/dns-lookup.html" style="width:100%;">Use DNS Lookup</a>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footRow">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" style="height:28px;width:auto;" />
+            <strong style="color:var(--text);font-size:16px;">InstantQR</strong>
+          </div>
+
+          <div class="small">
+            InstantQR.io provides free privacy-first web tools for DNS, QR codes, crypto, security, time, conversions, and more.
+          </div>
+
+          <div class="small" style="margin-top:8px;">
+            © <span id="year"></span> InstantQR.io. All rights reserved.
+          </div>
+        </div>
+
+        <div class="footerLinks">
+          <div>
+            <a href="/">Home</a> ·
+            <a href="/tools.html">All Tools</a> ·
+            <a href="/dns-lookup.html">DNS Lookup</a> ·
+            <a href="/games.html">Games</a>
+          </div>
+
+          <div>
+            <a href="/about.html">About</a> ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/terms.html">Terms</a> ·
+            <a href="/contact.html">Contact</a> ·
+            <a href="/sitemap.xml">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
