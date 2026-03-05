@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Free Online Racing Game (Fast Lane Runner) | InstantQR Games</title>
+  <meta name="description" content="Play a fast, safe, lightweight browser racing game. Dodge traffic, collect boosts, and beat your high score. Works on mobile and desktop." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/racing-game.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:rgba(255,255,255,.06);
+      --text:#eaf2ff;
+      --muted:rgba(234,242,255,.7);
+      --line:rgba(255,255,255,.10);
+      --btn:#1f6feb;
+      --btn2:rgba(255,255,255,.10);
+      --good:#2ecc71;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    body{margin:0;background:radial-gradient(1200px 600px at 50% -10%, #152b55 0%, var(--bg) 60%); color:var(--text);}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);}
+    .brand img{width:30px;height:30px}
+    .brand span{font-weight:700;letter-spacing:.2px}
+    nav a{color:var(--muted);text-decoration:none;margin-left:12px;font-size:14px}
+    nav a:hover{color:var(--text)}
+
+    .grid{display:grid;grid-template-columns: 1.1fr .9fr; gap:16px; align-items:start;}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr;} }
+
+    .card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px;}
+    h1{font-size:22px;margin:0 0 6px}
+    .sub{color:var(--muted);margin:0 0 12px;line-height:1.5}
+
+    .hud{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 12px}
+    .pill{border:1px solid var(--line); background:rgba(0,0,0,.18); border-radius:999px; padding:8px 10px; font-size:14px}
+    .pill b{color:var(--text)}
+    .pill span{color:var(--muted)}
+
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    button{
+      appearance:none;border:1px solid var(--line); border-radius:10px;
+      padding:10px 12px; font-weight:600; cursor:pointer; color:var(--text);
+      background:var(--btn2);
+    }
+    button.primary{background:var(--btn); border-color:rgba(31,111,235,.45)}
+    button:active{transform:translateY(1px)}
+    .tips{color:var(--muted);font-size:14px;line-height:1.55;margin-top:10px}
+    .k{display:inline-block;border:1px solid var(--line);border-bottom-color:rgba(255,255,255,.22);
+      padding:2px 7px;border-radius:8px;background:rgba(0,0,0,.18);font-size:12px;color:var(--text);}
+
+    .canvasWrap{position:relative}
+    canvas{
+      width:100%;
+      height:auto;
+      aspect-ratio: 3 / 4;
+      background:linear-gradient(#101826, #0a0f1a);
+      border:1px solid var(--line);
+      border-radius:14px;
+      display:block;
+      touch-action:none; /* allow custom touch controls */
+    }
+
+    .overlay{
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      pointer-events:none;
+    }
+    .overlay .msg{
+      pointer-events:none;
+      text-align:center;
+      background:rgba(0,0,0,.55);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px 16px;
+      max-width: 85%;
+    }
+    .overlay .msg h2{margin:0 0 6px;font-size:18px}
+    .overlay .msg p{margin:0;color:var(--muted);line-height:1.5}
+
+    .footerLinks{margin-top:12px;font-size:14px;color:var(--muted)}
+    .footerLinks a{color:var(--muted);text-decoration:none}
+    .footerLinks a:hover{color:var(--text)}
+
+    /* mobile on-screen controls */
+    .touchControls{
+      display:none;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    .touchControls button{
+      padding:14px 12px;
+      border-radius:14px;
+      font-size:16px;
+    }
+    @media (pointer:coarse){
+      .touchControls{display:grid;}
+    }
+  </style>
+
+  <!-- FAQ Structured Data (helps SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Is this racing game safe for kids?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. This is a simple offline browser game with no chat, no accounts, and no user-generated content."}
+      },
+      {
+        "@type":"Question",
+        "name":"How do I play?",
+        "acceptedAnswer":{"@type":"Answer","text":"Use Arrow keys or A/D to change lanes. On mobile, use the left and right buttons. Avoid traffic and collect boosts to increase your score."}
+      },
+      {
+        "@type":"Question",
+        "name":"Does it work on mobile?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. The game is responsive and includes touch controls for phones and tablets."}
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <span>InstantQR</span>
+      </a>
+      <nav>
+        <a href="/tools.html">Tools</a>
+        <a href="/games.html">Games</a>
+        <a href="/privacy.html">Privacy</a>
+      </nav>
+    </header>
+
+    <div class="grid">
+      <div class="canvasWrap card">
+        <canvas id="game" width="750" height="1000" aria-label="Racing game canvas"></canvas>
+        <div class="overlay" id="overlay" style="display:flex;">
+          <div class="msg">
+            <h2>Fast Lane Runner</h2>
+            <p>Press <span class="k">Start</span> then dodge traffic.<br/>Collect boosts. Beat your high score.</p>
+          </div>
+        </div>
+
+        <div class="touchControls" aria-label="Touch controls">
+          <button id="btnLeft">⬅️ Left</button>
+          <button id="btnRight">Right ➡️</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h1>Free Online Racing Game</h1>
+        <p class="sub">
+          A fast, safe, lightweight browser racing game. No downloads, no login. Runs locally in your browser.
+        </p>
+
+        <div class="hud">
+          <div class="pill"><span>Score:</span> <b id="score">0</b></div>
+          <div class="pill"><span>High:</span> <b id="high">0</b></div>
+          <div class="pill"><span>Speed:</span> <b id="speed">1.0x</b></div>
+        </div>
+
+        <div class="actions">
+          <button class="primary" id="startBtn">Start</button>
+          <button id="pauseBtn">Pause</button>
+          <button id="restartBtn">Restart</button>
+        </div>
+
+        <div class="tips">
+          <div><b>Controls:</b> <span class="k">←</span> <span class="k">→</span> or <span class="k">A</span>/<span class="k">D</span></div>
+          <div><b>Boost:</b> Grab the green boost to temporarily increase speed & score rate.</div>
+          <div><b>Safe by design:</b> No chat, no accounts, no tracking beyond analytics.</div>
+        </div>
+
+        <div class="footerLinks">
+          <div style="margin-bottom:8px;">
+            <a href="/dns-lookup.html">DNS Lookup</a> ·
+            <a href="/ip-lookup.html">IP Lookup</a> ·
+            <a href="/internet-speed-test.html">Speed Test</a> ·
+            <a href="/unit-converter.html">Unit Converter</a>
+          </div>
+          <div>
+            <a href="/about.html">About</a> ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/terms.html">Terms</a> ·
+            <a href="/contact.html">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+
+  const $score = document.getElementById('score');
+  const $high  = document.getElementById('high');
+  const $speed = document.getElementById('speed');
+  const overlay = document.getElementById('overlay');
+
+  const startBtn = document.getElementById('startBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const restartBtn = document.getElementById('restartBtn');
+
+  const btnLeft = document.getElementById('btnLeft');
+  const btnRight = document.getElementById('btnRight');
+
+  // Game settings
+  const lanes = 3;
+  const lanePadding = 70;
+  const roadTop = 40;
+  const roadBottom = canvas.height - 40;
+  const roadLeft = lanePadding;
+  const roadRight = canvas.width - lanePadding;
+  const roadWidth = roadRight - roadLeft;
+  const laneWidth = roadWidth / lanes;
+
+  const carW = 90, carH = 150;
+
+  let state = {
+    running: false,
+    paused: false,
+    lastT: 0,
+    score: 0,
+    high: Number(localStorage.getItem('iq_race_high') || 0),
+    speed: 1,           // base multiplier grows slowly
+    boost: 0,           // boost time remaining (ms)
+    spawnTimer: 0,
+    obstacles: [],
+    pickups: [],
+    shake: 0
+  };
+
+  $high.textContent = state.high;
+
+  const player = {
+    lane: 1,             // 0..2
+    x: laneCenterX(1),
+    y: canvas.height - 220,
+    targetX: laneCenterX(1),
+    alive: true
+  };
+
+  function laneCenterX(lane){
+    return roadLeft + laneWidth * (lane + 0.5);
+  }
+
+  function reset(){
+    state.running = false;
+    state.paused = false;
+    state.lastT = 0;
+    state.score = 0;
+    state.speed = 1;
+    state.boost = 0;
+    state.spawnTimer = 0;
+    state.obstacles = [];
+    state.pickups = [];
+    state.shake = 0;
+
+    player.lane = 1;
+    player.x = laneCenterX(1);
+    player.targetX = laneCenterX(1);
+    player.alive = true;
+
+    overlay.style.display = 'flex';
+    $score.textContent = '0';
+    $speed.textContent = '1.0x';
+  }
+
+  function start(){
+    if (state.running && !player.alive) return;
+    if (!state.running){
+      state.running = true;
+      state.paused = false;
+      state.lastT = performance.now();
+      overlay.style.display = 'none';
+      requestAnimationFrame(loop);
+      return;
+    }
+    if (state.paused){
+      state.paused = false;
+      state.lastT = performance.now();
+      overlay.style.display = 'none';
+      requestAnimationFrame(loop);
+    }
+  }
+
+  function pause(){
+    if (!state.running) return;
+    state.paused = !state.paused;
+    overlay.style.display = state.paused ? 'flex' : 'none';
+    if (!state.paused){
+      state.lastT = performance.now();
+      requestAnimationFrame(loop);
+    } else {
+      overlay.querySelector('h2').textContent = 'Paused';
+      overlay.querySelector('p').innerHTML = 'Press <span class="k">Start</span> to resume.';
+    }
+  }
+
+  function gameOver(){
+    state.running = true; // still "running" but player dead
+    state.paused = true;
+    player.alive = false;
+
+    if (state.score > state.high){
+      state.high = state.score;
+      localStorage.setItem('iq_race_high', String(state.high));
+      $high.textContent = state.high;
+    }
+
+    overlay.style.display = 'flex';
+    overlay.querySelector('h2').textContent = 'Game Over';
+    overlay.querySelector('p').innerHTML =
+      `Score: <b>${state.score}</b><br/>Press <span class="k">Restart</span> to try again.`;
+  }
+
+  function laneMove(dir){
+    if (!state.running || state.paused || !player.alive) return;
+    player.lane = Math.max(0, Math.min(lanes-1, player.lane + dir));
+    player.targetX = laneCenterX(player.lane);
+  }
+
+  // Input
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') laneMove(-1);
+    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') laneMove(1);
+    if (e.key === ' '){ e.preventDefault(); pause(); }
+  }, {passive:false});
+
+  // Touch buttons
+  const hold = {left:false, right:false, interval:null};
+
+  function startHold(which){
+    hold[which] = true;
+    laneMove(which === 'left' ? -1 : 1);
+    clearInterval(hold.interval);
+    hold.interval = setInterval(() => {
+      if (hold[which]) laneMove(which === 'left' ? -1 : 1);
+    }, 120);
+  }
+  function endHold(which){
+    hold[which] = false;
+    clearInterval(hold.interval);
+    hold.interval = null;
+  }
+
+  btnLeft.addEventListener('pointerdown', () => startHold('left'));
+  btnLeft.addEventListener('pointerup', () => endHold('left'));
+  btnLeft.addEventListener('pointercancel', () => endHold('left'));
+  btnRight.addEventListener('pointerdown', () => startHold('right'));
+  btnRight.addEventListener('pointerup', () => endHold('right'));
+  btnRight.addEventListener('pointercancel', () => endHold('right'));
+
+  // Buttons
+  startBtn.addEventListener('click', start);
+  pauseBtn.addEventListener('click', pause);
+  restartBtn.addEventListener('click', () => { reset(); start(); });
+
+  // Entities
+  function spawnObstacle(){
+    const lane = randInt(0, lanes-1);
+    const speed = 380 + Math.random()*120; // base px/sec
+    state.obstacles.push({
+      lane,
+      x: laneCenterX(lane),
+      y: roadTop - carH,
+      w: carW,
+      h: carH,
+      v: speed
+    });
+  }
+
+  function spawnPickup(){
+    // green boost pickup
+    const lane = randInt(0, lanes-1);
+    state.pickups.push({
+      lane,
+      x: laneCenterX(lane),
+      y: roadTop - 60,
+      r: 26,
+      v: 320 + Math.random()*80
+    });
+  }
+
+  function randInt(a,b){ return Math.floor(a + Math.random()*(b-a+1)); }
+
+  // Collision helpers
+  function rectsOverlap(ax,ay,aw,ah, bx,by,bw,bh){
+    return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
+  }
+
+  function circleRectOverlap(cx,cy,r, rx,ry,rw,rh){
+    // clamp point
+    const x = Math.max(rx, Math.min(cx, rx + rw));
+    const y = Math.max(ry, Math.min(cy, ry + rh));
+    const dx = cx - x, dy = cy - y;
+    return dx*dx + dy*dy <= r*r;
+  }
+
+  // Rendering
+  function draw(){
+    const shakeX = state.shake ? (Math.random()*state.shake - state.shake/2) : 0;
+    const shakeY = state.shake ? (Math.random()*state.shake - state.shake/2) : 0;
+
+    ctx.save();
+    ctx.translate(shakeX, shakeY);
+
+    // background
+    ctx.clearRect(-20,-20, canvas.width+40, canvas.height+40);
+
+    // road
+    roundRect(ctx, roadLeft, roadTop, roadWidth, roadBottom-roadTop, 18, '#0d1424', 'rgba(255,255,255,.10)');
+
+    // lane lines
+    ctx.strokeStyle = 'rgba(255,255,255,.18)';
+    ctx.lineWidth = 6;
+    ctx.setLineDash([30, 26]);
+    for (let i=1;i<lanes;i++){
+      const x = roadLeft + laneWidth*i;
+      ctx.beginPath();
+      ctx.moveTo(x, roadTop+12);
+      ctx.lineTo(x, roadBottom-12);
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    // obstacles
+    for (const o of state.obstacles){
+      drawCar(o.x, o.y, o.w, o.h, '#ff4757', '#1b0a0d');
+    }
+
+    // pickups
+    for (const p of state.pickups){
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(46, 204, 113, .95)';
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = 'rgba(255,255,255,.25)';
+      ctx.stroke();
+
+      ctx.fillStyle = 'rgba(0,0,0,.35)';
+      ctx.font = '700 18px system-ui';
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.fillText('⚡', p.x, p.y+1);
+    }
+
+    // player
+    if (player.alive){
+      drawCar(player.x, player.y, carW, carH, '#1f6feb', '#061225');
+    }
+
+    // HUD hints in-canvas
+    if (state.boost > 0){
+      ctx.fillStyle = 'rgba(46, 204, 113, .95)';
+      ctx.font = '700 22px system-ui';
+      ctx.textAlign='left';
+      ctx.textBaseline='top';
+      ctx.fillText('BOOST!', roadLeft+18, roadTop+16);
+    }
+
+    ctx.restore();
+  }
+
+  function drawCar(cx, cy, w, h, color, shadow){
+    const x = cx - w/2;
+    const y = cy - h/2;
+
+    // shadow
+    ctx.fillStyle = 'rgba(0,0,0,.35)';
+    ctx.beginPath();
+    ctx.ellipse(cx, y+h-10, w*0.46, 14, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // body
+    roundRect(ctx, x, y, w, h, 18, color, 'rgba(255,255,255,.18)');
+
+    // windshield
+    roundRect(ctx, x+14, y+18, w-28, 42, 12, 'rgba(255,255,255,.18)', 'rgba(255,255,255,.12)');
+
+    // stripe
+    roundRect(ctx, cx-8, y+10, 16, h-20, 10, 'rgba(255,255,255,.18)', 'rgba(255,255,255,.0)');
+
+    // lights
+    ctx.fillStyle = 'rgba(255,255,255,.85)';
+    ctx.fillRect(x+10, y+h-18, 16, 8);
+    ctx.fillRect(x+w-26, y+h-18, 16, 8);
+
+    // top shade
+    ctx.fillStyle = shadow;
+    ctx.globalAlpha = 0.18;
+    ctx.fillRect(x, y, w, h*0.45);
+    ctx.globalAlpha = 1;
+  }
+
+  function roundRect(ctx, x,y,w,h,r, fill, stroke){
+    ctx.beginPath();
+    ctx.moveTo(x+r, y);
+    ctx.arcTo(x+w, y, x+w, y+h, r);
+    ctx.arcTo(x+w, y+h, x, y+h, r);
+    ctx.arcTo(x, y+h, x, y, r);
+    ctx.arcTo(x, y, x+w, y, r);
+    ctx.closePath();
+    if (fill){
+      ctx.fillStyle = fill;
+      ctx.fill();
+    }
+    if (stroke){
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+  }
+
+  // Game loop
+  function loop(t){
+    if (!state.running || state.paused) return;
+
+    const dt = Math.min(0.033, (t - state.lastT)/1000); // cap delta
+    state.lastT = t;
+
+    // ease player to lane center
+    player.x += (player.targetX - player.x) * Math.min(1, dt*10);
+
+    // speed ramp + boost
+    state.speed += dt * 0.015; // slow ramp
+    let speedMul = state.speed;
+    if (state.boost > 0){
+      state.boost -= dt*1000;
+      speedMul *= 1.35;
+    }
+
+    // score
+    state.score += Math.floor( (80 * speedMul) * dt );
+    $score.textContent = state.score;
+    $speed.textContent = (speedMul).toFixed(1) + 'x';
+
+    // spawn obstacles
+    state.spawnTimer -= dt;
+    if (state.spawnTimer <= 0){
+      spawnObstacle();
+      // sometimes spawn pickup
+      if (Math.random() < 0.22) spawnPickup();
+
+      // dynamic spawn interval based on speed (lower is harder)
+      const base = 0.80;
+      const hard = Math.max(0.42, base - (state.speed-1)*0.10);
+      state.spawnTimer = hard + Math.random()*0.25;
+    }
+
+    // move obstacles
+    const roadSpeed = 520 * speedMul; // px/sec baseline
+    for (const o of state.obstacles){
+      o.y += (o.v + roadSpeed) * dt;
+    }
+    // move pickups
+    for (const p of state.pickups){
+      p.y += (p.v + roadSpeed*0.85) * dt;
+    }
+
+    // cleanup
+    state.obstacles = state.obstacles.filter(o => o.y < roadBottom + carH);
+    state.pickups = state.pickups.filter(p => p.y < roadBottom + 80);
+
+    // collisions
+    const px = player.x - carW/2;
+    const py = player.y - carH/2;
+
+    for (const o of state.obstacles){
+      const ox = o.x - o.w/2;
+      const oy = o.y - o.h/2;
+      if (rectsOverlap(px,py,carW,carH, ox,oy,o.w,o.h)){
+        state.shake = 12;
+        draw();
+        gameOver();
+        return;
+      }
+    }
+
+    for (let i=state.pickups.length-1; i>=0; i--){
+      const p = state.pickups[i];
+      if (circleRectOverlap(p.x, p.y, p.r, px,py,carW,carH)){
+        state.pickups.splice(i,1);
+        state.boost = Math.min(4500, state.boost + 2200);
+        state.score += 200; // instant bonus
+        state.shake = 5;
+      }
+    }
+
+    // decay shake
+    state.shake = Math.max(0, state.shake - dt*40);
+
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  // Initial draw
+  reset();
+  draw();
+})();
+</script>
+</body>
+</html>
