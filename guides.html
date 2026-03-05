@@ -2,476 +2,362 @@
 <html lang="en">
 <head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
 
-<!-- Google AdSense -->
-<script async
-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Guides | InstantQR</title>
+  <title>Guides | InstantQR</title>
+  <meta name="description"
+    content="InstantQR Guides — short, clear explanations for domain tools and internet concepts. Learn fast with simple guides." />
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://instantqr.io/guides.html">
 
-<meta name="description"
-content="InstantQR Guides — clear explanations for WHOIS, DNS, IP lookup, domain tools, and internet basics. Learn fast with short guides." />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <meta name="theme-color" content="#0b1220">
 
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="https://instantqr.io/guides.html">
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --brand:#69a6ff;
+      --border:rgba(255,255,255,.1);
+      --shadow:0 12px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --max:1120px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+        linear-gradient(180deg,var(--bg),#070b14 60%,#060912);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
 
-<link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg">
-<link rel="alternate icon" href="/favicon.ico">
+    .wrap{max-width:var(--max);margin:auto;padding:20px}
 
-<meta name="theme-color" content="#0b1220">
+    /* TOPBAR */
+    .topbar{
+      position:sticky;
+      top:0;
+      backdrop-filter:blur(10px);
+      background:rgba(7,11,20,.6);
+      border-bottom:1px solid var(--border);
+      z-index:50;
+    }
+    .topbar .inner{
+      max-width:var(--max);
+      margin:auto;
+      padding:14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brandRow{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .brandRow img{height:34px;width:auto;display:block}
 
-<style>
+    nav{display:flex;gap:12px;flex-wrap:wrap}
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:6px 10px;
+      border-radius:10px;
+    }
+    nav a:hover{
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+    }
 
-:root{
---bg:#0b1220;
---text:#e7eefc;
---muted:#a9b7d6;
---brand:#69a6ff;
---border:rgba(255,255,255,.1);
---shadow:0 12px 40px rgba(0,0,0,.45);
---radius:18px;
---max:1120px;
-}
+    /* HERO */
+    .hero{padding:30px 0 10px}
+    .heroCard{
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:36px;
+      letter-spacing:-.6px;
+      line-height:1.08;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      max-width:70ch;
+      line-height:1.55;
+    }
 
-*{box-sizing:border-box}
+    /* CONTROLS */
+    .controls{
+      display:flex;
+      gap:10px;
+      margin-top:16px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .input,.select{
+      padding:12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.15);
+      background:rgba(0,0,0,.15);
+      color:var(--text);
+      font-size:14px;
+    }
+    .input{
+      flex:1;
+      min-width:220px;
+    }
 
-body{
-margin:0;
-font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-color:var(--text);
-background:
-radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
-linear-gradient(180deg,var(--bg),#070b14 60%,#060912);
-}
+    /* GRID */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    .card{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:16px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      transition:.15s;
+      min-height:118px;
+    }
+    .card:hover{
+      background:rgba(255,255,255,.06);
+      transform:translateY(-2px);
+      border-color:rgba(105,166,255,.35);
+      text-decoration:none;
+    }
+    .icon{
+      width:56px;
+      height:56px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      font-size:26px;
+      background:rgba(105,166,255,.15);
+      border:1px solid rgba(255,255,255,.1);
+      flex:0 0 auto;
+    }
+    .title{
+      font-weight:900;
+      letter-spacing:-.2px;
+      margin-bottom:4px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 36ch;
+    }
+    .badge{
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,.15);
+      padding:4px 8px;
+      border-radius:999px;
+      white-space:nowrap;
+      flex:0 0 auto;
+    }
+    .desc{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+    .empty{
+      display:none;
+      margin-top:14px;
+      padding:12px;
+      border-radius:12px;
+      background:rgba(0,0,0,.2);
+      border:1px solid rgba(255,255,255,.12);
+      font-size:13px;
+      color:rgba(233,238,252,.82);
+    }
 
-a{color:inherit;text-decoration:none}
-a:hover{text-decoration:underline}
+    /* FOOTER */
+    .footer{
+      margin-top:30px;
+      padding:18px 0 36px;
+      border-top:1px solid rgba(255,255,255,.1);
+      font-size:13px;
+      color:var(--muted);
+    }
 
-.wrap{
-max-width:var(--max);
-margin:auto;
-padding:20px;
-}
+    @media (max-width:980px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      nav{display:none}
+    }
+    @media (max-width:560px){
+      .grid{grid-template-columns:1fr}
+      .controls{flex-direction:column;align-items:stretch}
+    }
+  </style>
 
-/* TOPBAR */
-
-.topbar{
-position:sticky;
-top:0;
-backdrop-filter:blur(10px);
-background:rgba(7,11,20,.6);
-border-bottom:1px solid var(--border);
-}
-
-.topbar .inner{
-max-width:var(--max);
-margin:auto;
-padding:14px 20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
-
-.brandRow{
-display:flex;
-align-items:center;
-gap:10px;
-font-weight:800;
-}
-
-.brandRow img{
-height:34px;
-}
-
-nav{
-display:flex;
-gap:12px;
-}
-
-nav a{
-color:var(--muted);
-font-size:14px;
-padding:6px 10px;
-border-radius:10px;
-}
-
-nav a:hover{
-background:rgba(255,255,255,.06);
-color:var(--text);
-text-decoration:none;
-}
-
-/* HERO */
-
-.hero{
-padding:30px 0 10px;
-}
-
-.heroCard{
-background:rgba(255,255,255,.05);
-border:1px solid var(--border);
-border-radius:var(--radius);
-padding:22px;
-box-shadow:var(--shadow);
-}
-
-.hero h1{
-margin:0 0 10px;
-font-size:36px;
-}
-
-.hero p{
-margin:0;
-color:var(--muted);
-max-width:650px;
-line-height:1.5;
-}
-
-/* CONTROLS */
-
-.controls{
-display:flex;
-gap:10px;
-margin-top:16px;
-flex-wrap:wrap;
-}
-
-.input,.select{
-padding:12px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.15);
-background:rgba(0,0,0,.15);
-color:var(--text);
-font-size:14px;
-}
-
-.input{
-flex:1;
-min-width:220px;
-}
-
-/* GRID */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-margin-top:18px;
-}
-
-.card{
-border-radius:var(--radius);
-border:1px solid var(--border);
-background:rgba(255,255,255,.04);
-padding:16px;
-display:flex;
-gap:14px;
-align-items:flex-start;
-transition:.15s;
-}
-
-.card:hover{
-background:rgba(255,255,255,.06);
-transform:translateY(-2px);
-border-color:rgba(105,166,255,.35);
-}
-
-.icon{
-width:56px;
-height:56px;
-border-radius:18px;
-display:grid;
-place-items:center;
-font-size:26px;
-background:rgba(105,166,255,.15);
-border:1px solid rgba(255,255,255,.1);
-}
-
-.title{
-font-weight:800;
-margin-bottom:4px;
-}
-
-.badge{
-font-size:12px;
-color:var(--muted);
-border:1px solid rgba(255,255,255,.15);
-padding:4px 8px;
-border-radius:999px;
-}
-
-.desc{
-color:var(--muted);
-font-size:13px;
-line-height:1.5;
-}
-
-.empty{
-display:none;
-margin-top:14px;
-padding:12px;
-border-radius:12px;
-background:rgba(0,0,0,.2);
-border:1px solid rgba(255,255,255,.12);
-font-size:13px;
-}
-
-/* FOOTER */
-
-.footer{
-margin-top:30px;
-padding:18px 0 36px;
-border-top:1px solid rgba(255,255,255,.1);
-font-size:13px;
-color:var(--muted);
-}
-
-@media (max-width:980px){
-.grid{grid-template-columns:repeat(2,1fr)}
-nav{display:none}
-}
-
-@media (max-width:560px){
-.grid{grid-template-columns:1fr}
-.controls{flex-direction:column}
-}
-
-</style>
-
-<!-- SEO -->
-<script type="application/ld+json">
-{
-"@context":"https://schema.org",
-"@type":"CollectionPage",
-"name":"InstantQR Guides",
-"url":"https://instantqr.io/guides.html",
-"isPartOf":{
-"@type":"WebSite",
-"name":"InstantQR",
-"url":"https://instantqr.io"
-}
-}
-</script>
+  <!-- Guides page schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    "name":"InstantQR Guides",
+    "url":"https://instantqr.io/guides.html",
+    "isPartOf": {
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
 
 </head>
 
 <body>
 
-<header class="topbar">
-<div class="inner">
-
-<a class="brandRow" href="/">
-<img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
-<span>InstantQR</span>
-</a>
-
-<nav>
-<a href="/tools.html">Tools</a>
-<a href="/games.html">Games</a>
-<a href="/guides.html">Guides</a>
-<a href="/about.html">About</a>
-</nav>
-
-</div>
-</header>
-
-<main class="wrap">
-
-<section class="hero">
-
-<div class="heroCard">
-
-<h1>Guides</h1>
-
-<p>
-Short explanations for domain tools, networking basics, and internet concepts.
-Learn quickly and jump directly to the tools when you need them.
-</p>
-
-<div class="controls">
-
-<input id="q" class="input"
-placeholder="Search guides (whois, dns, ip...)">
-
-<select id="cat" class="select">
-<option value="all">All categories</option>
-<option value="domains">Domains</option>
-<option value="network">Network</option>
-<option value="security">Security</option>
-</select>
-
-</div>
-
-<div class="empty" id="empty">
-No guides found. Try searching: whois, dns, ip, domain.
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<div class="grid" id="grid">
-
-<!-- WHOIS -->
-
-<a class="card"
-href="/guides/what-is-whois-lookup.html"
-data-cat="domains"
-data-tags="whois domain registrar rdap lookup owner privacy">
-
-<div class="icon">🔎</div>
-
-<div>
-
-<div style="display:flex;justify-content:space-between;align-items:center">
-
-<div class="title">What is WHOIS Lookup?</div>
-<div class="badge">Domains</div>
-
-</div>
-
-<div class="desc">
-Learn what WHOIS is, how domain ownership records work,
-and when to use WHOIS lookup.
-</div>
-
-</div>
-
-</a>
-
-
-<!-- DNS -->
-
-<a class="card"
-href="/dns-lookup.html"
-data-cat="network"
-data-tags="dns records a aaaa cname mx txt ns">
-
-<div class="icon">🧠</div>
-
-<div>
-
-<div style="display:flex;justify-content:space-between">
-
-<div class="title">DNS Records Explained</div>
-<div class="badge">Network</div>
-
-</div>
-
-<div class="desc">
-Understand DNS records like A, MX, TXT and how domains route traffic.
-</div>
-
-</div>
-
-</a>
-
-
-<!-- IP -->
-
-<a class="card"
-href="/ip-lookup.html"
-data-cat="network"
-data-tags="ip lookup geolocation isp asn">
-
-<div class="icon">🌍</div>
-
-<div>
-
-<div style="display:flex;justify-content:space-between">
-
-<div class="title">IP Lookup Basics</div>
-<div class="badge">Network</div>
-
-</div>
-
-<div class="desc">
-Learn what IP addresses reveal and how IP lookup works.
-</div>
-
-</div>
-
-</a>
-
-
-</div>
-
-</section>
-
-
-<footer class="footer">
-
-<div>
-
-<a href="/tools.html">Tools</a> ·
-<a href="/games.html">Games</a> ·
-<a href="/guides.html">Guides</a> ·
-<a href="/sitemap.xml">Sitemap</a>
-
-</div>
-
-<div style="margin-top:8px">
-
-© <span id="year"></span> InstantQR.io
-
-</div>
-
-</footer>
-
-</main>
-
-<script>
-
-document.getElementById('year').textContent=new Date().getFullYear()
-
-const q=document.getElementById('q')
-const cat=document.getElementById('cat')
-const cards=[...document.querySelectorAll('.card')]
-const empty=document.getElementById('empty')
-
-function filter(){
-
-const search=(q.value||'').toLowerCase()
-const c=cat.value
-
-let shown=0
-
-cards.forEach(card=>{
-
-const tags=(card.dataset.tags||'')+card.innerText
-const okSearch=!search||tags.toLowerCase().includes(search)
-const okCat=c==="all"||card.dataset.cat===c
-
-const visible=okSearch&&okCat
-
-card.style.display=visible?"flex":"none"
-
-if(visible)shown++
-
-})
-
-empty.style.display=shown? "none":"block"
-
-}
-
-q.addEventListener("input",filter)
-cat.addEventListener("change",filter)
-
-</script>
+  <header class="topbar">
+    <div class="inner">
+      <a class="brandRow" href="/" aria-label="InstantQR Home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+        <span>InstantQR</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <a href="/tools.html">Tools</a>
+        <a href="/games.html">Games</a>
+        <a href="/guides.html">Guides</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section class="hero" aria-label="Guides hero">
+      <div class="heroCard">
+        <h1>Guides</h1>
+        <p class="sub">
+          Short, clear explainers. Learn the concept first, then use the right tool when you need it.
+        </p>
+
+        <div class="controls" aria-label="Guides search and filter">
+          <input id="q" class="input" placeholder="Search guides… (e.g., whois)" autocomplete="off">
+          <select id="cat" class="select" aria-label="Filter guides category">
+            <option value="all" selected>All categories</option>
+            <option value="domains">Domains</option>
+            <option value="network">Network</option>
+            <option value="security">Security</option>
+          </select>
+        </div>
+
+        <div class="empty" id="empty" role="status" aria-live="polite">
+          No results. Try: “whois”, “domain”.
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Guides grid">
+      <div class="grid" id="grid">
+
+        <!-- ✅ ONLY GUIDE: WHOIS -->
+        <a class="card"
+           href="/guides/what-is-whois-lookup.html"
+           data-cat="domains"
+           data-tags="whois lookup domain owner registration registrar privacy rdap">
+
+          <div class="icon">🔎</div>
+
+          <div style="min-width:0; flex:1;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+              <div class="title">What is WHOIS Lookup?</div>
+              <div class="badge">Domains</div>
+            </div>
+            <div class="desc">
+              Learn what WHOIS is, how it works today, what domain privacy means, and when it helps.
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <footer class="footer" aria-label="Footer">
+      <div>
+        © <span id="year"></span> InstantQR.io ·
+        <a href="/tools.html">Tools</a> ·
+        <a href="/games.html">Games</a> ·
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const q = document.getElementById('q');
+    const cat = document.getElementById('cat');
+    const cards = Array.from(document.querySelectorAll('#grid .card'));
+    const empty = document.getElementById('empty');
+
+    function filter(){
+      const query = (q.value || '').trim().toLowerCase();
+      const c = cat.value || 'all';
+      let shown = 0;
+
+      for(const el of cards){
+        const tags = ((el.getAttribute('data-tags') || '') + ' ' + (el.innerText || '')).toLowerCase();
+        const okQ = !query || tags.includes(query);
+        const okC = (c === 'all') || (el.getAttribute('data-cat') === c);
+        const visible = okQ && okC;
+        el.style.display = visible ? 'flex' : 'none';
+        if(visible) shown++;
+      }
+
+      empty.style.display = (shown === 0) ? 'block' : 'none';
+    }
+
+    q.addEventListener('input', filter);
+    cat.addEventListener('change', filter);
+
+    // Support /guides.html?q=whois
+    const params = new URLSearchParams(location.search);
+    const qs = params.get('q');
+    if(qs){ q.value = qs; }
+    filter();
+  </script>
 
 </body>
 </html>
