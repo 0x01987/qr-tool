@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>What Is JSON Formatting? | InstantQR.io</title>
+  <meta name="description" content="Learn what JSON formatting is, why it matters, and how pretty-printing and validating JSON helps developers debug data faster." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/what-is-json-formatting.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="What Is JSON Formatting? | InstantQR.io" />
+  <meta property="og:description" content="Learn what JSON formatting is, why it matters, and how pretty-printing and validating JSON helps developers debug data faster." />
+  <meta property="og:url" content="https://instantqr.io/what-is-json-formatting.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Is JSON Formatting? | InstantQR.io" />
+  <meta name="twitter:description" content="Learn what JSON formatting is, why it matters, and how pretty-printing and validating JSON helps developers debug data faster." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <meta name="theme-color" content="#0b0f19" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+
+  <style>
+    :root{
+      --bg:#0b1220; --panel:rgba(255,255,255,.05); --panel-2:rgba(255,255,255,.04);
+      --text:#e7eefc; --muted:#a9b7d6; --brand:#69a6ff; --brand-2:#8db9ff;
+      --ok:#19c37d; --warn:#ffcc66; --border:rgba(255,255,255,.10);
+      --shadow:0 14px 40px rgba(0,0,0,.38); --radius:18px; --radius-lg:24px;
+      --max:1120px; --focus:0 0 0 3px rgba(105,166,255,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.12), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.10), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none} a:hover{text-decoration:underline} img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:20px}
+    .skip{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip:focus{left:12px;top:12px;width:auto;height:auto;padding:10px 12px;border-radius:12px;background:#0f1728;border:1px solid var(--border);box-shadow:var(--shadow);z-index:9999}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
+    .topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:rgba(7,11,20,.58);border-bottom:1px solid var(--border)}
+    .topbar .inner{max-width:var(--max);margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .brandRow{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px} .brandRow img{height:34px;width:auto}
+    nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+    nav a{color:var(--muted);font-size:14px;padding:8px 10px;border-radius:12px}
+    nav a:hover{color:var(--text);background:rgba(255,255,255,.06);text-decoration:none}
+    .cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;border-radius:999px;font-weight:700;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--text);cursor:pointer;transition:transform .12s ease, filter .12s ease, background .12s ease;white-space:nowrap;user-select:none}
+    .cta:hover{transform:translateY(-1px);text-decoration:none} .cta.primary{border:0;background:linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));box-shadow:0 14px 28px rgba(105,166,255,.22)} .cta.primary:hover{filter:brightness(1.06)} .cta.ghost:hover{background:rgba(255,255,255,.10)}
+    .hero{padding:34px 0 10px}
+    .heroCard{border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .heroCard:before{content:"";position:absolute;inset:-2px;background:radial-gradient(780px 260px at 18% 18%, rgba(105,166,255,.18), transparent 62%), radial-gradient(520px 220px at 82% 40%, rgba(25,195,125,.10), transparent 55%);pointer-events:none}
+    .heroCard > *{position:relative}
+    .pill{display:inline-flex;align-items:center;gap:8px;width:fit-content;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);color:var(--muted);font-size:13px}
+    h1{margin:14px 0 10px;font-size:clamp(30px, 4vw, 46px);line-height:1.05;letter-spacing:-.7px}
+    .sub{margin:0 0 18px;max-width:72ch;color:var(--muted);font-size:16px}
+    .heroActions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .contentGrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;margin-top:18px}
+    .article,.tocCard,.faq,.card{border:1px solid var(--border);background:var(--panel);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .article{padding:22px} .tocCard{position:sticky;top:88px;padding:16px;height:fit-content;background:linear-gradient(180deg, rgba(15,26,46,.75), rgba(15,26,46,.48))}
+    .tocTitle{font-size:15px;font-weight:800;margin:0 0 10px} .tocList{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+    .tocList a{color:var(--muted);font-size:14px;padding:8px 10px;border-radius:12px;display:block} .tocList a:hover{color:var(--text);background:rgba(255,255,255,.06);text-decoration:none}
+    .section{margin-top:26px} .section:first-child{margin-top:0}
+    h2{margin:0 0 10px;font-size:28px;line-height:1.15;letter-spacing:-.35px} h3{margin:18px 0 8px;font-size:20px;line-height:1.2;letter-spacing:-.2px}
+    p{margin:0 0 14px;color:var(--muted)} ul,ol{margin:0 0 16px 20px;color:var(--muted)} li{margin:6px 0} strong{color:var(--text)}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);padding:2px 6px;border-radius:8px;color:var(--text);font-size:.95em}
+    .steps{display:grid;gap:12px;margin:14px 0 16px} .step{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--border);border-radius:16px;padding:14px;background:rgba(255,255,255,.03)}
+    .stepNum{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;flex:0 0 auto;background:rgba(105,166,255,.14);border:1px solid rgba(255,255,255,.10);font-weight:800;color:var(--brand-2)}
+    .step h3{margin:0 0 6px;font-size:16px} .step p{margin:0}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 16px}
+    .card{padding:16px;background:var(--panel-2)} .card h3{margin:0 0 6px;font-size:16px} .card p{margin:0;font-size:14px}
+    .faq{padding:18px;margin-top:26px} details{border-top:1px solid rgba(255,255,255,.10);padding:12px 0} details:first-child{border-top:0;padding-top:0} summary{cursor:pointer;font-weight:800;list-style:none} summary::-webkit-details-marker{display:none} .faq p{margin:8px 0 0}
+    .related{margin-top:20px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .related a{display:block;padding:16px;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.04);transition:transform .12s ease, background .12s ease, border-color .12s ease}
+    .related a:hover{transform:translateY(-2px);text-decoration:none;background:rgba(255,255,255,.06);border-color:rgba(105,166,255,.35)} .related strong{display:block;margin-bottom:6px} .related span{color:var(--muted);font-size:14px;line-height:1.5}
+    .footer{margin-top:26px;padding:18px 0 36px;border-top:1px solid rgba(255,255,255,.10);color:var(--muted);font-size:13px}
+    .footRow{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap} .footerLinks{display:flex;flex-direction:column;gap:10px} .footerLinks a{color:var(--muted)} .footerLinks a:hover{color:var(--text);text-decoration:none} .small{font-size:12px;color:rgba(233,238,252,.55)}
+    @media (max-width: 980px){.contentGrid{grid-template-columns:1fr} .tocCard{position:static} nav{display:none} .grid2{grid-template-columns:1fr}}
+    @media (max-width: 640px){.heroCard,.article,.tocCard,.faq{padding:18px} .related{grid-template-columns:1fr} .cta{width:100%} .heroActions .cta{flex:1}}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"What Is JSON Formatting?",
+    "description":"Learn what JSON formatting is, why it matters, and how pretty-printing and validating JSON helps developers debug data faster.",
+    "author":{"@type":"Organization","name":"InstantQR"},
+    "publisher":{"@type":"Organization","name":"InstantQR","logo":{"@type":"ImageObject","url":"https://instantqr.io/assets/instantqr-logo.svg"}},
+    "mainEntityOfPage":"https://instantqr.io/what-is-json-formatting.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"What Is JSON Formatting?","item":"https://instantqr.io/what-is-json-formatting.html"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type": "Question", "name": "What is JSON formatting?", "acceptedAnswer": {"@type": "Answer", "text": "It is organizing JSON with indentation and structure so it is easier to read."}},
+      {"@type": "Question", "name": "Does formatting change the data?", "acceptedAnswer": {"@type": "Answer", "text": "Usually no. It mainly changes presentation, not meaning."}},
+      {"@type": "Question", "name": "Why use a JSON formatter?", "acceptedAnswer": {"@type": "Answer", "text": "It helps you read, debug, validate, and clean up JSON more quickly."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="inner">
+      <a class="brandRow" href="/" aria-label="InstantQR Home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+        <span>InstantQR</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="/tools.html">All Tools</a>
+        <a href="/games.html">Games</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <a class="cta primary" href="/tools.html">Explore Tools →</a>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero" aria-label="Hero">
+      <div class="heroCard">
+        <div class="pill">🧰 Dev Guide • {} JSON Basics • ✅ Readable Data</div>
+        <h1>What Is JSON Formatting?</h1>
+        <p class="sub">JSON formatting is the process of organizing JSON data so it is easier to read and work with. This usually means adding indentation, line breaks, and consistent structure so nested objects and arrays are clear at a glance.</p>
+        <div class="heroActions">
+          <a class="cta primary" href="/tools.html">Browse Tools</a>
+          <a class="cta ghost" href="#guide">Read Guide</a>
+          <a class="cta ghost" href="#faq">FAQ</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="contentGrid">
+      <article class="article">
+        <section class="section" id="guide">
+          <section class="section" id="why-formatting-matters">
+            <h2>Why formatting matters</h2>
+            <p>Raw JSON can be hard to read if it is all on one line.</p>
+            <p>Formatted JSON makes debugging, reviewing API responses, and spotting errors much easier.</p>
+          </section>
+          <section class="section" id="common-tasks">
+            <h2>Common tasks</h2>
+            <ul>
+              <li>Pretty-printing for readability</li>
+              <li>Minifying to reduce size</li>
+              <li>Validating structure</li>
+              <li>Checking for missing commas, quotes, or brackets</li>
+            </ul>
+          </section>
+          <section class="section" id="when-developers-use-it">
+            <h2>When developers use it</h2>
+            <ul>
+              <li>Reviewing API responses</li>
+              <li>Editing config files</li>
+              <li>Debugging front-end and back-end apps</li>
+              <li>Sharing readable examples in documentation</li>
+            </ul>
+          </section>
+          <section class="section" id="good-workflow">
+            <h2>Good workflow</h2>
+            <p>Paste the JSON into a formatter or validator.</p>
+            <p>Read the structure clearly, then fix any syntax issues before using it in production.</p>
+          </section>
+
+        <section class="faq" id="faq" aria-label="FAQ">
+          <h2 style="margin-top:0">FAQ</h2>
+                    <details open>
+            <summary>What is JSON formatting?</summary>
+            <p>It is organizing JSON with indentation and structure so it is easier to read.</p>
+          </details>
+          <details>
+            <summary>Does formatting change the data?</summary>
+            <p>Usually no. It mainly changes presentation, not meaning.</p>
+          </details>
+          <details>
+            <summary>Why use a JSON formatter?</summary>
+            <p>It helps you read, debug, validate, and clean up JSON more quickly.</p>
+          </details>
+        </section>
+
+        <section class="section" id="related">
+          <h2>Related pages</h2>
+          <div class="related">
+                        <a href="/what-is-base64.html">
+              <strong>What Is Base64?</strong>
+              <span>Understand common encoding basics.</span>
+            </a>
+            <a href="/tools.html">
+              <strong>Tools</strong>
+              <span>Browse developer-friendly tools.</span>
+            </a>
+          </div>
+        </section>
+      </article>
+
+      <aside class="tocCard" aria-label="Table of contents">
+        <div class="tocTitle">On this page</div>
+        <ul class="tocList">
+          <li><a href="#why-formatting-matters">Why formatting matters</a></li>
+          <li><a href="#common-tasks">Common tasks</a></li>
+          <li><a href="#when-developers-use-it">When developers use it</a></li>
+          <li><a href="#good-workflow">Good workflow</a></li>
+        </ul>
+        <div style="margin-top:14px;">
+          <a class="cta primary" href="/tools.html" style="width:100%;">Browse Tools</a>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footRow">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" style="height:28px;width:auto;" />
+            <strong style="color:var(--text);font-size:16px;">InstantQR</strong>
+          </div>
+          <div class="small">InstantQR.io provides free privacy-first web tools for QR codes, crypto, security, time, conversions, SEO, and more.</div>
+          <div class="small" style="margin-top:8px;">© <span id="year"></span> InstantQR.io. All rights reserved.</div>
+        </div>
+        <div class="footerLinks">
+          <div>
+            <a href="/">Home</a> ·
+            <a href="/tools.html">All Tools</a> ·
+            <a href="/games.html">Games</a>
+          </div>
+          <div>
+            <a href="/about.html">About</a> ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/terms.html">Terms</a> ·
+            <a href="/contact.html">Contact</a> ·
+            <a href="/sitemap.xml">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
