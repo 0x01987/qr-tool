@@ -7,7 +7,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
   <!-- Google AdSense -->
@@ -18,355 +18,386 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>What Is WHOIS Lookup? (RDAP Explained + Examples) | InstantQR Guides</title>
-  <meta name="description" content="Learn what WHOIS lookup is, what RDAP means, what data you can see (registrar, dates, status, nameservers), and how to use WHOIS for DNS troubleshooting and security checks." />
+  <title>What Is WHOIS Lookup? (Simple Guide) | InstantQR</title>
+  <meta name="description" content="WHOIS lookup explains who registered a domain, the registrar, dates, and sometimes contact details. Learn how WHOIS works, what privacy means, and when to use it." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://instantqr.io/guides/what-is-whois-lookup.html" />
-  <link rel="icon" href="/assets/instantqr-logo.svg" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="What Is WHOIS Lookup? (RDAP Explained + Examples) | InstantQR Guides" />
-  <meta property="og:description" content="A simple, practical guide to WHOIS/RDAP: registrar, domain status, dates, nameservers, and real troubleshooting use cases." />
   <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="What Is WHOIS Lookup? (Simple Guide)" />
+  <meta property="og:description" content="Learn what WHOIS lookup is, what it shows, and how domain privacy works." />
   <meta property="og:url" content="https://instantqr.io/guides/what-is-whois-lookup.html" />
 
-  <!-- Twitter/X -->
-  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <meta name="theme-color" content="#0b0f19" />
 
-  <!-- Breadcrumb structured data -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"BreadcrumbList",
-    "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
-      {"@type":"ListItem","position":2,"name":"Guides","item":"https://instantqr.io/guides.html"},
-      {"@type":"ListItem","position":3,"name":"What Is WHOIS Lookup?","item":"https://instantqr.io/guides/what-is-whois-lookup.html"}
-    ]
-  }
-  </script>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --brand:#69a6ff;
+      --ok:#19c37d;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 22px;
+      --max: 980px;
+      --focus: 0 0 0 3px rgba(105,166,255,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a{color:inherit}
+    a:hover{opacity:.95}
+    :focus-visible{ outline:none; box-shadow: var(--focus); border-radius: 12px; }
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:20px}
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 11, 20, .55);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar .inner{
+      max-width:1120px;
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brandRow{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+      text-decoration:none;
+      color: var(--text);
+    }
+    .brandRow img{display:block; height:34px; width:auto}
+    nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+      text-decoration:none;
+    }
+    nav a:hover{
+      color:var(--text);
+      background: rgba(255,255,255,.06);
+    }
+
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius: 999px;
+      font-weight:700;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      gap:8px;
+      white-space:nowrap;
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease, background .12s ease;
+    }
+    .cta:hover{ transform: translateY(-1px); text-decoration:none; }
+    .cta.primary{
+      border: 0;
+      background: linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
+      box-shadow: 0 14px 28px rgba(105,166,255,.22);
+    }
+    .cta.primary:hover{ filter:brightness(1.06); }
+    .cta.ghost:hover{ background: rgba(255,255,255,.10); }
+
+    /* Article */
+    .card{
+      margin-top: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 20%, rgba(105,166,255,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(25,195,125,.14), transparent 55%);
+      pointer-events:none;
+    }
+    .card > *{position:relative}
+
+    .crumbs{
+      font-size: 13px;
+      color: rgba(233,238,252,.70);
+      margin-bottom: 10px;
+    }
+    .crumbs a{color: rgba(233,238,252,.85); text-decoration:none}
+    .crumbs a:hover{text-decoration:underline}
+
+    h1{
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 40px);
+      letter-spacing: -.6px;
+      line-height: 1.08;
+    }
+    .lede{
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 75ch;
+      font-size: 16px;
+    }
+
+    .metaRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin: 10px 0 6px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(233,238,252,.78);
+      font-size:13px;
+      width: fit-content;
+    }
+
+    .content{
+      margin-top: 14px;
+      line-height: 1.85;
+      color: rgba(233,238,252,.92);
+      font-size: 16px;
+    }
+    .content h2{
+      margin: 18px 0 8px;
+      font-size: 20px;
+      letter-spacing: -.2px;
+    }
+    .content ul{
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: rgba(233,238,252,.88);
+    }
+    .content li{margin: 6px 0}
+    .note{
+      margin-top: 12px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      padding: 14px;
+      color: rgba(233,238,252,.88);
+    }
+
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 14px;
+    }
+
+    .faq{
+      margin-top: 16px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding: 16px;
+    }
+    details{border-top: 1px solid rgba(255,255,255,.10); padding: 12px 0;}
+    details:first-child{border-top:0; padding-top:0}
+    summary{cursor:pointer; font-weight:800; list-style:none;}
+    summary::-webkit-details-marker{display:none}
+    .faq p{margin:8px 0 0; color:var(--muted); line-height:1.7}
+
+    .footer{
+      margin-top: 22px;
+      padding: 18px 0 36px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footRow{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+    .small{font-size:12px; color:rgba(233,238,252,.55)}
+
+    @media (max-width: 980px){
+      nav{display:none}
+    }
+    @media (max-width: 560px){
+      .cta{width:100%}
+    }
+  </style>
 
   <!-- Article structured data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"Article",
-    "headline":"What Is WHOIS Lookup? (RDAP Explained + Examples)",
-    "description":"Learn what WHOIS lookup is, what RDAP means, what data you can see, and how to use WHOIS for troubleshooting and basic security checks.",
+    "headline":"What Is WHOIS Lookup? (Simple Guide)",
+    "description":"Learn what WHOIS lookup is, what it shows, how domain privacy works, and when to use it.",
     "author":{"@type":"Organization","name":"InstantQR"},
-    "publisher":{"@type":"Organization","name":"InstantQR"},
-    "mainEntityOfPage":{"@type":"WebPage","@id":"https://instantqr.io/guides/what-is-whois-lookup.html"},
-    "datePublished":"2026-03-05",
-    "dateModified":"2026-03-05"
+    "publisher":{"@type":"Organization","name":"InstantQR","logo":{"@type":"ImageObject","url":"https://instantqr.io/assets/instantqr-logo.svg"}},
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://instantqr.io/guides/what-is-whois-lookup.html"}
   }
   </script>
 
-  <!-- FAQ structured data -->
+  <!-- FAQ schema for this guide -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"FAQPage",
     "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is a WHOIS lookup?",
-        "acceptedAnswer":{"@type":"Answer","text":"A WHOIS lookup shows publicly available domain registration details such as the registrar, registration and expiration dates, domain status codes, and nameservers. Many registries now provide this data using RDAP, the modern replacement for classic WHOIS."}
-      },
-      {
-        "@type":"Question",
-        "name":"What is RDAP?",
-        "acceptedAnswer":{"@type":"Answer","text":"RDAP stands for Registration Data Access Protocol. It provides structured JSON-based registration data for domains and IP resources and is designed to replace legacy WHOIS."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why is the owner information hidden in WHOIS?",
-        "acceptedAnswer":{"@type":"Answer","text":"Many registries and registrars redact personal details for privacy and legal reasons. Even when registrant information is hidden, you can still often see registrar info, dates, status, and nameservers."}
-      },
-      {
-        "@type":"Question",
-        "name":"How do I check who owns a domain?",
-        "acceptedAnswer":{"@type":"Answer","text":"Use WHOIS/RDAP to view the registrar and registration data. For many domains, personal owner details may be redacted, but you can usually see registrar and technical details."}
-      }
+      {"@type":"Question","name":"What does a WHOIS lookup show?","acceptedAnswer":{"@type":"Answer","text":"It typically shows the registrar, registration dates, name servers, and sometimes registrant contact details (often hidden by privacy services)."}},
+      {"@type":"Question","name":"Is WHOIS lookup legal?","acceptedAnswer":{"@type":"Answer","text":"Yes. WHOIS is a public directory for domain registration data, although privacy rules and available fields vary by registrar and region."}},
+      {"@type":"Question","name":"Why is WHOIS data sometimes hidden?","acceptedAnswer":{"@type":"Answer","text":"Many domains use privacy or proxy services to reduce spam and protect personal contact details. You may still see registrar and technical details."}}
     ]
   }
   </script>
-
-  <style>
-    :root{
-      --bg:#0b1220;
-      --panel:rgba(255,255,255,.06);
-      --panel2:rgba(0,0,0,.22);
-      --line:rgba(255,255,255,.10);
-      --text:#eaf2ff;
-      --muted:rgba(234,242,255,.72);
-      --brand:#1f6feb;
-      --good:#2ecc71;
-      --warn:#f39c12;
-      --bad:#ff4757;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      color:var(--text);
-      background:radial-gradient(1200px 600px at 50% -10%, #152b55 0%, var(--bg) 60%);
-    }
-    .wrap{max-width:1100px;margin:0 auto;padding:18px;}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;}
-    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);}
-    .brand img{width:30px;height:30px}
-    .brand span{font-weight:800;letter-spacing:.2px}
-    nav a{color:var(--muted);text-decoration:none;margin-left:12px;font-size:14px}
-    nav a:hover{color:var(--text)}
-
-    .grid{display:grid;grid-template-columns: 1.08fr .92fr; gap:16px; align-items:start;}
-    @media (max-width: 900px){ .grid{grid-template-columns:1fr;} }
-
-    .card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:14px;
-      box-shadow:var(--shadow);
-    }
-
-    .crumbs{font-size:13px;color:rgba(234,242,255,.62);margin-bottom:10px}
-    .crumbs a{color:rgba(234,242,255,.78);text-decoration:none}
-    .crumbs a:hover{text-decoration:underline}
-
-    h1{margin:0 0 6px;font-size:24px}
-    .sub{margin:0 0 12px;color:var(--muted);line-height:1.6}
-    .meta{display:flex;gap:10px;flex-wrap:wrap;color:rgba(234,242,255,.62);font-size:13px;margin:10px 0 0}
-    .pill{
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      border-radius:999px;
-      padding:6px 10px;
-    }
-
-    .toc a{color:var(--text);text-decoration:none}
-    .toc a:hover{text-decoration:underline}
-
-    h2{margin:16px 0 8px;font-size:18px}
-    p{margin:8px 0;color:var(--muted);line-height:1.7}
-    ul{margin:8px 0 8px 18px;color:var(--muted);line-height:1.7}
-    li{margin:6px 0}
-    code{
-      color:var(--text);
-      background:rgba(0,0,0,.18);
-      border:1px solid var(--line);
-      padding:2px 6px;
-      border-radius:8px;
-      font-size: 13px;
-    }
-    .callout{
-      margin-top:12px;
-      border:1px solid rgba(46,204,113,.28);
-      background:linear-gradient(135deg, rgba(46,204,113,.12), rgba(31,111,235,.12));
-      border-radius:14px;
-      padding:12px;
-      color:var(--muted);
-      line-height:1.6;
-    }
-    .callout b{color:var(--text)}
-    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .btn{
-      appearance:none;
-      border:1px solid var(--line);
-      border-radius:12px;
-      padding:10px 12px;
-      cursor:pointer;
-      font-weight:800;
-      color:var(--text);
-      background:rgba(255,255,255,.08);
-      text-decoration:none;
-      display:inline-block;
-    }
-    .btn.primary{background:var(--brand);border-color:rgba(31,111,235,.55)}
-    .btn:hover{filter:brightness(1.06)}
-
-    details{
-      margin-top:12px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.16);
-      border-radius:12px;
-      padding:10px 12px;
-    }
-    summary{cursor:pointer;font-weight:900;color:var(--text)}
-    .faq p{margin:6px 0}
-
-    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .chip{
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:7px 10px;
-      background:rgba(255,255,255,.06);
-      font-size:13px;
-      color:var(--muted);
-      text-decoration:none;
-    }
-    .chip:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
-
-    .footerLinks{margin-top:14px;font-size:14px;color:var(--muted)}
-    .footerLinks a{color:var(--muted);text-decoration:none}
-    .footerLinks a:hover{color:var(--text)}
-    .hr{height:1px;background:var(--line);margin:14px 0}
-
-    .asideTitle{margin:0 0 10px;font-size:18px}
-    .asideList{margin:0;padding-left:18px;color:var(--muted);line-height:1.7}
-    .asideList a{color:var(--text);text-decoration:none}
-    .asideList a:hover{text-decoration:underline}
-    .note{font-size:13px;color:rgba(234,242,255,.62);line-height:1.6;margin-top:8px}
-  </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <!-- Header -->
-    <header>
-      <a class="brand" href="/">
-        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+  <header class="topbar">
+    <div class="inner">
+      <a class="brandRow" href="/" aria-label="InstantQR Home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
         <span>InstantQR</span>
       </a>
-      <nav>
-        <a href="/tools.html">Tools</a>
+
+      <nav aria-label="Primary">
+        <a href="/tools.html">All Tools</a>
         <a href="/games.html">Games</a>
-        <a href="/guides.html" style="color:var(--text);font-weight:800;">Guides</a>
-        <a href="/privacy.html">Privacy</a>
+        <a href="/guides.html">Guides</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
       </nav>
-    </header>
 
-    <div class="grid">
-      <!-- Main article -->
-      <article class="card">
-        <div class="crumbs">
-          <a href="/">Home</a> › <a href="/guides.html">Guides</a> › <span>WHOIS Lookup</span>
+      <a class="cta primary" href="/guides.html">More Guides →</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="card" aria-label="WHOIS guide">
+      <div class="crumbs">
+        <a href="/">Home</a> / <a href="/guides.html">Guides</a> / WHOIS Lookup
+      </div>
+
+      <h1>What is WHOIS Lookup?</h1>
+      <p class="lede">
+        A <strong>WHOIS lookup</strong> is a way to view publicly available domain registration information —
+        like which registrar manages a domain, when it was created, and which name servers it uses.
+        It’s commonly used for <strong>domain research</strong>, <strong>security investigations</strong>, and <strong>ownership context</strong>.
+      </p>
+
+      <div class="metaRow">
+        <div class="pill">📚 Guide</div>
+        <div class="pill">🌐 Domains</div>
+        <div class="pill">⏱️ 2–3 min read</div>
+      </div>
+
+      <div class="ctaRow">
+        <a class="cta primary" href="/dns-lookup.html">Use DNS Lookup</a>
+        <a class="cta ghost" href="/ip-lookup.html">Use IP Lookup</a>
+        <a class="cta ghost" href="/guides.html">Back to Guides</a>
+      </div>
+
+      <div class="content">
+        <h2>What does a WHOIS lookup show?</h2>
+        <p>Depending on the domain and registrar, WHOIS results can include:</p>
+        <ul>
+          <li><strong>Registrar</strong> (the company managing the domain registration)</li>
+          <li><strong>Creation date</strong> and <strong>expiration date</strong></li>
+          <li><strong>Name servers</strong> (where DNS is hosted)</li>
+          <li><strong>Domain status</strong> (locks, transfer restrictions, etc.)</li>
+          <li><strong>Registrant contact info</strong> (often hidden behind privacy/proxy services)</li>
+        </ul>
+
+        <div class="note">
+          <strong>Note:</strong> Many domains use privacy protection, so you may not see personal email/phone/address.
+          That’s normal and usually a good thing.
         </div>
 
-        <h1>What Is WHOIS Lookup?</h1>
-        <p class="sub">
-          WHOIS lookup helps you understand who manages a domain and how it’s configured. You’ll commonly see the
-          <b>registrar</b>, key <b>dates</b>, <b>status codes</b>, and <b>nameservers</b>. Today, many registries provide this data via
-          <b>RDAP</b> (a modern replacement for classic WHOIS).
+        <h2>Why people use WHOIS</h2>
+        <ul>
+          <li><strong>Security checks:</strong> spot suspicious domains or quick domain “spin-ups”</li>
+          <li><strong>Ownership context:</strong> identify a registrar or business behind a domain</li>
+          <li><strong>Brand protection:</strong> monitor look-alike domains and typo-squats</li>
+          <li><strong>Admin troubleshooting:</strong> verify name servers, status locks, or renewal dates</li>
+        </ul>
+
+        <h2>WHOIS vs DNS Lookup (quick difference)</h2>
+        <ul>
+          <li><strong>WHOIS</strong> = registration details (registrar, dates, sometimes contact)</li>
+          <li><strong>DNS Lookup</strong> = technical records that tell the internet where a domain points (A/AAAA/CNAME/MX/TXT, etc.)</li>
+        </ul>
+
+        <p>
+          If your goal is to see where a domain “points” or to check mail records, use
+          <a href="/dns-lookup.html">DNS Lookup</a>.
+          If your goal is to understand domain registration context, WHOIS is the right concept.
         </p>
 
-        <div class="meta">
-          <span class="pill">Updated: <b>Mar 5, 2026</b></span>
-          <span class="pill">Reading time: <b>4–6 min</b></span>
-          <span class="pill">Category: <b>Network</b></span>
-        </div>
+        <h2>What is “domain privacy”?</h2>
+        <p>
+          Domain privacy (privacy/proxy registration) is a service that replaces personal contact data
+          with proxy contact info. It reduces spam and helps protect identity.
+        </p>
+      </div>
 
-        <div class="callout">
-          <b>Try it now:</b> Use the InstantQR WHOIS tool to check a domain in seconds.
-          <div class="btnRow">
-            <a class="btn primary" href="/whois-lookup.html">Open WHOIS Lookup</a>
-            <a class="btn" href="/dns-lookup.html">DNS Lookup</a>
+      <section class="faq" aria-label="WHOIS FAQ">
+        <details open>
+          <summary>What does a WHOIS lookup show?</summary>
+          <p>Registrar, registration dates, name servers, and sometimes registrant contact details (often hidden by privacy services).</p>
+        </details>
+
+        <details>
+          <summary>Is WHOIS lookup legal?</summary>
+          <p>Yes. WHOIS is a public directory for domain registration data, but fields vary by registrar and region.</p>
+        </details>
+
+        <details>
+          <summary>Why is WHOIS data sometimes hidden?</summary>
+          <p>Privacy/proxy registration is common to reduce spam and protect personal contact details.</p>
+        </details>
+      </section>
+    </article>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footRow">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" style="height:28px;width:auto;display:block;" />
+            <strong style="color:var(--text);font-size:16px;">InstantQR</strong>
           </div>
+          <div class="small">Fast, simple tools + guides. Privacy-first.</div>
+          <div class="small" style="margin-top:8px;">© <span id="year"></span> InstantQR.io</div>
         </div>
 
-        <h2 id="toc">Table of contents</h2>
-        <ul class="toc">
-          <li><a href="#what">What WHOIS shows</a></li>
-          <li><a href="#rdap">WHOIS vs RDAP</a></li>
-          <li><a href="#fields">Key fields to look for</a></li>
-          <li><a href="#use-cases">Common use cases</a></li>
-          <li><a href="#status">Common domain status codes</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-
-        <h2 id="what">What WHOIS shows</h2>
-        <p>
-          A WHOIS lookup is like a public “registration record” for a domain. Depending on the domain and registry privacy rules,
-          you may see:
-        </p>
-        <ul>
-          <li><b>Registrar</b> (where the domain is registered)</li>
-          <li><b>Registration date</b> (when it was created)</li>
-          <li><b>Expiration date</b> (when it needs renewal)</li>
-          <li><b>Domain status</b> codes (locks/restrictions)</li>
-          <li><b>Nameservers</b> (where DNS is hosted)</li>
-          <li><b>Contact data</b> (often redacted)</li>
-        </ul>
-        <p>
-          On many modern domains, personal owner details are hidden, but technical details still help you troubleshoot and verify legitimacy.
-        </p>
-
-        <h2 id="rdap">WHOIS vs RDAP</h2>
-        <p>
-          Classic WHOIS was a text-based protocol. RDAP (Registration Data Access Protocol) is a modern API that returns structured JSON.
-          That structure makes it easier for tools to display consistent results and parse fields like registrar, events, and nameservers.
-        </p>
-        <p>
-          InstantQR uses RDAP where available because it’s cleaner, more consistent, and easier to render quickly in the browser.
-        </p>
-
-        <h2 id="fields">Key fields to look for</h2>
-        <ul>
-          <li><b>Registrar:</b> confirms who manages the domain registration.</li>
-          <li><b>Expires:</b> if a domain is near expiration, it may be at risk of downtime or takeover.</li>
-          <li><b>Nameservers:</b> tells you where DNS is hosted (often Cloudflare, Route 53, etc.).</li>
-          <li><b>Status:</b> indicates locks (transfer/update restrictions) or lifecycle states like deletion.</li>
-        </ul>
-
-        <h2 id="use-cases">Common use cases</h2>
-        <ul>
-          <li><b>Domain transfer prep:</b> check the registrar and whether the domain is locked.</li>
-          <li><b>DNS troubleshooting:</b> verify nameservers match where you expect DNS to be managed.</li>
-          <li><b>Security checks:</b> examine suspicious domains (newly registered + odd nameservers can be a signal).</li>
-          <li><b>Ops hygiene:</b> monitor expiration dates for business domains.</li>
-        </ul>
-
-        <h2 id="status">Common domain status codes</h2>
-        <p>
-          Status codes can look confusing, but a few are very common:
-        </p>
-        <ul>
-          <li><code>clientTransferProhibited</code> — transfer lock enabled (often a good thing).</li>
-          <li><code>clientUpdateProhibited</code> — updates restricted.</li>
-          <li><code>pendingDelete</code> — domain is pending deletion (high risk).</li>
-        </ul>
-
-        <h2 id="faq">FAQ</h2>
-
-        <details class="faq">
-          <summary>Can WHOIS show the domain owner?</summary>
-          <p>
-            Sometimes, but many registries redact personal information. You’ll usually still see registrar, dates, status, and nameservers.
-          </p>
-        </details>
-
-        <details class="faq">
-          <summary>What if WHOIS results look incomplete?</summary>
-          <p>
-            That’s often due to privacy redaction. Try validating DNS records too using <a href="/dns-lookup.html" style="color:var(--text);">DNS Lookup</a>.
-          </p>
-        </details>
-
-        <details class="faq">
-          <summary>Is WHOIS lookup safe to use?</summary>
-          <p>
-            Yes—WHOIS/RDAP returns public registration data. Avoid pasting private credentials anywhere. InstantQR does not require accounts.
-          </p>
-        </details>
-
-        <div class="hr"></div>
-
-        <div class="chips" aria-label="Related tools">
-          <a class="chip" href="/whois-lookup.html">WHOIS Lookup</a>
-          <a class="chip" href="/dns-lookup.html">DNS Lookup</a>
-          <a class="chip" href="/ip-lookup.html">IP Lookup</a>
-          <a class="chip" href="/internet-speed-test.html">Speed Test</a>
-          <a class="chip" href="/json-formatter.html">JSON Formatter</a>
-        </div>
-
-        <div class="footerLinks">
+        <div>
           <div style="margin-bottom:8px;">
-            <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
-            <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
-            <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
-            <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
-            <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+            <a href="/tools.html">Tools</a> ·
+            <a href="/games.html">Games</a> ·
+            <a href="/guides.html">Guides</a> ·
+            <a href="/sitemap.xml">Sitemap</a>
           </div>
           <div>
             <a href="/about.html">About</a> ·
@@ -375,33 +406,12 @@
             <a href="/contact.html">Contact</a>
           </div>
         </div>
-      </article>
+      </div>
+    </footer>
+  </main>
 
-      <!-- Sidebar -->
-      <aside class="card">
-        <h2 class="asideTitle">Recommended next guides</h2>
-        <ul class="asideList">
-          <li><a href="/guides/what-is-dns-lookup.html">What Is a DNS Lookup?</a></li>
-          <li><a href="/guides/dns-propagation-explained.html">DNS Propagation Explained</a></li>
-          <li><a href="/guides/how-to-create-wifi-qr-code.html">How to Create a WiFi QR Code</a></li>
-          <li><a href="/guides/how-to-generate-a-secure-password.html">How to Generate a Secure Password</a></li>
-        </ul>
-
-        <div class="hr"></div>
-
-        <h2 class="asideTitle">Related tools</h2>
-        <ul class="asideList">
-          <li><a href="/whois-lookup.html">WHOIS Lookup</a></li>
-          <li><a href="/dns-lookup.html">DNS Lookup</a></li>
-          <li><a href="/ip-lookup.html">IP Lookup</a></li>
-          <li><a href="/json-formatter.html">JSON Formatter</a></li>
-        </ul>
-
-        <p class="note">
-          Pro tip: add each new guide URL to your <code>sitemap.xml</code> to help indexing.
-        </p>
-      </aside>
-    </div>
-  </div>
+  <script defer>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
