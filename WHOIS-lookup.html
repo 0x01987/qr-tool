@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>WHOIS Lookup (Free Domain WHOIS & RDAP Search) | InstantQR</title>
+  <meta name="description" content="Free WHOIS lookup for any domain. Check registrar, registration dates, status, and nameservers using RDAP. Fast, privacy-first, runs in your browser." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/whois-lookup.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="WHOIS Lookup (Free Domain WHOIS & RDAP Search) | InstantQR" />
+  <meta property="og:description" content="Lookup domain ownership details: registrar, dates, status, nameservers. Free and fast." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://instantqr.io/whois-lookup.html" />
+
+  <!-- Twitter/X -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="WHOIS Lookup (Free Domain WHOIS & RDAP Search) | InstantQR" />
+  <meta name="twitter:description" content="Free WHOIS lookup for any domain — registrar, dates, status, nameservers." />
+
+  <!-- FAQ Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is a WHOIS lookup?",
+        "acceptedAnswer":{"@type":"Answer","text":"A WHOIS lookup shows public registration details for a domain (like registrar, registration/expiration dates, status codes, and nameservers). Many registries now provide this via RDAP, a modern replacement for classic WHOIS."}
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool store my searches?",
+        "acceptedAnswer":{"@type":"Answer","text":"No. Your input is processed in your browser. The lookup request is sent to a public RDAP endpoint to retrieve domain registration data. InstantQR does not store your queries."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why do some domains hide owner details?",
+        "acceptedAnswer":{"@type":"Answer","text":"Many registrars or registries redact personal data for privacy and legal reasons. You may still see registrar info, dates, status, and nameservers even when registrant details are hidden."}
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(0,0,0,.22);
+      --line:rgba(255,255,255,.10);
+      --text:#eaf2ff;
+      --muted:rgba(234,242,255,.72);
+      --brand:#1f6feb;
+      --good:#2ecc71;
+      --warn:#f39c12;
+      --bad:#ff4757;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      color:var(--text);
+      background:radial-gradient(1200px 600px at 50% -10%, #152b55 0%, var(--bg) 60%);
+    }
+    .wrap{max-width:1100px;margin:0 auto;padding:18px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);}
+    .brand img{width:30px;height:30px}
+    .brand span{font-weight:800;letter-spacing:.2px}
+    nav a{color:var(--muted);text-decoration:none;margin-left:12px;font-size:14px}
+    nav a:hover{color:var(--text)}
+
+    .grid{display:grid;grid-template-columns: 1.05fr .95fr; gap:16px; align-items:start;}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr;} }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+    h1{margin:0 0 6px;font-size:22px}
+    .sub{margin:0 0 12px;color:var(--muted);line-height:1.55}
+    .label{font-size:13px;color:var(--muted);margin:10px 0 6px}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    input{
+      width:100%;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.20);
+      color:var(--text);
+      outline:none;
+      font-size:16px;
+    }
+    input:focus{border-color:rgba(31,111,235,.55); box-shadow:0 0 0 3px rgba(31,111,235,.18);}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    button{
+      appearance:none;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-weight:700;
+      color:var(--text);
+      background:rgba(255,255,255,.08);
+    }
+    button.primary{background:var(--brand);border-color:rgba(31,111,235,.55)}
+    button:disabled{opacity:.6;cursor:not-allowed}
+    .pillbar{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 0}
+    .pill{
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:14px;
+    }
+    .pill span{color:var(--muted)}
+    .pill b{color:var(--text)}
+
+    .msg{
+      margin-top:10px;
+      border:1px solid var(--line);
+      background:var(--panel2);
+      border-radius:12px;
+      padding:10px 12px;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:14px;
+    }
+    .msg.good{border-color:rgba(46,204,113,.35)}
+    .msg.warn{border-color:rgba(243,156,18,.35)}
+    .msg.bad{border-color:rgba(255,71,87,.35)}
+    .msg b{color:var(--text)}
+    .small{font-size:13px;color:var(--muted);line-height:1.55}
+
+    .kv{margin-top:12px;display:grid;grid-template-columns: 1fr 1fr; gap:10px;}
+    @media (max-width: 520px){ .kv{grid-template-columns:1fr;} }
+    .kvc{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      background:rgba(0,0,0,.16);
+    }
+    .kvc .k{font-size:12px;color:var(--muted);margin-bottom:6px}
+    .kvc .v{font-weight:700; word-break:break-word}
+
+    .list{
+      margin-top:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.16);
+      border-radius:12px;
+      padding:10px 12px;
+    }
+    .list h2{margin:0 0 8px;font-size:15px}
+    .list ul{margin:0;padding-left:18px}
+    .list li{margin:6px 0;color:var(--muted);word-break:break-word}
+    .list code{color:var(--text)}
+
+    details{
+      margin-top:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.16);
+      border-radius:12px;
+      padding:10px 12px;
+    }
+    summary{cursor:pointer;font-weight:800}
+    pre{
+      margin:10px 0 0;
+      overflow:auto;
+      max-height:380px;
+      padding:10px;
+      border-radius:10px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.25);
+      color:rgba(234,242,255,.85);
+      font-size:12.5px;
+      line-height:1.45;
+    }
+
+    .footerLinks{margin-top:14px;font-size:14px;color:var(--muted)}
+    .footerLinks a{color:var(--muted);text-decoration:none}
+    .footerLinks a:hover{color:var(--text)}
+    .hr{height:1px;background:var(--line);margin:14px 0}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:7px 10px;
+      background:rgba(255,255,255,.06);
+      font-size:13px;
+      color:var(--muted);
+      text-decoration:none;
+    }
+    .chip:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <span>InstantQR</span>
+      </a>
+      <nav>
+        <a href="/tools.html">Tools</a>
+        <a href="/games.html">Games</a>
+        <a href="/privacy.html">Privacy</a>
+      </nav>
+    </header>
+
+    <div class="grid">
+      <!-- LEFT: Tool -->
+      <section class="card">
+        <h1>WHOIS Lookup (Domain Search)</h1>
+        <p class="sub">
+          Check public domain registration details like <b>registrar</b>, <b>status</b>, <b>registration/expiration</b>, and <b>nameservers</b>.
+          This tool uses <b>RDAP</b> (modern WHOIS).
+        </p>
+
+        <div class="label">Enter a domain</div>
+        <div class="row">
+          <input id="domain" inputmode="url" autocomplete="off" spellcheck="false" placeholder="example.com" aria-label="Domain input" />
+        </div>
+
+        <div class="btns">
+          <button class="primary" id="lookupBtn">Lookup</button>
+          <button id="clearBtn" type="button">Clear</button>
+          <button id="copyLinkBtn" type="button">Copy Share Link</button>
+        </div>
+
+        <div class="pillbar" aria-label="Quick info">
+          <div class="pill"><span>Status:</span> <b id="statusPill">—</b></div>
+          <div class="pill"><span>RDAP Source:</span> <b id="sourcePill">—</b></div>
+        </div>
+
+        <div id="message" class="msg" style="display:none;"></div>
+
+        <div class="kv" id="kv" style="display:none;">
+          <div class="kvc"><div class="k">Registrar</div><div class="v" id="registrar">—</div></div>
+          <div class="kvc"><div class="k">Domain Status</div><div class="v" id="domainStatus">—</div></div>
+          <div class="kvc"><div class="k">Registered</div><div class="v" id="registered">—</div></div>
+          <div class="kvc"><div class="k">Expires</div><div class="v" id="expires">—</div></div>
+        </div>
+
+        <div class="list" id="nsBox" style="display:none;">
+          <h2>Nameservers</h2>
+          <ul id="nsList"></ul>
+        </div>
+
+        <div class="list" id="eventsBox" style="display:none;">
+          <h2>Key Events</h2>
+          <ul id="eventsList"></ul>
+        </div>
+
+        <details id="rawBox" style="display:none;">
+          <summary>Raw RDAP JSON</summary>
+          <pre id="raw"></pre>
+        </details>
+
+        <div class="hr"></div>
+
+        <div class="small">
+          <b>Privacy note:</b> Some registries redact personal data. You may not see registrant name/email for many domains.
+          This tool is for domain diagnostics, ownership research, and configuration troubleshooting.
+        </div>
+
+        <div class="chips" aria-label="Related tools">
+          <a class="chip" href="/dns-lookup.html">DNS Lookup</a>
+          <a class="chip" href="/ip-lookup.html">IP Lookup</a>
+          <a class="chip" href="/internet-speed-test.html">Speed Test</a>
+          <a class="chip" href="/password-leak-checker.html">Password Leak Check</a>
+          <a class="chip" href="/json-formatter.html">JSON Formatter</a>
+        </div>
+
+        <div class="footerLinks">
+          <div style="margin-bottom:8px;">
+            <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+            <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
+            <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
+            <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
+            <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+          </div>
+          <div>
+            <a href="/about.html">About</a> ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/terms.html">Terms</a> ·
+            <a href="/contact.html">Contact</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: SEO Content -->
+      <aside class="card">
+        <h2 style="margin:0 0 6px;font-size:18px;">What WHOIS shows</h2>
+        <p class="sub" style="margin-bottom:10px;">
+          WHOIS data helps you verify domain ownership signals and troubleshoot DNS issues.
+          RDAP is the modern, structured way to access domain registration information.
+        </p>
+
+        <div class="list">
+          <h2>Common use cases</h2>
+          <ul>
+            <li><b>Verify registrar</b> before transferring a domain.</li>
+            <li><b>Check expiration</b> dates to prevent downtime.</li>
+            <li><b>Confirm nameservers</b> when DNS changes aren’t propagating.</li>
+            <li><b>Investigate domain status</b> codes (e.g., clientTransferProhibited).</li>
+          </ul>
+        </div>
+
+        <div class="list">
+          <h2>Domain status codes (examples)</h2>
+          <ul>
+            <li><code>clientTransferProhibited</code> — registrar lock enabled.</li>
+            <li><code>clientUpdateProhibited</code> — updates restricted.</li>
+            <li><code>pendingDelete</code> — domain is pending deletion.</li>
+          </ul>
+        </div>
+
+        <div class="list">
+          <h2>Tips for better results</h2>
+          <ul>
+            <li>Enter only the domain (e.g., <code>example.com</code>), not a full URL.</li>
+            <li>If results look incomplete, the registry may redact fields for privacy.</li>
+            <li>Use <a href="/dns-lookup.html" style="color:var(--text)">DNS Lookup</a> to verify records after updates.</li>
+          </ul>
+        </div>
+
+        <div class="msg warn">
+          <b>Note:</b> This page uses public RDAP endpoints. If a particular endpoint blocks browser requests,
+          the tool will automatically try another source.
+        </div>
+      </aside>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+
+  const domainEl = $('domain');
+  const lookupBtn = $('lookupBtn');
+  const clearBtn = $('clearBtn');
+  const copyLinkBtn = $('copyLinkBtn');
+
+  const statusPill = $('statusPill');
+  const sourcePill = $('sourcePill');
+
+  const message = $('message');
+  const kv = $('kv');
+  const registrarEl = $('registrar');
+  const domainStatusEl = $('domainStatus');
+  const registeredEl = $('registered');
+  const expiresEl = $('expires');
+
+  const nsBox = $('nsBox');
+  const nsList = $('nsList');
+
+  const eventsBox = $('eventsBox');
+  const eventsList = $('eventsList');
+
+  const rawBox = $('rawBox');
+  const rawEl = $('raw');
+
+  function setMsg(type, html){
+    message.className = 'msg ' + (type || '');
+    message.innerHTML = html;
+    message.style.display = 'block';
+  }
+
+  function hideMsg(){
+    message.style.display = 'none';
+    message.innerHTML = '';
+  }
+
+  function resetUI(){
+    hideMsg();
+    statusPill.textContent = '—';
+    sourcePill.textContent = '—';
+    kv.style.display = 'none';
+    nsBox.style.display = 'none';
+    eventsBox.style.display = 'none';
+    rawBox.style.display = 'none';
+    nsList.innerHTML = '';
+    eventsList.innerHTML = '';
+    rawEl.textContent = '';
+    registrarEl.textContent = '—';
+    domainStatusEl.textContent = '—';
+    registeredEl.textContent = '—';
+    expiresEl.textContent = '—';
+  }
+
+  function normalizeDomain(input){
+    let s = String(input || '').trim().toLowerCase();
+
+    // remove protocol and path if user pasted a URL
+    s = s.replace(/^https?:\/\//, '');
+    s = s.split('/')[0];
+
+    // remove trailing dot
+    s = s.replace(/\.$/, '');
+
+    // basic validation: must contain a dot and allowed chars
+    if (!s || s.length < 3) return '';
+    if (!s.includes('.')) return '';
+    if (!/^[a-z0-9.-]+$/.test(s)) return '';
+    if (s.includes('..')) return '';
+    if (s.startsWith('-') || s.endsWith('-')) return '';
+    return s;
+  }
+
+  function formatDate(iso){
+    if (!iso) return '—';
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return iso;
+    return d.toLocaleString(undefined, { year:'numeric', month:'short', day:'2-digit' });
+  }
+
+  function pickRegistrar(rdap){
+    // RDAP often includes entities; registrar is commonly an entity with role "registrar"
+    const ents = Array.isArray(rdap.entities) ? rdap.entities : [];
+    const regEnt = ents.find(e => Array.isArray(e.roles) && e.roles.includes('registrar'));
+    if (regEnt){
+      const vcard = Array.isArray(regEnt.vcardArray) ? regEnt.vcardArray : null;
+      if (vcard && Array.isArray(vcard[1])){
+        const fn = vcard[1].find(x => Array.isArray(x) && x[0] === 'fn');
+        if (fn && fn[3]) return String(fn[3]);
+      }
+      if (regEnt.handle) return String(regEnt.handle);
+    }
+    // fallback
+    if (rdap.registrar) return String(rdap.registrar);
+    return '—';
+  }
+
+  function pickEvent(rdap, action){
+    const events = Array.isArray(rdap.events) ? rdap.events : [];
+    const ev = events.find(e => e && e.eventAction === action);
+    return ev ? ev.eventDate : '';
+  }
+
+  function safeText(x){
+    if (x === null || x === undefined) return '';
+    return String(x);
+  }
+
+  async function fetchJson(url){
+    const res = await fetch(url, { method:'GET', headers:{ 'accept':'application/rdap+json, application/json' } });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  }
+
+  async function lookup(domain){
+    resetUI();
+    hideMsg();
+
+    const d = normalizeDomain(domain);
+    if (!d){
+      setMsg('bad', `<b>Invalid domain.</b> Enter a domain like <b>example.com</b> (no spaces).`);
+      return;
+    }
+
+    domainEl.value = d;
+    lookupBtn.disabled = true;
+    statusPill.textContent = 'Loading…';
+    sourcePill.textContent = '—';
+
+    // Public RDAP endpoints that often allow browser fetch (CORS can vary).
+    // We'll try multiple in order and use the first that works.
+    const candidates = [
+      { name: 'rdap.org', url: `https://rdap.org/domain/${encodeURIComponent(d)}` },
+      { name: 'OpenRDAP', url: `https://rdap.arin.net/registry/domain/${encodeURIComponent(d)}` }, // may not support all TLDs
+      { name: 'IANA RDAP', url: `https://rdap.iana.org/domain/${encodeURIComponent(d)}` } // mostly for infrastructure
+    ];
+
+    let rdap = null;
+    let source = null;
+    let lastErr = null;
+
+    for (const c of candidates){
+      try{
+        const json = await fetchJson(c.url);
+        // sanity: expect object with "ldhName" or "handle" or "objectClassName"
+        if (json && typeof json === 'object'){
+          rdap = json;
+          source = c.name;
+          break;
+        }
+      } catch (e){
+        lastErr = e;
+      }
+    }
+
+    lookupBtn.disabled = false;
+
+    if (!rdap){
+      statusPill.textContent = 'Error';
+      sourcePill.textContent = '—';
+      setMsg('bad',
+        `<b>Lookup failed.</b> This can happen if the RDAP endpoint blocks browser requests or the domain/TLD isn’t supported by the endpoint.<br/>
+         Try again, or use the domain without "www".`
+      );
+      // Helpful debug:
+      if (lastErr) {
+        rawBox.style.display = 'block';
+        rawEl.textContent = `Error: ${lastErr.message || lastErr}\nTried:\n${candidates.map(x=>x.url).join('\n')}`;
+      }
+      return;
+    }
+
+    sourcePill.textContent = source || 'RDAP';
+    statusPill.textContent = 'OK';
+
+    // Fill UI
+    const registrar = pickRegistrar(rdap);
+    const statusArr = Array.isArray(rdap.status) ? rdap.status : [];
+    const statusText = statusArr.length ? statusArr.join(', ') : '—';
+
+    const regDate = pickEvent(rdap, 'registration');
+    const expDate = pickEvent(rdap, 'expiration');
+    const lastChanged = pickEvent(rdap, 'last changed');
+
+    registrarEl.textContent = registrar;
+    domainStatusEl.textContent = statusText;
+    registeredEl.textContent = formatDate(regDate);
+    expiresEl.textContent = formatDate(expDate);
+
+    kv.style.display = 'grid';
+
+    // Nameservers
+    const ns = Array.isArray(rdap.nameservers) ? rdap.nameservers : [];
+    const nsNames = ns.map(n => n && (n.ldhName || n.unicodeName)).filter(Boolean);
+
+    if (nsNames.length){
+      nsList.innerHTML = nsNames.map(x => `<li><code>${escapeHtml(safeText(x))}</code></li>`).join('');
+      nsBox.style.display = 'block';
+    }
+
+    // Events
+    const events = Array.isArray(rdap.events) ? rdap.events : [];
+    const important = events
+      .filter(e => e && e.eventAction && e.eventDate)
+      .slice(0, 12)
+      .map(e => ({ action: e.eventAction, date: e.eventDate }));
+
+    if (important.length){
+      eventsList.innerHTML = important.map(e =>
+        `<li><b>${escapeHtml(safeText(e.action))}</b>: ${escapeHtml(formatDate(e.date))}</li>`
+      ).join('');
+      eventsBox.style.display = 'block';
+    }
+
+    // Message
+    const displayName = rdap.ldhName || rdap.handle || d;
+    setMsg('good',
+      `<b>${escapeHtml(displayName)}</b> found via <b>${escapeHtml(sourcePill.textContent)}</b>.
+       ${lastChanged ? `Last changed: <b>${escapeHtml(formatDate(lastChanged))}</b>.` : ''}`
+    );
+
+    // Raw
+    rawBox.style.display = 'block';
+    rawEl.textContent = JSON.stringify(rdap, null, 2);
+  }
+
+  function escapeHtml(str){
+    return String(str || '').replace(/[&<>"']/g, (m) => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  }
+
+  function makeShareLink(domain){
+    const url = new URL(location.href);
+    if (domain) url.searchParams.set('domain', domain);
+    else url.searchParams.delete('domain');
+    return url.toString();
+  }
+
+  async function copyText(text){
+    try{
+      await navigator.clipboard.writeText(text);
+      setMsg('good', `<b>Copied.</b> Share link copied to clipboard.`);
+    } catch {
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      setMsg('good', `<b>Copied.</b> Share link copied to clipboard.`);
+    }
+  }
+
+  // Wire up
+  lookupBtn.addEventListener('click', () => lookup(domainEl.value));
+  clearBtn.addEventListener('click', () => { domainEl.value = ''; resetUI(); hideMsg(); history.replaceState({}, '', makeShareLink('')); });
+
+  copyLinkBtn.addEventListener('click', () => {
+    const d = normalizeDomain(domainEl.value);
+    const link = makeShareLink(d || '');
+    copyText(link);
+  });
+
+  domainEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') lookup(domainEl.value);
+  });
+
+  // Auto-run if shared link includes ?domain=
+  const params = new URLSearchParams(location.search);
+  const shared = params.get('domain');
+  if (shared){
+    domainEl.value = shared;
+    lookup(shared);
+  } else {
+    resetUI();
+  }
+})();
+</script>
+</body>
+</html>
