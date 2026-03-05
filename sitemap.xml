@@ -1,110 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Core -->
   <url>
     <loc>https://instantqr.io/</loc>
     <lastmod>2026-03-03</lastmod>
   </url>
-
   <url>
-    <loc>https://instantqr.io/password.html</loc>
-    <lastmod>2026-03-03</lastmod>
+    <loc>https://instantqr.io/tools.html</loc>
+    <lastmod>2026-03-04</lastmod>
   </url>
 
-  <url>
-    <loc>https://instantqr.io/unit-converter.html</loc>
-    <lastmod>2026-03-03</lastmod>
-  </url>
-
-  <url>
-    <loc>https://instantqr.io/ip-lookup.html</loc>
-    <lastmod>2026-03-03</lastmod>
-  </url>
-
-  <url>
-    <loc>https://instantqr.io/json-formatter.html</loc>
-    <lastmod>2026-03-03</lastmod>
-  </url>
-
-  <url>
-    <loc>https://instantqr.io/time-zone-converter.html</loc>
-    <lastmod>2026-03-03</lastmod>
-  </url>
-
-  <url>
-    <loc>https://instantqr.io/base64-encoder.html</loc>
-    <lastmod>2026-03-03</lastmod>
-  </url>
-
-  <url>
-    <loc>https://instantqr.io/countdown-timer.html</loc>
-    <lastmod>2026-03-03</lastmod>
-  </url>
-
-  <url>
-    <loc>https://instantqr.io/world-clock.html</loc>
-    <lastmod>2026-03-03</lastmod>
-  </url>
-
-  <url>
-    <loc>https://instantqr.io/web3-gas-fee-estimator.html</loc>
-    <lastmod>2026-03-01</lastmod>
-  </url>
-
-  <url>
-    <loc>https://instantqr.io/crypto-profit-calculator.html</loc>
-    <lastmod>2026-03-01</lastmod>
-  </url>
-
+  <!-- QR Tools -->
   <url>
     <loc>https://instantqr.io/wifi-qr-code-generator.html</loc>
     <lastmod>2026-03-03</lastmod>
   </url>
-
   <url>
     <loc>https://instantqr.io/url-qr-code-generator.html</loc>
     <lastmod>2026-03-03</lastmod>
   </url>
-
   <url>
     <loc>https://instantqr.io/create-qr-code-for-wifi.html</loc>
     <lastmod>2026-03-03</lastmod>
   </url>
 
+  <!-- Network -->
   <url>
-    <loc>https://instantqr.io/about.html</loc>
+    <loc>https://instantqr.io/internet-speed-test.html</loc>
+    <lastmod>2026-03-03</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/ip-lookup.html</loc>
     <lastmod>2026-03-03</lastmod>
   </url>
 
+  <!-- Security -->
   <url>
-    <loc>https://instantqr.io/privacy.html</loc>
+    <loc>https://instantqr.io/password.html</loc>
+    <lastmod>2026-03-03</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/password-leak-checker.html</loc>
     <lastmod>2026-03-03</lastmod>
   </url>
 
+  <!-- Converters / Time -->
   <url>
-    <loc>https://instantqr.io/terms.html</loc>
+    <loc>https://instantqr.io/unit-converter.html</loc>
+    <lastmod>2026-03-03</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/time-zone-converter.html</loc>
+    <lastmod>2026-03-03</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/world-clock.html</loc>
+    <lastmod>2026-03-03</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/countdown-timer.html</loc>
     <lastmod>2026-03-03</lastmod>
   </url>
 
+  <!-- Dev Tools -->
   <url>
-    <loc>https://instantqr.io/contact.html</loc>
+    <loc>https://instantqr.io/base64-encoder.html</loc>
     <lastmod>2026-03-03</lastmod>
   </url>
+  <url>
+    <loc>https://instantqr.io/json-formatter.html</loc>
+    <lastmod>2026-03-03</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/uuid-generator.html</loc>
+    <lastmod>2026-03-04</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/jwt-decoder.html</loc>
+    <lastmod>2026-03-04</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/timestamp-converter.html</loc>
+    <lastmod>2026-03-04</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/regex-tester.html</loc>
+    <lastmod>2026-03-04</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/hash-generator.html</loc>
+    <lastmod>2026-03-04</lastmod>
+  </url>
 
-  <!-- ✅ Games -->
+  <!-- Crypto -->
+  <url>
+    <loc>https://instantqr.io/web3-gas-fee-estimator.html</loc>
+    <lastmod>2026-03-01</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/crypto-profit-calculator.html</loc>
+    <lastmod>2026-03-01</lastmod>
+  </url>
+
+  <!-- Games -->
+  <url>
+    <loc>https://instantqr.io/reaction-speed-test.html</loc>
+    <lastmod>2026-03-04</lastmod>
+  </url>
   <url>
     <loc>https://instantqr.io/2048-mini.html</loc>
     <lastmod>2026-03-04</lastmod>
   </url>
-
   <url>
     <loc>https://instantqr.io/tap-aim.html</loc>
     <lastmod>2026-03-04</lastmod>
   </url>
-
   <url>
     <loc>https://instantqr.io/snake.html</loc>
     <lastmod>2026-03-04</lastmod>
+  </url>
+
+  <!-- Site Pages -->
+  <url>
+    <loc>https://instantqr.io/about.html</loc>
+    <lastmod>2026-03-03</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/privacy.html</loc>
+    <lastmod>2026-03-03</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/terms.html</loc>
+    <lastmod>2026-03-03</lastmod>
+  </url>
+  <url>
+    <loc>https://instantqr.io/contact.html</loc>
+    <lastmod>2026-03-03</lastmod>
   </url>
 
 </urlset>
