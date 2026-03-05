@@ -10,25 +10,30 @@
     gtag('config', 'G-6213N2G8R2');
   </script>
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googletagmanager.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+  <!-- Google AdSense (correct URL) -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <title>WHOIS Lookup (Free Domain WHOIS & RDAP Search) | InstantQR</title>
-  <meta name="description" content="Free WHOIS lookup for any domain. Check registrar, registration dates, status, and nameservers using RDAP. Fast and privacy-first." />
+  <meta name="description" content="Free WHOIS lookup for any domain. Check registrar, registration/expiration dates, domain status, and nameservers using RDAP. Fast, responsive, privacy-first." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://instantqr.io/whois-lookup.html" />
   <link rel="icon" href="/assets/instantqr-logo.svg" />
 
+  <!-- Open Graph -->
   <meta property="og:title" content="WHOIS Lookup (Free Domain WHOIS & RDAP Search) | InstantQR" />
-  <meta property="og:description" content="Lookup registrar, dates, status, nameservers. Free and fast." />
+  <meta property="og:description" content="Lookup registrar, dates, status, and nameservers. Free, fast, and privacy-first." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://instantqr.io/whois-lookup.html" />
 
+  <!-- Twitter/X -->
   <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="WHOIS Lookup (Free Domain WHOIS & RDAP Search) | InstantQR" />
+  <meta name="twitter:description" content="Free WHOIS lookup for any domain — registrar, dates, status, nameservers." />
 
   <!-- FAQ Structured Data -->
   <script type="application/ld+json">
@@ -36,9 +41,21 @@
     "@context":"https://schema.org",
     "@type":"FAQPage",
     "mainEntity":[
-      {"@type":"Question","name":"What is a WHOIS lookup?","acceptedAnswer":{"@type":"Answer","text":"A WHOIS lookup shows public registration details for a domain (registrar, dates, status, nameservers). Modern registries provide this via RDAP."}},
-      {"@type":"Question","name":"Is this WHOIS tool private?","acceptedAnswer":{"@type":"Answer","text":"InstantQR does not store your queries. Your browser requests RDAP data from public endpoints to display results."}},
-      {"@type":"Question","name":"Why are some owner details hidden?","acceptedAnswer":{"@type":"Answer","text":"Many registries redact personal data for privacy reasons. You may still see registrar, dates, status, and nameservers."}}
+      {
+        "@type":"Question",
+        "name":"What is a WHOIS lookup?",
+        "acceptedAnswer":{"@type":"Answer","text":"A WHOIS lookup shows public registration details for a domain (registrar, registration and expiration dates, status codes, and nameservers). Modern registries provide this via RDAP."}
+      },
+      {
+        "@type":"Question",
+        "name":"Why does WHOIS sometimes hide the owner?",
+        "acceptedAnswer":{"@type":"Answer","text":"Many registries and registrars redact personal details for privacy and legal reasons. You can still often see registrar info, dates, status, and nameservers."}
+      },
+      {
+        "@type":"Question",
+        "name":"Is this WHOIS lookup private?",
+        "acceptedAnswer":{"@type":"Answer","text":"InstantQR does not store your queries. Your browser fetches RDAP data from public endpoints to display results."}
+      }
     ]
   }
   </script>
@@ -84,6 +101,7 @@
     }
     h1{margin:0 0 6px;font-size:22px}
     .sub{margin:0 0 12px;color:var(--muted);line-height:1.55}
+
     .label{font-size:13px;color:var(--muted);margin:10px 0 6px}
     input{
       width:100%;
@@ -95,7 +113,11 @@
       outline:none;
       font-size:16px;
     }
-    input:focus{border-color:rgba(31,111,235,.55); box-shadow:0 0 0 3px rgba(31,111,235,.18);}
+    input:focus{
+      border-color:rgba(31,111,235,.55);
+      box-shadow:0 0 0 3px rgba(31,111,235,.18);
+    }
+
     .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
     button{
       appearance:none;
@@ -194,11 +216,26 @@
       text-decoration:none;
     }
     .chip:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+
+    .footerLinks{margin-top:14px;font-size:14px;color:var(--muted)}
+    .footerLinks a{color:var(--muted);text-decoration:none}
+    .footerLinks a:hover{color:var(--text)}
+    .hr{height:1px;background:var(--line);margin:14px 0}
+
+    .kbd{
+      display:inline-block;
+      border:1px solid var(--line);
+      border-bottom-color:rgba(255,255,255,.22);
+      padding:2px 7px;border-radius:8px;
+      background:rgba(0,0,0,.18);
+      font-size:12px;color:var(--text);
+    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
+    <!-- Header (matches InstantQR style) -->
     <header>
       <a class="brand" href="/">
         <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
@@ -212,15 +249,16 @@
     </header>
 
     <div class="grid">
+      <!-- Left: Tool -->
       <section class="card">
-        <h1>WHOIS Lookup (Domain Search)</h1>
+        <h1>WHOIS Lookup (RDAP)</h1>
         <p class="sub">
-          Look up domain registration info: <b>registrar</b>, <b>status</b>, <b>dates</b>, and <b>nameservers</b>.
-          Uses <b>RDAP</b> (modern WHOIS). Built for speed on mobile + desktop.
+          Look up domain registration details: <b>registrar</b>, <b>dates</b>, <b>status</b>, and <b>nameservers</b>.
+          Built for speed on mobile and desktop. Press <span class="kbd">Enter</span> to search.
         </p>
 
         <div class="label">Enter a domain</div>
-        <input id="domain" inputmode="url" autocomplete="off" spellcheck="false" placeholder="example.com" aria-label="Domain input" />
+        <input id="domain" inputmode="url" autocomplete="off" spellcheck="false" placeholder="instantqr.io" aria-label="Domain input" />
 
         <div class="btns">
           <button class="primary" id="lookupBtn">Lookup</button>
@@ -253,6 +291,13 @@
           <pre id="raw"></pre>
         </details>
 
+        <div class="hr"></div>
+
+        <div class="small">
+          <b>Privacy note:</b> Many registries redact owner details. This tool focuses on registrar, dates, status, and nameservers.
+          If a registry blocks browser requests (CORS), we automatically try a safe fallback.
+        </div>
+
         <div class="chips" aria-label="Related tools">
           <a class="chip" href="/dns-lookup.html">DNS Lookup</a>
           <a class="chip" href="/ip-lookup.html">IP Lookup</a>
@@ -261,30 +306,52 @@
           <a class="chip" href="/base64-encoder.html">Base64</a>
         </div>
 
-        <div class="small" style="margin-top:12px;">
-          <b>Note:</b> Many registries redact owner details. This tool focuses on registrar, dates, status, and nameservers.
+        <div class="footerLinks">
+          <div style="margin-bottom:8px;">
+            <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+            <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
+            <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
+            <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
+            <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+          </div>
+          <div>
+            <a href="/about.html">About</a> ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/terms.html">Terms</a> ·
+            <a href="/contact.html">Contact</a>
+          </div>
         </div>
       </section>
 
+      <!-- Right: SEO content -->
       <aside class="card">
-        <h2 style="margin:0 0 6px;font-size:18px;">How to use WHOIS lookup</h2>
+        <h2 style="margin:0 0 6px;font-size:18px;">What WHOIS tells you</h2>
         <p class="sub">
-          Enter a domain (like <b>example.com</b>). You’ll see registrar, dates, status codes, and nameservers.
-          Great for domain transfers, DNS troubleshooting, and security checks.
+          WHOIS data helps with domain transfers, DNS troubleshooting, and basic security checks.
+          This page uses <b>RDAP</b> (structured WHOIS) and selects the correct RDAP server using the <b>IANA RDAP bootstrap</b>.
         </p>
 
         <div class="list">
-          <h2>Common reasons to use this</h2>
+          <h2>Common use cases</h2>
           <ul>
-            <li>Check <b>expiration</b> before a domain goes down</li>
-            <li>Confirm <b>nameservers</b> after DNS changes</li>
-            <li>See if a domain is <b>locked</b> (transfer prohibited)</li>
-            <li>Investigate suspicious domains quickly</li>
+            <li><b>Check expiration</b> dates to prevent downtime.</li>
+            <li><b>Confirm nameservers</b> after DNS updates.</li>
+            <li><b>See status codes</b> like <code>clientTransferProhibited</code> (domain lock).</li>
+            <li><b>Verify registrar</b> before initiating a transfer.</li>
+          </ul>
+        </div>
+
+        <div class="list">
+          <h2>Status codes (examples)</h2>
+          <ul>
+            <li><code>clientTransferProhibited</code> — transfer lock enabled</li>
+            <li><code>clientUpdateProhibited</code> — updates restricted</li>
+            <li><code>pendingDelete</code> — domain pending deletion</li>
           </ul>
         </div>
 
         <div class="msg warn">
-          <b>Reliability:</b> Some RDAP servers block browser requests (CORS). This page automatically falls back to CORS-friendly sources so it still works on GitHub Pages.
+          <b>Note:</b> Some registry RDAP servers may block browser requests (CORS). When that happens, this tool automatically retries via a fallback fetch method to keep it working on static hosting.
         </div>
       </aside>
     </div>
@@ -316,10 +383,7 @@
   const rawBox = $('rawBox');
   const rawEl = $('raw');
 
-  // Small in-memory + session cache for speed
-  const memCache = new Map();
-  const SKEY = 'iq_whois_cache_v1';
-
+  // ---------- UI helpers ----------
   function setMsg(type, html){
     message.className = 'msg ' + (type || '');
     message.innerHTML = html;
@@ -345,6 +409,12 @@
     expiresEl.textContent = '—';
   }
 
+  function escapeHtml(str){
+    return String(str || '').replace(/[&<>"']/g, (m) => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  }
+
   function normalizeDomain(input){
     let s = String(input || '').trim().toLowerCase();
     s = s.replace(/^https?:\/\//, '');
@@ -355,6 +425,30 @@
     if (!/^[a-z0-9.-]+$/.test(s)) return '';
     if (s.includes('..')) return '';
     return s;
+  }
+
+  function makeShareLink(domain){
+    const url = new URL(location.href);
+    if (domain) url.searchParams.set('domain', domain);
+    else url.searchParams.delete('domain');
+    return url.toString();
+  }
+
+  async function copyText(text){
+    try{
+      await navigator.clipboard.writeText(text);
+      setMsg('good', `<b>Copied.</b> Share link copied to clipboard.`);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      setMsg('good', `<b>Copied.</b> Share link copied to clipboard.`);
+    }
   }
 
   function formatDate(iso){
@@ -384,179 +478,112 @@
     return '—';
   }
 
-  function escapeHtml(str){
-    return String(str || '').replace(/[&<>"']/g, (m) => ({
-      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-    }[m]));
+  // ---------- Caching ----------
+  const memCache = new Map();
+  const BOOT_KEY = 'iq_rdap_bootstrap_v1';
+  const RES_KEY  = 'iq_whois_cache_v1';
+  const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+  function loadCache(key){
+    try{ return JSON.parse(localStorage.getItem(key) || 'null') || null; } catch { return null; }
+  }
+  function saveCache(key, obj){
+    try{ localStorage.setItem(key, JSON.stringify(obj)); } catch {}
   }
 
-  function makeShareLink(domain){
-    const url = new URL(location.href);
-    if (domain) url.searchParams.set('domain', domain);
-    else url.searchParams.delete('domain');
-    return url.toString();
-  }
-
-  async function copyText(text){
-    try{
-      await navigator.clipboard.writeText(text);
-      setMsg('good', `<b>Copied.</b> Share link copied to clipboard.`);
-    } catch {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.left = '-9999px';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      ta.remove();
-      setMsg('good', `<b>Copied.</b> Share link copied to clipboard.`);
-    }
-  }
-
-  // ---- RDAP fetch strategy for GitHub Pages (CORS-safe) ----
-  // 1) Try direct fetch (fastest if CORS enabled)
-  // 2) Fallback to allorigins raw proxy (usually works)
-  // 3) Fallback to r.jina.ai "reader" proxy
-  // 4) Fallback to whateverorigin
-  const RDAP_BASES = [
-    { name: 'rdap.org', url: (d) => `https://rdap.org/domain/${encodeURIComponent(d)}` }
-  ];
-
-  const PROXIES = [
-    { name: 'Direct', wrap: (u) => u, mode: 'json' },
-    { name: 'AllOrigins', wrap: (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`, mode: 'text' },
-    { name: 'JinaAI', wrap: (u) => `https://r.jina.ai/http://` + u.replace(/^https?:\/\//,''),
-      mode: 'text' },
-    { name: 'WhateverOrigin', wrap: (u) => `https://www.whateverorigin.org/get?url=${encodeURIComponent(u)}&callback=?`,
-      mode: 'jsonp' }
-  ];
-
-  async function fetchWithTimeout(promise, ms=6500){
+  // ---------- Fetch helpers ----------
+  async function fetchWithTimeout(url, ms=6500, acceptJson=true){
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), ms);
     try{
-      const res = await promise(ctrl.signal);
-      clearTimeout(t);
+      const res = await fetch(url, {
+        method:'GET',
+        signal: ctrl.signal,
+        headers: acceptJson ? { 'accept':'application/rdap+json, application/json' } : {}
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return res;
-    } catch (e){
+    } finally {
       clearTimeout(t);
-      throw e;
     }
-  }
-
-  async function fetchJsonDirect(url, signal){
-    const res = await fetch(url, {
-      method:'GET',
-      signal,
-      headers:{ 'accept':'application/rdap+json, application/json' }
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
-  }
-
-  async function fetchText(url, signal){
-    const res = await fetch(url, { method:'GET', signal });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.text();
   }
 
   function tryParseJson(text){
-    // Some proxies may prepend text; try to find the first { and last }
     const i = text.indexOf('{');
     const j = text.lastIndexOf('}');
-    if (i >= 0 && j > i){
-      const slice = text.slice(i, j+1);
-      return JSON.parse(slice);
-    }
+    if (i >= 0 && j > i) return JSON.parse(text.slice(i, j+1));
     return JSON.parse(text);
   }
 
-  function loadSessionCache(){
-    try{
-      const raw = sessionStorage.getItem(SKEY);
-      return raw ? JSON.parse(raw) : {};
-    } catch { return {}; }
-  }
-  function saveSessionCache(obj){
-    try{ sessionStorage.setItem(SKEY, JSON.stringify(obj)); } catch {}
-  }
+  // ---------- IANA RDAP bootstrap ----------
+  const IANA_BOOTSTRAP_URL = 'https://data.iana.org/rdap/dns.json';
 
-  async function rdapLookup(domain){
-    // cache
-    if (memCache.has(domain)) return { data: memCache.get(domain), source: 'Cache', ms: 0 };
+  async function getBootstrap(){
+    if (memCache.has('bootstrap')) return memCache.get('bootstrap');
 
-    const sCache = loadSessionCache();
-    if (sCache[domain]){
-      memCache.set(domain, sCache[domain].data);
-      return { data: sCache[domain].data, source: 'Cache', ms: 0 };
+    const cached = loadCache(BOOT_KEY);
+    if (cached && cached.t && (Date.now() - cached.t) < CACHE_TTL_MS && cached.data){
+      memCache.set('bootstrap', cached.data);
+      return cached.data;
     }
 
-    let lastErr = null;
+    const res = await fetchWithTimeout(IANA_BOOTSTRAP_URL, 6500, true);
+    const data = await res.json();
+    memCache.set('bootstrap', data);
+    saveCache(BOOT_KEY, { t: Date.now(), data });
+    return data;
+  }
 
-    for (const base of RDAP_BASES){
-      const target = base.url(domain);
+  function tldFromDomain(domain){
+    const parts = domain.split('.');
+    return parts.length >= 2 ? parts[parts.length - 1] : '';
+  }
 
-      for (const proxy of PROXIES){
-        const start = performance.now();
+  function rdapServerForTld(bootstrap, tld){
+    const services = Array.isArray(bootstrap.services) ? bootstrap.services : [];
+    const t = String(tld || '').toLowerCase();
 
-        try{
-          if (proxy.mode === 'json'){
-            const data = await fetchWithTimeout((signal) => fetchJsonDirect(proxy.wrap(target), signal));
-            const ms = Math.round(performance.now() - start);
-            return { data, source: `${base.name} • ${proxy.name}`, ms };
-          }
-
-          if (proxy.mode === 'text'){
-            const text = await fetchWithTimeout((signal) => fetchText(proxy.wrap(target), signal));
-            const data = tryParseJson(text);
-            const ms = Math.round(performance.now() - start);
-            return { data, source: `${base.name} • ${proxy.name}`, ms };
-          }
-
-          if (proxy.mode === 'jsonp'){
-            const data = await new Promise((resolve, reject) => {
-              const cbName = 'wo_' + Math.random().toString(16).slice(2);
-              const script = document.createElement('script');
-              const url = proxy.wrap(target).replace('callback=?', `callback=${cbName}`);
-              let done = false;
-
-              window[cbName] = (resp) => {
-                done = true;
-                cleanup();
-                if (resp && resp.contents){
-                  try { resolve(tryParseJson(resp.contents)); }
-                  catch (e){ reject(e); }
-                } else {
-                  reject(new Error('No JSONP contents'));
-                }
-              };
-
-              function cleanup(){
-                try{ delete window[cbName]; } catch {}
-                if (script.parentNode) script.parentNode.removeChild(script);
-              }
-
-              script.onerror = () => { if (!done){ cleanup(); reject(new Error('JSONP failed')); } };
-              script.src = url;
-              document.head.appendChild(script);
-
-              // timeout
-              setTimeout(() => { if (!done){ cleanup(); reject(new Error('JSONP timeout')); } }, 6500);
-            });
-
-            const ms = Math.round(performance.now() - start);
-            return { data, source: `${base.name} • ${proxy.name}`, ms };
-          }
-        } catch (e){
-          lastErr = e;
-        }
+    for (const entry of services){
+      if (!Array.isArray(entry) || entry.length < 2) continue;
+      const tlds = entry[0];
+      const urls = entry[1];
+      if (Array.isArray(tlds) && tlds.map(x => String(x).toLowerCase()).includes(t)){
+        if (Array.isArray(urls) && urls[0]) return String(urls[0]);
       }
     }
-
-    throw lastErr || new Error('Lookup failed');
+    return '';
   }
 
+  // ---------- RDAP fetch strategy ----------
+  // 1) Direct to authoritative RDAP server (from IANA bootstrap) - fastest when CORS allows
+  // 2) Fallback to AllOrigins raw proxy (best-effort for static hosting)
+  const PROXIES = [
+    { name: 'Direct', wrap: (u) => u, mode: 'json' },
+    { name: 'AllOrigins', wrap: (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`, mode: 'text' }
+  ];
+
+  async function fetchRdapJson(url){
+    let lastErr = null;
+
+    for (const p of PROXIES){
+      const wrapped = p.wrap(url);
+      try{
+        if (p.mode === 'json'){
+          const res = await fetchWithTimeout(wrapped, 6500, true);
+          return { data: await res.json(), via: p.name };
+        } else {
+          const res = await fetchWithTimeout(wrapped, 6500, false);
+          const txt = await res.text();
+          return { data: tryParseJson(txt), via: p.name };
+        }
+      } catch (e){
+        lastErr = e;
+      }
+    }
+    throw lastErr || new Error('RDAP fetch failed');
+  }
+
+  // ---------- Render ----------
   function render(rdap){
     const registrar = pickRegistrar(rdap);
     const statusArr = Array.isArray(rdap.status) ? rdap.status : [];
@@ -587,6 +614,7 @@
     rawEl.textContent = JSON.stringify(rdap, null, 2);
   }
 
+  // ---------- Main lookup ----------
   async function lookup(){
     resetUI();
 
@@ -596,8 +624,6 @@
       return;
     }
     domainEl.value = d;
-
-    // update share url
     history.replaceState({}, '', makeShareLink(d));
 
     lookupBtn.disabled = true;
@@ -605,38 +631,64 @@
     sourcePill.textContent = '—';
     timePill.textContent = '—';
 
+    const start = performance.now();
+
     try{
-      const result = await rdapLookup(d);
+      // per-domain cache
+      const cache = loadCache(RES_KEY) || {};
+      const cached = cache[d];
+      if (cached && cached.t && (Date.now() - cached.t) < CACHE_TTL_MS && cached.data){
+        statusPill.textContent = 'OK';
+        sourcePill.textContent = 'Cache';
+        timePill.textContent = 'cached';
+        setMsg('good', `<b>${escapeHtml(d)}</b> loaded from cache.`);
+        render(cached.data);
+        return;
+      }
 
-      // cache
-      memCache.set(d, result.data);
-      const sCache = loadSessionCache();
-      sCache[d] = { t: Date.now(), data: result.data };
-      saveSessionCache(sCache);
+      const bootstrap = await getBootstrap();
+      const tld = tldFromDomain(d);
+      const rdapBase = rdapServerForTld(bootstrap, tld);
+      if (!rdapBase){
+        throw new Error(`No RDAP server found for .${tld}`);
+      }
 
+      const base = rdapBase.endsWith('/') ? rdapBase : (rdapBase + '/');
+      const rdapUrl = base + 'domain/' + encodeURIComponent(d);
+
+      const { data, via } = await fetchRdapJson(rdapUrl);
+
+      // save cache
+      cache[d] = { t: Date.now(), data };
+      saveCache(RES_KEY, cache);
+
+      const ms = Math.round(performance.now() - start);
       statusPill.textContent = 'OK';
-      sourcePill.textContent = result.source;
-      timePill.textContent = result.ms ? (result.ms + 'ms') : 'cached';
+      sourcePill.textContent = `${new URL(base).hostname} • ${via}`;
+      timePill.textContent = ms + 'ms';
 
       setMsg('good', `<b>${escapeHtml(d)}</b> lookup complete.`);
-      render(result.data);
+      render(data);
     } catch (e){
       statusPill.textContent = 'Error';
       sourcePill.textContent = '—';
       timePill.textContent = '—';
 
       setMsg('bad',
-        `<b>Lookup failed.</b> Some registries block browser requests. This tool tries multiple CORS-safe sources, but one may be temporarily down.<br/>
-         Try another domain, or refresh and retry.`
+        `<b>Lookup failed.</b> ${escapeHtml(e && e.message ? e.message : String(e))}<br/>
+         Tip: try <b>google.com</b> to confirm the tool is working, then retry your domain.`
       );
 
       rawBox.style.display = 'block';
-      rawEl.textContent = `Error: ${e && e.message ? e.message : e}`;
+      rawEl.textContent =
+        `Error: ${e && e.message ? e.message : e}\n\n` +
+        `Note: Some registry RDAP servers block browser requests (CORS). The fallback proxy may also rate-limit.`;
     } finally {
       lookupBtn.disabled = false;
     }
   }
 
+  // ---------- Wire up ----------
   lookupBtn.addEventListener('click', lookup);
   domainEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') lookup(); });
 
@@ -651,7 +703,7 @@
     copyText(makeShareLink(d || ''));
   });
 
-  // Auto run on shared link
+  // Auto-run on shared link
   const params = new URLSearchParams(location.search);
   const shared = params.get('domain');
   if (shared){
@@ -659,24 +711,6 @@
     lookup();
   } else {
     resetUI();
-  }
-
-  function copyText(t){ return copyTextImpl(t); }
-  async function copyTextImpl(text){
-    try{
-      await navigator.clipboard.writeText(text);
-      setMsg('good', `<b>Copied.</b> Share link copied to clipboard.`);
-    } catch {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.left = '-9999px';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      ta.remove();
-      setMsg('good', `<b>Copied.</b> Share link copied to clipboard.`);
-    }
   }
 })();
 </script>
