@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tap Aim | InstantQR</title>
+  <meta name="description" content="Tap Aim: hit targets fast and improve accuracy. Mobile-friendly, responsive, and privacy-first." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/tap-aim.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <meta name="theme-color" content="#0b0f19" />
+
+  <style>
+    :root{
+      --bg:#0b1220; --text:#e7eefc; --muted:#a9b7d6;
+      --border:rgba(255,255,255,.10); --shadow:0 12px 40px rgba(0,0,0,.45);
+      --radius:20px; --max:980px;
+      --panel:rgba(255,255,255,.05);
+      --ok:#22c55e; --bad:#ef4444; --brand:#3b82f6;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(59,130,246,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(34,197,94,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+      min-height:100vh;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:18px}
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 11, 20, .55);
+      border-bottom:1px solid var(--border);
+    }
+    header .inner{
+      max-width:var(--max);margin:0 auto;padding:14px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900}
+    .brand img{height:32px}
+    nav{display:flex;gap:10px;flex-wrap:wrap}
+    nav a{color:var(--muted);font-size:14px;padding:8px 10px;border-radius:12px}
+    nav a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+    @media(max-width:560px){nav{display:none}}
+
+    .card{
+      margin-top:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .top{padding:16px 16px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+    h1{margin:0 0 6px;font-size:clamp(22px,3.2vw,32px)}
+    .sub{margin:0;color:var(--muted);line-height:1.5}
+
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px 16px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:10px 14px;border-radius:999px;font-weight:800;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);color:var(--text);
+      cursor:pointer;user-select:none;
+    }
+    .btn.primary{
+      border:0;
+      background: linear-gradient(135deg, rgba(59,130,246,1), rgba(59,130,246,.78));
+      box-shadow: 0 14px 28px rgba(59,130,246,.22);
+    }
+    .stats{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+    .pill{padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.12)}
+
+    .arenaWrap{padding:14px 16px 18px;display:flex;justify-content:center}
+    .arena{
+      width:min(520px, 92vw);
+      height:min(520px, 92vw);
+      max-height:62vh;
+      background: rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+      position:relative;
+      overflow:hidden;
+      touch-action: manipulation;
+      user-select:none;
+    }
+    .target{
+      position:absolute;
+      width:64px;height:64px;
+      border-radius:999px;
+      display:flex;align-items:center;justify-content:center;
+      background: rgba(34,197,94,.22);
+      border: 2px solid rgba(34,197,94,.55);
+      box-shadow: 0 10px 22px rgba(0,0,0,.35);
+      cursor:pointer;
+      transform: translate(-50%,-50%);
+    }
+    .target::after{
+      content:"";
+      width:18px;height:18px;border-radius:999px;
+      background: rgba(34,197,94,.75);
+    }
+    .miss{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      display:flex;
+      align-items:center;justify-content:center;
+      color:rgba(239,68,68,.9);
+      font-weight:900;
+      opacity:0;
+      transition:opacity .12s ease;
+    }
+    .miss.show{opacity:1}
+
+    .hint{padding:0 16px 16px;color:var(--muted);font-size:13px;line-height:1.5}
+  </style>
+</head>
+<body>
+<header>
+  <div class="inner">
+    <a class="brand" href="/" aria-label="InstantQR Home">
+      <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+      <span>InstantQR</span>
+    </a>
+    <nav>
+      <a href="/tools.html">All Tools</a>
+      <a href="/games.html">Games</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card" aria-label="Tap Aim">
+    <div class="top">
+      <h1>Tap Aim</h1>
+      <p class="sub">Hit targets fast. Score = hits. Accuracy matters.</p>
+    </div>
+
+    <div class="row">
+      <div class="stats">
+        <span class="pill">Time: <strong id="time">20.0</strong>s</span>
+        <span class="pill">Hits: <strong id="hits">0</strong></span>
+        <span class="pill">Misses: <strong id="misses">0</strong></span>
+        <span class="pill">Accuracy: <strong id="acc">—</strong></span>
+      </div>
+      <div class="stats">
+        <select id="mode" class="pill" style="background:rgba(0,0,0,.12);color:var(--text);border:1px solid rgba(255,255,255,.10)">
+          <option value="20" selected>20s</option>
+          <option value="30">30s</option>
+          <option value="45">45s</option>
+        </select>
+        <button class="btn primary" id="startBtn" type="button">Start</button>
+        <button class="btn" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="arenaWrap">
+      <div class="arena" id="arena" role="application" aria-label="Tap Aim Arena">
+        <div class="miss" id="missFlash">MISS</div>
+      </div>
+    </div>
+
+    <div class="hint">
+      Tip: play with one thumb. Targets shrink a bit as your score increases.
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const arena = document.getElementById('arena');
+  const missFlash = document.getElementById('missFlash');
+  const timeEl = document.getElementById('time');
+  const hitsEl = document.getElementById('hits');
+  const missesEl = document.getElementById('misses');
+  const accEl = document.getElementById('acc');
+  const startBtn = document.getElementById('startBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const modeEl = document.getElementById('mode');
+
+  let running=false;
+  let duration=20;
+  let endAt=0;
+  let raf=0;
+
+  let hits=0, misses=0;
+  let target=null;
+
+  function setStats(){
+    hitsEl.textContent = hits;
+    missesEl.textContent = misses;
+    const shots = hits + misses;
+    accEl.textContent = shots ? Math.round((hits/shots)*100) + '%' : '—';
+  }
+
+  function flashMiss(){
+    missFlash.classList.add('show');
+    clearTimeout(window.__m);
+    window.__m = setTimeout(()=> missFlash.classList.remove('show'), 160);
+  }
+
+  function clearTarget(){
+    if(target){ target.remove(); target=null; }
+  }
+
+  function spawnTarget(){
+    clearTarget();
+    const rect = arena.getBoundingClientRect();
+    const pad = 28;
+    const min = 48;
+    const shrink = Math.min(14, Math.floor(hits/6)*2);
+    const size = Math.max(min, 64 - shrink);
+
+    const x = pad + Math.random()*(rect.width - pad*2);
+    const y = pad + Math.random()*(rect.height - pad*2);
+
+    const t = document.createElement('div');
+    t.className = 'target';
+    t.style.width = size + 'px';
+    t.style.height = size + 'px';
+    t.style.left = x + 'px';
+    t.style.top = y + 'px';
+
+    t.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      if(!running) return;
+      hits++;
+      setStats();
+      spawnTarget();
+    });
+
+    arena.appendChild(t);
+    target = t;
+  }
+
+  function tick(){
+    if(!running) return;
+    const now = performance.now();
+    const left = Math.max(0, endAt - now);
+    timeEl.textContent = (left/1000).toFixed(1);
+
+    if(left <= 0){
+      stop();
+      return;
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  function start(){
+    if(running) return;
+    running = true;
+    duration = Number(modeEl.value || '20');
+    endAt = performance.now() + duration*1000;
+    startBtn.textContent = 'Running…';
+    startBtn.disabled = true;
+    modeEl.disabled = true;
+    spawnTarget();
+    raf = requestAnimationFrame(tick);
+  }
+
+  function stop(){
+    running = false;
+    cancelAnimationFrame(raf);
+    startBtn.textContent = 'Start';
+    startBtn.disabled = false;
+    modeEl.disabled = false;
+    clearTarget();
+  }
+
+  function reset(){
+    stop();
+    hits=0; misses=0;
+    setStats();
+    timeEl.textContent = Number(modeEl.value || '20').toFixed(1);
+  }
+
+  // Misses: clicking arena not on target
+  arena.addEventListener('pointerdown', (e) => {
+    if(!running) return;
+    if(e.target === arena || e.target === missFlash){
+      misses++;
+      setStats();
+      flashMiss();
+    }
+  });
+
+  startBtn.addEventListener('click', start);
+  resetBtn.addEventListener('click', reset);
+
+  reset();
+})();
+</script>
+</body>
+</html>
