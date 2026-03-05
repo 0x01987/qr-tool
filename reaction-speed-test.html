@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reaction Speed Test Game | InstantQR</title>
+  <meta name="description" content="Test your reaction time in milliseconds. Tap when the screen turns green. Fast, mobile-friendly, privacy-first." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/reaction-speed-test.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <meta name="theme-color" content="#0b0f19" />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --radius: 20px;
+      --max: 900px;
+      --green: #22c55e;
+      --red: #ef4444;
+      --blue: #3b82f6;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(59,130,246,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(34,197,94,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+      min-height:100vh;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px}
+    header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 11, 20, .55);
+      border-bottom: 1px solid var(--border);
+    }
+    header .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+    .brand img{height:32px}
+    nav{display:flex; gap:10px; flex-wrap:wrap}
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    nav a:hover{color:var(--text); background: rgba(255,255,255,.06)}
+    .card{
+      margin-top:18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .top{
+      padding:18px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    h1{margin:0 0 6px; font-size: clamp(24px, 3.5vw, 34px)}
+    .sub{margin:0; color:var(--muted); line-height:1.5}
+    .play{
+      height: 46vh;
+      min-height: 320px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:18px;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      background: rgba(0,0,0,.16);
+    }
+    .state{
+      max-width: 44ch;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+    }
+    .big{
+      font-weight:900;
+      font-size: clamp(22px, 4vw, 34px);
+      letter-spacing:-.4px;
+      margin-bottom:6px;
+    }
+    .small{color:var(--muted); font-size:14px; line-height:1.5}
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      padding: 14px 18px 18px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius: 999px;
+      font-weight:800;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      gap:8px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn.primary{
+      border:0;
+      background: linear-gradient(135deg, rgba(59,130,246,1), rgba(59,130,246,.78));
+      box-shadow: 0 14px 28px rgba(59,130,246,.22);
+    }
+    .stats{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .pill{
+      padding:8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+    }
+    .ok{color: var(--green)}
+    .bad{color: var(--red)}
+    @media (max-width:560px){
+      nav{display:none}
+      .row{flex-direction:column; align-items:stretch}
+      .btn{width:100%}
+      .play{min-height: 360px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <a class="brand" href="/" aria-label="InstantQR Home">
+      <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+      <span>InstantQR</span>
+    </a>
+    <nav>
+      <a href="/tools.html">All Tools</a>
+      <a href="/internet-speed-test.html">Speed Test</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card" aria-label="Reaction Speed Test">
+    <div class="top">
+      <h1>Reaction Speed Test</h1>
+      <p class="sub">Tap/click when the screen turns <span class="ok"><strong>GREEN</strong></span>. Too early = <span class="bad"><strong>false start</strong></span>.</p>
+    </div>
+
+    <div id="play" class="play" role="button" tabindex="0" aria-label="Game area">
+      <div class="state">
+        <div id="big" class="big">Tap to start</div>
+        <div id="small" class="small">When it turns green, tap as fast as you can.</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <button class="btn primary" id="startBtn" type="button">Start</button>
+      <button class="btn" id="resetBtn" type="button">Reset</button>
+
+      <div class="stats">
+        <span class="pill">Last: <strong id="last">—</strong> ms</span>
+        <span class="pill">Best: <strong id="best">—</strong> ms</span>
+        <span class="pill">Avg (5): <strong id="avg">—</strong> ms</span>
+      </div>
+    </div>
+  </section>
+
+  <p class="sub" style="margin-top:12px;">
+    Privacy-first: this game runs in your browser. No account required.
+  </p>
+</main>
+
+<script>
+(() => {
+  const play = document.getElementById('play');
+  const big = document.getElementById('big');
+  const small = document.getElementById('small');
+  const startBtn = document.getElementById('startBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  const lastEl = document.getElementById('last');
+  const bestEl = document.getElementById('best');
+  const avgEl = document.getElementById('avg');
+
+  let state = 'idle'; // idle | waiting | go
+  let timer = null;
+  let goAt = 0;
+  let results = []; // keep last 5
+  let best = null;
+
+  function setIdle(msgBig="Tap to start", msgSmall="When it turns green, tap as fast as you can.") {
+    state = 'idle';
+    play.style.background = 'rgba(0,0,0,.16)';
+    big.textContent = msgBig;
+    small.textContent = msgSmall;
+    clearTimeout(timer);
+    timer = null;
+  }
+
+  function start() {
+    if (state === 'waiting' || state === 'go') return;
+
+    state = 'waiting';
+    play.style.background = 'rgba(239,68,68,.16)';
+    big.textContent = 'Wait…';
+    small.textContent = 'Don’t tap yet.';
+
+    const delay = 1200 + Math.random() * 2600;
+    timer = setTimeout(() => {
+      state = 'go';
+      play.style.background = 'rgba(34,197,94,.22)';
+      big.textContent = 'TAP!';
+      small.textContent = 'Now!';
+      goAt = performance.now();
+      // safety timeout (if user doesn’t tap)
+      timer = setTimeout(() => setIdle('Time out', 'Tap Start to try again.'), 3000);
+    }, delay);
+  }
+
+  function tap() {
+    if (state === 'idle') {
+      start();
+      return;
+    }
+
+    if (state === 'waiting') {
+      // false start
+      setIdle('Too soon!', 'False start. Tap Start to try again.');
+      return;
+    }
+
+    if (state === 'go') {
+      const ms = Math.round(performance.now() - goAt);
+      clearTimeout(timer);
+      timer = null;
+
+      results.unshift(ms);
+      results = results.slice(0, 5);
+
+      best = (best === null) ? ms : Math.min(best, ms);
+
+      lastEl.textContent = ms;
+      bestEl.textContent = best;
+
+      const avg = Math.round(results.reduce((a,b)=>a+b,0) / results.length);
+      avgEl.textContent = avg;
+
+      setIdle(`Reaction: ${ms} ms`, 'Tap Start to go again.');
+    }
+  }
+
+  function reset() {
+    results = [];
+    best = null;
+    lastEl.textContent = '—';
+    bestEl.textContent = '—';
+    avgEl.textContent = '—';
+    setIdle();
+  }
+
+  startBtn.addEventListener('click', start);
+  resetBtn.addEventListener('click', reset);
+  play.addEventListener('click', tap);
+  play.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tap(); }
+  });
+
+  setIdle();
+})();
+</script>
+
+</body>
+</html>
