@@ -1,825 +1,365 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
-  </script>
 
-  <!-- AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-    crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-6213N2G8R2');
+</script>
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+crossorigin="anonymous"></script>
 
-  <title>Tools | InstantQR</title>
-  <meta name="description" content="Explore all InstantQR tools — fast, privacy-first utilities for QR codes, conversions, network checks, crypto calculators, and more." />
-  <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://instantqr.io/tools.html" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 
-  <meta property="og:title" content="Tools | InstantQR" />
-  <meta property="og:description" content="Explore all InstantQR tools — fast, privacy-first utilities for QR codes, conversions, network checks, crypto calculators, and more." />
-  <meta property="og:url" content="https://instantqr.io/tools.html" />
-  <meta property="og:type" content="website" />
+<title>All Tools | InstantQR Free Online Utilities</title>
+<meta name="description" content="Browse all free InstantQR tools including QR generators, converters, crypto calculators, network tools and developer utilities."/>
 
-  <link rel="icon" href="/assets/instantqr-logo.svg" />
+<link rel="canonical" href="https://instantqr.io/tools.html"/>
+<link rel="icon" href="/assets/instantqr-logo.svg"/>
 
-  <style>
-    :root{
-      --bg:#0b1220;
-      --text:#eaf0ff;
-      --muted:#a9b6d6;
-      --line:rgba(255,255,255,.10);
-      --brand:#69a6ff;
-      --ok:#19c37d;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    }
-    body{
-      margin:0;
-      background:
-        radial-gradient(1200px 600px at 20% 0%, rgba(105,166,255,.18), transparent 60%),
-        radial-gradient(900px 500px at 90% 10%, rgba(25,195,125,.12), transparent 55%),
-        var(--bg);
-      color:var(--text);
-    }
-    a{ color:inherit; text-decoration:none; }
-    .wrap{ max-width:1100px; margin:0 auto; padding:20px; }
+<style>
 
-    header{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:14px; padding:10px 0 18px;
-    }
-    .brand{ display:flex; gap:10px; align-items:center; }
-    .logo{
-      width:36px;height:36px;border-radius:12px;
-      background:rgba(105,166,255,.14);
-      display:grid;place-items:center;
-      border:1px solid var(--line);
-    }
-    .logo svg{ width:20px;height:20px; }
-    .brand b{ font-size:16px; letter-spacing:.2px; }
+:root{
+--bg:#0b1220;
+--card:#111a2b;
+--text:#e7eefc;
+--muted:#9db0d1;
+--border:rgba(255,255,255,.08);
+--radius:16px;
+--max:1100px;
+}
 
-    .nav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
-    .pill{
-      padding:8px 10px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background:rgba(255,255,255,.04);
-      font-size:13px;
-      color:var(--muted);
-    }
-    .pill:hover{ border-color:rgba(105,166,255,.45); color:var(--text); }
+*{box-sizing:border-box}
 
-    .hero{ display:grid; gap:10px; margin:10px 0 14px; }
-    h1{ margin:0; font-size:30px; letter-spacing:-.4px; }
-    .sub{ color:var(--muted); line-height:1.6; max-width:80ch; }
+body{
+margin:0;
+font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+background:var(--bg);
+color:var(--text);
+}
 
-    .controls{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-      margin:14px 0 16px;
-    }
-    .search{
-      flex:1;
-      min-width:240px;
-      display:flex; gap:10px; align-items:center;
-      background:rgba(0,0,0,.22);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:10px 12px;
-    }
-    .search input{
-      width:100%;
-      border:0; outline:0;
-      background:transparent;
-      color:var(--text);
-      font-size:15px;
-    }
-    select, button{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      border-radius:12px;
-      padding:10px 12px;
-      font-size:14px;
-    }
-    button{ cursor:pointer; }
-    button:hover{ border-color:rgba(105,166,255,.45); }
+.wrap{
+max-width:var(--max);
+margin:auto;
+padding:24px;
+}
 
-    .section{ margin:18px 0 10px; }
-    .section h2{
-      margin:0 0 10px;
-      font-size:16px;
-      color:var(--muted);
-      letter-spacing:.2px;
-    }
+header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:30px;
+}
 
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap:12px;
-    }
-    @media (min-width: 760px){
-      .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    }
-    @media (min-width: 1040px){
-      .grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    }
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:700;
+}
 
-    .card{
-      position:relative;
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      transition: transform .12s ease, border-color .12s ease;
-    }
-    .card:hover{
-      transform: translateY(-2px);
-      border-color: rgba(105,166,255,.45);
-    }
-    .card a{
-      display:flex; gap:14px; align-items:center;
-      padding:14px;
-      min-height:86px;
-    }
-    .icon{
-      width:56px; height:56px;
-      border-radius:16px;
-      display:grid; place-items:center;
-      background:rgba(105,166,255,.12);
-      border:1px solid rgba(255,255,255,.10);
-      flex:0 0 auto;
-    }
-    .icon svg{ width:30px; height:30px; }
-    .meta{ display:grid; gap:4px; min-width:0; }
-    .name{
-      font-size:16px;
-      font-weight:700;
-      letter-spacing:-.2px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .desc{
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.35;
-      overflow:hidden;
-      display:-webkit-box;
-      -webkit-line-clamp:2;
-      -webkit-box-orient:vertical;
-    }
-    .tag{
-      display:inline-block;
-      margin-top:2px;
-      font-size:12px;
-      color:rgba(234,240,255,.92);
-      background:rgba(25,195,125,.10);
-      border:1px solid rgba(25,195,125,.22);
-      padding:3px 8px;
-      border-radius:999px;
-      width:max-content;
-    }
+.logo img{
+height:32px;
+}
 
-    footer{ margin:20px 0 10px; color:var(--muted); font-size:13px; }
-    .footerLinks{ margin-top:10px; border-top:1px solid var(--line); padding-top:12px; }
-    .footerLinks a{ color:var(--muted); }
-    .footerLinks a:hover{ color:var(--text); text-decoration:underline; }
-    .small{ font-size:12px; opacity:.9; }
+nav a{
+color:var(--muted);
+margin-left:14px;
+font-size:14px;
+text-decoration:none;
+}
 
-    .hidden{ display:none !important; }
-  </style>
+nav a:hover{
+color:white;
+}
 
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"CollectionPage",
-    "name":"InstantQR Tools",
-    "url":"https://instantqr.io/tools.html",
-    "description":"Explore all InstantQR tools — fast, privacy-first utilities for QR codes, conversions, network checks, crypto calculators, and more."
-  }
-  </script>
+h1{
+font-size:34px;
+margin:0 0 8px;
+}
+
+p{
+color:var(--muted);
+}
+
+.search{
+margin-top:16px;
+display:flex;
+gap:10px;
+}
+
+.search input{
+flex:1;
+padding:12px;
+border-radius:10px;
+border:1px solid var(--border);
+background:#08101d;
+color:white;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+gap:16px;
+margin-top:26px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:var(--radius);
+padding:18px;
+display:flex;
+gap:14px;
+align-items:center;
+text-decoration:none;
+color:inherit;
+transition:.15s;
+}
+
+.card:hover{
+transform:translateY(-3px);
+border-color:#3b82f6;
+}
+
+.icon{
+font-size:28px;
+width:46px;
+height:46px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,.06);
+border-radius:12px;
+}
+
+.cardTitle{
+font-weight:700;
+font-size:15px;
+}
+
+.cardDesc{
+font-size:13px;
+color:var(--muted);
+margin-top:4px;
+}
+
+.badge{
+font-size:11px;
+padding:3px 7px;
+background:rgba(255,255,255,.06);
+border-radius:6px;
+color:var(--muted);
+margin-left:auto;
+}
+
+footer{
+margin-top:40px;
+padding-top:20px;
+border-top:1px solid var(--border);
+font-size:13px;
+color:var(--muted);
+}
+
+footer a{
+color:var(--muted);
+text-decoration:none;
+margin-right:10px;
+}
+
+footer a:hover{
+color:white;
+}
+
+</style>
+
 </head>
 
 <body>
-  <div class="wrap">
-    <header>
-      <a class="brand" href="/">
-        <div class="logo" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M6 7h12M6 12h10M6 17h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <b>InstantQR</b>
-      </a>
 
-      <nav class="nav">
-        <a class="pill" href="/tools.html">All Tools</a>
-        <a class="pill" href="/wifi-qr-code-generator.html">WiFi QR</a>
-        <a class="pill" href="/url-qr-code-generator.html">URL QR</a>
-        <a class="pill" href="/unit-converter.html">Converter Hub</a>
-      </nav>
-    </header>
+<div class="wrap">
 
-    <div class="hero">
-      <h1>All Tools</h1>
-      <div class="sub">
-        Fast, clean, privacy-first utilities — no signup. Search or filter to find what you need.
-      </div>
-    </div>
+<header>
 
-    <div class="controls">
-      <div class="search" role="search" aria-label="Search tools">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M21 21l-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <input id="q" type="search" placeholder="Search tools (e.g., qr, password, ip, speed, cups, mph)..." autocomplete="off" />
-      </div>
+<div class="logo">
+<img src="/assets/instantqr-logo.svg">
+<span>InstantQR</span>
+</div>
 
-      <select id="cat" aria-label="Filter by category">
-        <option value="all" selected>All categories</option>
-        <option value="qr">QR Tools</option>
-        <option value="security">Security</option>
-        <option value="network">Network</option>
-        <option value="crypto">Crypto</option>
-        <option value="converter">Converters</option>
-        <option value="dev">Developer</option>
-        <option value="time">Time</option>
-        <option value="pages">Site Pages</option>
-      </select>
+<nav>
+<a href="/">Home</a>
+<a href="/tools.html">Tools</a>
+<a href="/about.html">About</a>
+<a href="/contact.html">Contact</a>
+</nav>
 
-      <button id="clear" type="button">Clear</button>
-    </div>
+</header>
 
-    <!-- QR TOOLS -->
-    <div class="section" data-section="qr">
-      <h2>QR Tools</h2>
-      <div class="grid">
-        <div class="card tool" data-cat="qr" data-name="WiFi QR Code Generator" data-tags="wifi qr code generator create wifi qr">
-          <a href="/wifi-qr-code-generator.html">
-            <div class="icon" aria-hidden="true">
-              <!-- WiFi -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M2.5 8.5a16 16 0 0 1 19 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M5.5 11.5a12 12 0 0 1 13 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M8.5 14.5a8 8 0 0 1 7 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 18.2h0" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">WiFi QR Generator</div>
-              <div class="desc">Create WiFi QR codes instantly. Share network access with a scan.</div>
-              <span class="tag">QR</span>
-            </div>
-          </a>
-        </div>
+<h1>All InstantQR Tools</h1>
+<p>Fast, privacy-first online utilities.</p>
 
-        <div class="card tool" data-cat="qr" data-name="URL QR Code Generator" data-tags="url qr code generator link website">
-          <a href="/url-qr-code-generator.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Link -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M10 13a5 5 0 0 1 0-7l1.5-1.5a5 5 0 0 1 7 7L17 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M14 11a5 5 0 0 1 0 7L12.5 19.5a5 5 0 0 1-7-7L7 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">URL QR Generator</div>
-              <div class="desc">Turn any link into a QR code. Download as PNG in seconds.</div>
-              <span class="tag">QR</span>
-            </div>
-          </a>
-        </div>
+<div class="search">
+<input id="search" placeholder="Search tools (QR, JSON, speed, convert...)">
+</div>
 
-        <div class="card tool" data-cat="qr" data-name="Create QR Code for WiFi" data-tags="create wifi qr code ssid password">
-          <a href="/create-qr-code-for-wifi.html">
-            <div class="icon" aria-hidden="true">
-              <!-- QR-ish -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 4h6v6H4V4Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M14 4h6v6h-6V4Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M4 14h6v6H4v-6Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M14 14h3v3h-3v-3Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M19 14h1v6h-6v-1" stroke="currentColor" stroke-width="2"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Create WiFi QR</div>
-              <div class="desc">Quick WiFi QR creation with clear steps and share-ready output.</div>
-              <span class="tag">QR</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+<div class="grid" id="grid">
 
-    <!-- SECURITY -->
-    <div class="section" data-section="security">
-      <h2>Security</h2>
-      <div class="grid">
-        <div class="card tool" data-cat="security" data-name="Password Generator" data-tags="password generator secure random">
-          <a href="/password.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Lock -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M6.5 11h11A2.5 2.5 0 0 1 20 13.5v5A2.5 2.5 0 0 1 17.5 21h-11A2.5 2.5 0 0 1 4 18.5v-5A2.5 2.5 0 0 1 6.5 11Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M12 15v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Password Generator</div>
-              <div class="desc">Generate strong passwords locally — fast, private, no signup.</div>
-              <span class="tag">Security</span>
-            </div>
-          </a>
-        </div>
+<a class="card" href="/wifi-qr-code-generator.html" data-tags="qr wifi">
+<div class="icon">📶</div>
+<div>
+<div class="cardTitle">WiFi QR Generator</div>
+<div class="cardDesc">Create QR codes for WiFi networks.</div>
+</div>
+<span class="badge">QR</span>
+</a>
 
-        <div class="card tool" data-cat="security" data-name="Password Leak Checker" data-tags="password leak check pwned">
-          <a href="/password-leak-checker.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Shield -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 2 20 6v6c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V6l8-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Password Leak Checker</div>
-              <div class="desc">Check if a password appears in known leaks (privacy-first flow).</div>
-              <span class="tag">Security</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+<a class="card" href="/url-qr-code-generator.html" data-tags="qr url">
+<div class="icon">🔗</div>
+<div>
+<div class="cardTitle">URL QR Generator</div>
+<div class="cardDesc">Convert links into QR codes.</div>
+</div>
+<span class="badge">QR</span>
+</a>
 
-    <!-- NETWORK -->
-    <div class="section" data-section="network">
-      <h2>Network</h2>
-      <div class="grid">
-        <div class="card tool" data-cat="network" data-name="IP Lookup" data-tags="ip lookup ip address geolocation isp">
-          <a href="/ip-lookup.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Globe -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 2c3 3 3 17 0 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 2c-3 3-3 17 0 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">IP Lookup</div>
-              <div class="desc">Look up IP details quickly — location, ISP, ASN (as available).</div>
-              <span class="tag">Network</span>
-            </div>
-          </a>
-        </div>
+<a class="card" href="/internet-speed-test.html" data-tags="internet speed">
+<div class="icon">⚡</div>
+<div>
+<div class="cardTitle">Internet Speed Test</div>
+<div class="cardDesc">Check download speed and latency.</div>
+</div>
+<span class="badge">Network</span>
+</a>
 
-        <div class="card tool" data-cat="network" data-name="Internet Speed Test" data-tags="internet speed test wifi speedtest download upload">
-          <a href="/internet-speed-test.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Gauge -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 13a8 8 0 1 1 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 13l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M6 20h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Internet Speed Test</div>
-              <div class="desc">Simple browser speed test with clear results — fast and clean.</div>
-              <span class="tag">Network</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+<a class="card" href="/ip-lookup.html" data-tags="ip lookup">
+<div class="icon">🌍</div>
+<div>
+<div class="cardTitle">IP Lookup</div>
+<div class="cardDesc">Find IP location and ISP.</div>
+</div>
+<span class="badge">Network</span>
+</a>
 
-    <!-- CRYPTO -->
-    <div class="section" data-section="crypto">
-      <h2>Crypto</h2>
-      <div class="grid">
-        <div class="card tool" data-cat="crypto" data-name="Crypto Profit Calculator" data-tags="crypto profit calculator roi p&l">
-          <a href="/crypto-profit-calculator.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Trend -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 16l6-6 4 4 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M20 8V4h-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Crypto Profit Calculator</div>
-              <div class="desc">Calculate P&L with fees, taxes, and precision controls.</div>
-              <span class="tag">Crypto</span>
-            </div>
-          </a>
-        </div>
+<a class="card" href="/password.html" data-tags="password generator">
+<div class="icon">🔐</div>
+<div>
+<div class="cardTitle">Password Generator</div>
+<div class="cardDesc">Generate strong passwords.</div>
+</div>
+<span class="badge">Security</span>
+</a>
 
-        <div class="card tool" data-cat="crypto" data-name="Web3 Gas Fee Estimator" data-tags="gas fee estimator ethereum polygon">
-          <a href="/web3-gas-fee-estimator.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Gas/bolt -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M13 2 4 14h7l-1 8 10-14h-7l0-6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Gas Fee Estimator</div>
-              <div class="desc">Estimate gas costs with a clean UI — quick and readable.</div>
-              <span class="tag">Crypto</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+<a class="card" href="/password-leak-checker.html" data-tags="password breach">
+<div class="icon">🛡</div>
+<div>
+<div class="cardTitle">Password Leak Checker</div>
+<div class="cardDesc">Check breach databases.</div>
+</div>
+<span class="badge">Security</span>
+</a>
 
-    <!-- CONVERTERS -->
-    <div class="section" data-section="converter">
-      <h2>Converters</h2>
-      <div class="grid">
-        <div class="card tool" data-cat="converter" data-name="Unit Converter Hub" data-tags="unit converter hub conversions">
-          <a href="/unit-converter.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Swap -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M7 7h14l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M17 17H3l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Unit Converter Hub</div>
-              <div class="desc">All conversions in one place — fast and mobile-friendly.</div>
-              <span class="tag">Converters</span>
-            </div>
-          </a>
-        </div>
+<a class="card" href="/unit-converter.html" data-tags="unit convert">
+<div class="icon">📏</div>
+<div>
+<div class="cardTitle">Unit Converter</div>
+<div class="cardDesc">Convert measurements instantly.</div>
+</div>
+<span class="badge">Converter</span>
+</a>
 
-        <!-- Split conversion pages -->
-        <div class="card tool" data-cat="converter" data-name="Cups to Grams" data-tags="cups to grams water">
-          <a href="/cups-to-grams.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Beaker -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M9 2v6l-4 8a5 5 0 0 0 4.5 6h5A5 5 0 0 0 19 16l-4-8V2" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M8 8h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Cups → Grams</div>
-              <div class="desc">Convert US cups to grams (water reference).</div>
-              <span class="tag">Converters</span>
-            </div>
-          </a>
-        </div>
+<a class="card" href="/world-clock.html" data-tags="world clock">
+<div class="icon">🕒</div>
+<div>
+<div class="cardTitle">World Clock</div>
+<div class="cardDesc">Compare global time zones.</div>
+</div>
+<span class="badge">Time</span>
+</a>
 
-        <div class="card tool" data-cat="converter" data-name="Grams to Cups" data-tags="grams to cups water">
-          <a href="/grams-to-cups.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Scale -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 3v18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M5 7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M7 7l-3 6h6l-3-6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M17 7l-3 6h6l-3-6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Grams → Cups</div>
-              <div class="desc">Convert grams to US cups (water reference).</div>
-              <span class="tag">Converters</span>
-            </div>
-          </a>
-        </div>
+<a class="card" href="/crypto-profit-calculator.html" data-tags="crypto profit">
+<div class="icon">📈</div>
+<div>
+<div class="cardTitle">Crypto Profit Calculator</div>
+<div class="cardDesc">Calculate crypto ROI.</div>
+</div>
+<span class="badge">Crypto</span>
+</a>
 
-        <div class="card tool" data-cat="converter" data-name="Pounds to Kilograms" data-tags="lbs to kg pounds kilograms">
-          <a href="/lbs-to-kg.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Weight -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M8 7a4 4 0 0 1 8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M6 7h12l2 14H4L6 7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">lbs → kg</div>
-              <div class="desc">Convert pounds to kilograms instantly.</div>
-              <span class="tag">Converters</span>
-            </div>
-          </a>
-        </div>
+<a class="card" href="/web3-gas-fee-estimator.html" data-tags="web3 gas">
+<div class="icon">⛽</div>
+<div>
+<div class="cardTitle">Web3 Gas Fee Estimator</div>
+<div class="cardDesc">Estimate Ethereum gas costs.</div>
+</div>
+<span class="badge">Crypto</span>
+</a>
 
-        <div class="card tool" data-cat="converter" data-name="Kilograms to Pounds" data-tags="kg to lbs kilograms pounds">
-          <a href="/kg-to-lbs.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Weight -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M8 7a4 4 0 0 1 8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M6 7h12l2 14H4L6 7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M9.5 14h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">kg → lbs</div>
-              <div class="desc">Convert kilograms to pounds instantly.</div>
-              <span class="tag">Converters</span>
-            </div>
-          </a>
-        </div>
+<a class="card" href="/json-formatter.html" data-tags="json formatter dev">
+<div class="icon">🧾</div>
+<div>
+<div class="cardTitle">JSON Formatter</div>
+<div class="cardDesc">Format and validate JSON.</div>
+</div>
+<span class="badge">Dev</span>
+</a>
 
-        <div class="card tool" data-cat="converter" data-name="Inches to Centimeters" data-tags="inches to cm in to cm">
-          <a href="/inches-to-cm.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Ruler -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 8h16v8H4V8Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M7 8v3M10 8v2M13 8v3M16 8v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">in → cm</div>
-              <div class="desc">Convert inches to centimeters instantly.</div>
-              <span class="tag">Converters</span>
-            </div>
-          </a>
-        </div>
+<a class="card" href="/base64-encoder.html" data-tags="base64 encode decode">
+<div class="icon">🧬</div>
+<div>
+<div class="cardTitle">Base64 Encoder</div>
+<div class="cardDesc">Encode or decode Base64.</div>
+</div>
+<span class="badge">Dev</span>
+</a>
 
-        <div class="card tool" data-cat="converter" data-name="Centimeters to Inches" data-tags="cm to inches cm to in">
-          <a href="/cm-to-inches.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Ruler -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 8h16v8H4V8Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M7 16v-3M10 16v-2M13 16v-3M16 16v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">cm → in</div>
-              <div class="desc">Convert centimeters to inches instantly.</div>
-              <span class="tag">Converters</span>
-            </div>
-          </a>
-        </div>
+</div>
 
-        <div class="card tool" data-cat="converter" data-name="MPH to KMH" data-tags="mph to kmh mph to km/h">
-          <a href="/mph-to-kmh.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Speed -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 13a8 8 0 1 1 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 13l5-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M7 20h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">mph → km/h</div>
-              <div class="desc">Convert mph to km/h instantly.</div>
-              <span class="tag">Converters</span>
-            </div>
-          </a>
-        </div>
+<footer>
 
-        <div class="card tool" data-cat="converter" data-name="KMH to MPH" data-tags="kmh to mph km/h to mph">
-          <a href="/kmh-to-mph.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Speed -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 13a8 8 0 1 1 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 13l-5-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M7 20h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">km/h → mph</div>
-              <div class="desc">Convert km/h to mph instantly.</div>
-              <span class="tag">Converters</span>
-            </div>
-          </a>
-        </div>
+<div>
+<a href="/privacy.html">Privacy</a>
+<a href="/terms.html">Terms</a>
+<a href="/contact.html">Contact</a>
+<a href="/sitemap.xml">Sitemap</a>
+</div>
 
-        <div class="card tool" data-cat="converter" data-name="Fahrenheit to Celsius" data-tags="fahrenheit to celsius f to c">
-          <a href="/f-to-c.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Thermometer -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M14 14.76V5a2 2 0 0 0-4 0v9.76a4 4 0 1 0 4 0Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M12 17a2 2 0 0 0 0-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">°F → °C</div>
-              <div class="desc">Convert Fahrenheit to Celsius instantly.</div>
-              <span class="tag">Converters</span>
-            </div>
-          </a>
-        </div>
+<div style="margin-top:6px;">
+© <span id="year"></span> InstantQR.io
+</div>
 
-        <div class="card tool" data-cat="converter" data-name="Celsius to Fahrenheit" data-tags="celsius to fahrenheit c to f">
-          <a href="/c-to-f.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Thermometer -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M14 14.76V5a2 2 0 0 0-4 0v9.76a4 4 0 1 0 4 0Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M12 17a2 2 0 0 1 0-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">°C → °F</div>
-              <div class="desc">Convert Celsius to Fahrenheit instantly.</div>
-              <span class="tag">Converters</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+</footer>
 
-    <!-- TIME -->
-    <div class="section" data-section="time">
-      <h2>Time</h2>
-      <div class="grid">
-        <div class="card tool" data-cat="time" data-name="World Clock" data-tags="world clock time zones">
-          <a href="/world-clock.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Clock -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">World Clock</div>
-              <div class="desc">Compare time zones quickly with a clean UI.</div>
-              <span class="tag">Time</span>
-            </div>
-          </a>
-        </div>
+</div>
 
-        <div class="card tool" data-cat="time" data-name="Time Zone Converter" data-tags="time zone converter iana">
-          <a href="/time-zone-converter.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Arrows -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M7 7h10l-2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M17 17H7l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Time Zone Converter</div>
-              <div class="desc">Convert times across IANA time zones.</div>
-              <span class="tag">Time</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+<script>
 
-    <!-- SITE PAGES -->
-    <div class="section" data-section="pages">
-      <h2>Site Pages</h2>
-      <div class="grid">
-        <div class="card tool" data-cat="pages" data-name="About" data-tags="about instantqr">
-          <a href="/about.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Info -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M12 10v7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 7h0" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">About</div>
-              <div class="desc">Learn what InstantQR is and why we built it.</div>
-              <span class="tag">Pages</span>
-            </div>
-          </a>
-        </div>
+document.getElementById("year").textContent = new Date().getFullYear()
 
-        <div class="card tool" data-cat="pages" data-name="Privacy Policy" data-tags="privacy policy">
-          <a href="/privacy.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Eye-off -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M3 3l18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M9.5 5.5A10.5 10.5 0 0 1 12 5c5.5 0 10 7 10 7a19.5 19.5 0 0 1-3.2 3.9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M6.2 6.2C3.9 7.8 2 10.5 2 12.0c0 0 4.5 7 10 7 1 0 2-.2 3-.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Privacy</div>
-              <div class="desc">How we handle data (privacy-first).</div>
-              <span class="tag">Pages</span>
-            </div>
-          </a>
-        </div>
+const search = document.getElementById("search")
+const cards = document.querySelectorAll(".card")
 
-        <div class="card tool" data-cat="pages" data-name="Terms" data-tags="terms conditions">
-          <a href="/terms.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Document -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M7 3h7l3 3v15H7V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M14 3v3h3" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M9 12h6M9 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Terms</div>
-              <div class="desc">Terms of use for InstantQR tools.</div>
-              <span class="tag">Pages</span>
-            </div>
-          </a>
-        </div>
+search.addEventListener("input",()=>{
 
-        <div class="card tool" data-cat="pages" data-name="Contact" data-tags="contact support">
-          <a href="/contact.html">
-            <div class="icon" aria-hidden="true">
-              <!-- Mail -->
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="meta">
-              <div class="name">Contact</div>
-              <div class="desc">Get in touch with the InstantQR team.</div>
-              <span class="tag">Pages</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+let q = search.value.toLowerCase()
 
-    <footer>
-      <div class="small">© <span id="y"></span> InstantQR — fast, privacy-first web tools.</div>
-      <div class="footerLinks">
-        <div style="margin-bottom:8px;">
-          <a href="/">Home</a> ·
-          <a href="/tools.html">All Tools</a> ·
-          <a href="/wifi-qr-code-generator.html">WiFi QR</a> ·
-          <a href="/url-qr-code-generator.html">URL QR</a> ·
-          <a href="/unit-converter.html">Converter Hub</a>
-        </div>
-        <div>
-          <a href="/about.html">About</a> ·
-          <a href="/privacy.html">Privacy</a> ·
-          <a href="/terms.html">Terms</a> ·
-          <a href="/contact.html">Contact</a>
-        </div>
-      </div>
-    </footer>
-  </div>
+cards.forEach(card=>{
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+let text = card.dataset.tags + card.innerText.toLowerCase()
 
-    const q = document.getElementById('q');
-    const cat = document.getElementById('cat');
-    const clear = document.getElementById('clear');
-    const tools = Array.from(document.querySelectorAll('.tool'));
-    const sections = Array.from(document.querySelectorAll('.section'));
+card.style.display = text.includes(q) ? "flex":"none"
 
-    function norm(s){ return (s||'').toLowerCase().trim(); }
+})
 
-    function applyFilters(){
-      const query = norm(q.value);
-      const c = cat.value;
+})
 
-      tools.forEach(card => {
-        const name = norm(card.dataset.name);
-        const tags = norm(card.dataset.tags);
-        const okQuery = !query || name.includes(query) || tags.includes(query);
-        const okCat = (c === 'all') || (card.dataset.cat === c);
-        card.classList.toggle('hidden', !(okQuery && okCat));
-      });
+</script>
 
-      // Hide entire sections if empty after filtering
-      sections.forEach(sec => {
-        const visible = sec.querySelectorAll('.tool:not(.hidden)').length > 0;
-        sec.classList.toggle('hidden', !visible);
-      });
-    }
-
-    q.addEventListener('input', applyFilters);
-    cat.addEventListener('change', applyFilters);
-    clear.addEventListener('click', () => {
-      q.value = '';
-      cat.value = 'all';
-      applyFilters();
-      q.focus();
-    });
-
-    applyFilters();
-  </script>
 </body>
 </html>
