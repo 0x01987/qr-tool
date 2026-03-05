@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Snake | InstantQR</title>
+  <meta name="description" content="Play Snake: eat food, grow longer, avoid walls and yourself. Fast, responsive, mobile-friendly." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/snake.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <meta name="theme-color" content="#0b0f19" />
+
+  <style>
+    :root{
+      --bg:#0b1220; --text:#e7eefc; --muted:#a9b7d6;
+      --border:rgba(255,255,255,.10); --shadow:0 12px 40px rgba(0,0,0,.45);
+      --radius:20px; --max:980px;
+      --panel:rgba(255,255,255,.05);
+      --brand:#3b82f6; --ok:#22c55e; --bad:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(59,130,246,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(34,197,94,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+      min-height:100vh;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:18px}
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 11, 20, .55);
+      border-bottom:1px solid var(--border);
+    }
+    header .inner{
+      max-width:var(--max);margin:0 auto;padding:14px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900}
+    .brand img{height:32px}
+    nav{display:flex;gap:10px;flex-wrap:wrap}
+    nav a{color:var(--muted);font-size:14px;padding:8px 10px;border-radius:12px}
+    nav a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+    @media(max-width:560px){nav{display:none}}
+
+    .card{
+      margin-top:18px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .top{padding:16px 16px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+    h1{margin:0 0 6px;font-size:clamp(22px,3.2vw,32px)}
+    .sub{margin:0;color:var(--muted);line-height:1.5}
+
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px 16px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:10px 14px;border-radius:999px;font-weight:800;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);color:var(--text);
+      cursor:pointer;user-select:none;
+    }
+    .btn.primary{
+      border:0;
+      background: linear-gradient(135deg, rgba(59,130,246,1), rgba(59,130,246,.78));
+      box-shadow: 0 14px 28px rgba(59,130,246,.22);
+    }
+    .stats{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+    .pill{padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.12)}
+
+    .gameWrap{padding:14px 16px 18px;display:flex;justify-content:center}
+    canvas{
+      width:min(520px, 92vw);
+      height:min(520px, 92vw);
+      max-height:62vh;
+      background: rgba(0,0,0,.20);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+      touch-action: none;
+    }
+    .hint{padding:0 16px 16px;color:var(--muted);font-size:13px;line-height:1.5}
+  </style>
+</head>
+<body>
+<header>
+  <div class="inner">
+    <a class="brand" href="/" aria-label="InstantQR Home">
+      <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+      <span>InstantQR</span>
+    </a>
+    <nav>
+      <a href="/tools.html">All Tools</a>
+      <a href="/games.html">Games</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card" aria-label="Snake">
+    <div class="top">
+      <h1>Snake</h1>
+      <p class="sub">Arrow keys or swipe. Eat food, grow longer, don’t crash.</p>
+    </div>
+
+    <div class="row">
+      <div class="stats">
+        <span class="pill">Score: <strong id="score">0</strong></span>
+        <span class="pill">Best: <strong id="best">0</strong></span>
+        <span class="pill">Speed: <strong id="spd">8</strong> t/s</span>
+      </div>
+      <div class="stats">
+        <select id="speed" class="pill" style="background:rgba(0,0,0,.12);color:var(--text);border:1px solid rgba(255,255,255,.10)">
+          <option value="7">Easy</option>
+          <option value="8" selected>Normal</option>
+          <option value="10">Hard</option>
+          <option value="12">Insane</option>
+        </select>
+        <button class="btn primary" id="startBtn" type="button">Start</button>
+        <button class="btn" id="resetBtn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="gameWrap">
+      <canvas id="cv" width="520" height="520" aria-label="Snake canvas"></canvas>
+    </div>
+
+    <div class="hint">
+      Mobile: swipe in the direction you want to go. Desktop: arrow keys.
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const cv = document.getElementById('cv');
+  const ctx = cv.getContext('2d');
+
+  const scoreEl = document.getElementById('score');
+  const bestEl  = document.getElementById('best');
+  const spdEl   = document.getElementById('spd');
+  const speedSel= document.getElementById('speed');
+  const startBtn= document.getElementById('startBtn');
+  const resetBtn= document.getElementById('resetBtn');
+
+  const KEY_BEST = "instantqr_snake_best";
+
+  const N = 20;                 // grid size
+  const cell = cv.width / N;    // cell px
+  let tickRate = 8;             // ticks per second
+  let timer = null;
+  let running = false;
+
+  let snake, dir, nextDir, food, score, best;
+
+  function loadBest(){
+    const v = Number(localStorage.getItem(KEY_BEST) || '0');
+    return Number.isFinite(v) ? v : 0;
+  }
+  function saveBest(v){ localStorage.setItem(KEY_BEST, String(v)); }
+
+  function randCell(){
+    return { x: Math.floor(Math.random()*N), y: Math.floor(Math.random()*N) };
+  }
+
+  function spawnFood(){
+    while(true){
+      const f = randCell();
+      if(!snake.some(s => s.x===f.x && s.y===f.y)){
+        food = f; return;
+      }
+    }
+  }
+
+  function reset(){
+    best = loadBest();
+    score = 0;
+    dir = {x:1,y:0};
+    nextDir = {x:1,y:0};
+    snake = [{x:5,y:10},{x:4,y:10},{x:3,y:10}];
+    spawnFood();
+    render();
+    updateHUD();
+  }
+
+  function updateHUD(){
+    scoreEl.textContent = score;
+    bestEl.textContent = best;
+    spdEl.textContent = tickRate;
+  }
+
+  function start(){
+    if(running) return;
+    running = true;
+    startBtn.textContent = "Running…";
+    startBtn.disabled = true;
+    speedSel.disabled = true;
+    timer = setInterval(step, 1000 / tickRate);
+  }
+
+  function stop(msg){
+    running = false;
+    clearInterval(timer);
+    timer = null;
+    startBtn.textContent = "Start";
+    startBtn.disabled = false;
+    speedSel.disabled = false;
+    if(msg) drawOverlay(msg);
+  }
+
+  function step(){
+    dir = nextDir;
+
+    const head = snake[0];
+    const nx = head.x + dir.x;
+    const ny = head.y + dir.y;
+
+    // wall
+    if(nx<0 || nx>=N || ny<0 || ny>=N){
+      endGame(); return;
+    }
+
+    // self collision (allow tail move by checking after shift? easiest: check against full snake except last)
+    const bodyToCheck = snake.slice(0, snake.length-1);
+    if(bodyToCheck.some(s => s.x===nx && s.y===ny)){
+      endGame(); return;
+    }
+
+    // move
+    snake.unshift({x:nx,y:ny});
+
+    // eat
+    if(nx===food.x && ny===food.y){
+      score += 1;
+      if(score > best){ best = score; saveBest(best); }
+      spawnFood();
+    } else {
+      snake.pop();
+    }
+
+    render();
+    updateHUD();
+  }
+
+  function endGame(){
+    render();
+    stop("Game Over");
+  }
+
+  function drawOverlay(text){
+    ctx.save();
+    ctx.fillStyle = "rgba(0,0,0,.45)";
+    ctx.fillRect(0,0,cv.width,cv.height);
+    ctx.fillStyle = "#e7eefc";
+    ctx.font = "900 36px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(text, cv.width/2, cv.height/2 - 6);
+    ctx.font = "600 14px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+    ctx.fillStyle = "rgba(233,238,252,.75)";
+    ctx.fillText("Tap Start to play again", cv.width/2, cv.height/2 + 24);
+    ctx.restore();
+  }
+
+  function render(){
+    // background
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.fillStyle = "rgba(0,0,0,.18)";
+    ctx.fillRect(0,0,cv.width,cv.height);
+
+    // subtle grid
+    ctx.strokeStyle = "rgba(255,255,255,.04)";
+    for(let i=1;i<N;i++){
+      ctx.beginPath(); ctx.moveTo(i*cell,0); ctx.lineTo(i*cell,cv.height); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0,i*cell); ctx.lineTo(cv.width,i*cell); ctx.stroke();
+    }
+
+    // food
+    ctx.fillStyle = "rgba(239,68,68,.85)";
+    ctx.beginPath();
+    ctx.arc((food.x+0.5)*cell, (food.y+0.5)*cell, cell*0.32, 0, Math.PI*2);
+    ctx.fill();
+
+    // snake
+    for(let i=0;i<snake.length;i++){
+      const s = snake[i];
+      ctx.fillStyle = i===0 ? "rgba(34,197,94,.90)" : "rgba(34,197,94,.60)";
+      const pad = cell*0.12;
+      ctx.fillRect(s.x*cell+pad, s.y*cell+pad, cell-pad*2, cell-pad*2);
+    }
+  }
+
+  // controls
+  function setDir(dx,dy){
+    // block reverse
+    if(dx === -dir.x && dy === -dir.y) return;
+    nextDir = {x:dx,y:dy};
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) e.preventDefault();
+    if(e.key==='ArrowLeft') setDir(-1,0);
+    if(e.key==='ArrowRight') setDir(1,0);
+    if(e.key==='ArrowUp') setDir(0,-1);
+    if(e.key==='ArrowDown') setDir(0,1);
+  }, { passive:false });
+
+  // swipe
+  let sx=0, sy=0, active=false;
+  cv.addEventListener('pointerdown', (e) => {
+    active=true; sx=e.clientX; sy=e.clientY;
+    cv.setPointerCapture(e.pointerId);
+  });
+  cv.addEventListener('pointerup', (e) => {
+    if(!active) return;
+    active=false;
+    const dx = e.clientX - sx;
+    const dy = e.clientY - sy;
+    const ax = Math.abs(dx), ay = Math.abs(dy);
+    if(Math.max(ax,ay) < 18) return;
+
+    if(ax > ay){
+      setDir(dx > 0 ? 1 : -1, 0);
+    } else {
+      setDir(0, dy > 0 ? 1 : -1);
+    }
+  });
+
+  speedSel.addEventListener('change', () => {
+    tickRate = Number(speedSel.value || '8');
+    updateHUD();
+    if(running){
+      clearInterval(timer);
+      timer = setInterval(step, 1000 / tickRate);
+    }
+  });
+
+  startBtn.addEventListener('click', start);
+  resetBtn.addEventListener('click', () => { stop(); reset(); });
+
+  tickRate = Number(speedSel.value || '8');
+  reset();
+})();
+</script>
+</body>
+</html>
