@@ -11,28 +11,24 @@
   </script>
 
   <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+  <script async src="https://pagead2.googletagmanager.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <title>WHOIS Lookup (Free Domain WHOIS & RDAP Search) | InstantQR</title>
-  <meta name="description" content="Free WHOIS lookup for any domain. Check registrar, registration dates, status, and nameservers using RDAP. Fast, privacy-first, runs in your browser." />
+  <meta name="description" content="Free WHOIS lookup for any domain. Check registrar, registration dates, status, and nameservers using RDAP. Fast and privacy-first." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://instantqr.io/whois-lookup.html" />
   <link rel="icon" href="/assets/instantqr-logo.svg" />
 
-  <!-- Open Graph -->
   <meta property="og:title" content="WHOIS Lookup (Free Domain WHOIS & RDAP Search) | InstantQR" />
-  <meta property="og:description" content="Lookup domain ownership details: registrar, dates, status, nameservers. Free and fast." />
+  <meta property="og:description" content="Lookup registrar, dates, status, nameservers. Free and fast." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://instantqr.io/whois-lookup.html" />
 
-  <!-- Twitter/X -->
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="WHOIS Lookup (Free Domain WHOIS & RDAP Search) | InstantQR" />
-  <meta name="twitter:description" content="Free WHOIS lookup for any domain — registrar, dates, status, nameservers." />
 
   <!-- FAQ Structured Data -->
   <script type="application/ld+json">
@@ -40,21 +36,9 @@
     "@context":"https://schema.org",
     "@type":"FAQPage",
     "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is a WHOIS lookup?",
-        "acceptedAnswer":{"@type":"Answer","text":"A WHOIS lookup shows public registration details for a domain (like registrar, registration/expiration dates, status codes, and nameservers). Many registries now provide this via RDAP, a modern replacement for classic WHOIS."}
-      },
-      {
-        "@type":"Question",
-        "name":"Does this tool store my searches?",
-        "acceptedAnswer":{"@type":"Answer","text":"No. Your input is processed in your browser. The lookup request is sent to a public RDAP endpoint to retrieve domain registration data. InstantQR does not store your queries."}
-      },
-      {
-        "@type":"Question",
-        "name":"Why do some domains hide owner details?",
-        "acceptedAnswer":{"@type":"Answer","text":"Many registrars or registries redact personal data for privacy and legal reasons. You may still see registrar info, dates, status, and nameservers even when registrant details are hidden."}
-      }
+      {"@type":"Question","name":"What is a WHOIS lookup?","acceptedAnswer":{"@type":"Answer","text":"A WHOIS lookup shows public registration details for a domain (registrar, dates, status, nameservers). Modern registries provide this via RDAP."}},
+      {"@type":"Question","name":"Is this WHOIS tool private?","acceptedAnswer":{"@type":"Answer","text":"InstantQR does not store your queries. Your browser requests RDAP data from public endpoints to display results."}},
+      {"@type":"Question","name":"Why are some owner details hidden?","acceptedAnswer":{"@type":"Answer","text":"Many registries redact personal data for privacy reasons. You may still see registrar, dates, status, and nameservers."}}
     ]
   }
   </script>
@@ -101,7 +85,6 @@
     h1{margin:0 0 6px;font-size:22px}
     .sub{margin:0 0 12px;color:var(--muted);line-height:1.55}
     .label{font-size:13px;color:var(--muted);margin:10px 0 6px}
-    .row{display:flex;gap:10px;flex-wrap:wrap}
     input{
       width:100%;
       padding:12px 12px;
@@ -120,12 +103,13 @@
       border-radius:12px;
       padding:10px 12px;
       cursor:pointer;
-      font-weight:700;
+      font-weight:800;
       color:var(--text);
       background:rgba(255,255,255,.08);
     }
     button.primary{background:var(--brand);border-color:rgba(31,111,235,.55)}
     button:disabled{opacity:.6;cursor:not-allowed}
+
     .pillbar{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 0}
     .pill{
       border:1px solid var(--line);
@@ -162,7 +146,7 @@
       background:rgba(0,0,0,.16);
     }
     .kvc .k{font-size:12px;color:var(--muted);margin-bottom:6px}
-    .kvc .v{font-weight:700; word-break:break-word}
+    .kvc .v{font-weight:800; word-break:break-word}
 
     .list{
       margin-top:12px;
@@ -183,7 +167,7 @@
       border-radius:12px;
       padding:10px 12px;
     }
-    summary{cursor:pointer;font-weight:800}
+    summary{cursor:pointer;font-weight:900}
     pre{
       margin:10px 0 0;
       overflow:auto;
@@ -195,12 +179,10 @@
       color:rgba(234,242,255,.85);
       font-size:12.5px;
       line-height:1.45;
+      white-space:pre-wrap;
+      word-break:break-word;
     }
 
-    .footerLinks{margin-top:14px;font-size:14px;color:var(--muted)}
-    .footerLinks a{color:var(--muted);text-decoration:none}
-    .footerLinks a:hover{color:var(--text)}
-    .hr{height:1px;background:var(--line);margin:14px 0}
     .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
     .chip{
       border:1px solid var(--line);
@@ -230,18 +212,15 @@
     </header>
 
     <div class="grid">
-      <!-- LEFT: Tool -->
       <section class="card">
         <h1>WHOIS Lookup (Domain Search)</h1>
         <p class="sub">
-          Check public domain registration details like <b>registrar</b>, <b>status</b>, <b>registration/expiration</b>, and <b>nameservers</b>.
-          This tool uses <b>RDAP</b> (modern WHOIS).
+          Look up domain registration info: <b>registrar</b>, <b>status</b>, <b>dates</b>, and <b>nameservers</b>.
+          Uses <b>RDAP</b> (modern WHOIS). Built for speed on mobile + desktop.
         </p>
 
         <div class="label">Enter a domain</div>
-        <div class="row">
-          <input id="domain" inputmode="url" autocomplete="off" spellcheck="false" placeholder="example.com" aria-label="Domain input" />
-        </div>
+        <input id="domain" inputmode="url" autocomplete="off" spellcheck="false" placeholder="example.com" aria-label="Domain input" />
 
         <div class="btns">
           <button class="primary" id="lookupBtn">Lookup</button>
@@ -249,9 +228,10 @@
           <button id="copyLinkBtn" type="button">Copy Share Link</button>
         </div>
 
-        <div class="pillbar" aria-label="Quick info">
+        <div class="pillbar">
           <div class="pill"><span>Status:</span> <b id="statusPill">—</b></div>
-          <div class="pill"><span>RDAP Source:</span> <b id="sourcePill">—</b></div>
+          <div class="pill"><span>Source:</span> <b id="sourcePill">—</b></div>
+          <div class="pill"><span>Time:</span> <b id="timePill">—</b></div>
         </div>
 
         <div id="message" class="msg" style="display:none;"></div>
@@ -268,87 +248,43 @@
           <ul id="nsList"></ul>
         </div>
 
-        <div class="list" id="eventsBox" style="display:none;">
-          <h2>Key Events</h2>
-          <ul id="eventsList"></ul>
-        </div>
-
         <details id="rawBox" style="display:none;">
           <summary>Raw RDAP JSON</summary>
           <pre id="raw"></pre>
         </details>
 
-        <div class="hr"></div>
-
-        <div class="small">
-          <b>Privacy note:</b> Some registries redact personal data. You may not see registrant name/email for many domains.
-          This tool is for domain diagnostics, ownership research, and configuration troubleshooting.
-        </div>
-
         <div class="chips" aria-label="Related tools">
           <a class="chip" href="/dns-lookup.html">DNS Lookup</a>
           <a class="chip" href="/ip-lookup.html">IP Lookup</a>
           <a class="chip" href="/internet-speed-test.html">Speed Test</a>
-          <a class="chip" href="/password-leak-checker.html">Password Leak Check</a>
           <a class="chip" href="/json-formatter.html">JSON Formatter</a>
+          <a class="chip" href="/base64-encoder.html">Base64</a>
         </div>
 
-        <div class="footerLinks">
-          <div style="margin-bottom:8px;">
-            <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
-            <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
-            <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
-            <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
-            <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
-          </div>
-          <div>
-            <a href="/about.html">About</a> ·
-            <a href="/privacy.html">Privacy</a> ·
-            <a href="/terms.html">Terms</a> ·
-            <a href="/contact.html">Contact</a>
-          </div>
+        <div class="small" style="margin-top:12px;">
+          <b>Note:</b> Many registries redact owner details. This tool focuses on registrar, dates, status, and nameservers.
         </div>
       </section>
 
-      <!-- RIGHT: SEO Content -->
       <aside class="card">
-        <h2 style="margin:0 0 6px;font-size:18px;">What WHOIS shows</h2>
-        <p class="sub" style="margin-bottom:10px;">
-          WHOIS data helps you verify domain ownership signals and troubleshoot DNS issues.
-          RDAP is the modern, structured way to access domain registration information.
+        <h2 style="margin:0 0 6px;font-size:18px;">How to use WHOIS lookup</h2>
+        <p class="sub">
+          Enter a domain (like <b>example.com</b>). You’ll see registrar, dates, status codes, and nameservers.
+          Great for domain transfers, DNS troubleshooting, and security checks.
         </p>
 
         <div class="list">
-          <h2>Common use cases</h2>
+          <h2>Common reasons to use this</h2>
           <ul>
-            <li><b>Verify registrar</b> before transferring a domain.</li>
-            <li><b>Check expiration</b> dates to prevent downtime.</li>
-            <li><b>Confirm nameservers</b> when DNS changes aren’t propagating.</li>
-            <li><b>Investigate domain status</b> codes (e.g., clientTransferProhibited).</li>
-          </ul>
-        </div>
-
-        <div class="list">
-          <h2>Domain status codes (examples)</h2>
-          <ul>
-            <li><code>clientTransferProhibited</code> — registrar lock enabled.</li>
-            <li><code>clientUpdateProhibited</code> — updates restricted.</li>
-            <li><code>pendingDelete</code> — domain is pending deletion.</li>
-          </ul>
-        </div>
-
-        <div class="list">
-          <h2>Tips for better results</h2>
-          <ul>
-            <li>Enter only the domain (e.g., <code>example.com</code>), not a full URL.</li>
-            <li>If results look incomplete, the registry may redact fields for privacy.</li>
-            <li>Use <a href="/dns-lookup.html" style="color:var(--text)">DNS Lookup</a> to verify records after updates.</li>
+            <li>Check <b>expiration</b> before a domain goes down</li>
+            <li>Confirm <b>nameservers</b> after DNS changes</li>
+            <li>See if a domain is <b>locked</b> (transfer prohibited)</li>
+            <li>Investigate suspicious domains quickly</li>
           </ul>
         </div>
 
         <div class="msg warn">
-          <b>Note:</b> This page uses public RDAP endpoints. If a particular endpoint blocks browser requests,
-          the tool will automatically try another source.
+          <b>Reliability:</b> Some RDAP servers block browser requests (CORS). This page automatically falls back to CORS-friendly sources so it still works on GitHub Pages.
         </div>
       </aside>
     </div>
@@ -365,6 +301,7 @@
 
   const statusPill = $('statusPill');
   const sourcePill = $('sourcePill');
+  const timePill = $('timePill');
 
   const message = $('message');
   const kv = $('kv');
@@ -376,33 +313,31 @@
   const nsBox = $('nsBox');
   const nsList = $('nsList');
 
-  const eventsBox = $('eventsBox');
-  const eventsList = $('eventsList');
-
   const rawBox = $('rawBox');
   const rawEl = $('raw');
+
+  // Small in-memory + session cache for speed
+  const memCache = new Map();
+  const SKEY = 'iq_whois_cache_v1';
 
   function setMsg(type, html){
     message.className = 'msg ' + (type || '');
     message.innerHTML = html;
     message.style.display = 'block';
   }
-
   function hideMsg(){
     message.style.display = 'none';
     message.innerHTML = '';
   }
-
   function resetUI(){
     hideMsg();
     statusPill.textContent = '—';
     sourcePill.textContent = '—';
+    timePill.textContent = '—';
     kv.style.display = 'none';
     nsBox.style.display = 'none';
-    eventsBox.style.display = 'none';
     rawBox.style.display = 'none';
     nsList.innerHTML = '';
-    eventsList.innerHTML = '';
     rawEl.textContent = '';
     registrarEl.textContent = '—';
     domainStatusEl.textContent = '—';
@@ -412,20 +347,13 @@
 
   function normalizeDomain(input){
     let s = String(input || '').trim().toLowerCase();
-
-    // remove protocol and path if user pasted a URL
     s = s.replace(/^https?:\/\//, '');
     s = s.split('/')[0];
-
-    // remove trailing dot
     s = s.replace(/\.$/, '');
-
-    // basic validation: must contain a dot and allowed chars
     if (!s || s.length < 3) return '';
     if (!s.includes('.')) return '';
     if (!/^[a-z0-9.-]+$/.test(s)) return '';
     if (s.includes('..')) return '';
-    if (s.startsWith('-') || s.endsWith('-')) return '';
     return s;
   }
 
@@ -436,8 +364,13 @@
     return d.toLocaleString(undefined, { year:'numeric', month:'short', day:'2-digit' });
   }
 
+  function pickEvent(rdap, action){
+    const events = Array.isArray(rdap.events) ? rdap.events : [];
+    const ev = events.find(e => e && e.eventAction === action);
+    return ev ? ev.eventDate : '';
+  }
+
   function pickRegistrar(rdap){
-    // RDAP often includes entities; registrar is commonly an entity with role "registrar"
     const ents = Array.isArray(rdap.entities) ? rdap.entities : [];
     const regEnt = ents.find(e => Array.isArray(e.roles) && e.roles.includes('registrar'));
     if (regEnt){
@@ -448,138 +381,7 @@
       }
       if (regEnt.handle) return String(regEnt.handle);
     }
-    // fallback
-    if (rdap.registrar) return String(rdap.registrar);
     return '—';
-  }
-
-  function pickEvent(rdap, action){
-    const events = Array.isArray(rdap.events) ? rdap.events : [];
-    const ev = events.find(e => e && e.eventAction === action);
-    return ev ? ev.eventDate : '';
-  }
-
-  function safeText(x){
-    if (x === null || x === undefined) return '';
-    return String(x);
-  }
-
-  async function fetchJson(url){
-    const res = await fetch(url, { method:'GET', headers:{ 'accept':'application/rdap+json, application/json' } });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
-  }
-
-  async function lookup(domain){
-    resetUI();
-    hideMsg();
-
-    const d = normalizeDomain(domain);
-    if (!d){
-      setMsg('bad', `<b>Invalid domain.</b> Enter a domain like <b>example.com</b> (no spaces).`);
-      return;
-    }
-
-    domainEl.value = d;
-    lookupBtn.disabled = true;
-    statusPill.textContent = 'Loading…';
-    sourcePill.textContent = '—';
-
-    // Public RDAP endpoints that often allow browser fetch (CORS can vary).
-    // We'll try multiple in order and use the first that works.
-    const candidates = [
-      { name: 'rdap.org', url: `https://rdap.org/domain/${encodeURIComponent(d)}` },
-      { name: 'OpenRDAP', url: `https://rdap.arin.net/registry/domain/${encodeURIComponent(d)}` }, // may not support all TLDs
-      { name: 'IANA RDAP', url: `https://rdap.iana.org/domain/${encodeURIComponent(d)}` } // mostly for infrastructure
-    ];
-
-    let rdap = null;
-    let source = null;
-    let lastErr = null;
-
-    for (const c of candidates){
-      try{
-        const json = await fetchJson(c.url);
-        // sanity: expect object with "ldhName" or "handle" or "objectClassName"
-        if (json && typeof json === 'object'){
-          rdap = json;
-          source = c.name;
-          break;
-        }
-      } catch (e){
-        lastErr = e;
-      }
-    }
-
-    lookupBtn.disabled = false;
-
-    if (!rdap){
-      statusPill.textContent = 'Error';
-      sourcePill.textContent = '—';
-      setMsg('bad',
-        `<b>Lookup failed.</b> This can happen if the RDAP endpoint blocks browser requests or the domain/TLD isn’t supported by the endpoint.<br/>
-         Try again, or use the domain without "www".`
-      );
-      // Helpful debug:
-      if (lastErr) {
-        rawBox.style.display = 'block';
-        rawEl.textContent = `Error: ${lastErr.message || lastErr}\nTried:\n${candidates.map(x=>x.url).join('\n')}`;
-      }
-      return;
-    }
-
-    sourcePill.textContent = source || 'RDAP';
-    statusPill.textContent = 'OK';
-
-    // Fill UI
-    const registrar = pickRegistrar(rdap);
-    const statusArr = Array.isArray(rdap.status) ? rdap.status : [];
-    const statusText = statusArr.length ? statusArr.join(', ') : '—';
-
-    const regDate = pickEvent(rdap, 'registration');
-    const expDate = pickEvent(rdap, 'expiration');
-    const lastChanged = pickEvent(rdap, 'last changed');
-
-    registrarEl.textContent = registrar;
-    domainStatusEl.textContent = statusText;
-    registeredEl.textContent = formatDate(regDate);
-    expiresEl.textContent = formatDate(expDate);
-
-    kv.style.display = 'grid';
-
-    // Nameservers
-    const ns = Array.isArray(rdap.nameservers) ? rdap.nameservers : [];
-    const nsNames = ns.map(n => n && (n.ldhName || n.unicodeName)).filter(Boolean);
-
-    if (nsNames.length){
-      nsList.innerHTML = nsNames.map(x => `<li><code>${escapeHtml(safeText(x))}</code></li>`).join('');
-      nsBox.style.display = 'block';
-    }
-
-    // Events
-    const events = Array.isArray(rdap.events) ? rdap.events : [];
-    const important = events
-      .filter(e => e && e.eventAction && e.eventDate)
-      .slice(0, 12)
-      .map(e => ({ action: e.eventAction, date: e.eventDate }));
-
-    if (important.length){
-      eventsList.innerHTML = important.map(e =>
-        `<li><b>${escapeHtml(safeText(e.action))}</b>: ${escapeHtml(formatDate(e.date))}</li>`
-      ).join('');
-      eventsBox.style.display = 'block';
-    }
-
-    // Message
-    const displayName = rdap.ldhName || rdap.handle || d;
-    setMsg('good',
-      `<b>${escapeHtml(displayName)}</b> found via <b>${escapeHtml(sourcePill.textContent)}</b>.
-       ${lastChanged ? `Last changed: <b>${escapeHtml(formatDate(lastChanged))}</b>.` : ''}`
-    );
-
-    // Raw
-    rawBox.style.display = 'block';
-    rawEl.textContent = JSON.stringify(rdap, null, 2);
   }
 
   function escapeHtml(str){
@@ -600,7 +402,6 @@
       await navigator.clipboard.writeText(text);
       setMsg('good', `<b>Copied.</b> Share link copied to clipboard.`);
     } catch {
-      // fallback
       const ta = document.createElement('textarea');
       ta.value = text;
       ta.style.position = 'fixed';
@@ -613,28 +414,269 @@
     }
   }
 
-  // Wire up
-  lookupBtn.addEventListener('click', () => lookup(domainEl.value));
-  clearBtn.addEventListener('click', () => { domainEl.value = ''; resetUI(); hideMsg(); history.replaceState({}, '', makeShareLink('')); });
+  // ---- RDAP fetch strategy for GitHub Pages (CORS-safe) ----
+  // 1) Try direct fetch (fastest if CORS enabled)
+  // 2) Fallback to allorigins raw proxy (usually works)
+  // 3) Fallback to r.jina.ai "reader" proxy
+  // 4) Fallback to whateverorigin
+  const RDAP_BASES = [
+    { name: 'rdap.org', url: (d) => `https://rdap.org/domain/${encodeURIComponent(d)}` }
+  ];
+
+  const PROXIES = [
+    { name: 'Direct', wrap: (u) => u, mode: 'json' },
+    { name: 'AllOrigins', wrap: (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`, mode: 'text' },
+    { name: 'JinaAI', wrap: (u) => `https://r.jina.ai/http://` + u.replace(/^https?:\/\//,''),
+      mode: 'text' },
+    { name: 'WhateverOrigin', wrap: (u) => `https://www.whateverorigin.org/get?url=${encodeURIComponent(u)}&callback=?`,
+      mode: 'jsonp' }
+  ];
+
+  async function fetchWithTimeout(promise, ms=6500){
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), ms);
+    try{
+      const res = await promise(ctrl.signal);
+      clearTimeout(t);
+      return res;
+    } catch (e){
+      clearTimeout(t);
+      throw e;
+    }
+  }
+
+  async function fetchJsonDirect(url, signal){
+    const res = await fetch(url, {
+      method:'GET',
+      signal,
+      headers:{ 'accept':'application/rdap+json, application/json' }
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  }
+
+  async function fetchText(url, signal){
+    const res = await fetch(url, { method:'GET', signal });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.text();
+  }
+
+  function tryParseJson(text){
+    // Some proxies may prepend text; try to find the first { and last }
+    const i = text.indexOf('{');
+    const j = text.lastIndexOf('}');
+    if (i >= 0 && j > i){
+      const slice = text.slice(i, j+1);
+      return JSON.parse(slice);
+    }
+    return JSON.parse(text);
+  }
+
+  function loadSessionCache(){
+    try{
+      const raw = sessionStorage.getItem(SKEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch { return {}; }
+  }
+  function saveSessionCache(obj){
+    try{ sessionStorage.setItem(SKEY, JSON.stringify(obj)); } catch {}
+  }
+
+  async function rdapLookup(domain){
+    // cache
+    if (memCache.has(domain)) return { data: memCache.get(domain), source: 'Cache', ms: 0 };
+
+    const sCache = loadSessionCache();
+    if (sCache[domain]){
+      memCache.set(domain, sCache[domain].data);
+      return { data: sCache[domain].data, source: 'Cache', ms: 0 };
+    }
+
+    let lastErr = null;
+
+    for (const base of RDAP_BASES){
+      const target = base.url(domain);
+
+      for (const proxy of PROXIES){
+        const start = performance.now();
+
+        try{
+          if (proxy.mode === 'json'){
+            const data = await fetchWithTimeout((signal) => fetchJsonDirect(proxy.wrap(target), signal));
+            const ms = Math.round(performance.now() - start);
+            return { data, source: `${base.name} • ${proxy.name}`, ms };
+          }
+
+          if (proxy.mode === 'text'){
+            const text = await fetchWithTimeout((signal) => fetchText(proxy.wrap(target), signal));
+            const data = tryParseJson(text);
+            const ms = Math.round(performance.now() - start);
+            return { data, source: `${base.name} • ${proxy.name}`, ms };
+          }
+
+          if (proxy.mode === 'jsonp'){
+            const data = await new Promise((resolve, reject) => {
+              const cbName = 'wo_' + Math.random().toString(16).slice(2);
+              const script = document.createElement('script');
+              const url = proxy.wrap(target).replace('callback=?', `callback=${cbName}`);
+              let done = false;
+
+              window[cbName] = (resp) => {
+                done = true;
+                cleanup();
+                if (resp && resp.contents){
+                  try { resolve(tryParseJson(resp.contents)); }
+                  catch (e){ reject(e); }
+                } else {
+                  reject(new Error('No JSONP contents'));
+                }
+              };
+
+              function cleanup(){
+                try{ delete window[cbName]; } catch {}
+                if (script.parentNode) script.parentNode.removeChild(script);
+              }
+
+              script.onerror = () => { if (!done){ cleanup(); reject(new Error('JSONP failed')); } };
+              script.src = url;
+              document.head.appendChild(script);
+
+              // timeout
+              setTimeout(() => { if (!done){ cleanup(); reject(new Error('JSONP timeout')); } }, 6500);
+            });
+
+            const ms = Math.round(performance.now() - start);
+            return { data, source: `${base.name} • ${proxy.name}`, ms };
+          }
+        } catch (e){
+          lastErr = e;
+        }
+      }
+    }
+
+    throw lastErr || new Error('Lookup failed');
+  }
+
+  function render(rdap){
+    const registrar = pickRegistrar(rdap);
+    const statusArr = Array.isArray(rdap.status) ? rdap.status : [];
+    const statusText = statusArr.length ? statusArr.join(', ') : '—';
+
+    registrarEl.textContent = registrar;
+    domainStatusEl.textContent = statusText;
+
+    const regDate = pickEvent(rdap, 'registration');
+    const expDate = pickEvent(rdap, 'expiration');
+
+    registeredEl.textContent = formatDate(regDate);
+    expiresEl.textContent = formatDate(expDate);
+
+    kv.style.display = 'grid';
+
+    const ns = Array.isArray(rdap.nameservers) ? rdap.nameservers : [];
+    const nsNames = ns.map(n => n && (n.ldhName || n.unicodeName)).filter(Boolean);
+
+    if (nsNames.length){
+      nsList.innerHTML = nsNames.map(x => `<li><code>${escapeHtml(x)}</code></li>`).join('');
+      nsBox.style.display = 'block';
+    } else {
+      nsBox.style.display = 'none';
+    }
+
+    rawBox.style.display = 'block';
+    rawEl.textContent = JSON.stringify(rdap, null, 2);
+  }
+
+  async function lookup(){
+    resetUI();
+
+    const d = normalizeDomain(domainEl.value);
+    if (!d){
+      setMsg('bad', `<b>Invalid domain.</b> Enter a domain like <b>example.com</b> (no spaces).`);
+      return;
+    }
+    domainEl.value = d;
+
+    // update share url
+    history.replaceState({}, '', makeShareLink(d));
+
+    lookupBtn.disabled = true;
+    statusPill.textContent = 'Loading…';
+    sourcePill.textContent = '—';
+    timePill.textContent = '—';
+
+    try{
+      const result = await rdapLookup(d);
+
+      // cache
+      memCache.set(d, result.data);
+      const sCache = loadSessionCache();
+      sCache[d] = { t: Date.now(), data: result.data };
+      saveSessionCache(sCache);
+
+      statusPill.textContent = 'OK';
+      sourcePill.textContent = result.source;
+      timePill.textContent = result.ms ? (result.ms + 'ms') : 'cached';
+
+      setMsg('good', `<b>${escapeHtml(d)}</b> lookup complete.`);
+      render(result.data);
+    } catch (e){
+      statusPill.textContent = 'Error';
+      sourcePill.textContent = '—';
+      timePill.textContent = '—';
+
+      setMsg('bad',
+        `<b>Lookup failed.</b> Some registries block browser requests. This tool tries multiple CORS-safe sources, but one may be temporarily down.<br/>
+         Try another domain, or refresh and retry.`
+      );
+
+      rawBox.style.display = 'block';
+      rawEl.textContent = `Error: ${e && e.message ? e.message : e}`;
+    } finally {
+      lookupBtn.disabled = false;
+    }
+  }
+
+  lookupBtn.addEventListener('click', lookup);
+  domainEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') lookup(); });
+
+  clearBtn.addEventListener('click', () => {
+    domainEl.value = '';
+    resetUI();
+    history.replaceState({}, '', makeShareLink(''));
+  });
 
   copyLinkBtn.addEventListener('click', () => {
     const d = normalizeDomain(domainEl.value);
-    const link = makeShareLink(d || '');
-    copyText(link);
+    copyText(makeShareLink(d || ''));
   });
 
-  domainEl.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') lookup(domainEl.value);
-  });
-
-  // Auto-run if shared link includes ?domain=
+  // Auto run on shared link
   const params = new URLSearchParams(location.search);
   const shared = params.get('domain');
   if (shared){
     domainEl.value = shared;
-    lookup(shared);
+    lookup();
   } else {
     resetUI();
+  }
+
+  function copyText(t){ return copyTextImpl(t); }
+  async function copyTextImpl(text){
+    try{
+      await navigator.clipboard.writeText(text);
+      setMsg('good', `<b>Copied.</b> Share link copied to clipboard.`);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      setMsg('good', `<b>Copied.</b> Share link copied to clipboard.`);
+    }
   }
 })();
 </script>
