@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DNS Lookup | InstantQR</title>
+  <meta name="description" content="Fast DNS lookup tool (A, AAAA, CNAME, MX, TXT, NS, SOA). Uses DNS-over-HTTPS. Clean UI, mobile-friendly, privacy-first." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/dns-lookup.html" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <meta name="theme-color" content="#0b0f19" />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --brand:#69a6ff;
+      --ok:#19c37d;
+      --warn:#fbbf24;
+      --bad:#ef4444;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 22px;
+      --max: 1050px;
+      --panel: rgba(255,255,255,.05);
+      --panel2: rgba(0,0,0,.14);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+    }
+    a{color:inherit; text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px}
+
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 11, 20, .55);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.2px}
+    .brand img{height:32px; width:auto; display:block}
+    nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    nav a:hover{color:var(--text); background: rgba(255,255,255,.06); text-decoration:none}
+    @media (max-width:560px){ nav{display:none} }
+
+    .card{
+      margin-top:16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .head{
+      padding:18px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    h1{margin:0 0 6px; font-size: clamp(22px, 3.2vw, 34px); letter-spacing:-.6px}
+    .sub{margin:0; color:var(--muted); line-height:1.5}
+
+    .controls{padding:16px 18px 12px}
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .input, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      color: var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    .input::placeholder{color: rgba(233,238,252,.60)}
+    .col{flex:1; min-width: 220px}
+    .col.small{flex:0 0 180px; min-width: 180px}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius: 999px;
+      font-weight:800;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      gap:8px;
+      white-space:nowrap;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .12s ease, filter .12s ease, background .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); text-decoration:none; }
+    .btn.primary{
+      border: 0;
+      background: linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
+      box-shadow: 0 14px 28px rgba(105,166,255,.22);
+    }
+    .btn.primary:hover{ filter:brightness(1.06); }
+    .btn.ghost:hover{ background: rgba(255,255,255,.10); }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size:13px;
+    }
+
+    .tabs{padding:0 18px 12px}
+    .tabbar{
+      display:flex; gap:8px; flex-wrap:wrap;
+      padding:10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+    }
+    .tab{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding:8px 10px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:13px;
+      user-select:none;
+    }
+    .tab[aria-selected="true"]{
+      border:0;
+      background: linear-gradient(135deg, rgba(25,195,125,1), rgba(25,195,125,.70));
+      box-shadow: 0 14px 28px rgba(25,195,125,.18);
+    }
+
+    .resultWrap{padding: 0 18px 18px}
+    .resultTop{
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+      margin: 6px 0 10px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      color: var(--muted);
+      font-size:13px;
+    }
+    .badge strong{color:var(--text)}
+    .pop{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(700px 300px at 15% 10%, rgba(25,195,125,.18), transparent 55%),
+        radial-gradient(520px 260px at 85% 15%, rgba(105,166,255,.16), transparent 55%),
+        rgba(0,0,0,.14);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      overflow:hidden;
+    }
+    .mono{font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    .kv{
+      display:flex; gap:10px; align-items:flex-start; justify-content:space-between;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      margin-bottom: 10px;
+    }
+    .kv strong{display:block; font-size:12px; color:var(--muted); font-weight:900; letter-spacing:.2px}
+    .kv .v{font-weight:900; font-size:14px; word-break:break-word}
+    .ok{color:var(--ok)}
+    .bad{color:var(--bad)}
+    .warn{color:var(--warn)}
+    .table{
+      width:100%;
+      border-collapse: collapse;
+      overflow:hidden;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.10);
+    }
+    .table th, .table td{
+      padding:10px 10px;
+      border-top:1px solid rgba(255,255,255,.08);
+      text-align:left;
+      font-size:13px;
+      vertical-align:top;
+    }
+    .table th{
+      color: rgba(233,238,252,.85);
+      font-weight:900;
+      background: rgba(255,255,255,.04);
+      border-top:0;
+    }
+    .copy{
+      padding:7px 10px;
+      font-weight:900;
+      font-size:12px;
+    }
+
+    .help{color:var(--muted); font-size:13px; line-height:1.55}
+    .footer{
+      margin-top: 18px;
+      padding: 16px 0 30px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer a{color:var(--muted)}
+    .footer a:hover{color:var(--text); text-decoration:none}
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,.55);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .15s ease;
+      z-index: 9999;
+    }
+    .toast.show{opacity:1}
+
+    @media (max-width: 560px){
+      .btn{width:100%}
+      .row.actions .btn{flex:1}
+      .col.small{flex:1 1 220px}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="/" aria-label="InstantQR Home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+        <span>InstantQR</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="/tools.html">All Tools</a>
+        <a href="/ip-lookup.html">IP Lookup</a>
+        <a href="/internet-speed-test.html">Speed Test</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card" aria-label="DNS Lookup Tool">
+      <div class="head">
+        <div class="pill">⚡ Super Fast · 🌐 DNS-over-HTTPS · 🔒 Privacy-first</div>
+        <h1>DNS Lookup</h1>
+        <p class="sub">Look up DNS records in seconds: <strong>A</strong>, <strong>AAAA</strong>, <strong>CNAME</strong>, <strong>MX</strong>, <strong>TXT</strong>, <strong>NS</strong>, <strong>SOA</strong>. Results are designed to <strong>pop</strong>.</p>
+      </div>
+
+      <div class="controls">
+        <div class="row">
+          <div class="col">
+            <label class="help" for="name" style="display:block;margin:0 0 6px;">Domain / Hostname</label>
+            <input id="name" class="input" inputmode="url" autocomplete="off" spellcheck="false" placeholder="example.com or sub.example.com" />
+          </div>
+          <div class="col small">
+            <label class="help" for="resolver" style="display:block;margin:0 0 6px;">Resolver</label>
+            <select id="resolver" class="input">
+              <option value="cloudflare" selected>Cloudflare DoH</option>
+              <option value="google">Google DoH</option>
+            </select>
+          </div>
+          <div class="col small">
+            <label class="help" for="typePick" style="display:block;margin:0 0 6px;">Record Type</label>
+            <select id="typePick" class="input">
+              <option value="A" selected>A</option>
+              <option value="AAAA">AAAA</option>
+              <option value="CNAME">CNAME</option>
+              <option value="MX">MX</option>
+              <option value="TXT">TXT</option>
+              <option value="NS">NS</option>
+              <option value="SOA">SOA</option>
+              <option value="ANY">ANY (multi)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row actions" style="margin-top:10px;">
+          <button class="btn primary" id="lookupBtn" type="button">Lookup DNS</button>
+          <button class="btn ghost" id="shareBtn" type="button">Copy Link</button>
+          <button class="btn ghost" id="clearBtn" type="button">Clear</button>
+          <span class="badge" id="statusBadge"><strong>Status:</strong> <span id="statusText">Ready</span></span>
+        </div>
+
+        <div class="help" style="margin-top:10px;">
+          Tip: Use <span class="mono">ANY</span> to get multiple records fast. This tool uses DNS-over-HTTPS (DoH) — your query is sent to the selected resolver.
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div class="tabbar" role="tablist" aria-label="Record tabs">
+          <button class="tab" data-type="A" aria-selected="true">A</button>
+          <button class="tab" data-type="AAAA" aria-selected="false">AAAA</button>
+          <button class="tab" data-type="CNAME" aria-selected="false">CNAME</button>
+          <button class="tab" data-type="MX" aria-selected="false">MX</button>
+          <button class="tab" data-type="TXT" aria-selected="false">TXT</button>
+          <button class="tab" data-type="NS" aria-selected="false">NS</button>
+          <button class="tab" data-type="SOA" aria-selected="false">SOA</button>
+          <button class="tab" data-type="ANY" aria-selected="false">ANY</button>
+        </div>
+      </div>
+
+      <div class="resultWrap">
+        <div class="resultTop">
+          <div class="badge"><strong>Query:</strong> <span id="qOut" class="mono">—</span></div>
+          <div class="badge"><strong>Latency:</strong> <span id="msOut" class="mono">—</span></div>
+        </div>
+
+        <div class="pop" id="resultBox" aria-live="polite">
+          <div class="kv">
+            <div>
+              <strong>Result</strong>
+              <div class="v" id="headline">Enter a domain and click Lookup.</div>
+              <div class="help" id="subline">Example: <span class="mono">instantqr.io</span></div>
+            </div>
+            <button class="btn ghost copy" id="copyJsonBtn" type="button">Copy JSON</button>
+          </div>
+
+          <table class="table" id="table" style="display:none;">
+            <thead>
+              <tr>
+                <th style="width:110px;">Type</th>
+                <th>Answer</th>
+                <th style="width:90px;">TTL</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+
+          <pre id="raw" class="mono" style="display:none;margin:0;white-space:pre-wrap;word-break:break-word;"></pre>
+
+          <div class="help" style="margin-top:12px;">
+            <span class="ok">Pop tip:</span> Click “ANY” for a quick multi-record overview. Use “Copy JSON” to paste into tickets, notes, or docs.
+          </div>
+        </div>
+
+        <div class="footer">
+          <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;">
+            <div class="help">
+              Privacy-first: this page doesn’t require login. Requests are made from your browser directly to the selected DoH resolver.
+            </div>
+            <div class="help">
+              <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.xml">Sitemap</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+  (function(){
+    const $ = (id) => document.getElementById(id);
+
+    const nameEl = $('name');
+    const resolverEl = $('resolver');
+    const typePickEl = $('typePick');
+    const lookupBtn = $('lookupBtn');
+    const shareBtn = $('shareBtn');
+    const clearBtn = $('clearBtn');
+
+    const qOut = $('qOut');
+    const msOut = $('msOut');
+
+    const statusText = $('statusText');
+    const statusBadge = $('statusBadge');
+
+    const headline = $('headline');
+    const subline = $('subline');
+    const copyJsonBtn = $('copyJsonBtn');
+
+    const table = $('table');
+    const tbody = $('tbody');
+    const raw = $('raw');
+
+    const toastEl = $('toast');
+
+    let lastJson = null;
+
+    function toast(msg){
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toastEl.classList.remove('show'), 1300);
+    }
+
+    async function copyText(text){
+      try {
+        await navigator.clipboard.writeText(text);
+        toast('Copied');
+      } catch(e){
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        toast('Copied');
+      }
+    }
+
+    function setStatus(kind, text){
+      statusText.textContent = text;
+      statusBadge.style.borderColor =
+        kind === 'ok' ? 'rgba(25,195,125,.35)' :
+        kind === 'warn' ? 'rgba(251,191,36,.35)' :
+        kind === 'bad' ? 'rgba(239,68,68,.35)' :
+        'rgba(255,255,255,.10)';
+      statusBadge.style.background =
+        kind === 'ok' ? 'rgba(25,195,125,.10)' :
+        kind === 'warn' ? 'rgba(251,191,36,.10)' :
+        kind === 'bad' ? 'rgba(239,68,68,.10)' :
+        'rgba(0,0,0,.12)';
+    }
+
+    function normalizeName(s){
+      s = (s || '').trim();
+      if(!s) return '';
+      // strip protocol/path if user pastes URL
+      try{
+        if(s.includes('://')){
+          const u = new URL(s);
+          s = u.hostname;
+        } else if (s.includes('/')) {
+          // might be "example.com/path"
+          s = s.split('/')[0];
+        }
+      }catch(_){}
+      // remove trailing dot
+      s = s.replace(/\.+$/,'');
+      return s;
+    }
+
+    function dohUrl(resolver, name, type){
+      const encName = encodeURIComponent(name);
+      const encType = encodeURIComponent(type);
+      if(resolver === 'google'){
+        return `https://dns.google/resolve?name=${encName}&type=${encType}`;
+      }
+      // cloudflare
+      return `https://cloudflare-dns.com/dns-query?name=${encName}&type=${encType}`;
+    }
+
+    async function fetchDoh(resolver, name, type){
+      const url = dohUrl(resolver, name, type);
+      const t0 = performance.now();
+      const res = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'accept': 'application/dns-json'
+        }
+      });
+      const ms = Math.round(performance.now() - t0);
+      if(!res.ok){
+        throw new Error(`HTTP ${res.status}`);
+      }
+      const json = await res.json();
+      return { json, ms, url };
+    }
+
+    const TYPE_MAP = {
+      1: 'A',
+      28: 'AAAA',
+      5: 'CNAME',
+      15: 'MX',
+      16: 'TXT',
+      2: 'NS',
+      6: 'SOA'
+    };
+
+    function typeNameFromNum(n){
+      return TYPE_MAP[n] || String(n);
+    }
+
+    function renderAnswers(json){
+      tbody.innerHTML = '';
+      table.style.display = 'none';
+      raw.style.display = 'none';
+
+      const answers = (json && json.Answer) ? json.Answer : [];
+      const status = json && (json.Status ?? json.status);
+      const isNoData = !answers.length;
+
+      if(isNoData){
+        headline.innerHTML = `No answers found <span class="warn">(try another type or ANY)</span>`;
+        subline.textContent = 'Some domains may have records only for certain types.';
+        return;
+      }
+
+      headline.innerHTML = `Found <span class="ok">${answers.length}</span> answer(s)`;
+      subline.textContent = 'Tap an answer to copy it.';
+
+      answers.forEach((a) => {
+        const tr = document.createElement('tr');
+        const t = typeNameFromNum(a.type || a.Type);
+        const data = (a.data || a.Data || '').toString();
+        const ttl = (a.TTL ?? a.ttl ?? '').toString();
+
+        tr.innerHTML = `
+          <td class="mono"><strong>${t}</strong></td>
+          <td class="mono" style="cursor:pointer;user-select:text" title="Click to copy">${escapeHtml(data)}</td>
+          <td class="mono">${escapeHtml(ttl || '—')}</td>
+        `;
+
+        tr.children[1].addEventListener('click', () => copyText(data));
+        tbody.appendChild(tr);
+      });
+
+      table.style.display = '';
+    }
+
+    function escapeHtml(s){
+      return String(s)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#039;");
+    }
+
+    async function runLookup(typeOverride){
+      const name = normalizeName(nameEl.value);
+      const resolver = resolverEl.value;
+      const type = (typeOverride || typePickEl.value || 'A').toUpperCase();
+
+      nameEl.value = name;
+      if(!name){
+        toast('Enter a domain');
+        setStatus('warn', 'Missing domain');
+        return;
+      }
+
+      qOut.textContent = `${name} · ${type} · ${resolver}`;
+      msOut.textContent = '…';
+      setStatus('', 'Looking up…');
+      lookupBtn.disabled = true;
+      lookupBtn.textContent = 'Looking up…';
+
+      headline.textContent = 'Working…';
+      subline.textContent = 'Fetching DNS-over-HTTPS response.';
+      tbody.innerHTML = '';
+      table.style.display = 'none';
+      raw.style.display = 'none';
+
+      try{
+        // For ANY, we do a fast multi-query bundle (parallel) for common types,
+        // because many resolvers don't reliably return full ANY answers.
+        let outJson = null;
+        let totalMs = 0;
+
+        if(type === 'ANY'){
+          const types = ['A','AAAA','CNAME','MX','TXT','NS','SOA'];
+          const tasks = types.map(t => fetchDoh(resolver, name, t).then(r => ({ type:t, ...r })).catch(e => ({ type:t, error:String(e) })));
+          const t0 = performance.now();
+          const results = await Promise.all(tasks);
+          totalMs = Math.round(performance.now() - t0);
+
+          // merge into a pseudo "Answer" array with type numbers if available
+          const merged = [];
+          results.forEach(r => {
+            if(r && r.json && Array.isArray(r.json.Answer)){
+              r.json.Answer.forEach(a => {
+                merged.push(a);
+              });
+            }
+          });
+
+          outJson = {
+            Status: 0,
+            Question: [{ name, type: 'ANY' }],
+            Answer: merged,
+            _meta: {
+              resolver,
+              bundle: results.map(r => ({
+                type: r.type,
+                ms: r.ms,
+                ok: !!(r.json && r.json.Answer),
+                error: r.error || null
+              }))
+            }
+          };
+
+          msOut.textContent = totalMs + ' ms';
+          lastJson = outJson;
+
+          // “pop” headline with counts by type
+          const counts = {};
+          merged.forEach(a => {
+            const tn = typeNameFromNum(a.type || a.Type);
+            counts[tn] = (counts[tn] || 0) + 1;
+          });
+          const parts = Object.keys(counts).sort().map(k => `${k}:${counts[k]}`);
+          headline.innerHTML = merged.length
+            ? `Found <span class="ok">${merged.length}</span> total answer(s) <span class="pill" style="margin-left:8px;">${parts.join(' · ')}</span>`
+            : `No answers found <span class="warn">(try specific types)</span>`;
+          subline.textContent = merged.length ? 'Click any answer to copy.' : 'Some resolvers block/limit ANY. Try A/AAAA/TXT etc.';
+
+          // Show table from merged answers
+          tbody.innerHTML = '';
+          if(merged.length){
+            merged.forEach((a) => {
+              const tr = document.createElement('tr');
+              const t = typeNameFromNum(a.type || a.Type);
+              const data = (a.data || a.Data || '').toString();
+              const ttl = (a.TTL ?? a.ttl ?? '').toString();
+
+              tr.innerHTML = `
+                <td class="mono"><strong>${t}</strong></td>
+                <td class="mono" style="cursor:pointer;user-select:text" title="Click to copy">${escapeHtml(data)}</td>
+                <td class="mono">${escapeHtml(ttl || '—')}</td>
+              `;
+              tr.children[1].addEventListener('click', () => copyText(data));
+              tbody.appendChild(tr);
+            });
+            table.style.display = '';
+          } else {
+            table.style.display = 'none';
+          }
+
+          setStatus(merged.length ? 'ok' : 'warn', merged.length ? 'Success' : 'No answers');
+          return;
+        }
+
+        // Single-type lookup
+        const { json, ms } = await fetchDoh(resolver, name, type);
+        msOut.textContent = ms + ' ms';
+        lastJson = json;
+
+        // Determine response health
+        const status = json && (json.Status ?? json.status);
+        const answers = (json && json.Answer) ? json.Answer : [];
+
+        if(status === 0 && answers.length){
+          setStatus('ok', 'Success');
+        } else if (status === 0 && !answers.length) {
+          setStatus('warn', 'No answers');
+        } else {
+          setStatus('bad', 'Resolver error');
+        }
+
+        renderAnswers(json);
+
+      } catch(e){
+        msOut.textContent = '—';
+        lastJson = { error: String(e) };
+        setStatus('bad', 'Request failed');
+        headline.innerHTML = `Request failed <span class="bad">(${escapeHtml(e && e.message ? e.message : String(e))})</span>`;
+        subline.textContent = 'Try another resolver (Cloudflare/Google) or check the domain.';
+        raw.style.display = '';
+        raw.textContent = JSON.stringify(lastJson, null, 2);
+      } finally {
+        lookupBtn.disabled = false;
+        lookupBtn.textContent = 'Lookup DNS';
+      }
+    }
+
+    // Tabs sync
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    function selectTab(type){
+      tabs.forEach(t => t.setAttribute('aria-selected', t.dataset.type === type ? 'true' : 'false'));
+      typePickEl.value = type;
+    }
+
+    tabs.forEach(t => t.addEventListener('click', () => {
+      const type = t.dataset.type;
+      selectTab(type);
+      runLookup(type);
+    }));
+
+    lookupBtn.addEventListener('click', () => runLookup());
+    nameEl.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        runLookup();
+      }
+    });
+
+    shareBtn.addEventListener('click', async () => {
+      const name = normalizeName(nameEl.value);
+      const type = (typePickEl.value || 'A').toUpperCase();
+      const resolver = resolverEl.value;
+      const url = new URL(window.location.href);
+      url.searchParams.set('name', name || '');
+      url.searchParams.set('type', type);
+      url.searchParams.set('resolver', resolver);
+      await copyText(url.toString());
+    });
+
+    clearBtn.addEventListener('click', () => {
+      nameEl.value = '';
+      msOut.textContent = '—';
+      qOut.textContent = '—';
+      lastJson = null;
+      setStatus('', 'Ready');
+      headline.textContent = 'Enter a domain and click Lookup.';
+      subline.textContent = 'Example: instantqr.io';
+      tbody.innerHTML = '';
+      table.style.display = 'none';
+      raw.style.display = 'none';
+      toast('Cleared');
+      nameEl.focus();
+    });
+
+    copyJsonBtn.addEventListener('click', async () => {
+      if(!lastJson){
+        toast('Nothing to copy');
+        return;
+      }
+      await copyText(JSON.stringify(lastJson, null, 2));
+    });
+
+    // Auto-load from query string
+    (function init(){
+      const url = new URL(window.location.href);
+      const name = normalizeName(url.searchParams.get('name') || '');
+      const type = (url.searchParams.get('type') || 'A').toUpperCase();
+      const resolver = (url.searchParams.get('resolver') || 'cloudflare').toLowerCase();
+
+      if(resolver === 'google') resolverEl.value = 'google';
+      if(['A','AAAA','CNAME','MX','TXT','NS','SOA','ANY'].includes(type)){
+        typePickEl.value = type;
+        selectTab(type);
+      } else {
+        selectTab(typePickEl.value);
+      }
+
+      if(name){
+        nameEl.value = name;
+        runLookup(typePickEl.value);
+      } else {
+        // sensible default suggestion
+        nameEl.value = 'instantqr.io';
+      }
+    })();
+  })();
+  </script>
+</body>
+</html>
