@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- =========================
+       Analytics / Monetization
+       ========================= -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <!-- =========================
+       Core SEO / Meta
+       ========================= -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>What is a DNS Lookup? (A/AAAA/CNAME/MX/TXT/NS) | InstantQR Guides</title>
+  <meta name="description" content="Learn what a DNS lookup is, which DNS records matter (A, AAAA, CNAME, MX, TXT, NS), and how to troubleshoot domain and email issues fast. Includes a simple DNS Lookup tool link." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/guides/what-is-a-dns-lookup.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="What is a DNS Lookup? | InstantQR Guides" />
+  <meta property="og:description" content="DNS explained clearly: records, common uses, and troubleshooting steps — plus a fast DNS Lookup tool." />
+  <meta property="og:url" content="https://instantqr.io/guides/what-is-a-dns-lookup.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What is a DNS Lookup? | InstantQR Guides" />
+  <meta name="twitter:description" content="DNS lookup explained: A/AAAA/CNAME/MX/TXT/NS + quick troubleshooting." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <!-- Performance -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --brand:#69a6ff;
+      --ok:#19c37d;
+      --warn:#ffcc66;
+      --bad:#ff6b6b;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 22px;
+      --max: 980px;
+      --focus: 0 0 0 3px rgba(105,166,255,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a{color:inherit; text-decoration:none}
+    a:hover{text-decoration:underline}
+    :focus-visible{ outline:none; box-shadow: var(--focus); border-radius: 12px; }
+
+    .skip{
+      position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip:focus{
+      left:12px; top:12px; width:auto; height:auto;
+      padding:10px 12px; border-radius:12px;
+      background: rgba(0,0,0,.75);
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: var(--shadow);
+      z-index: 9999;
+    }
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:20px}
+
+    /* Top Bar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 11, 20, .55);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brandRow{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .brandRow img{display:block; height:34px; width:auto}
+    nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    nav a:hover{
+      color:var(--text);
+      background: rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius: 999px;
+      font-weight:800;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      gap:8px;
+      white-space:nowrap;
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease, background .12s ease;
+      user-select:none;
+    }
+    .cta:hover{ transform: translateY(-1px); text-decoration:none; }
+    .cta.primary{
+      border: 0;
+      background: linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
+      box-shadow: 0 14px 28px rgba(105,166,255,.22);
+    }
+    .cta.primary:hover{ filter:brightness(1.06); }
+    .cta.ghost:hover{ background: rgba(255,255,255,.10); }
+    .cta:active{ transform: translateY(0) scale(.99); }
+
+    /* Header */
+    .hero{padding: 26px 0 10px;}
+    .heroCard{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 20%, rgba(105,166,255,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(25,195,125,.14), transparent 55%);
+      pointer-events:none;
+    }
+    .heroCard > *{position:relative}
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size:13px;
+      width: fit-content;
+    }
+    h1{
+      margin: 12px 0 10px;
+      font-size: clamp(28px, 4vw, 40px);
+      letter-spacing: -.7px;
+      line-height: 1.08;
+    }
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 80ch;
+    }
+    .metaRow{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top: 14px;
+    }
+    .chip{
+      font-size:12px;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.12);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    /* Content */
+    .content{
+      margin-top: 14px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .breadcrumbs{
+      font-size: 13px;
+      color: rgba(233,238,252,.72);
+      margin-bottom: 12px;
+    }
+    .breadcrumbs a{ color: rgba(233,238,252,.82); }
+    .breadcrumbs span{ color: rgba(233,238,252,.55); }
+
+    h2{
+      margin: 18px 0 8px;
+      font-size: 20px;
+      letter-spacing: -.2px;
+    }
+    p{
+      margin: 0 0 12px;
+      color: rgba(233,238,252,.86);
+      line-height: 1.7;
+    }
+    ul{
+      margin: 0 0 12px;
+      padding-left: 18px;
+      color: rgba(233,238,252,.84);
+      line-height: 1.7;
+    }
+
+    .callout{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      padding: 14px;
+      margin: 14px 0;
+    }
+    .callout strong{ color: var(--text); }
+    .callout .row{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
+    .callout .hint{ color: rgba(233,238,252,.70); font-size: 13px; margin-top: 8px; line-height: 1.6; }
+
+    .records{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 10px 0 12px;
+    }
+    .rec{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      padding: 14px;
+    }
+    .recTop{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom: 6px;
+    }
+    .recCode{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-weight: 800;
+      letter-spacing: .3px;
+      color: var(--text);
+    }
+    .tag{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.10);
+      padding: 4px 8px;
+      border-radius: 999px;
+      white-space:nowrap;
+    }
+    .rec p{ margin: 0; color: rgba(233,238,252,.78); font-size: 13px; line-height: 1.6; }
+
+    .steps{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.12);
+      padding: 14px;
+      margin: 10px 0 12px;
+    }
+    .steps ol{ margin: 0; padding-left: 18px; line-height: 1.7; color: rgba(233,238,252,.84); }
+    .steps li{ margin: 6px 0; }
+
+    .faq{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 14px;
+      margin-top: 14px;
+    }
+    details{ border-top: 1px solid rgba(255,255,255,.10); padding: 12px 0; }
+    details:first-child{ border-top: 0; padding-top: 0; }
+    summary{ cursor:pointer; font-weight:800; list-style:none; }
+    summary::-webkit-details-marker{ display:none; }
+    .faq p{ margin: 8px 0 0; color: rgba(233,238,252,.78); }
+
+    .footer{
+      margin-top: 22px;
+      padding: 18px 0 36px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footRow{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .small{font-size:12px; color:rgba(233,238,252,.55)}
+
+    @media (max-width: 980px){
+      nav{display:none}
+      .records{ grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <!-- =========================
+       Structured Data (JSON-LD)
+       ========================= -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Guides","item":"https://instantqr.io/guides.html"},
+      {"@type":"ListItem","position":3,"name":"What is a DNS Lookup?","item":"https://instantqr.io/guides/what-is-a-dns-lookup.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"What is a DNS Lookup?",
+    "description":"Learn what a DNS lookup is, which DNS records matter (A, AAAA, CNAME, MX, TXT, NS), and how to troubleshoot domain and email issues fast.",
+    "author":{"@type":"Organization","name":"InstantQR"},
+    "publisher":{"@type":"Organization","name":"InstantQR","logo":{"@type":"ImageObject","url":"https://instantqr.io/assets/instantqr-logo.svg"}},
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://instantqr.io/guides/what-is-a-dns-lookup.html"},
+    "datePublished":"2026-03-05",
+    "dateModified":"2026-03-05"
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="inner">
+      <a class="brandRow" href="/" aria-label="InstantQR Home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+        <span>InstantQR</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <a href="/tools.html">Tools</a>
+        <a href="/games.html">Games</a>
+        <a href="/guides.html">Guides</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+
+      <a class="cta primary" href="/tools.html">Explore Tools →</a>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero" aria-label="Guide header">
+      <div class="heroCard">
+        <div class="kicker">🌐 Domains & Network • DNS basics • Quick troubleshooting</div>
+        <h1>What is a DNS Lookup?</h1>
+        <p class="sub">
+          A <strong>DNS lookup</strong> is how you check what “instructions” the internet has for a domain name.
+          DNS tells browsers where a website lives, tells email servers where to deliver mail, and supports verification for services.
+        </p>
+
+        <div class="metaRow" aria-label="Guide meta">
+          <span class="chip">Records: A, AAAA, CNAME, MX, TXT, NS</span>
+          <span class="chip">Common uses: website + email + verification</span>
+          <span class="chip">Updated: 2026-03-05</span>
+        </div>
+
+        <div class="metaRow" style="margin-top:12px;">
+          <a class="cta primary" href="/dns-lookup.html">Open DNS Lookup Tool →</a>
+          <a class="cta ghost" href="/guides.html">Back to Guides</a>
+        </div>
+      </div>
+    </section>
+
+    <article class="content" aria-label="DNS Lookup guide content">
+      <div class="breadcrumbs" aria-label="Breadcrumbs">
+        <a href="/">Home</a> <span>›</span>
+        <a href="/guides.html">Guides</a> <span>›</span>
+        <span>What is a DNS Lookup?</span>
+      </div>
+
+      <h2>DNS in one sentence</h2>
+      <p>
+        DNS (Domain Name System) is like the internet’s phonebook: it translates <strong>names</strong> (example.com)
+        into <strong>technical destinations</strong> (IP addresses, mail servers, and other record types).
+      </p>
+
+      <div class="callout">
+        <strong>Quick action:</strong> If a website won’t load or email isn’t delivering, run a DNS lookup first.
+        <div class="row">
+          <a class="cta primary" href="/dns-lookup.html">DNS Lookup</a>
+          <a class="cta ghost" href="/tools.html">All Tools</a>
+        </div>
+        <div class="hint">Tip: Check multiple record types (A/AAAA/CNAME/MX/TXT) to see the full picture.</div>
+      </div>
+
+      <h2>Common DNS record types (what they mean)</h2>
+      <div class="records">
+        <div class="rec">
+          <div class="recTop">
+            <div class="recCode">A</div>
+            <div class="tag">Website IPv4</div>
+          </div>
+          <p>Points a domain (or subdomain) to an <strong>IPv4</strong> address (e.g., 93.184.216.34).</p>
+        </div>
+
+        <div class="rec">
+          <div class="recTop">
+            <div class="recCode">AAAA</div>
+            <div class="tag">Website IPv6</div>
+          </div>
+          <p>Points a domain to an <strong>IPv6</strong> address. Many sites use both A and AAAA.</p>
+        </div>
+
+        <div class="rec">
+          <div class="recTop">
+            <div class="recCode">CNAME</div>
+            <div class="tag">Alias</div>
+          </div>
+          <p>Makes a name an alias of another name (common for <strong>www</strong> pointing to a host).</p>
+        </div>
+
+        <div class="rec">
+          <div class="recTop">
+            <div class="recCode">MX</div>
+            <div class="tag">Email delivery</div>
+          </div>
+          <p>Tells the internet which mail servers should receive email for the domain.</p>
+        </div>
+
+        <div class="rec">
+          <div class="recTop">
+            <div class="recCode">TXT</div>
+            <div class="tag">Verification / Email security</div>
+          </div>
+          <p>Stores text values used for domain verification and email security like <strong>SPF</strong>, <strong>DKIM</strong>, <strong>DMARC</strong>.</p>
+        </div>
+
+        <div class="rec">
+          <div class="recTop">
+            <div class="recCode">NS</div>
+            <div class="tag">Nameservers</div>
+          </div>
+          <p>Shows which DNS provider is authoritative for the domain (where records are managed).</p>
+        </div>
+      </div>
+
+      <h2>When should you do a DNS lookup?</h2>
+      <ul>
+        <li><strong>Website issues:</strong> domain not loading, wrong server, redirect problems</li>
+        <li><strong>Email problems:</strong> mail not arriving, “unable to deliver”, SPF/DKIM/DMARC setup</li>
+        <li><strong>Verification:</strong> adding Google/Cloud/Stripe/third-party verification TXT records</li>
+        <li><strong>DNS changes:</strong> you updated records and want to confirm what’s currently published</li>
+      </ul>
+
+      <h2>How to troubleshoot with DNS (simple steps)</h2>
+      <div class="steps">
+        <ol>
+          <li>Run a lookup for the domain (example.com) and check <strong>A/AAAA/CNAME</strong> for website routing.</li>
+          <li>If email is failing, check <strong>MX</strong> records first.</li>
+          <li>For deliverability/security, check <strong>TXT</strong> for SPF/DKIM/DMARC strings.</li>
+          <li>If records look wrong, check <strong>NS</strong> to confirm you’re editing DNS in the correct provider.</li>
+          <li>After changes, remember DNS can take time to update (“propagation”). Recheck after a bit.</li>
+        </ol>
+      </div>
+
+      <h2>DNS propagation: why changes aren’t instant</h2>
+      <p>
+        DNS results can be cached across the internet. Even after you change a record, some networks may still show older values
+        temporarily. This is normal — re-run your lookup later to confirm the latest published records.
+      </p>
+
+      <div class="callout">
+        <strong>Run it now:</strong> Use the InstantQR DNS Lookup for a quick, clean view of record results.
+        <div class="row">
+          <a class="cta primary" href="/dns-lookup.html">Open DNS Lookup Tool →</a>
+          <a class="cta ghost" href="/guides/what-is-whois-lookup.html">Next: WHOIS Lookup Guide</a>
+        </div>
+      </div>
+
+      <section class="faq" aria-label="DNS Lookup FAQ">
+        <details open>
+          <summary>Is DNS lookup the same as WHOIS?</summary>
+          <p>
+            No. A DNS lookup shows where a domain points (records). WHOIS is about domain registration info (registrar, status, etc.).
+          </p>
+        </details>
+
+        <details>
+          <summary>Why do I see both A and CNAME?</summary>
+          <p>
+            Many domains use a CNAME for <strong>www</strong> and A/AAAA for the root domain. The pattern depends on the host/provider.
+          </p>
+        </details>
+
+        <details>
+          <summary>What if MX records are missing?</summary>
+          <p>
+            If a domain has no MX records, email delivery may fail or fallback behavior may occur depending on servers.
+            If you want email for the domain, set correct MX records with your email provider.
+          </p>
+        </details>
+
+        <details>
+          <summary>What’s the fastest way to confirm my DNS change worked?</summary>
+          <p>
+            Run a DNS lookup and compare the record value with what you set in your DNS provider. If it’s not matching yet,
+            it may still be propagating or you may be editing DNS in the wrong provider (check NS).
+          </p>
+        </details>
+      </section>
+    </article>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footRow">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" style="height:28px;width:auto;display:block;" />
+            <strong style="color:var(--text);font-size:16px;">InstantQR</strong>
+          </div>
+          <div class="small">Guides built for speed + clarity. No fluff.</div>
+          <div class="small" style="margin-top:8px;">© <span id="year"></span> InstantQR.io</div>
+        </div>
+
+        <div>
+          <div style="margin-bottom:8px;">
+            <a href="/tools.html">Tools</a> ·
+            <a href="/games.html">Games</a> ·
+            <a href="/guides.html">Guides</a> ·
+            <a href="/sitemap.xml">Sitemap</a>
+          </div>
+          <div>
+            <a href="/about.html">About</a> ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/terms.html">Terms</a> ·
+            <a href="/contact.html">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"What is a DNS lookup?","acceptedAnswer":{"@type":"Answer","text":"A DNS lookup checks what DNS records a domain publishes (like A, AAAA, CNAME, MX, TXT, NS) to route website traffic, email delivery, and domain verification."}},
+      {"@type":"Question","name":"What DNS records matter most for websites?","acceptedAnswer":{"@type":"Answer","text":"For websites, A (IPv4), AAAA (IPv6), and CNAME (alias) are the most common records used to route traffic."}},
+      {"@type":"Question","name":"What DNS records matter most for email?","acceptedAnswer":{"@type":"Answer","text":"For email, MX records control mail delivery, while TXT records are commonly used for SPF, DKIM, and DMARC authentication."}},
+      {"@type":"Question","name":"Why don’t DNS changes show immediately?","acceptedAnswer":{"@type":"Answer","text":"DNS results can be cached across networks and resolvers. After changes, it can take time for updates to propagate and caches to expire."}}
+    ]
+  }
+  </script>
+
+</body>
+</html>
