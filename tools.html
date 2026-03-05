@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-<!-- Google tag (gtag.js) -->
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -15,14 +15,14 @@ gtag('config', 'G-6213N2G8R2');
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
 crossorigin="anonymous"></script>
 
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>All Tools | InstantQR Free Online Utilities</title>
-<meta name="description" content="Browse all free InstantQR tools including QR generators, converters, crypto calculators, network tools and developer utilities."/>
+<meta name="description" content="Browse all InstantQR tools including QR generators, speed test, converters, crypto tools, developer tools, and utilities.">
 
-<link rel="canonical" href="https://instantqr.io/tools.html"/>
-<link rel="icon" href="/assets/instantqr-logo.svg"/>
+<link rel="canonical" href="https://instantqr.io/tools.html">
+<link rel="icon" href="/assets/instantqr-logo.svg">
 
 <style>
 
@@ -82,7 +82,7 @@ color:white;
 
 h1{
 font-size:34px;
-margin:0 0 8px;
+margin-bottom:6px;
 }
 
 p{
@@ -90,13 +90,11 @@ color:var(--muted);
 }
 
 .search{
-margin-top:16px;
-display:flex;
-gap:10px;
+margin-top:18px;
 }
 
 .search input{
-flex:1;
+width:100%;
 padding:12px;
 border-radius:10px;
 border:1px solid var(--border);
@@ -106,7 +104,7 @@ color:white;
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
 gap:16px;
 margin-top:26px;
 }
@@ -153,7 +151,7 @@ margin-top:4px;
 
 .badge{
 font-size:11px;
-padding:3px 7px;
+padding:4px 7px;
 background:rgba(255,255,255,.06);
 border-radius:6px;
 color:var(--muted);
@@ -203,33 +201,17 @@ color:white;
 </header>
 
 <h1>All InstantQR Tools</h1>
-<p>Fast, privacy-first online utilities.</p>
+<p>Fast, privacy-first utilities for everyday tasks.</p>
 
 <div class="search">
-<input id="search" placeholder="Search tools (QR, JSON, speed, convert...)">
+<input id="search" placeholder="Search tools (QR, convert, JSON, speed...)">
 </div>
 
 <div class="grid" id="grid">
 
-<a class="card" href="/wifi-qr-code-generator.html" data-tags="qr wifi">
-<div class="icon">📶</div>
-<div>
-<div class="cardTitle">WiFi QR Generator</div>
-<div class="cardDesc">Create QR codes for WiFi networks.</div>
-</div>
-<span class="badge">QR</span>
-</a>
+<!-- NETWORK -->
 
-<a class="card" href="/url-qr-code-generator.html" data-tags="qr url">
-<div class="icon">🔗</div>
-<div>
-<div class="cardTitle">URL QR Generator</div>
-<div class="cardDesc">Convert links into QR codes.</div>
-</div>
-<span class="badge">QR</span>
-</a>
-
-<a class="card" href="/internet-speed-test.html" data-tags="internet speed">
+<a class="card" href="/internet-speed-test.html" data-tags="speed internet wifi">
 <div class="icon">⚡</div>
 <div>
 <div class="cardTitle">Internet Speed Test</div>
@@ -238,43 +220,78 @@ color:white;
 <span class="badge">Network</span>
 </a>
 
-<a class="card" href="/ip-lookup.html" data-tags="ip lookup">
+<a class="card" href="/ip-lookup.html" data-tags="ip lookup address network">
 <div class="icon">🌍</div>
 <div>
 <div class="cardTitle">IP Lookup</div>
-<div class="cardDesc">Find IP location and ISP.</div>
+<div class="cardDesc">Find IP location and ISP info.</div>
 </div>
 <span class="badge">Network</span>
 </a>
+
+<!-- QR -->
+
+<a class="card" href="/wifi-qr-code-generator.html" data-tags="qr wifi">
+<div class="icon">📶</div>
+<div>
+<div class="cardTitle">WiFi QR Generator</div>
+<div class="cardDesc">Generate QR codes for WiFi networks.</div>
+</div>
+<span class="badge">QR</span>
+</a>
+
+<a class="card" href="/url-qr-code-generator.html" data-tags="qr url link">
+<div class="icon">🔗</div>
+<div>
+<div class="cardTitle">URL QR Generator</div>
+<div class="cardDesc">Convert links into QR codes.</div>
+</div>
+<span class="badge">QR</span>
+</a>
+
+<a class="card" href="/create-qr-code-for-wifi.html" data-tags="qr wifi guide">
+<div class="icon">📡</div>
+<div>
+<div class="cardTitle">Create WiFi QR</div>
+<div class="cardDesc">Guide for creating WiFi QR codes.</div>
+</div>
+<span class="badge">QR</span>
+</a>
+
+<!-- SECURITY -->
 
 <a class="card" href="/password.html" data-tags="password generator">
 <div class="icon">🔐</div>
 <div>
 <div class="cardTitle">Password Generator</div>
-<div class="cardDesc">Generate strong passwords.</div>
+<div class="cardDesc">Generate secure passwords.</div>
 </div>
 <span class="badge">Security</span>
 </a>
 
-<a class="card" href="/password-leak-checker.html" data-tags="password breach">
+<a class="card" href="/password-leak-checker.html" data-tags="password breach security">
 <div class="icon">🛡</div>
 <div>
 <div class="cardTitle">Password Leak Checker</div>
-<div class="cardDesc">Check breach databases.</div>
+<div class="cardDesc">Check if password appears in breaches.</div>
 </div>
 <span class="badge">Security</span>
 </a>
 
-<a class="card" href="/unit-converter.html" data-tags="unit convert">
+<!-- CONVERTERS -->
+
+<a class="card" href="/unit-converter.html" data-tags="unit converter">
 <div class="icon">📏</div>
 <div>
 <div class="cardTitle">Unit Converter</div>
-<div class="cardDesc">Convert measurements instantly.</div>
+<div class="cardDesc">Convert measurements quickly.</div>
 </div>
 <span class="badge">Converter</span>
 </a>
 
-<a class="card" href="/world-clock.html" data-tags="world clock">
+<!-- TIME -->
+
+<a class="card" href="/world-clock.html" data-tags="clock time">
 <div class="icon">🕒</div>
 <div>
 <div class="cardTitle">World Clock</div>
@@ -283,16 +300,36 @@ color:white;
 <span class="badge">Time</span>
 </a>
 
-<a class="card" href="/crypto-profit-calculator.html" data-tags="crypto profit">
+<a class="card" href="/time-zone-converter.html" data-tags="timezone converter">
+<div class="icon">🌐</div>
+<div>
+<div class="cardTitle">Time Zone Converter</div>
+<div class="cardDesc">Convert between time zones.</div>
+</div>
+<span class="badge">Time</span>
+</a>
+
+<a class="card" href="/countdown-timer.html" data-tags="timer countdown">
+<div class="icon">⏳</div>
+<div>
+<div class="cardTitle">Countdown Timer</div>
+<div class="cardDesc">Create countdown timers easily.</div>
+</div>
+<span class="badge">Time</span>
+</a>
+
+<!-- CRYPTO -->
+
+<a class="card" href="/crypto-profit-calculator.html" data-tags="crypto profit calculator">
 <div class="icon">📈</div>
 <div>
 <div class="cardTitle">Crypto Profit Calculator</div>
-<div class="cardDesc">Calculate crypto ROI.</div>
+<div class="cardDesc">Calculate crypto profit and ROI.</div>
 </div>
 <span class="badge">Crypto</span>
 </a>
 
-<a class="card" href="/web3-gas-fee-estimator.html" data-tags="web3 gas">
+<a class="card" href="/web3-gas-fee-estimator.html" data-tags="gas web3 ethereum">
 <div class="icon">⛽</div>
 <div>
 <div class="cardTitle">Web3 Gas Fee Estimator</div>
@@ -300,6 +337,8 @@ color:white;
 </div>
 <span class="badge">Crypto</span>
 </a>
+
+<!-- DEV -->
 
 <a class="card" href="/json-formatter.html" data-tags="json formatter dev">
 <div class="icon">🧾</div>
@@ -310,7 +349,7 @@ color:white;
 <span class="badge">Dev</span>
 </a>
 
-<a class="card" href="/base64-encoder.html" data-tags="base64 encode decode">
+<a class="card" href="/base64-encoder.html" data-tags="base64 encode decode dev">
 <div class="icon">🧬</div>
 <div>
 <div class="cardTitle">Base64 Encoder</div>
@@ -330,7 +369,7 @@ color:white;
 <a href="/sitemap.xml">Sitemap</a>
 </div>
 
-<div style="margin-top:6px;">
+<div style="margin-top:8px;">
 © <span id="year"></span> InstantQR.io
 </div>
 
@@ -340,20 +379,20 @@ color:white;
 
 <script>
 
-document.getElementById("year").textContent = new Date().getFullYear()
+document.getElementById("year").textContent=new Date().getFullYear()
 
-const search = document.getElementById("search")
-const cards = document.querySelectorAll(".card")
+const search=document.getElementById("search")
+const cards=document.querySelectorAll(".card")
 
 search.addEventListener("input",()=>{
 
-let q = search.value.toLowerCase()
+let q=search.value.toLowerCase()
 
 cards.forEach(card=>{
 
-let text = card.dataset.tags + card.innerText.toLowerCase()
+let text=card.dataset.tags+card.innerText.toLowerCase()
 
-card.style.display = text.includes(q) ? "flex":"none"
+card.style.display=text.includes(q)?"flex":"none"
 
 })
 
