@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-6213N2G8R2');
+</script>
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+crossorigin="anonymous"></script>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Timestamp Converter | InstantQR</title>
+<meta name="description" content="Convert Unix timestamps (seconds/ms) to human dates and back. Runs locally." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://instantqr.io/timestamp-converter.html" />
+<link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+<link rel="alternate icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+<meta name="theme-color" content="#0b0f19" />
+
+<style>
+:root{
+  --bg:#0b1220;
+  --panel: rgba(255,255,255,.04);
+  --panel2: rgba(255,255,255,.06);
+  --text:#e7eefc;
+  --muted:#a9b7d6;
+  --brand:#69a6ff;
+  --ok:#19c37d;
+  --warn:#fbbf24;
+  --bad:#ef4444;
+  --border: rgba(255,255,255,.10);
+  --shadow: 0 12px 40px rgba(0,0,0,.45);
+  --radius: 18px;
+  --radius2: 22px;
+  --max: 980px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+    radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
+    radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+    linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+}
+a{color:inherit; text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:var(--max); margin:0 auto; padding:18px}
+.topbar{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter: blur(10px);
+  background: rgba(7, 11, 20, .55);
+  border-bottom: 1px solid var(--border);
+}
+.topbar .inner{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:14px 18px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+.brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+.brand img{height:32px; width:auto; display:block}
+nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+nav a{
+  color:var(--muted);
+  font-size:14px;
+  padding:8px 10px;
+  border-radius:12px;
+}
+nav a:hover{color:var(--text); background: rgba(255,255,255,.06); text-decoration:none}
+
+h1{margin:14px 0 6px; font-size: clamp(26px, 3.5vw, 36px); letter-spacing:-.6px}
+.sub{margin:0 0 16px; color:var(--muted); line-height:1.5}
+
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border:1px solid var(--border);
+  border-radius: var(--radius2);
+  box-shadow: var(--shadow);
+  padding:16px;
+}
+.grid{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+@media (max-width: 860px){ .grid{grid-template-columns:1fr} }
+
+label{display:block; font-size:13px; color:var(--muted); margin:8px 0 6px}
+.input, textarea, select{
+  width:100%;
+  padding:12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.14);
+  color: var(--text);
+  outline:none;
+  font-size:14px;
+}
+textarea{min-height:140px; resize:vertical}
+.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 14px;
+  border-radius: 999px;
+  font-weight:700;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  text-decoration:none;
+  gap:8px;
+  white-space:nowrap;
+  cursor:pointer;
+  transition: transform .12s ease, filter .12s ease, background .12s ease;
+  user-select:none;
+}
+.btn:hover{ transform: translateY(-1px); text-decoration:none; }
+.btn.primary{
+  border: 0;
+  background: linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
+  box-shadow: 0 14px 28px rgba(105,166,255,.22);
+}
+.btn.primary:hover{ filter:brightness(1.06); }
+.btn.ghost:hover{ background: rgba(255,255,255,.10); }
+.pill{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  color: var(--muted);
+  font-size:13px;
+}
+.kv{
+  display:flex; gap:10px; align-items:flex-start; justify-content:space-between;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  background: rgba(0,0,0,.10);
+  padding:12px;
+}
+.kv strong{display:block; font-size:13px; color:var(--muted); font-weight:700}
+.kv code, .mono{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 13px;
+  word-break: break-all;
+}
+.help{color:var(--muted); font-size:13px; line-height:1.55}
+.ok{color:var(--ok)}
+.bad{color:var(--bad)}
+.warn{color:var(--warn)}
+.hr{height:1px; background: rgba(255,255,255,.10); margin:14px 0}
+.footer{
+  margin-top: 18px;
+  padding: 16px 0 32px;
+  border-top: 1px solid rgba(255,255,255,.10);
+  color: var(--muted);
+  font-size: 13px;
+}
+.footer a{color:var(--muted)}
+.footer a:hover{color:var(--text); text-decoration:none}
+.small{font-size:12px; color:rgba(233,238,252,.60)}
+.toast{
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.55);
+  border: 1px solid rgba(255,255,255,.12);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events:none;
+  transition: opacity .15s ease;
+}
+.toast.show{opacity:1}
+</style>
+
+</head>
+<body>
+<header class="topbar">
+  <div class="inner">
+    <a class="brand" href="/" aria-label="InstantQR Home">
+      <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+      <span>InstantQR</span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="/tools.html">All Tools</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="card">
+  <div class="pill">⏱️ Dev Tool · 🕒 Unix time</div>
+  <h1>Timestamp Converter</h1>
+  <p class="sub">Convert Unix timestamps (seconds or milliseconds) to readable dates — and generate timestamps from dates.</p>
+
+  <div class="grid">
+    <div>
+      <label for="unix">Unix Timestamp</label>
+      <input id="unix" class="input mono" placeholder="e.g., 1700000000 or 1700000000000" />
+
+      <div class="row" style="margin-top:10px;">
+        <button class="btn primary" id="toHuman" type="button">Convert →</button>
+        <button class="btn ghost" id="nowBtn" type="button">Now</button>
+        <button class="btn ghost" id="copyUnix" type="button">Copy</button>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="kv">
+        <div>
+          <strong>Human-readable</strong>
+          <div class="help" id="humanOut">—</div>
+        </div>
+        <button class="btn ghost" id="copyHuman" type="button">Copy</button>
+      </div>
+
+      <div class="kv" style="margin-top:10px;">
+        <div>
+          <strong>ISO 8601 (UTC)</strong>
+          <div class="help mono" id="isoOut">—</div>
+        </div>
+        <button class="btn ghost" id="copyIso" type="button">Copy</button>
+      </div>
+
+      <div class="help" style="margin-top:10px;">
+        Auto-detects <span class="mono">seconds</span> vs <span class="mono">milliseconds</span>.
+      </div>
+    </div>
+
+    <div>
+      <label for="dt">Date & Time</label>
+      <input id="dt" class="input mono" type="datetime-local" />
+
+      <div class="row" style="margin-top:10px;">
+        <button class="btn primary" id="toUnix" type="button">← To Unix</button>
+        <button class="btn ghost" id="setNow" type="button">Set to now</button>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="kv">
+        <div>
+          <strong>Unix (seconds)</strong>
+          <div class="help mono" id="unixS">—</div>
+        </div>
+        <button class="btn ghost" id="copyS" type="button">Copy</button>
+      </div>
+
+      <div class="kv" style="margin-top:10px;">
+        <div>
+          <strong>Unix (milliseconds)</strong>
+          <div class="help mono" id="unixMs">—</div>
+        </div>
+        <button class="btn ghost" id="copyMs" type="button">Copy</button>
+      </div>
+
+      <div class="help" style="margin-top:10px;">
+        <span class="warn">Note:</span> <span class="mono">datetime-local</span> uses your local timezone.
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const unix = document.getElementById('unix');
+  const humanOut = document.getElementById('humanOut');
+  const isoOut = document.getElementById('isoOut');
+
+  const dt = document.getElementById('dt');
+  const unixS = document.getElementById('unixS');
+  const unixMs = document.getElementById('unixMs');
+
+  function parseUnix(v){
+    const s = (v || '').trim();
+    if(!s) return null;
+    if(!/^-?\\d+$/.test(s)) return null;
+    const n = Number(s);
+    const abs = Math.abs(n);
+    const isMs = abs >= 1e12;
+    return { ms: isMs ? n : n*1000 };
+  }
+
+  function fmt(d){
+    const pad = (x)=>String(x).padStart(2,'0');
+    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  }
+
+  function fromUnix(){
+    const p = parseUnix(unix.value);
+    if(!p){ toast('Enter a numeric Unix timestamp'); return; }
+    const d = new Date(p.ms);
+    if(Number.isNaN(d.getTime())){ toast('Invalid timestamp'); return; }
+    humanOut.textContent = fmt(d) + ` (local)`;
+    isoOut.textContent = d.toISOString();
+  }
+
+  function setNowUnix(){
+    unix.value = String(Date.now());
+    fromUnix();
+    toast('Now');
+  }
+
+  function toUnix(){
+    if(!dt.value){ toast('Pick a date/time'); return; }
+    const d = new Date(dt.value);
+    if(Number.isNaN(d.getTime())){ toast('Invalid date'); return; }
+    const ms = d.getTime();
+    unixS.textContent = String(Math.floor(ms/1000));
+    unixMs.textContent = String(ms);
+    toast('Converted');
+  }
+
+  function setNowLocal(){
+    const d = new Date();
+    const pad = (x)=>String(x).padStart(2,'0');
+    dt.value = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    toUnix();
+    toast('Now set');
+  }
+
+  document.getElementById('toHuman').addEventListener('click', () => { fromUnix(); toast('Converted'); });
+  document.getElementById('nowBtn').addEventListener('click', setNowUnix);
+  document.getElementById('toUnix').addEventListener('click', toUnix);
+  document.getElementById('setNow').addEventListener('click', setNowLocal);
+
+  document.getElementById('copyUnix').addEventListener('click', async () => {
+    const v = (unix.value || '').trim();
+    if(!v){ toast('Nothing to copy'); return; }
+    await copyText(v);
+  });
+  document.getElementById('copyHuman').addEventListener('click', async () => {
+    const v = (humanOut.textContent || '').trim();
+    if(!v || v==='—'){ toast('Nothing to copy'); return; }
+    await copyText(v);
+  });
+  document.getElementById('copyIso').addEventListener('click', async () => {
+    const v = (isoOut.textContent || '').trim();
+    if(!v || v==='—'){ toast('Nothing to copy'); return; }
+    await copyText(v);
+  });
+  document.getElementById('copyS').addEventListener('click', async () => {
+    const v = (unixS.textContent || '').trim();
+    if(!v || v==='—'){ toast('Nothing to copy'); return; }
+    await copyText(v);
+  });
+  document.getElementById('copyMs').addEventListener('click', async () => {
+    const v = (unixMs.textContent || '').trim();
+    if(!v || v==='—'){ toast('Nothing to copy'); return; }
+    await copyText(v);
+  });
+
+  unix.addEventListener('input', () => {
+    clearTimeout(window.__tsTimer);
+    window.__tsTimer = setTimeout(() => {
+      const p = parseUnix(unix.value);
+      if(p) fromUnix();
+    }, 180);
+  });
+
+  setNowUnix();
+  setNowLocal();
+})();
+</script>
+
+  <footer class="footer" aria-label="Footer">
+    <div class="small">© <span id="year"></span> InstantQR.io · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.xml">Sitemap</a></div>
+  </footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function toast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(() => t.classList.remove('show'), 1300);
+  }
+
+  async function copyText(text){
+    try {
+      await navigator.clipboard.writeText(text);
+      toast('Copied');
+    } catch(e) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      toast('Copied');
+    }
+  }
+</script>
+
+</body>
+</html>
