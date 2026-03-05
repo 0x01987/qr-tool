@@ -17,14 +17,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>Grams to Cups Converter (Water) | InstantQR</title>
-  <meta name="description" content="Convert grams to US cups instantly (water). Fast, mobile-friendly, privacy-first — runs locally in your browser." />
+  <title>Inches to Centimeters Converter (in to cm) | InstantQR</title>
+  <meta name="description" content="Convert inches to centimeters instantly. Fast, mobile-friendly, privacy-first — runs locally in your browser." />
   <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://instantqr.io/grams-to-cups.html" />
+  <link rel="canonical" href="https://instantqr.io/inches-to-cm.html" />
 
-  <meta property="og:title" content="Grams to Cups Converter (Water) | InstantQR" />
-  <meta property="og:description" content="Convert grams to US cups instantly (water). Fast, mobile-friendly, privacy-first — runs locally in your browser." />
-  <meta property="og:url" content="https://instantqr.io/grams-to-cups.html" />
+  <meta property="og:title" content="Inches to Centimeters Converter (in to cm) | InstantQR" />
+  <meta property="og:description" content="Convert inches to centimeters instantly. Fast, mobile-friendly, privacy-first — runs locally in your browser." />
+  <meta property="og:url" content="https://instantqr.io/inches-to-cm.html" />
   <meta property="og:type" content="website" />
 
   <link rel="icon" href="/assets/instantqr-logo.svg" />
@@ -93,7 +93,7 @@ footer{ margin:18px 0 10px; color:var(--muted); font-size:13px; }
 .small{ font-size:12px; opacity:.9; }
 </style>
   <script type="application/ld+json">
-  {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How many cups are in 250 grams?", "acceptedAnswer": {"@type": "Answer", "text": "For water, 250 g ≈ 1.06 cups (US)."}}, {"@type": "Question", "name": "Does grams to cups depend on ingredient?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. This page assumes water. Other ingredients have different densities."}}, {"@type": "Question", "name": "Does this tool store my data?", "acceptedAnswer": {"@type": "Answer", "text": "No. It runs locally in your browser."}}]}
+  {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How many centimeters are in 1 inch?", "acceptedAnswer": {"@type": "Answer", "text": "1 inch = 2.54 centimeters."}}, {"@type": "Question", "name": "How do I convert inches to cm?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply inches by 2.54 to get centimeters."}}, {"@type": "Question", "name": "Does this tool store my data?", "acceptedAnswer": {"@type": "Answer", "text": "No. It runs locally in your browser."}}]}
   </script>
 </head>
 
@@ -117,26 +117,26 @@ footer{ margin:18px 0 10px; color:var(--muted); font-size:13px; }
     </header>
 
     <div class="hero">
-      <h1>Grams to Cups Converter (Water)</h1>
-      <div class="sub">Convert grams to US cups instantly (water). Fast, mobile-friendly, privacy-first — runs locally in your browser.</div>
-      <div class="note"><b>Note:</b> This page assumes <b>water</b> density. For flour/sugar/etc, grams per cup differs.</div>
+      <h1>Inches to Centimeters Converter (in to cm)</h1>
+      <div class="sub">Convert inches to centimeters instantly. Fast, mobile-friendly, privacy-first — runs locally in your browser.</div>
+      
     </div>
 
     <div class="card">
       <div class="cardInner">
         <div class="grid">
           <div>
-            <label for="a">Grams (water)</label>
+            <label for="a">Inches</label>
             <div class="input">
               <input id="a" type="number" inputmode="decimal" placeholder="e.g. 1" />
-              <span class="unit">g</span>
+              <span class="unit">in</span>
             </div>
           </div>
           <div>
-            <label for="b">Cups (US)</label>
+            <label for="b">Centimeters</label>
             <div class="input">
               <input id="b" type="number" inputmode="decimal" placeholder="e.g. 1" />
-              <span class="unit">cup</span>
+              <span class="unit">cm</span>
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@ footer{ margin:18px 0 10px; color:var(--muted); font-size:13px; }
         </div>
 
         <div id="out" class="result">Enter a value to convert.</div>
-        <div class="muted">Formula (water): cups = grams ÷ 236.5882365.</div>
+        <div class="muted">Formula: cm = inches × 2.54.</div>
       </div>
     </div>
 
@@ -168,9 +168,9 @@ footer{ margin:18px 0 10px; color:var(--muted); font-size:13px; }
       <div class="sec">
         <h2>Common conversions</h2>
         <ul>
-          <li>250 g ≈ 1.06 cups</li>
-<li>500 g ≈ 2.11 cups</li>
-<li>100 g ≈ 0.42 cups</li>
+          <li>1 in = 2.54 cm</li>
+<li>10 in = 25.4 cm</li>
+<li>12 in = 30.48 cm</li>
         </ul>
       </div>
     </div>
@@ -201,7 +201,7 @@ footer{ margin:18px 0 10px; color:var(--muted); font-size:13px; }
   </div>
 
   <script>
-    const FACTOR = 0.004226752837730375;
+    const FACTOR = 2.54;
 
     const a = document.getElementById('a');
     const b = document.getElementById('b');
@@ -225,7 +225,7 @@ footer{ margin:18px 0 10px; color:var(--muted); font-size:13px; }
       if (!isFinite(v)) { b.value=''; setOut('Enter a value to convert.'); return; }
       const v2 = v * FACTOR;
       b.value = fmt(v2);
-      setOut(`${fmt(v)} g = ${fmt(v2)} cup`);
+      setOut(`${fmt(v)} in = ${fmt(v2)} cm`);
     }
 
     function fromB(){
@@ -233,7 +233,7 @@ footer{ margin:18px 0 10px; color:var(--muted); font-size:13px; }
       if (!isFinite(v)) { a.value=''; setOut('Enter a value to convert.'); return; }
       const v2 = v / FACTOR;
       a.value = fmt(v2);
-      setOut(`${fmt(v)} cup = ${fmt(v2)} g`);
+      setOut(`${fmt(v)} cm = ${fmt(v2)} in`);
     }
 
     a.addEventListener('input', () => { lock='a'; fromA(); });
