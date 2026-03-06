@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -16,7 +25,247 @@
   <meta property="og:url" content="https://instantqr.io/url-qr-code-generator.html" />
 
   <link rel="icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/style.css" />
+
+  <style>
+    :root{
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      --bg:#0b0f19;
+      --card:#121a2a;
+      --panel:#0e1525;
+      --border:#22304e;
+      --border2:#2a3a5f;
+      --text:#e7eaf2;
+      --muted:#b8c0d6;
+      --muted2:#8ea0c8;
+      --link:#cfe0ff;
+      --brand:#3b82f6;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:16px;
+      --max: 980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:
+        radial-gradient(900px 540px at 12% 8%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px;}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:2px 2px 10px;
+      border-bottom:1px solid rgba(34,48,78,.55);
+      margin-bottom:12px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:900;
+      letter-spacing:-.2px;
+    }
+    .brand img{ height:30px; width:auto; display:block; }
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .nav a{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--link);
+      text-decoration:none;
+      font-weight:800;
+      font-size:12px;
+      user-select:none;
+    }
+    .nav a:hover{ border-color: rgba(59,130,246,.85); }
+
+    .hero{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .hero h1{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-.3px;
+      max-width: 24ch;
+    }
+    .hero p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+      max-width: 70ch;
+    }
+    .badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .badge{
+      padding:7px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--muted);
+      font-size:12px;
+      user-select:none;
+    }
+
+    .info{
+      margin-top:14px;
+      background:var(--panel);
+      border:1px solid var(--border2);
+      border-radius:var(--radius2);
+      padding:14px;
+    }
+    .info h2{ margin:0 0 8px; font-size:16px; }
+    .info p, .info li{ color:var(--muted); font-size:13px; line-height:1.7; }
+    .info ol, .info ul{ padding-left:18px; margin:8px 0 0; }
+    .tiny{ color:var(--muted2); font-size:12px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      margin-top:14px;
+      align-items:start;
+    }
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+
+    .box{
+      background:var(--panel);
+      border:1px solid var(--border2);
+      border-radius:var(--radius2);
+      padding:14px;
+    }
+    label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
+    input, select, textarea{
+      width:100%;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid var(--border2);
+      background:#0b1222;
+      color:var(--text);
+      outline:none;
+    }
+    textarea{
+      min-height:120px;
+      resize:vertical;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(59,130,246,.85);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+    }
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    @media (max-width: 520px){ .row{ grid-template-columns: 1fr; } }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    button{
+      border:0;
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--brand);
+      color:white;
+      font-weight:900;
+      cursor:pointer;
+    }
+    button:hover{ filter:brightness(1.05); }
+    button.secondary{
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--text);
+      font-weight:800;
+    }
+    button.secondary:hover{ border-color: rgba(59,130,246,.7); }
+
+    .qrWrap{
+      width:320px;
+      max-width:100%;
+      aspect-ratio:1/1;
+      border-radius:16px;
+      background:#0b1222;
+      border:1px dashed rgba(184,192,214,.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:10px;
+    }
+    .preview{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .hint{ color:var(--muted); font-size:12px; text-align:center; }
+
+    .error{
+      color:#ff9fb3;
+      font-size:12px;
+      margin-top:8px;
+      display:none;
+    }
+
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    code{ color:var(--link); }
+
+    .faq{
+      margin-top:14px;
+      background:var(--panel);
+      border:1px solid var(--border2);
+      border-radius:var(--radius2);
+      padding:14px;
+    }
+    .faq h2{ margin:0 0 10px; font-size:16px; }
+    details{
+      background:#0b1222;
+      border:1px solid var(--border2);
+      border-radius:14px;
+      padding:10px 12px;
+      margin-top:10px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:900;
+      color:var(--text);
+      list-style:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details p{ margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.7; }
+
+    .footerLinks{
+      margin-top:14px;
+      text-align:center;
+      color:var(--muted2);
+      font-size:12px;
+    }
+    .footerLinks a{ color:var(--link); text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
+  </style>
 
   <!-- ✅ Structured Data: SoftwareApplication -->
   <script type="application/ld+json">
@@ -82,77 +331,63 @@
     ]
   }
   </script>
-
-  <!-- ✅ Small, page-specific polish (safe even with shared style.css) -->
-  <style>
-    /* If style.css already defines these, this won't hurt — it only improves focus states. */
-    textarea:focus, input:focus, select:focus{
-      outline:none;
-      border-color: rgba(59,130,246,.85) !important;
-      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
-    }
-    .topBrand{
-      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-    }
-    .topBrand img{ height:30px; width:auto; display:block; }
-    .tiny{ font-size:12px; color:#8ea0c8; }
-  </style>
 </head>
 
 <body>
   <div class="wrap">
     <div class="card">
 
-      <header>
-        <div class="topBrand">
+      <!-- Topbar -->
+      <div class="topbar">
+        <a class="brand" href="/" aria-label="InstantQR Home">
           <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
-          <div>
-            <h1>URL QR Code Generator</h1>
-            <div class="sub">Create a QR code for any website link. Scan and open instantly.</div>
+          <span>InstantQR</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="/">Home</a>
+          <a href="/tools/url-qr-code-generator.html">URL QR Code Generator</a>
+          <a href="/tools/wifi-qr-code-generator.html">WiFi QR Code Generator</a>
+        </nav>
+      </div>
+
+      <!-- Hero -->
+      <section class="hero">
+        <div>
+          <h1>URL QR Code Generator</h1>
+          <p>
+            Create a QR code for any website link and let people open it instantly with a phone scan.
+            Paste your URL, generate your code, and download it as a PNG.
+          </p>
+          <div class="badges" aria-label="Highlights">
+            <span class="badge">⚡ Fast</span>
+            <span class="badge">🔒 Privacy-first</span>
+            <span class="badge">🌐 Website links</span>
+            <span class="badge">⬇️ PNG Download</span>
           </div>
         </div>
-
-        <div class="footerLinks" style="margin-top:0;">
-          <a href="/">Home</a> ·
-          <a href="/wifi-qr-code-generator.html">WiFi QR</a>
-        </div>
-      </header>
+      </section>
 
       <!-- SEO Content Block -->
-      <div class="infoMid">
+      <section class="info" aria-label="How to create a QR code for a website">
         <h2>How to Create a QR Code for a Website</h2>
         <ol>
-          <li>Enter your website URL in the box below (include <strong>https://</strong>).</li>
+          <li>Enter your website URL below and include <strong>https://</strong>.</li>
           <li>Click <strong>Generate</strong>.</li>
           <li>Download your QR code as a PNG image.</li>
         </ol>
 
-        <p>
+        <p style="margin-top:10px;">
           Use this free URL QR code generator to share websites, landing pages, restaurant menus,
-          event pages, or social profiles. Anyone can scan the code using a phone camera.
+          event pages, portfolios, app download pages, or social profiles. Anyone can scan the code using a phone camera.
         </p>
+      </section>
 
-        <h2>Why Use a URL QR Code?</h2>
-        <ul>
-          <li>Share links instantly without typing</li>
-          <li>Print on flyers, posters, menus, and business cards</li>
-          <li>Use UTM or tracking links for marketing campaigns</li>
-          <li>Make offline promotions interactive</li>
-        </ul>
-      </div>
-
+      <!-- Tool -->
       <div class="grid">
 
         <!-- Controls -->
         <div class="box">
-
-          <label>Type</label>
-          <div class="pillbar" id="typeBar">
-            <div class="pill active" data-type="text">Text / URL</div>
-            <div class="pill" data-type="wifi">Wi-Fi</div>
-          </div>
-
-          <!-- TEXT/URL FORM (VISIBLE BY DEFAULT) -->
           <div id="textForm">
             <label for="text">Website URL</label>
             <textarea
@@ -163,39 +398,7 @@
               spellcheck="false"
             ></textarea>
             <div class="tiny" style="margin-top:8px;">
-              Tip: include <code>https://</code> for best compatibility.
-            </div>
-          </div>
-
-          <!-- WIFI FORM (HIDDEN BY DEFAULT) -->
-          <div id="wifiForm" style="display:none;">
-            <div class="row">
-              <div>
-                <label for="ssid">Wi-Fi name (SSID)</label>
-                <input id="ssid" type="text" placeholder="MyWiFi" />
-              </div>
-              <div>
-                <label for="security">Security</label>
-                <select id="security">
-                  <option value="WPA" selected>WPA/WPA2/WPA3</option>
-                  <option value="WEP">WEP</option>
-                  <option value="nopass">No password</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="row" style="margin-top:12px;">
-              <div>
-                <label for="password">Password</label>
-                <input id="password" type="text" placeholder="••••••••" />
-              </div>
-              <div>
-                <label for="hidden">Hidden network</label>
-                <select id="hidden">
-                  <option value="false" selected>No</option>
-                  <option value="true">Yes</option>
-                </select>
-              </div>
+              Tip: use the full URL with <code>https://</code> for best compatibility.
             </div>
           </div>
 
@@ -228,19 +431,64 @@
         <!-- Preview -->
         <div class="box preview">
           <div class="qrWrap" id="qrWrap">
-            <div class="hint">Your QR code will appear here.</div>
+            <div class="hint">Your URL QR code will appear here.</div>
           </div>
           <div class="hint">Tip: test-scan before printing or publishing.</div>
         </div>
 
       </div>
 
+      <!-- Extra SEO sections -->
+      <section class="info" aria-label="Why use a URL QR code">
+        <h2>Why Use a URL QR Code?</h2>
+        <ul>
+          <li>Share links instantly without typing</li>
+          <li>Print on flyers, posters, menus, and business cards</li>
+          <li>Use UTM or tracking links for marketing campaigns</li>
+          <li>Make offline promotions interactive</li>
+        </ul>
+
+        <h2 style="margin-top:16px;">Best Practices</h2>
+        <ul>
+          <li>Always test the QR code before printing or publishing.</li>
+          <li>Use a short, clean URL if possible for easier scanning.</li>
+          <li>Choose <strong>M</strong> or <strong>H</strong> error correction for printed materials.</li>
+          <li>Use larger sizes like 512px+ for posters and signage.</li>
+        </ul>
+      </section>
+
+      <!-- FAQ UI -->
+      <section class="faq" aria-label="Frequently asked questions">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>How do I create a QR code for a website?</summary>
+          <p>Paste your full website link, click Generate, then download the QR code as a PNG image.</p>
+        </details>
+
+        <details>
+          <summary>Does InstantQR store my URL?</summary>
+          <p>No. This tool is designed to run locally in your browser where possible and does not intentionally store your input.</p>
+        </details>
+
+        <details>
+          <summary>Should I include https:// in my link?</summary>
+          <p>Yes. Using the full URL helps scanners open the correct website reliably.</p>
+        </details>
+
+        <details>
+          <summary>Can I use tracking links?</summary>
+          <p>Yes. You can generate a QR code for UTM links, campaign URLs, and other tracked website links.</p>
+        </details>
+      </section>
+
       <!-- Footer Links -->
       <div class="footerLinks">
         <a href="/about.html">About</a> ·
         <a href="/privacy.html">Privacy</a> ·
         <a href="/terms.html">Terms</a> ·
-        <a href="/contact.html">Contact</a>
+        <a href="/contact.html">Contact</a> ·
+        <a href="/sitemap.xml">Sitemap</a>
       </div>
 
     </div>
@@ -256,7 +504,7 @@
     // Force Text/URL mode on this page (expects app.js to expose setType)
     if (typeof setType === "function") setType("text");
 
-    // ✅ Fix: auto-generate after paste (and after manual typing pause)
+    // Auto-generate after paste / typing pause
     const textEl = document.getElementById('text');
     const genBtn = document.getElementById('generateBtn');
 
@@ -268,12 +516,10 @@
     }
 
     if (textEl) {
-      // Paste → generate
       textEl.addEventListener('paste', () => {
         setTimeout(safeAutoGenerate, 60);
       });
 
-      // Typing pause → generate (debounced)
       let t = null;
       textEl.addEventListener('input', () => {
         clearTimeout(t);
