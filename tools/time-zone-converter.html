@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Time Zone Converter | InstantQR</title>
+  <meta name="description" content="Convert times between time zones instantly. Supports IANA time zones. Privacy-first: runs locally in your browser." />
+  <meta name="robots" content="index,follow" />
+
+  <style>
+    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    body { margin:0; background:#0b0f19; color:#e7eaf2; }
+    .wrap { max-width: 1100px; margin:0 auto; padding: 22px; }
+    .card {
+      background:#121a2a; border:1px solid #22304e; border-radius:18px;
+      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap; margin-bottom:14px;
+    }
+    .brand{
+      display:flex; align-items:baseline; gap:10px;
+      text-decoration:none; color:#e7eaf2;
+    }
+    .brand strong{ font-size:16px; letter-spacing:.2px; }
+    .brand span{ color:#8ea0c8; font-size:12px; }
+
+    .toolnav{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .toolnav a{
+      padding:8px 10px; border-radius:999px;
+      background:#0b1222; border:1px solid #2a3a5f;
+      color:#b8c0d6; font-size:12px; text-decoration:none; font-weight:700;
+    }
+    .toolnav a:hover{ border-color:#3b82f6; color:#e7eaf2; }
+    .toolnav a.active{ border-color:#3b82f6; color:#e7eaf2; }
+
+    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    h1{ margin:0; font-size:24px; }
+    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
+
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-top:14px; }
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+
+    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; }
+    label{ display:block; font-size:12px; color:#b8c0d6; margin-bottom:6px; }
+
+    input, select{
+      width:100%; padding:12px 10px; border-radius:14px;
+      border:1px solid #2a3a5f; background:#0b1222; color:#e7eaf2; outline:none;
+      font-size:14px;
+    }
+
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    @media (max-width: 520px){ .row{ grid-template-columns: 1fr; } }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    button{
+      border:0; border-radius:14px; padding:12px 14px;
+      background:#3b82f6; color:white; font-weight:800; cursor:pointer;
+    }
+    button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
+    button.ghost{ background:#0b1222; border:1px solid #2a3a5f; color:#b8c0d6; }
+
+    .pill{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:10px 12px; border-radius:16px;
+      background:#0b1222; border:1px solid #2a3a5f; margin-top:10px;
+    }
+    .pill .k{ color:#8ea0c8; font-size:12px; }
+    .pill .v{ font-weight:900; font-size:14px; }
+
+    .hint{ color:#b8c0d6; font-size:12px; line-height:1.55; }
+    .tiny{ color:#8ea0c8; font-size:12px; }
+    .error{ color:#ff9fb3; font-size:12px; }
+    .ok{ color:#9fffb8; font-size:12px; }
+
+    .status{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px dashed rgba(184,192,214,.35);
+      background:#0b1222;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .footerLinks{
+      margin-top:14px;
+      text-align:center;
+      color:#8ea0c8;
+      font-size:12px;
+    }
+    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <div class="topbar">
+        <a class="brand" href="/">
+          <strong>InstantQR</strong>
+          <span>privacy-first tools</span>
+        </a>
+        <nav class="toolnav" aria-label="Tools">
+          <a href="/">QR Generator</a>
+          <a href="/password.html">Password Generator</a>
+          <a href="/unit-converter.html">Unit Converter</a>
+          <a href="/ip-lookup.html">IP Lookup</a>
+          <a href="/json-formatter.html">JSON Formatter</a>
+          <a class="active" href="/time-zone-converter.html">Time Zone Converter</a>
+          <a href="/base64-encoder.html">Base64 Encoder</a>
+          <a href="/countdown-timer.html">Countdown Timer</a>
+          <a href="/world-clock.html">World Clock</a>
+        </nav>
+      </div>
+
+      <header>
+        <div>
+          <h1>Time Zone Converter</h1>
+          <div class="sub">Convert times between time zones instantly. Runs locally in your browser.</div>
+        </div>
+      </header>
+
+      <div class="grid">
+        <!-- Controls -->
+        <div class="box">
+          <div class="row">
+            <div>
+              <label for="date">Date</label>
+              <input id="date" type="date" />
+            </div>
+            <div>
+              <label for="time">Time</label>
+              <input id="time" type="time" step="60" />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:12px;">
+            <div>
+              <label for="fromTz">From time zone</label>
+              <select id="fromTz"></select>
+              <div class="tiny" style="margin-top:6px;" id="fromNow"></div>
+            </div>
+            <div>
+              <label for="toTz">To time zone</label>
+              <select id="toTz"></select>
+              <div class="tiny" style="margin-top:6px;" id="toNow"></div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="convertBtn" type="button">Convert</button>
+            <button class="secondary" id="swapBtn" type="button">Swap</button>
+            <button class="ghost" id="nowBtn" type="button">Use Now</button>
+            <button class="secondary" id="copyBtn" type="button">Copy Result</button>
+          </div>
+
+          <div class="status" aria-live="polite">
+            <div class="tiny">Status</div>
+            <div id="statusLine" class="hint">Pick date/time + zones, then click Convert.</div>
+          </div>
+
+          <div class="hint" style="margin-top:10px;">
+            Tip: This tool uses official IANA time zones (e.g., <code>America/Phoenix</code>, <code>Europe/London</code>).
+          </div>
+        </div>
+
+        <!-- Output -->
+        <div class="box">
+          <div class="pill">
+            <div>
+              <div class="k">From</div>
+              <div class="v" id="fromOut">—</div>
+            </div>
+            <div class="tiny" id="fromMeta">—</div>
+          </div>
+
+          <div class="pill">
+            <div>
+              <div class="k">To</div>
+              <div class="v" id="toOut">—</div>
+            </div>
+            <div class="tiny" id="toMeta">—</div>
+          </div>
+
+          <div class="pill">
+            <div>
+              <div class="k">Difference</div>
+              <div class="v" id="diffOut">—</div>
+            </div>
+            <div class="tiny" id="dstOut">—</div>
+          </div>
+
+          <div class="hint" style="margin-top:10px;">
+            Privacy-first: conversion happens locally using <code>Intl.DateTimeFormat</code>. No time data is sent anywhere.
+          </div>
+        </div>
+      </div>
+
+      <div class="footerLinks">
+        <div style="margin-bottom:8px;">
+          <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+          <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
+          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a>
+        </div>
+        <div>
+          <a href="/about.html">About</a> ·
+          <a href="/privacy.html">Privacy</a> ·
+          <a href="/terms.html">Terms</a> ·
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const dateEl = document.getElementById("date");
+    const timeEl = document.getElementById("time");
+    const fromEl = document.getElementById("fromTz");
+    const toEl = document.getElementById("toTz");
+    const convertBtn = document.getElementById("convertBtn");
+    const swapBtn = document.getElementById("swapBtn");
+    const nowBtn = document.getElementById("nowBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const statusLine = document.getElementById("statusLine");
+
+    const fromOut = document.getElementById("fromOut");
+    const toOut = document.getElementById("toOut");
+    const diffOut = document.getElementById("diffOut");
+    const dstOut = document.getElementById("dstOut");
+    const fromMeta = document.getElementById("fromMeta");
+    const toMeta = document.getElementById("toMeta");
+    const fromNow = document.getElementById("fromNow");
+    const toNow = document.getElementById("toNow");
+
+    const COMMON_TZ = [
+      "America/Phoenix","America/Los_Angeles","America/Denver","America/Chicago","America/New_York",
+      "America/Anchorage","Pacific/Honolulu",
+      "Europe/London","Europe/Paris","Europe/Berlin","Europe/Madrid","Europe/Rome",
+      "Asia/Dubai","Asia/Kolkata","Asia/Singapore","Asia/Tokyo","Asia/Seoul",
+      "Australia/Sydney","Australia/Perth",
+      "UTC"
+    ];
+
+    function setStatus(msg, type="hint"){
+      statusLine.className = type;
+      statusLine.textContent = msg;
+    }
+
+    function getAllTimeZones(){
+      if (typeof Intl.supportedValuesOf === "function") {
+        try {
+          const z = Intl.supportedValuesOf("timeZone");
+          if (Array.isArray(z) && z.length) return z;
+        } catch {}
+      }
+      return COMMON_TZ;
+    }
+
+    function fillSelect(select, values){
+      select.innerHTML = "";
+      for(const tz of values){
+        const opt = document.createElement("option");
+        opt.value = tz;
+        opt.textContent = tz;
+        select.appendChild(opt);
+      }
+    }
+
+    function pad2(n){ return String(n).padStart(2,"0"); }
+
+    function setNow(){
+      const now = new Date();
+      dateEl.value = `${now.getFullYear()}-${pad2(now.getMonth()+1)}-${pad2(now.getDate())}`;
+      timeEl.value = `${pad2(now.getHours())}:${pad2(now.getMinutes())}`;
+      setStatus("Loaded current local date/time.", "ok");
+      convert();
+    }
+
+    function formatInTZ(date, timeZone){
+      const fmt = new Intl.DateTimeFormat(undefined, {
+        timeZone,
+        year:"numeric", month:"short", day:"2-digit",
+        hour:"2-digit", minute:"2-digit",
+        weekday:"short"
+      });
+      return fmt.format(date);
+    }
+
+    function getOffsetMinutes(date, timeZone){
+      const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone,
+        hour:"2-digit", minute:"2-digit",
+        timeZoneName: "shortOffset"
+      }).formatToParts(date);
+      const tzPart = parts.find(p => p.type === "timeZoneName");
+      if(!tzPart) return 0;
+      const m = tzPart.value.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/);
+      if(!m) return 0;
+      const sign = m[1] === "-" ? -1 : 1;
+      const hh = Number(m[2] || 0);
+      const mm = Number(m[3] || 0);
+      return sign * (hh*60 + mm);
+    }
+
+    function dateTimeInZoneToInstant(dateStr, timeStr, timeZone){
+      const [Y,M,D] = dateStr.split("-").map(Number);
+      const [h,m] = timeStr.split(":").map(Number);
+
+      let guess = new Date(Date.UTC(Y, M-1, D, h, m, 0));
+      for(let i=0; i<3; i++){
+        const off = getOffsetMinutes(guess, timeZone);
+        const desiredUTC = Date.UTC(Y, M-1, D, h, m, 0) - off*60*1000;
+        guess = new Date(desiredUTC);
+      }
+      return guess;
+    }
+
+    function updateNowLabels(){
+      const now = new Date();
+      const f = fromEl.value;
+      const t = toEl.value;
+      fromNow.textContent = f ? `Now: ${formatInTZ(now, f)}` : "Now: —";
+      toNow.textContent = t ? `Now: ${formatInTZ(now, t)}` : "Now: —";
+    }
+
+    function convert(){
+      const dateStr = (dateEl.value || "").trim();
+      const timeStr = (timeEl.value || "").trim();
+      const fromTz = fromEl.value;
+      const toTz = toEl.value;
+
+      if(!dateStr || !timeStr){
+        setStatus("Please choose a date and time.", "error");
+        return;
+      }
+      if(!fromTz || !toTz){
+        setStatus("Please select both time zones.", "error");
+        return;
+      }
+
+      try{
+        const instant = dateTimeInZoneToInstant(dateStr, timeStr, fromTz);
+
+        const fromTxt = formatInTZ(instant, fromTz);
+        const toTxt = formatInTZ(instant, toTz);
+
+        fromOut.textContent = fromTxt;
+        toOut.textContent = toTxt;
+
+        const offFrom = getOffsetMinutes(instant, fromTz);
+        const offTo = getOffsetMinutes(instant, toTz);
+        const diffMin = offTo - offFrom;
+
+        const sign = diffMin >= 0 ? "+" : "-";
+        const abs = Math.abs(diffMin);
+        const hh = Math.floor(abs/60);
+        const mm = abs % 60;
+        diffOut.textContent = `${sign}${hh}h ${mm}m`;
+
+        // show UTC offsets cleanly
+        const fmtOff = (mins) => {
+          const s = mins >= 0 ? "+" : "-";
+          const a = Math.abs(mins);
+          const h = Math.floor(a/60);
+          const m = a%60;
+          return `UTC${s}${h}${m?(":" + String(m).padStart(2,"0")):""}`;
+        };
+
+        fromMeta.textContent = `${fromTz} (${fmtOff(offFrom)})`;
+        toMeta.textContent = `${toTz} (${fmtOff(offTo)})`;
+        dstOut.textContent = `Offsets at this time: ${fromTz}=${offFrom} min, ${toTz}=${offTo} min`;
+
+        setStatus("Converted ✔", "ok");
+        updateNowLabels();
+      }catch(e){
+        setStatus("Conversion error: " + (e.message || String(e)), "error");
+      }
+    }
+
+    async function copyResult(){
+      const fromTz = fromEl.value;
+      const toTz = toEl.value;
+      const text = `From (${fromTz}): ${fromOut.textContent}\nTo (${toTz}): ${toOut.textContent}\nDifference: ${diffOut.textContent}`;
+      try{
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = "Copied!";
+        setTimeout(()=>copyBtn.textContent="Copy Result", 1200);
+      }catch{
+        setStatus("Copy failed (clipboard blocked).", "error");
+      }
+    }
+
+    function swap(){
+      const a = fromEl.value;
+      fromEl.value = toEl.value;
+      toEl.value = a;
+
+      // If swap produced empty (edge case), force valid options
+      if(!fromEl.value && fromEl.options.length) fromEl.selectedIndex = 0;
+      if(!toEl.value && toEl.options.length) toEl.selectedIndex = 0;
+
+      setStatus("Swapped time zones.", "ok");
+      convert();
+    }
+
+    (function init(){
+      const zones = getAllTimeZones();
+
+      const set = new Set(zones);
+      const ordered = [
+        ...COMMON_TZ.filter(z => set.has(z)),
+        ...zones.filter(z => !COMMON_TZ.includes(z))
+      ];
+
+      fillSelect(fromEl, ordered);
+      fillSelect(toEl, ordered);
+
+      const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+
+      // ensure selected values exist in the dropdown
+      fromEl.value = ordered.includes(localTz) ? localTz : "UTC";
+
+      let target = (fromEl.value === "America/Phoenix") ? "UTC" : "America/Phoenix";
+      if(!ordered.includes(target)) target = ordered.includes("UTC") ? "UTC" : (ordered[0] || "UTC");
+      toEl.value = target;
+
+      if(!fromEl.value && fromEl.options.length) fromEl.selectedIndex = 0;
+      if(!toEl.value && toEl.options.length) toEl.selectedIndex = 0;
+
+      setNow();
+      updateNowLabels();
+    })();
+
+    convertBtn.addEventListener("click", convert);
+    swapBtn.addEventListener("click", swap);
+    nowBtn.addEventListener("click", setNow);
+    copyBtn.addEventListener("click", copyResult);
+    fromEl.addEventListener("change", () => { updateNowLabels(); convert(); });
+    toEl.addEventListener("change", () => { updateNowLabels(); convert(); });
+    dateEl.addEventListener("change", convert);
+    timeEl.addEventListener("change", convert);
+  </script>
+</body>
+</html>
