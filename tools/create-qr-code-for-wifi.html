@@ -13,7 +13,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Create a WiFi QR Code | WiFi QR Generator (SSID + Password) | InstantQR.io</title>
+  <title>Create a WiFi QR Code | WiFi QR Code Generator (SSID + Password) | InstantQR.io</title>
   <meta name="description" content="Create a WiFi QR code for guests to scan and join instantly. Enter SSID + password, choose security (WPA/WEP/open), generate and download a PNG. Free & privacy-first." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://instantqr.io/create-qr-code-for-wifi.html" />
@@ -62,7 +62,7 @@
       box-shadow: var(--shadow);
     }
 
-    /* Topbar (matches homepage style pattern) */
+    /* Topbar */
     .topbar{
       display:flex;
       align-items:center;
@@ -229,19 +229,6 @@
       display:none;
     }
 
-    .pillbar{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
-    .pill{
-      padding:7px 10px;
-      border-radius:999px;
-      background:#0b1222;
-      border:1px solid var(--border2);
-      color:var(--muted);
-      font-size:12px;
-      cursor:pointer;
-      user-select:none;
-    }
-    .pill.active{ border-color: rgba(59,130,246,.9); color:var(--text); }
-
     a{ color:var(--link); text-decoration:none; }
     a:hover{ text-decoration:underline; }
     code{ color:var(--link); }
@@ -302,7 +289,7 @@
       {
         "@type":"Question",
         "name":"What is a WiFi QR code?",
-        "acceptedAnswer":{"@type":"Answer","text":"A WiFi QR code contains your SSID, password, and security type so guests can scan to connect without typing."}
+        "acceptedAnswer":{"@type":"Answer","text":"A WiFi QR code contains your SSID, password, and security type so guests can scan to connect instantly."}
       },
       {
         "@type":"Question",
@@ -337,8 +324,8 @@
 
         <nav class="nav" aria-label="Primary navigation">
           <a href="/">Home</a>
-          <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a>
-          <a href="/url-qr-code-generator.html">URL QR Generator</a>
+          <a href="/tools/wifi-qr-code-generator.html">WiFi QR Code Generator</a>
+          <a href="/tools/url-qr-code-generator.html">URL QR Generator</a>
         </nav>
       </div>
 
@@ -378,19 +365,6 @@
       <div class="grid">
         <!-- Controls -->
         <div class="box">
-          <label>Type</label>
-          <div class="pillbar" id="typeBar">
-            <div class="pill" data-type="text">Text / URL</div>
-            <div class="pill active" data-type="wifi">Wi-Fi</div>
-          </div>
-
-          <!-- TEXT/URL (HIDDEN) -->
-          <div id="textForm" style="display:none;">
-            <label for="text">Text or URL</label>
-            <textarea id="text" placeholder="https://example.com&#10;or any text"></textarea>
-          </div>
-
-          <!-- WIFI -->
           <div id="wifiForm">
             <div class="row">
               <div>
@@ -486,7 +460,7 @@
         </ul>
       </section>
 
-      <!-- FAQ UI (matches brand + helps SEO via on-page content too) -->
+      <!-- FAQ UI -->
       <section class="faq" aria-label="Frequently asked questions">
         <h2>FAQ</h2>
 
