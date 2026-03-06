@@ -1,6 +1,20 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Canonical duplicate cleanup: redirect /index.html -> / -->
+  <script>
+    (function () {
+      var isIndexHtml =
+        window.location.pathname === "/index.html" ||
+        window.location.pathname.endsWith("/index.html");
+
+      if (isIndexHtml) {
+        var target = window.location.origin + "/" + window.location.search + window.location.hash;
+        window.location.replace(target);
+      }
+    })();
+  </script>
+
   <!-- =========================
        Analytics / Monetization
        ========================= -->
@@ -36,7 +50,6 @@
   <meta property="og:title" content="InstantQR | Free Online Tools (QR, Converters, Crypto, Security & More)" />
   <meta property="og:description" content="Free, privacy-first online tools. No signup required." />
   <meta property="og:url" content="https://instantqr.io/" />
-  <!-- GUIDE: Host a 1200x630 image at /assets/og-instantqr.png (or update this URL) -->
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -100,7 +113,6 @@
     a{color:inherit; text-decoration:none}
     a:hover{text-decoration:underline}
 
-    /* A11y: skip link */
     .skip{
       position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
     }
@@ -114,12 +126,10 @@
       z-index: 9999;
     }
 
-    /* Focus */
     :focus-visible{ outline: none; box-shadow: var(--focus); border-radius: 12px; }
 
     .wrap{max-width:var(--max); margin:0 auto; padding:20px}
 
-    /* Top Bar */
     .topbar{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
@@ -176,7 +186,6 @@
     .cta.ghost:hover{ background: rgba(255,255,255,.10); }
     .cta:active{ transform: translateY(0px) scale(.99); }
 
-    /* Hero */
     .hero{padding:44px 0 18px;}
     .heroGrid{
       display:grid;
@@ -243,7 +252,6 @@
     .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px}
     .miniNote{margin-top:10px; font-size:13px; color: var(--muted)}
 
-    /* Finder */
     .finder{
       background: linear-gradient(180deg, rgba(15,26,46,.75), rgba(15,26,46,.45));
       border: 1px solid var(--border);
@@ -282,12 +290,10 @@
       display: none;
     }
 
-    /* Sections */
     .section{padding: 14px 0}
     .section h2{margin: 0 0 10px; font-size: 22px; letter-spacing:-.25px;}
     .section p{margin: 0 0 12px; color:var(--muted); line-height:1.6}
 
-    /* Tools grid */
     .toolControls{
       display:flex; gap:10px; align-items:center; flex-wrap:wrap;
       margin: 12px 0 12px;
@@ -364,7 +370,6 @@
       flex-wrap:wrap;
     }
 
-    /* Featured row */
     .featureRow{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -391,7 +396,6 @@
     .featureTitle{font-weight:900; margin:0 0 4px}
     .featureDesc{margin:0; color:var(--muted); font-size:13px; line-height:1.45}
 
-    /* Why */
     .why{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -407,7 +411,6 @@
     .whyBox h3{margin:0 0 6px; font-size:16px}
     .whyBox ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.6}
 
-    /* FAQ */
     .faq{
       border-radius: var(--radius2);
       border: 1px solid var(--border);
@@ -420,7 +423,6 @@
     summary::-webkit-details-marker{display:none}
     .faq p{margin:8px 0 0; color:var(--muted); line-height:1.6}
 
-    /* Footer */
     .footer{
       margin-top: 22px;
       padding: 18px 0 36px;
@@ -450,11 +452,6 @@
     }
   </style>
 
-  <!-- =========================
-       Structured Data (JSON-LD)
-       ========================= -->
-
-  <!-- ✅ WebSite + SearchAction schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -469,7 +466,6 @@
   }
   </script>
 
-  <!-- ✅ Organization schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -480,7 +476,6 @@
   }
   </script>
 
-  <!-- ✅ FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -498,7 +493,6 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Top Bar -->
   <header class="topbar">
     <div class="inner">
       <a class="brandRow" href="/" aria-label="InstantQR Home">
@@ -522,7 +516,6 @@
   </header>
 
   <main id="main" class="wrap">
-    <!-- HERO -->
     <section class="hero" aria-label="Hero">
       <div class="heroGrid">
         <div class="heroCard">
@@ -552,7 +545,6 @@
           <div class="miniNote">Tip: Bookmark InstantQR for quick daily utilities + quick break games + simple guides.</div>
         </div>
 
-        <!-- Quick Finder -->
         <aside class="finder" aria-label="Tool Finder">
           <div>
             <div class="finderTitle">Find a tool instantly</div>
@@ -589,7 +581,6 @@
       </div>
     </section>
 
-    <!-- FEATURED: Guides -->
     <section class="section" aria-label="Guides">
       <h2>New: Guides</h2>
       <p>Fast explainers for everyday internet, security, and domain concepts — written for normal humans.</p>
@@ -597,7 +588,6 @@
       <div class="featureRow">
         <a class="feature" href="/guides.html">
           <div class="ico" aria-hidden="true">
-            <!-- Book -->
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M4 5.5C4 4.1 5.1 3 6.5 3H20v18H6.5C5.1 21 4 19.9 4 18.5V5.5Z" stroke="currentColor" stroke-width="2"/>
               <path d="M8 7h8M8 11h8M8 15h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -611,7 +601,6 @@
 
         <a class="feature" href="/guides/what-is-whois-lookup.html">
           <div class="ico" aria-hidden="true">
-            <!-- Search -->
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2"/>
               <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -625,7 +614,6 @@
       </div>
     </section>
 
-    <!-- FEATURED: Games -->
     <section class="section" aria-label="Games">
       <h2>New: Games Hub</h2>
       <p>Need a quick break? Play fast mini-games — built to load instantly and run smoothly on mobile.</p>
@@ -633,7 +621,6 @@
       <div class="featureRow">
         <a class="feature" href="/games.html">
           <div class="ico" aria-hidden="true">
-            <!-- Gamepad -->
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M8 15H6m1-1v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               <path d="M16 14h.01M18 15h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
@@ -648,7 +635,6 @@
 
         <a class="feature" href="/2048-mini.html">
           <div class="ico" aria-hidden="true">
-            <!-- Grid -->
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z" stroke="currentColor" stroke-width="2"/>
             </svg>
@@ -661,7 +647,6 @@
       </div>
     </section>
 
-    <!-- TOOLS -->
     <section id="tools" class="section" aria-label="Tools">
       <h2>Popular Tools</h2>
       <p>Clean, fast, and made for real-world use. Use search + filter to find what you need.</p>
@@ -680,7 +665,6 @@
       </div>
 
       <div class="grid" id="toolGrid">
-        <!-- Network -->
         <a class="tool" href="/internet-speed-test.html" data-cat="network" data-tags="internet speed test wifi speed download upload ping latency mbps">
           <div class="ico" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
@@ -733,7 +717,6 @@
           </div>
         </a>
 
-        <!-- QR -->
         <a class="tool" href="/wifi-qr-code-generator.html" data-cat="qr" data-tags="qr wifi qrcode internet router ssid">
           <div class="ico" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
@@ -810,7 +793,6 @@
       </div>
     </section>
 
-    <!-- WHY -->
     <section id="why" class="section" aria-label="Why InstantQR">
       <h2>Why InstantQR?</h2>
       <p>
@@ -838,7 +820,6 @@
       </div>
     </section>
 
-    <!-- FAQ -->
     <section id="faq" class="section" aria-label="FAQ">
       <h2>FAQ</h2>
       <div class="faq">
@@ -867,7 +848,6 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="footer" aria-label="Footer">
       <div class="footRow">
         <div>
@@ -905,13 +885,10 @@
     </footer>
   </main>
 
-  <!-- JS: defer for performance -->
   <script defer>
-    // Year
     const yearEl = document.getElementById('year');
     if(yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // Fast client-side tool search + category filter (popular grid)
     const input = document.getElementById('toolSearch');
     const btn = document.getElementById('searchBtn');
     const cat = document.getElementById('cat');
