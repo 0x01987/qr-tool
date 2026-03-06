@@ -8,7 +8,7 @@
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-6213N2G8R2');
+gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
 </script>
 
 <!-- Google AdSense -->
@@ -18,20 +18,43 @@ crossorigin="anonymous"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>All Tools | InstantQR Free Online Utilities</title>
-<meta name="description" content="Browse all InstantQR tools including QR generators, speed test, DNS tools, converters, crypto tools, developer tools, and utilities.">
-<meta name="robots" content="index,follow">
+<title>All Tools | Free QR, DNS, Converter, Crypto & Developer Tools | InstantQR</title>
+<meta name="description" content="Browse all InstantQR tools including QR code generators, internet speed test, DNS tools, converters, crypto calculators, time utilities, and developer tools. Fast, privacy-first, and free online.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="author" content="InstantQR">
+<meta name="application-name" content="InstantQR">
+<meta name="theme-color" content="#0b1220">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://instantqr.io/tools.html">
+<link rel="alternate" href="https://instantqr.io/tools.html" hreflang="en">
+<link rel="alternate" href="https://instantqr.io/tools.html" hreflang="x-default">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="All Tools | InstantQR Free Online Utilities">
-<meta property="og:description" content="Browse all InstantQR tools including QR generators, speed test, DNS tools, converters, crypto tools, developer tools, and utilities.">
+<meta property="og:site_name" content="InstantQR">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="All Tools | Free QR, DNS, Converter, Crypto & Developer Tools | InstantQR">
+<meta property="og:description" content="Browse all InstantQR tools including QR code generators, internet speed test, DNS tools, converters, crypto calculators, time utilities, and developer tools.">
 <meta property="og:url" content="https://instantqr.io/tools.html">
+<meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png">
+<meta property="og:image:secure_url" content="https://instantqr.io/assets/og-instantqr.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="InstantQR tools directory with free online utilities including QR, DNS, converters, crypto, time, security, and developer tools.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="All Tools | Free QR, DNS, Converter, Crypto & Developer Tools | InstantQR">
+<meta name="twitter:description" content="Browse all InstantQR tools including QR code generators, internet speed test, DNS tools, converters, crypto calculators, time utilities, and developer tools.">
+<meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png">
+<meta name="twitter:image:alt" content="InstantQR tools directory with free online utilities including QR, DNS, converters, crypto, time, security, and developer tools.">
 
 <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg">
 <link rel="alternate icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg">
-<meta name="theme-color" content="#0b1220">
+<link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="/assets/og-instantqr.png">
+<link rel="prefetch" href="/guides.html" as="document">
+<link rel="prefetch" href="/mini-games/games.html" as="document">
 
 <style>
 :root{
@@ -62,12 +85,33 @@ a{color:inherit;text-decoration:none}
 a:hover{text-decoration:underline}
 .wrap{max-width:var(--max); margin:auto; padding:24px;}
 
+.skip{
+  position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+}
+.skip:focus{
+  left:14px; top:14px; width:auto; height:auto; z-index:9999;
+  padding:10px 12px; border-radius:12px; background:#08101d; color:#fff;
+  border:1px solid var(--border);
+}
+
+.sr-only{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+
 header{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:18px;
-  margin-bottom:30px;
+  margin-bottom:18px;
 }
 .logo{
   display:flex;
@@ -89,6 +133,25 @@ nav a{
 }
 nav a:hover{color:white}
 
+.breadcrumb{
+  margin:0 0 16px;
+  font-size:12px;
+  color:var(--muted);
+}
+.breadcrumb ol{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.breadcrumb li+li:before{
+  content:"/";
+  margin-right:8px;
+  color:rgba(255,255,255,.35);
+}
+
 .hero{
   border:1px solid var(--border);
   border-radius:22px;
@@ -107,6 +170,22 @@ h1{
   margin:0;
   line-height:1.55;
 }
+.metaRow{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+.metaPill{
+  display:inline-flex;
+  align-items:center;
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:12px;
+  color:var(--muted);
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--border);
+}
 .search{
   margin-top:18px;
 }
@@ -121,6 +200,32 @@ h1{
   outline:none;
 }
 .search input::placeholder{color:rgba(231,238,252,.55)}
+
+.intro{
+  margin-top:18px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.65;
+}
+.quickLinks{
+  margin-top:14px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.quickLinks a{
+  color:#d6e4ff;
+  font-size:13px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+  padding:8px 10px;
+  border-radius:10px;
+  text-decoration:none;
+}
+.quickLinks a:hover{
+  border-color:#3b82f6;
+  text-decoration:none;
+}
 
 .grid{
   display:grid;
@@ -191,6 +296,47 @@ h1{
   font-size:13px;
 }
 
+.seoBlock{
+  margin-top:28px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:rgba(255,255,255,.03);
+}
+.seoBlock h2{
+  margin:0 0 8px;
+  font-size:22px;
+  line-height:1.2;
+}
+.seoBlock p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.65;
+  font-size:14px;
+}
+.seoCols{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:14px;
+}
+.seoCard{
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:rgba(255,255,255,.03);
+  padding:14px;
+}
+.seoCard h3{
+  margin:0 0 6px;
+  font-size:15px;
+}
+.seoCard p{
+  margin:0;
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.55;
+}
+
 footer{
   margin-top:40px;
   padding-top:20px;
@@ -205,6 +351,9 @@ footer a{
 }
 footer a:hover{color:white}
 
+@media (max-width:820px){
+  .seoCols{grid-template-columns:1fr}
+}
 @media (max-width:640px){
   header{
     flex-direction:column;
@@ -215,23 +364,87 @@ footer a:hover{color:white}
 }
 </style>
 
+<!-- Collection Page -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":"CollectionPage",
   "name":"All InstantQR Tools",
   "url":"https://instantqr.io/tools.html",
+  "description":"Browse all InstantQR tools including QR code generators, DNS tools, converter tools, crypto utilities, time tools, security tools, and developer tools.",
   "isPartOf":{
     "@type":"WebSite",
     "name":"InstantQR",
     "url":"https://instantqr.io/"
+  },
+  "primaryImageOfPage":{
+    "@type":"ImageObject",
+    "url":"https://instantqr.io/assets/og-instantqr.png",
+    "width":"1200",
+    "height":"630"
   }
+}
+</script>
+
+<!-- Breadcrumbs -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BreadcrumbList",
+  "itemListElement":[
+    {
+      "@type":"ListItem",
+      "position":1,
+      "name":"Home",
+      "item":"https://instantqr.io/"
+    },
+    {
+      "@type":"ListItem",
+      "position":2,
+      "name":"Tools",
+      "item":"https://instantqr.io/tools.html"
+    }
+  ]
+}
+</script>
+
+<!-- ItemList -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"ItemList",
+  "name":"InstantQR Tools Directory",
+  "itemListOrder":"https://schema.org/ItemListOrderAscending",
+  "numberOfItems":20,
+  "itemListElement":[
+    {"@type":"ListItem","position":1,"url":"https://instantqr.io/tools/internet-speed-test.html","name":"Internet Speed Test"},
+    {"@type":"ListItem","position":2,"url":"https://instantqr.io/tools/ip-lookup.html","name":"IP Lookup"},
+    {"@type":"ListItem","position":3,"url":"https://instantqr.io/tools/dns-lookup.html","name":"DNS Lookup"},
+    {"@type":"ListItem","position":4,"url":"https://instantqr.io/tools/dns-propagation-checker.html","name":"DNS Propagation Checker"},
+    {"@type":"ListItem","position":5,"url":"https://instantqr.io/tools/url-qr-code-generator.html","name":"URL QR Code Generator"},
+    {"@type":"ListItem","position":6,"url":"https://instantqr.io/tools/create-qr-code-for-wifi.html","name":"Create WiFi QR Code"},
+    {"@type":"ListItem","position":7,"url":"https://instantqr.io/tools/password.html","name":"Password Generator"},
+    {"@type":"ListItem","position":8,"url":"https://instantqr.io/tools/password-leak-checker.html","name":"Password Leak Checker"},
+    {"@type":"ListItem","position":9,"url":"https://instantqr.io/tools/unit-converter.html","name":"Unit Converter"},
+    {"@type":"ListItem","position":10,"url":"https://instantqr.io/tools/world-clock.html","name":"World Clock"},
+    {"@type":"ListItem","position":11,"url":"https://instantqr.io/tools/time-zone-converter.html","name":"Time Zone Converter"},
+    {"@type":"ListItem","position":12,"url":"https://instantqr.io/tools/countdown-timer.html","name":"Countdown Timer"},
+    {"@type":"ListItem","position":13,"url":"https://instantqr.io/tools/crypto-profit-calculator.html","name":"Crypto Profit Calculator"},
+    {"@type":"ListItem","position":14,"url":"https://instantqr.io/tools/web3-gas-fee-estimator.html","name":"Web3 Gas Fee Estimator"},
+    {"@type":"ListItem","position":15,"url":"https://instantqr.io/tools/json-formatter.html","name":"JSON Formatter"},
+    {"@type":"ListItem","position":16,"url":"https://instantqr.io/tools/base64-encoder.html","name":"Base64 Encoder"},
+    {"@type":"ListItem","position":17,"url":"https://instantqr.io/tools/uuid-generator.html","name":"UUID Generator"},
+    {"@type":"ListItem","position":18,"url":"https://instantqr.io/tools/jwt-decoder.html","name":"JWT Decoder"},
+    {"@type":"ListItem","position":19,"url":"https://instantqr.io/tools/timestamp-converter.html","name":"Timestamp Converter"},
+    {"@type":"ListItem","position":20,"url":"https://instantqr.io/tools/regex-tester.html","name":"Regex Tester"}
+  ]
 }
 </script>
 
 </head>
 
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <div class="wrap">
 
@@ -251,216 +464,268 @@ footer a:hover{color:white}
   </nav>
 </header>
 
-<section class="hero">
-  <h1>All InstantQR Tools</h1>
-  <p class="sub">Fast, privacy-first utilities for everyday tasks. All tool pages now live under <strong>/tools</strong>.</p>
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><span aria-current="page">Tools</span></li>
+  </ol>
+</nav>
 
-  <div class="search">
-    <input id="search" placeholder="Search tools (QR, JSON, UUID, hash, regex, speed, dns...)">
-  </div>
-</section>
+<main id="main">
+  <section class="hero">
+    <h1>All InstantQR Tools</h1>
+    <p class="sub">Fast, privacy-first utilities for everyday tasks. Browse QR code tools, DNS and network tools, converters, crypto calculators, time utilities, security tools, and developer tools.</p>
 
-<div class="empty" id="empty">No tools matched your search. Try: qr, dns, speed, uuid, hash, password.</div>
-
-<div class="grid" id="grid">
-
-  <!-- NETWORK -->
-  <a class="card" href="/tools/internet-speed-test.html" data-tags="speed internet wifi network ping latency mbps">
-    <div class="icon">⚡</div>
-    <div class="main">
-      <div class="cardTitle">Internet Speed Test</div>
-      <div class="cardDesc">Check download speed and latency.</div>
+    <div class="metaRow" aria-label="Highlights">
+      <span class="metaPill">⚡ Fast</span>
+      <span class="metaPill">🔒 Privacy-first</span>
+      <span class="metaPill">🧰 20+ tools</span>
+      <span class="metaPill">💻 Mobile-friendly</span>
     </div>
-    <span class="badge">Network</span>
-  </a>
 
-  <a class="card" href="/tools/ip-lookup.html" data-tags="ip lookup address network isp asn">
-    <div class="icon">🌍</div>
-    <div class="main">
-      <div class="cardTitle">IP Lookup</div>
-      <div class="cardDesc">Find IP location and ISP info.</div>
+    <div class="search">
+      <label for="search" class="sr-only">Search tools</label>
+      <input id="search" placeholder="Search tools (QR, JSON, UUID, hash, regex, speed, dns...)">
     </div>
-    <span class="badge">Network</span>
-  </a>
 
-  <a class="card" href="/tools/dns-lookup.html" data-tags="dns lookup domain ns a aaaa cname mx txt soa srv whois resolver records network">
-    <div class="icon">🧠</div>
-    <div class="main">
-      <div class="cardTitle">DNS Lookup</div>
-      <div class="cardDesc">Lookup DNS records (A/AAAA/CNAME/MX/TXT/NS) instantly.</div>
+    <div class="intro">
+      InstantQR makes everyday web utilities simple and fast. Whether you need a DNS lookup, QR code generator, password tool, unit converter, world clock, crypto calculator, or developer utility, this tools hub helps you find it quickly.
     </div>
-    <span class="badge">Network</span>
-  </a>
 
-  <a class="card" href="/tools/dns-propagation-checker.html" data-tags="dns propagation checker records resolver network a aaaa cname mx txt ns">
-    <div class="icon">🛰️</div>
-    <div class="main">
-      <div class="cardTitle">DNS Propagation Checker</div>
-      <div class="cardDesc">Check DNS visibility across resolvers with standout results.</div>
+    <div class="quickLinks" aria-label="Popular tool links">
+      <a href="/tools/dns-lookup.html">DNS Lookup</a>
+      <a href="/tools/url-qr-code-generator.html">URL QR Generator</a>
+      <a href="/tools/create-qr-code-for-wifi.html">WiFi QR Code</a>
+      <a href="/tools/password.html">Password Generator</a>
+      <a href="/tools/json-formatter.html">JSON Formatter</a>
+      <a href="/tools/crypto-profit-calculator.html">Crypto Calculator</a>
     </div>
-    <span class="badge">Network</span>
-  </a>
-  
-  <!-- QR Code -->
-  <a class="card" href="/tools/url-qr-code-generator.html" data-tags="qr url link generator website">
-    <div class="icon">🔗</div>
-    <div class="main">
-      <div class="cardTitle">URL QR Code Generator</div>
-      <div class="cardDesc">Convert links into QR codes.</div>
-    </div>
-    <span class="badge">QR Code</span>
-  </a>
+  </section>
 
-  <a class="card" href="/tools/create-qr-code-for-wifi.html" data-tags="qr wifi guide how to">
-    <div class="icon">📶</div>
-    <div class="main">
-      <div class="cardTitle">Create WiFi QR Code</div>
-      <div class="cardDesc">Guide-style tool for creating WiFi QR codes.</div>
-    </div>
-    <span class="badge">QR Code</span>
-  </a>
+  <div class="empty" id="empty">No tools matched your search. Try: qr, dns, speed, uuid, hash, password.</div>
 
-  <!-- SECURITY -->
-  <a class="card" href="/tools/password.html" data-tags="password generator secure random">
-    <div class="icon">🔐</div>
-    <div class="main">
-      <div class="cardTitle">Password Generator</div>
-      <div class="cardDesc">Generate secure passwords.</div>
-    </div>
-    <span class="badge">Security</span>
-  </a>
+  <section class="grid" id="grid" aria-label="Tool directory">
 
-  <a class="card" href="/tools/password-leak-checker.html" data-tags="password breach security leak checker pwned">
-    <div class="icon">🛡</div>
-    <div class="main">
-      <div class="cardTitle">Password Leak Checker</div>
-      <div class="cardDesc">Check if a password appears in breaches.</div>
-    </div>
-    <span class="badge">Security</span>
-  </a>
+    <!-- NETWORK -->
+    <a class="card" href="/tools/internet-speed-test.html" data-tags="speed internet wifi network ping latency mbps">
+      <div class="icon">⚡</div>
+      <div class="main">
+        <div class="cardTitle">Internet Speed Test</div>
+        <div class="cardDesc">Check download speed and latency.</div>
+      </div>
+      <span class="badge">Network</span>
+    </a>
 
-  <!-- CONVERTERS -->
-  <a class="card" href="/tools/unit-converter.html" data-tags="unit converter convert kg lbs mph kmh inches cm cups grams">
-    <div class="icon">📏</div>
-    <div class="main">
-      <div class="cardTitle">Unit Converter</div>
-      <div class="cardDesc">Convert measurements quickly.</div>
-    </div>
-    <span class="badge">Converter</span>
-  </a>
+    <a class="card" href="/tools/ip-lookup.html" data-tags="ip lookup address network isp asn">
+      <div class="icon">🌍</div>
+      <div class="main">
+        <div class="cardTitle">IP Lookup</div>
+        <div class="cardDesc">Find IP location and ISP info.</div>
+      </div>
+      <span class="badge">Network</span>
+    </a>
 
-  <!-- TIME -->
-  <a class="card" href="/tools/world-clock.html" data-tags="clock world time zones timezone">
-    <div class="icon">🕒</div>
-    <div class="main">
-      <div class="cardTitle">World Clock</div>
-      <div class="cardDesc">Compare global time zones.</div>
-    </div>
-    <span class="badge">Time</span>
-  </a>
+    <a class="card" href="/tools/dns-lookup.html" data-tags="dns lookup domain ns a aaaa cname mx txt soa srv whois resolver records network">
+      <div class="icon">🧠</div>
+      <div class="main">
+        <div class="cardTitle">DNS Lookup</div>
+        <div class="cardDesc">Lookup DNS records (A/AAAA/CNAME/MX/TXT/NS) instantly.</div>
+      </div>
+      <span class="badge">Network</span>
+    </a>
 
-  <a class="card" href="/tools/time-zone-converter.html" data-tags="timezone converter time zone convert">
-    <div class="icon">🌐</div>
-    <div class="main">
-      <div class="cardTitle">Time Zone Converter</div>
-      <div class="cardDesc">Convert between time zones.</div>
-    </div>
-    <span class="badge">Time</span>
-  </a>
+    <a class="card" href="/tools/dns-propagation-checker.html" data-tags="dns propagation checker records resolver network a aaaa cname mx txt ns">
+      <div class="icon">🛰️</div>
+      <div class="main">
+        <div class="cardTitle">DNS Propagation Checker</div>
+        <div class="cardDesc">Check DNS visibility across resolvers with standout results.</div>
+      </div>
+      <span class="badge">Network</span>
+    </a>
 
-  <a class="card" href="/tools/countdown-timer.html" data-tags="timer countdown">
-    <div class="icon">⏳</div>
-    <div class="main">
-      <div class="cardTitle">Countdown Timer</div>
-      <div class="cardDesc">Create countdown timers easily.</div>
-    </div>
-    <span class="badge">Time</span>
-  </a>
+    <!-- QR Code -->
+    <a class="card" href="/tools/url-qr-code-generator.html" data-tags="qr url link generator website">
+      <div class="icon">🔗</div>
+      <div class="main">
+        <div class="cardTitle">URL QR Code Generator</div>
+        <div class="cardDesc">Convert links into QR codes.</div>
+      </div>
+      <span class="badge">QR Code</span>
+    </a>
 
-  <!-- CRYPTO -->
-  <a class="card" href="/tools/crypto-profit-calculator.html" data-tags="crypto profit calculator roi pnl">
-    <div class="icon">📈</div>
-    <div class="main">
-      <div class="cardTitle">Crypto Profit Calculator</div>
-      <div class="cardDesc">Calculate crypto profit and ROI.</div>
-    </div>
-    <span class="badge">Crypto</span>
-  </a>
+    <a class="card" href="/tools/create-qr-code-for-wifi.html" data-tags="qr wifi guide how to">
+      <div class="icon">📶</div>
+      <div class="main">
+        <div class="cardTitle">Create WiFi QR Code</div>
+        <div class="cardDesc">Guide-style tool for creating WiFi QR codes.</div>
+      </div>
+      <span class="badge">QR Code</span>
+    </a>
 
-  <a class="card" href="/tools/web3-gas-fee-estimator.html" data-tags="gas web3 ethereum fee estimator">
-    <div class="icon">⛽</div>
-    <div class="main">
-      <div class="cardTitle">Web3 Gas Fee Estimator</div>
-      <div class="cardDesc">Estimate transaction fees and gas.</div>
-    </div>
-    <span class="badge">Crypto</span>
-  </a>
+    <!-- SECURITY -->
+    <a class="card" href="/tools/password.html" data-tags="password generator secure random">
+      <div class="icon">🔐</div>
+      <div class="main">
+        <div class="cardTitle">Password Generator</div>
+        <div class="cardDesc">Generate secure passwords.</div>
+      </div>
+      <span class="badge">Security</span>
+    </a>
 
-  <!-- DEV -->
-  <a class="card" href="/tools/json-formatter.html" data-tags="json formatter validate prettify dev developer">
-    <div class="icon">🧾</div>
-    <div class="main">
-      <div class="cardTitle">JSON Formatter</div>
-      <div class="cardDesc">Format and validate JSON instantly.</div>
-    </div>
-    <span class="badge">Dev</span>
-  </a>
+    <a class="card" href="/tools/password-leak-checker.html" data-tags="password breach security leak checker pwned">
+      <div class="icon">🛡️</div>
+      <div class="main">
+        <div class="cardTitle">Password Leak Checker</div>
+        <div class="cardDesc">Check if a password appears in breaches.</div>
+      </div>
+      <span class="badge">Security</span>
+    </a>
 
-  <a class="card" href="/tools/base64-encoder.html" data-tags="base64 encoder decoder encode decode dev developer">
-    <div class="icon">🧬</div>
-    <div class="main">
-      <div class="cardTitle">Base64 Encoder</div>
-      <div class="cardDesc">Encode or decode Base64 data.</div>
-    </div>
-    <span class="badge">Dev</span>
-  </a>
+    <!-- CONVERTERS -->
+    <a class="card" href="/tools/unit-converter.html" data-tags="unit converter convert kg lbs mph kmh inches cm cups grams">
+      <div class="icon">📏</div>
+      <div class="main">
+        <div class="cardTitle">Unit Converter</div>
+        <div class="cardDesc">Convert measurements quickly.</div>
+      </div>
+      <span class="badge">Converter</span>
+    </a>
 
-  <a class="card" href="/tools/uuid-generator.html" data-tags="uuid generator v4 rfc4122 guid dev developer">
-    <div class="icon">🧩</div>
-    <div class="main">
-      <div class="cardTitle">UUID Generator</div>
-      <div class="cardDesc">Generate UUID v4 identifiers instantly.</div>
-    </div>
-    <span class="badge">Dev</span>
-  </a>
+    <!-- TIME -->
+    <a class="card" href="/tools/world-clock.html" data-tags="clock world time zones timezone">
+      <div class="icon">🕒</div>
+      <div class="main">
+        <div class="cardTitle">World Clock</div>
+        <div class="cardDesc">Compare global time zones.</div>
+      </div>
+      <span class="badge">Time</span>
+    </a>
 
-  <a class="card" href="/tools/jwt-decoder.html" data-tags="jwt decoder json web token decode header payload dev developer">
-    <div class="icon">🎟️</div>
-    <div class="main">
-      <div class="cardTitle">JWT Decoder</div>
-      <div class="cardDesc">Decode JWT header and payload.</div>
-    </div>
-    <span class="badge">Dev</span>
-  </a>
+    <a class="card" href="/tools/time-zone-converter.html" data-tags="timezone converter time zone convert">
+      <div class="icon">🌐</div>
+      <div class="main">
+        <div class="cardTitle">Time Zone Converter</div>
+        <div class="cardDesc">Convert between time zones.</div>
+      </div>
+      <span class="badge">Time</span>
+    </a>
 
-  <a class="card" href="/tools/timestamp-converter.html" data-tags="timestamp converter unix epoch seconds milliseconds dev developer">
-    <div class="icon">⏱️</div>
-    <div class="main">
-      <div class="cardTitle">Timestamp Converter</div>
-      <div class="cardDesc">Convert Unix timestamps ↔ human dates.</div>
-    </div>
-    <span class="badge">Dev</span>
-  </a>
+    <a class="card" href="/tools/countdown-timer.html" data-tags="timer countdown">
+      <div class="icon">⏳</div>
+      <div class="main">
+        <div class="cardTitle">Countdown Timer</div>
+        <div class="cardDesc">Create countdown timers easily.</div>
+      </div>
+      <span class="badge">Time</span>
+    </a>
 
-  <a class="card" href="/tools/regex-tester.html" data-tags="regex tester regular expression replace match groups flags dev developer">
-    <div class="icon">🔎</div>
-    <div class="main">
-      <div class="cardTitle">Regex Tester</div>
-      <div class="cardDesc">Test regex matches and replacements.</div>
-    </div>
-    <span class="badge">Dev</span>
-  </a>
+    <!-- CRYPTO -->
+    <a class="card" href="/tools/crypto-profit-calculator.html" data-tags="crypto profit calculator roi pnl">
+      <div class="icon">📈</div>
+      <div class="main">
+        <div class="cardTitle">Crypto Profit Calculator</div>
+        <div class="cardDesc">Calculate crypto profit and ROI.</div>
+      </div>
+      <span class="badge">Crypto</span>
+    </a>
 
-  <a class="card" href="/tools/hash-generator.html" data-tags="hash generator sha256 sha1 sha512 webcrypto checksum dev developer">
-    <div class="icon">#️⃣</div>
-    <div class="main">
-      <div class="cardTitle">Hash Generator</div>
-      <div class="cardDesc">Generate SHA hashes locally.</div>
-    </div>
-    <span class="badge">Dev</span>
-  </a>
+    <a class="card" href="/tools/web3-gas-fee-estimator.html" data-tags="gas web3 ethereum fee estimator">
+      <div class="icon">⛽</div>
+      <div class="main">
+        <div class="cardTitle">Web3 Gas Fee Estimator</div>
+        <div class="cardDesc">Estimate transaction fees and gas.</div>
+      </div>
+      <span class="badge">Crypto</span>
+    </a>
 
-</div>
+    <!-- DEV -->
+    <a class="card" href="/tools/json-formatter.html" data-tags="json formatter validate prettify dev developer">
+      <div class="icon">🧾</div>
+      <div class="main">
+        <div class="cardTitle">JSON Formatter</div>
+        <div class="cardDesc">Format and validate JSON instantly.</div>
+      </div>
+      <span class="badge">Dev</span>
+    </a>
+
+    <a class="card" href="/tools/base64-encoder.html" data-tags="base64 encoder decoder encode decode dev developer">
+      <div class="icon">🧬</div>
+      <div class="main">
+        <div class="cardTitle">Base64 Encoder</div>
+        <div class="cardDesc">Encode or decode Base64 data.</div>
+      </div>
+      <span class="badge">Dev</span>
+    </a>
+
+    <a class="card" href="/tools/uuid-generator.html" data-tags="uuid generator v4 rfc4122 guid dev developer">
+      <div class="icon">🧩</div>
+      <div class="main">
+        <div class="cardTitle">UUID Generator</div>
+        <div class="cardDesc">Generate UUID v4 identifiers instantly.</div>
+      </div>
+      <span class="badge">Dev</span>
+    </a>
+
+    <a class="card" href="/tools/jwt-decoder.html" data-tags="jwt decoder json web token decode header payload dev developer">
+      <div class="icon">🎟️</div>
+      <div class="main">
+        <div class="cardTitle">JWT Decoder</div>
+        <div class="cardDesc">Decode JWT header and payload.</div>
+      </div>
+      <span class="badge">Dev</span>
+    </a>
+
+    <a class="card" href="/tools/timestamp-converter.html" data-tags="timestamp converter unix epoch seconds milliseconds dev developer">
+      <div class="icon">⏱️</div>
+      <div class="main">
+        <div class="cardTitle">Timestamp Converter</div>
+        <div class="cardDesc">Convert Unix timestamps ↔ human dates.</div>
+      </div>
+      <span class="badge">Dev</span>
+    </a>
+
+    <a class="card" href="/tools/regex-tester.html" data-tags="regex tester regular expression replace match groups flags dev developer">
+      <div class="icon">🔎</div>
+      <div class="main">
+        <div class="cardTitle">Regex Tester</div>
+        <div class="cardDesc">Test regex matches and replacements.</div>
+      </div>
+      <span class="badge">Dev</span>
+    </a>
+
+    <a class="card" href="/tools/hash-generator.html" data-tags="hash generator sha256 sha1 sha512 webcrypto checksum dev developer">
+      <div class="icon">#️⃣</div>
+      <div class="main">
+        <div class="cardTitle">Hash Generator</div>
+        <div class="cardDesc">Generate SHA hashes locally.</div>
+      </div>
+      <span class="badge">Dev</span>
+    </a>
+
+  </section>
+
+  <section class="seoBlock" aria-label="About InstantQR tools">
+    <h2>Free online tools built for speed, privacy, and simplicity</h2>
+    <p>
+      InstantQR focuses on lightweight utilities that solve real problems fast. From QR code generation and DNS lookups to converter tools, crypto utilities, and developer helpers, every tool is designed to be simple, useful, and easy to use on desktop or mobile.
+    </p>
+
+    <div class="seoCols">
+      <div class="seoCard">
+        <h3>Popular QR & utility tools</h3>
+        <p>Generate QR codes for websites and WiFi, convert units, compare time zones, and use practical tools without creating an account.</p>
+      </div>
+      <div class="seoCard">
+        <h3>Network & security tools</h3>
+        <p>Check DNS records, inspect DNS propagation, test speed, look up IP details, and use password tools for quick troubleshooting and daily workflows.</p>
+      </div>
+      <div class="seoCard">
+        <h3>Developer-friendly tools</h3>
+        <p>Format JSON, encode Base64, generate UUIDs, decode JWTs, convert timestamps, test regex, and create hashes instantly in the browser.</p>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer>
   <div>
@@ -500,6 +765,14 @@ function applySearch(){
 }
 
 search.addEventListener("input", applySearch);
+
+// Support /tools.html?q=dns
+const params = new URLSearchParams(window.location.search);
+const qs = params.get("q");
+if (qs) {
+  search.value = qs;
+  applySearch();
+}
 </script>
 
 </body>
