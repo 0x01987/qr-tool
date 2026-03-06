@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>SEO Tools | Free Meta, SERP, Sitemap, Robots.txt & Canonical Tools | InstantQR</title>
+  <meta name="description" content="Free SEO tools by InstantQR: meta title preview, meta description preview, SERP preview, robots.txt generator, sitemap generator, canonical tag checker, and keyword density checker." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/seo-tools.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="SEO Tools | Free Meta, SERP, Sitemap, Robots.txt & Canonical Tools" />
+  <meta property="og:description" content="Fast, free SEO tools for titles, descriptions, SERP previews, sitemaps, robots.txt, canonical checks, and keyword density." />
+  <meta property="og:url" content="https://instantqr.io/seo-tools.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SEO Tools | InstantQR" />
+  <meta name="twitter:description" content="Free SEO tools for meta tags, SERP previews, sitemaps, robots.txt, canonical tags, and keyword density." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <meta name="theme-color" content="#0b0f19" />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#111a2b;
+      --card2:rgba(255,255,255,.04);
+      --text:#e7eefc;
+      --muted:#9db0d1;
+      --brand:#69a6ff;
+      --brand2:#8db9ff;
+      --ok:#19c37d;
+      --border:rgba(255,255,255,.08);
+      --radius:18px;
+      --radius2:22px;
+      --max:1140px;
+      --shadow:0 12px 40px rgba(0,0,0,.45);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.12), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.10), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:auto;padding:24px}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(10px);
+      background:rgba(7,11,20,.58);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar .inner{
+      max-width:var(--max);
+      margin:auto;
+      padding:14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .logo img{height:34px;width:auto;display:block}
+    nav{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    nav a:hover{
+      color:#fff;
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      transition:.15s ease;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .cta:hover{
+      transform:translateY(-1px);
+      text-decoration:none;
+    }
+    .cta.primary{
+      border:0;
+      background:linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
+      box-shadow:0 14px 28px rgba(105,166,255,.22);
+    }
+    .cta.primary:hover{filter:brightness(1.06)}
+
+    .hero{
+      padding:28px 0 8px;
+    }
+    .heroCard{
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(760px 260px at 18% 18%, rgba(105,166,255,.18), transparent 62%),
+        radial-gradient(520px 220px at 82% 40%, rgba(25,195,125,.10), transparent 55%);
+      pointer-events:none;
+    }
+    .heroCard > *{position:relative}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      width:fit-content;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-size:13px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:clamp(30px, 4vw, 46px);
+      line-height:1.05;
+      letter-spacing:-.7px;
+    }
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.6;
+      max-width:72ch;
+    }
+    .heroActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:8px;
+    }
+
+    .searchRow{
+      margin-top:18px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .search{
+      flex:1;
+      min-width:240px;
+      padding:13px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#08101d;
+      color:#fff;
+      font-size:14px;
+      outline:none;
+    }
+    .search::placeholder{color:rgba(231,238,252,.55)}
+
+    .section{
+      padding:18px 0 8px;
+    }
+    .section h2{
+      margin:0 0 10px;
+      font-size:24px;
+      letter-spacing:-.25px;
+    }
+    .section p{
+      margin:0 0 12px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .quickStats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .stat{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:var(--card2);
+      padding:16px;
+    }
+    .statNum{
+      font-size:24px;
+      font-weight:900;
+      letter-spacing:-.4px;
+    }
+    .statLabel{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+      gap:16px;
+      margin-top:22px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      text-decoration:none;
+      color:inherit;
+      transition:.15s;
+      min-height:116px;
+    }
+    .card:hover{
+      transform:translateY(-3px);
+      border-color:#3b82f6;
+      text-decoration:none;
+    }
+    .icon{
+      font-size:26px;
+      width:48px;
+      height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.06);
+      border-radius:14px;
+      flex:0 0 auto;
+    }
+    .cardBody{
+      min-width:0;
+      flex:1;
+    }
+    .cardTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .cardTitle{
+      font-weight:800;
+      font-size:15px;
+      line-height:1.25;
+    }
+    .cardDesc{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:6px;
+      line-height:1.5;
+    }
+    .badge{
+      font-size:11px;
+      padding:4px 7px;
+      background:rgba(255,255,255,.06);
+      border-radius:6px;
+      color:var(--muted);
+      white-space:nowrap;
+      flex:0 0 auto;
+    }
+
+    .guideGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .guideCard{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:var(--card2);
+      padding:16px;
+    }
+    .guideCard h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .guideCard p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+    }
+
+    .why{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .whyBox{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:var(--card2);
+      padding:16px;
+    }
+    .whyBox h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .whyBox p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.55;
+    }
+
+    .footer{
+      margin-top:40px;
+      padding-top:20px;
+      border-top:1px solid var(--border);
+      font-size:13px;
+      color:var(--muted);
+    }
+    .footer a{
+      color:var(--muted);
+      text-decoration:none;
+      margin-right:10px;
+    }
+    .footer a:hover{color:#fff}
+
+    .hidden{display:none !important}
+
+    @media (max-width:900px){
+      .quickStats{grid-template-columns:1fr 1fr}
+      .why{grid-template-columns:1fr}
+      .guideGrid{grid-template-columns:1fr}
+    }
+    @media (max-width:560px){
+      nav{display:none}
+      h1{font-size:34px}
+      .quickStats{grid-template-columns:1fr}
+      .heroCard{padding:20px}
+      .cta{width:100%}
+      .heroActions .cta{flex:1}
+    }
+  </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    "name":"SEO Tools",
+    "url":"https://instantqr.io/seo-tools.html",
+    "description":"Free SEO tools by InstantQR including meta title preview, meta description preview, SERP preview, robots.txt generator, sitemap generator, canonical tag checker, and keyword density checker."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    "name":"InstantQR SEO Tools",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "url":"https://instantqr.io/qr-tool/seo-tools/meta-title-preview.html",
+        "name":"Meta Title Preview"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "url":"https://instantqr.io/qr-tool/seo-tools/meta-description-preview.html",
+        "name":"Meta Description Preview"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "url":"https://instantqr.io/qr-tool/seo-tools/serp-preview-tool.html",
+        "name":"SERP Preview Tool"
+      },
+      {
+        "@type":"ListItem",
+        "position":4,
+        "url":"https://instantqr.io/qr-tool/seo-tools/robots-txt-generator.html",
+        "name":"Robots.txt Generator"
+      },
+      {
+        "@type":"ListItem",
+        "position":5,
+        "url":"https://instantqr.io/qr-tool/seo-tools/sitemap-generator.html",
+        "name":"Sitemap Generator"
+      },
+      {
+        "@type":"ListItem",
+        "position":6,
+        "url":"https://instantqr.io/qr-tool/seo-tools/canonical-tag-checker.html",
+        "name":"Canonical Tag Checker"
+      },
+      {
+        "@type":"ListItem",
+        "position":7,
+        "url":"https://instantqr.io/qr-tool/seo-tools/keyword-density-checker.html",
+        "name":"Keyword Density Checker"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Are these SEO tools free to use?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. InstantQR SEO tools are free to use and designed to be fast and privacy-first."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Do these SEO tools work on mobile?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The tools are responsive and work across phones, tablets, and desktop browsers."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Which SEO tool should I use first?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Most users start with SERP Preview, Meta Title Preview, and Meta Description Preview, then use Robots.txt Generator, Sitemap Generator, and Canonical Tag Checker as needed."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="inner">
+      <a class="logo" href="/" aria-label="InstantQR Home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+        <span>InstantQR</span>
+      </a>
+
+      <nav>
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/seo-tools.html">SEO Tools</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+
+      <a class="cta primary" href="/tools.html">All Tools →</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" aria-label="SEO Tools Hero">
+      <div class="heroCard">
+        <div class="pill">🚀 Fast • 🔍 SEO-Focused • ✅ Free Tools</div>
+        <h1>Free SEO Tools for Titles, SERP Snippets, Sitemaps, Robots.txt & More</h1>
+        <p class="sub">
+          Use InstantQR SEO tools to preview metadata, improve search snippets, check canonical tags,
+          generate robots.txt files, create sitemaps, and analyze keyword density — all with a fast,
+          clean, privacy-first experience.
+        </p>
+
+        <div class="heroActions">
+          <a class="cta primary" href="#tools">Browse SEO Tools</a>
+          <a class="cta" href="/meta-title-description-best-practices.html">Read SEO Guide</a>
+          <a class="cta" href="/tools.html">All InstantQR Tools</a>
+        </div>
+
+        <div class="searchRow">
+          <input id="search" class="search" placeholder="Search SEO tools (meta, SERP, robots, sitemap, canonical, keyword...)" aria-label="Search SEO tools">
+        </div>
+
+        <div class="quickStats">
+          <div class="stat">
+            <div class="statNum">7</div>
+            <div class="statLabel">SEO tools live</div>
+          </div>
+          <div class="stat">
+            <div class="statNum">100%</div>
+            <div class="statLabel">Browser-based workflow</div>
+          </div>
+          <div class="stat">
+            <div class="statNum">Fast</div>
+            <div class="statLabel">Responsive UI</div>
+          </div>
+          <div class="stat">
+            <div class="statNum">Free</div>
+            <div class="statLabel">No signup required</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tools" aria-label="SEO Tools">
+      <h2>All SEO Tools</h2>
+      <p>Choose a tool below to improve on-page SEO, indexing signals, search snippets, and content structure.</p>
+
+      <div class="grid" id="grid">
+
+        <a class="card" href="/qr-tool/seo-tools/meta-title-preview.html" data-tags="seo meta title preview serp snippet google title length">
+          <div class="icon">🔎</div>
+          <div class="cardBody">
+            <div class="cardTop">
+              <div class="cardTitle">Meta Title Preview</div>
+              <span class="badge">SEO</span>
+            </div>
+            <div class="cardDesc">Preview how titles may appear in Google search results and optimize title length.</div>
+          </div>
+        </a>
+
+        <a class="card" href="/qr-tool/seo-tools/meta-description-preview.html" data-tags="seo meta description preview serp snippet google search">
+          <div class="icon">📝</div>
+          <div class="cardBody">
+            <div class="cardTop">
+              <div class="cardTitle">Meta Description Preview</div>
+              <span class="badge">SEO</span>
+            </div>
+            <div class="cardDesc">Preview meta descriptions and refine messaging for better click-through rates.</div>
+          </div>
+        </a>
+
+        <a class="card" href="/qr-tool/seo-tools/serp-preview-tool.html" data-tags="seo serp preview google snippet title description mobile desktop">
+          <div class="icon">📊</div>
+          <div class="cardBody">
+            <div class="cardTop">
+              <div class="cardTitle">SERP Preview Tool</div>
+              <span class="badge">SEO</span>
+            </div>
+            <div class="cardDesc">Preview titles and descriptions in a Google-style snippet for desktop and mobile planning.</div>
+          </div>
+        </a>
+
+        <a class="card" href="/qr-tool/seo-tools/robots-txt-generator.html" data-tags="seo robots txt generator crawler indexing sitemap robots">
+          <div class="icon">🤖</div>
+          <div class="cardBody">
+            <div class="cardTop">
+              <div class="cardTitle">Robots.txt Generator</div>
+              <span class="badge">SEO</span>
+            </div>
+            <div class="cardDesc">Generate robots.txt rules quickly with simple presets and sitemap support.</div>
+          </div>
+        </a>
+
+        <a class="card" href="/qr-tool/seo-tools/sitemap-generator.html" data-tags="seo sitemap xml generator search engine indexing crawl">
+          <div class="icon">🗺️</div>
+          <div class="cardBody">
+            <div class="cardTop">
+              <div class="cardTitle">Sitemap Generator</div>
+              <span class="badge">SEO</span>
+            </div>
+            <div class="cardDesc">Build XML sitemaps fast to help search engines discover your important pages.</div>
+          </div>
+        </a>
+
+        <a class="card" href="/qr-tool/seo-tools/canonical-tag-checker.html" data-tags="seo canonical tag checker duplicate content rel canonical index">
+          <div class="icon">🔗</div>
+          <div class="cardBody">
+            <div class="cardTop">
+              <div class="cardTitle">Canonical Tag Checker</div>
+              <span class="badge">SEO</span>
+            </div>
+            <div class="cardDesc">Check canonical tags and spot duplicate-content related issues faster.</div>
+          </div>
+        </a>
+
+        <a class="card" href="/qr-tool/seo-tools/keyword-density-checker.html" data-tags="seo keyword density checker frequency content analysis on page">
+          <div class="icon">📈</div>
+          <div class="cardBody">
+            <div class="cardTop">
+              <div class="cardTitle">Keyword Density Checker</div>
+              <span class="badge">SEO</span>
+            </div>
+            <div class="cardDesc">Analyze keyword frequency in content and review on-page optimization balance.</div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <section class="section" aria-label="Why use these tools">
+      <h2>Why use InstantQR SEO tools?</h2>
+      <p>These tools are built for speed, clarity, and practical SEO work — whether you are optimizing a homepage, article, product page, or tool page.</p>
+
+      <div class="why">
+        <div class="whyBox">
+          <h3>Fast workflow</h3>
+          <p>Quick tools with clean interfaces so you can check titles, snippets, canonicals, and crawl files without clutter.</p>
+        </div>
+        <div class="whyBox">
+          <h3>Useful for real pages</h3>
+          <p>Ideal for websites, blogs, landing pages, SaaS tools, e-commerce pages, and static sites like GitHub Pages.</p>
+        </div>
+        <div class="whyBox">
+          <h3>Privacy-first design</h3>
+          <p>Tools are lightweight and designed for efficient browser-based use where possible.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Related SEO guides">
+      <h2>Related SEO Guides</h2>
+      <p>Learn the basics and improve implementation across your site with these supporting guides.</p>
+
+      <div class="guideGrid">
+        <a class="guideCard" href="/meta-title-description-best-practices.html">
+          <h3>Meta Title & Description Best Practices</h3>
+          <p>Learn how to write clearer titles and descriptions that align with search intent and improve click-through rate.</p>
+        </a>
+
+        <a class="guideCard" href="/robots-txt-basics.html">
+          <h3>Robots.txt Basics</h3>
+          <p>Understand how robots.txt works, what it should do, and what it should not be used for.</p>
+        </a>
+
+        <a class="guideCard" href="/how-to-fix-canonical-issues.html">
+          <h3>How to Fix Canonical Issues</h3>
+          <p>Review common canonical mistakes and how to fix duplicate-content signals on your site.</p>
+        </a>
+
+        <a class="guideCard" href="/what-is-json-formatting.html">
+          <h3>What Is JSON Formatting?</h3>
+          <p>A helpful companion for developer-focused SEO workflows and clean structured data preparation.</p>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>
+        <a href="/">Home</a>
+        <a href="/tools.html">All Tools</a>
+        <a href="/seo-tools.html">SEO Tools</a>
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+      <div style="margin-top:8px;">
+        © <span id="year"></span> InstantQR.io
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const search = document.getElementById("search");
+    const cards = document.querySelectorAll(".card");
+
+    search.addEventListener("input", () => {
+      const q = (search.value || "").toLowerCase().trim();
+      cards.forEach(card => {
+        const text = ((card.dataset.tags || "") + " " + card.innerText).toLowerCase();
+        card.classList.toggle("hidden", !text.includes(q));
+      });
+    });
+  </script>
+</body>
+</html>
