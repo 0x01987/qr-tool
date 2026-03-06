@@ -1,21 +1,42 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>WiFi QR Code Generator | Create a WiFi QR (SSID + Password) | InstantQR.io</title>
-  <meta name="description" content="Create a WiFi QR code for your network (SSID + password). Guests can scan to join instantly. Free, fast, privacy-first. Download as PNG." />
-  <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://instantqr.io/wifi-qr-code-generator.html" />
+  <title>WiFi QR Code Generator | Create a WiFi QR Code (SSID + Password) | InstantQR.io</title>
+  <meta name="description" content="Create a WiFi QR code for your network using SSID and password. Guests can scan to join instantly. Free, fast, privacy-first, and downloadable as PNG." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <link rel="canonical" href="https://instantqr.io/tools/wifi-qr-code-generator.html" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
   <meta property="og:title" content="WiFi QR Code Generator | InstantQR.io" />
   <meta property="og:description" content="Generate a WiFi QR code for your SSID and password. Download as PNG. Free and privacy-first." />
-  <meta property="og:url" content="https://instantqr.io/wifi-qr-code-generator.html" />
+  <meta property="og:url" content="https://instantqr.io/tools/wifi-qr-code-generator.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR WiFi QR Code Generator" />
 
-  <link rel="icon" href="/favicon.ico" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="WiFi QR Code Generator | InstantQR.io" />
+  <meta name="twitter:description" content="Create a WiFi QR code for guests to scan and join instantly." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <meta name="theme-color" content="#0b0f19" />
 
   <!-- ✅ Structured Data: SoftwareApplication -->
   <script type="application/ld+json">
@@ -25,7 +46,7 @@
     "name":"WiFi QR Code Generator",
     "applicationCategory":"UtilitiesApplication",
     "operatingSystem":"Web",
-    "url":"https://instantqr.io/wifi-qr-code-generator.html",
+    "url":"https://instantqr.io/tools/wifi-qr-code-generator.html",
     "publisher":{
       "@type":"Organization",
       "name":"InstantQR",
@@ -37,6 +58,34 @@
       "price":"0",
       "priceCurrency":"USD"
     }
+  }
+  </script>
+
+  <!-- ✅ Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"WiFi QR Code Generator",
+        "item":"https://instantqr.io/tools/wifi-qr-code-generator.html"
+      }
+    ]
   }
   </script>
 
@@ -67,7 +116,7 @@
         "name":"Which security types are supported?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"You can generate WiFi QR codes for WPA/WPA2/WPA3, WEP, or open networks (no password)."
+          "text":"You can generate WiFi QR codes for WPA/WPA2/WPA3, WEP, or open networks with no password."
         }
       },
       {
@@ -75,7 +124,7 @@
         "name":"Why won’t my phone connect after scanning?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Double-check your SSID and password, confirm the correct security type, and ensure hidden network is set correctly. Some devices require WPA for modern networks."
+          "text":"Double-check your SSID and password, confirm the correct security type, and ensure the hidden network setting matches your router configuration."
         }
       }
     ]
@@ -150,6 +199,26 @@
     }
     .linkbtn:hover{ border-color:var(--brand); text-decoration:none; }
 
+    .breadcrumb{
+      margin:14px 0 0;
+      font-size:12px;
+      color:var(--muted2);
+    }
+    .breadcrumb a{ color:var(--link); }
+    .breadcrumb ol{
+      list-style:none;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      padding:0;
+      margin:0;
+    }
+    .breadcrumb li+li::before{
+      content:"/";
+      margin-right:8px;
+      color:var(--muted2);
+    }
+
     .infoMid{
       margin-top:14px;
       background:var(--panel);
@@ -159,7 +228,7 @@
     }
     .infoMid h2{ margin:0 0 8px; font-size:16px; }
     .infoMid p, .infoMid li{ color:var(--muted); font-size:13px; line-height:1.7; }
-    .infoMid ol{ padding-left:18px; margin:8px 0 0; }
+    .infoMid ol, .infoMid ul{ padding-left:18px; margin:8px 0 0; }
     .tiny{ color:var(--muted2); font-size:12px; }
 
     .grid{
@@ -179,7 +248,7 @@
     }
 
     label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
-    input, select, textarea{
+    input, select{
       width:100%;
       padding:12px 10px;
       border-radius:14px;
@@ -188,7 +257,7 @@
       color:var(--text);
       outline:none;
     }
-    input:focus, select:focus, textarea:focus{
+    input:focus, select:focus{
       border-color: rgba(59,130,246,.85);
       box-shadow: 0 0 0 3px rgba(59,130,246,.18);
     }
@@ -238,22 +307,6 @@
       display:none;
     }
 
-    .pillbar{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
-    .pill{
-      padding:7px 10px;
-      border-radius:999px;
-      background:#0b1222;
-      border:1px solid var(--border2);
-      color:var(--muted);
-      font-size:12px;
-      cursor:pointer;
-      user-select:none;
-    }
-    .pill.active{
-      border-color: rgba(59,130,246,.9);
-      color:var(--text);
-    }
-
     .footerLinks{
       margin-top:14px;
       text-align:center;
@@ -282,10 +335,19 @@
 
         <div class="topnav">
           <a class="linkbtn" href="/">Home</a>
-          <a class="linkbtn" href="/url-qr-code-generator.html">URL QR</a>
-          <a class="linkbtn" href="/create-qr-code-for-wifi.html">WiFi QR Guide</a>
+          <a class="linkbtn" href="/tools.html">All Tools</a>
+          <a class="linkbtn" href="/tools/url-qr-code-generator.html">URL QR</a>
+          <a class="linkbtn" href="/tools/create-qr-code-for-wifi.html">WiFi QR Guide</a>
         </div>
       </header>
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/tools.html">Tools</a></li>
+          <li><span aria-current="page">WiFi QR Code Generator</span></li>
+        </ol>
+      </nav>
 
       <div class="infoMid">
         <h2>How it works</h2>
@@ -300,19 +362,6 @@
       <div class="grid">
         <!-- Controls -->
         <div class="box">
-          <label>Mode</label>
-          <div class="pillbar" id="typeBar">
-            <div class="pill" data-type="text">Text / URL</div>
-            <div class="pill active" data-type="wifi">Wi-Fi</div>
-          </div>
-
-          <!-- TEXT/URL -->
-          <div id="textForm" style="display:none;">
-            <label for="text">Text or URL</label>
-            <textarea id="text" placeholder="https://example.com&#10;or any text"></textarea>
-          </div>
-
-          <!-- WIFI -->
           <div id="wifiForm">
             <div class="row">
               <div>
@@ -389,23 +438,23 @@
         </div>
       </div>
 
-      <!-- SEO content block (lightweight but meaningful) -->
       <div class="infoMid" style="margin-top:14px;">
         <h2>What is a WiFi QR code?</h2>
         <p>
           A <strong>WiFi QR code</strong> lets guests connect to your wireless network by scanning a code with their phone camera.
-          It contains your SSID, password, and security type in a standard format supported by iOS and Android.
+          It contains your SSID, password, and security type in a standard format supported by many iPhone and Android devices.
         </p>
 
         <h2>Best practices</h2>
         <ul>
           <li>Use WPA/WPA2/WPA3 when possible.</li>
-          <li>Double-check spelling (SSID is case-sensitive).</li>
-          <li>Print a copy and keep a backup saved as PNG.</li>
+          <li>Double-check spelling because SSID is case-sensitive.</li>
+          <li>Print a copy and keep a backup PNG saved.</li>
+          <li>Use the hidden network option only if your router actually uses a hidden SSID.</li>
         </ul>
 
         <p class="tiny">
-          Need the URL generator? Try <a href="/url-qr-code-generator.html">URL QR Generator</a>.
+          Need a QR code for a link instead? Try <a href="/tools/url-qr-code-generator.html">URL QR Generator</a>.
         </p>
       </div>
 
@@ -426,6 +475,12 @@
   <script>
     // Force Wi-Fi mode on this page (expects app.js to expose setType)
     if (typeof setType === "function") setType("wifi");
+
+    // Hide any legacy text/URL UI if app.js injects or toggles it
+    const typeBar = document.getElementById('typeBar');
+    const textForm = document.getElementById('textForm');
+    if (typeBar) typeBar.style.display = 'none';
+    if (textForm) textForm.style.display = 'none';
 
     // Show/hide password toggle
     const showPass = document.getElementById('showPass');
