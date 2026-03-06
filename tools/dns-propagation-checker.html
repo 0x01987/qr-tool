@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>DNS Propagation Checker | InstantQR</title>
+  <meta name="description" content="Fast DNS propagation checker. Compare A, AAAA, CNAME, MX, TXT, NS, and SOA results across multiple public DNS resolvers. Clean responsive UI with standout results." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://instantqr.io/dns-propagation-checker.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="DNS Propagation Checker | InstantQR" />
+  <meta property="og:description" content="Check DNS propagation fast across major resolvers." />
+  <meta property="og:url" content="https://instantqr.io/dns-propagation-checker.html" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <link rel="preconnect" href="https://dns.google" crossorigin>
+  <link rel="preconnect" href="https://cloudflare-dns.com" crossorigin>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --brand:#69a6ff;
+      --ok:#19c37d;
+      --okbg:rgba(25,195,125,.14);
+      --warn:#ffcc66;
+      --bad:#ff6b6b;
+      --badbg:rgba(255,107,107,.12);
+      --border:rgba(255,255,255,.10);
+      --shadow:0 12px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:22px;
+      --max:1180px;
+      --focus:0 0 0 3px rgba(105,166,255,.35);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:20px}
+
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(10px);
+      background:rgba(7,11,20,.55);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+    }
+    .brandRow{
+      display:flex;align-items:center;gap:10px;
+      font-weight:800;letter-spacing:.2px;
+    }
+    .brandRow img{display:block;height:34px;width:auto}
+    nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    nav a:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .cta{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:10px 14px;border-radius:999px;
+      font-weight:800;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+      gap:8px;white-space:nowrap;cursor:pointer;
+      transition:transform .12s ease, filter .12s ease, background .12s ease;
+      user-select:none;
+    }
+    .cta:hover{transform:translateY(-1px);text-decoration:none}
+    .cta.primary{
+      border:0;
+      background:linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
+      box-shadow:0 14px 28px rgba(105,166,255,.22);
+    }
+    .cta.primary:hover{filter:brightness(1.06)}
+    .cta.ghost:hover{background:rgba(255,255,255,.10)}
+
+    .hero{
+      margin-top:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow);
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 20%, rgba(105,166,255,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(25,195,125,.14), transparent 55%);
+      pointer-events:none;
+    }
+    .hero>*{position:relative}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);font-size:13px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:clamp(28px, 4vw, 42px);
+      line-height:1.05;
+      letter-spacing:-.7px;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      max-width:70ch;
+      font-size:16px;
+    }
+
+    .controls{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: minmax(240px, 1.3fr) 160px 160px auto;
+      gap:10px;
+      align-items:end;
+    }
+    .control label{
+      display:block;
+      margin:0 0 6px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .input,.select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.14);
+      color:var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    .input::placeholder{color:rgba(233,238,252,.55)}
+
+    .quick{
+      display:flex;gap:8px;flex-wrap:wrap;margin-top:12px
+    }
+    .quick button{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:12px;
+      cursor:pointer;
+    }
+    .quick button:hover{color:var(--text);background:rgba(255,255,255,.08)}
+
+    .summary{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
+    }
+    .sumCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      min-height:96px;
+    }
+    .sumLabel{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:.4px;
+    }
+    .sumValue{
+      font-weight:900;
+      font-size:24px;
+      line-height:1.1;
+    }
+    .sumNote{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.45;
+    }
+    .greenGlow{
+      background:linear-gradient(180deg, rgba(25,195,125,.16), rgba(25,195,125,.08));
+      border-color:rgba(25,195,125,.30);
+      box-shadow:0 0 0 1px rgba(25,195,125,.05), 0 14px 26px rgba(25,195,125,.10);
+    }
+
+    .panel{
+      margin-top:14px;
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .panelHead{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    }
+    .panelTitle{
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:-.2px;
+    }
+    .panelSub{font-size:13px;color:var(--muted)}
+    .panelBody{padding:16px}
+
+    .statusLine{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+    }
+    .badge{
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.10);
+      padding:6px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .badge.ok{
+      color:#d7fff0;
+      border-color:rgba(25,195,125,.35);
+      background:var(--okbg);
+      font-weight:800;
+    }
+    .badge.bad{
+      color:#ffdede;
+      border-color:rgba(255,107,107,.35);
+      background:var(--badbg);
+      font-weight:800;
+    }
+
+    .loader{
+      display:none;
+      margin-top:12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.12);
+      padding:14px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .loader.show{display:block}
+    .dots::after{
+      content:"";
+      display:inline-block;
+      width:1em;
+      text-align:left;
+      animation:dots 1.1s steps(4,end) infinite;
+    }
+    @keyframes dots{
+      0%{content:""}
+      25%{content:"."}
+      50%{content:".."}
+      75%{content:"..."}
+      100%{content:""}
+    }
+
+    .tableWrap{overflow:auto;border-radius:16px}
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:860px;
+    }
+    th, td{
+      padding:12px 12px;
+      text-align:left;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      vertical-align:top;
+      font-size:13px;
+    }
+    th{
+      position:sticky;top:0;
+      background:rgba(7,11,20,.92);
+      color:#eaf2ff;
+      z-index:1;
+      font-size:12px;
+      letter-spacing:.3px;
+      text-transform:uppercase;
+    }
+    tbody tr:hover{background:rgba(255,255,255,.03)}
+    .resolver{
+      font-weight:800;
+      color:var(--text);
+      min-width:140px;
+    }
+    .resolver small{
+      display:block;
+      color:var(--muted);
+      font-weight:500;
+      margin-top:2px;
+      font-size:11px;
+    }
+    .resultCell{
+      max-width:420px;
+    }
+    .resultBox{
+      border-radius:14px;
+      padding:10px 12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.14);
+    }
+    .resultBox.ok{
+      background:linear-gradient(180deg, rgba(25,195,125,.18), rgba(25,195,125,.10));
+      border-color:rgba(25,195,125,.35);
+      box-shadow: inset 0 0 0 1px rgba(25,195,125,.05), 0 10px 20px rgba(25,195,125,.08);
+    }
+    .resultBox.bad{
+      background:linear-gradient(180deg, rgba(255,107,107,.14), rgba(255,107,107,.07));
+      border-color:rgba(255,107,107,.30);
+    }
+    .resultTop{
+      display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+      margin-bottom:6px;
+    }
+    .resultStatus{
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .resultStatus.ok{color:#c8ffe9}
+    .resultStatus.bad{color:#ffd3d3}
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      word-break:break-word;
+      line-height:1.55;
+      color:#f0f6ff;
+    }
+    .muted{color:var(--muted)}
+    .small{font-size:12px}
+    .ttl{
+      font-weight:800;
+      color:#dce9ff;
+      white-space:nowrap;
+    }
+
+    .helpBox{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .helpCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .helpCard h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .helpCard p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .footer{
+      margin-top:22px;
+      padding:18px 0 36px;
+      border-top:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .footRow{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    }
+
+    @media (max-width: 980px){
+      nav{display:none}
+      .controls{grid-template-columns:1fr 1fr}
+      .summary{grid-template-columns:1fr 1fr}
+      .helpBox{grid-template-columns:1fr}
+    }
+    @media (max-width: 640px){
+      .controls{grid-template-columns:1fr}
+      .summary{grid-template-columns:1fr}
+      .cta{width:100%}
+    }
+  </style>
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"DNS Propagation Checker",
+    "url":"https://instantqr.io/dns-propagation-checker.html",
+    "description":"Fast DNS propagation checker for A, AAAA, CNAME, MX, TXT, NS, and SOA records."
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="inner">
+      <a class="brandRow" href="/" aria-label="InstantQR Home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+        <span>InstantQR</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <a href="/tools.html">All Tools</a>
+        <a href="/dns-lookup.html">DNS Lookup</a>
+        <a href="/guides.html">Guides</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+
+      <a class="cta primary" href="/dns-lookup.html">DNS Lookup →</a>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero" aria-label="DNS Propagation Checker">
+      <div class="pill">⚡ Fast • 🌍 Multi-resolver • ✅ Standout green results</div>
+      <h1>DNS Propagation Checker</h1>
+      <p class="sub">
+        Check whether your DNS changes are visible across multiple major public resolvers.
+        Great for A, AAAA, CNAME, MX, TXT, NS, and SOA records.
+      </p>
+
+      <div class="controls" aria-label="Checker controls">
+        <div class="control">
+          <label for="domain">Domain / Hostname</label>
+          <input id="domain" class="input" placeholder="example.com or sub.example.com" autocomplete="off" spellcheck="false" />
+        </div>
+
+        <div class="control">
+          <label for="type">Record Type</label>
+          <select id="type" class="select">
+            <option value="A" selected>A</option>
+            <option value="AAAA">AAAA</option>
+            <option value="CNAME">CNAME</option>
+            <option value="MX">MX</option>
+            <option value="TXT">TXT</option>
+            <option value="NS">NS</option>
+            <option value="SOA">SOA</option>
+          </select>
+        </div>
+
+        <div class="control">
+          <label for="expected">Expected Value (optional)</label>
+          <input id="expected" class="input" placeholder="IP, host, MX, TXT snippet..." autocomplete="off" spellcheck="false" />
+        </div>
+
+        <div class="control">
+          <label>&nbsp;</label>
+          <button id="checkBtn" class="cta primary" type="button">Check Propagation</button>
+        </div>
+      </div>
+
+      <div class="quick" aria-label="Quick examples">
+        <button type="button" data-fill="instantqr.io|A|">A record</button>
+        <button type="button" data-fill="instantqr.io|NS|">NS record</button>
+        <button type="button" data-fill="instantqr.io|TXT|">TXT record</button>
+        <button type="button" data-fill="instantqr.io|MX|">MX record</button>
+      </div>
+
+      <div class="summary" aria-label="Propagation summary">
+        <div class="sumCard greenGlow">
+          <div class="sumLabel">Matched / Visible</div>
+          <div class="sumValue" id="matchedCount">—</div>
+          <div class="sumNote">Resolvers returning the expected or current record clearly.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Propagation %</div>
+          <div class="sumValue" id="propPercent">—</div>
+          <div class="sumNote">Quick signal for how widely the record is visible.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Consensus Value</div>
+          <div class="sumValue small mono" id="consensusValue">—</div>
+          <div class="sumNote">Most common answer across resolvers.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Query</div>
+          <div class="sumValue small mono" id="queryLabel">—</div>
+          <div class="sumNote">Current domain + record type checked.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Results panel">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Resolver Results</div>
+          <div class="panelSub">Green results stand out when records are found and matched.</div>
+        </div>
+
+        <div class="statusLine">
+          <span class="badge" id="statusBadge">Ready</span>
+          <button id="copyBtn" class="cta ghost" type="button">Copy Summary</button>
+          <button id="shareBtn" class="cta ghost" type="button">Copy Link</button>
+        </div>
+      </div>
+
+      <div class="panelBody">
+        <div class="loader" id="loader">
+          Checking major public resolvers<span class="dots"></span>
+        </div>
+
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Resolver</th>
+                <th>Result</th>
+                <th>TTL</th>
+                <th>Latency</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody">
+              <tr>
+                <td class="resolver">Ready</td>
+                <td class="resultCell">
+                  <div class="resultBox">
+                    <div class="mono muted">Enter a domain, choose a record type, and run the check.</div>
+                  </div>
+                </td>
+                <td class="ttl">—</td>
+                <td class="ttl">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="helpBox">
+          <div class="helpCard">
+            <h3>How to read this</h3>
+            <p>
+              Strong green results mean the resolver returned a record and it matches the expected value
+              or the current consensus. Mixed results usually mean propagation is still in progress.
+            </p>
+          </div>
+          <div class="helpCard">
+            <h3>Tip</h3>
+            <p>
+              For planned DNS changes, lower TTL ahead of time when possible. After changes, compare A, CNAME,
+              MX, TXT, or NS records depending on what you updated.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footRow">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" style="height:28px;width:auto;display:block;" />
+            <strong style="color:var(--text);font-size:16px;">InstantQR</strong>
+          </div>
+          <div class="small">Fast tools. Clean results. Privacy-first design.</div>
+          <div class="small" style="margin-top:8px;">© <span id="year"></span> InstantQR.io</div>
+        </div>
+
+        <div>
+          <div style="margin-bottom:8px;">
+            <a href="/tools.html">Tools</a> ·
+            <a href="/guides/dns-propagation-explained.html">DNS Propagation Guide</a> ·
+            <a href="/dns-lookup.html">DNS Lookup</a> ·
+            <a href="/sitemap.xml">Sitemap</a>
+          </div>
+          <div>
+            <a href="/about.html">About</a> ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/terms.html">Terms</a> ·
+            <a href="/contact.html">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const RESOLVERS = [
+      { name: "Google DNS", provider: "dns.google", url: "https://dns.google/resolve" },
+      { name: "Cloudflare DNS", provider: "cloudflare-dns.com", url: "https://cloudflare-dns.com/dns-query" },
+      { name: "Google DNS (repeat)", provider: "dns.google", url: "https://dns.google/resolve?cd=0" },
+      { name: "Cloudflare DNS (repeat)", provider: "cloudflare-dns.com", url: "https://cloudflare-dns.com/dns-query?cd=false" }
+    ];
+
+    const TYPE_MAP = {1:"A", 28:"AAAA", 5:"CNAME", 15:"MX", 16:"TXT", 2:"NS", 6:"SOA"};
+
+    const domainEl = document.getElementById("domain");
+    const typeEl = document.getElementById("type");
+    const expectedEl = document.getElementById("expected");
+    const checkBtn = document.getElementById("checkBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const shareBtn = document.getElementById("shareBtn");
+    const loader = document.getElementById("loader");
+    const resultsBody = document.getElementById("resultsBody");
+    const matchedCountEl = document.getElementById("matchedCount");
+    const propPercentEl = document.getElementById("propPercent");
+    const consensusValueEl = document.getElementById("consensusValue");
+    const queryLabelEl = document.getElementById("queryLabel");
+    const statusBadge = document.getElementById("statusBadge");
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    let lastSummary = "";
+
+    function normalizeDomain(input){
+      let s = (input || "").trim();
+      if (!s) return "";
+      try {
+        if (s.includes("://")) s = new URL(s).hostname;
+      } catch(e){}
+      s = s.split("/")[0].replace(/\.+$/,"");
+      return s.toLowerCase();
+    }
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;");
+    }
+
+    function formatAnswer(ans){
+      if (!ans || !ans.length) return "";
+      return ans
+        .map(a => {
+          const val = (a.data || a.Data || "").toString();
+          return val.replace(/^"|"$/g, "");
+        })
+        .join(" | ");
+    }
+
+    function mostCommon(arr){
+      const map = new Map();
+      arr.forEach(v => map.set(v, (map.get(v) || 0) + 1));
+      let best = "";
+      let count = 0;
+      for (const [k,v] of map.entries()){
+        if (v > count){ best = k; count = v; }
+      }
+      return best;
+    }
+
+    function setStatus(text, kind=""){
+      statusBadge.textContent = text;
+      statusBadge.className = "badge" + (kind ? " " + kind : "");
+    }
+
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        setStatus("Copied", "ok");
+        setTimeout(()=>setStatus("Ready"), 1200);
+      }catch(e){
+        setStatus("Copy failed", "bad");
+      }
+    }
+
+    async function queryResolver(resolver, domain, type){
+      const base = resolver.url.includes("?") ? resolver.url + "&" : resolver.url + "?";
+      const url = `${base}name=${encodeURIComponent(domain)}&type=${encodeURIComponent(type)}`;
+      const started = performance.now();
+
+      const res = await fetch(url, {
+        headers: { "accept":"application/dns-json" }
+      });
+      const ms = Math.round(performance.now() - started);
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const json = await res.json();
+
+      const answers = Array.isArray(json.Answer) ? json.Answer : [];
+      const text = formatAnswer(answers);
+      const ttl = answers.length ? (answers[0].TTL ?? "—") : "—";
+
+      return {
+        resolver: resolver.name,
+        provider: resolver.provider,
+        ok: answers.length > 0,
+        answers,
+        text,
+        ttl,
+        ms,
+        raw: json
+      };
+    }
+
+    function renderRows(rows, expected, consensus){
+      resultsBody.innerHTML = "";
+
+      rows.forEach(row => {
+        const tr = document.createElement("tr");
+
+        let match = false;
+        const normalizedText = (row.text || "").toLowerCase();
+        const normalizedExpected = (expected || "").toLowerCase();
+        const normalizedConsensus = (consensus || "").toLowerCase();
+
+        if (normalizedExpected) {
+          match = normalizedText.includes(normalizedExpected);
+        } else if (normalizedConsensus) {
+          match = normalizedText === normalizedConsensus;
+        }
+
+        const boxClass = row.ok
+          ? (match ? "resultBox ok" : "resultBox")
+          : "resultBox bad";
+
+        const statusClass = row.ok
+          ? (match ? "resultStatus ok" : "resultStatus")
+          : "resultStatus bad";
+
+        const statusText = row.ok
+          ? (match ? "Visible / Match" : "Visible")
+          : "No answer";
+
+        tr.innerHTML = `
+          <td class="resolver">
+            ${escapeHtml(row.resolver)}
+            <small>${escapeHtml(row.provider)}</small>
+          </td>
+          <td class="resultCell">
+            <div class="${boxClass}">
+              <div class="resultTop">
+                <div class="${statusClass}">${escapeHtml(statusText)}</div>
+                <div class="small muted">${row.ok ? "Record returned" : "Nothing returned"}</div>
+              </div>
+              <div class="mono">${row.text ? escapeHtml(row.text) : '<span class="muted">No record found or not returned by resolver.</span>'}</div>
+            </div>
+          </td>
+          <td class="ttl">${escapeHtml(String(row.ttl))}</td>
+          <td class="ttl">${escapeHtml(String(row.ms))} ms</td>
+        `;
+        resultsBody.appendChild(tr);
+      });
+    }
+
+    async function runCheck(){
+      const domain = normalizeDomain(domainEl.value);
+      const type = typeEl.value;
+      const expected = (expectedEl.value || "").trim();
+
+      if (!domain){
+        setStatus("Enter a domain", "bad");
+        domainEl.focus();
+        return;
+      }
+
+      queryLabelEl.textContent = `${domain} / ${type}`;
+      matchedCountEl.textContent = "…";
+      propPercentEl.textContent = "…";
+      consensusValueEl.textContent = "Checking…";
+      loader.classList.add("show");
+      setStatus("Checking…");
+
+      checkBtn.disabled = true;
+      checkBtn.textContent = "Checking…";
+
+      try{
+        const results = await Promise.all(
+          RESOLVERS.map(r =>
+            queryResolver(r, domain, type).catch(err => ({
+              resolver: r.name,
+              provider: r.provider,
+              ok: false,
+              answers: [],
+              text: "",
+              ttl: "—",
+              ms: "—",
+              error: String(err)
+            }))
+          )
+        );
+
+        const visibleRows = results.filter(r => r.ok && r.text);
+        const values = visibleRows.map(r => r.text.trim()).filter(Boolean);
+        const consensus = values.length ? mostCommon(values) : "";
+        consensusValueEl.textContent = consensus || "No consensus";
+
+        let matched = 0;
+        results.forEach(r => {
+          if (!r.ok || !r.text) return;
+          const val = r.text.toLowerCase();
+          if (expected) {
+            if (val.includes(expected.toLowerCase())) matched++;
+          } else if (consensus && val === consensus.toLowerCase()) {
+            matched++;
+          }
+        });
+
+        const total = results.length;
+        const percent = total ? Math.round((matched / total) * 100) : 0;
+
+        matchedCountEl.textContent = `${matched}/${total}`;
+        propPercentEl.textContent = `${percent}%`;
+
+        renderRows(results, expected, consensus);
+
+        if (matched > 0) {
+          setStatus(percent >= 75 ? "Strong propagation" : "Partial propagation", "ok");
+        } else {
+          setStatus("No clear propagation yet", "bad");
+        }
+
+        lastSummary =
+`DNS Propagation Checker
+Domain: ${domain}
+Type: ${type}
+Expected: ${expected || "(none)"}
+Consensus: ${consensus || "(none)"}
+Matched: ${matched}/${total}
+Propagation: ${percent}%
+
+${results.map(r => `- ${r.resolver}: ${r.text || "No answer"} | TTL: ${r.ttl} | Latency: ${r.ms}ms`).join("\n")}`;
+      } catch (err){
+        resultsBody.innerHTML = `
+          <tr>
+            <td class="resolver">Error</td>
+            <td class="resultCell">
+              <div class="resultBox bad">
+                <div class="resultTop">
+                  <div class="resultStatus bad">Request failed</div>
+                </div>
+                <div class="mono">${escapeHtml(String(err))}</div>
+              </div>
+            </td>
+            <td class="ttl">—</td>
+            <td class="ttl">—</td>
+          </tr>
+        `;
+        matchedCountEl.textContent = "0/0";
+        propPercentEl.textContent = "0%";
+        consensusValueEl.textContent = "—";
+        setStatus("Request failed", "bad");
+      } finally {
+        loader.classList.remove("show");
+        checkBtn.disabled = false;
+        checkBtn.textContent = "Check Propagation";
+      }
+    }
+
+    checkBtn.addEventListener("click", runCheck);
+    domainEl.addEventListener("keydown", e => {
+      if (e.key === "Enter"){ e.preventDefault(); runCheck(); }
+    });
+    expectedEl.addEventListener("keydown", e => {
+      if (e.key === "Enter"){ e.preventDefault(); runCheck(); }
+    });
+
+    document.querySelectorAll(".quick button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const [d,t,e] = btn.dataset.fill.split("|");
+        domainEl.value = d || "";
+        typeEl.value = t || "A";
+        expectedEl.value = e || "";
+        runCheck();
+      });
+    });
+
+    copyBtn.addEventListener("click", () => {
+      if (!lastSummary) {
+        setStatus("Nothing to copy", "bad");
+        return;
+      }
+      copyText(lastSummary);
+    });
+
+    shareBtn.addEventListener("click", () => {
+      const domain = normalizeDomain(domainEl.value);
+      const type = typeEl.value;
+      const expected = (expectedEl.value || "").trim();
+      const u = new URL(location.href);
+      if (domain) u.searchParams.set("domain", domain);
+      if (type) u.searchParams.set("type", type);
+      if (expected) u.searchParams.set("expected", expected);
+      copyText(u.toString());
+    });
+
+    (function initFromQuery(){
+      const p = new URLSearchParams(location.search);
+      const d = p.get("domain");
+      const t = p.get("type");
+      const e = p.get("expected");
+      if (d) domainEl.value = d;
+      if (t && [...typeEl.options].some(o => o.value === t)) typeEl.value = t;
+      if (e) expectedEl.value = e;
+      if (d) runCheck();
+    })();
+  </script>
+</body>
+</html>
