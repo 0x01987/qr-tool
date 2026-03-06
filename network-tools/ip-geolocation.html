@@ -18,15 +18,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>IP Geolocation Tool | Fast IP Lookup by City, Region, Country & ISP | InstantQR</title>
-  <meta name="description" content="Fast, clean IP geolocation tool by InstantQR. Lookup IP address location, ISP, ASN, timezone, country, region, city, coordinates, and more." />
+  <title>IP Geolocation Tool | Fast IP Lookup by Country, City, ISP & ASN | InstantQR</title>
+  <meta name="description" content="Fast, clean IP geolocation tool by InstantQR. Lookup country, region, city, timezone, ISP, ASN, coordinates, postal code, and more for any public IP address." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://instantqr.io/ip-geolocation.html" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
-  <meta property="og:title" content="IP Geolocation Tool | Fast IP Lookup by City, Region, Country & ISP" />
+  <meta property="og:title" content="IP Geolocation Tool | Fast IP Lookup by Country, City, ISP & ASN" />
   <meta property="og:description" content="Lookup IP geolocation, ISP, ASN, timezone, country, region, city, coordinates, and more with a fast, clean interface." />
   <meta property="og:url" content="https://instantqr.io/ip-geolocation.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
@@ -34,7 +34,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="IP Geolocation Tool | InstantQR" />
-  <meta name="twitter:description" content="Fast IP geolocation lookup with country, city, ISP, ASN, timezone, and map links." />
+  <meta name="twitter:description" content="Fast IP geolocation lookup with country, city, ISP, ASN, timezone, and coordinates." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
@@ -59,7 +59,6 @@
       --max:1140px;
       --shadow:0 12px 40px rgba(0,0,0,.45);
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -74,15 +73,12 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
-
     a{color:inherit;text-decoration:none}
     a:hover{text-decoration:underline}
     .wrap{max-width:var(--max);margin:auto;padding:24px}
 
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
+      position:sticky; top:0; z-index:50;
       backdrop-filter:blur(10px);
       background:rgba(7,11,20,.58);
       border-bottom:1px solid var(--border);
@@ -201,9 +197,7 @@
       margin-top:8px;
     }
 
-    .section{
-      padding:18px 0 8px;
-    }
+    .section{padding:18px 0 8px}
     .section h2{
       margin:0 0 10px;
       font-size:24px;
@@ -380,6 +374,8 @@
     }
     .footer a:hover{color:#fff}
 
+    .hidden{display:none!important}
+
     @media (max-width:1000px){
       .grid{grid-template-columns:1fr}
       .tips{grid-template-columns:1fr}
@@ -407,39 +403,6 @@
     "description":"Fast IP geolocation lookup tool with city, region, country, ISP, ASN, timezone, coordinates, and JSON output."
   }
   </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What does an IP geolocation tool show?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"An IP geolocation tool typically shows approximate location data such as country, region, city, timezone, ISP, ASN, and coordinates for a public IP address."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"Is IP geolocation exact?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"No. IP geolocation is approximate and usually best at city, region, or country level depending on the provider and network."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"Can I look up my current IP?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes. This tool includes a one-click option to detect and look up your current public IP address."
-        }
-      }
-    ]
-  }
-  </script>
 </head>
 
 <body>
@@ -464,7 +427,7 @@
   <main class="wrap">
     <section class="hero" aria-label="IP Geolocation Hero">
       <div class="heroCard">
-        <div class="pill">🌍 IP Lookup • ⚡ Fast • ✅ Clean Results</div>
+        <div class="pill">🌍 IP Lookup • ⚡ Fast • ✅ Static-Site Friendly</div>
         <h1>IP Geolocation Tool</h1>
         <p class="sub">
           Lookup a public IP address and see approximate location details such as
@@ -484,8 +447,7 @@
     <section class="section" id="tool" aria-label="IP Geolocation Tool">
       <h2>Lookup an IP Address</h2>
       <p>
-        Enter a public IPv4 or IPv6 address, or use your current IP. This tool is fast,
-        mobile-friendly, and only requests lookup data when you search.
+        Enter a public IPv4 or IPv6 address, or use your current IP. This tool only requests lookup data when you search.
       </p>
 
       <div class="grid">
@@ -534,7 +496,7 @@
               <div class="metaValue" id="timezoneVal">—</div>
             </div>
             <div class="metaCard">
-              <div class="metaLabel">ISP</div>
+              <div class="metaLabel">ISP / Org</div>
               <div class="metaValue" id="ispVal">—</div>
             </div>
             <div class="metaCard">
@@ -546,7 +508,7 @@
               <div class="metaValue" id="coordsVal">—</div>
             </div>
             <div class="metaCard">
-              <div class="metaLabel">Continent / Country Code</div>
+              <div class="metaLabel">Postal / Continent</div>
               <div class="metaValue" id="codeVal">—</div>
             </div>
           </div>
@@ -556,21 +518,15 @@
       <div class="tips">
         <div class="tip">
           <h3>Approximate location</h3>
-          <p>
-            IP geolocation usually shows approximate network location, not a precise street address.
-          </p>
+          <p>IP geolocation usually shows approximate network location, not a precise street address.</p>
         </div>
         <div class="tip">
           <h3>Best use cases</h3>
-          <p>
-            Helpful for troubleshooting, analytics checks, content personalization, fraud review, and network analysis.
-          </p>
+          <p>Helpful for troubleshooting, analytics checks, fraud review, localization, and network analysis.</p>
         </div>
         <div class="tip">
-          <h3>Keep it fast</h3>
-          <p>
-            This page only loads data when you click a button, helping keep the tool lightweight and responsive.
-          </p>
+          <h3>Fast static setup</h3>
+          <p>This version uses a browser-friendly API so it works on a static site without needing your own backend.</p>
         </div>
       </div>
     </section>
@@ -615,6 +571,7 @@
     const mapLink = document.getElementById("mapLink");
 
     let lastJsonText = "{}";
+    const cache = new Map();
 
     function setStatus(message, type) {
       statusEl.textContent = message;
@@ -623,7 +580,7 @@
 
     function isLikelyIp(value) {
       const v = (value || "").trim();
-      const ipv4 = /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
+      const ipv4 = /^(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}$/;
       const ipv6 = /^[0-9a-fA-F:]+$/;
       return ipv4.test(v) || (v.includes(":") && ipv6.test(v));
     }
@@ -650,18 +607,19 @@
     }
 
     function renderData(data) {
-      const lat = data.latitude;
-      const lon = data.longitude;
+      const ip = clean(data.ip);
       const city = clean(data.city);
       const region = clean(data.region);
-      const country = clean(data.country);
-      const timezone = clean(data.timezone && data.timezone.id ? data.timezone.id : data.timezone);
-      const isp = clean(data.connection && data.connection.isp ? data.connection.isp : data.isp);
-      const asn = clean(data.connection && data.connection.asn ? data.connection.asn : data.asn);
-      const continent = clean(data.continent);
-      const countryCode = clean(data.country_code);
+      const country = clean(data.country_name || data.country);
+      const timezone = clean(data.timezone);
+      const isp = clean(data.org);
+      const asn = clean(data.asn);
+      const latitude = data.latitude;
+      const longitude = data.longitude;
+      const postal = clean(data.postal);
+      const continent = clean(data.continent_code);
 
-      resultIp.textContent = clean(data.ip);
+      resultIp.textContent = ip;
       resultSummary.textContent = [city, region, country].filter(v => v !== "—").join(", ") || "No summary available.";
 
       countryVal.textContent = country;
@@ -670,13 +628,13 @@
       timezoneVal.textContent = timezone;
       ispVal.textContent = isp;
       asnVal.textContent = asn;
-      coordsVal.textContent = (lat !== null && lat !== undefined && lon !== null && lon !== undefined)
-        ? lat + ", " + lon
+      coordsVal.textContent = (latitude !== undefined && longitude !== undefined && latitude !== null && longitude !== null)
+        ? latitude + ", " + longitude
         : "—";
-      codeVal.textContent = [continent, countryCode].filter(v => v !== "—").join(" / ") || "—";
+      codeVal.textContent = [postal, continent].filter(v => v !== "—").join(" / ") || "—";
 
-      if (lat !== null && lat !== undefined && lon !== null && lon !== undefined) {
-        mapLink.href = "https://www.google.com/maps?q=" + encodeURIComponent(lat + "," + lon);
+      if (latitude !== undefined && longitude !== undefined && latitude !== null && longitude !== null) {
+        mapLink.href = "https://www.google.com/maps?q=" + encodeURIComponent(latitude + "," + longitude);
         mapLink.classList.remove("hidden");
       } else {
         mapLink.classList.add("hidden");
@@ -686,27 +644,47 @@
       jsonBox.textContent = lastJsonText;
     }
 
+    async function fetchIpapi(url) {
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+      if (!res.ok) {
+        throw new Error("Request failed");
+      }
+      return res.json();
+    }
+
     async function lookupIp(ip) {
-      const target = (ip || "").trim();
-      const endpoint = target
-        ? "https://ipwho.is/" + encodeURIComponent(target)
-        : "https://ipwho.is/";
+      const key = (ip || "__self__").trim();
+
+      if (cache.has(key)) {
+        renderData(cache.get(key));
+        setStatus("Loaded from cache.", "ok");
+        return;
+      }
 
       setStatus("Looking up IP geolocation...", "warn");
 
       try {
-        const res = await fetch(endpoint, { method: "GET" });
-        const data = await res.json();
+        const endpoint = ip
+          ? "https://ipapi.co/" + encodeURIComponent(ip.trim()) + "/json/"
+          : "https://ipapi.co/json/";
 
-        if (!data || data.success === false) {
-          setStatus((data && data.message) ? data.message : "Lookup failed. Please try another IP.", "danger");
+        const data = await fetchIpapi(endpoint);
+
+        if (data.error) {
+          setStatus(clean(data.reason || data.message || "Lookup failed."), "danger");
           return;
         }
 
+        cache.set(key, data);
         renderData(data);
         setStatus("Lookup complete.", "ok");
       } catch (err) {
-        setStatus("Unable to fetch geolocation data right now. Please try again.", "danger");
+        setStatus("Unable to fetch IP geolocation right now. Please try again.", "danger");
       }
     }
 
