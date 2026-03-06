@@ -23,7 +23,6 @@
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://instantqr.io/sitemap-generator.html" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:title" content="Sitemap Generator | Free XML Sitemap Builder" />
@@ -31,7 +30,6 @@
   <meta property="og:url" content="https://instantqr.io/sitemap-generator.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Sitemap Generator | InstantQR" />
   <meta name="twitter:description" content="Generate XML sitemaps fast. Copy, download, and organize URLs with lastmod, changefreq, and priority." />
@@ -50,7 +48,6 @@
       --text:#e7eefc;
       --muted:#9db0d1;
       --brand:#69a6ff;
-      --brand2:#8db9ff;
       --ok:#19c37d;
       --warn:#ffcc66;
       --danger:#ff6b6b;
@@ -60,11 +57,8 @@
       --max:1140px;
       --shadow:0 12px 40px rgba(0,0,0,.45);
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
-    html{scroll-behavior:smooth}
-
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -77,16 +71,11 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
-
     a{color:inherit;text-decoration:none}
     a:hover{text-decoration:underline}
-
     .wrap{max-width:var(--max);margin:auto;padding:24px}
-
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
+      position:sticky; top:0; z-index:50;
       backdrop-filter:blur(10px);
       background:rgba(7,11,20,.58);
       border-bottom:1px solid var(--border);
@@ -125,7 +114,6 @@
       background:rgba(255,255,255,.06);
       text-decoration:none;
     }
-
     .cta{
       display:inline-flex;
       align-items:center;
@@ -157,10 +145,7 @@
       background:rgba(255,107,107,.10);
       color:#ffd4d4;
     }
-
-    .hero{
-      padding:28px 0 8px;
-    }
+    .hero{padding:28px 0 8px}
     .heroCard{
       border:1px solid var(--border);
       border-radius:var(--radius2);
@@ -211,10 +196,7 @@
       gap:10px;
       margin-top:8px;
     }
-
-    .section{
-      padding:18px 0 8px;
-    }
+    .section{padding:18px 0 8px}
     .section h2{
       margin:0 0 10px;
       font-size:24px;
@@ -225,14 +207,12 @@
       color:var(--muted);
       line-height:1.6;
     }
-
     .grid{
       display:grid;
       grid-template-columns:1.05fr .95fr;
       gap:16px;
       margin-top:18px;
     }
-
     .card{
       background:var(--card);
       border:1px solid var(--border);
@@ -240,7 +220,6 @@
       padding:18px;
       box-shadow:var(--shadow);
     }
-
     .label{
       display:block;
       margin:0 0 6px;
@@ -248,8 +227,7 @@
       color:var(--muted);
       font-weight:600;
     }
-
-    .input, .textarea, .select{
+    .input,.textarea,.select{
       width:100%;
       border:1px solid var(--border);
       background:#08101d;
@@ -262,23 +240,20 @@
     .textarea{
       min-height:220px;
       resize:vertical;
-      font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
       line-height:1.45;
     }
-
     .row{
       display:grid;
       grid-template-columns:1fr 1fr 1fr;
       gap:12px;
     }
-
     .actionRow{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       margin-top:14px;
     }
-
     .kpis{
       display:grid;
       grid-template-columns:repeat(4,1fr);
@@ -301,14 +276,12 @@
       color:var(--muted);
       font-size:12px;
     }
-
     .helper{
       font-size:12px;
       color:var(--muted);
       line-height:1.6;
       margin-top:10px;
     }
-
     .status{
       margin-top:14px;
       padding:12px 14px;
@@ -333,7 +306,6 @@
       background:rgba(255,107,107,.08);
       color:#ffd8d8;
     }
-
     .outputHeader{
       display:flex;
       align-items:center;
@@ -342,7 +314,6 @@
       flex-wrap:wrap;
       margin-bottom:10px;
     }
-
     .code{
       width:100%;
       min-height:430px;
@@ -353,11 +324,10 @@
       padding:14px;
       font-size:13px;
       line-height:1.5;
-      font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
       resize:vertical;
       white-space:pre;
     }
-
     .tips{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -380,7 +350,6 @@
       color:var(--muted);
       line-height:1.55;
     }
-
     .footer{
       margin-top:40px;
       padding-top:20px;
@@ -394,9 +363,6 @@
       margin-right:10px;
     }
     .footer a:hover{color:#fff}
-
-    .hidden{display:none!important}
-
     @media (max-width:1000px){
       .grid{grid-template-columns:1fr}
     }
@@ -414,51 +380,6 @@
       .kpis{grid-template-columns:1fr}
     }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebApplication",
-    "name":"Sitemap Generator",
-    "url":"https://instantqr.io/sitemap-generator.html",
-    "applicationCategory":"DeveloperApplication",
-    "operatingSystem":"All",
-    "description":"Free XML sitemap generator by InstantQR. Create a valid sitemap.xml from a list of URLs, then copy or download it."
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is a sitemap.xml file?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"A sitemap.xml file helps search engines discover and crawl the important URLs on your site."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"Where should I place sitemap.xml?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Place it at your site root, such as https://example.com/sitemap.xml, then reference it in robots.txt and submit it in Google Search Console."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"Can I use relative paths in this tool?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes. If you provide a base URL, the tool can convert relative paths like /about.html into full URLs."
-        }
-      }
-    ]
-  }
-  </script>
 </head>
 
 <body>
@@ -601,7 +522,7 @@ https://instantqr.io/tools.html
             </div>
           </div>
 
-          <textarea id="output" class="code" spellcheck="false" placeholder="<?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>"></textarea>
+          <textarea id="output" class="code" spellcheck="false"></textarea>
         </div>
       </div>
 
@@ -655,7 +576,7 @@ https://instantqr.io/tools.html
     const invalidCountEl = document.getElementById("invalidCount");
     const xmlLinesEl = document.getElementById("xmlLines");
 
-    function escapeXml(str){
+    function escapeXml(str) {
       return String(str)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -664,17 +585,36 @@ https://instantqr.io/tools.html
         .replace(/'/g, "&apos;");
     }
 
-    function normalizeUrl(input, baseUrl){
-      const value = (input || "").trim();
-      if(!value) return null;
+    function setStatus(message, type) {
+      statusEl.textContent = message;
+      statusEl.className = "status" + (type ? " " + type : "");
+    }
+
+    function cleanBaseUrl(value) {
+      const raw = (value || "").trim();
+      if (!raw) return "";
+      try {
+        return new URL(raw).origin;
+      } catch (e) {
+        return "";
+      }
+    }
+
+    function normalizeSingleUrl(value, baseOrigin) {
+      const raw = (value || "").trim();
+      if (!raw) return null;
 
       try {
-        if (/^https?:\\/\\//i.test(value)) {
-          return new URL(value).toString();
+        if (/^https?:\/\//i.test(raw)) {
+          return new URL(raw).toString();
         }
 
-        if (baseUrl) {
-          return new URL(value, baseUrl).toString();
+        if (baseOrigin && raw.startsWith("/")) {
+          return new URL(raw, baseOrigin).toString();
+        }
+
+        if (baseOrigin && !raw.startsWith("/")) {
+          return new URL("/" + raw, baseOrigin).toString();
         }
 
         return null;
@@ -683,46 +623,38 @@ https://instantqr.io/tools.html
       }
     }
 
-    function setStatus(message, type){
-      statusEl.textContent = message;
-      statusEl.className = "status" + (type ? " " + type : "");
-    }
-
-    function generateSitemap(){
-      const baseUrlRaw = (baseUrlEl.value || "").trim();
-      let safeBaseUrl = "";
-
-      if (baseUrlRaw) {
-        try {
-          safeBaseUrl = new URL(baseUrlRaw).toString();
-        } catch (e) {
-          setStatus("Base URL is invalid. Please enter a valid URL like https://instantqr.io", "danger");
-          return;
-        }
-      }
-
-      const lines = (urlListEl.value || "")
-        .split(/\\r?\\n/)
-        .map(v => v.trim())
+    function generateSitemap() {
+      const baseOrigin = cleanBaseUrl(baseUrlEl.value);
+      const rawLines = (urlListEl.value || "")
+        .split(/\r?\n/)
+        .map(line => line.trim())
         .filter(Boolean);
 
-      if (!lines.length) {
+      if (baseUrlEl.value.trim() && !baseOrigin) {
+        setStatus("Base URL is invalid. Use a full URL like https://instantqr.io", "danger");
+        return;
+      }
+
+      if (!rawLines.length) {
         outputEl.value = "";
         urlCountEl.textContent = "0";
         dupCountEl.textContent = "0";
         invalidCountEl.textContent = "0";
         xmlLinesEl.textContent = "0";
-        setStatus("Add at least one URL or path to generate a sitemap.", "warn");
+        setStatus("Add at least one URL or path first.", "warn");
         return;
       }
 
       const normalized = [];
       let invalid = 0;
 
-      for (const line of lines) {
-        const url = normalizeUrl(line, safeBaseUrl);
-        if (url) normalized.push(url);
-        else invalid++;
+      for (const line of rawLines) {
+        const url = normalizeSingleUrl(line, baseOrigin);
+        if (url) {
+          normalized.push(url);
+        } else {
+          invalid++;
+        }
       }
 
       const uniqueUrls = [...new Set(normalized)];
@@ -734,11 +666,11 @@ https://instantqr.io/tools.html
         dupCountEl.textContent = String(duplicatesRemoved);
         invalidCountEl.textContent = String(invalid);
         xmlLinesEl.textContent = "0";
-        setStatus("No valid URLs found. Check your input or provide a Base URL for relative paths.", "danger");
+        setStatus("No valid URLs were found. Add full URLs or provide a valid Base URL for relative paths.", "danger");
         return;
       }
 
-      const freq = changefreqEl.value;
+      const changefreq = changefreqEl.value;
       const priority = priorityEl.value;
       const lastmod = (lastmodEl.value || "").trim();
 
@@ -746,20 +678,20 @@ https://instantqr.io/tools.html
       xmlParts.push('<?xml version="1.0" encoding="UTF-8"?>');
       xmlParts.push('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
 
-      uniqueUrls.forEach(url => {
+      for (const url of uniqueUrls) {
         xmlParts.push("  <url>");
-        xmlParts.push(`    <loc>${escapeXml(url)}</loc>`);
+        xmlParts.push("    <loc>" + escapeXml(url) + "</loc>");
         if (lastmod) {
-          xmlParts.push(`    <lastmod>${escapeXml(lastmod)}</lastmod>`);
+          xmlParts.push("    <lastmod>" + escapeXml(lastmod) + "</lastmod>");
         }
-        xmlParts.push(`    <changefreq>${escapeXml(freq)}</changefreq>`);
-        xmlParts.push(`    <priority>${escapeXml(priority)}</priority>`);
+        xmlParts.push("    <changefreq>" + escapeXml(changefreq) + "</changefreq>");
+        xmlParts.push("    <priority>" + escapeXml(priority) + "</priority>");
         xmlParts.push("  </url>");
-      });
+      }
 
       xmlParts.push("</urlset>");
 
-      const xml = xmlParts.join("\\n");
+      const xml = xmlParts.join("\n");
       outputEl.value = xml;
 
       urlCountEl.textContent = String(uniqueUrls.length);
@@ -768,15 +700,18 @@ https://instantqr.io/tools.html
       xmlLinesEl.textContent = String(xmlParts.length);
 
       if (invalid > 0) {
-        setStatus(`Sitemap generated with ${uniqueUrls.length} valid URL(s). ${invalid} invalid entr${invalid === 1 ? "y was" : "ies were"} skipped.`, "warn");
+        setStatus(
+          "Sitemap generated with " + uniqueUrls.length + " valid URL(s). " + invalid + " invalid entr" + (invalid === 1 ? "y was" : "ies were") + " skipped.",
+          "warn"
+        );
       } else {
-        setStatus(`Sitemap generated successfully with ${uniqueUrls.length} valid URL(s).`, "ok");
+        setStatus("Sitemap generated successfully with " + uniqueUrls.length + " valid URL(s).", "ok");
       }
     }
 
     document.getElementById("generateBtn").addEventListener("click", generateSitemap);
 
-    document.getElementById("loadExampleBtn").addEventListener("click", () => {
+    document.getElementById("loadExampleBtn").addEventListener("click", function () {
       baseUrlEl.value = "https://instantqr.io";
       urlListEl.value = [
         "/",
@@ -785,14 +720,14 @@ https://instantqr.io/tools.html
         "/sitemap-generator.html",
         "/about.html",
         "/contact.html"
-      ].join("\\n");
+      ].join("\n");
       changefreqEl.value = "weekly";
       priorityEl.value = "0.9";
       lastmodEl.value = "2026-03-05";
       generateSitemap();
     });
 
-    document.getElementById("clearBtn").addEventListener("click", () => {
+    document.getElementById("clearBtn").addEventListener("click", function () {
       baseUrlEl.value = "";
       urlListEl.value = "";
       outputEl.value = "";
@@ -803,7 +738,7 @@ https://instantqr.io/tools.html
       setStatus("Cleared. Enter your URLs, then click “Generate Sitemap”.", "");
     });
 
-    document.getElementById("copyBtn").addEventListener("click", async () => {
+    document.getElementById("copyBtn").addEventListener("click", async function () {
       if (!outputEl.value.trim()) {
         setStatus("Nothing to copy yet. Generate a sitemap first.", "warn");
         return;
@@ -819,7 +754,7 @@ https://instantqr.io/tools.html
       }
     });
 
-    document.getElementById("downloadBtn").addEventListener("click", () => {
+    document.getElementById("downloadBtn").addEventListener("click", function () {
       if (!outputEl.value.trim()) {
         setStatus("Nothing to download yet. Generate a sitemap first.", "warn");
         return;
@@ -831,7 +766,8 @@ https://instantqr.io/tools.html
       link.download = "sitemap.xml";
       document.body.appendChild(link);
       link.click();
-      setTimeout(() => {
+
+      setTimeout(function () {
         URL.revokeObjectURL(link.href);
         link.remove();
       }, 0);
@@ -839,13 +775,13 @@ https://instantqr.io/tools.html
       setStatus("sitemap.xml downloaded.", "ok");
     });
 
-    // preload example
+    // Default example
     baseUrlEl.value = "https://instantqr.io";
     urlListEl.value = [
       "https://instantqr.io/",
       "https://instantqr.io/tools.html",
       "https://instantqr.io/seo-tools.html"
-    ].join("\\n");
+    ].join("\n");
     generateSitemap();
   </script>
 </body>
