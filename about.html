@@ -1,24 +1,52 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>About InstantQR | Free QR Code Generator & Online Tools</title>
-  <meta name="description" content="Learn about InstantQR.io — a free, privacy-first platform for QR code generators (WiFi & URL), converters, crypto tools, and security utilities. Fast, clean, and no signup required." />
-  <meta name="robots" content="index,follow" />
+  <title>About InstantQR | Free Online Tools for QR, DNS, Security, Crypto & More</title>
+  <meta name="description" content="Learn about InstantQR.io — a free, privacy-first platform for QR code tools, DNS and network tools, converters, crypto utilities, security tools, developer tools, guides, and mini-games." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="theme-color" content="#0b0f19" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="canonical" href="https://instantqr.io/about.html" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="About InstantQR | Free QR Code Generator & Online Tools" />
-  <meta property="og:description" content="InstantQR.io is a free, privacy-first tool hub for QR codes, converters, crypto tools, and security utilities." />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="About InstantQR | Free Online Tools for QR, DNS, Security, Crypto & More" />
+  <meta property="og:description" content="InstantQR.io is a free, privacy-first tool hub for QR codes, DNS and network tools, converters, crypto tools, security utilities, developer tools, guides, and mini-games." />
   <meta property="og:url" content="https://instantqr.io/about.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="About InstantQR and its free online tools" />
 
-  <!-- Optional favicon -->
-  <link rel="icon" href="/favicon.ico" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About InstantQR | Free Online Tools for QR, DNS, Security, Crypto & More" />
+  <meta name="twitter:description" content="Learn about InstantQR.io — a privacy-first platform for QR tools, DNS tools, converters, crypto utilities, security tools, guides, and mini-games." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <!-- ✅ Organization Schema (brand trust + SEO) -->
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+
+  <!-- ✅ Organization Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -37,12 +65,34 @@
     "@type":"WebPage",
     "name":"About InstantQR",
     "url":"https://instantqr.io/about.html",
-    "description":"InstantQR.io is a free, privacy-first platform for QR code generators (WiFi & URL), converters, crypto tools, and security utilities.",
+    "description":"InstantQR.io is a free, privacy-first platform for QR code tools, DNS and network tools, converters, crypto utilities, security tools, developer tools, guides, and mini-games.",
     "isPartOf":{
       "@type":"WebSite",
       "name":"InstantQR",
       "url":"https://instantqr.io/"
     }
+  }
+  </script>
+
+  <!-- ✅ Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"About",
+        "item":"https://instantqr.io/about.html"
+      }
+    ]
   }
   </script>
 
@@ -63,7 +113,15 @@
       --shadow: 0 12px 40px rgba(0,0,0,.35);
       --max: 920px;
     }
-    body { margin:0; background:var(--bg); color:var(--text); }
+    *{box-sizing:border-box}
+    body {
+      margin:0;
+      background:
+        radial-gradient(900px 540px at 12% 8%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
     .wrap { max-width: var(--max); margin:0 auto; padding: 22px; }
 
     .card {
@@ -79,7 +137,7 @@
     .logoImg{ height:30px; width:auto; display:block; }
 
     h1{ margin:0; font-size:26px; letter-spacing:-.2px; }
-    .sub{ margin:6px 0 0; color:var(--muted); font-size:13px; }
+    .sub{ margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.55; }
 
     .topnav{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
     .linkbtn{
@@ -87,7 +145,26 @@
       background:#0b1222; border:1px solid var(--border2);
       color:var(--link); text-decoration:none; font-weight:700; font-size:12px;
     }
-    .linkbtn:hover{ border-color:var(--brand); }
+    .linkbtn:hover{ border-color:var(--brand); text-decoration:none; }
+
+    .breadcrumb{
+      margin-top:12px;
+      font-size:12px;
+      color:#8ea0c8;
+    }
+    .breadcrumb ol{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .breadcrumb li+li::before{
+      content:"/";
+      margin-right:8px;
+      color:#8ea0c8;
+    }
 
     .box{
       background:var(--panel);
@@ -97,6 +174,7 @@
       margin-top:14px;
     }
     h2{ margin:16px 0 8px; font-size:16px; }
+    h2:first-child{margin-top:0}
     p, li{ color:var(--muted); font-size:13px; line-height:1.75; }
     ul{ margin:8px 0 0; padding-left:18px; }
 
@@ -117,6 +195,28 @@
     }
     .miniTitle{ font-weight:800; color:var(--text); font-size:13px; margin-bottom:6px; }
     .miniText{ color:var(--muted); font-size:13px; line-height:1.65; margin:0; }
+
+    .quickLinks{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .quickLinks a{
+      display:inline-block;
+      padding:9px 11px;
+      border-radius:12px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--link);
+      font-size:12px;
+      font-weight:700;
+      text-decoration:none;
+    }
+    .quickLinks a:hover{
+      border-color:var(--brand);
+      text-decoration:none;
+    }
 
     .footerLinks{
       margin-top:14px;
@@ -149,31 +249,49 @@
         </div>
 
         <div class="topnav">
-          <a class="linkbtn" href="/">← Back to Home</a>
+          <a class="linkbtn" href="/">Home</a>
+          <a class="linkbtn" href="/tools.html">All Tools</a>
+          <a class="linkbtn" href="/guides.html">Guides</a>
+          <a class="linkbtn" href="/mini-games/games.html">Games</a>
           <a class="linkbtn" href="/contact.html">Contact</a>
         </div>
       </header>
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><span aria-current="page">About</span></li>
+        </ol>
+      </nav>
 
       <div class="box">
         <h2>What is InstantQR.io?</h2>
         <p>
           <strong>InstantQR.io</strong> is a free, lightweight tool hub built to help you get quick results without clutter.
-          We offer a <strong>QR code generator</strong> (WiFi and URL), plus practical utilities like converters, crypto calculators,
-          and security tools — designed to work smoothly on both mobile and desktop.
+          What started with QR code generation has grown into a broader platform for practical online utilities — including
+          <strong>QR tools</strong>, <strong>DNS and network tools</strong>, <strong>security tools</strong>,
+          <strong>crypto utilities</strong>, <strong>developer tools</strong>, <strong>time and converter tools</strong>,
+          plus <strong>guides</strong> and <strong>mini-games</strong>.
         </p>
 
         <h2>What you can do on InstantQR</h2>
         <div class="grid">
           <div class="miniCard">
-            <div class="miniTitle">🔳 QR Code Generators</div>
+            <div class="miniTitle">🔳 QR Code Tools</div>
             <p class="miniText">
               Create <strong>WiFi QR codes</strong> for guests and <strong>URL QR codes</strong> for websites, menus, flyers, and business cards.
             </p>
           </div>
           <div class="miniCard">
-            <div class="miniTitle">📏 Converters & Everyday Tools</div>
+            <div class="miniTitle">🌐 DNS & Network Tools</div>
             <p class="miniText">
-              Convert common units quickly and use simple utilities that save time — built for speed and clarity.
+              Use tools like <strong>DNS Lookup</strong>, <strong>DNS Propagation Checker</strong>, <strong>IP Lookup</strong>, and <strong>Internet Speed Test</strong>.
+            </p>
+          </div>
+          <div class="miniCard">
+            <div class="miniTitle">📏 Time, Converters & Everyday Utilities</div>
+            <p class="miniText">
+              Convert common units, compare time zones, use a world clock, and access practical utilities built for speed and clarity.
             </p>
           </div>
           <div class="miniCard">
@@ -183,26 +301,47 @@
             </p>
           </div>
           <div class="miniCard">
-            <div class="miniTitle">🔐 Security Utilities</div>
+            <div class="miniTitle">🔐 Security Tools</div>
             <p class="miniText">
-              Generate strong passwords and use privacy-minded tools for everyday online safety.
+              Generate strong passwords and use privacy-minded tools like password breach checking for everyday online safety.
+            </p>
+          </div>
+          <div class="miniCard">
+            <div class="miniTitle">🧾 Developer Tools</div>
+            <p class="miniText">
+              Use JSON formatting, Base64 encoding, UUID generation, JWT decoding, timestamp conversion, regex testing, and hashing tools.
             </p>
           </div>
         </div>
 
-        <h2>Privacy-first</h2>
+        <h2>Built for speed, privacy, and simplicity</h2>
         <p>
           We aim to keep InstantQR <strong>privacy-first</strong>. Many tools are designed to run locally in your browser.
           We don’t require accounts and we don’t intentionally store sensitive inputs such as WiFi details, passwords, or text you enter.
+          Our goal is simple: build fast tools with a clean experience that work smoothly on both mobile and desktop.
         </p>
 
         <h2>Who InstantQR is for</h2>
         <ul>
           <li>Small businesses creating QR codes for menus, signs, and promotions</li>
           <li>Events and venues sharing WiFi access instantly</li>
-          <li>Creators and teams needing fast conversions and time tools</li>
+          <li>Developers needing quick formatting, encoding, hashing, and testing tools</li>
+          <li>Teams and creators using time, DNS, and conversion tools for daily work</li>
           <li>Crypto users estimating gas and calculating trade outcomes</li>
+          <li>Anyone who wants free, fast online utilities without clutter</li>
         </ul>
+
+        <h2>Guides and learning resources</h2>
+        <p>
+          InstantQR also includes a growing <a href="/guides.html">Guides hub</a> with short, clear explainers that pair with our tools.
+          These guides help users understand topics like WHOIS, DNS, and other practical web concepts without technical overload.
+        </p>
+
+        <h2>Mini-games and engagement</h2>
+        <p>
+          In addition to utility tools, InstantQR also includes a small <a href="/mini-games/games.html">Games hub</a> with lightweight mini-games
+          like 2048 Mini, Tap Aim, and Snake — built to load quickly and keep the site fun and engaging.
+        </p>
 
         <h2>Support & feedback</h2>
         <p>
@@ -211,18 +350,23 @@
         </p>
 
         <h2>Quick links</h2>
-        <ul>
-          <li><a href="/wifi-qr-code-generator.html">WiFi QR Generator</a></li>
-          <li><a href="/url-qr-code-generator.html">URL QR Generator</a></li>
-          <li><a href="/unit-converter.html">Unit Converter</a></li>
-          <li><a href="/web3-gas-fee-estimator.html">Web3 Gas Fee Estimator</a></li>
-          <li><a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a></li>
-          <li><a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms of Service</a></li>
-        </ul>
+        <div class="quickLinks">
+          <a href="/tools.html">All Tools</a>
+          <a href="/guides.html">Guides</a>
+          <a href="/mini-games/games.html">Games</a>
+          <a href="/tools/wifi-qr-code-generator.html">WiFi QR Generator</a>
+          <a href="/tools/url-qr-code-generator.html">URL QR Generator</a>
+          <a href="/tools/dns-lookup.html">DNS Lookup</a>
+          <a href="/tools/password.html">Password Generator</a>
+          <a href="/tools/json-formatter.html">JSON Formatter</a>
+        </div>
       </div>
 
       <div class="footerLinks">
         <a href="/about.html">About</a> ·
+        <a href="/tools.html">Tools</a> ·
+        <a href="/guides.html">Guides</a> ·
+        <a href="/mini-games/games.html">Games</a> ·
         <a href="/privacy.html">Privacy</a> ·
         <a href="/terms.html">Terms</a> ·
         <a href="/contact.html">Contact</a> ·
