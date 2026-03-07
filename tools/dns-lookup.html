@@ -7,7 +7,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
   <!-- Google AdSense -->
@@ -16,15 +16,141 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DNS Lookup | InstantQR</title>
-  <meta name="description" content="Fast DNS lookup tool (A, AAAA, CNAME, MX, TXT, NS, SOA). Uses DNS-over-HTTPS. Clean UI, mobile-friendly, privacy-first." />
-  <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://instantqr.io/dns-lookup.html" />
+
+  <title>DNS Lookup | A, AAAA, CNAME, MX, TXT, NS, SOA DNS Checker | InstantQR</title>
+  <meta name="description" content="Fast DNS lookup tool for A, AAAA, CNAME, MX, TXT, NS, and SOA records. Uses DNS-over-HTTPS with a clean, mobile-friendly, privacy-first interface." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="theme-color" content="#0b0f19" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://instantqr.io/tools/dns-lookup.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="DNS Lookup | A, AAAA, CNAME, MX, TXT, NS, SOA DNS Checker" />
+  <meta property="og:description" content="Look up DNS records in seconds with a fast DNS-over-HTTPS checker for A, AAAA, CNAME, MX, TXT, NS, and SOA records." />
+  <meta property="og:url" content="https://instantqr.io/tools/dns-lookup.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR DNS Lookup tool" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DNS Lookup | InstantQR" />
+  <meta name="twitter:description" content="Fast DNS lookup tool for A, AAAA, CNAME, MX, TXT, NS, and SOA records." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
   <meta name="theme-color" content="#0b0f19" />
+
+  <!-- SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"DNS Lookup",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Web",
+    "url":"https://instantqr.io/tools/dns-lookup.html",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io",
+      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <!-- CollectionPage -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    "name":"DNS Lookup",
+    "url":"https://instantqr.io/tools/dns-lookup.html",
+    "description":"Fast DNS lookup tool for checking A, AAAA, CNAME, MX, TXT, NS, and SOA records.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <!-- Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"DNS Lookup",
+        "item":"https://instantqr.io/tools/dns-lookup.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is a DNS lookup?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A DNS lookup checks the DNS records for a domain or hostname, such as A, AAAA, CNAME, MX, TXT, NS, and SOA records."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What DNS record types can I check here?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This tool supports A, AAAA, CNAME, MX, TXT, NS, SOA, and an ANY-style multi-record lookup."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this DNS lookup use DNS-over-HTTPS?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. This tool queries the selected resolver from your browser using DNS-over-HTTPS."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why would a DNS lookup return no answers?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A lookup may return no answers if the domain has no records for that type, the hostname is incorrect, or the resolver does not return results for that query."
+        }
+      }
+    ]
+  }
+  </script>
 
   <style>
     :root{
@@ -35,6 +161,9 @@
       --ok:#19c37d;
       --warn:#fbbf24;
       --bad:#ef4444;
+      --bright:#3cff78;
+      --brightBg:rgba(60,255,120,.12);
+      --brightBorder:rgba(60,255,120,.34);
       --border: rgba(255,255,255,.10);
       --shadow: 0 12px 40px rgba(0,0,0,.45);
       --radius: 18px;
@@ -42,6 +171,7 @@
       --max: 1050px;
       --panel: rgba(255,255,255,.05);
       --panel2: rgba(0,0,0,.14);
+      --focus: 0 0 0 3px rgba(105,166,255,.35);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -54,9 +184,12 @@
         radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
         radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
         linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
     a{color:inherit; text-decoration:none}
     a:hover{text-decoration:underline}
+    :focus-visible{outline:none; box-shadow:var(--focus); border-radius:12px}
     .wrap{max-width:var(--max); margin:0 auto; padding:18px}
 
     .topbar{
@@ -83,8 +216,30 @@
     nav a:hover{color:var(--text); background: rgba(255,255,255,.06); text-decoration:none}
     @media (max-width:560px){ nav{display:none} }
 
+    .breadcrumb{
+      margin:14px 0 10px;
+      font-size:12px;
+      color:rgba(233,238,252,.72);
+    }
+    .breadcrumb ol{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .breadcrumb li+li:before{
+      content:"/";
+      margin-right:8px;
+      color:rgba(233,238,252,.45);
+    }
+    .breadcrumb a{color:var(--muted)}
+    .breadcrumb a:hover{color:var(--text); text-decoration:none}
+
     .card{
-      margin-top:16px;
+      margin-top:0;
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       border: 1px solid var(--border);
       border-radius: var(--radius2);
@@ -205,13 +360,19 @@
       display:flex; gap:10px; align-items:flex-start; justify-content:space-between;
       padding: 12px;
       border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.12);
+      border: 1px solid var(--brightBorder);
+      background: linear-gradient(180deg, rgba(60,255,120,.08), rgba(60,255,120,.04)), rgba(0,0,0,.12);
       margin-bottom: 10px;
     }
     .kv strong{display:block; font-size:12px; color:var(--muted); font-weight:900; letter-spacing:.2px}
-    .kv .v{font-weight:900; font-size:14px; word-break:break-word}
-    .ok{color:var(--ok)}
+    .kv .v{
+      font-weight:900;
+      font-size:15px;
+      word-break:break-word;
+      color:var(--bright);
+      text-shadow:0 0 14px rgba(60,255,120,.12);
+    }
+    .ok{color:var(--bright)}
     .bad{color:var(--bad)}
     .warn{color:var(--warn)}
     .table{
@@ -219,8 +380,8 @@
       border-collapse: collapse;
       overflow:hidden;
       border-radius: 14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.10);
+      border:1px solid var(--brightBorder);
+      background: linear-gradient(180deg, rgba(60,255,120,.05), rgba(60,255,120,.02)), rgba(0,0,0,.10);
     }
     .table th, .table td{
       padding:10px 10px;
@@ -230,10 +391,14 @@
       vertical-align:top;
     }
     .table th{
-      color: rgba(233,238,252,.85);
+      color: rgba(233,238,252,.92);
       font-weight:900;
       background: rgba(255,255,255,.04);
       border-top:0;
+    }
+    .table td{
+      color:var(--bright);
+      text-shadow:0 0 10px rgba(60,255,120,.08);
     }
     .copy{
       padding:7px 10px;
@@ -242,6 +407,37 @@
     }
 
     .help{color:var(--muted); font-size:13px; line-height:1.55}
+    .faq{
+      margin-top:14px;
+      padding:16px 18px 18px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .faq h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    details:first-child{
+      border-top:0;
+      padding-top:0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+
     .footer{
       margin-top: 18px;
       padding: 16px 0 30px;
@@ -287,19 +483,27 @@
       </a>
       <nav aria-label="Primary">
         <a href="/tools.html">All Tools</a>
-        <a href="/ip-lookup.html">IP Lookup</a>
-        <a href="/internet-speed-test.html">Speed Test</a>
+        <a href="/tools/ip-lookup.html">IP Lookup</a>
+        <a href="/tools/internet-speed-test.html">Speed Test</a>
         <a href="/contact.html">Contact</a>
       </nav>
     </div>
   </header>
 
   <main class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li><span aria-current="page">DNS Lookup</span></li>
+      </ol>
+    </nav>
+
     <section class="card" aria-label="DNS Lookup Tool">
       <div class="head">
         <div class="pill">⚡ Super Fast · 🌐 DNS-over-HTTPS · 🔒 Privacy-first</div>
         <h1>DNS Lookup</h1>
-        <p class="sub">Look up DNS records in seconds: <strong>A</strong>, <strong>AAAA</strong>, <strong>CNAME</strong>, <strong>MX</strong>, <strong>TXT</strong>, <strong>NS</strong>, <strong>SOA</strong>. Results are designed to <strong>pop</strong>.</p>
+        <p class="sub">Look up DNS records in seconds: <strong>A</strong>, <strong>AAAA</strong>, <strong>CNAME</strong>, <strong>MX</strong>, <strong>TXT</strong>, <strong>NS</strong>, <strong>SOA</strong>. Clean output, fast results, and mobile-friendly design.</p>
       </div>
 
       <div class="controls">
@@ -338,7 +542,7 @@
         </div>
 
         <div class="help" style="margin-top:10px;">
-          Tip: Use <span class="mono">ANY</span> to get multiple records fast. This tool uses DNS-over-HTTPS (DoH) — your query is sent to the selected resolver.
+          Tip: Use <span class="mono">ANY</span> to get a quick multi-record overview. This tool uses DNS-over-HTTPS (DoH), so your lookup is sent directly from your browser to the selected resolver.
         </div>
       </div>
 
@@ -385,14 +589,38 @@
           <pre id="raw" class="mono" style="display:none;margin:0;white-space:pre-wrap;word-break:break-word;"></pre>
 
           <div class="help" style="margin-top:12px;">
-            <span class="ok">Pop tip:</span> Click “ANY” for a quick multi-record overview. Use “Copy JSON” to paste into tickets, notes, or docs.
+            <span class="ok">Tip:</span> Click “ANY” for a quick multi-record overview. Use “Copy JSON” to paste the raw result into notes, docs, or tickets.
           </div>
         </div>
+
+        <section class="faq" aria-label="Frequently asked questions">
+          <h2>FAQ</h2>
+
+          <details>
+            <summary>What is a DNS lookup?</summary>
+            <p>A DNS lookup checks the DNS records for a domain or hostname, such as A, AAAA, CNAME, MX, TXT, NS, and SOA records.</p>
+          </details>
+
+          <details>
+            <summary>What DNS record types can I check here?</summary>
+            <p>This DNS lookup tool supports A, AAAA, CNAME, MX, TXT, NS, SOA, and an ANY-style multi-record lookup.</p>
+          </details>
+
+          <details>
+            <summary>Does this tool use DNS-over-HTTPS?</summary>
+            <p>Yes. Your query is sent directly from your browser to the selected DNS-over-HTTPS resolver, such as Cloudflare or Google.</p>
+          </details>
+
+          <details>
+            <summary>Why would a DNS lookup return no answers?</summary>
+            <p>A lookup can return no answers if the domain has no records for that type, the hostname is incorrect, the resolver does not return results for that query, or the domain has not been configured yet.</p>
+          </details>
+        </section>
 
         <div class="footer">
           <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;">
             <div class="help">
-              Privacy-first: this page doesn’t require login. Requests are made from your browser directly to the selected DoH resolver.
+              Privacy-first: this page does not require login. Requests are made from your browser directly to the selected DoH resolver.
             </div>
             <div class="help">
               <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.xml">Sitemap</a>
@@ -475,17 +703,14 @@
     function normalizeName(s){
       s = (s || '').trim();
       if(!s) return '';
-      // strip protocol/path if user pastes URL
       try{
         if(s.includes('://')){
           const u = new URL(s);
           s = u.hostname;
         } else if (s.includes('/')) {
-          // might be "example.com/path"
           s = s.split('/')[0];
         }
       }catch(_){}
-      // remove trailing dot
       s = s.replace(/\.+$/,'');
       return s;
     }
@@ -496,7 +721,6 @@
       if(resolver === 'google'){
         return `https://dns.google/resolve?name=${encName}&type=${encType}`;
       }
-      // cloudflare
       return `https://cloudflare-dns.com/dns-query?name=${encName}&type=${encType}`;
     }
 
@@ -537,17 +761,16 @@
       raw.style.display = 'none';
 
       const answers = (json && json.Answer) ? json.Answer : [];
-      const status = json && (json.Status ?? json.status);
       const isNoData = !answers.length;
 
       if(isNoData){
         headline.innerHTML = `No answers found <span class="warn">(try another type or ANY)</span>`;
-        subline.textContent = 'Some domains may have records only for certain types.';
+        subline.textContent = 'Some domains may have records only for specific record types.';
         return;
       }
 
       headline.innerHTML = `Found <span class="ok">${answers.length}</span> answer(s)`;
-      subline.textContent = 'Tap an answer to copy it.';
+      subline.textContent = 'Click any answer to copy it.';
 
       answers.forEach((a) => {
         const tr = document.createElement('tr');
@@ -602,8 +825,6 @@
       raw.style.display = 'none';
 
       try{
-        // For ANY, we do a fast multi-query bundle (parallel) for common types,
-        // because many resolvers don't reliably return full ANY answers.
         let outJson = null;
         let totalMs = 0;
 
@@ -614,7 +835,6 @@
           const results = await Promise.all(tasks);
           totalMs = Math.round(performance.now() - t0);
 
-          // merge into a pseudo "Answer" array with type numbers if available
           const merged = [];
           results.forEach(r => {
             if(r && r.json && Array.isArray(r.json.Answer)){
@@ -642,7 +862,6 @@
           msOut.textContent = totalMs + ' ms';
           lastJson = outJson;
 
-          // “pop” headline with counts by type
           const counts = {};
           merged.forEach(a => {
             const tn = typeNameFromNum(a.type || a.Type);
@@ -652,9 +871,8 @@
           headline.innerHTML = merged.length
             ? `Found <span class="ok">${merged.length}</span> total answer(s) <span class="pill" style="margin-left:8px;">${parts.join(' · ')}</span>`
             : `No answers found <span class="warn">(try specific types)</span>`;
-          subline.textContent = merged.length ? 'Click any answer to copy.' : 'Some resolvers block/limit ANY. Try A/AAAA/TXT etc.';
+          subline.textContent = merged.length ? 'Click any answer to copy.' : 'Some resolvers limit ANY lookups. Try A, AAAA, TXT, or MX.';
 
-          // Show table from merged answers
           tbody.innerHTML = '';
           if(merged.length){
             merged.forEach((a) => {
@@ -680,12 +898,10 @@
           return;
         }
 
-        // Single-type lookup
         const { json, ms } = await fetchDoh(resolver, name, type);
         msOut.textContent = ms + ' ms';
         lastJson = json;
 
-        // Determine response health
         const status = json && (json.Status ?? json.status);
         const answers = (json && json.Answer) ? json.Answer : [];
 
@@ -704,7 +920,7 @@
         lastJson = { error: String(e) };
         setStatus('bad', 'Request failed');
         headline.innerHTML = `Request failed <span class="bad">(${escapeHtml(e && e.message ? e.message : String(e))})</span>`;
-        subline.textContent = 'Try another resolver (Cloudflare/Google) or check the domain.';
+        subline.textContent = 'Try another resolver or double-check the hostname.';
         raw.style.display = '';
         raw.textContent = JSON.stringify(lastJson, null, 2);
       } finally {
@@ -713,7 +929,6 @@
       }
     }
 
-    // Tabs sync
     const tabs = Array.from(document.querySelectorAll('.tab'));
     function selectTab(type){
       tabs.forEach(t => t.setAttribute('aria-selected', t.dataset.type === type ? 'true' : 'false'));
@@ -768,7 +983,6 @@
       await copyText(JSON.stringify(lastJson, null, 2));
     });
 
-    // Auto-load from query string
     (function init(){
       const url = new URL(window.location.href);
       const name = normalizeName(url.searchParams.get('name') || '');
@@ -787,7 +1001,6 @@
         nameEl.value = name;
         runLookup(typePickEl.value);
       } else {
-        // sensible default suggestion
         nameEl.value = 'instantqr.io';
       }
     })();
