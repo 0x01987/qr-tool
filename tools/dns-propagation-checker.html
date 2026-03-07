@@ -10,30 +10,137 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+  crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>DNS Propagation Checker | InstantQR</title>
-  <meta name="description" content="Fast DNS propagation checker. Compare A, AAAA, CNAME, MX, TXT, NS, and SOA results across multiple public DNS resolvers. Clean responsive UI with standout results." />
-  <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://instantqr.io/dns-propagation-checker.html" />
+  <title>DNS Propagation Checker | Check A, AAAA, CNAME, MX, TXT, NS & SOA | InstantQR</title>
+  <meta name="description" content="Fast DNS propagation checker to compare A, AAAA, CNAME, MX, TXT, NS, and SOA records across public DNS resolvers. Clean responsive UI with standout green results." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="DNS Propagation Checker | InstantQR" />
-  <meta property="og:description" content="Check DNS propagation fast across major resolvers." />
-  <meta property="og:url" content="https://instantqr.io/dns-propagation-checker.html" />
-
+  <link rel="canonical" href="https://instantqr.io/tools/dns-propagation-checker.html" />
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
-  <meta name="theme-color" content="#0b1220" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="DNS Propagation Checker | InstantQR" />
+  <meta property="og:description" content="Check DNS propagation fast across major public resolvers for A, AAAA, CNAME, MX, TXT, NS, and SOA records." />
+  <meta property="og:url" content="https://instantqr.io/tools/dns-propagation-checker.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR DNS Propagation Checker" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DNS Propagation Checker | InstantQR" />
+  <meta name="twitter:description" content="Fast DNS propagation checker across public DNS resolvers with standout green results." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <link rel="preconnect" href="https://dns.google" crossorigin>
   <link rel="preconnect" href="https://cloudflare-dns.com" crossorigin>
+
+  <!-- WebPage -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"DNS Propagation Checker",
+    "url":"https://instantqr.io/tools/dns-propagation-checker.html",
+    "description":"Fast DNS propagation checker for A, AAAA, CNAME, MX, TXT, NS, and SOA records across public resolvers.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <!-- CollectionPage -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    "name":"DNS Propagation Checker",
+    "url":"https://instantqr.io/tools/dns-propagation-checker.html",
+    "description":"Check DNS propagation for A, AAAA, CNAME, MX, TXT, NS, and SOA records across public DNS resolvers."
+  }
+  </script>
+
+  <!-- Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"DNS Propagation Checker",
+        "item":"https://instantqr.io/tools/dns-propagation-checker.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is DNS propagation?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"DNS propagation is the time it takes for DNS record changes to become visible across different DNS resolvers around the internet."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What record types can I check with this DNS propagation checker?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"You can check A, AAAA, CNAME, MX, TXT, NS, and SOA records."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why do some resolvers show different DNS results?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Resolvers may show different results because cached records expire at different times, propagation is still in progress, or your updated DNS changes have not reached every resolver yet."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How do I know if my DNS change has propagated?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"If multiple resolvers return the same expected value and the propagation percentage is high, your DNS change is likely visible across most of the internet."
+        }
+      }
+    ]
+  }
+  </script>
 
   <style>
     :root{
@@ -72,6 +179,15 @@ crossorigin="anonymous"></script>
     a{color:inherit;text-decoration:none}
     a:hover{text-decoration:underline}
     :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
+
+    .skip{
+      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+    }
+    .skip:focus{
+      left:14px;top:14px;width:auto;height:auto;z-index:9999;
+      padding:10px 12px;border-radius:12px;background:#08101d;color:#fff;
+      border:1px solid var(--border);
+    }
 
     .wrap{max-width:var(--max);margin:0 auto;padding:20px}
 
@@ -125,6 +241,28 @@ crossorigin="anonymous"></script>
     }
     .cta.primary:hover{filter:brightness(1.06)}
     .cta.ghost:hover{background:rgba(255,255,255,.10)}
+
+    .breadcrumb{
+      margin:14px 0 10px;
+      font-size:12px;
+      color:rgba(233,238,252,.72);
+    }
+    .breadcrumb ol{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .breadcrumb li+li:before{
+      content:"/";
+      margin-right:8px;
+      color:rgba(233,238,252,.45);
+    }
+    .breadcrumb a{color:var(--muted)}
+    .breadcrumb a:hover{color:var(--text); text-decoration:none}
 
     .hero{
       margin-top:18px;
@@ -414,6 +552,37 @@ crossorigin="anonymous"></script>
       font-size:14px;
     }
 
+    .faq{
+      margin-top:14px;
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    .faq h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    details:first-child{border-top:0;padding-top:0}
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
     .footer{
       margin-top:22px;
       padding:18px 0 36px;
@@ -437,17 +606,6 @@ crossorigin="anonymous"></script>
       .cta{width:100%}
     }
   </style>
-
-  <!-- Schema -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"DNS Propagation Checker",
-    "url":"https://instantqr.io/dns-propagation-checker.html",
-    "description":"Fast DNS propagation checker for A, AAAA, CNAME, MX, TXT, NS, and SOA records."
-  }
-  </script>
 </head>
 
 <body>
@@ -462,16 +620,24 @@ crossorigin="anonymous"></script>
 
       <nav aria-label="Primary">
         <a href="/tools.html">All Tools</a>
-        <a href="/dns-lookup.html">DNS Lookup</a>
+        <a href="/tools/dns-lookup.html">DNS Lookup</a>
         <a href="/guides.html">Guides</a>
         <a href="/contact.html">Contact</a>
       </nav>
 
-      <a class="cta primary" href="/dns-lookup.html">DNS Lookup →</a>
+      <a class="cta primary" href="/tools/dns-lookup.html">DNS Lookup →</a>
     </div>
   </header>
 
   <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li><span aria-current="page">DNS Propagation Checker</span></li>
+      </ol>
+    </nav>
+
     <section class="hero" aria-label="DNS Propagation Checker">
       <div class="pill">⚡ Fast • 🌍 Multi-resolver • ✅ Standout green results</div>
       <h1>DNS Propagation Checker</h1>
@@ -604,6 +770,30 @@ crossorigin="anonymous"></script>
       </div>
     </section>
 
+    <section class="faq" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>What is DNS propagation?</summary>
+        <p>DNS propagation is the time it takes for updated DNS records to become visible across different DNS resolvers around the internet.</p>
+      </details>
+
+      <details>
+        <summary>What record types can I check here?</summary>
+        <p>You can check A, AAAA, CNAME, MX, TXT, NS, and SOA records with this DNS propagation checker.</p>
+      </details>
+
+      <details>
+        <summary>Why do some resolvers show different results?</summary>
+        <p>Resolvers may return different answers because cached DNS records expire at different times, propagation is still in progress, or your DNS update has not reached every resolver yet.</p>
+      </details>
+
+      <details>
+        <summary>How do I know if my DNS changes have propagated?</summary>
+        <p>If multiple resolvers return the same expected value and the propagation percentage is high, your DNS change is likely visible across most of the internet.</p>
+      </details>
+    </section>
+
     <footer class="footer" aria-label="Footer">
       <div class="footRow">
         <div>
@@ -619,7 +809,7 @@ crossorigin="anonymous"></script>
           <div style="margin-bottom:8px;">
             <a href="/tools.html">Tools</a> ·
             <a href="/guides/dns-propagation-explained.html">DNS Propagation Guide</a> ·
-            <a href="/dns-lookup.html">DNS Lookup</a> ·
+            <a href="/tools/dns-lookup.html">DNS Lookup</a> ·
             <a href="/sitemap.xml">Sitemap</a>
           </div>
           <div>
@@ -640,8 +830,6 @@ crossorigin="anonymous"></script>
       { name: "Google DNS (repeat)", provider: "dns.google", url: "https://dns.google/resolve?cd=0" },
       { name: "Cloudflare DNS (repeat)", provider: "cloudflare-dns.com", url: "https://cloudflare-dns.com/dns-query?cd=false" }
     ];
-
-    const TYPE_MAP = {1:"A", 28:"AAAA", 5:"CNAME", 15:"MX", 16:"TXT", 2:"NS", 6:"SOA"};
 
     const domainEl = document.getElementById("domain");
     const typeEl = document.getElementById("type");
