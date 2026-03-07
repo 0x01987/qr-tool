@@ -55,10 +55,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://instantqr.io/tools/create-qr-code-for-wifi.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
 
   <!-- Security Tools -->
   <url>
