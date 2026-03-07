@@ -54,8 +54,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-
   <!-- Security Tools -->
   <url>
     <loc>https://instantqr.io/tools/password.html</loc>
