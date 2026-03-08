@@ -9,27 +9,27 @@
     gtag('js', new Date());
     gtag('config', 'G-6213N2G8R2');
   </script>
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
   
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>Gas Fee Estimator | EVM Gas Tracker (Slow/Standard/Fast) | InstantQR.io</title>
-  <meta name="description" content="Estimate EVM gas fees (slow/standard/fast) using live JSON-RPC fee history. Free, fast, and privacy-first. Runs locally in your browser." />
+  <title>Gas Fee Estimator | EVM Gas Tracker for Ethereum, BNB, Base, Arbitrum & More | InstantQR.io</title>
+  <meta name="description" content="Estimate live gas fees for major EVM networks including Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Avalanche, Fantom, Linea, Scroll, zkSync Era, KCC, and more. Free, fast, and privacy-first." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://instantqr.io/tools/web3-gas-fee-estimator.html" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Gas Fee Estimator | InstantQR.io" />
-  <meta property="og:description" content="Live EIP-1559 estimates for EVM chains (Slow/Standard/Fast). Privacy-first." />
+  <meta property="og:description" content="Live gas fee estimates for major EVM chains including Ethereum, BNB, Base, Arbitrum, Polygon, Avalanche, Fantom, KCC, Linea, Scroll, and more." />
   <meta property="og:url" content="https://instantqr.io/tools/web3-gas-fee-estimator.html" />
 
   <link rel="icon" href="/favicon.ico" />
 
-  <!-- ✅ Structured Data: SoftwareApplication -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -38,6 +38,7 @@ crossorigin="anonymous"></script>
     "applicationCategory":"UtilitiesApplication",
     "operatingSystem":"Web",
     "url":"https://instantqr.io/tools/web3-gas-fee-estimator.html",
+    "description":"Estimate live gas fees for major EVM networks including Ethereum, BNB Smart Chain, Base, Arbitrum, Polygon, Avalanche, Fantom, KCC, Linea, Scroll, zkSync Era, and more.",
     "publisher":{
       "@type":"Organization",
       "name":"InstantQR",
@@ -52,7 +53,6 @@ crossorigin="anonymous"></script>
   }
   </script>
 
-  <!-- ✅ FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -61,22 +61,42 @@ crossorigin="anonymous"></script>
       {
         "@type":"Question",
         "name":"How do gas fees work on EVM networks?",
-        "acceptedAnswer":{"@type":"Answer","text":"Most EVM networks use EIP-1559 where a base fee changes each block and you add a priority fee (tip). Your wallet sets a max fee so your transaction can be included."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Most EVM networks use a gas model where a base fee or network gas price changes with demand. Many chains support EIP-1559 fee estimation, while others rely on legacy gasPrice methods."
+        }
       },
       {
         "@type":"Question",
-        "name":"What does Slow / Standard / Fast mean?",
-        "acceptedAnswer":{"@type":"Answer","text":"They are suggested fee tiers using different priority-fee percentiles from recent blocks. Fast uses a higher percentile tip and is more likely to confirm sooner."}
+        "name":"Which networks does this gas fee estimator support?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This tool supports major EVM-compatible networks including Ethereum, Arbitrum, Optimism, Base, Polygon, BNB Smart Chain, Avalanche C-Chain, Fantom, Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool support Bitcoin, Litecoin, or Monero fees?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. Bitcoin, Litecoin, and Monero do not use EVM gas estimation APIs like eth_feeHistory. They require separate fee estimation logic specific to each network."
+        }
       },
       {
         "@type":"Question",
         "name":"Do you store my RPC URL or data?",
-        "acceptedAnswer":{"@type":"Answer","text":"No. This tool runs in your browser and calls the RPC directly from your device. InstantQR does not intentionally store your inputs on a server."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. This tool runs in your browser and calls the RPC endpoint directly from your device. InstantQR does not intentionally store your RPC URL or transaction inputs on a server."
+        }
       },
       {
         "@type":"Question",
         "name":"Why do public RPC endpoints sometimes fail?",
-        "acceptedAnswer":{"@type":"Answer","text":"Public RPCs can be rate-limited or blocked by adblockers, VPNs, or network rules. If errors persist, use your own provider endpoint (Alchemy/Infura/QuickNode) or another public RPC."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Public RPC endpoints can be rate-limited, overloaded, or blocked by VPNs, browser extensions, or network rules. If a public RPC fails, try your own provider endpoint such as Alchemy, Infura, QuickNode, or another reliable RPC."
+        }
       }
     ]
   }
@@ -128,7 +148,6 @@ crossorigin="anonymous"></script>
       box-shadow: var(--shadow);
     }
 
-    /* Topbar (matches your other polished pages) */
     .topbar{
       display:flex;
       align-items:center;
@@ -172,7 +191,6 @@ crossorigin="anonymous"></script>
     .nav a:hover{ border-color: rgba(59,130,246,.85); }
     .nav a.active{ border-color: rgba(59,130,246,.95); }
 
-    /* Hero */
     .hero{
       display:flex;
       align-items:flex-start;
@@ -182,6 +200,8 @@ crossorigin="anonymous"></script>
       margin-top:8px;
     }
     h1{ margin:0; font-size:26px; letter-spacing:-.3px; }
+    h2{ margin:0 0 10px; font-size:20px; letter-spacing:-.2px; }
+    h3{ margin:0 0 8px; font-size:16px; letter-spacing:-.1px; }
     .sub{ margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.6; max-width:78ch; }
 
     .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
@@ -278,6 +298,24 @@ crossorigin="anonymous"></script>
       text-shadow: 0 0 8px rgba(52,211,153,0.35);
     }
 
+    .faqGrid{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+    .faqItem{
+      background:#0b1222;
+      border:1px solid var(--border2);
+      border-radius:14px;
+      padding:14px;
+    }
+    .faqItem p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+
     .foot{ color:var(--muted); font-size:12px; line-height:1.6; margin-top:10px; }
     .mono{ font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; }
     code{ color:var(--link); }
@@ -296,7 +334,6 @@ crossorigin="anonymous"></script>
   <div class="wrap">
     <div class="card">
 
-      <!-- Topbar -->
       <div class="topbar">
         <a class="brand" href="/" aria-label="InstantQR Home">
           <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
@@ -317,17 +354,15 @@ crossorigin="anonymous"></script>
         </nav>
       </div>
 
-      <!-- Hero -->
       <section class="hero">
         <div>
           <h1>Gas Fee Estimator</h1>
           <p class="sub">
-            Live EIP-1559 estimates (Slow / Standard / Fast) for EVM networks. Uses JSON-RPC fee history when available.
-            Runs locally in your browser.
+            Live gas fee estimates for major EVM networks including Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Avalanche, Fantom, Gnosis, Celo, Scroll, Linea, zkSync Era, and KCC. Runs locally in your browser.
           </p>
           <div class="badges" aria-label="Highlights">
             <span class="badge">⚡ Live estimates</span>
-            <span class="badge">⛽ EIP-1559</span>
+            <span class="badge">⛽ EIP-1559 + legacy fallback</span>
             <span class="badge">🔒 Privacy-first</span>
             <span class="badge">✅ Free</span>
           </div>
@@ -340,7 +375,6 @@ crossorigin="anonymous"></script>
       </section>
 
       <div class="grid">
-        <!-- Controls -->
         <div class="panel">
           <div class="row">
             <div>
@@ -359,7 +393,7 @@ crossorigin="anonymous"></script>
               <label for="rpcUrl">RPC URL (editable)</label>
               <input id="rpcUrl" type="url" placeholder="https://…" />
               <div class="foot">
-                Tip: public RPCs can be rate-limited. If you get errors, paste an Alchemy/Infura/QuickNode endpoint.
+                Tip: public RPCs can be rate-limited. If you get errors, paste an Alchemy, Infura, QuickNode, or another provider endpoint.
               </div>
             </div>
             <div>
@@ -376,9 +410,12 @@ crossorigin="anonymous"></script>
               <div class="foot" id="lastUpdated">Last updated: —</div>
             </div>
           </div>
+
+          <div class="foot">
+            Note: BTC, LTC, and Monero do not use EVM gas estimation APIs, so they are not part of this page. They need a separate non-EVM network fee estimator.
+          </div>
         </div>
 
-        <!-- Results -->
         <div class="panel">
           <div class="cards">
             <div class="tierCard" id="slowCard">
@@ -419,12 +456,51 @@ crossorigin="anonymous"></script>
           </div>
 
           <div class="foot" style="margin-top:12px;">
-            <b>How it works:</b> This tool queries <code>eth_feeHistory</code> (EIP-1559) to estimate priority fees and reads the latest base fee.
-            If a chain/RPC doesn’t support fee history, it falls back to <code>eth_gasPrice</code>.
+            <b>How it works:</b> This tool queries <code>eth_feeHistory</code> when available to estimate priority fees and reads the latest base fee.
+            If a chain or RPC does not support fee history, it falls back to <code>eth_gasPrice</code>.
           </div>
         </div>
 
-        <!-- Footer -->
+        <div class="panel">
+          <h2>Gas Fee Estimator FAQ</h2>
+          <div class="faqGrid">
+            <div class="faqItem">
+              <h3>How do gas fees work on EVM networks?</h3>
+              <p>
+                EVM chains use gas to price network computation and transaction inclusion. Many modern networks support EIP-1559, where a base fee changes with demand and a priority fee helps transactions confirm faster.
+              </p>
+            </div>
+
+            <div class="faqItem">
+              <h3>Which networks are supported?</h3>
+              <p>
+                This page supports Ethereum, Arbitrum, Optimism, Base, Polygon, BNB Smart Chain, Avalanche C-Chain, Fantom, Gnosis, Celo, Scroll, Linea, zkSync Era, and KCC.
+              </p>
+            </div>
+
+            <div class="faqItem">
+              <h3>Why are BTC, LTC, and Monero not included?</h3>
+              <p>
+                Bitcoin, Litecoin, and Monero do not use the EVM gas model or JSON-RPC methods used here. They require their own network-specific fee estimator logic.
+              </p>
+            </div>
+
+            <div class="faqItem">
+              <h3>Do you store my RPC URL or transaction data?</h3>
+              <p>
+                No. This tool runs in your browser and sends requests directly to the RPC endpoint you choose. InstantQR does not intentionally store your RPC input on a server.
+              </p>
+            </div>
+
+            <div class="faqItem">
+              <h3>Why can a public RPC fail?</h3>
+              <p>
+                Public endpoints may be overloaded, rate-limited, blocked, or temporarily unavailable. If that happens, try a different RPC or use your own provider endpoint.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div class="footerLinks">
           <div style="margin-bottom:8px;">
             <a href="/tools/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
@@ -446,11 +522,20 @@ crossorigin="anonymous"></script>
 <script>
 (() => {
   const NETWORKS = [
-    { key:"eth",  name:"Ethereum",     chainId:1,     symbol:"ETH",  rpc:"https://ethereum.publicnode.com" },
-    { key:"arb",  name:"Arbitrum One", chainId:42161, symbol:"ARB",  rpc:"https://arb1.arbitrum.io/rpc" },
-    { key:"op",   name:"Optimism",     chainId:10,    symbol:"OP",  rpc:"https://mainnet.optimism.io" },
-    { key:"base", name:"Base",         chainId:8453,  symbol:"BASE",  rpc:"https://mainnet.base.org" },
-    { key:"poly", name:"Polygon PoS",  chainId:137,   symbol:"POL",  rpc:"https://polygon-bor.publicnode.com" }
+    { key:"eth",    name:"Ethereum",              chainId:1,      symbol:"ETH",   rpc:"https://ethereum.publicnode.com" },
+    { key:"bsc",    name:"BNB Smart Chain",       chainId:56,     symbol:"BNB",   rpc:"https://bsc-dataseed.binance.org" },
+    { key:"arb",    name:"Arbitrum One",          chainId:42161,  symbol:"ETH",   rpc:"https://arb1.arbitrum.io/rpc" },
+    { key:"op",     name:"Optimism",              chainId:10,     symbol:"ETH",   rpc:"https://mainnet.optimism.io" },
+    { key:"base",   name:"Base",                  chainId:8453,   symbol:"ETH",   rpc:"https://mainnet.base.org" },
+    { key:"poly",   name:"Polygon PoS",           chainId:137,    symbol:"POL",   rpc:"https://polygon-bor.publicnode.com" },
+    { key:"avax",   name:"Avalanche C-Chain",     chainId:43114,  symbol:"AVAX",  rpc:"https://api.avax.network/ext/bc/C/rpc" },
+    { key:"ftm",    name:"Fantom",                chainId:250,    symbol:"FTM",   rpc:"https://rpc.ftm.tools" },
+    { key:"gnosis", name:"Gnosis",                chainId:100,    symbol:"xDAI",  rpc:"https://rpc.gnosischain.com" },
+    { key:"celo",   name:"Celo",                  chainId:42220,  symbol:"CELO",  rpc:"https://forno.celo.org" },
+    { key:"zksync", name:"zkSync Era",            chainId:324,    symbol:"ETH",   rpc:"https://mainnet.era.zksync.io" },
+    { key:"linea",  name:"Linea",                 chainId:59144,  symbol:"ETH",   rpc:"https://rpc.linea.build" },
+    { key:"scroll", name:"Scroll",                chainId:534352, symbol:"ETH",   rpc:"https://rpc.scroll.io" },
+    { key:"kcc",    name:"KCC (KuCoin Community Chain)", chainId:321, symbol:"KCS", rpc:"https://rpc-mainnet.kcc.network" }
   ];
 
   const els = {
@@ -480,10 +565,9 @@ crossorigin="anonymous"></script>
     fastNative: document.getElementById("fastNative")
   };
 
-  // --- Speed + stability knobs ---
   const RPC_TIMEOUT_MS = 4500;
   const AUTO_REFRESH_MS = 15000;
-  const CACHE_TTL_MS = 15000; // avoid spamming RPC if user clicks quickly
+  const CACHE_TTL_MS = 15000;
 
   let timer = null;
   let rpcId = 1;
@@ -537,7 +621,7 @@ crossorigin="anonymous"></script>
   }
 
   async function estimateFees(rpcUrl){
-    const blockCount = "0x14"; // 20 blocks
+    const blockCount = "0x14";
     const newest = "latest";
     const percentiles = [10, 50, 90];
 
@@ -571,7 +655,6 @@ crossorigin="anonymous"></script>
         }
       };
     }catch(_e){
-      // fallback to legacy gasPrice
       const gp = await rpcCall(rpcUrl, "eth_gasPrice", []);
       const gasPrice = BigInt(gp);
       const slow = gasPrice;
@@ -604,7 +687,7 @@ crossorigin="anonymous"></script>
 
       if (maxEl)   maxEl.textContent = gweiFromWei(tier.maxFee);
       if (tipEl)   tipEl.textContent = tier.tip ? gweiFromWei(tier.tip) : "—";
-      if (totalEl) totalEl.textContent = gweiFromWei(tier.maxFee); // per-gas for readability
+      if (totalEl) totalEl.textContent = gweiFromWei(tier.maxFee);
       if (natEl)   natEl.textContent = formatNative(totalWei, sym);
     }
 
@@ -658,7 +741,6 @@ crossorigin="anonymous"></script>
       return;
     }
 
-    // prevent multiple concurrent refreshes
     if (inflight) return inflight;
 
     const cached = cacheGet();
@@ -705,7 +787,6 @@ crossorigin="anonymous"></script>
     refresh();
   });
 
-  // Light reactivity (no spam): debounce gasUnits changes
   let gasDebounce = null;
   els.gasUnits.addEventListener("input", () => {
     if (gasDebounce) clearTimeout(gasDebounce);
