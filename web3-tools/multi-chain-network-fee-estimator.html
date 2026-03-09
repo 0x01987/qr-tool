@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Multi-Chain Network Fee Estimator | BTC, LTC, DOGE, DASH, TRON | InstantQR.io</title>
+  <meta name="description" content="Estimate network fees for Bitcoin, Litecoin, Dogecoin, Dash, and Tron. Free multi-chain fee calculator with live fee lookups, fast performance, and a privacy-first interface." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b0f19" />
+  <link rel="canonical" href="https://instantqr.io/web3-tools/multi-chain-network-fee-estimator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Multi-Chain Network Fee Estimator | InstantQR.io" />
+  <meta property="og:description" content="Estimate BTC, LTC, DOGE, DASH, and TRON network fees with a fast multi-chain fee page." />
+  <meta property="og:url" content="https://instantqr.io/web3-tools/multi-chain-network-fee-estimator.html" />
+
+  <link rel="icon" href="/favicon.ico" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Multi-Chain Network Fee Estimator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Web",
+    "url":"https://instantqr.io/web3-tools/multi-chain-network-fee-estimator.html",
+    "description":"Estimate network fees for Bitcoin, Litecoin, Dogecoin, Dash, and Tron with a privacy-first browser-based calculator.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io",
+      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Which chains does this fee estimator support?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This page supports Bitcoin, Litecoin, Dogecoin, Dash, and Tron. Each chain uses a different fee model, so the estimator adapts the calculation method for that network."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why are these fees calculated differently?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Bitcoin, Litecoin, Dogecoin, and Dash typically use fee rates based on transaction size, while Tron uses Bandwidth and Energy pricing."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Do you store my endpoint URLs or inputs?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. This page runs in your browser. Inputs and endpoint URLs stay on your device unless your browser sends a direct request to the endpoint you choose."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why can some lookups fail in the browser?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Some endpoints can be rate-limited, unavailable, or require API keys. If an endpoint fails, try again later or use another provider."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root{
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+
+      --bg:#0b0f19;
+      --card:#121a2a;
+      --panel:#0e1525;
+      --border:#22304e;
+      --border2:#2a3a5f;
+
+      --text:#e7eaf2;
+      --muted:#b8c0d6;
+      --muted2:#8ea0c8;
+      --link:#cfe0ff;
+
+      --brand:#3b82f6;
+      --good:#34d399;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:16px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:
+        radial-gradient(900px 540px at 12% 8%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding:22px; }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:2px 2px 10px;
+      border-bottom:1px solid rgba(34,48,78,.55);
+      margin-bottom:12px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:900;
+      letter-spacing:-.2px;
+    }
+    .brand img{ height:30px; width:auto; display:block; }
+    .brand span{ font-size:16px; }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .nav a{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:800;
+      font-size:12px;
+      user-select:none;
+    }
+    .nav a:hover{ border-color: rgba(59,130,246,.85); }
+    .nav a.active{ border-color: rgba(59,130,246,.95); }
+
+    .hero{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    h1{ margin:0; font-size:28px; letter-spacing:-.3px; }
+    h2{ margin:0 0 10px; font-size:18px; letter-spacing:-.2px; }
+    h3{ margin:0 0 8px; font-size:15px; letter-spacing:-.1px; }
+    .sub{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+      max-width:80ch;
+    }
+
+    .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .badge{
+      padding:7px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--muted);
+      font-size:12px;
+      user-select:none;
+    }
+
+    .pill{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--border2);
+      border-radius:999px;
+      color:var(--muted);
+      font-size:12px;
+      background:#0b1222;
+      user-select:none;
+    }
+    .statusDot{ width:8px; height:8px; border-radius:50%; background:var(--warn); }
+
+    .grid{ display:grid; gap:12px; margin-top:14px; }
+    .chains{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
+    }
+    @media (max-width:980px){
+      .chains{ grid-template-columns:1fr; }
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--border2);
+      border-radius:var(--radius2);
+      padding:14px;
+    }
+
+    .row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .row3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+    @media (max-width:820px){
+      .row, .row3{ grid-template-columns:1fr; }
+    }
+
+    label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
+    select,input,button{
+      width:100%;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid var(--border2);
+      background:#0b1222;
+      color:var(--text);
+      outline:none;
+    }
+    input:focus, select:focus{
+      border-color: rgba(59,130,246,.85);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+    }
+    input::placeholder{ color:#64748b; }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:10px;
+    }
+    .actions button{ width:auto; cursor:pointer; }
+
+    .btn{
+      background:var(--brand);
+      border:none;
+      color:white;
+      font-weight:900;
+    }
+    .btn:hover{ filter:brightness(1.05); }
+    .btn2{
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--text);
+      font-weight:800;
+    }
+    .btn2:hover{ border-color: rgba(59,130,246,.7); }
+
+    .chainHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+      flex-wrap:wrap;
+    }
+
+    .chainStatus{
+      font-size:12px;
+      color:var(--muted);
+      padding:6px 10px;
+      border:1px solid var(--border2);
+      border-radius:999px;
+      background:#0b1222;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    @media (max-width:700px){
+      .cards{ grid-template-columns:1fr; }
+    }
+
+    .tierCard{
+      border:1px solid var(--border2);
+      border-radius:14px;
+      padding:12px;
+      background:#0b1222;
+    }
+    .tierHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:10px;
+    }
+    .tierHead b{ font-size:14px; }
+    .tag{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--border2);
+      color:var(--muted);
+    }
+
+    .kv{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:8px;
+      margin:6px 0;
+      font-size:13px;
+    }
+    .kv span{ color:var(--muted); }
+
+    .big{
+      font-size:18px;
+      font-weight:900;
+      margin-top:6px;
+      color: var(--good);
+      text-shadow: 0 0 8px rgba(52,211,153,0.35);
+    }
+
+    .mono{ font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; }
+    code{ color:var(--link); }
+
+    .foot{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.65;
+      margin-top:10px;
+    }
+
+    .faqGrid{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+    .faqItem{
+      background:#0b1222;
+      border:1px solid var(--border2);
+      border-radius:14px;
+      padding:14px;
+    }
+    .faqItem p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .footerLinks{
+      margin-top:14px;
+      text-align:center;
+      color:var(--muted2);
+      font-size:12px;
+    }
+    .footerLinks a{ color:var(--link); }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <div class="topbar">
+        <a class="brand" href="/" aria-label="InstantQR Home">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+          <span>InstantQR</span>
+        </a>
+
+        <nav class="nav" aria-label="Tools">
+          <a href="/">QR Generator</a>
+          <a href="/tools.html">All Tools</a>
+          <a href="/tools/crypto-profit-calculator.html">Crypto Profit</a>
+          <a href="/tools/web3-gas-fee-estimator.html">EVM Gas</a>
+          <a class="active" href="/web3-tools/multi-chain-network-fee-estimator.html">Multi-Chain Fees</a>
+        </nav>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>Multi-Chain Network Fee Estimator</h1>
+          <p class="sub">
+            Estimate transaction fees for Bitcoin, Litecoin, Dogecoin, Dash, and Tron using chain-specific fee logic.
+            Built for speed, clarity, and privacy-first browser usage.
+          </p>
+          <div class="badges" aria-label="Highlights">
+            <span class="badge">₿ BTC + LTC</span>
+            <span class="badge">Ð DOGE</span>
+            <span class="badge">DASH</span>
+            <span class="badge">◉ TRON</span>
+            <span class="badge">⚡ Fast UI</span>
+            <span class="badge">🔒 Browser-based</span>
+          </div>
+        </div>
+
+        <div class="pill" aria-live="polite">
+          <span class="statusDot"></span>
+          <span>Ready</span>
+        </div>
+      </section>
+
+      <div class="grid">
+        <div class="chains">
+
+          <!-- BTC -->
+          <section class="panel" id="btcPanel">
+            <div class="chainHead">
+              <h2>Bitcoin (BTC)</h2>
+              <div class="chainStatus" id="btcStatus">Ready</div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="btcUrl">API URL</label>
+                <input id="btcUrl" type="url" value="https://mempool.space/api/v1/fees/recommended" />
+              </div>
+              <div>
+                <label for="btcSize">Transaction size (vBytes)</label>
+                <input id="btcSize" type="number" min="1" step="1" value="140" />
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn" type="button" id="btcRefresh">Refresh BTC</button>
+            </div>
+
+            <div class="cards">
+              <div class="tierCard">
+                <div class="tierHead"><b>Low</b><span class="tag">Economy</span></div>
+                <div class="kv"><span>Fee rate</span><b class="mono" id="btcLowRate">—</b></div>
+                <div class="kv"><span>Total sats</span><b class="mono" id="btcLowSats">—</b></div>
+                <div class="big mono" id="btcLowBtc">—</div>
+              </div>
+              <div class="tierCard">
+                <div class="tierHead"><b>Standard</b><span class="tag">Balanced</span></div>
+                <div class="kv"><span>Fee rate</span><b class="mono" id="btcStdRate">—</b></div>
+                <div class="kv"><span>Total sats</span><b class="mono" id="btcStdSats">—</b></div>
+                <div class="big mono" id="btcStdBtc">—</div>
+              </div>
+              <div class="tierCard">
+                <div class="tierHead"><b>Fast</b><span class="tag">Priority</span></div>
+                <div class="kv"><span>Fee rate</span><b class="mono" id="btcFastRate">—</b></div>
+                <div class="kv"><span>Total sats</span><b class="mono" id="btcFastSats">—</b></div>
+                <div class="big mono" id="btcFastBtc">—</div>
+              </div>
+            </div>
+
+            <div class="foot">
+              Uses sat/vB-style fee estimation. Adjust the vByte size to reflect your transaction type.
+            </div>
+          </section>
+
+          <!-- LTC -->
+          <section class="panel" id="ltcPanel">
+            <div class="chainHead">
+              <h2>Litecoin (LTC)</h2>
+              <div class="chainStatus" id="ltcStatus">Ready</div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="ltcUrl">API URL</label>
+                <input id="ltcUrl" type="url" value="https://api.blockcypher.com/v1/ltc/main" />
+              </div>
+              <div>
+                <label for="ltcSize">Transaction size (bytes)</label>
+                <input id="ltcSize" type="number" min="1" step="1" value="250" />
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn" type="button" id="ltcRefresh">Refresh LTC</button>
+            </div>
+
+            <div class="cards">
+              <div class="tierCard">
+                <div class="tierHead"><b>Low</b><span class="tag">Economy</span></div>
+                <div class="kv"><span>Fee / KB</span><b class="mono" id="ltcLowRate">—</b></div>
+                <div class="kv"><span>Total litoshi</span><b class="mono" id="ltcLowLitoshi">—</b></div>
+                <div class="big mono" id="ltcLowLtc">—</div>
+              </div>
+              <div class="tierCard">
+                <div class="tierHead"><b>Standard</b><span class="tag">Balanced</span></div>
+                <div class="kv"><span>Fee / KB</span><b class="mono" id="ltcStdRate">—</b></div>
+                <div class="kv"><span>Total litoshi</span><b class="mono" id="ltcStdLitoshi">—</b></div>
+                <div class="big mono" id="ltcStdLtc">—</div>
+              </div>
+              <div class="tierCard">
+                <div class="tierHead"><b>Fast</b><span class="tag">Priority</span></div>
+                <div class="kv"><span>Fee / KB</span><b class="mono" id="ltcFastRate">—</b></div>
+                <div class="kv"><span>Total litoshi</span><b class="mono" id="ltcFastLitoshi">—</b></div>
+                <div class="big mono" id="ltcFastLtc">—</div>
+              </div>
+            </div>
+
+            <div class="foot">
+              Uses per-kilobyte estimates. Litecoin fees are usually low, but this still varies by network conditions.
+            </div>
+          </section>
+
+          <!-- DOGE -->
+          <section class="panel" id="dogePanel">
+            <div class="chainHead">
+              <h2>Dogecoin (DOGE)</h2>
+              <div class="chainStatus" id="dogeStatus">Ready</div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="dogeUrl">API URL</label>
+                <input id="dogeUrl" type="url" value="https://api.blockcypher.com/v1/doge/main" />
+              </div>
+              <div>
+                <label for="dogeSize">Transaction size (bytes)</label>
+                <input id="dogeSize" type="number" min="1" step="1" value="250" />
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn" type="button" id="dogeRefresh">Refresh DOGE</button>
+            </div>
+
+            <div class="cards">
+              <div class="tierCard">
+                <div class="tierHead"><b>Low</b><span class="tag">Economy</span></div>
+                <div class="kv"><span>Fee / KB</span><b class="mono" id="dogeLowRate">—</b></div>
+                <div class="kv"><span>Total koinu</span><b class="mono" id="dogeLowKoinu">—</b></div>
+                <div class="big mono" id="dogeLowDoge">—</div>
+              </div>
+              <div class="tierCard">
+                <div class="tierHead"><b>Standard</b><span class="tag">Balanced</span></div>
+                <div class="kv"><span>Fee / KB</span><b class="mono" id="dogeStdRate">—</b></div>
+                <div class="kv"><span>Total koinu</span><b class="mono" id="dogeStdKoinu">—</b></div>
+                <div class="big mono" id="dogeStdDoge">—</div>
+              </div>
+              <div class="tierCard">
+                <div class="tierHead"><b>Fast</b><span class="tag">Priority</span></div>
+                <div class="kv"><span>Fee / KB</span><b class="mono" id="dogeFastRate">—</b></div>
+                <div class="kv"><span>Total koinu</span><b class="mono" id="dogeFastKoinu">—</b></div>
+                <div class="big mono" id="dogeFastDoge">—</div>
+              </div>
+            </div>
+
+            <div class="foot">
+              Uses per-kilobyte estimates similar to Litecoin. Dogecoin values are shown in koinu and DOGE.
+            </div>
+          </section>
+
+          <!-- DASH -->
+          <section class="panel" id="dashPanel">
+            <div class="chainHead">
+              <h2>Dash (DASH)</h2>
+              <div class="chainStatus" id="dashStatus">Ready</div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="dashUrl">API URL</label>
+                <input id="dashUrl" type="url" value="https://api.blockcypher.com/v1/dash/main" />
+              </div>
+              <div>
+                <label for="dashSize">Transaction size (bytes)</label>
+                <input id="dashSize" type="number" min="1" step="1" value="250" />
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn" type="button" id="dashRefresh">Refresh DASH</button>
+            </div>
+
+            <div class="cards">
+              <div class="tierCard">
+                <div class="tierHead"><b>Low</b><span class="tag">Economy</span></div>
+                <div class="kv"><span>Fee / KB</span><b class="mono" id="dashLowRate">—</b></div>
+                <div class="kv"><span>Total duffs</span><b class="mono" id="dashLowDuffs">—</b></div>
+                <div class="big mono" id="dashLowDash">—</div>
+              </div>
+              <div class="tierCard">
+                <div class="tierHead"><b>Standard</b><span class="tag">Balanced</span></div>
+                <div class="kv"><span>Fee / KB</span><b class="mono" id="dashStdRate">—</b></div>
+                <div class="kv"><span>Total duffs</span><b class="mono" id="dashStdDuffs">—</b></div>
+                <div class="big mono" id="dashStdDash">—</div>
+              </div>
+              <div class="tierCard">
+                <div class="tierHead"><b>Fast</b><span class="tag">Priority</span></div>
+                <div class="kv"><span>Fee / KB</span><b class="mono" id="dashFastRate">—</b></div>
+                <div class="kv"><span>Total duffs</span><b class="mono" id="dashFastDuffs">—</b></div>
+                <div class="big mono" id="dashFastDash">—</div>
+              </div>
+            </div>
+
+            <div class="foot">
+              Uses per-kilobyte estimates. Dash values are shown in duffs and DASH.
+            </div>
+          </section>
+
+          <!-- TRON -->
+          <section class="panel" id="trxPanel">
+            <div class="chainHead">
+              <h2>TRON (TRX)</h2>
+              <div class="chainStatus" id="trxStatus">Ready</div>
+            </div>
+
+            <div class="row3">
+              <div>
+                <label for="trxUrl">Endpoint URL</label>
+                <input id="trxUrl" type="url" value="https://api.trongrid.io/wallet/getchainparameters" />
+              </div>
+              <div>
+                <label for="trxBytes">Bandwidth bytes</label>
+                <input id="trxBytes" type="number" min="0" step="1" value="300" />
+              </div>
+              <div>
+                <label for="trxEnergy">Energy units</label>
+                <input id="trxEnergy" type="number" min="0" step="1" value="0" />
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn" type="button" id="trxRefresh">Refresh TRON</button>
+            </div>
+
+            <div class="cards">
+              <div class="tierCard">
+                <div class="tierHead"><b>Bandwidth</b><span class="tag">Bytes</span></div>
+                <div class="kv"><span>Unit price</span><b class="mono" id="trxBwRate">—</b></div>
+                <div class="kv"><span>Estimated burn</span><b class="mono" id="trxBwSun">—</b></div>
+                <div class="big mono" id="trxBwTrx">—</div>
+              </div>
+              <div class="tierCard">
+                <div class="tierHead"><b>Energy</b><span class="tag">TVM</span></div>
+                <div class="kv"><span>Unit price</span><b class="mono" id="trxEnergyRate">—</b></div>
+                <div class="kv"><span>Estimated burn</span><b class="mono" id="trxEnergySun">—</b></div>
+                <div class="big mono" id="trxEnergyTrx">—</div>
+              </div>
+              <div class="tierCard">
+                <div class="tierHead"><b>Total</b><span class="tag">TRX</span></div>
+                <div class="kv"><span>Total sun</span><b class="mono" id="trxTotalSun">—</b></div>
+                <div class="kv"><span>Free BW/day</span><b class="mono">600</b></div>
+                <div class="big mono" id="trxTotalTrx">—</div>
+              </div>
+            </div>
+
+            <div class="foot">
+              TRON charges through Bandwidth and Energy. Free daily Bandwidth is not auto-subtracted from this estimate.
+            </div>
+          </section>
+
+        </div>
+
+        <div class="panel">
+          <div class="actions">
+            <button class="btn" type="button" id="refreshAll">Refresh All</button>
+            <button class="btn2" type="button" id="fillDefaults">Reset Defaults</button>
+          </div>
+          <div class="foot">
+            This page uses network-specific fee models. BTC uses sat/vB-style fees, LTC, DOGE, and DASH use per-kilobyte estimates, and TRON estimates burned TRX from Bandwidth and Energy.
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Multi-Chain Fee Estimator FAQ</h2>
+          <div class="faqGrid">
+            <div class="faqItem">
+              <h3>Why are these networks estimated differently?</h3>
+              <p>
+                Each chain uses a different fee model. Bitcoin-style chains focus on transaction size, while TRON uses Bandwidth and Energy.
+              </p>
+            </div>
+            <div class="faqItem">
+              <h3>Is this the exact final fee?</h3>
+              <p>
+                It is a practical estimate based on current network data and your chosen transaction size inputs. Final wallet fees can differ depending on wallet logic, transaction complexity, and network congestion.
+              </p>
+            </div>
+            <div class="faqItem">
+              <h3>Why can some lookups fail in the browser?</h3>
+              <p>
+                Some endpoints can be rate-limited, unavailable, or require API keys. If a request fails, try again later or use another provider endpoint.
+              </p>
+            </div>
+            <div class="faqItem">
+              <h3>Do you store my node or endpoint URLs?</h3>
+              <p>
+                No. This page runs in your browser and does not intentionally store your fee inputs on a server.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footerLinks">
+          <div style="margin-bottom:8px;">
+            <a href="/tools/crypto-profit-calculator.html">Crypto Profit Calculator</a> ·
+            <a href="/tools/web3-gas-fee-estimator.html">EVM Gas Estimator</a> ·
+            <a href="/tools.html">All Tools</a>
+          </div>
+          <div>
+            <a href="/about.html">About</a> ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/terms.html">Terms</a> ·
+            <a href="/contact.html">Contact</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+
+  const els = {
+    btcUrl: $("btcUrl"),
+    btcSize: $("btcSize"),
+    btcStatus: $("btcStatus"),
+
+    ltcUrl: $("ltcUrl"),
+    ltcSize: $("ltcSize"),
+    ltcStatus: $("ltcStatus"),
+
+    dogeUrl: $("dogeUrl"),
+    dogeSize: $("dogeSize"),
+    dogeStatus: $("dogeStatus"),
+
+    dashUrl: $("dashUrl"),
+    dashSize: $("dashSize"),
+    dashStatus: $("dashStatus"),
+
+    trxUrl: $("trxUrl"),
+    trxBytes: $("trxBytes"),
+    trxEnergy: $("trxEnergy"),
+    trxStatus: $("trxStatus")
+  };
+
+  const DEFAULTS = {
+    btcUrl: "https://mempool.space/api/v1/fees/recommended",
+    btcSize: 140,
+    ltcUrl: "https://api.blockcypher.com/v1/ltc/main",
+    ltcSize: 250,
+    dogeUrl: "https://api.blockcypher.com/v1/doge/main",
+    dogeSize: 250,
+    dashUrl: "https://api.blockcypher.com/v1/dash/main",
+    dashSize: 250,
+    trxUrl: "https://api.trongrid.io/wallet/getchainparameters",
+    trxBytes: 300,
+    trxEnergy: 0
+  };
+
+  const TIMEOUT_MS = 8000;
+
+  function setStatus(el, text){
+    el.textContent = text;
+  }
+
+  function num(v, fallback = 0){
+    const n = Number(v);
+    return Number.isFinite(n) ? n : fallback;
+  }
+
+  function fmt(n, digits = 2){
+    const x = Number(n);
+    if (!Number.isFinite(x)) return "—";
+    return x.toLocaleString(undefined, { maximumFractionDigits: digits });
+  }
+
+  function fmtFixed(n, digits = 8){
+    const x = Number(n);
+    if (!Number.isFinite(x)) return "—";
+    return x.toFixed(digits);
+  }
+
+  function satsToBtc(sats){ return Number(sats) / 1e8; }
+  function litoshiToLtc(litoshi){ return Number(litoshi) / 1e8; }
+  function koinuToDoge(koinu){ return Number(koinu) / 1e8; }
+  function duffsToDash(duffs){ return Number(duffs) / 1e8; }
+  function sunToTrx(sun){ return Number(sun) / 1e6; }
+
+  async function abortableFetch(url, opts = {}, timeoutMs = TIMEOUT_MS){
+    const controller = new AbortController();
+    const t = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      return await fetch(url, { ...opts, signal: controller.signal });
+    } finally {
+      clearTimeout(t);
+    }
+  }
+
+  async function jsonFetch(url, opts = {}){
+    const res = await abortableFetch(url, opts);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  }
+
+  function calcPerKb(size, lowRate, stdRate, fastRate){
+    return {
+      low: Math.ceil((size / 1000) * lowRate),
+      std: Math.ceil((size / 1000) * stdRate),
+      fast: Math.ceil((size / 1000) * fastRate)
+    };
+  }
+
+  async function refreshBTC(){
+    setStatus(els.btcStatus, "Fetching…");
+    try{
+      const data = await jsonFetch(els.btcUrl.value.trim());
+      const size = Math.max(1, parseInt(els.btcSize.value || "140", 10));
+
+      const lowRate = num(data.hourFee || data.minimumFee || data.economyFee, 1);
+      const stdRate = num(data.halfHourFee || data.economyFee || data.fastestFee, lowRate);
+      const fastRate = num(data.fastestFee || data.halfHourFee || data.hourFee, stdRate);
+
+      const lowSats = Math.ceil(size * lowRate);
+      const stdSats = Math.ceil(size * stdRate);
+      const fastSats = Math.ceil(size * fastRate);
+
+      $("btcLowRate").textContent = `${fmt(lowRate, 2)} sat/vB`;
+      $("btcStdRate").textContent = `${fmt(stdRate, 2)} sat/vB`;
+      $("btcFastRate").textContent = `${fmt(fastRate, 2)} sat/vB`;
+
+      $("btcLowSats").textContent = fmt(lowSats, 0);
+      $("btcStdSats").textContent = fmt(stdSats, 0);
+      $("btcFastSats").textContent = fmt(fastSats, 0);
+
+      $("btcLowBtc").textContent = `${fmtFixed(satsToBtc(lowSats), 8)} BTC`;
+      $("btcStdBtc").textContent = `${fmtFixed(satsToBtc(stdSats), 8)} BTC`;
+      $("btcFastBtc").textContent = `${fmtFixed(satsToBtc(fastSats), 8)} BTC`;
+
+      setStatus(els.btcStatus, "Updated");
+    }catch(e){
+      setStatus(els.btcStatus, `Failed: ${e.message}`);
+    }
+  }
+
+  async function refreshLTC(){
+    setStatus(els.ltcStatus, "Fetching…");
+    try{
+      const data = await jsonFetch(els.ltcUrl.value.trim());
+      const size = Math.max(1, parseInt(els.ltcSize.value || "250", 10));
+
+      const lowRate = num(data.low_fee_per_kb, 0);
+      const stdRate = num(data.medium_fee_per_kb, lowRate);
+      const fastRate = num(data.high_fee_per_kb, stdRate);
+      const fee = calcPerKb(size, lowRate, stdRate, fastRate);
+
+      $("ltcLowRate").textContent = `${fmt(lowRate, 0)} litoshi/kB`;
+      $("ltcStdRate").textContent = `${fmt(stdRate, 0)} litoshi/kB`;
+      $("ltcFastRate").textContent = `${fmt(fastRate, 0)} litoshi/kB`;
+
+      $("ltcLowLitoshi").textContent = fmt(fee.low, 0);
+      $("ltcStdLitoshi").textContent = fmt(fee.std, 0);
+      $("ltcFastLitoshi").textContent = fmt(fee.fast, 0);
+
+      $("ltcLowLtc").textContent = `${fmtFixed(litoshiToLtc(fee.low), 8)} LTC`;
+      $("ltcStdLtc").textContent = `${fmtFixed(litoshiToLtc(fee.std), 8)} LTC`;
+      $("ltcFastLtc").textContent = `${fmtFixed(litoshiToLtc(fee.fast), 8)} LTC`;
+
+      setStatus(els.ltcStatus, "Updated");
+    }catch(e){
+      setStatus(els.ltcStatus, `Failed: ${e.message}`);
+    }
+  }
+
+  async function refreshDOGE(){
+    setStatus(els.dogeStatus, "Fetching…");
+    try{
+      const data = await jsonFetch(els.dogeUrl.value.trim());
+      const size = Math.max(1, parseInt(els.dogeSize.value || "250", 10));
+
+      const lowRate = num(data.low_fee_per_kb, 0);
+      const stdRate = num(data.medium_fee_per_kb, lowRate);
+      const fastRate = num(data.high_fee_per_kb, stdRate);
+      const fee = calcPerKb(size, lowRate, stdRate, fastRate);
+
+      $("dogeLowRate").textContent = `${fmt(lowRate, 0)} koinu/kB`;
+      $("dogeStdRate").textContent = `${fmt(stdRate, 0)} koinu/kB`;
+      $("dogeFastRate").textContent = `${fmt(fastRate, 0)} koinu/kB`;
+
+      $("dogeLowKoinu").textContent = fmt(fee.low, 0);
+      $("dogeStdKoinu").textContent = fmt(fee.std, 0);
+      $("dogeFastKoinu").textContent = fmt(fee.fast, 0);
+
+      $("dogeLowDoge").textContent = `${fmtFixed(koinuToDoge(fee.low), 8)} DOGE`;
+      $("dogeStdDoge").textContent = `${fmtFixed(koinuToDoge(fee.std), 8)} DOGE`;
+      $("dogeFastDoge").textContent = `${fmtFixed(koinuToDoge(fee.fast), 8)} DOGE`;
+
+      setStatus(els.dogeStatus, "Updated");
+    }catch(e){
+      setStatus(els.dogeStatus, `Failed: ${e.message}`);
+    }
+  }
+
+  async function refreshDASH(){
+    setStatus(els.dashStatus, "Fetching…");
+    try{
+      const data = await jsonFetch(els.dashUrl.value.trim());
+      const size = Math.max(1, parseInt(els.dashSize.value || "250", 10));
+
+      const lowRate = num(data.low_fee_per_kb, 0);
+      const stdRate = num(data.medium_fee_per_kb, lowRate);
+      const fastRate = num(data.high_fee_per_kb, stdRate);
+      const fee = calcPerKb(size, lowRate, stdRate, fastRate);
+
+      $("dashLowRate").textContent = `${fmt(lowRate, 0)} duffs/kB`;
+      $("dashStdRate").textContent = `${fmt(stdRate, 0)} duffs/kB`;
+      $("dashFastRate").textContent = `${fmt(fastRate, 0)} duffs/kB`;
+
+      $("dashLowDuffs").textContent = fmt(fee.low, 0);
+      $("dashStdDuffs").textContent = fmt(fee.std, 0);
+      $("dashFastDuffs").textContent = fmt(fee.fast, 0);
+
+      $("dashLowDash").textContent = `${fmtFixed(duffsToDash(fee.low), 8)} DASH`;
+      $("dashStdDash").textContent = `${fmtFixed(duffsToDash(fee.std), 8)} DASH`;
+      $("dashFastDash").textContent = `${fmtFixed(duffsToDash(fee.fast), 8)} DASH`;
+
+      setStatus(els.dashStatus, "Updated");
+    }catch(e){
+      setStatus(els.dashStatus, `Failed: ${e.message}`);
+    }
+  }
+
+  async function refreshTRX(){
+    setStatus(els.trxStatus, "Fetching…");
+    try{
+      const url = els.trxUrl.value.trim();
+      const bytes = Math.max(0, parseInt(els.trxBytes.value || "300", 10));
+      const energy = Math.max(0, parseInt(els.trxEnergy.value || "0", 10));
+
+      const data = await jsonFetch(url, {
+        method: "POST",
+        headers: { "content-type":"application/json" },
+        body: "{}"
+      });
+
+      const list = Array.isArray(data.chainParameter) ? data.chainParameter : data;
+      if (!Array.isArray(list)) throw new Error("Unexpected TRON response");
+
+      function getValue(...names){
+        for (const item of list){
+          if (names.includes(item.key)) return Number(item.value);
+        }
+        return null;
+      }
+
+      const bandwidthPrice = getValue("getTransactionFee") ?? 1000;
+      const energyPrice = getValue("getEnergyFee") ?? 0;
+
+      const bwSun = bytes * bandwidthPrice;
+      const energySun = energy * energyPrice;
+      const totalSun = bwSun + energySun;
+
+      $("trxBwRate").textContent = `${fmt(bandwidthPrice, 0)} sun / byte`;
+      $("trxEnergyRate").textContent = energyPrice ? `${fmt(energyPrice, 0)} sun / energy` : "Unavailable";
+      $("trxBwSun").textContent = fmt(bwSun, 0);
+      $("trxEnergySun").textContent = fmt(energySun, 0);
+      $("trxTotalSun").textContent = fmt(totalSun, 0);
+
+      $("trxBwTrx").textContent = `${fmtFixed(sunToTrx(bwSun), 6)} TRX`;
+      $("trxEnergyTrx").textContent = `${fmtFixed(sunToTrx(energySun), 6)} TRX`;
+      $("trxTotalTrx").textContent = `${fmtFixed(sunToTrx(totalSun), 6)} TRX`;
+
+      setStatus(els.trxStatus, "Updated");
+    }catch(e){
+      setStatus(els.trxStatus, `Failed: ${e.message}`);
+    }
+  }
+
+  async function refreshAll(){
+    await Promise.allSettled([
+      refreshBTC(),
+      refreshLTC(),
+      refreshDOGE(),
+      refreshDASH(),
+      refreshTRX()
+    ]);
+  }
+
+  function fillDefaults(){
+    for (const [key, value] of Object.entries(DEFAULTS)){
+      if ($(key)) $(key).value = value;
+    }
+    els.btcStatus.textContent = "Ready";
+    els.ltcStatus.textContent = "Ready";
+    els.dogeStatus.textContent = "Ready";
+    els.dashStatus.textContent = "Ready";
+    els.trxStatus.textContent = "Ready";
+  }
+
+  $("btcRefresh").addEventListener("click", refreshBTC);
+  $("ltcRefresh").addEventListener("click", refreshLTC);
+  $("dogeRefresh").addEventListener("click", refreshDOGE);
+  $("dashRefresh").addEventListener("click", refreshDASH);
+  $("trxRefresh").addEventListener("click", refreshTRX);
+  $("refreshAll").addEventListener("click", refreshAll);
+  $("fillDefaults").addEventListener("click", fillDefaults);
+
+  ["btcSize","ltcSize","dogeSize","dashSize","trxBytes","trxEnergy"].forEach(id => {
+    $(id).addEventListener("input", () => {
+      if (id.startsWith("btc")) refreshBTC();
+      else if (id.startsWith("ltc")) refreshLTC();
+      else if (id.startsWith("doge")) refreshDOGE();
+      else if (id.startsWith("dash")) refreshDASH();
+      else if (id.startsWith("trx")) refreshTRX();
+    });
+  });
+
+  refreshAll();
+})();
+</script>
+</body>
+</html>
