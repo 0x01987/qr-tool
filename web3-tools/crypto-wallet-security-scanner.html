@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Crypto Wallet Security Scanner | Free Wallet Safety Check Tool | InstantQR</title>
+  <meta name="description" content="Scan your crypto wallet security posture with this free wallet safety checker. Review wallet hygiene, phishing exposure, approval risks, seed phrase safety, hardware wallet usage, and more — fast, private, and browser-based." />
+  <meta name="keywords" content="crypto wallet security scanner, wallet safety checker, web3 wallet scanner, wallet approval risk checker, crypto security tool, seed phrase safety, wallet phishing checker, metamask security, revoke wallet approvals, wallet security audit tool" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <link rel="canonical" href="https://instantqr.io/web3-tools/crypto-wallet-security-scanner.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Crypto Wallet Security Scanner | InstantQR" />
+  <meta property="og:description" content="Free browser-based crypto wallet security scanner. Check wallet hygiene, phishing exposure, approval risks, and key security practices instantly." />
+  <meta property="og:url" content="https://instantqr.io/web3-tools/crypto-wallet-security-scanner.html" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Crypto Wallet Security Scanner | InstantQR" />
+  <meta name="twitter:description" content="Review your crypto wallet security posture with this free, fast, privacy-first tool." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+
+  <style>
+    :root{
+      --bg:#081120;
+      --bg2:#0f172a;
+      --panel:#111c34;
+      --panel2:#16233f;
+      --text:#e5eefc;
+      --muted:#94a3b8;
+      --line:rgba(255,255,255,.08);
+      --brand:#60a5fa;
+      --brand2:#22c55e;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --ok:#10b981;
+      --shadow:0 12px 35px rgba(0,0,0,.28);
+      --radius:20px;
+      --radius-sm:14px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 28%),
+        linear-gradient(180deg, #07101d 0%, #0b1324 55%, #081120 100%);
+      min-height:100vh;
+      line-height:1.55;
+    }
+
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+    .topbar{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(14px);
+      background:rgba(8,17,32,.78);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width:var(--max);margin:0 auto;
+      padding:12px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;
+    }
+    .brand-logo{
+      width:38px;height:38px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.18));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .brand-logo img{width:24px;height:24px;display:block}
+    .top-links{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    }
+    .top-links a{
+      color:var(--text);
+      font-size:.95rem;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid transparent;
+    }
+    .top-links a:hover{
+      text-decoration:none;
+      background:rgba(255,255,255,.04);
+      border-color:var(--line);
+    }
+
+    .hero{padding:34px 0 20px}
+    .breadcrumbs{
+      color:var(--muted);
+      font-size:.92rem;
+      margin-bottom:14px;
+      overflow:auto;
+      white-space:nowrap;
+    }
+    .breadcrumbs a{color:var(--muted)}
+    .breadcrumbs span{margin:0 8px;color:#64748b}
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-main{
+      padding:28px;
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:.85rem;font-weight:700;
+      color:#bfdbfe;
+      background:rgba(96,165,250,.10);
+      border:1px solid rgba(96,165,250,.22);
+      padding:8px 12px;border-radius:999px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(2rem,4vw,3rem);
+      line-height:1.06;
+      letter-spacing:-.03em;
+    }
+    .hero p{
+      margin:0;
+      color:#cbd5e1;
+      max-width:800px;
+      font-size:1.03rem;
+    }
+    .hero-actions{
+      margin-top:18px;
+      display:flex;gap:12px;flex-wrap:wrap;
+    }
+    .btn{
+      appearance:none;border:0;cursor:pointer;
+      font:inherit;font-weight:800;
+      border-radius:14px;padding:13px 16px;
+      transition:.18s ease;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg, var(--brand), #3b82f6);
+      color:#fff;
+      box-shadow:0 10px 26px rgba(59,130,246,.28);
+    }
+    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03)}
+    .btn-secondary{
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+    }
+    .btn-secondary:hover{background:rgba(255,255,255,.06);text-decoration:none}
+
+    .hero-side{
+      padding:22px;
+      display:grid;
+      gap:12px;
+      align-content:start;
+    }
+    .mini-stat{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    .mini-stat .label{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-bottom:4px;
+    }
+    .mini-stat .value{
+      font-weight:800;
+      font-size:1.15rem;
+      color:#fff;
+    }
+
+    .section{
+      padding:14px 0 10px;
+    }
+
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .tool-panel{
+      padding:22px;
+    }
+
+    .tool-panel h2,.info-panel h2,.content h2,.content h3{
+      margin:0 0 10px;
+      letter-spacing:-.02em;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:.96rem;
+      margin-bottom:18px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .full{grid-column:1/-1}
+
+    label{
+      display:block;
+      font-size:.94rem;
+      font-weight:700;
+      margin-bottom:8px;
+      color:#dbeafe;
+    }
+
+    input[type="text"], select, textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0a1427;
+      color:#fff;
+      padding:14px 14px;
+      font:inherit;
+      outline:none;
+      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    input[type="text"]:focus, select:focus, textarea:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 4px rgba(96,165,250,.14);
+      background:#0b172d;
+    }
+
+    .helper{
+      color:var(--muted);
+      font-size:.85rem;
+      margin-top:6px;
+    }
+
+    .checks{
+      display:grid;
+      gap:12px;
+      margin-top:6px;
+    }
+
+    .check{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+    }
+
+    .check input{
+      margin-top:4px;
+      transform:scale(1.15);
+      accent-color:#60a5fa;
+    }
+
+    .check strong{
+      display:block;
+      margin-bottom:4px;
+      color:#fff;
+      font-size:.96rem;
+    }
+
+    .check span{
+      display:block;
+      color:var(--muted);
+      font-size:.9rem;
+      line-height:1.45;
+    }
+
+    .actions{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .info-panel{
+      padding:22px;
+      position:sticky;
+      top:76px;
+    }
+
+    .score-wrap{
+      display:grid;
+      place-items:center;
+      margin:4px 0 16px;
+    }
+
+    .meter{
+      width:min(260px, 100%);
+      aspect-ratio:1/1;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      position:relative;
+      background:
+        conic-gradient(var(--meterColor, #10b981) calc(var(--percent, 0) * 1%), rgba(255,255,255,.08) 0);
+    }
+
+    .meter::before{
+      content:"";
+      position:absolute;
+      inset:14px;
+      border-radius:50%;
+      background:linear-gradient(180deg, #0d1730, #091221);
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+
+    .meter-content{
+      position:relative;
+      z-index:1;
+      text-align:center;
+      padding:20px;
+    }
+
+    .score{
+      font-size:clamp(2rem,5vw,3rem);
+      font-weight:900;
+      line-height:1;
+      letter-spacing:-.04em;
+    }
+
+    .score-label{
+      margin-top:8px;
+      font-size:.94rem;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:36px;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:.88rem;
+      font-weight:800;
+      letter-spacing:.01em;
+      border:1px solid transparent;
+    }
+
+    .badge.good{color:#d1fae5;background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.24)}
+    .badge.warn{color:#fef3c7;background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.24)}
+    .badge.danger{color:#fee2e2;background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.24)}
+
+    .summary-box{
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      margin-bottom:14px;
+    }
+    .summary-box p{
+      margin:0;
+      color:#dbeafe;
+    }
+
+    .results{
+      display:grid;
+      gap:10px;
+    }
+    .result-item{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:12px 13px;
+    }
+    .result-item strong{
+      display:block;
+      margin-bottom:5px;
+      color:#fff;
+      font-size:.95rem;
+    }
+    .result-item span{
+      color:#cbd5e1;
+      font-size:.92rem;
+    }
+
+    .disclaimer{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:.82rem;
+      line-height:1.45;
+    }
+
+    .content{
+      margin-top:20px;
+      display:grid;
+      gap:18px;
+    }
+    .content-card{
+      padding:22px;
+    }
+    .content p{
+      color:#cbd5e1;
+      margin:0 0 12px;
+    }
+    .content ul{
+      margin:10px 0 0 18px;
+      color:#cbd5e1;
+    }
+    .content li{margin:8px 0}
+
+    .faq{
+      display:grid;
+      gap:12px;
+      margin-top:12px;
+    }
+    details{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      color:#fff;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin:10px 0 0;
+      color:#cbd5e1;
+    }
+
+    .footer{
+      padding:28px 0 42px;
+      color:var(--muted);
+    }
+    .footer-box{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 0 0;
+      border-top:1px solid var(--line);
+    }
+    .footer-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .footer-links a{color:var(--muted)}
+    .footer-links a:hover{color:var(--text);text-decoration:none}
+
+    .note{
+      border-left:4px solid var(--brand);
+      padding:12px 14px;
+      background:rgba(96,165,250,.08);
+      border-radius:0 14px 14px 0;
+      color:#dbeafe;
+      margin-top:12px;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid,.tool-grid{grid-template-columns:1fr}
+      .info-panel{position:relative;top:auto}
+    }
+
+    @media (max-width: 700px){
+      .form-grid{grid-template-columns:1fr}
+      .hero-main,.hero-side,.tool-panel,.info-panel,.content-card{padding:18px}
+      .topbar-inner{padding:10px 14px}
+      .top-links{display:none}
+      h1{font-size:2rem}
+      .btn{width:100%}
+      .actions .btn{width:auto;flex:1 1 180px}
+      .meter{width:220px}
+    }
+  </style>
+
+  <!-- BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Web3 Tools",
+        "item":"https://instantqr.io/web3-tools/web3-tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Crypto Wallet Security Scanner",
+        "item":"https://instantqr.io/web3-tools/crypto-wallet-security-scanner.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Crypto Wallet Security Scanner",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/web3-tools/crypto-wallet-security-scanner.html",
+    "description":"Free browser-based crypto wallet security scanner that helps users review wallet hygiene, approval risk, phishing exposure, seed phrase practices, and core Web3 security habits.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <!-- FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What does this crypto wallet security scanner check?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This tool reviews your wallet security posture based on wallet hygiene and safety inputs such as seed phrase handling, hardware wallet usage, blind signing habits, approval reviews, phishing exposure, device hygiene, and address validation. It runs locally in your browser."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool connect to my wallet?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. This page does not require wallet connection. It is designed to work locally in your browser for privacy and speed."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can this scanner detect malicious smart contracts automatically?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Not fully. This version is a browser-based safety scanner focused on wallet security practices and address validation. Deep on-chain contract or approval analysis would require third-party APIs or blockchain integrations."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Is it safe to enter my wallet address?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A public wallet address is generally safe to paste, but never enter your seed phrase, private key, recovery phrase, or secret credentials into any website or tool."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
+
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/web3-tools/web3-tools.html">Web3 Tools</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="/web3-tools/web3-tools.html">Web3 Tools</a><span>›</span>
+        <span>Crypto Wallet Security Scanner</span>
+      </div>
+
+      <div class="hero-grid">
+        <div class="card hero-main">
+          <div class="eyebrow">Web3 Security • Privacy-First • Browser-Based</div>
+          <h1>Crypto Wallet Security Scanner</h1>
+          <p>
+            Review your wallet security posture in seconds. This free browser-based tool helps crypto users spot risky habits, improve wallet hygiene, validate public wallet format, and reduce exposure to phishing, approval abuse, and blind-signing mistakes.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#scanner">Scan Wallet Security</a>
+            <a class="btn btn-secondary" href="/web3-tools/web3-tools.html">Browse Web3 Tools</a>
+          </div>
+        </div>
+
+        <aside class="card hero-side" aria-label="Tool highlights">
+          <div class="mini-stat">
+            <div class="label">Runs locally</div>
+            <div class="value">No wallet connection required</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Built for speed</div>
+            <div class="value">Instant in-browser results</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Best for</div>
+            <div class="value">Wallet hygiene and security habits</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Important</div>
+            <div class="value">Never enter a seed phrase or private key</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="scanner">
+      <div class="tool-grid">
+        <section class="card tool-panel" aria-labelledby="scanner-title">
+          <h2 id="scanner-title">Scan your wallet security posture</h2>
+          <div class="sub">
+            Enter a public wallet address if you want format validation, then answer the security questions below. This tool stays in your browser and does not need wallet access.
+          </div>
+
+          <div class="form-grid">
+            <div class="full">
+              <label for="walletAddress">Public wallet address</label>
+              <input id="walletAddress" type="text" placeholder="Example: 0x1234...abcd or bc1q..." autocomplete="off" spellcheck="false" />
+              <div class="helper">Public addresses are okay. Never paste a seed phrase, private key, or secret recovery phrase.</div>
+            </div>
+
+            <div>
+              <label for="chain">Primary wallet/network</label>
+              <select id="chain">
+                <option value="evm">Ethereum / EVM wallet</option>
+                <option value="btc">Bitcoin wallet</option>
+                <option value="sol">Solana wallet</option>
+                <option value="other">Other / Unknown</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="usage">Wallet usage type</label>
+              <select id="usage">
+                <option value="main">Main wallet / long-term holdings</option>
+                <option value="active">Active trading / DeFi wallet</option>
+                <option value="burner">Burner / experimental wallet</option>
+                <option value="mixed">Mixed usage</option>
+              </select>
+            </div>
+
+            <div class="full">
+              <label>Security checklist</label>
+              <div class="checks">
+                <label class="check">
+                  <input type="checkbox" id="c1" />
+                  <div>
+                    <strong>I use a hardware wallet for major holdings</strong>
+                    <span>Hardware wallets reduce risk from browser malware, phishing popups, and compromised devices.</span>
+                  </div>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" id="c2" />
+                  <div>
+                    <strong>I have never entered my seed phrase into a website or browser popup</strong>
+                    <span>Seed phrase entry into websites is a major red flag and one of the most common wallet-drain attack paths.</span>
+                  </div>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" id="c3" />
+                  <div>
+                    <strong>I review token approvals / allowances regularly</strong>
+                    <span>Unlimited approvals can remain active long after you stop using a dApp.</span>
+                  </div>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" id="c4" />
+                  <div>
+                    <strong>I avoid signing blind or unreadable transactions</strong>
+                    <span>Blind-signing increases the chance of approving malicious contract actions without understanding them.</span>
+                  </div>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" id="c5" />
+                  <div>
+                    <strong>I use a separate burner wallet for unknown apps, mints, and airdrops</strong>
+                    <span>Keeping experiments away from your main wallet helps contain damage if something goes wrong.</span>
+                  </div>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" id="c6" />
+                  <div>
+                    <strong>I verify URLs, dApps, and social links before connecting my wallet</strong>
+                    <span>Phishing clones often look identical to real sites. Double-check domains before connecting.</span>
+                  </div>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" id="c7" />
+                  <div>
+                    <strong>My device is updated and protected with a lock screen and strong password</strong>
+                    <span>Wallet security depends heavily on device hygiene, especially on mobile and browser-extension wallets.</span>
+                  </div>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" id="c8" />
+                  <div>
+                    <strong>I do not keep my recovery phrase in screenshots, cloud notes, email, or chat apps</strong>
+                    <span>Digital backups can leak through sync tools, inbox compromise, or malware.</span>
+                  </div>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" id="c9" />
+                  <div>
+                    <strong>I am careful with unknown tokens, surprise NFTs, and random airdrops</strong>
+                    <span>Dusting and malicious airdrops can be used to bait interactions with risky contracts or fake support scams.</span>
+                  </div>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" id="c10" />
+                  <div>
+                    <strong>I only use this wallet on devices and browsers I trust</strong>
+                    <span>Shared, work, public, or heavily-modified devices can increase exposure to keyloggers and session theft.</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="scanBtn" type="button">Run Security Scan</button>
+            <button class="btn btn-secondary" id="resetBtn" type="button">Reset</button>
+          </div>
+
+          <div class="note">
+            This scanner is designed for wallet hygiene and personal safety review. It does not replace a full on-chain security audit, transaction simulation engine, or professional incident response.
+          </div>
+        </section>
+
+        <aside class="card info-panel" aria-labelledby="results-title">
+          <h2 id="results-title">Scan results</h2>
+
+          <div class="score-wrap">
+            <div class="meter" id="meter" style="--percent:72;--meterColor:#10b981;">
+              <div class="meter-content">
+                <div class="score" id="scoreValue">72</div>
+                <div class="score-label">Wallet security score</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:center;margin-bottom:14px;">
+            <span class="badge warn" id="riskBadge">Moderate risk</span>
+          </div>
+
+          <div class="summary-box">
+            <p id="summaryText">
+              Start the scan to review your wallet hygiene, security habits, and public address format.
+            </p>
+          </div>
+
+          <div class="results" id="resultsList">
+            <div class="result-item">
+              <strong>Address validation</strong>
+              <span>Waiting for scan.</span>
+            </div>
+            <div class="result-item">
+              <strong>Approval hygiene</strong>
+              <span>Waiting for scan.</span>
+            </div>
+            <div class="result-item">
+              <strong>Phishing resistance</strong>
+              <span>Waiting for scan.</span>
+            </div>
+            <div class="result-item">
+              <strong>Key / recovery safety</strong>
+              <span>Waiting for scan.</span>
+            </div>
+          </div>
+
+          <div class="disclaimer">
+            Privacy note: this page performs local analysis in your browser. Do not enter private keys, seed phrases, or passwords anywhere.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content">
+      <article class="card content-card">
+        <h2>How this wallet security scanner works</h2>
+        <p>
+          This crypto wallet security scanner helps users review the most common weaknesses in wallet safety: recovery phrase handling, allowance management, device hygiene, phishing habits, blind signing, and wallet separation. It also validates common public address formats for EVM wallets, Bitcoin, and Solana.
+        </p>
+        <p>
+          Because this version is designed for speed, privacy, and broad compatibility, it does not require wallet connection and does not pull blockchain data. That makes it lightweight, fast, and easy to use on both desktop and mobile.
+        </p>
+        <ul>
+          <li>Check core crypto wallet safety practices in seconds</li>
+          <li>Validate public wallet formatting for common chains</li>
+          <li>Spot high-risk behavior before it becomes a costly mistake</li>
+          <li>Improve DeFi, NFT, and trading wallet hygiene</li>
+        </ul>
+      </article>
+
+      <article class="card content-card">
+        <h2>Best practices for crypto wallet security</h2>
+        <p>
+          Good wallet security is not just about using the right app. It is about habits. The strongest crypto users separate wallets by purpose, review approvals, avoid random links, verify domains, and never expose recovery phrases online.
+        </p>
+        <ul>
+          <li>Use a hardware wallet for meaningful balances</li>
+          <li>Keep a separate burner wallet for testing new dApps</li>
+          <li>Revoke unused token approvals regularly</li>
+          <li>Never trust surprise NFTs, airdrops, or fake support messages</li>
+          <li>Read transaction prompts carefully before signing</li>
+          <li>Store recovery phrases offline, not in cloud tools or screenshots</li>
+        </ul>
+      </article>
+
+      <article class="card content-card">
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+          <details>
+            <summary>What does this crypto wallet security scanner actually scan?</summary>
+            <p>
+              It scans your wallet security posture based on the information you provide, including wallet habits, recovery phrase handling, hardware wallet usage, approval hygiene, and public address formatting. It does not drain-check your wallet or fetch blockchain data in this version.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does this tool connect to MetaMask, Phantom, or other wallets?</summary>
+            <p>
+              No. This version is fully browser-based and does not require a wallet connection. That keeps it fast and privacy-friendly.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can this detect malicious token approvals automatically?</summary>
+            <p>
+              Not automatically in this standalone version. A full approval scanner would need chain-specific RPC calls or third-party APIs to inspect current allowances and contracts.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is it safe to paste my wallet address here?</summary>
+            <p>
+              A public wallet address is generally safe to paste into tools like this. Never enter your seed phrase, private key, recovery phrase, or any secret credentials.
+            </p>
+          </details>
+
+          <details>
+            <summary>Who should use this tool?</summary>
+            <p>
+              It is useful for beginners, traders, NFT users, DeFi users, and anyone who wants a quick security review before interacting with apps, bridges, swaps, or token approvals.
+            </p>
+          </details>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools.html">Tools</a>
+          <a href="/web3-tools/web3-tools.html">Web3 Tools</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+
+      const els = {
+        walletAddress: $('walletAddress'),
+        chain: $('chain'),
+        usage: $('usage'),
+        scanBtn: $('scanBtn'),
+        resetBtn: $('resetBtn'),
+        meter: $('meter'),
+        scoreValue: $('scoreValue'),
+        riskBadge: $('riskBadge'),
+        summaryText: $('summaryText'),
+        resultsList: $('resultsList'),
+        year: $('year')
+      };
+
+      const checks = Array.from({ length: 10 }, (_, i) => $('c' + (i + 1)));
+
+      els.year.textContent = new Date().getFullYear();
+
+      function escapeHtml(str) {
+        return String(str).replace(/[&<>"']/g, function (m) {
+          return ({
+            '&':'&amp;',
+            '<':'&lt;',
+            '>':'&gt;',
+            '"':'&quot;',
+            "'":'&#39;'
+          })[m];
+        });
+      }
+
+      function isLikelySeedPhrase(input) {
+        const value = input.trim().toLowerCase();
+        const words = value.split(/\s+/).filter(Boolean);
+        return words.length >= 12 && words.length <= 24 && !value.startsWith('0x');
+      }
+
+      function isValidEvmAddress(addr) {
+        return /^0x[a-fA-F0-9]{40}$/.test(addr);
+      }
+
+      function isValidBitcoinAddress(addr) {
+        return /^(bc1[ac-hj-np-z02-9]{11,71}|[13][a-km-zA-HJ-NP-Z1-9]{25,34})$/.test(addr);
+      }
+
+      function isValidSolanaAddress(addr) {
+        return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(addr);
+      }
+
+      function validateAddressByChain(addr, chain) {
+        const trimmed = addr.trim();
+        if (!trimmed) {
+          return {
+            state: 'neutral',
+            title: 'No address entered',
+            text: 'You can still use this tool without entering a public wallet address.'
+          };
+        }
+
+        if (isLikelySeedPhrase(trimmed)) {
+          return {
+            state: 'danger',
+            title: 'Possible seed phrase detected',
+            text: 'This looks like a recovery phrase. Do not paste seed phrases into websites. Remove it immediately.'
+          };
+        }
+
+        if (chain === 'evm') {
+          return isValidEvmAddress(trimmed)
+            ? { state:'good', title:'Valid EVM-style address', text:'The address format looks consistent with Ethereum / EVM wallets.' }
+            : { state:'danger', title:'Invalid EVM-style address', text:'The address does not match a standard 0x EVM wallet format.' };
+        }
+
+        if (chain === 'btc') {
+          return isValidBitcoinAddress(trimmed)
+            ? { state:'good', title:'Valid Bitcoin-style address', text:'The address format looks consistent with common Bitcoin address formats.' }
+            : { state:'danger', title:'Invalid Bitcoin-style address', text:'The address does not match a common Bitcoin address pattern.' };
+        }
+
+        if (chain === 'sol') {
+          return isValidSolanaAddress(trimmed)
+            ? { state:'good', title:'Valid Solana-style address', text:'The address format looks consistent with Solana public key formatting.' }
+            : { state:'danger', title:'Invalid Solana-style address', text:'The address does not match common Solana public address formatting.' };
+        }
+
+        const anyValid = isValidEvmAddress(trimmed) || isValidBitcoinAddress(trimmed) || isValidSolanaAddress(trimmed);
+        return anyValid
+          ? { state:'good', title:'Address format looks valid', text:'The wallet address matches at least one common public address format.' }
+          : { state:'warn', title:'Unable to verify address format', text:'The address does not match common EVM, Bitcoin, or Solana patterns.' };
+      }
+
+      function getSecurityScore() {
+        let score = 18;
+
+        checks.forEach((c) => {
+          if (c.checked) score += 7;
+        });
+
+        const usage = els.usage.value;
+        if (usage === 'burner') score += 6;
+        if (usage === 'main') score += 1;
+        if (usage === 'mixed') score -= 4;
+        if (usage === 'active') score -= 2;
+
+        const addr = els.walletAddress.value.trim();
+        const validation = validateAddressByChain(addr, els.chain.value);
+
+        if (validation.state === 'good') score += 6;
+        if (validation.state === 'warn') score -= 2;
+        if (validation.state === 'danger') score -= 12;
+
+        score = Math.max(0, Math.min(100, score));
+        return { score, validation };
+      }
+
+      function badgeInfo(score) {
+        if (score >= 85) {
+          return {
+            label: 'Strong posture',
+            className: 'good',
+            color: '#10b981',
+            text: 'Your wallet security posture looks strong. Keep reviewing approvals, stay careful with phishing, and maintain offline key safety.'
+          };
+        }
+        if (score >= 65) {
+          return {
+            label: 'Moderate risk',
+            className: 'warn',
+            color: '#f59e0b',
+            text: 'Your wallet setup is decent, but there are still weak points worth improving to reduce avoidable risk.'
+          };
+        }
+        return {
+          label: 'High risk',
+          className: 'danger',
+          color: '#ef4444',
+          text: 'Your current wallet security posture shows high-risk gaps. Improve recovery phrase handling, signing habits, and wallet separation as soon as possible.'
+        };
+      }
+
+      function buildFindings(score, validation) {
+        const selected = checks.map(c => c.checked);
+
+        const findings = [];
+
+        findings.push({
+          title: 'Address validation',
+          text: validation.text
+        });
+
+        if (selected[2]) {
+          findings.push({
+            title: 'Approval hygiene',
+            text: 'Good practice detected: you review approvals regularly, which helps reduce exposure to stale or unlimited token allowances.'
+          });
+        } else {
+          findings.push({
+            title: 'Approval hygiene',
+            text: 'Approval review is missing. Consider checking and revoking unused token allowances, especially after using unfamiliar dApps.'
+          });
+        }
+
+        if (selected[5]) {
+          findings.push({
+            title: 'Phishing resistance',
+            text: 'Good practice detected: verifying URLs and dApps before connecting helps prevent clone-site and fake-support attacks.'
+          });
+        } else {
+          findings.push({
+            title: 'Phishing resistance',
+            text: 'Domain verification appears weak. Double-check website URLs, social links, and bookmarks before connecting your wallet.'
+          });
+        }
+
+        if (selected[1] && selected[7]) {
+          findings.push({
+            title: 'Key / recovery safety',
+            text: 'Your recovery-phrase handling appears strong. Keeping recovery material offline and out of cloud apps is a major security win.'
+          });
+        } else {
+          findings.push({
+            title: 'Key / recovery safety',
+            text: 'Recovery phrase safety needs attention. Never store a seed phrase in screenshots, cloud notes, chat apps, or email.'
+          });
+        }
+
+        if (!selected[3]) {
+          findings.push({
+            title: 'Signing behavior',
+            text: 'Blind-signing risk detected. Read wallet prompts carefully and avoid signing transactions you cannot interpret.'
+          });
+        }
+
+        if (!selected[4] && (els.usage.value === 'active' || els.usage.value === 'mixed')) {
+          findings.push({
+            title: 'Wallet separation',
+            text: 'Using one wallet for everything increases exposure. Consider a burner wallet for mints, unknown dApps, and experimental protocols.'
+          });
+        }
+
+        if (!selected[0] && els.usage.value === 'main') {
+          findings.push({
+            title: 'Hardware wallet',
+            text: 'Your main wallet may benefit from hardware wallet protection, especially for long-term holdings or larger balances.'
+          });
+        }
+
+        return findings.slice(0, 6);
+      }
+
+      function renderResults() {
+        const { score, validation } = getSecurityScore();
+        const badge = badgeInfo(score);
+        const findings = buildFindings(score, validation);
+
+        els.meter.style.setProperty('--percent', score);
+        els.meter.style.setProperty('--meterColor', badge.color);
+        els.scoreValue.textContent = score;
+
+        els.riskBadge.className = 'badge ' + badge.className;
+        els.riskBadge.textContent = badge.label;
+        els.summaryText.textContent = badge.text;
+
+        els.resultsList.innerHTML = findings.map(item => `
+          <div class="result-item">
+            <strong>${escapeHtml(item.title)}</strong>
+            <span>${escapeHtml(item.text)}</span>
+          </div>
+        `).join('');
+      }
+
+      function resetForm() {
+        els.walletAddress.value = '';
+        els.chain.value = 'evm';
+        els.usage.value = 'main';
+        checks.forEach(c => c.checked = false);
+
+        els.meter.style.setProperty('--percent', 72);
+        els.meter.style.setProperty('--meterColor', '#f59e0b');
+        els.scoreValue.textContent = '72';
+        els.riskBadge.className = 'badge warn';
+        els.riskBadge.textContent = 'Moderate risk';
+        els.summaryText.textContent = 'Start the scan to review your wallet hygiene, security habits, and public address format.';
+        els.resultsList.innerHTML = `
+          <div class="result-item">
+            <strong>Address validation</strong>
+            <span>Waiting for scan.</span>
+          </div>
+          <div class="result-item">
+            <strong>Approval hygiene</strong>
+            <span>Waiting for scan.</span>
+          </div>
+          <div class="result-item">
+            <strong>Phishing resistance</strong>
+            <span>Waiting for scan.</span>
+          </div>
+          <div class="result-item">
+            <strong>Key / recovery safety</strong>
+            <span>Waiting for scan.</span>
+          </div>
+        `;
+      }
+
+      els.scanBtn.addEventListener('click', renderResults);
+      els.resetBtn.addEventListener('click', resetForm);
+
+      els.walletAddress.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          renderResults();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
