@@ -1,0 +1,1289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>Wallet Approval Checker | ERC-20 Token Allowance Checker | InstantQR</title>
+  <meta name="description" content="Free wallet approval checker for Ethereum, Base, Arbitrum, Optimism, and BNB Chain. Check ERC-20 token allowances, detect unlimited approvals, and revoke token access with your connected wallet." />
+  <meta name="keywords" content="wallet approval checker, token approval checker, ERC20 allowance checker, revoke token approval, crypto approval checker, unlimited approval checker, wallet security tool, ethereum allowance checker, base approval checker, arbitrum approval checker, instantqr" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#081120" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/wallet-approval-checker.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Wallet Approval Checker | InstantQR" />
+  <meta property="og:description" content="Check ERC-20 token approvals and allowances across major EVM chains. Fast, responsive, privacy-friendly wallet security tool." />
+  <meta property="og:url" content="https://instantqr.io/tools/wallet-approval-checker.html" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wallet Approval Checker | InstantQR" />
+  <meta name="twitter:description" content="Check token allowances and unlimited approvals. Revoke access with your wallet on supported EVM chains." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+
+  <style>
+    :root{
+      --bg:#081120;
+      --bg2:#0c1730;
+      --card:#0f172a;
+      --card2:#111c34;
+      --text:#e8f1ff;
+      --muted:#95a6c7;
+      --line:rgba(255,255,255,.10);
+      --brand:#38bdf8;
+      --brand2:#2563eb;
+      --success:#22c55e;
+      --warning:#f59e0b;
+      --danger:#ef4444;
+      --radius:22px;
+      --radius-sm:14px;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.14), transparent 30%),
+        radial-gradient(circle at top right, rgba(37,99,235,.14), transparent 28%),
+        linear-gradient(180deg,#07101d 0%,#0b1427 45%,#09111f 100%);
+      min-height:100vh;
+      line-height:1.55;
+    }
+
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(10px);
+      background:rgba(8,17,32,.76);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      color:#fff;
+      letter-spacing:.2px;
+    }
+    .brand img{width:34px;height:34px;display:block}
+    .navlinks{display:flex;gap:12px;flex-wrap:wrap}
+    .navlinks a{
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:.95rem;
+    }
+    .navlinks a:hover{
+      color:#fff;
+      text-decoration:none;
+      background:rgba(255,255,255,.06);
+    }
+
+    .hero{padding:38px 0 18px}
+    .heroCard{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:22px;
+      padding:28px;
+      border-radius:28px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(17,28,52,.94),rgba(15,23,42,.96));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .heroCard::after{
+      content:"";
+      position:absolute;
+      right:-70px;
+      bottom:-70px;
+      width:220px;
+      height:220px;
+      background:radial-gradient(circle, rgba(56,189,248,.18), transparent 66%);
+      pointer-events:none;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(56,189,248,.10);
+      border:1px solid rgba(56,189,248,.22);
+      color:#c7f0ff;
+      font-weight:800;
+      font-size:.86rem;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(2rem, 4vw, 3.2rem);
+      line-height:1.04;
+      letter-spacing:-.03em;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:1.03rem;
+      max-width:780px;
+    }
+
+    .heroPoints{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .pill{
+      padding:12px 14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      color:#dce7fb;
+      font-size:.95rem;
+    }
+
+    .miniCol{
+      display:grid;
+      gap:14px;
+      align-content:start;
+    }
+
+    .miniStat{
+      padding:18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .miniStat strong{
+      display:block;
+      font-size:1.25rem;
+      margin-bottom:4px;
+    }
+    .miniStat span{
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .breadcrumbs{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+    .breadcrumbs a{color:var(--muted)}
+    .breadcrumbs a:hover{color:#fff}
+
+    main{padding:18px 0 42px}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .card{
+      background:linear-gradient(180deg,rgba(17,28,52,.94),rgba(15,23,42,.97));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+
+    .card h2,.card h3{
+      margin:0 0 8px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+
+    .card p{margin:0 0 14px;color:var(--muted)}
+
+    .toolGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .field.full{grid-column:1/-1}
+    label{
+      font-weight:800;
+      font-size:.94rem;
+      color:#e9f2ff;
+    }
+
+    input, select, button{
+      font:inherit;
+    }
+    input, select{
+      width:100%;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0b1426;
+      color:#fff;
+      padding:14px 14px;
+      border-radius:14px;
+      outline:none;
+      transition:border-color .18s ease, box-shadow .18s ease;
+    }
+    input::placeholder{color:#7d8ba5}
+    input:focus, select:focus{
+      border-color:rgba(56,189,248,.62);
+      box-shadow:0 0 0 4px rgba(56,189,248,.14);
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    button{
+      border:0;
+      cursor:pointer;
+      border-radius:14px;
+      padding:13px 16px;
+      font-weight:800;
+      transition:transform .08s ease, filter .2s ease, opacity .2s ease;
+    }
+    button:hover{filter:brightness(1.05)}
+    button:active{transform:translateY(1px)}
+    button[disabled]{opacity:.55;cursor:not-allowed}
+
+    .btnPrimary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}
+    .btnSecondary{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.10)}
+    .btnDanger{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}
+    .btnSuccess{background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff}
+
+    .inlineHint{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .result{
+      margin-top:16px;
+      border-radius:18px;
+      padding:16px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      min-height:120px;
+    }
+
+    .resultStatus{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:.83rem;
+      font-weight:900;
+      letter-spacing:.02em;
+      margin-bottom:12px;
+    }
+
+    .statusNeutral{
+      background:rgba(255,255,255,.06);
+      color:#dbe5f6;
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .statusSafe{
+      background:rgba(34,197,94,.12);
+      color:#bdf6c9;
+      border:1px solid rgba(34,197,94,.22);
+    }
+    .statusWarn{
+      background:rgba(245,158,11,.12);
+      color:#ffe0a3;
+      border:1px solid rgba(245,158,11,.24);
+    }
+    .statusDanger{
+      background:rgba(239,68,68,.12);
+      color:#ffc4c4;
+      border:1px solid rgba(239,68,68,.25);
+    }
+
+    .resultMain{
+      font-size:1.65rem;
+      font-weight:900;
+      line-height:1.15;
+      margin-bottom:8px;
+      letter-spacing:-.02em;
+      word-break:break-word;
+    }
+
+    .resultMeta{
+      color:var(--muted);
+      font-size:.96rem;
+      margin-bottom:12px;
+    }
+
+    .resultGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+
+    .kv{
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .kv span{
+      display:block;
+      color:var(--muted);
+      font-size:.82rem;
+      margin-bottom:4px;
+    }
+    .kv strong{
+      display:block;
+      word-break:break-word;
+      font-size:.97rem;
+    }
+
+    .connectedBox{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      margin-top:12px;
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .walletBadge{
+      color:#d6e7ff;
+      font-weight:700;
+      font-size:.93rem;
+      word-break:break-word;
+    }
+
+    .content p{color:var(--muted)}
+    .content strong{color:#fff}
+
+    .faq details{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    .faq details + details{margin-top:12px}
+    .faq summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+    .faq summary::-webkit-details-marker{display:none}
+    .faq .answer{
+      margin-top:10px;
+      color:var(--muted);
+    }
+
+    .tips{
+      display:grid;
+      gap:12px;
+    }
+    .tip{
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .tip strong{display:block;margin-bottom:6px}
+    .tip p{margin:0;color:var(--muted)}
+
+    .footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:26px 0 40px;
+      color:var(--muted);
+    }
+    .footerCard{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;
+      padding:20px;
+    }
+    .footerLinks{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top:10px;
+      font-size:.95rem;
+    }
+    .footerLinks a{color:#c4d6ef}
+
+    .wideSection{
+      margin-top:18px;
+      display:grid;
+      gap:18px;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    }
+
+    .hidden{display:none !important}
+
+    @media (max-width: 980px){
+      .heroCard,.grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 720px){
+      .wrap{padding:0 14px}
+      .hero{padding:24px 0 12px}
+      .heroCard,.card,.footerCard{padding:18px}
+      .toolGrid,.resultGrid,.heroPoints{grid-template-columns:1fr}
+      .nav{align-items:flex-start;flex-direction:column}
+      .navlinks{width:100%}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"Wallet Approval Checker",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "url":"https://instantqr.io/tools/wallet-approval-checker.html",
+    "description":"Free ERC-20 wallet approval checker for Ethereum, Base, Arbitrum, Optimism, and BNB Chain. Check token allowances and revoke approvals.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Wallet Approval Checker",
+        "item":"https://instantqr.io/tools/wallet-approval-checker.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is a wallet approval?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A wallet approval, also called a token allowance, lets a smart contract spend a specific amount of your ERC-20 token from your wallet."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What is an unlimited token approval?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"An unlimited approval gives a spender contract permission to move a very large amount of your token. This can be convenient, but it can also increase risk if the contract is compromised."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I revoke token approval with this tool?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. If you connect a compatible wallet and you are checking your own wallet address, you can send an on-chain approve(spender, 0) transaction to revoke access."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Which chains are supported?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This tool supports Ethereum, Base, Arbitrum, Optimism, and BNB Chain."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+        <span>InstantQR</span>
+      </a>
+
+      <nav class="navlinks" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="heroCard">
+        <div>
+          <div class="badge">Web3 Security Tool</div>
+          <h1>Wallet Approval Checker</h1>
+          <p class="sub">
+            Check ERC-20 token allowances across major EVM chains. Detect unlimited approvals,
+            review spender access, and revoke token approvals with your connected wallet.
+          </p>
+
+          <div class="heroPoints">
+            <div class="pill">Ethereum, Base, Arbitrum, Optimism, BNB Chain</div>
+            <div class="pill">Check any ERC-20 token allowance instantly</div>
+            <div class="pill">Detect unlimited approval risk</div>
+            <div class="pill">Client-side tool with clean responsive UX</div>
+          </div>
+
+          <div class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="/">Home</a> / <a href="/tools.html">Tools</a> / <span>Wallet Approval Checker</span>
+          </div>
+        </div>
+
+        <aside class="miniCol" aria-label="Highlights">
+          <div class="miniStat">
+            <strong>Fast allowance checks</strong>
+            <span>Uses direct ERC-20 contract reads on supported chains.</span>
+          </div>
+          <div class="miniStat">
+            <strong>Unlimited approval detection</strong>
+            <span>Flags large spend permissions that may increase wallet risk.</span>
+          </div>
+          <div class="miniStat">
+            <strong>Wallet revoke support</strong>
+            <span>Connect your wallet and send an approve-to-zero transaction.</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="wrap">
+      <section class="grid">
+        <article class="card">
+          <h2>Check Token Approval</h2>
+          <p>
+            Enter a wallet address, token contract, and spender contract to check the ERC-20 allowance on a supported chain.
+          </p>
+
+          <div class="actions" style="margin-top:0">
+            <button type="button" class="btnSuccess" id="connectBtn">Connect Wallet</button>
+            <button type="button" class="btnSecondary" id="useConnectedBtn">Use Connected Address</button>
+          </div>
+
+          <div class="connectedBox" id="connectedBox">
+            <div class="walletBadge" id="walletStatus">No wallet connected.</div>
+            <div class="inlineHint">Connect if you want to revoke access directly from this page.</div>
+          </div>
+
+          <div class="toolGrid" style="margin-top:16px;">
+            <div class="field">
+              <label for="chain">Chain</label>
+              <select id="chain">
+                <option value="ethereum">Ethereum</option>
+                <option value="base">Base</option>
+                <option value="arbitrum">Arbitrum</option>
+                <option value="optimism">Optimism</option>
+                <option value="bnb">BNB Chain</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="spenderPreset">Common spender</label>
+              <select id="spenderPreset">
+                <option value="">Custom spender address</option>
+                <option value="permit2">Permit2</option>
+                <option value="1inch-v5">1inch Router v5</option>
+                <option value="uniswap-v2">Uniswap V2 Router</option>
+                <option value="pancakeswap-v2">PancakeSwap V2 Router</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="owner">Wallet address</label>
+              <input id="owner" type="text" spellcheck="false" autocomplete="off" placeholder="0xYourWalletAddress" />
+            </div>
+
+            <div class="field full">
+              <label for="token">Token contract address</label>
+              <input id="token" type="text" spellcheck="false" autocomplete="off" placeholder="0xTokenContractAddress" />
+            </div>
+
+            <div class="field full">
+              <label for="spender">Spender contract address</label>
+              <input id="spender" type="text" spellcheck="false" autocomplete="off" placeholder="0xSpenderContractAddress" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btnPrimary" id="checkBtn">Check Approval</button>
+            <button type="button" class="btnDanger" id="revokeBtn" disabled>Revoke Approval</button>
+            <button type="button" class="btnSecondary" id="resetBtn">Reset</button>
+          </div>
+
+          <div class="inlineHint">
+            This tool checks ERC-20 allowance for a specific wallet, token, and spender combination.
+            It does not automatically scan every approval in a wallet.
+          </div>
+
+          <div class="result" id="resultBox" aria-live="polite">
+            <div class="resultStatus statusNeutral" id="statusPill">READY</div>
+            <div class="resultMain" id="resultMain">Enter addresses to check token approval.</div>
+            <div class="resultMeta" id="resultMeta">Allowances are read directly from the token contract.</div>
+
+            <div class="resultGrid">
+              <div class="kv">
+                <span>Token</span>
+                <strong id="tokenName">—</strong>
+              </div>
+              <div class="kv">
+                <span>Symbol</span>
+                <strong id="tokenSymbol">—</strong>
+              </div>
+              <div class="kv">
+                <span>Formatted allowance</span>
+                <strong id="allowanceHuman">—</strong>
+              </div>
+              <div class="kv">
+                <span>Raw allowance</span>
+                <strong class="mono" id="allowanceRaw">—</strong>
+              </div>
+              <div class="kv">
+                <span>Risk</span>
+                <strong id="riskLevel">—</strong>
+              </div>
+              <div class="kv">
+                <span>Spender</span>
+                <strong class="mono" id="spenderOut">—</strong>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="card">
+          <h2>Popular Spender Addresses</h2>
+          <p>Choose a preset or paste your own spender contract address.</p>
+
+          <div class="tips">
+            <div class="tip">
+              <strong>Permit2</strong>
+              <p class="mono">0x000000000022D473030F116dDEE9F6B43aC78BA3</p>
+            </div>
+            <div class="tip">
+              <strong>1inch Router v5</strong>
+              <p class="mono">0x1111111254EEB25477B68fb85Ed929f73A960582</p>
+            </div>
+            <div class="tip">
+              <strong>Uniswap V2 Router</strong>
+              <p class="mono">0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D</p>
+            </div>
+            <div class="tip">
+              <strong>PancakeSwap V2 Router</strong>
+              <p class="mono">0x10ED43C718714eb63d5aA57B78B54704E256024E</p>
+            </div>
+          </div>
+
+          <div style="height:16px"></div>
+
+          <h3>How revoke works</h3>
+          <p>
+            Revoke sends an on-chain ERC-20 transaction:
+            <span class="mono">approve(spender, 0)</span>.
+            Your wallet will ask for confirmation, and network gas fees apply.
+          </p>
+
+          <h3>Important note</h3>
+          <p>
+            Revoke is only enabled when your connected wallet matches the wallet address in the form.
+          </p>
+        </aside>
+      </section>
+
+      <section class="wideSection">
+        <article class="card content">
+          <h2>What Is a Wallet Approval Checker?</h2>
+          <p>
+            A wallet approval checker helps you inspect <strong>ERC-20 token allowances</strong>. When you interact with a DEX,
+            bridge, staking app, or DeFi protocol, you often approve a spender contract to move tokens from your wallet.
+          </p>
+          <p>
+            Those approvals can remain active long after you stop using the app. In some cases, users grant
+            <strong>very large or unlimited approvals</strong>, which can create extra risk if a contract is exploited or a malicious app is used.
+          </p>
+          <p>
+            This InstantQR tool lets you check an approval for a specific wallet, token, and spender across supported EVM chains,
+            then optionally revoke that access with your connected wallet.
+          </p>
+        </article>
+
+        <article class="card content">
+          <h2>How to Use This ERC-20 Allowance Checker</h2>
+          <p><strong>Step 1:</strong> Choose a chain such as Ethereum, Base, Arbitrum, Optimism, or BNB Chain.</p>
+          <p><strong>Step 2:</strong> Enter the wallet address you want to inspect.</p>
+          <p><strong>Step 3:</strong> Paste the token contract address.</p>
+          <p><strong>Step 4:</strong> Paste the spender contract address, or choose a common preset.</p>
+          <p><strong>Step 5:</strong> Click <strong>Check Approval</strong> to read the allowance directly from the token contract.</p>
+          <p><strong>Step 6:</strong> If your connected wallet is the same wallet address and the allowance is not zero, click <strong>Revoke Approval</strong>.</p>
+        </article>
+
+        <article class="card faq">
+          <h2>Frequently Asked Questions</h2>
+
+          <details>
+            <summary>What is an ERC-20 allowance?</summary>
+            <div class="answer">
+              An ERC-20 allowance is the amount of tokens a wallet has approved a spender contract to use on its behalf.
+            </div>
+          </details>
+
+          <details>
+            <summary>What counts as an unlimited approval?</summary>
+            <div class="answer">
+              In practice, very large values close to the maximum uint256 value are treated as unlimited approvals.
+              This tool flags very large allowances as elevated risk.
+            </div>
+          </details>
+
+          <details>
+            <summary>Why is revoke not scanning all my approvals automatically?</summary>
+            <div class="answer">
+              This page is designed as a fast client-side checker for a specific token and spender combination.
+              A full wallet-wide approval scanner usually requires a backend indexer or external API.
+            </div>
+          </details>
+
+          <details>
+            <summary>Does this tool support native ETH or BNB?</summary>
+            <div class="answer">
+              No. Native coins do not use ERC-20 approvals. This checker is for ERC-20 token contracts only.
+            </div>
+          </details>
+
+          <details>
+            <summary>Does this tool store my wallet data?</summary>
+            <div class="answer">
+              No. The page runs in your browser and directly reads contract data from supported public RPC endpoints.
+            </div>
+          </details>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footerCard">
+        <strong>InstantQR</strong>
+        <div class="footerLinks">
+          <div>
+            <a href="/tools.html">All Tools</a> ·
+            <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a> ·
+            <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
+            <a href="/ip-lookup.html">IP Lookup</a> ·
+            <a href="/password.html">Password Generator</a> ·
+            <a href="/unit-converter.html">Unit Converter</a>
+          </div>
+          <div>
+            <a href="/about.html">About</a> ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/terms.html">Terms</a> ·
+            <a href="/contact.html">Contact</a>
+          </div>
+          <div>© <span id="year"></span> InstantQR. Fast, clean, privacy-friendly tools.</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
+  <script>
+    (function(){
+      const $ = (id) => document.getElementById(id);
+
+      const ERC20_ABI = [
+        "function allowance(address owner, address spender) view returns (uint256)",
+        "function approve(address spender, uint256 amount) returns (bool)",
+        "function symbol() view returns (string)",
+        "function name() view returns (string)",
+        "function decimals() view returns (uint8)"
+      ];
+
+      const CHAINS = {
+        ethereum: {
+          label: "Ethereum",
+          chainId: 1,
+          rpc: "https://ethereum-rpc.publicnode.com"
+        },
+        base: {
+          label: "Base",
+          chainId: 8453,
+          rpc: "https://base-rpc.publicnode.com"
+        },
+        arbitrum: {
+          label: "Arbitrum",
+          chainId: 42161,
+          rpc: "https://arbitrum-one-rpc.publicnode.com"
+        },
+        optimism: {
+          label: "Optimism",
+          chainId: 10,
+          rpc: "https://optimism-rpc.publicnode.com"
+        },
+        bnb: {
+          label: "BNB Chain",
+          chainId: 56,
+          rpc: "https://bsc-rpc.publicnode.com"
+        }
+      };
+
+      const PRESETS = {
+        "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+        "1inch-v5": "0x1111111254EEB25477B68fb85Ed929f73A960582",
+        "uniswap-v2": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "pancakeswap-v2": "0x10ED43C718714eb63d5aA57B78B54704E256024E"
+      };
+
+      let connectedAddress = "";
+      let browserProvider = null;
+      let signer = null;
+      let lastCheck = null;
+
+      function shortAddr(addr){
+        if (!addr || addr.length < 10) return addr || "—";
+        return addr.slice(0, 6) + "..." + addr.slice(-4);
+      }
+
+      function setStatus(type, label){
+        const el = $("statusPill");
+        el.className = "resultStatus";
+        if (type === "safe") el.classList.add("statusSafe");
+        else if (type === "warn") el.classList.add("statusWarn");
+        else if (type === "danger") el.classList.add("statusDanger");
+        else el.classList.add("statusNeutral");
+        el.textContent = label;
+      }
+
+      function setResult(data){
+        $("resultMain").textContent = data.main || "—";
+        $("resultMeta").textContent = data.meta || "";
+        $("tokenName").textContent = data.tokenName || "—";
+        $("tokenSymbol").textContent = data.tokenSymbol || "—";
+        $("allowanceHuman").textContent = data.allowanceHuman || "—";
+        $("allowanceRaw").textContent = data.allowanceRaw || "—";
+        $("riskLevel").textContent = data.riskLevel || "—";
+        $("spenderOut").textContent = data.spender || "—";
+      }
+
+      function resetResult(){
+        setStatus("neutral", "READY");
+        setResult({
+          main: "Enter addresses to check token approval.",
+          meta: "Allowances are read directly from the token contract.",
+          tokenName: "—",
+          tokenSymbol: "—",
+          allowanceHuman: "—",
+          allowanceRaw: "—",
+          riskLevel: "—",
+          spender: "—"
+        });
+        $("revokeBtn").disabled = true;
+      }
+
+      function clearInputs(){
+        $("owner").value = "";
+        $("token").value = "";
+        $("spender").value = "";
+        $("spenderPreset").value = "";
+        $("chain").value = "ethereum";
+        lastCheck = null;
+        resetResult();
+      }
+
+      function fmtBigintWithCommas(valueStr){
+        try{
+          const isNeg = valueStr.startsWith("-");
+          const s = isNeg ? valueStr.slice(1) : valueStr;
+          const out = s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          return isNeg ? "-" + out : out;
+        }catch{
+          return valueStr;
+        }
+      }
+
+      function formatAllowanceHuman(value, decimals){
+        try{
+          const formatted = ethers.formatUnits(value, decimals);
+          const [whole, frac = ""] = formatted.split(".");
+          const wholeWithCommas = fmtBigintWithCommas(whole);
+          const trimmedFrac = frac.replace(/0+$/, "").slice(0, 8);
+          return trimmedFrac ? wholeWithCommas + "." + trimmedFrac : wholeWithCommas;
+        }catch{
+          return value.toString();
+        }
+      }
+
+      function isUnlimited(value){
+        const max = ethers.MaxUint256;
+        return value >= (max * 99n / 100n);
+      }
+
+      function getRiskLabel(value){
+        if (value === 0n) return { type: "safe", label: "NO ACTIVE APPROVAL", risk: "Low" };
+        if (isUnlimited(value)) return { type: "danger", label: "UNLIMITED APPROVAL", risk: "High" };
+        return { type: "warn", label: "ACTIVE APPROVAL", risk: "Medium" };
+      }
+
+      async function getReadProvider(){
+        const chain = CHAINS[$("chain").value];
+        return new ethers.JsonRpcProvider(chain.rpc, chain.chainId, { staticNetwork: true });
+      }
+
+      function validateAddress(v){
+        try{
+          return ethers.isAddress(v);
+        }catch{
+          return false;
+        }
+      }
+
+      function syncPresetToSpender(){
+        const key = $("spenderPreset").value;
+        if (key && PRESETS[key]) {
+          $("spender").value = PRESETS[key];
+        }
+      }
+
+      async function connectWallet(){
+        if (!window.ethereum) {
+          alert("No EVM wallet detected. Install MetaMask or another compatible wallet.");
+          return;
+        }
+        try{
+          browserProvider = new ethers.BrowserProvider(window.ethereum);
+          await browserProvider.send("eth_requestAccounts", []);
+          signer = await browserProvider.getSigner();
+          connectedAddress = await signer.getAddress();
+          $("walletStatus").textContent = "Connected wallet: " + connectedAddress;
+        }catch(err){
+          console.error(err);
+          alert("Wallet connection failed.");
+        }
+      }
+
+      function canRevokeCurrentCheck(){
+        if (!connectedAddress || !lastCheck) return false;
+        try{
+          const sameOwner = ethers.getAddress(connectedAddress) === ethers.getAddress(lastCheck.owner);
+          const nonZero = lastCheck.allowance > 0n;
+          return sameOwner && nonZero;
+        }catch{
+          return false;
+        }
+      }
+
+      function updateRevokeButton(){
+        $("revokeBtn").disabled = !canRevokeCurrentCheck();
+      }
+
+      async function readTokenMeta(contract){
+        let name = "Unknown token";
+        let symbol = "—";
+        let decimals = 18;
+        try { name = await contract.name(); } catch {}
+        try { symbol = await contract.symbol(); } catch {}
+        try { decimals = Number(await contract.decimals()); } catch {}
+        return { name, symbol, decimals };
+      }
+
+      async function checkApproval(){
+        const owner = $("owner").value.trim();
+        const token = $("token").value.trim();
+        const spender = $("spender").value.trim();
+
+        if (!validateAddress(owner)) {
+          setStatus("danger", "INVALID INPUT");
+          setResult({
+            main: "Invalid wallet address.",
+            meta: "Enter a valid EVM wallet address.",
+            spender: "—"
+          });
+          updateRevokeButton();
+          return;
+        }
+
+        if (!validateAddress(token)) {
+          setStatus("danger", "INVALID INPUT");
+          setResult({
+            main: "Invalid token contract address.",
+            meta: "Enter a valid ERC-20 token contract address.",
+            spender: "—"
+          });
+          updateRevokeButton();
+          return;
+        }
+
+        if (!validateAddress(spender)) {
+          setStatus("danger", "INVALID INPUT");
+          setResult({
+            main: "Invalid spender contract address.",
+            meta: "Enter a valid spender contract address or use a preset.",
+            spender: "—"
+          });
+          updateRevokeButton();
+          return;
+        }
+
+        try{
+          setStatus("neutral", "CHECKING");
+          setResult({
+            main: "Reading token allowance...",
+            meta: "Querying the token contract on the selected chain.",
+            spender: spender
+          });
+
+          const provider = await getReadProvider();
+          const contract = new ethers.Contract(token, ERC20_ABI, provider);
+          const meta = await readTokenMeta(contract);
+          const allowance = await contract.allowance(owner, spender);
+
+          const human = formatAllowanceHuman(allowance, meta.decimals);
+          const risk = getRiskLabel(allowance);
+
+          setStatus(risk.type, risk.label);
+          setResult({
+            main: allowance === 0n
+              ? "No active token approval found."
+              : isUnlimited(allowance)
+                ? "Unlimited token approval detected."
+                : "Active token approval found.",
+            meta: `${meta.name} (${meta.symbol}) on ${CHAINS[$("chain").value].label}.`,
+            tokenName: meta.name,
+            tokenSymbol: meta.symbol,
+            allowanceHuman: human + (meta.symbol && meta.symbol !== "—" ? ` ${meta.symbol}` : ""),
+            allowanceRaw: allowance.toString(),
+            riskLevel: risk.risk,
+            spender: spender
+          });
+
+          lastCheck = {
+            owner,
+            token,
+            spender,
+            chainKey: $("chain").value,
+            allowance,
+            decimals: meta.decimals
+          };
+
+          updateRevokeButton();
+        }catch(err){
+          console.error(err);
+          setStatus("danger", "LOOKUP FAILED");
+          setResult({
+            main: "Unable to read token allowance.",
+            meta: "Check the chain, token address, spender address, and try again.",
+            tokenName: "—",
+            tokenSymbol: "—",
+            allowanceHuman: "—",
+            allowanceRaw: "—",
+            riskLevel: "—",
+            spender: spender || "—"
+          });
+          lastCheck = null;
+          updateRevokeButton();
+        }
+      }
+
+      async function revokeApproval(){
+        if (!canRevokeCurrentCheck()) return;
+
+        if (!window.ethereum || !browserProvider || !signer) {
+          alert("Connect your wallet first.");
+          return;
+        }
+
+        const selectedChain = CHAINS[lastCheck.chainKey];
+
+        try{
+          const network = await browserProvider.getNetwork();
+          if (Number(network.chainId) !== selectedChain.chainId) {
+            try{
+              await window.ethereum.request({
+                method: "wallet_switchEthereumChain",
+                params: [{ chainId: "0x" + selectedChain.chainId.toString(16) }]
+              });
+              browserProvider = new ethers.BrowserProvider(window.ethereum);
+              signer = await browserProvider.getSigner();
+            }catch(switchErr){
+              console.error(switchErr);
+              alert(`Please switch your wallet to ${selectedChain.label} and try again.`);
+              return;
+            }
+          }
+
+          setStatus("warn", "REVOCATION PENDING");
+          setResult({
+            main: "Preparing revoke transaction...",
+            meta: "Your wallet will ask you to confirm an approve(spender, 0) transaction.",
+            tokenName: $("tokenName").textContent,
+            tokenSymbol: $("tokenSymbol").textContent,
+            allowanceHuman: $("allowanceHuman").textContent,
+            allowanceRaw: $("allowanceRaw").textContent,
+            riskLevel: $("riskLevel").textContent,
+            spender: lastCheck.spender
+          });
+
+          const writeContract = new ethers.Contract(lastCheck.token, ERC20_ABI, signer);
+          const tx = await writeContract.approve(lastCheck.spender, 0n);
+
+          setStatus("warn", "TX SUBMITTED");
+          $("resultMain").textContent = "Revocation transaction submitted.";
+          $("resultMeta").textContent = `Transaction hash: ${tx.hash}`;
+
+          await tx.wait();
+
+          setStatus("safe", "REVOKED");
+          $("resultMain").textContent = "Approval revoked successfully.";
+          $("resultMeta").textContent = "The token allowance was set to zero on-chain.";
+
+          lastCheck.allowance = 0n;
+          $("allowanceHuman").textContent = "0";
+          $("allowanceRaw").textContent = "0";
+          $("riskLevel").textContent = "Low";
+          updateRevokeButton();
+        }catch(err){
+          console.error(err);
+          setStatus("danger", "REVOCATION FAILED");
+          $("resultMain").textContent = "Approval revocation failed or was cancelled.";
+          $("resultMeta").textContent = "No changes were applied unless the transaction was confirmed on-chain.";
+        }
+      }
+
+      $("spenderPreset").addEventListener("change", syncPresetToSpender);
+
+      $("connectBtn").addEventListener("click", connectWallet);
+
+      $("useConnectedBtn").addEventListener("click", () => {
+        if (!connectedAddress) {
+          alert("Connect a wallet first.");
+          return;
+        }
+        $("owner").value = connectedAddress;
+      });
+
+      $("checkBtn").addEventListener("click", checkApproval);
+      $("revokeBtn").addEventListener("click", revokeApproval);
+      $("resetBtn").addEventListener("click", clearInputs);
+
+      ["owner","token","spender"].forEach((id) => {
+        $(id).addEventListener("keydown", (e) => {
+          if (e.key === "Enter") checkApproval();
+        });
+      });
+
+      if (window.ethereum) {
+        window.ethereum.on?.("accountsChanged", async (accounts) => {
+          try{
+            connectedAddress = accounts && accounts[0] ? ethers.getAddress(accounts[0]) : "";
+          }catch{
+            connectedAddress = "";
+          }
+          $("walletStatus").textContent = connectedAddress
+            ? "Connected wallet: " + connectedAddress
+            : "No wallet connected.";
+          updateRevokeButton();
+        });
+
+        window.ethereum.on?.("chainChanged", () => {
+          updateRevokeButton();
+        });
+      }
+
+      $("year").textContent = new Date().getFullYear();
+      resetResult();
+    })();
+  </script>
+</body>
+</html>
