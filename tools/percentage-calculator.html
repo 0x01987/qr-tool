@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Percentage Calculator Online | Percent Increase, Decrease & Reverse % | InstantQR</title>
+  <meta name="description" content="Free percentage calculator online. Calculate percentages, percent increase, percent decrease, what percent one number is of another, and reverse percentages instantly. Fast, mobile-friendly, and privacy-friendly." />
+  <meta name="keywords" content="percentage calculator, percent calculator, percent increase calculator, percent decrease calculator, reverse percentage calculator, what percent is, x percent of y, percentage change calculator, online percentage tool, instantqr" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/percentage-calculator.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Percentage Calculator Online | InstantQR" />
+  <meta property="og:description" content="Calculate percentages, percent increase/decrease, and reverse percentages instantly with this fast free tool." />
+  <meta property="og:url" content="https://instantqr.io/tools/percentage-calculator.html" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Percentage Calculator Online | InstantQR" />
+  <meta name="twitter:description" content="Free fast percentage calculator for everyday math, finance, discounts, and growth calculations." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+
+  <!-- Performance -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <style>
+    :root{
+      --bg:#081120;
+      --panel:#0f172a;
+      --panel-2:#111c34;
+      --text:#e5eefc;
+      --muted:#97a6c0;
+      --line:rgba(255,255,255,.10);
+      --brand:#38bdf8;
+      --brand-2:#22c55e;
+      --accent:#7c3aed;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:22px;
+      --radius-sm:14px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(124,58,237,.14), transparent 26%),
+        linear-gradient(180deg, #07101d 0%, #0a1325 45%, #09111f 100%);
+      min-height:100vh;
+      line-height:1.55;
+    }
+
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+    .topbar{
+      position:sticky; top:0; z-index:30;
+      backdrop-filter: blur(10px);
+      background:rgba(8,17,32,.72);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; color:#fff; font-weight:800; letter-spacing:.2px;
+    }
+    .brand img{width:34px;height:34px;display:block}
+    .brand span{font-size:1.05rem}
+    .navlinks{display:flex;gap:14px;flex-wrap:wrap}
+    .navlinks a{
+      color:var(--muted);
+      font-size:.95rem;
+      padding:8px 12px;
+      border-radius:999px;
+    }
+    .navlinks a:hover{
+      color:#fff;
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .hero{padding:40px 0 20px}
+    .heroCard{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:22px;
+      background:linear-gradient(180deg, rgba(17,28,52,.94), rgba(15,23,42,.94));
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:28px;
+      overflow:hidden;
+      position:relative;
+    }
+    .heroCard::after{
+      content:"";
+      position:absolute;
+      inset:auto -80px -80px auto;
+      width:240px; height:240px;
+      background:radial-gradient(circle, rgba(56,189,248,.18), transparent 65%);
+      pointer-events:none;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      background:rgba(56,189,248,.10);
+      color:#bfe9ff;
+      border:1px solid rgba(56,189,248,.22);
+      border-radius:999px;
+      font-size:.86rem;
+      font-weight:700;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(2rem, 4vw, 3.2rem);
+      line-height:1.05;
+      letter-spacing:-.03em;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:1.02rem;
+      max-width:760px;
+    }
+
+    .heroPoints{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+    .pill{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      padding:12px 14px;
+      color:#d8e4f7;
+      font-size:.95rem;
+    }
+
+    .heroAside{
+      display:grid;
+      gap:14px;
+      align-content:start;
+    }
+    .miniStat{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:18px;
+    }
+    .miniStat strong{
+      display:block;
+      font-size:1.4rem;
+      margin-bottom:4px;
+    }
+    .miniStat span{color:var(--muted);font-size:.95rem}
+
+    .breadcrumbs{
+      color:var(--muted);
+      font-size:.92rem;
+      margin:16px 0 0;
+    }
+    .breadcrumbs a{color:var(--muted)}
+    .breadcrumbs a:hover{color:#fff}
+
+    main{padding:22px 0 44px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(17,28,52,.94), rgba(15,23,42,.96));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+
+    .card h2,.card h3{
+      margin:0 0 8px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+    .card p{margin:0 0 14px;color:var(--muted)}
+
+    .toolGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+
+    .field{display:flex;flex-direction:column;gap:8px}
+    label{
+      font-weight:700;
+      font-size:.95rem;
+      color:#e8f1ff;
+    }
+
+    input, select, button{
+      font:inherit;
+    }
+    input, select{
+      width:100%;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0b1426;
+      color:#fff;
+      border-radius:14px;
+      padding:14px 14px;
+      outline:none;
+      transition:border-color .18s ease, box-shadow .18s ease, transform .08s ease;
+    }
+    input::placeholder{color:#7d8ba5}
+    input:focus, select:focus{
+      border-color:rgba(56,189,248,.62);
+      box-shadow:0 0 0 4px rgba(56,189,248,.15);
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    button{
+      border:0;
+      border-radius:14px;
+      padding:13px 16px;
+      cursor:pointer;
+      font-weight:800;
+      transition:transform .08s ease, opacity .2s ease, filter .2s ease;
+    }
+    button:hover{filter:brightness(1.04)}
+    button:active{transform:translateY(1px)}
+    .btnPrimary{
+      background:linear-gradient(135deg,var(--brand),#2563eb);
+      color:#fff;
+    }
+    .btnSecondary{
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.1);
+    }
+
+    .result{
+      margin-top:14px;
+      border:1px solid rgba(34,197,94,.22);
+      background:linear-gradient(180deg, rgba(34,197,94,.08), rgba(34,197,94,.03));
+      border-radius:18px;
+      padding:16px;
+      min-height:84px;
+    }
+    .result .value{
+      display:block;
+      font-size:clamp(1.35rem, 2.6vw, 2rem);
+      font-weight:900;
+      color:#b8ffd0;
+      letter-spacing:-.02em;
+      margin-bottom:5px;
+      word-break:break-word;
+    }
+    .result .meta{
+      color:#cde8d7;
+      font-size:.95rem;
+    }
+
+    .wide{grid-column:1 / -1}
+
+    .infoGrid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+    .infoBox{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:18px;
+    }
+    .infoBox h3{margin:0 0 8px}
+    .infoBox p{margin:0;color:var(--muted)}
+
+    .faq details{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    .faq details + details{margin-top:12px}
+    .faq summary{
+      cursor:pointer;
+      font-weight:800;
+      color:#fff;
+      list-style:none;
+    }
+    .faq summary::-webkit-details-marker{display:none}
+    .faq .answer{
+      margin-top:10px;
+      color:var(--muted);
+    }
+
+    .content p{color:var(--muted)}
+    .content strong{color:#fff}
+
+    .footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:26px 0 40px;
+      color:var(--muted);
+    }
+    .footerCard{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;
+      padding:20px;
+    }
+    .footerLinks{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top:10px;
+      font-size:.95rem;
+    }
+    .footerLinks a{color:#c4d6ef}
+
+    .sr-only{
+      position:absolute !important;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);
+      white-space:nowrap;border:0;
+    }
+
+    @media (max-width: 980px){
+      .heroCard{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .infoGrid{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 680px){
+      .wrap{padding:0 14px}
+      .hero{padding:24px 0 14px}
+      .heroCard,.card,.footerCard{padding:18px}
+      .toolGrid{grid-template-columns:1fr}
+      .heroPoints{grid-template-columns:1fr}
+      .nav{align-items:flex-start;flex-direction:column}
+      .navlinks{width:100%}
+    }
+  </style>
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"Percentage Calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "url":"https://instantqr.io/tools/percentage-calculator.html",
+    "description":"Free online percentage calculator for percent increase, percent decrease, reverse percentage, and common percentage math.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Percentage Calculator",
+        "item":"https://instantqr.io/tools/percentage-calculator.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How do I calculate a percentage of a number?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Multiply the number by the percentage and divide by 100. For example, 20% of 150 is 30."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How do I find percent increase or decrease?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Subtract the old value from the new value, divide by the old value, then multiply by 100. A positive result is an increase and a negative result is a decrease."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What is a reverse percentage?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A reverse percentage helps you find the original value before a percentage increase or decrease was applied."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this percentage calculator store my numbers?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. All calculations run directly in your browser and no input values are stored."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <span>InstantQR</span>
+      </a>
+
+      <nav class="navlinks" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="heroCard">
+        <div>
+          <div class="badge">Free Online Math Tool</div>
+          <h1>Percentage Calculator</h1>
+          <p class="sub">
+            Calculate percentages instantly with a fast, responsive, privacy-friendly tool. Find
+            <strong>X% of Y</strong>, determine <strong>what percent one number is of another</strong>,
+            measure <strong>percent increase or decrease</strong>, and solve <strong>reverse percentages</strong>.
+          </p>
+
+          <div class="heroPoints">
+            <div class="pill">Fast and mobile-friendly</div>
+            <div class="pill">Multiple percent formulas in one page</div>
+            <div class="pill">Useful for discounts, tips, finance, and growth</div>
+            <div class="pill">Runs locally in your browser</div>
+          </div>
+
+          <div class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="/">Home</a> / <a href="/tools.html">Tools</a> / <span>Percentage Calculator</span>
+          </div>
+        </div>
+
+        <aside class="heroAside" aria-label="Highlights">
+          <div class="miniStat">
+            <strong>4 calculators</strong>
+            <span>Everyday percent math in one clean page</span>
+          </div>
+          <div class="miniStat">
+            <strong>Instant results</strong>
+            <span>No signup, no delay, no unnecessary clutter</span>
+          </div>
+          <div class="miniStat">
+            <strong>Useful for SEO traffic</strong>
+            <span>Targets high-intent search terms around percentage math</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="wrap">
+      <section class="grid" aria-label="Percentage calculator tools">
+        <!-- X% of Y -->
+        <article class="card">
+          <h2>X% of Y</h2>
+          <p>Find a percentage of any number. Great for tax, tips, discounts, commissions, and quick math.</p>
+
+          <div class="toolGrid">
+            <div class="field">
+              <label for="percentOfX">Percentage (%)</label>
+              <input id="percentOfX" inputmode="decimal" placeholder="e.g. 25" />
+            </div>
+            <div class="field">
+              <label for="percentOfY">Number</label>
+              <input id="percentOfY" inputmode="decimal" placeholder="e.g. 200" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btnPrimary" id="calcPercentOfBtn" type="button">Calculate</button>
+            <button class="btnSecondary" id="resetPercentOfBtn" type="button">Reset</button>
+          </div>
+
+          <div class="result" id="percentOfResult" aria-live="polite">
+            <span class="value">—</span>
+            <div class="meta">Enter values to calculate the result.</div>
+          </div>
+        </article>
+
+        <!-- What percent is X of Y -->
+        <article class="card">
+          <h2>What percent is X of Y?</h2>
+          <p>Find the percentage that one number represents of another number.</p>
+
+          <div class="toolGrid">
+            <div class="field">
+              <label for="whatPercentX">Part (X)</label>
+              <input id="whatPercentX" inputmode="decimal" placeholder="e.g. 50" />
+            </div>
+            <div class="field">
+              <label for="whatPercentY">Whole (Y)</label>
+              <input id="whatPercentY" inputmode="decimal" placeholder="e.g. 200" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btnPrimary" id="calcWhatPercentBtn" type="button">Calculate</button>
+            <button class="btnSecondary" id="resetWhatPercentBtn" type="button">Reset</button>
+          </div>
+
+          <div class="result" id="whatPercentResult" aria-live="polite">
+            <span class="value">—</span>
+            <div class="meta">Enter values to calculate the result.</div>
+          </div>
+        </article>
+
+        <!-- Percent change -->
+        <article class="card">
+          <h2>Percent Increase / Decrease</h2>
+          <p>Measure percentage change from an original number to a new number.</p>
+
+          <div class="toolGrid">
+            <div class="field">
+              <label for="changeOld">Original value</label>
+              <input id="changeOld" inputmode="decimal" placeholder="e.g. 120" />
+            </div>
+            <div class="field">
+              <label for="changeNew">New value</label>
+              <input id="changeNew" inputmode="decimal" placeholder="e.g. 150" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btnPrimary" id="calcChangeBtn" type="button">Calculate</button>
+            <button class="btnSecondary" id="resetChangeBtn" type="button">Reset</button>
+          </div>
+
+          <div class="result" id="changeResult" aria-live="polite">
+            <span class="value">—</span>
+            <div class="meta">Enter values to calculate the result.</div>
+          </div>
+        </article>
+
+        <!-- Reverse percentage -->
+        <article class="card">
+          <h2>Reverse Percentage</h2>
+          <p>Find the original value before a percentage increase or decrease was applied.</p>
+
+          <div class="toolGrid">
+            <div class="field">
+              <label for="reverseFinal">Final value</label>
+              <input id="reverseFinal" inputmode="decimal" placeholder="e.g. 120" />
+            </div>
+            <div class="field">
+              <label for="reversePercent">Percentage (%)</label>
+              <input id="reversePercent" inputmode="decimal" placeholder="e.g. 20" />
+            </div>
+            <div class="field" style="grid-column:1 / -1;">
+              <label for="reverseMode">Operation</label>
+              <select id="reverseMode">
+                <option value="increase">Final value after percentage increase</option>
+                <option value="decrease">Final value after percentage decrease</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btnPrimary" id="calcReverseBtn" type="button">Calculate</button>
+            <button class="btnSecondary" id="resetReverseBtn" type="button">Reset</button>
+          </div>
+
+          <div class="result" id="reverseResult" aria-live="polite">
+            <span class="value">—</span>
+            <div class="meta">Enter values to calculate the result.</div>
+          </div>
+        </article>
+
+        <section class="card wide" aria-labelledby="commonExamplesTitle">
+          <h2 id="commonExamplesTitle">Common Percentage Examples</h2>
+          <p>Quick reference examples for everyday use.</p>
+
+          <div class="infoGrid">
+            <div class="infoBox">
+              <h3>Discounts</h3>
+              <p>20% off $80 = $16 discount. Final price = $64.</p>
+            </div>
+            <div class="infoBox">
+              <h3>Tips</h3>
+              <p>15% tip on $50 = $7.50.</p>
+            </div>
+            <div class="infoBox">
+              <h3>Growth</h3>
+              <p>Increase from 200 to 250 = 25% increase.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="card wide content" aria-labelledby="aboutTitle">
+          <h2 id="aboutTitle">How to Use This Percentage Calculator</h2>
+          <p>
+            This free online percentage calculator helps with some of the most common percentage formulas.
+            You can use it for shopping discounts, profit analysis, tax estimates, schoolwork, budgeting,
+            business metrics, and growth tracking.
+          </p>
+          <p>
+            <strong>X% of Y:</strong> Use this when you need to find a portion of a number. Example: 18% of 250.
+          </p>
+          <p>
+            <strong>What percent is X of Y:</strong> Use this to compare values. Example: 45 is what percent of 60?
+          </p>
+          <p>
+            <strong>Percent increase or decrease:</strong> Use this to measure change over time or compare before-and-after values.
+          </p>
+          <p>
+            <strong>Reverse percentage:</strong> Use this when you know the final amount and want to find the original amount before an increase or decrease.
+          </p>
+        </section>
+
+        <section class="card wide faq" aria-labelledby="faqTitle">
+          <h2 id="faqTitle">Frequently Asked Questions</h2>
+          <p>Answers to common questions about percentage calculations.</p>
+
+          <details>
+            <summary>How do you calculate X percent of Y?</summary>
+            <div class="answer">
+              Multiply Y by X, then divide by 100. Example: 25% of 200 = (25 × 200) ÷ 100 = 50.
+            </div>
+          </details>
+
+          <details>
+            <summary>How do I calculate percent increase?</summary>
+            <div class="answer">
+              Subtract the old value from the new value, divide by the old value, and multiply by 100.
+              Example: from 80 to 100 = ((100 − 80) ÷ 80) × 100 = 25%.
+            </div>
+          </details>
+
+          <details>
+            <summary>How do I calculate percent decrease?</summary>
+            <div class="answer">
+              Subtract the new value from the old value, divide by the old value, and multiply by 100.
+              Example: from 100 to 80 = ((100 − 80) ÷ 100) × 100 = 20%.
+            </div>
+          </details>
+
+          <details>
+            <summary>What is reverse percentage used for?</summary>
+            <div class="answer">
+              Reverse percentage is useful when you know the final value after a discount or markup and need to find the original number.
+            </div>
+          </details>
+
+          <details>
+            <summary>Does this tool store my inputs?</summary>
+            <div class="answer">
+              No. The calculations run in your browser for speed and privacy.
+            </div>
+          </details>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footerCard">
+        <strong>InstantQR</strong>
+        <div class="footerLinks">
+          <div>
+            <a href="/tools.html">All Tools</a> ·
+            <a href="/password.html">Password Generator</a> ·
+            <a href="/unit-converter.html">Unit Converter</a> ·
+            <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+            <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
+            <a href="/ip-lookup.html">IP Lookup</a> ·
+            <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+          </div>
+          <div>
+            <a href="/about.html">About</a> ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/terms.html">Terms</a> ·
+            <a href="/contact.html">Contact</a>
+          </div>
+          <div>© <span id="year"></span> InstantQR. Fast, clean, and privacy-friendly tools.</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const $ = (id) => document.getElementById(id);
+
+      const fmt = (num) => {
+        if (!Number.isFinite(num)) return "—";
+        const abs = Math.abs(num);
+        const digits = abs >= 1000 ? 2 : abs >= 1 ? 4 : 6;
+        return new Intl.NumberFormat(undefined, {
+          maximumFractionDigits: digits
+        }).format(num);
+      };
+
+      const readNum = (el) => {
+        const v = el.value.trim().replace(/,/g, "");
+        if (v === "") return NaN;
+        return Number(v);
+      };
+
+      const setResult = (box, value, meta) => {
+        box.querySelector(".value").textContent = value;
+        box.querySelector(".meta").textContent = meta;
+      };
+
+      const invalid = (box, msg) => {
+        setResult(box, "Invalid input", msg);
+      };
+
+      // X% of Y
+      function calcPercentOf(){
+        const x = readNum($("percentOfX"));
+        const y = readNum($("percentOfY"));
+        const box = $("percentOfResult");
+
+        if (!Number.isFinite(x) || !Number.isFinite(y)) {
+          return invalid(box, "Please enter valid numbers for percentage and value.");
+        }
+
+        const result = (x / 100) * y;
+        setResult(
+          box,
+          fmt(result),
+          `${fmt(x)}% of ${fmt(y)} = ${fmt(result)}`
+        );
+      }
+
+      function resetPercentOf(){
+        $("percentOfX").value = "";
+        $("percentOfY").value = "";
+        setResult($("percentOfResult"), "—", "Enter values to calculate the result.");
+      }
+
+      // What percent is X of Y
+      function calcWhatPercent(){
+        const x = readNum($("whatPercentX"));
+        const y = readNum($("whatPercentY"));
+        const box = $("whatPercentResult");
+
+        if (!Number.isFinite(x) || !Number.isFinite(y)) {
+          return invalid(box, "Please enter valid numbers for part and whole.");
+        }
+        if (y === 0) {
+          return invalid(box, "The whole value cannot be 0.");
+        }
+
+        const result = (x / y) * 100;
+        setResult(
+          box,
+          `${fmt(result)}%`,
+          `${fmt(x)} is ${fmt(result)}% of ${fmt(y)}`
+        );
+      }
+
+      function resetWhatPercent(){
+        $("whatPercentX").value = "";
+        $("whatPercentY").value = "";
+        setResult($("whatPercentResult"), "—", "Enter values to calculate the result.");
+      }
+
+      // Percent change
+      function calcChange(){
+        const oldVal = readNum($("changeOld"));
+        const newVal = readNum($("changeNew"));
+        const box = $("changeResult");
+
+        if (!Number.isFinite(oldVal) || !Number.isFinite(newVal)) {
+          return invalid(box, "Please enter valid original and new values.");
+        }
+        if (oldVal === 0) {
+          return invalid(box, "The original value cannot be 0.");
+        }
+
+        const delta = newVal - oldVal;
+        const pct = (delta / oldVal) * 100;
+        const label = pct > 0 ? "increase" : pct < 0 ? "decrease" : "no change";
+
+        setResult(
+          box,
+          `${fmt(pct)}%`,
+          `From ${fmt(oldVal)} to ${fmt(newVal)} = ${label} of ${fmt(Math.abs(pct))}%`
+        );
+      }
+
+      function resetChange(){
+        $("changeOld").value = "";
+        $("changeNew").value = "";
+        setResult($("changeResult"), "—", "Enter values to calculate the result.");
+      }
+
+      // Reverse percentage
+      function calcReverse(){
+        const finalVal = readNum($("reverseFinal"));
+        const percent = readNum($("reversePercent"));
+        const mode = $("reverseMode").value;
+        const box = $("reverseResult");
+
+        if (!Number.isFinite(finalVal) || !Number.isFinite(percent)) {
+          return invalid(box, "Please enter valid values for final amount and percentage.");
+        }
+
+        let original;
+
+        if (mode === "increase") {
+          const divisor = 1 + (percent / 100);
+          if (divisor === 0) return invalid(box, "This percentage creates an invalid calculation.");
+          original = finalVal / divisor;
+          setResult(
+            box,
+            fmt(original),
+            `Original value before a ${fmt(percent)}% increase = ${fmt(original)}`
+          );
+        } else {
+          const divisor = 1 - (percent / 100);
+          if (divisor === 0) return invalid(box, "100% decrease does not allow a reverse calculation.");
+          original = finalVal / divisor;
+          setResult(
+            box,
+            fmt(original),
+            `Original value before a ${fmt(percent)}% decrease = ${fmt(original)}`
+          );
+        }
+      }
+
+      function resetReverse(){
+        $("reverseFinal").value = "";
+        $("reversePercent").value = "";
+        $("reverseMode").value = "increase";
+        setResult($("reverseResult"), "—", "Enter values to calculate the result.");
+      }
+
+      // Bind buttons
+      $("calcPercentOfBtn").addEventListener("click", calcPercentOf);
+      $("resetPercentOfBtn").addEventListener("click", resetPercentOf);
+
+      $("calcWhatPercentBtn").addEventListener("click", calcWhatPercent);
+      $("resetWhatPercentBtn").addEventListener("click", resetWhatPercent);
+
+      $("calcChangeBtn").addEventListener("click", calcChange);
+      $("resetChangeBtn").addEventListener("click", resetChange);
+
+      $("calcReverseBtn").addEventListener("click", calcReverse);
+      $("resetReverseBtn").addEventListener("click", resetReverse);
+
+      // Enter to calculate inside each section
+      [
+        ["percentOfX","percentOfY"],
+        ["whatPercentX","whatPercentY"],
+        ["changeOld","changeNew"],
+        ["reverseFinal","reversePercent"]
+      ].forEach((ids, index) => {
+        ids.forEach(id => {
+          $(id).addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+              if (index === 0) calcPercentOf();
+              if (index === 1) calcWhatPercent();
+              if (index === 2) calcChange();
+              if (index === 3) calcReverse();
+            }
+          });
+        });
+      });
+
+      $("reverseMode").addEventListener("change", calcReverse);
+
+      $("year").textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
