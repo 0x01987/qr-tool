@@ -7,30 +7,42 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
-  
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <!-- ✅ Match InstantQR “home page” style: same topbar/nav/card layout -->
   <title>World Clock – Live Time in Any City | InstantQR.io</title>
-  <meta name="description" content="Free world clock: live local time for any city/time zone. Add & remove clocks, 12/24-hour toggle, business-hours indicator, and copy time. Privacy-first: runs locally in your browser." />
-  <meta name="robots" content="index,follow" />
+  <meta name="description" content="Free world clock with live local time for cities and time zones worldwide. Add and remove clocks, switch 12/24-hour format, change color theme, maximize clocks, check business hours, and copy time instantly." />
+  <meta name="keywords" content="world clock, live world clock, city time, current time by city, time zones, local time, international clock, UTC clock, business hours clock" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0b0f19" />
+  <meta name="format-detection" content="telephone=no" />
+
   <link rel="canonical" href="https://instantqr.io/tools/world-clock.html" />
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="alternate" hreflang="en" href="https://instantqr.io/tools/world-clock.html" />
 
-  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR.io" />
   <meta property="og:title" content="World Clock – Live Time in Any City | InstantQR.io" />
-  <meta property="og:description" content="Live world clock for any city/time zone. Add clocks, 12/24h toggle, business-hours indicator, and copy time. Runs locally." />
+  <meta property="og:description" content="Live local time for cities and time zones worldwide. Add clocks, switch 12/24-hour format, change color theme, maximize clocks, and copy time instantly." />
   <meta property="og:url" content="https://instantqr.io/tools/world-clock.html" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+  <meta property="og:image:alt" content="InstantQR World Clock tool" />
+  <meta property="og:locale" content="en_US" />
 
-  <!-- ✅ SoftwareApplication schema -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="World Clock – Live Time in Any City | InstantQR.io" />
+  <meta name="twitter:description" content="Free online world clock with live time zones, themes, maximize mode, business-hours status, and quick sharing." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -39,17 +51,21 @@ crossorigin="anonymous"></script>
     "applicationCategory":"UtilitiesApplication",
     "operatingSystem":"Web",
     "url":"https://instantqr.io/tools/world-clock.html",
+    "description":"Free online world clock showing live local time in cities and time zones worldwide.",
     "publisher":{
       "@type":"Organization",
       "name":"InstantQR",
       "url":"https://instantqr.io",
       "logo":"https://instantqr.io/assets/instantqr-logo.svg"
     },
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
   }
   </script>
 
-  <!-- ✅ FAQ schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -58,17 +74,62 @@ crossorigin="anonymous"></script>
       {
         "@type":"Question",
         "name":"Does this world clock run locally?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes. The world clock runs entirely in your browser using built-in time zone support. No login is required."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The world clock runs entirely in your browser using built-in time zone support. No login is required."
+        }
       },
       {
         "@type":"Question",
         "name":"Can I add or remove cities?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes. Add cities/time zones from the search box and remove any clock. Your selected clocks are saved locally in your browser."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. Add cities or time zones from the search box and remove any clock. Your selected clocks are saved locally in your browser."
+        }
       },
       {
         "@type":"Question",
-        "name":"What are business hours?",
-        "acceptedAnswer":{"@type":"Answer","text":"Business hours are shown as an indicator for 9:00–17:00 local time in each city to help schedule calls and meetings."}
+        "name":"Can I change the color theme?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can switch between blue, green, red, and white themes."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I maximize one clock or all clocks?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can maximize an individual clock card or expand the whole clock grid."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "@id":"https://instantqr.io/tools/world-clock.html#breadcrumb",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"World Clock",
+        "item":"https://instantqr.io/tools/world-clock.html"
       }
     ]
   }
@@ -77,45 +138,81 @@ crossorigin="anonymous"></script>
   <style>
     :root{
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-
       --bg:#0b0f19;
       --card:#121a2a;
       --panel:#0e1525;
-
       --border:#22304e;
       --border2:#2a3a5f;
-
       --text:#e7eaf2;
       --muted:#b8c0d6;
       --muted2:#8ea0c8;
       --link:#cfe0ff;
-
       --brand:#3b82f6;
+      --brand-soft:rgba(59,130,246,.18);
       --good:#34d399;
       --warn:#fbbf24;
       --bad:#fb7185;
-
-      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --shadow:0 12px 40px rgba(0,0,0,.35);
       --radius:18px;
       --radius2:16px;
-
       --max:1080px;
-      color-scheme: dark;
+      color-scheme:dark;
     }
-    *{ box-sizing:border-box; }
+
+    body.theme-blue{
+      --brand:#3b82f6;
+      --brand-soft:rgba(59,130,246,.18);
+      --link:#cfe0ff;
+    }
+    body.theme-green{
+      --brand:#22c55e;
+      --brand-soft:rgba(34,197,94,.18);
+      --link:#d7ffe5;
+    }
+    body.theme-red{
+      --brand:#ef4444;
+      --brand-soft:rgba(239,68,68,.18);
+      --link:#ffe1e1;
+    }
+    body.theme-white{
+      --brand:#e5e7eb;
+      --brand-soft:rgba(229,231,235,.18);
+      --link:#ffffff;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
     body{
       margin:0;
       background:
-        radial-gradient(900px 540px at 12% 8%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 540px at 12% 8%, var(--brand-soft), transparent 55%),
         radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
         var(--bg);
       color:var(--text);
-      line-height:1.45;
+      line-height:1.5;
     }
-    a{ color:var(--link); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
 
-    .wrap{ max-width:var(--max); margin:0 auto; padding:22px; }
+    body.theme-white{
+      background:
+        radial-gradient(900px 540px at 12% 8%, rgba(229,231,235,.12), transparent 55%),
+        radial-gradient(900px 540px at 88% 12%, rgba(255,255,255,.06), transparent 55%),
+        var(--bg);
+    }
+
+    body.grid-maximized .wrap{
+      max-width:100%;
+      padding:12px;
+    }
+
+    body.grid-maximized .card{
+      padding:14px;
+    }
+
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px;transition:max-width .2s ease}
     .card{
       background:var(--card);
       border:1px solid var(--border);
@@ -124,7 +221,6 @@ crossorigin="anonymous"></script>
       box-shadow:var(--shadow);
     }
 
-    /* ✅ Home-page style topbar */
     .topbar{
       display:flex;
       align-items:center;
@@ -135,6 +231,7 @@ crossorigin="anonymous"></script>
       border-bottom:1px solid rgba(34,48,78,.55);
       margin-bottom:12px;
     }
+
     .brand{
       display:flex;
       align-items:center;
@@ -145,8 +242,9 @@ crossorigin="anonymous"></script>
       letter-spacing:-.2px;
       min-width:0;
     }
-    .brand img{ height:30px; width:auto; display:block; }
-    .brand span{ font-size:16px; }
+
+    .brand img{height:30px;width:auto;display:block}
+    .brand span{font-size:16px}
 
     .nav{
       display:flex;
@@ -154,6 +252,7 @@ crossorigin="anonymous"></script>
       flex-wrap:wrap;
       align-items:center;
     }
+
     .nav a{
       display:inline-block;
       padding:10px 12px;
@@ -165,30 +264,57 @@ crossorigin="anonymous"></script>
       font-weight:800;
       font-size:12px;
       user-select:none;
-      -webkit-tap-highlight-color: transparent;
+      -webkit-tap-highlight-color:transparent;
     }
-    .nav a:hover{ border-color: rgba(59,130,246,.85); }
-    .nav a.active{ border-color: rgba(59,130,246,.95); }
 
-    /* Hero */
+    .nav a:hover{border-color:var(--brand)}
+    .nav a.active{border-color:var(--brand)}
+
+    .breadcrumbs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin:4px 0 14px;
+      font-size:12px;
+      color:var(--muted2);
+    }
+
     .hero{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns:1.1fr .9fr;
       gap:14px;
       align-items:start;
       margin-top:10px;
     }
-    @media (max-width: 920px){ .hero{ grid-template-columns:1fr; } }
-    h1{ margin:0; font-size:28px; letter-spacing:-.3px; }
-    .sub{ margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.6; max-width:76ch; }
+
+    @media (max-width:920px){
+      .hero{grid-template-columns:1fr}
+    }
+
+    h1{
+      margin:0;
+      font-size:28px;
+      letter-spacing:-.3px;
+    }
+
+    .sub{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.65;
+      max-width:76ch;
+    }
 
     .kpis{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns:repeat(3, 1fr);
       gap:10px;
       margin-top:14px;
     }
-    @media (max-width: 920px){ .kpis{ grid-template-columns:1fr; } }
+
+    @media (max-width:920px){
+      .kpis{grid-template-columns:1fr}
+    }
 
     .kpi{
       border:1px solid var(--border2);
@@ -196,8 +322,9 @@ crossorigin="anonymous"></script>
       border-radius:14px;
       padding:12px;
     }
-    .kpi .t{ color:var(--muted2); font-size:12px; }
-    .kpi .v{ font-size:16px; font-weight:900; margin-top:4px; }
+
+    .kpi .t{color:var(--muted2);font-size:12px}
+    .kpi .v{font-size:16px;font-weight:900;margin-top:4px}
 
     .panel{
       background:var(--panel);
@@ -205,14 +332,21 @@ crossorigin="anonymous"></script>
       border-radius:var(--radius2);
       padding:14px;
     }
+
     .panelHeader{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
       margin-bottom:10px;
+      flex-wrap:wrap;
     }
-    .panelHeader .title{ font-weight:900; letter-spacing:-.1px; }
+
+    .panelHeader .title{
+      font-weight:900;
+      letter-spacing:-.1px;
+    }
+
     .badge{
       font-size:12px;
       color:var(--muted);
@@ -224,14 +358,16 @@ crossorigin="anonymous"></script>
       white-space:nowrap;
     }
 
-    /* Controls */
     .row{
       display:grid;
-      grid-template-columns: 1.4fr .8fr .8fr;
+      grid-template-columns:1.3fr .8fr 1fr;
       gap:12px;
       align-items:start;
     }
-    @media (max-width: 920px){ .row{ grid-template-columns:1fr; } }
+
+    @media (max-width:920px){
+      .row{grid-template-columns:1fr}
+    }
 
     label{
       font-size:12px;
@@ -242,7 +378,9 @@ crossorigin="anonymous"></script>
       gap:8px;
       margin-bottom:6px;
     }
-    .hint{ color: var(--muted2); font-size:12px; }
+
+    .hint{color:var(--muted2);font-size:12px}
+    .note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.65}
 
     input, select, button{
       width:100%;
@@ -253,13 +391,15 @@ crossorigin="anonymous"></script>
       color:var(--text);
       outline:none;
       font-size:14px;
-      -webkit-tap-highlight-color: transparent;
+      -webkit-tap-highlight-color:transparent;
     }
+
     input:focus, select:focus{
-      border-color: rgba(59,130,246,.85);
-      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+      border-color:var(--brand);
+      box-shadow:0 0 0 3px color-mix(in srgb, var(--brand) 22%, transparent);
     }
-    input::placeholder{ color:#64748b; }
+
+    input::placeholder{color:#64748b}
 
     .actions{
       display:flex;
@@ -267,7 +407,9 @@ crossorigin="anonymous"></script>
       flex-wrap:wrap;
       align-items:center;
     }
-    .actions button{ width:auto; }
+
+    .actions button{width:auto}
+
     .btn{
       cursor:pointer;
       border:1px solid var(--border2);
@@ -277,114 +419,311 @@ crossorigin="anonymous"></script>
       border-radius:14px;
       font-weight:900;
     }
-    .btn:hover{ border-color: rgba(59,130,246,.75); }
+
+    .btn:hover{border-color:var(--brand)}
+
     .btn.primary{
-      background: var(--brand);
-      border-color: transparent;
-      color:white;
+      background:var(--brand);
+      border-color:transparent;
+      color:#fff;
     }
+
+    body.theme-white .btn.primary{
+      color:#111827;
+    }
+
     .btn.danger{
-      border-color: rgba(251,113,133,.55);
-      background: rgba(251,113,133,.12);
+      border-color:rgba(251,113,133,.55);
+      background:rgba(251,113,133,.12);
     }
 
-    .note{ margin-top:10px; color:var(--muted); font-size:12px; line-height:1.6; }
+    .themeRow{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
 
-    /* Suggestions */
-    .suggest{ position:relative; }
+    .themeBtn{
+      width:auto;
+      min-width:74px;
+      padding:10px 12px;
+      border-radius:999px;
+      font-weight:800;
+      cursor:pointer;
+      border:1px solid var(--border2);
+      background:#0b1222;
+      color:var(--text);
+    }
+
+    .themeBtn.active{
+      border-color:var(--brand);
+      box-shadow:0 0 0 2px color-mix(in srgb, var(--brand) 22%, transparent);
+    }
+
+    .themeBtn[data-theme="blue"]{background:rgba(59,130,246,.12)}
+    .themeBtn[data-theme="green"]{background:rgba(34,197,94,.12)}
+    .themeBtn[data-theme="red"]{background:rgba(239,68,68,.12)}
+    .themeBtn[data-theme="white"]{background:rgba(255,255,255,.10)}
+
+    .suggest{position:relative}
+
     .suggestList{
-      position:absolute;left:0;right:0;top:100%;
-      background:#0b1222;border:1px solid var(--border2);
-      border-radius:14px;margin-top:8px;
-      overflow:hidden;display:none;
-      max-height:280px;overflow-y:auto;
+      position:absolute;
+      left:0;
+      right:0;
+      top:100%;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      border-radius:14px;
+      margin-top:8px;
+      overflow:hidden;
+      display:none;
+      max-height:280px;
+      overflow-y:auto;
       z-index:20;
-      box-shadow: var(--shadow);
-      contain: content;
+      box-shadow:var(--shadow);
+      contain:content;
     }
+
     .suggestItem{
-      padding:10px 12px;cursor:pointer;
-      display:flex;justify-content:space-between;gap:12px;
+      padding:10px 12px;
+      cursor:pointer;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
       border-top:1px solid rgba(42,58,95,.55);
     }
+
     .suggestItem:first-child{border-top:none}
     .suggestItem:hover{background:#0f1a2e}
     .suggestItem b{font-size:13px}
     .suggestItem span{font-size:12px;color:var(--muted2)}
-    .mono{ font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; }
 
-    /* Clocks grid */
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    }
+
     .cards{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns:repeat(3, 1fr);
       gap:12px;
+      transition:all .2s ease;
     }
-    @media (max-width:980px){ .cards{grid-template-columns: repeat(2, 1fr);} }
-    @media (max-width:640px){ .cards{grid-template-columns: 1fr;} }
+
+    body.grid-maximized .cards{
+      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    @media (max-width:980px){
+      .cards{grid-template-columns:repeat(2, 1fr)}
+    }
+
+    @media (max-width:640px){
+      .cards{grid-template-columns:1fr}
+    }
 
     .clockCard{
       border:1px solid var(--border2);
       border-radius:16px;
       padding:12px;
       background:#0b1222;
-      contain: content;
+      contain:content;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
 
-    .topline{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-    .city{display:flex;flex-direction:column;gap:2px;min-width:0;}
-    .city b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .city small{color:var(--muted2);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .clockCard:hover{
+      border-color:color-mix(in srgb, var(--brand) 70%, var(--border2));
+      transform:translateY(-1px);
+    }
 
-    .chipRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .clockCard.maximized{
+      grid-column:1 / -1;
+      min-height:380px;
+      padding:18px;
+      border-color:var(--brand);
+      box-shadow:0 0 0 1px color-mix(in srgb, var(--brand) 25%, transparent), var(--shadow);
+    }
+
+    .clockCard.maximized .time{
+      font-size:64px;
+      margin-top:20px;
+    }
+
+    .clockCard.maximized .date{
+      font-size:16px;
+      margin-top:10px;
+    }
+
+    .clockCard.maximized .city b{
+      font-size:24px;
+    }
+
+    .clockCard.maximized .city small{
+      font-size:14px;
+    }
+
+    .topline{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .city{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+
+    .city b{
+      font-size:14px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .city small{
+      color:var(--muted2);
+      font-size:12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .chipRow{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+
     .chip{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:6px 10px;border-radius:999px;border:1px solid rgba(42,58,95,.70);
-      font-size:12px;color:var(--muted);background: rgba(14,21,37,.55);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(42,58,95,.70);
+      font-size:12px;
+      color:var(--muted);
+      background:rgba(14,21,37,.55);
     }
-    .dot{width:8px;height:8px;border-radius:50%;}
+
+    .dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+    }
+
     .dot.good{background:var(--good)}
     .dot.warn{background:var(--warn)}
     .dot.bad{background:var(--bad)}
 
     .time{
-      font-size:30px;font-weight:950;letter-spacing:0.4px;line-height:1.05;
+      font-size:30px;
+      font-weight:950;
+      letter-spacing:.4px;
+      line-height:1.05;
       margin-top:10px;
+      color:var(--brand);
+      text-shadow:0 0 18px color-mix(in srgb, var(--brand) 18%, transparent);
     }
-    .date{color:var(--muted);font-size:12px;margin-top:6px}
 
-    .btnRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .btnRow button{flex:1}
-    .btnMini{
-      padding:10px 10px;border-radius:14px;border:1px solid var(--border2);
-      background:#0b1222;color:var(--text);font-weight:800;cursor:pointer;
+    body.theme-white .time{
+      color:#f9fafb;
     }
-    .btnMini:hover{ border-color: rgba(59,130,246,.75); }
+
+    .date{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:6px;
+    }
+
+    .btnRow{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .btnRow button{flex:1}
+
+    .btnMini{
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid var(--border2);
+      background:#0b1222;
+      color:var(--text);
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .btnMini:hover{border-color:var(--brand)}
+
+    .faqWrap{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    @media (max-width:920px){
+      .faqWrap{grid-template-columns:1fr}
+    }
+
+    .sectionTitle{
+      margin:0 0 10px;
+      font-size:15px;
+      font-weight:900;
+      letter-spacing:-.2px;
+    }
+
+    .faqItem{
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px solid rgba(42,58,95,.55);
+    }
+
+    .faqItem:first-of-type{
+      margin-top:0;
+      padding-top:0;
+      border-top:0;
+    }
 
     .toast{
-      position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
-      background:#0b1222; border:1px solid var(--border2);
-      color:var(--text); padding:10px 12px; border-radius:999px;
-      font-size:13px; display:none;
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:13px;
+      display:none;
       z-index:50;
-      box-shadow: var(--shadow);
+      box-shadow:var(--shadow);
     }
 
-    /* Footer (same pattern you use on other tools) */
     .footerLinks{
       margin-top:14px;
       text-align:center;
       color:var(--muted2);
       font-size:12px;
+      line-height:1.8;
     }
-    .footerLinks a{ color:var(--link); }
+
+    .footerLinks a{color:var(--link)}
   </style>
 </head>
 
-<body>
+<body class="theme-blue">
   <div class="wrap">
     <div class="card">
 
-      <!-- ✅ InstantQR top bar (same as other pages) -->
       <div class="topbar">
         <a class="brand" href="/" aria-label="InstantQR Home">
           <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
@@ -392,22 +731,29 @@ crossorigin="anonymous"></script>
         </a>
 
         <nav class="nav" aria-label="Tools">
-          <a href="/">QR Code Generator</a>
+          <a href="/">HOME</a>
           <a href="/tools/password.html">Password</a>
           <a href="/tools/unit-converter.html">Unit Converter</a>
           <a href="/tools/ip-lookup.html">IP Lookup</a>
           <a href="/tools/web3-gas-fee-estimator.html">Gas Fees</a>
-          <a class="active" href="/tools/world-clock.html">World Clock</a>
+          <a class="active" href="/tools/world-clock.html" aria-current="page">World Clock</a>
         </nav>
       </div>
 
-      <!-- ✅ Hero -->
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/tools.html">Tools</a>
+        <span>/</span>
+        <span>World Clock</span>
+      </nav>
+
       <section class="hero">
         <div>
           <h1>World Clock</h1>
           <p class="sub">
-            Live local time for any city or IANA time zone. Add/remove clocks, switch 12/24-hour format,
-            see business-hours status, and copy time. Privacy-first: runs locally in your browser.
+            Live local time for any city or IANA time zone. Add or remove clocks, switch between 12-hour and 24-hour format,
+            change theme colors, maximize one clock or the full grid, and share selected clocks instantly.
           </p>
 
           <div class="kpis" aria-label="Quick stats">
@@ -420,26 +766,25 @@ crossorigin="anonymous"></script>
               <div class="v" id="kpiCount">0</div>
             </div>
             <div class="kpi">
-              <div class="t">Status</div>
-              <div class="v" id="kpiStatus">Running</div>
+              <div class="t">Theme</div>
+              <div class="v" id="kpiTheme">Blue</div>
             </div>
           </div>
         </div>
 
-        <div class="panel" role="region" aria-label="Tips">
+        <aside class="panel" role="region" aria-label="Tips">
           <div class="panelHeader">
             <div class="title">Fast tips</div>
             <div class="badge">Runs locally</div>
           </div>
           <div class="note" style="margin:0;">
-            • Search cities or type an IANA zone like <b class="mono">America/Phoenix</b>.<br/>
-            • Press <b>Enter</b> to add the top suggestion.<br/>
-            • “Share Selected” copies a link with your chosen clocks.
+            • Search cities or type an IANA zone like <b class="mono">America/Phoenix</b>.<br>
+            • Use the theme buttons to switch colors.<br>
+            • Maximize one clock or expand the entire grid.
           </div>
-        </div>
+        </aside>
       </section>
 
-      <!-- ✅ Controls -->
       <section class="panel" style="margin-top:14px;" aria-label="World clock controls">
         <div class="panelHeader">
           <div class="title">Controls</div>
@@ -464,17 +809,27 @@ crossorigin="anonymous"></script>
           </div>
 
           <div>
-            <label>Actions <span class="hint">share / reset</span></label>
+            <label>Actions <span class="hint">share / reset / expand</span></label>
             <div class="actions">
-              <button class="btn primary" id="shareBtn" type="button">Share Selected</button>
+              <button class="btn primary" id="shareBtn" type="button">Share</button>
+              <button class="btn" id="toggleGridBtn" type="button">Maximize All</button>
               <button class="btn danger" id="resetBtn" type="button">Reset</button>
             </div>
             <div class="note" id="shareHint" style="margin-top:8px;">Share creates a link with your selected time zones.</div>
           </div>
         </div>
+
+        <div style="margin-top:14px;">
+          <label>Color theme <span class="hint">saved locally</span></label>
+          <div class="themeRow" id="themeRow">
+            <button class="themeBtn active" data-theme="blue" type="button">Blue</button>
+            <button class="themeBtn" data-theme="green" type="button">Green</button>
+            <button class="themeBtn" data-theme="red" type="button">Red</button>
+            <button class="themeBtn" data-theme="white" type="button">White</button>
+          </div>
+        </div>
       </section>
 
-      <!-- ✅ Clock grid -->
       <section class="panel" style="margin-top:14px;" aria-label="World clock grid">
         <div class="panelHeader">
           <div class="title">Clocks</div>
@@ -483,19 +838,51 @@ crossorigin="anonymous"></script>
         <div class="cards" id="clockGrid"></div>
       </section>
 
-      <!-- ✅ Footer (same structure as your other pages) -->
+      <section class="faqWrap" aria-label="Additional information">
+        <div class="panel">
+          <h2 class="sectionTitle">Frequently asked questions</h2>
+
+          <div class="faqItem">
+            <div class="note"><strong>Can I change the color theme?</strong><br>Yes. You can switch between blue, green, red, and white themes.</div>
+          </div>
+
+          <div class="faqItem">
+            <div class="note"><strong>Can I maximize one clock?</strong><br>Yes. Each clock card has a maximize button to expand it.</div>
+          </div>
+
+          <div class="faqItem">
+            <div class="note"><strong>Can I maximize all clocks?</strong><br>Yes. Use the Maximize All button to expand the whole grid area.</div>
+          </div>
+
+          <div class="faqItem">
+            <div class="note"><strong>Does this save my preferences?</strong><br>Yes. Selected clocks, time format, and theme are stored locally in your browser.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2 class="sectionTitle">Related tools</h2>
+          <p class="note" style="margin-top:0;">
+            <a href="/tools/time-zone-converter.html">Time Zone Converter</a> ·
+            <a href="/tools/countdown-timer.html">Countdown Timer</a> ·
+            <a href="/tools/unit-converter.html">Unit Converter</a>
+          </p>
+        </div>
+      </section>
+
       <div class="footerLinks">
         <div style="margin-bottom:8px;">
           <a href="/tools/wifi-qr-code-generator.html">WiFi QR Code Generator</a> ·
           <a href="/tools/url-qr-code-generator.html">QR Code Generator</a> ·
           <a href="/tools/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
-          <a href="/tools/world-clock.html">World Clock</a>
+          <a href="/tools/world-clock.html">World Clock</a> ·
+          <a href="/tools/time-zone-converter.html">Time Zone Converter</a>
         </div>
         <div>
           <a href="/about.html">About</a> ·
           <a href="/privacy.html">Privacy</a> ·
           <a href="/terms.html">Terms</a> ·
-          <a href="/contact.html">Contact</a>
+          <a href="/contact.html">Contact</a> ·
+          <a href="/sitemap.xml">Sitemap</a>
         </div>
       </div>
 
@@ -506,18 +893,21 @@ crossorigin="anonymous"></script>
 
   <script>
   (() => {
-    // ========= Utilities =========
     const $ = (id) => document.getElementById(id);
     const LS_KEY = "instantqr_world_clock_v3";
     const LS_FMT = "instantqr_world_clock_fmt_v2";
+    const LS_THEME = "instantqr_world_clock_theme_v1";
 
     const toastEl = $("toast");
     let toastTimer = null;
+    let maximizedCardId = null;
+    let gridMaximized = false;
+
     function toast(msg){
       toastEl.textContent = msg;
       toastEl.style.display = "block";
       if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(()=> toastEl.style.display="none", 1600);
+      toastTimer = setTimeout(() => toastEl.style.display = "none", 1600);
     }
 
     async function copyText(text){
@@ -547,12 +937,21 @@ crossorigin="anonymous"></script>
     function safeJSONParse(s, fallback){
       try { return JSON.parse(s); } catch { return fallback; }
     }
-    function uniq(arr){ return Array.from(new Set(arr)); }
+
+    function uniq(arr){
+      return Array.from(new Set(arr));
+    }
+
     function escapeHTML(s){
       return String(s).replace(/[&<>"']/g, (m) => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
       }[m]));
     }
+
     function normalize(s){
       return (s || "").toLowerCase()
         .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
@@ -560,7 +959,6 @@ crossorigin="anonymous"></script>
         .trim();
     }
 
-    // ========= Time zones =========
     function getAllTimeZones(){
       if (Intl && typeof Intl.supportedValuesOf === "function"){
         const zones = Intl.supportedValuesOf("timeZone");
@@ -568,22 +966,9 @@ crossorigin="anonymous"></script>
         return zones;
       }
       return [
-        "UTC",
-        "America/Phoenix",
-        "America/Los_Angeles",
-        "America/Denver",
-        "America/Chicago",
-        "America/New_York",
-        "America/Toronto",
-        "Europe/London",
-        "Europe/Paris",
-        "Europe/Berlin",
-        "Asia/Tokyo",
-        "Asia/Seoul",
-        "Asia/Singapore",
-        "Asia/Bangkok",
-        "Asia/Phnom_Penh",
-        "Australia/Sydney"
+        "UTC","America/Phoenix","America/Los_Angeles","America/Denver","America/Chicago",
+        "America/New_York","America/Toronto","Europe/London","Europe/Paris","Europe/Berlin",
+        "Asia/Tokyo","Asia/Seoul","Asia/Singapore","Asia/Bangkok","Asia/Phnom_Penh","Australia/Sydney"
       ];
     }
 
@@ -598,22 +983,23 @@ crossorigin="anonymous"></script>
       const city = cityRaw.replace(/_/g, " ");
       return { id: tz, name: city, region, tz };
     }
+
     function getEntryById(id){
       if (!id || !TZ_SET.has(id)) return null;
       return tzToEntry(id);
     }
 
-    // ========= State =========
     const searchEl = $("citySearch");
     const listEl = $("suggestList");
     const gridEl = $("clockGrid");
-
     const kpiFmt = $("kpiFmt");
     const kpiCount = $("kpiCount");
-    const kpiStatus = $("kpiStatus");
+    const kpiTheme = $("kpiTheme");
     const runBadge = $("runBadge");
     const clockBadge = $("clockBadge");
     const timeFormatSel = $("timeFormat");
+    const themeRow = $("themeRow");
+    const toggleGridBtn = $("toggleGridBtn");
 
     const localTZ = (() => {
       try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; }
@@ -630,6 +1016,7 @@ crossorigin="anonymous"></script>
     ].filter(tz => TZ_SET.has(tz)));
 
     let timeFormat = localStorage.getItem(LS_FMT) || "12";
+    let currentTheme = localStorage.getItem(LS_THEME) || "blue";
     timeFormatSel.value = (timeFormat === "24") ? "24" : "12";
 
     function sanitizeSelected(ids){
@@ -652,11 +1039,13 @@ crossorigin="anonymous"></script>
       const u = new URL(location.href);
       const cities = u.searchParams.get("cities");
       const fmt = u.searchParams.get("fmt");
+
       if (fmt === "24" || fmt === "12"){
         timeFormat = fmt;
         localStorage.setItem(LS_FMT, timeFormat);
         timeFormatSel.value = fmt;
       }
+
       if (!cities) return null;
       const ids = cities.split(",").map(s => decodeURIComponent(s.trim())).filter(Boolean);
       return ids.length ? ids : null;
@@ -664,9 +1053,27 @@ crossorigin="anonymous"></script>
 
     let selectedIds = sanitizeSelected(loadSelectedFromURL() || loadSelectedFromLS() || defaultSelected);
 
-    function saveSelected(){ localStorage.setItem(LS_KEY, JSON.stringify(selectedIds)); }
+    function saveSelected(){
+      localStorage.setItem(LS_KEY, JSON.stringify(selectedIds));
+    }
 
-    // ========= Suggestions (fast pre-index) =========
+    function applyTheme(theme){
+      const valid = ["blue","green","red","white"];
+      currentTheme = valid.includes(theme) ? theme : "blue";
+      document.body.classList.remove("theme-blue","theme-green","theme-red","theme-white");
+      document.body.classList.add(`theme-${currentTheme}`);
+      localStorage.setItem(LS_THEME, currentTheme);
+      kpiTheme.textContent = currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1);
+      themeRow.querySelectorAll(".themeBtn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.theme === currentTheme);
+      });
+    }
+
+    function applyGridState(){
+      document.body.classList.toggle("grid-maximized", gridMaximized);
+      toggleGridBtn.textContent = gridMaximized ? "Restore All" : "Maximize All";
+    }
+
     const INDEX = TIMEZONES.map(tz => {
       const entry = tzToEntry(tz);
       const hay = normalize(`${entry.name} ${entry.region} ${entry.tz}`);
@@ -691,6 +1098,7 @@ crossorigin="anonymous"></script>
           scored.push({ entry: it.entry, score });
         }
       }
+
       scored.sort((a,b) => b.score - a.score);
       return scored.slice(0, 12).map(x => x.entry);
     }
@@ -701,6 +1109,7 @@ crossorigin="anonymous"></script>
         listEl.innerHTML = "";
         return;
       }
+
       listEl.innerHTML = items.map(e => `
         <div class="suggestItem" role="option" data-id="${escapeHTML(e.id)}">
           <div style="min-width:0">
@@ -710,9 +1119,13 @@ crossorigin="anonymous"></script>
           <span class="mono">${escapeHTML(e.tz)}</span>
         </div>
       `).join("");
+
       listEl.style.display = "block";
     }
-    function hideSuggestions(){ listEl.style.display = "none"; }
+
+    function hideSuggestions(){
+      listEl.style.display = "none";
+    }
 
     let sugTimer = null;
     function scheduleSuggestions(){
@@ -724,12 +1137,12 @@ crossorigin="anonymous"></script>
     searchEl.addEventListener("focus", scheduleSuggestions, { passive:true });
 
     document.addEventListener("click", (e) => {
-      if(!e.target.closest(".suggest")) hideSuggestions();
+      if (!e.target.closest(".suggest")) hideSuggestions();
     }, { passive:true });
 
     listEl.addEventListener("click", (e) => {
       const item = e.target.closest(".suggestItem");
-      if(!item) return;
+      if (!item) return;
       const id = item.getAttribute("data-id");
       addTZ(id);
     });
@@ -744,8 +1157,22 @@ crossorigin="anonymous"></script>
       if (e.key === "Escape") hideSuggestions();
     });
 
-    // ========= Intl formatter cache =========
-    const formatCache = new Map(); // key => { time, date, hourOnly }
+    themeRow.addEventListener("click", (e) => {
+      const btn = e.target.closest(".themeBtn");
+      if (!btn) return;
+      applyTheme(btn.dataset.theme);
+      renderGrid();
+      toast("Theme updated");
+    });
+
+    toggleGridBtn.addEventListener("click", () => {
+      gridMaximized = !gridMaximized;
+      applyGridState();
+      toast(gridMaximized ? "All clocks maximized" : "Grid restored");
+    });
+
+    const formatCache = new Map();
+
     function getFormatters(tz){
       const key = `${tz}|${timeFormat}`;
       if (formatCache.has(key)) return formatCache.get(key);
@@ -753,13 +1180,26 @@ crossorigin="anonymous"></script>
       const hour12 = (timeFormat !== "24");
       const f = {
         time: new Intl.DateTimeFormat(undefined, {
-          timeZone: tz, hour: "2-digit", minute: "2-digit", second: "2-digit", hour12
+          timeZone: tz,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12
         }),
         date: new Intl.DateTimeFormat(undefined, {
-          timeZone: tz, weekday: "short", year: "numeric", month: "short", day: "2-digit"
+          timeZone: tz,
+          weekday: "short",
+          year: "numeric",
+          month: "short",
+          day: "2-digit"
         }),
-        hourOnly: new Intl.DateTimeFormat("en-US", { timeZone: tz, hour: "2-digit", hour12: false })
+        hourOnly: new Intl.DateTimeFormat("en-US", {
+          timeZone: tz,
+          hour: "2-digit",
+          hour12: false
+        })
       };
+
       formatCache.set(key, f);
       return f;
     }
@@ -767,7 +1207,7 @@ crossorigin="anonymous"></script>
     function updateKpis(){
       kpiFmt.textContent = (timeFormat === "24") ? "24-hour" : "12-hour";
       kpiCount.textContent = String(selectedIds.length);
-      kpiStatus.textContent = "Running";
+      kpiTheme.textContent = currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1);
       runBadge.textContent = "Live";
     }
 
@@ -780,37 +1220,40 @@ crossorigin="anonymous"></script>
       toast("Updated");
     });
 
-    // ========= Business Hours =========
     function getBusinessStatus(now, tz){
       const f = getFormatters(tz);
       const h = parseInt(f.hourOnly.format(now), 10);
+
       if (!Number.isFinite(h)) return { cls:"warn", label:"Time unavailable" };
       if (h >= 9 && h < 17) return { cls:"good", label:"Business hours" };
       if ((h >= 7 && h < 9) || (h >= 17 && h < 19)) return { cls:"warn", label:"Edge hours" };
       return { cls:"bad", label:"Off hours" };
     }
 
-    // ========= Render Grid =========
     function renderGrid(){
       const now = new Date();
 
       const cards = selectedIds.map(id => {
         const entry = getEntryById(id);
-        if(!entry) return "";
+        if (!entry) return "";
 
         const f = getFormatters(entry.tz);
         const timeStr = f.time.format(now);
         const dateStr = f.date.format(now);
         const bs = getBusinessStatus(now, entry.tz);
+        const isMax = maximizedCardId === entry.id;
 
         return `
-          <article class="clockCard" data-id="${escapeHTML(entry.id)}">
+          <article class="clockCard ${isMax ? "maximized" : ""}" data-id="${escapeHTML(entry.id)}">
             <div class="topline">
               <div class="city">
                 <b title="${escapeHTML(entry.name)}">${escapeHTML(entry.name)}</b>
                 <small title="${escapeHTML(entry.region)}">${escapeHTML(entry.region)} · <span class="mono">${escapeHTML(entry.tz)}</span></small>
               </div>
-              <button class="btnMini" data-action="remove" title="Remove" aria-label="Remove ${escapeHTML(entry.name)}">✕</button>
+              <div style="display:flex;gap:8px;">
+                <button class="btnMini" data-action="maximize" title="${isMax ? "Restore" : "Maximize"}" aria-label="${isMax ? "Restore" : "Maximize"} ${escapeHTML(entry.name)}">${isMax ? "🗕" : "⛶"}</button>
+                <button class="btnMini" data-action="remove" title="Remove" aria-label="Remove ${escapeHTML(entry.name)}">✕</button>
+              </div>
             </div>
 
             <div class="chipRow">
@@ -836,57 +1279,67 @@ crossorigin="anonymous"></script>
       updateKpis();
     }
 
-    // Update only text nodes (no rebuild each second)
     function tick(){
       const now = new Date();
-      for(const id of selectedIds){
+
+      for (const id of selectedIds){
         const entry = getEntryById(id);
-        if(!entry) continue;
+        if (!entry) continue;
 
         const card = gridEl.querySelector(`.clockCard[data-id="${CSS.escape(entry.id)}"]`);
-        if(!card) continue;
+        if (!card) continue;
 
         const f = getFormatters(entry.tz);
-        const tEl = card.querySelector(`[data-field="time"]`);
-        const dEl = card.querySelector(`[data-field="date"]`);
-        if(tEl) tEl.textContent = f.time.format(now);
-        if(dEl) dEl.textContent = f.date.format(now);
+        const tEl = card.querySelector('[data-field="time"]');
+        const dEl = card.querySelector('[data-field="date"]');
+
+        if (tEl) tEl.textContent = f.time.format(now);
+        if (dEl) dEl.textContent = f.date.format(now);
 
         const bs = getBusinessStatus(now, entry.tz);
         const chipDot = card.querySelector(".chip .dot");
         const chip = card.querySelector(".chip");
-        if(chipDot){
+
+        if (chipDot){
           chipDot.classList.remove("good","warn","bad");
           chipDot.classList.add(bs.cls);
         }
-        if(chip){
+
+        if (chip){
           chip.innerHTML = `<span class="dot ${bs.cls}"></span> ${escapeHTML(bs.label)}`;
         }
       }
     }
 
-    // ========= Actions =========
     gridEl.addEventListener("click", (e) => {
       const btn = e.target.closest("button[data-action]");
-      if(!btn) return;
+      if (!btn) return;
 
       const action = btn.getAttribute("data-action");
       const card = e.target.closest(".clockCard");
-      if(!card) return;
+      if (!card) return;
 
       const id = card.getAttribute("data-id");
       const entry = getEntryById(id);
-      if(!entry) return;
+      if (!entry) return;
 
-      if(action === "remove"){
+      if (action === "maximize"){
+        maximizedCardId = maximizedCardId === id ? null : id;
+        renderGrid();
+        toast(maximizedCardId ? "Clock maximized" : "Clock restored");
+        return;
+      }
+
+      if (action === "remove"){
         selectedIds = selectedIds.filter(x => x !== id);
+        if (maximizedCardId === id) maximizedCardId = null;
         saveSelected();
         renderGrid();
         toast("Removed");
         return;
       }
 
-      if(action === "copy"){
+      if (action === "copy"){
         const now = new Date();
         const f = getFormatters(entry.tz);
         const timeStr = f.time.format(now);
@@ -895,15 +1348,20 @@ crossorigin="anonymous"></script>
         return;
       }
 
-      if(action === "open"){
-        window.open("/time-zone-converter.html", "_blank", "noopener");
-        return;
+      if (action === "open"){
+        window.open("/tools/time-zone-converter.html", "_blank", "noopener");
       }
     }, { passive:true });
 
     function addTZ(id){
-      if(!TZ_SET.has(id)){ toast("Unknown time zone"); return; }
-      if(selectedIds.includes(id)){ toast("Already added"); return; }
+      if (!TZ_SET.has(id)){
+        toast("Unknown time zone");
+        return;
+      }
+      if (selectedIds.includes(id)){
+        toast("Already added");
+        return;
+      }
 
       selectedIds.push(id);
       selectedIds = sanitizeSelected(selectedIds);
@@ -935,40 +1393,48 @@ crossorigin="anonymous"></script>
     $("resetBtn").addEventListener("click", () => {
       selectedIds = [...defaultSelected];
       timeFormat = "12";
+      maximizedCardId = null;
+      gridMaximized = false;
       localStorage.setItem(LS_FMT, timeFormat);
       timeFormatSel.value = "12";
       formatCache.clear();
       saveSelected();
-      try{ history.replaceState({}, "", location.pathname); }catch{}
+      applyGridState();
+      try { history.replaceState({}, "", location.pathname); } catch {}
       renderGrid();
       toast("Reset");
     });
 
-    // ========= Init =========
     try{
       new Intl.DateTimeFormat(undefined, { timeZone: "UTC" }).format(new Date());
     }catch{
       runBadge.textContent = "Limited";
-      kpiStatus.textContent = "Timezone support missing";
       toast("Timezone support missing");
     }
 
     saveSelected();
+    applyTheme(currentTheme);
+    applyGridState();
     renderGrid();
 
-    // ✅ Smarter ticking: pause when hidden
     let timer = null;
+
     function start(){
       if (timer) clearInterval(timer);
       timer = setInterval(tick, 1000);
     }
+
     function stop(){
       if (timer) clearInterval(timer);
       timer = null;
     }
+
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) stop();
-      else { tick(); start(); }
+      else {
+        tick();
+        start();
+      }
     }, { passive:true });
 
     tick();
