@@ -10,7 +10,6 @@ The platform is organized into several major categories.
 
 - WiFi QR Code Generator
 - URL QR Code Generator
-- Create QR Code for WiFi
 - Text QR Generator
 - Email QR Generator (planned)
 
