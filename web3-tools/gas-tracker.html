@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Gas Tracker | Live Ethereum Gas Prices & Fee Estimates | InstantQR</title>
+  <meta name="description" content="Track live Ethereum gas prices and estimate transaction fees for transfers, swaps, and NFT actions. Free fast gas tracker tool by InstantQR." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <link rel="canonical" href="https://instantqr.io/web3-tools/gas-tracker.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Gas Tracker | Live Ethereum Gas Prices & Fee Estimates" />
+  <meta property="og:description" content="Check low, average, and high Ethereum gas prices and estimate transaction costs instantly." />
+  <meta property="og:url" content="https://instantqr.io/web3-tools/gas-tracker.html" />
+  <meta property="og:site_name" content="InstantQR" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Gas Tracker | Live Ethereum Gas Prices & Fee Estimates" />
+  <meta name="twitter:description" content="Live Ethereum gas tracker with fee estimates for common transaction types." />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#121b2f;
+      --panel2:#0f172a;
+      --card:#0a1428;
+      --text:#f8fafc;
+      --muted:#94a3b8;
+      --line:rgba(255,255,255,.10);
+      --blue:#3b82f6;
+      --blue2:#2563eb;
+      --green:#22c55e;
+      --yellow:#f59e0b;
+      --red:#ef4444;
+      --shadow:0 16px 44px rgba(0,0,0,.28);
+      --radius:18px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,.14), transparent 25%),
+        radial-gradient(circle at top right, rgba(34,197,94,.08), transparent 22%),
+        linear-gradient(180deg,#0b1220 0%,#09101d 100%);
+      line-height:1.55;
+    }
+
+    a{color:#93c5fd;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(10px);
+      background:rgba(11,18,32,.82);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      min-height:70px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--text);
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    .brand img{
+      width:36px;
+      height:36px;
+      display:block;
+    }
+
+    .navlinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+    }
+
+    .navlinks a{
+      color:var(--muted);
+      font-weight:600;
+      font-size:.95rem;
+    }
+
+    .navlinks a:hover{
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .hero{
+      padding:28px 0 12px;
+    }
+
+    .breadcrumbs{
+      color:var(--muted);
+      font-size:.92rem;
+      margin-bottom:14px;
+    }
+
+    .breadcrumbs a{color:var(--muted)}
+    .breadcrumbs span{color:var(--text)}
+
+    .heroCard,.card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border-radius:24px;
+      box-shadow:var(--shadow);
+    }
+
+    .heroCard{padding:28px}
+    .cardInner{padding:22px}
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      background:rgba(59,130,246,.10);
+      border:1px solid rgba(59,130,246,.24);
+      color:#bfdbfe;
+      border-radius:999px;
+      font-size:.9rem;
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(2rem,4vw,3.1rem);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+
+    h2{
+      margin:0 0 14px;
+      letter-spacing:-.02em;
+      font-size:1.18rem;
+    }
+
+    .lead{
+      margin:0;
+      max-width:860px;
+      color:var(--muted);
+      font-size:1.04rem;
+    }
+
+    .main{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:22px;
+      padding:22px 0;
+    }
+
+    .gasCards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+
+    .gasCard{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .gasLabel{
+      color:var(--muted);
+      font-size:.92rem;
+      margin-bottom:8px;
+      font-weight:700;
+    }
+
+    .gasValue{
+      font-size:1.9rem;
+      font-weight:900;
+      letter-spacing:-.03em;
+      line-height:1;
+      margin-bottom:6px;
+    }
+
+    .gasSub{
+      color:var(--muted);
+      font-size:.88rem;
+    }
+
+    .low .gasValue{color:var(--green)}
+    .avg .gasValue{color:var(--yellow)}
+    .high .gasValue{color:#fca5a5}
+
+    .metaGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .metaCard{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .metaCard .k{
+      color:var(--muted);
+      font-size:.88rem;
+      margin-bottom:6px;
+    }
+
+    .metaCard .v{
+      font-size:1.08rem;
+      font-weight:800;
+      letter-spacing:-.02em;
+      word-break:break-word;
+    }
+
+    .status{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .ok{color:var(--green)}
+    .warn{color:var(--yellow)}
+    .bad{color:var(--red)}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .field.full{grid-column:1 / -1}
+
+    label{
+      color:#dbeafe;
+      font-size:.95rem;
+      font-weight:700;
+    }
+
+    .hint{
+      color:var(--muted);
+      font-size:.86rem;
+      margin-top:-2px;
+    }
+
+    input,select{
+      width:100%;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0a1428;
+      color:var(--text);
+      border-radius:14px;
+      padding:14px;
+      font:inherit;
+      outline:none;
+      transition:border-color .18s ease, transform .18s ease;
+    }
+
+    input:focus,select:focus{
+      border-color:rgba(59,130,246,.7);
+      transform:translateY(-1px);
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    button{
+      appearance:none;
+      border:none;
+      border-radius:14px;
+      padding:14px 18px;
+      font:inherit;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .18s ease;
+    }
+
+    button:hover{transform:translateY(-1px)}
+    .btnPrimary{
+      background:linear-gradient(135deg,var(--blue),var(--blue2));
+      color:#fff;
+      box-shadow:0 10px 28px rgba(37,99,235,.24);
+    }
+    .btnGhost{
+      background:#0a1428;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+
+    .estimateGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .estimateCard{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .estimateCard .k{
+      color:var(--muted);
+      font-size:.88rem;
+      margin-bottom:6px;
+    }
+
+    .estimateCard .v{
+      font-size:1.05rem;
+      font-weight:800;
+      word-break:break-word;
+    }
+
+    .section{
+      padding:8px 0 6px;
+    }
+
+    .contentCard{
+      padding:22px;
+    }
+
+    .contentCard p,.contentCard li{
+      color:var(--muted);
+    }
+
+    details{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.012));
+      margin-top:12px;
+    }
+
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+
+    summary::-webkit-details-marker{display:none}
+    details p{margin:10px 0 0}
+
+    footer{
+      padding:28px 0 46px;
+      color:var(--muted);
+    }
+
+    .footerCard{
+      border-top:1px solid var(--line);
+      padding-top:18px;
+    }
+
+    .footerLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 14px;
+      margin-top:12px;
+    }
+
+    @media (max-width: 980px){
+      .main{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 780px){
+      .container{width:min(var(--max), calc(100% - 20px))}
+      .nav{
+        padding:8px 0;
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .heroCard,.cardInner,.contentCard{padding:18px}
+      .gasCards,.grid,.metaGrid,.estimateGrid{grid-template-columns:1fr}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Gas Tracker",
+    "url":"https://instantqr.io/web3-tools/gas-tracker.html",
+    "description":"Live Ethereum gas tracker with low, average, and high gas prices plus fee estimates.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    },
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+        {"@type":"ListItem","position":2,"name":"Web3 Tools","item":"https://instantqr.io/web3-tools.html"},
+        {"@type":"ListItem","position":3,"name":"Gas Tracker","item":"https://instantqr.io/web3-tools/gas-tracker.html"}
+      ]
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is a gas tracker?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A gas tracker shows live blockchain gas conditions such as low, average, and high gas prices. It helps users decide when to send a transaction."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How is a gas tracker different from a gas fee estimator?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A gas tracker monitors current network gas prices, while a gas fee estimator calculates what a specific transaction might cost using gas price and gas limit."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What transactions can I estimate here?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This page includes fee estimates for simple ETH transfers, token transfers, swaps, and NFT mint-style transactions."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool require a wallet connection?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. You can view gas prices and estimates without connecting a wallet."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <span>InstantQR</span>
+      </a>
+      <nav class="navlinks" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/web3-tools.html">Web3 Tools</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> / <a href="/web3-tools.html">Web3 Tools</a> / <span>Gas Tracker</span>
+      </nav>
+
+      <div class="heroCard">
+        <div class="eyebrow">Ethereum Network Tool</div>
+        <h1>Gas Tracker</h1>
+        <p class="lead">
+          Track live Ethereum gas prices and estimate transaction fees for transfers, swaps, and NFT actions.
+          Use this tool to spot cheaper times to transact and compare low, average, and high network conditions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main class="container main">
+    <section class="card">
+      <div class="cardInner">
+        <h2>Live Ethereum Gas</h2>
+
+        <div class="gasCards">
+          <div class="gasCard low">
+            <div class="gasLabel">Low</div>
+            <div class="gasValue" id="lowGas">—</div>
+            <div class="gasSub">Slower confirmation</div>
+          </div>
+
+          <div class="gasCard avg">
+            <div class="gasLabel">Average</div>
+            <div class="gasValue" id="avgGas">—</div>
+            <div class="gasSub">Typical network speed</div>
+          </div>
+
+          <div class="gasCard high">
+            <div class="gasLabel">High</div>
+            <div class="gasValue" id="highGas">—</div>
+            <div class="gasSub">Faster confirmation</div>
+          </div>
+        </div>
+
+        <div class="metaGrid">
+          <div class="metaCard">
+            <div class="k">Base Fee</div>
+            <div class="v" id="baseFee">—</div>
+          </div>
+          <div class="metaCard">
+            <div class="k">Priority Fee Hint</div>
+            <div class="v" id="tipFee">—</div>
+          </div>
+          <div class="metaCard">
+            <div class="k">Latest Block</div>
+            <div class="v" id="latestBlock">—</div>
+          </div>
+          <div class="metaCard">
+            <div class="k">Last Updated</div>
+            <div class="v" id="lastUpdated">—</div>
+          </div>
+        </div>
+
+        <div class="status" id="status">Loading gas data…</div>
+      </div>
+    </section>
+
+    <aside class="card">
+      <div class="cardInner">
+        <h2>Fee Estimate</h2>
+
+        <div class="grid">
+          <div class="field">
+            <label for="actionType">Action Type</label>
+            <select id="actionType">
+              <option value="21000">ETH Transfer (21,000 gas)</option>
+              <option value="65000">Token Transfer (65,000 gas)</option>
+              <option value="120000">Token Approval (120,000 gas)</option>
+              <option value="180000" selected>DEX Swap (180,000 gas)</option>
+              <option value="250000">NFT Mint / Complex Tx (250,000 gas)</option>
+              <option value="custom">Custom Gas Limit</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="gasLimit">Gas Limit</label>
+            <input id="gasLimit" type="number" min="21000" step="1" value="180000" />
+            <div class="hint">Used when custom is selected or for manual adjustment.</div>
+          </div>
+
+          <div class="field full">
+            <label for="ethPrice">ETH Price in USD</label>
+            <input id="ethPrice" type="number" min="0" step="0.01" placeholder="3500" value="3500" />
+            <div class="hint">Optional but useful for USD estimates.</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btnPrimary" id="estimateBtn" type="button">Estimate Fees</button>
+          <button class="btnGhost" id="refreshBtn" type="button">Refresh Gas</button>
+        </div>
+
+        <div class="estimateGrid">
+          <div class="estimateCard">
+            <div class="k">Low Estimate</div>
+            <div class="v" id="lowEstimate">—</div>
+          </div>
+          <div class="estimateCard">
+            <div class="k">Average Estimate</div>
+            <div class="v" id="avgEstimate">—</div>
+          </div>
+          <div class="estimateCard">
+            <div class="k">High Estimate</div>
+            <div class="v" id="highEstimate">—</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <section class="section">
+    <div class="container">
+      <div class="card contentCard">
+        <h2>What this gas tracker shows</h2>
+        <p>
+          A gas tracker helps you understand current Ethereum network conditions by showing approximate low, average, and high gas prices in gwei.
+          These values can help you decide whether to submit a transaction now or wait for cheaper network activity.
+        </p>
+        <p>
+          This page also includes fee estimates for common actions like ETH transfers, token transfers, swaps, and NFT-style transactions.
+          That makes it a useful companion to your gas fee estimator page.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="card contentCard">
+        <h2>Frequently Asked Questions</h2>
+
+        <details>
+          <summary>What is gas in Ethereum?</summary>
+          <p>Gas is the unit used to measure the computational work required to process a transaction or smart contract interaction on Ethereum.</p>
+        </details>
+
+        <details>
+          <summary>What does gwei mean?</summary>
+          <p>Gwei is a small denomination of ETH commonly used to quote gas prices. One gwei equals 0.000000001 ETH.</p>
+        </details>
+
+        <details>
+          <summary>Why do gas prices change?</summary>
+          <p>Gas prices change based on network demand. When more users compete to get transactions included quickly, gas prices tend to rise.</p>
+        </details>
+
+        <details>
+          <summary>Should I use the gas tracker and gas estimator together?</summary>
+          <p>Yes. The gas tracker shows current market conditions, while the estimator helps calculate what a specific transaction may cost.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footerCard">
+      <div>Fast, privacy-friendly Web3 tools by InstantQR.</div>
+      <div class="footerLinks">
+        <a href="/">Home</a>
+        <a href="/web3-tools.html">Web3 Tools</a>
+        <a href="/web3-tools/web3-gas-fee-estimator.html">Gas Fee Estimator</a>
+        <a href="/web3-tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+        <a href="/web3-tools/dca-calculator.html">DCA Calculator</a>
+        <a href="/web3-tools/token-contract-analyzer.html">Token Contract Analyzer</a>
+        <a href="/web3-tools/block-explorer-lite.html">Block Explorer Lite</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const RPC_URL = 'https://cloudflare-eth.com';
+
+      const els = {
+        lowGas: document.getElementById('lowGas'),
+        avgGas: document.getElementById('avgGas'),
+        highGas: document.getElementById('highGas'),
+        baseFee: document.getElementById('baseFee'),
+        tipFee: document.getElementById('tipFee'),
+        latestBlock: document.getElementById('latestBlock'),
+        lastUpdated: document.getElementById('lastUpdated'),
+        status: document.getElementById('status'),
+        actionType: document.getElementById('actionType'),
+        gasLimit: document.getElementById('gasLimit'),
+        ethPrice: document.getElementById('ethPrice'),
+        estimateBtn: document.getElementById('estimateBtn'),
+        refreshBtn: document.getElementById('refreshBtn'),
+        lowEstimate: document.getElementById('lowEstimate'),
+        avgEstimate: document.getElementById('avgEstimate'),
+        highEstimate: document.getElementById('highEstimate')
+      };
+
+      let gasState = {
+        low: null,
+        avg: null,
+        high: null,
+        base: null,
+        tip: 2,
+        latestBlock: null
+      };
+
+      async function rpc(method, params = []){
+        const res = await fetch(RPC_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            jsonrpc: '2.0',
+            id: Date.now(),
+            method,
+            params
+          })
+        });
+
+        if (!res.ok) throw new Error('RPC request failed');
+        const data = await res.json();
+        if (data.error) throw new Error(data.error.message || 'RPC error');
+        return data.result;
+      }
+
+      function hexToInt(hex){
+        return parseInt(hex || '0x0', 16);
+      }
+
+      function gweiFromWeiHex(hex){
+        const wei = hexToInt(hex);
+        return wei / 1e9;
+      }
+
+      function setStatus(text, type){
+        els.status.className = 'status';
+        if (type === 'ok') els.status.classList.add('ok');
+        if (type === 'warn') els.status.classList.add('warn');
+        if (type === 'bad') els.status.classList.add('bad');
+        els.status.textContent = text;
+      }
+
+      function formatGwei(n){
+        return Number.isFinite(n)
+          ? n.toLocaleString(undefined, { maximumFractionDigits: 2 }) + ' gwei'
+          : '—';
+      }
+
+      function formatBlock(n){
+        return Number.isFinite(n) ? n.toLocaleString() : '—';
+      }
+
+      function formatEth(v){
+        return Number.isFinite(v)
+          ? v.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 6 }) + ' ETH'
+          : '—';
+      }
+
+      function formatUsd(v){
+        return Number.isFinite(v)
+          ? '$' + v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+          : '—';
+      }
+
+      function getEffectiveGasLimit(){
+        const type = els.actionType.value;
+        if (type !== 'custom') {
+          const preset = parseInt(type, 10);
+          els.gasLimit.value = preset;
+          return preset;
+        }
+        return Math.max(21000, parseInt(els.gasLimit.value || '21000', 10));
+      }
+
+      function estimateCost(gwei, gasLimit, ethPrice){
+        const ethCost = (gwei * gasLimit) / 1e9;
+        const usdCost = ethPrice > 0 ? ethCost * ethPrice : null;
+        return { ethCost, usdCost };
+      }
+
+      function renderEstimates(){
+        const gasLimit = getEffectiveGasLimit();
+        const ethPrice = parseFloat(els.ethPrice.value || '0');
+
+        if (!Number.isFinite(gasState.low) || !Number.isFinite(gasState.avg) || !Number.isFinite(gasState.high)) {
+          els.lowEstimate.textContent = '—';
+          els.avgEstimate.textContent = '—';
+          els.highEstimate.textContent = '—';
+          return;
+        }
+
+        const low = estimateCost(gasState.low, gasLimit, ethPrice);
+        const avg = estimateCost(gasState.avg, gasLimit, ethPrice);
+        const high = estimateCost(gasState.high, gasLimit, ethPrice);
+
+        els.lowEstimate.textContent = formatEth(low.ethCost) + (low.usdCost != null ? ' · ' + formatUsd(low.usdCost) : '');
+        els.avgEstimate.textContent = formatEth(avg.ethCost) + (avg.usdCost != null ? ' · ' + formatUsd(avg.usdCost) : '');
+        els.highEstimate.textContent = formatEth(high.ethCost) + (high.usdCost != null ? ' · ' + formatUsd(high.usdCost) : '');
+      }
+
+      async function loadGas(){
+        setStatus('Loading gas data…');
+
+        try {
+          const [blockNumberHex, gasPriceHex, latestBlock] = await Promise.all([
+            rpc('eth_blockNumber'),
+            rpc('eth_gasPrice'),
+            rpc('eth_getBlockByNumber', ['latest', false])
+          ]);
+
+          const latestBlockNum = hexToInt(blockNumberHex);
+          const gasPriceGwei = gweiFromWeiHex(gasPriceHex);
+
+          let baseFeeGwei = null;
+          if (latestBlock && latestBlock.baseFeePerGas) {
+            baseFeeGwei = gweiFromWeiHex(latestBlock.baseFeePerGas);
+          }
+
+          const priorityTip = 2;
+          const avg = baseFeeGwei != null ? baseFeeGwei + priorityTip : gasPriceGwei;
+          const low = Math.max(1, avg * 0.85);
+          const high = avg * 1.2;
+
+          gasState = {
+            low,
+            avg,
+            high,
+            base: baseFeeGwei != null ? baseFeeGwei : gasPriceGwei,
+            tip: priorityTip,
+            latestBlock: latestBlockNum
+          };
+
+          els.lowGas.textContent = formatGwei(low);
+          els.avgGas.textContent = formatGwei(avg);
+          els.highGas.textContent = formatGwei(high);
+          els.baseFee.textContent = formatGwei(gasState.base);
+          els.tipFee.textContent = formatGwei(gasState.tip);
+          els.latestBlock.textContent = formatBlock(gasState.latestBlock);
+          els.lastUpdated.textContent = new Date().toLocaleTimeString();
+
+          renderEstimates();
+          setStatus('Live gas data updated.', 'ok');
+        } catch (err) {
+          setStatus('Unable to load gas data right now. The public RPC endpoint may be temporarily unavailable.', 'bad');
+        }
+      }
+
+      els.actionType.addEventListener('change', function(){
+        getEffectiveGasLimit();
+        renderEstimates();
+      });
+
+      els.gasLimit.addEventListener('input', renderEstimates);
+      els.ethPrice.addEventListener('input', renderEstimates);
+      els.estimateBtn.addEventListener('click', renderEstimates);
+      els.refreshBtn.addEventListener('click', loadGas);
+
+      loadGas();
+      setInterval(loadGas, 30000);
+    })();
+  </script>
+</body>
+</html>
