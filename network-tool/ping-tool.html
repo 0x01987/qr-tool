@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+</script>
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+crossorigin="anonymous"></script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Ping Tool | Test Server Latency Online | InstantQR</title>
+
+<meta name="description" content="Free online ping tool to test latency to a website or server. Check response times and connectivity instantly.">
+
+<link rel="canonical" href="https://instantqr.io/tools/ping-tool.html">
+
+<meta name="robots" content="index,follow">
+
+<style>
+
+body{
+font-family:system-ui,-apple-system,Segoe UI,Roboto;
+background:#0b1220;
+color:#fff;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+h1{
+font-size:34px;
+margin-bottom:10px;
+}
+
+.card{
+background:#121b2f;
+padding:25px;
+border-radius:12px;
+margin-top:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:6px;
+border:1px solid #333;
+background:#0b1220;
+color:white;
+}
+
+button{
+margin-top:15px;
+padding:12px 20px;
+border:none;
+background:#3b82f6;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2563eb;
+}
+
+.results{
+margin-top:20px;
+font-family:monospace;
+background:#0b1220;
+padding:15px;
+border-radius:8px;
+}
+
+.good{color:#22c55e}
+.bad{color:#ef4444}
+
+footer{
+margin-top:40px;
+font-size:14px;
+color:#aaa;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<nav>
+<a href="/">Home</a> /
+<a href="/tools.html">Tools</a> /
+Ping Tool
+</nav>
+
+<h1>Ping Tool</h1>
+
+<p>Test latency and connectivity to a server or website.</p>
+
+<div class="card">
+
+<label>Domain or URL</label>
+<input id="host" placeholder="example.com">
+
+<button onclick="startPing()">Start Ping</button>
+
+<div id="results" class="results"></div>
+
+</div>
+
+<footer>
+
+<h2>What is a Ping Test?</h2>
+
+<p>
+A ping test measures the time it takes for a request to travel from your device to a server and back. It helps diagnose connectivity problems, network latency, and server availability.
+</p>
+
+<h2>What Does Ping Time Mean?</h2>
+
+<ul>
+<li>Under 20ms – Excellent</li>
+<li>20–50ms – Very Good</li>
+<li>50–100ms – Acceptable</li>
+<li>100ms+ – Slow</li>
+</ul>
+
+</footer>
+
+</div>
+
+<script>
+
+async function pingOnce(url){
+
+let start = performance.now()
+
+try{
+
+await fetch("https://" + url + "/?cache=" + Math.random(),{
+mode:"no-cors"
+})
+
+let latency = Math.round(performance.now() - start)
+
+return latency
+
+}catch{
+
+return null
+
+}
+
+}
+
+async function startPing(){
+
+let host=document.getElementById("host").value
+let output=document.getElementById("results")
+
+if(!host){
+output.innerHTML="Enter a domain"
+return
+}
+
+output.innerHTML="Pinging " + host + "...<br><br>"
+
+let times=[]
+
+for(let i=1;i<=5;i++){
+
+let latency=await pingOnce(host)
+
+if(latency){
+
+times.push(latency)
+
+output.innerHTML +=
+`Reply ${i}: <span class="good">${latency} ms</span><br>`
+
+}else{
+
+output.innerHTML +=
+`Reply ${i}: <span class="bad">timeout</span><br>`
+
+}
+
+}
+
+if(times.length){
+
+let avg = Math.round(times.reduce((a,b)=>a+b)/times.length)
+
+output.innerHTML += `<br>Average latency: <span class="good">${avg} ms</span>`
+
+}else{
+
+output.innerHTML += "<br>Server did not respond."
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
