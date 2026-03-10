@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+</script>
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+crossorigin="anonymous"></script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Random String Generator | Secure Token Generator | InstantQR</title>
+
+<meta name="description" content="Generate secure random strings for passwords, API keys, tokens, and testing. Fast and privacy-friendly random string generator.">
+
+<link rel="canonical" href="https://instantqr.io/tools/random-string-generator.html">
+
+<meta name="robots" content="index,follow">
+
+<style>
+
+body{
+font-family:system-ui,-apple-system,Segoe UI,Roboto;
+background:#0b1220;
+color:#fff;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+h1{
+font-size:34px;
+margin-bottom:10px;
+}
+
+.card{
+background:#121b2f;
+padding:25px;
+border-radius:12px;
+margin-top:20px;
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:6px;
+border:1px solid #333;
+background:#0b1220;
+color:white;
+}
+
+button{
+margin-top:15px;
+padding:12px 20px;
+border:none;
+background:#3b82f6;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2563eb;
+}
+
+.result{
+margin-top:20px;
+font-family:monospace;
+background:#0b1220;
+padding:15px;
+border-radius:8px;
+word-break:break-all;
+}
+
+.options{
+margin-top:10px;
+}
+
+label{
+display:block;
+margin-top:8px;
+}
+
+footer{
+margin-top:40px;
+font-size:14px;
+color:#aaa;
+}
+
+.copyBtn{
+background:#22c55e;
+margin-left:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<nav>
+<a href="/">Home</a> /
+<a href="/tools.html">Tools</a> /
+Random String Generator
+</nav>
+
+<h1>Random String Generator</h1>
+
+<p>Create secure random strings for tokens, passwords, and testing.</p>
+
+<div class="card">
+
+<label>Length</label>
+<input id="length" type="number" value="32">
+
+<div class="options">
+
+<label><input type="checkbox" id="lower" checked> Lowercase</label>
+<label><input type="checkbox" id="upper" checked> Uppercase</label>
+<label><input type="checkbox" id="numbers" checked> Numbers</label>
+<label><input type="checkbox" id="symbols"> Symbols</label>
+
+</div>
+
+<button onclick="generate()">Generate</button>
+
+<button class="copyBtn" onclick="copy()">Copy</button>
+
+<div id="result" class="result"></div>
+
+</div>
+
+<footer>
+
+<h2>What is a Random String?</h2>
+
+<p>
+A random string is a sequence of characters generated without predictable patterns. They are commonly used for passwords, API keys, tokens, and unique identifiers.
+</p>
+
+<h2>Secure Random Generation</h2>
+
+<p>
+This tool uses the browser's cryptographically secure random generator to produce unpredictable strings.
+</p>
+
+</footer>
+
+</div>
+
+<script>
+
+function generate(){
+
+let length=parseInt(document.getElementById("length").value)
+
+let chars=""
+
+if(document.getElementById("lower").checked)
+chars+="abcdefghijklmnopqrstuvwxyz"
+
+if(document.getElementById("upper").checked)
+chars+="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+if(document.getElementById("numbers").checked)
+chars+="0123456789"
+
+if(document.getElementById("symbols").checked)
+chars+="!@#$%^&*()_+-=[]{}|;:,.<>?"
+
+if(chars===""){
+alert("Select at least one character set")
+return
+}
+
+let result=""
+
+let array=new Uint32Array(length)
+crypto.getRandomValues(array)
+
+for(let i=0;i<length;i++){
+
+result += chars[array[i] % chars.length]
+
+}
+
+document.getElementById("result").innerText=result
+
+}
+
+function copy(){
+
+let text=document.getElementById("result").innerText
+
+navigator.clipboard.writeText(text)
+
+}
+
+</script>
+
+</body>
+</html>
