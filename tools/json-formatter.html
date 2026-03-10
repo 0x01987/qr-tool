@@ -7,106 +7,422 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
-  
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>JSON Formatter & JSON ↔ CSV | InstantQR</title>
-  <meta name="description" content="Format, validate, and minify JSON instantly. Convert JSON to CSV and CSV to JSON in your browser. Privacy-first: everything runs locally." />
-  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>JSON Formatter & JSON to CSV Converter | Validate, Minify, Convert CSV to JSON | InstantQR.io</title>
+  <meta name="description" content="Free online JSON formatter, validator, and minifier. Convert JSON to CSV and CSV to JSON instantly in your browser. Privacy-first, fast, and mobile friendly." />
+  <meta name="keywords" content="json formatter, json validator, json minifier, json to csv, csv to json, format json online, validate json online, minify json, csv converter" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0b0f19" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/json-formatter.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="alternate" hreflang="en" href="https://instantqr.io/tools/json-formatter.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR.io" />
+  <meta property="og:title" content="JSON Formatter & JSON ↔ CSV Converter | InstantQR.io" />
+  <meta property="og:description" content="Format, validate, and minify JSON instantly. Convert JSON to CSV and CSV to JSON in your browser." />
+  <meta property="og:url" content="https://instantqr.io/tools/json-formatter.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+  <meta property="og:image:alt" content="InstantQR JSON Formatter tool" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="JSON Formatter & JSON ↔ CSV Converter | InstantQR.io" />
+  <meta name="twitter:description" content="Free online JSON formatter, validator, minifier, and JSON ↔ CSV converter." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+
+  <!-- Structured Data: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"JSON Formatter & JSON ↔ CSV Converter",
+    "applicationCategory":"DeveloperApplication",
+    "operatingSystem":"Web",
+    "url":"https://instantqr.io/tools/json-formatter.html",
+    "description":"Free online JSON formatter, validator, minifier, and JSON to CSV / CSV to JSON converter.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io",
+      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Is this JSON formatter free to use?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The JSON formatter and JSON/CSV conversion tools are free to use."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool validate JSON?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can validate JSON, format it, minify it, and copy or download the result."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I convert JSON to CSV and CSV to JSON?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The tool supports JSON to CSV conversion and CSV to JSON conversion directly in your browser."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does InstantQR upload my JSON or CSV data?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. Formatting and conversions run locally in your browser and your data is not intentionally uploaded."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "@id":"https://instantqr.io/tools/json-formatter.html#breadcrumb",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"JSON Formatter",
+        "item":"https://instantqr.io/tools/json-formatter.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: WebPage -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"JSON Formatter & JSON ↔ CSV Converter",
+    "url":"https://instantqr.io/tools/json-formatter.html",
+    "description":"Format, validate, and minify JSON. Convert JSON to CSV and CSV to JSON instantly online.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR.io",
+      "url":"https://instantqr.io/"
+    },
+    "breadcrumb":{
+      "@id":"https://instantqr.io/tools/json-formatter.html#breadcrumb"
+    }
+  }
+  </script>
 
   <style>
-    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
-    body { margin:0; background:#0b0f19; color:#e7eaf2; }
-    .wrap { max-width: 1100px; margin:0 auto; padding: 22px; }
-    .card {
-      background:#121a2a; border:1px solid #22304e; border-radius:18px;
-      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    :root{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      --bg:#0b0f19;
+      --card:#121a2a;
+      --panel:#0e1525;
+      --border:#22304e;
+      --border2:#2a3a5f;
+      --text:#e7eaf2;
+      --muted:#b8c0d6;
+      --muted2:#8ea0c8;
+      --link:#cfe0ff;
+      --brand:#3b82f6;
+      --good:#9fffb8;
+      --bad:#ff9fb3;
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+      color-scheme:dark;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(900px 540px at 12% 8%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    .wrap{max-width:1100px;margin:0 auto;padding:22px}
+    .card{
+      background:#121a2a;
+      border:1px solid #22304e;
+      border-radius:18px;
+      padding:18px;
+      box-shadow:var(--shadow);
     }
 
     .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; flex-wrap:wrap; margin-bottom:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:2px 2px 10px;
+      border-bottom:1px solid rgba(34,48,78,.55);
+      margin-bottom:12px;
     }
+
     .brand{
-      display:flex; align-items:baseline; gap:10px;
-      text-decoration:none; color:#e7eaf2;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:900;
+      letter-spacing:-.2px;
+      min-width:0;
     }
-    .brand strong{ font-size:16px; letter-spacing:.2px; }
-    .brand span{ color:#8ea0c8; font-size:12px; }
 
-    .toolnav{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .brand img{
+      height:30px;
+      width:auto;
+      display:block;
+    }
+
+    .brand span{
+      font-size:16px;
+    }
+
+    .toolnav{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
     .toolnav a{
-      padding:8px 10px; border-radius:999px;
-      background:#0b1222; border:1px solid #2a3a5f;
-      color:#b8c0d6; font-size:12px; text-decoration:none; font-weight:700;
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      background:#0b1222;
+      border:1px solid #2a3a5f;
+      color:#cfe0ff;
+      font-size:12px;
+      text-decoration:none;
+      font-weight:800;
+      user-select:none;
     }
-    .toolnav a:hover{ border-color:#3b82f6; color:#e7eaf2; }
-    .toolnav a.active{ border-color:#3b82f6; color:#e7eaf2; }
 
-    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    h1{ margin:0; font-size:24px; }
-    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
+    .toolnav a:hover{border-color:#3b82f6;color:#e7eaf2}
+    .toolnav a.active{border-color:#3b82f6;color:#e7eaf2}
 
-    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-top:14px; }
-    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+    .breadcrumbs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin:4px 0 14px;
+      font-size:12px;
+      color:var(--muted2);
+    }
 
-    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; }
-    label{ display:block; font-size:12px; color:#b8c0d6; margin-bottom:6px; }
+    .breadcrumbs a{
+      color:var(--link);
+      text-decoration:none;
+    }
+
+    .breadcrumbs a:hover{text-decoration:underline}
+
+    header{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    h1{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-.3px;
+    }
+
+    .sub{
+      margin:8px 0 0;
+      color:#b8c0d6;
+      font-size:13px;
+      line-height:1.6;
+      max-width:80ch;
+    }
+
+    .badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .badge{
+      padding:7px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid #2a3a5f;
+      color:#b8c0d6;
+      font-size:12px;
+      user-select:none;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    @media (max-width:860px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .box{
+      background:#0e1525;
+      border:1px solid #2a3a5f;
+      border-radius:16px;
+      padding:14px;
+    }
+
+    label{
+      display:block;
+      font-size:12px;
+      color:#b8c0d6;
+      margin-bottom:6px;
+    }
 
     textarea{
       width:100%;
-      min-height: 320px;
-      resize: vertical;
+      min-height:320px;
+      resize:vertical;
       padding:12px 10px;
       border-radius:14px;
       border:1px solid #2a3a5f;
       background:#0b1222;
       color:#e7eaf2;
       outline:none;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px;
-      line-height: 1.6;
-      white-space: pre;
-      tab-size: 2;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      font-size:12px;
+      line-height:1.6;
+      white-space:pre;
+      tab-size:2;
     }
 
-    /* Drag & drop highlight */
-    .dropZone{
-      position: relative;
-      border-radius: 16px;
-      transition: box-shadow .15s ease, border-color .15s ease;
+    textarea:focus{
+      border-color:rgba(59,130,246,.85);
+      box-shadow:0 0 0 3px rgba(59,130,246,.18);
     }
+
+    .dropZone{
+      position:relative;
+      border-radius:16px;
+      transition:box-shadow .15s ease, border-color .15s ease;
+    }
+
     .dropZone.dragover{
-      box-shadow: 0 0 0 2px rgba(59,130,246,.35);
+      box-shadow:0 0 0 2px rgba(59,130,246,.35);
       border-color:#3b82f6;
     }
+
     .dropHint{
       margin-top:8px;
       font-size:12px;
       color:#8ea0c8;
+      line-height:1.55;
     }
 
-    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px; }
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:10px;
+    }
 
     button{
-      border:0; border-radius:14px; padding:12px 14px;
-      background:#3b82f6; color:white; font-weight:800; cursor:pointer;
+      border:0;
+      border-radius:14px;
+      padding:12px 14px;
+      background:#3b82f6;
+      color:white;
+      font-weight:800;
+      cursor:pointer;
     }
-    button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
-    button.ghost{ background:#0b1222; border:1px solid #2a3a5f; color:#b8c0d6; }
+
+    button:hover{filter:brightness(1.04)}
+
+    button.secondary{
+      background:#1f2a44;
+      border:1px solid #2a3a5f;
+    }
+
+    button.ghost{
+      background:#0b1222;
+      border:1px solid #2a3a5f;
+      color:#b8c0d6;
+    }
 
     .pill{
-      display:flex; align-items:center; gap:8px;
-      padding:7px 10px; border-radius:999px;
-      background:#0b1222; border:1px solid #2a3a5f;
-      color:#b8c0d6; font-size:12px; user-select:none;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid #2a3a5f;
+      color:#b8c0d6;
+      font-size:12px;
+      user-select:none;
     }
-    .pill input, .pill select{ margin:0; }
+
+    .pill input,
+    .pill select{
+      margin:0;
+    }
+
     .pill select{
       border:1px solid #2a3a5f;
       background:#0b1222;
@@ -117,14 +433,33 @@ crossorigin="anonymous"></script>
       outline:none;
     }
 
-    .hint{ color:#b8c0d6; font-size:12px; line-height:1.55; }
-    .tiny{ color:#8ea0c8; font-size:12px; }
-    .error{ color:#ff9fb3; font-size:12px; }
-    .ok{ color:#9fffb8; font-size:12px; }
+    .hint{
+      color:#b8c0d6;
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    .tiny{
+      color:#8ea0c8;
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .error{
+      color:#ff9fb3;
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .ok{
+      color:#9fffb8;
+      font-size:12px;
+      line-height:1.55;
+    }
 
     .status{
       margin-top:10px;
-      padding:10px 12px;
+      padding:12px;
       border-radius:14px;
       border:1px dashed rgba(184,192,214,.35);
       background:#0b1222;
@@ -148,14 +483,60 @@ crossorigin="anonymous"></script>
       letter-spacing:.2px;
     }
 
+    .metaGrid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    @media (max-width:860px){
+      .metaGrid{grid-template-columns:1fr}
+    }
+
+    .faqItem{
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px solid rgba(42,58,95,.55);
+    }
+
+    .faqItem:first-of-type{
+      margin-top:0;
+      padding-top:0;
+      border-top:0;
+    }
+
+    code{
+      color:#cfe0ff;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    }
+
     .footerLinks{
       margin-top:14px;
       text-align:center;
       color:#8ea0c8;
       font-size:12px;
+      line-height:1.8;
     }
-    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
-    .footerLinks a:hover{ text-decoration:underline; }
+
+    .footerLinks a{
+      color:#cfe0ff;
+      text-decoration:none;
+    }
+
+    .footerLinks a:hover{text-decoration:underline}
+
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
   </style>
 </head>
 
@@ -164,33 +545,53 @@ crossorigin="anonymous"></script>
     <div class="card">
 
       <div class="topbar">
-        <a class="brand" href="/">
-          <strong>InstantQR</strong>
-          <span>privacy-first tools</span>
+        <a class="brand" href="/" aria-label="InstantQR Home">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+          <span>InstantQR</span>
         </a>
+
         <nav class="toolnav" aria-label="Tools">
-          <a href="/">HOME</a>
+          <a href="/">Home</a>
           <a href="/tools/password.html">Password Generator</a>
           <a href="/tools/unit-converter.html">Unit Converter</a>
           <a href="/tools/ip-lookup.html">IP Lookup</a>
-          <a class="active" href="/tols/json-formatter.html">JSON Formatter</a>
+          <a class="active" href="/tools/json-formatter.html" aria-current="page">JSON Formatter</a>
           <a href="/tools/time-zone-converter.html">Time Zone Converter</a>
           <a href="/tools/base64-encoder.html">Base64 Encoder</a>
           <a href="/tools/countdown-timer.html">Countdown Timer</a>
-          <a href="tools/world-clock.html">World Clock</a>
+          <a href="/tools/world-clock.html">World Clock</a>
         </nav>
       </div>
 
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/tools.html">Tools</a>
+        <span>/</span>
+        <span>JSON Formatter</span>
+      </nav>
+
       <header>
         <div>
-          <h1>JSON Formatter</h1>
-          <div class="sub">Format, validate, minify JSON — plus convert JSON ↔ CSV. Everything runs locally in your browser.</div>
+          <h1>JSON Formatter &amp; JSON ↔ CSV Converter</h1>
+          <div class="sub">
+            Format, validate, and minify JSON instantly. Convert JSON to CSV and CSV to JSON directly in your browser.
+            Fast, private, and mobile friendly.
+          </div>
+          <div class="badges" aria-label="Highlights">
+            <span class="badge">⚡ Fast</span>
+            <span class="badge">🔒 Local</span>
+            <span class="badge">📱 Mobile friendly</span>
+            <span class="badge">✅ No signup</span>
+          </div>
         </div>
       </header>
 
       <div class="grid">
         <!-- Input -->
-        <div class="box dropZone" id="dropZone">
+        <section class="box dropZone" id="dropZone" aria-labelledby="input-title">
+          <h2 id="input-title" class="sr-only">JSON and CSV input tools</h2>
+
           <label for="inputJson">Input</label>
           <textarea id="inputJson" placeholder='Paste JSON or CSV here...'></textarea>
 
@@ -201,28 +602,27 @@ crossorigin="anonymous"></script>
             <button class="ghost" id="sampleBtn" type="button">Sample</button>
             <button class="ghost" id="clearBtn" type="button">Clear</button>
 
-            <!-- ✅ Upload CSV button -->
             <button class="secondary" id="uploadCsvBtn" type="button">Upload CSV</button>
             <input id="csvFile" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values" hidden />
 
-            <label class="pill" title="Auto-format after you stop typing (safe).">
+            <label class="pill" title="Auto-format after you stop typing.">
               <input id="autoFormat" type="checkbox" />
               Auto-format
             </label>
           </div>
 
-          <div class="dropHint">Tip: Drag & drop a <strong>.csv</strong> or <strong>.tsv</strong> file into this box to load it.</div>
+          <div class="dropHint">Tip: Drag and drop a <strong>.csv</strong> or <strong>.tsv</strong> file into this box to load it.</div>
 
           <div class="status" aria-live="polite">
             <div class="tiny">Status</div>
-            <div id="statusLine" class="hint">Paste JSON (or CSV), then use the buttons below.</div>
+            <div id="statusLine" class="hint">Paste JSON or CSV, then use the tools below.</div>
           </div>
 
           <hr class="divider" />
 
-          <h2 class="sectionTitle">JSON → CSV Converter</h2>
+          <h2 class="sectionTitle">JSON to CSV Converter</h2>
           <div class="hint" style="margin-top:6px;">
-            Best for JSON arrays of objects. Nested objects can be flattened or stored as JSON strings.
+            Best for JSON arrays of objects. Nested objects can be flattened into dot-keys or stored as JSON strings.
           </div>
 
           <div class="row">
@@ -247,9 +647,9 @@ crossorigin="anonymous"></script>
 
           <hr class="divider" />
 
-          <h2 class="sectionTitle">CSV → JSON Converter</h2>
+          <h2 class="sectionTitle">CSV to JSON Converter</h2>
           <div class="hint" style="margin-top:6px;">
-            Paste CSV with headers in the first row (example: <code>name,age</code>). Converts to a JSON array of objects.
+            Paste CSV with headers in the first row, such as <code>name,age</code>. The converter returns a JSON array of objects.
           </div>
 
           <div class="row">
@@ -262,21 +662,23 @@ crossorigin="anonymous"></script>
               Trim cells
             </label>
 
-            <label class="pill" title="Try to detect numbers, booleans, null">
+            <label class="pill" title="Try to detect numbers, booleans, and null values">
               <input id="inferTypes" type="checkbox" checked />
               Infer types
             </label>
           </div>
 
           <div class="tiny" style="margin-top:8px;">
-            CSV parsing supports quoted fields (commas inside quotes) and CRLF/newlines.
+            CSV parsing supports quoted fields, commas inside quotes, and multiline values.
           </div>
-        </div>
+        </section>
 
         <!-- Output -->
-        <div class="box">
+        <section class="box" aria-labelledby="output-title">
+          <h2 id="output-title" class="sr-only">JSON and CSV output</h2>
+
           <label for="outputJson">Formatted / Minified Output</label>
-          <textarea id="outputJson" readonly placeholder="Formatted / minified JSON will appear here..."></textarea>
+          <textarea id="outputJson" readonly placeholder="Formatted or minified JSON will appear here..."></textarea>
 
           <div class="row">
             <button id="copyFormattedBtn" type="button">Copy Output</button>
@@ -287,29 +689,69 @@ crossorigin="anonymous"></script>
           <hr class="divider" />
 
           <label for="csvOutput">CSV Output</label>
-          <textarea id="csvOutput" readonly placeholder="CSV will appear here after JSON → CSV..."></textarea>
+          <textarea id="csvOutput" readonly placeholder="CSV will appear here after JSON to CSV conversion..."></textarea>
 
           <hr class="divider" />
 
-          <label for="csvJsonOutput">CSV → JSON Output</label>
-          <textarea id="csvJsonOutput" readonly placeholder="JSON will appear here after CSV → JSON conversion..."></textarea>
+          <label for="csvJsonOutput">CSV to JSON Output</label>
+          <textarea id="csvJsonOutput" readonly placeholder="JSON will appear here after CSV to JSON conversion..."></textarea>
 
           <div class="tiny" style="margin-top:10px;">
-            Privacy: formatting and conversion run in your browser. No data is uploaded to InstantQR servers.
+            Privacy-first: formatting and conversion run in your browser. No data is uploaded to InstantQR servers.
+          </div>
+        </section>
+      </div>
+
+      <section class="metaGrid" aria-label="Additional information">
+        <div class="box">
+          <h2 class="sectionTitle">Frequently asked questions</h2>
+
+          <div class="faqItem">
+            <div class="hint"><strong>Is this JSON formatter free?</strong><br>Yes. It is free to use.</div>
+          </div>
+
+          <div class="faqItem">
+            <div class="hint"><strong>Can I validate and minify JSON?</strong><br>Yes. You can validate, format, and minify JSON instantly.</div>
+          </div>
+
+          <div class="faqItem">
+            <div class="hint"><strong>Can I convert JSON to CSV and CSV to JSON?</strong><br>Yes. Both conversion directions are supported in the browser.</div>
+          </div>
+
+          <div class="faqItem">
+            <div class="hint"><strong>Does InstantQR store my data?</strong><br>No. Your data stays in your browser during formatting and conversion.</div>
           </div>
         </div>
-      </div>
+
+        <div class="box">
+          <h2 class="sectionTitle">Why use this tool?</h2>
+          <p class="hint" style="margin-top:0;">
+            This tool is useful for developers, analysts, students, and anyone working with APIs, exports, datasets, or debugging structured data.
+            It combines JSON formatting, JSON validation, minification, JSON to CSV conversion, and CSV to JSON conversion in one place.
+          </p>
+
+          <h2 class="sectionTitle" style="margin-top:16px;">Related tools</h2>
+          <p class="hint" style="margin-top:0;">
+            <a href="/tools/base64-encoder.html">Base64 Encoder</a> ·
+            <a href="/tools/time-zone-converter.html">Time Zone Converter</a> ·
+            <a href="/tools/ip-lookup.html">IP Lookup</a>
+          </p>
+        </div>
+      </section>
 
       <div class="footerLinks">
         <div style="margin-bottom:8px;">
           <a href="/tools/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
           <a href="/tools/url-qr-code-generator.html">URL QR Generator</a> ·
+          <a href="/tools/base64-encoder.html">Base64 Encoder</a> ·
+          <a href="/tools/countdown-timer.html">Countdown Timer</a>
         </div>
         <div>
           <a href="/about.html">About</a> ·
           <a href="/privacy.html">Privacy</a> ·
           <a href="/terms.html">Terms</a> ·
-          <a href="/contact.html">Contact</a>
+          <a href="/contact.html">Contact</a> ·
+          <a href="/sitemap.xml">Sitemap</a>
         </div>
       </div>
 
@@ -349,11 +791,10 @@ crossorigin="anonymous"></script>
     const autoFormatEl = document.getElementById("autoFormat");
     let autoTimer = null;
 
-    // ✅ Upload CSV elements
     const uploadCsvBtn = document.getElementById("uploadCsvBtn");
     const csvFileEl = document.getElementById("csvFile");
 
-    function setStatus(msg, type="hint"){
+    function setStatus(msg, type = "hint"){
       statusLine.className = type;
       statusLine.textContent = msg;
     }
@@ -374,6 +815,7 @@ crossorigin="anonymous"></script>
       const col = lines[lines.length - 1].length + 1;
       return { line, col };
     }
+
     function tryExplainJsonError(text, err){
       const msg = String(err && err.message ? err.message : err);
       const m = msg.match(/position\s+(\d+)/i);
@@ -426,7 +868,7 @@ crossorigin="anonymous"></script>
       try{
         await navigator.clipboard.writeText(text);
         btn.textContent = okLabel;
-        setTimeout(()=> btn.textContent = baseLabel, 1200);
+        setTimeout(() => btn.textContent = baseLabel, 1200);
       }catch{
         const t = document.createElement("textarea");
         t.value = text;
@@ -435,7 +877,7 @@ crossorigin="anonymous"></script>
         document.execCommand("copy");
         document.body.removeChild(t);
         btn.textContent = okLabel;
-        setTimeout(()=> btn.textContent = baseLabel, 1200);
+        setTimeout(() => btn.textContent = baseLabel, 1200);
       }
     }
 
@@ -459,12 +901,11 @@ crossorigin="anonymous"></script>
       setStatus("Downloaded formatted.json", "ok");
     }
 
-    // ----- JSON -> CSV -----
     function isPlainObject(v){
       return v && typeof v === "object" && !Array.isArray(v);
     }
 
-    function flattenObject(obj, prefix="", out={}){
+    function flattenObject(obj, prefix = "", out = {}){
       for(const [k, v] of Object.entries(obj || {})){
         const key = prefix ? `${prefix}.${k}` : k;
         if(isPlainObject(v)){
@@ -495,16 +936,16 @@ crossorigin="anonymous"></script>
       return needsQuotes ? `"${s}"` : s;
     }
 
-    function jsonToCsv(data, { flatten=true, delimiter="," }){
+    function jsonToCsv(data, { flatten = true, delimiter = "," }){
       let arr = data;
       if(isPlainObject(arr)) arr = [arr];
-      if(!Array.isArray(arr)) throw new Error("JSON → CSV expects an array of objects (or a single object).");
+      if(!Array.isArray(arr)) throw new Error("JSON to CSV expects an array of objects or a single object.");
 
       const objRows = arr.map((row) => {
         if(!isPlainObject(row)) return { value: JSON.stringify(row) };
         return flatten
           ? flattenObject(row)
-          : Object.fromEntries(Object.entries(row).map(([k,v]) => {
+          : Object.fromEntries(Object.entries(row).map(([k, v]) => {
               if(isPlainObject(v) || Array.isArray(v)) return [k, JSON.stringify(v)];
               return [k, v];
             }));
@@ -528,26 +969,25 @@ crossorigin="anonymous"></script>
         const delim = delimiterEl.value === "\\t" ? "\t" : delimiterEl.value;
         const csv = jsonToCsv(obj, { flatten: flattenEl.checked, delimiter: delim });
         csvEl.value = csv;
-        setStatus("Converted JSON → CSV ✔", "ok");
+        setStatus("Converted JSON to CSV ✔", "ok");
       }catch(err){
         csvEl.value = "";
         setStatus("CSV error: " + (err.message || tryExplainJsonError(raw, err)), "error");
       }
     }
 
-    // ----- CSV -> JSON -----
     function parseCSV(text, delimiter){
       const rows = [];
       let row = [];
       let field = "";
       let inQuotes = false;
 
-      for(let i=0; i<text.length; i++){
+      for(let i = 0; i < text.length; i++){
         const c = text[i];
 
         if(inQuotes){
           if(c === '"'){
-            const next = text[i+1];
+            const next = text[i + 1];
             if(next === '"'){ field += '"'; i++; }
             else { inQuotes = false; }
           }else{
@@ -567,10 +1007,11 @@ crossorigin="anonymous"></script>
         if(c === "\r"){ continue; }
         field += c;
       }
+
       row.push(field);
       rows.push(row);
 
-      if(rows.length && rows[rows.length-1].every(v => v === "")) rows.pop();
+      if(rows.length && rows[rows.length - 1].every(v => v === "")) rows.pop();
       return rows;
     }
 
@@ -603,13 +1044,13 @@ crossorigin="anonymous"></script>
         if(headers.length === 0 || headers.every(h => !h)) throw new Error("Missing CSV header row.");
 
         const out = [];
-        for(let r=1; r<rows.length; r++){
+        for(let r = 1; r < rows.length; r++){
           const cols = rows[r];
           if(cols.every(c => (c || "").trim() === "")) continue;
 
           const obj = {};
-          for(let c=0; c<headers.length; c++){
-            const key = headers[c] || `col_${c+1}`;
+          for(let c = 0; c < headers.length; c++){
+            const key = headers[c] || `col_${c + 1}`;
             let val = cols[c] ?? "";
             if(trimCellsEl.checked) val = String(val).trim();
             obj[key] = inferTypesEl.checked ? inferValue(val) : val;
@@ -618,14 +1059,13 @@ crossorigin="anonymous"></script>
         }
 
         csvJsonEl.value = JSON.stringify(out, null, 2);
-        setStatus("Converted CSV → JSON ✔", "ok");
+        setStatus("Converted CSV to JSON ✔", "ok");
       }catch(err){
         csvJsonEl.value = "";
-        setStatus("CSV → JSON error: " + (err.message || String(err)), "error");
+        setStatus("CSV to JSON error: " + (err.message || String(err)), "error");
       }
     }
 
-    // ✅ Auto detect delimiter from first ~5 lines
     function detectDelimiter(text){
       const sample = (text || "").slice(0, 20000);
       const lines = sample.split(/\r?\n/).filter(Boolean).slice(0, 5);
@@ -635,25 +1075,22 @@ crossorigin="anonymous"></script>
       let best = { delim: ",", score: -1 };
 
       for(const d of candidates){
-        // count delimiter occurrences per line, prefer consistent non-zero
         const counts = lines.map(l => (l.match(new RegExp(d === "\t" ? "\\t" : "\\" + d, "g")) || []).length);
         const nonZero = counts.filter(n => n > 0).length;
-        const avg = counts.reduce((a,b)=>a+b,0) / counts.length;
-        const variance = counts.reduce((a,b)=>a + Math.pow(b-avg,2),0) / counts.length;
+        const avg = counts.reduce((a, b) => a + b, 0) / counts.length;
+        const variance = counts.reduce((a, b) => a + Math.pow(b - avg, 2), 0) / counts.length;
 
-        const score = (nonZero * 10) + avg - variance; // simple heuristic
+        const score = (nonZero * 10) + avg - variance;
         if(score > best.score) best = { delim: d, score };
       }
       return best.delim;
     }
 
-    // ✅ File loader
     async function loadCsvFile(file){
       if(!file) return;
       const text = await file.text();
       inputEl.value = text;
 
-      // detect delimiter and update dropdown
       const d = detectDelimiter(text);
       if(d === "\t") delimiterEl.value = "\\t";
       else delimiterEl.value = d;
@@ -661,13 +1098,15 @@ crossorigin="anonymous"></script>
       setStatus(`Loaded ${file.name} ✔ Delimiter detected: ${d === "\t" ? "Tab" : d}`, "ok");
     }
 
-    // Drag & drop
-    function prevent(e){ e.preventDefault(); e.stopPropagation(); }
+    function prevent(e){
+      e.preventDefault();
+      e.stopPropagation();
+    }
 
-    dropZone.addEventListener("dragenter", (e)=>{ prevent(e); dropZone.classList.add("dragover"); });
-    dropZone.addEventListener("dragover", (e)=>{ prevent(e); dropZone.classList.add("dragover"); });
-    dropZone.addEventListener("dragleave", (e)=>{ prevent(e); dropZone.classList.remove("dragover"); });
-    dropZone.addEventListener("drop", async (e)=>{
+    dropZone.addEventListener("dragenter", (e) => { prevent(e); dropZone.classList.add("dragover"); });
+    dropZone.addEventListener("dragover", (e) => { prevent(e); dropZone.classList.add("dragover"); });
+    dropZone.addEventListener("dragleave", (e) => { prevent(e); dropZone.classList.remove("dragover"); });
+    dropZone.addEventListener("drop", async (e) => {
       prevent(e);
       dropZone.classList.remove("dragover");
       const file = e.dataTransfer?.files?.[0];
@@ -683,12 +1122,11 @@ crossorigin="anonymous"></script>
       await loadCsvFile(file);
     });
 
-    // Upload button
     uploadCsvBtn.addEventListener("click", () => csvFileEl.click());
     csvFileEl.addEventListener("change", async () => {
       const file = csvFileEl.files?.[0];
       await loadCsvFile(file);
-      csvFileEl.value = ""; // reset so same file can be re-selected
+      csvFileEl.value = "";
     });
 
     function loadSample(){
@@ -701,13 +1139,12 @@ crossorigin="anonymous"></script>
       doToCsv();
       outputEl.value = inputEl.value;
 
-      // show CSV->JSON sample
       const csv = "id,tool,users,active\n1,QR Generator,8,true\n2,Password Generator,3,true";
       inputEl.value = csv;
       doToJson();
       inputEl.value = JSON.stringify(sampleJson, null, 2);
 
-      setStatus("Sample loaded (JSON + CSV).", "ok");
+      setStatus("Sample loaded for JSON and CSV.", "ok");
     }
 
     function clearAll(){
@@ -724,7 +1161,6 @@ crossorigin="anonymous"></script>
       autoTimer = setTimeout(() => doFormat(), 450);
     }
 
-    // Events
     formatBtn.addEventListener("click", doFormat);
     minifyBtn.addEventListener("click", doMinify);
     validateBtn.addEventListener("click", doValidate);
@@ -783,7 +1219,6 @@ crossorigin="anonymous"></script>
 
     inputEl.addEventListener("input", scheduleAuto);
 
-    // Tab inserts 2 spaces
     inputEl.addEventListener("keydown", (e) => {
       if(e.key === "Tab"){
         e.preventDefault();
