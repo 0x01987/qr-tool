@@ -1,189 +1,529 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-6213N2G8R2');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
 
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>JWT Decoder | InstantQR</title>
-<meta name="description" content="Decode JWT header and payload instantly in your browser. No signature verification." />
-<meta name="robots" content="index,follow" />
-<link rel="canonical" href="https://instantqr.io/tools/jwt-decoder.html" />
-<link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
-<link rel="alternate icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
-<meta name="theme-color" content="#0b0f19" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-<style>
-:root{
-  --bg:#0b1220;
-  --panel: rgba(255,255,255,.04);
-  --panel2: rgba(255,255,255,.06);
-  --text:#e7eefc;
-  --muted:#a9b7d6;
-  --brand:#69a6ff;
-  --ok:#19c37d;
-  --warn:#fbbf24;
-  --bad:#ef4444;
-  --border: rgba(255,255,255,.10);
-  --shadow: 0 12px 40px rgba(0,0,0,.45);
-  --radius: 18px;
-  --radius2: 22px;
-  --max: 980px;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
-    radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
-    radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
-    linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
-}
-a{color:inherit; text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:var(--max); margin:0 auto; padding:18px}
-.topbar{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter: blur(10px);
-  background: rgba(7, 11, 20, .55);
-  border-bottom: 1px solid var(--border);
-}
-.topbar .inner{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:14px 18px;
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-}
-.brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
-.brand img{height:32px; width:auto; display:block}
-nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
-nav a{
-  color:var(--muted);
-  font-size:14px;
-  padding:8px 10px;
-  border-radius:12px;
-}
-nav a:hover{color:var(--text); background: rgba(255,255,255,.06); text-decoration:none}
+  <title>JWT Decoder | Decode JWT Header & Payload Online | InstantQR.io</title>
+  <meta name="description" content="Free online JWT decoder. Decode JWT header and payload instantly in your browser, prettify JSON, and copy decoded data. Privacy-first and local. Does not verify signatures." />
+  <meta name="keywords" content="jwt decoder, decode jwt, jwt parser, jwt token decoder, json web token decoder, jwt header payload decoder, jwt online tool" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0b0f19" />
+  <meta name="format-detection" content="telephone=no" />
 
-h1{margin:14px 0 6px; font-size: clamp(26px, 3.5vw, 36px); letter-spacing:-.6px}
-.sub{margin:0 0 16px; color:var(--muted); line-height:1.5}
+  <link rel="canonical" href="https://instantqr.io/tools/jwt-decoder.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate" hreflang="en" href="https://instantqr.io/tools/jwt-decoder.html" />
 
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  border:1px solid var(--border);
-  border-radius: var(--radius2);
-  box-shadow: var(--shadow);
-  padding:16px;
-}
-.grid{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
-@media (max-width: 860px){ .grid{grid-template-columns:1fr} }
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR.io" />
+  <meta property="og:title" content="JWT Decoder | Decode JWT Header & Payload Online | InstantQR.io" />
+  <meta property="og:description" content="Decode JWT header and payload instantly in your browser. Prettify JSON and inspect token contents locally. No signature verification." />
+  <meta property="og:url" content="https://instantqr.io/tools/jwt-decoder.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+  <meta property="og:image:alt" content="InstantQR JWT Decoder tool" />
+  <meta property="og:locale" content="en_US" />
 
-label{display:block; font-size:13px; color:var(--muted); margin:8px 0 6px}
-.input, textarea, select{
-  width:100%;
-  padding:12px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(0,0,0,.14);
-  color: var(--text);
-  outline:none;
-  font-size:14px;
-}
-textarea{min-height:140px; resize:vertical}
-.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:10px 14px;
-  border-radius: 999px;
-  font-weight:700;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
-  color: var(--text);
-  text-decoration:none;
-  gap:8px;
-  white-space:nowrap;
-  cursor:pointer;
-  transition: transform .12s ease, filter .12s ease, background .12s ease;
-  user-select:none;
-}
-.btn:hover{ transform: translateY(-1px); text-decoration:none; }
-.btn.primary{
-  border: 0;
-  background: linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
-  box-shadow: 0 14px 28px rgba(105,166,255,.22);
-}
-.btn.primary:hover{ filter:brightness(1.06); }
-.btn.ghost:hover{ background: rgba(255,255,255,.10); }
-.pill{
-  display:inline-flex; align-items:center; gap:8px;
-  padding:8px 12px;
-  border-radius:999px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.10);
-  color: var(--muted);
-  font-size:13px;
-}
-.kv{
-  display:flex; gap:10px; align-items:flex-start; justify-content:space-between;
-  border:1px solid rgba(255,255,255,.10);
-  border-radius: 14px;
-  background: rgba(0,0,0,.10);
-  padding:12px;
-}
-.kv strong{display:block; font-size:13px; color:var(--muted); font-weight:700}
-.kv code, .mono{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 13px;
-  word-break: break-all;
-}
-.help{color:var(--muted); font-size:13px; line-height:1.55}
-.ok{color:var(--ok)}
-.bad{color:var(--bad)}
-.warn{color:var(--warn)}
-.hr{height:1px; background: rgba(255,255,255,.10); margin:14px 0}
-.footer{
-  margin-top: 18px;
-  padding: 16px 0 32px;
-  border-top: 1px solid rgba(255,255,255,.10);
-  color: var(--muted);
-  font-size: 13px;
-}
-.footer a{color:var(--muted)}
-.footer a:hover{color:var(--text); text-decoration:none}
-.small{font-size:12px; color:rgba(233,238,252,.60)}
-.toast{
-  position: fixed;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,.55);
-  border: 1px solid rgba(255,255,255,.12);
-  color: var(--text);
-  padding: 10px 14px;
-  border-radius: 999px;
-  box-shadow: var(--shadow);
-  opacity: 0;
-  pointer-events:none;
-  transition: opacity .15s ease;
-}
-.toast.show{opacity:1}
-</style>
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="JWT Decoder | InstantQR.io" />
+  <meta name="twitter:description" content="Free online JWT decoder for header and payload inspection. Fast, private, and browser-based." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
 
+  <!-- Structured Data: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"JWT Decoder",
+    "applicationCategory":"DeveloperApplication",
+    "operatingSystem":"Web",
+    "url":"https://instantqr.io/tools/jwt-decoder.html",
+    "description":"Free online JWT decoder for header and payload inspection. Does not verify signatures.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io",
+      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Is this JWT decoder free to use?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The InstantQR JWT decoder is free to use."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What parts of a JWT does this tool decode?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This tool decodes the JWT header and payload sections."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool verify JWT signatures?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. This tool only decodes the token contents. It does not verify signatures or token validity."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does the JWT decoder run locally?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The decoding happens in your browser so the token is not intentionally sent anywhere."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "@id":"https://instantqr.io/tools/jwt-decoder.html#breadcrumb",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"JWT Decoder",
+        "item":"https://instantqr.io/tools/jwt-decoder.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: WebPage -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"JWT Decoder",
+    "url":"https://instantqr.io/tools/jwt-decoder.html",
+    "description":"Decode JWT header and payload instantly online. Does not verify signatures.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR.io",
+      "url":"https://instantqr.io/"
+    },
+    "breadcrumb":{
+      "@id":"https://instantqr.io/tools/jwt-decoder.html#breadcrumb"
+    }
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --link:#cfe0ff;
+      --brand:#69a6ff;
+      --ok:#19c37d;
+      --warn:#fbbf24;
+      --bad:#ef4444;
+      --border:rgba(255,255,255,.10);
+      --shadow:0 12px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:22px;
+      --max:980px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+    }
+
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:18px;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(10px);
+      background:rgba(7, 11, 20, .55);
+      border-bottom:1px solid var(--border);
+    }
+
+    .topbar .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+      color:var(--text);
+    }
+
+    .brand img{
+      height:32px;
+      width:auto;
+      display:block;
+    }
+
+    nav{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+
+    nav a:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    nav a.active{
+      color:var(--text);
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .breadcrumbs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin:8px 0 14px;
+      font-size:12px;
+      color:rgba(233,238,252,.60);
+    }
+
+    .breadcrumbs a{
+      color:var(--link);
+      text-decoration:none;
+    }
+
+    .breadcrumbs a:hover{text-decoration:underline}
+
+    h1{
+      margin:14px 0 6px;
+      font-size:clamp(26px, 3.5vw, 36px);
+      letter-spacing:-.6px;
+    }
+
+    .sub{
+      margin:0 0 16px;
+      color:var(--muted);
+      line-height:1.55;
+      max-width:76ch;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+
+    .badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .badge,
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    label{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      margin:8px 0 6px;
+    }
+
+    .input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.14);
+      color:var(--text);
+      outline:none;
+      font-size:14px;
+    }
+
+    .input:focus, textarea:focus, select:focus{
+      border-color:rgba(105,166,255,.85);
+      box-shadow:0 0 0 3px rgba(105,166,255,.16);
+    }
+
+    textarea{
+      min-height:160px;
+      resize:vertical;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    @media (max-width:860px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+      gap:8px;
+      white-space:nowrap;
+      cursor:pointer;
+      transition:transform .12s ease, filter .12s ease, background .12s ease;
+      user-select:none;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      text-decoration:none;
+    }
+
+    .btn.primary{
+      border:0;
+      background:linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
+      box-shadow:0 14px 28px rgba(105,166,255,.22);
+    }
+
+    .btn.primary:hover{filter:brightness(1.06)}
+    .btn.ghost:hover{background:rgba(255,255,255,.10)}
+
+    .kv{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      justify-content:space-between;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:14px;
+      background:rgba(0,0,0,.10);
+      padding:12px;
+    }
+
+    .kv strong{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .kv code, .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      font-size:13px;
+      word-break:break-all;
+    }
+
+    .help{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .ok{color:var(--ok)}
+    .bad{color:var(--bad)}
+    .warn{color:var(--warn)}
+
+    .hr{
+      height:1px;
+      background:rgba(255,255,255,.10);
+      margin:14px 0;
+    }
+
+    .metaGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    @media (max-width:860px){
+      .metaGrid{grid-template-columns:1fr}
+    }
+
+    .sectionTitle{
+      margin:0 0 10px;
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+
+    .faqItem{
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px solid rgba(255,255,255,.10);
+    }
+
+    .faqItem:first-of-type{
+      margin-top:0;
+      padding-top:0;
+      border-top:0;
+    }
+
+    .footer{
+      margin-top:18px;
+      padding:16px 0 32px;
+      border-top:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.8;
+    }
+
+    .footer a{color:var(--muted)}
+    .footer a:hover{color:var(--text);text-decoration:none}
+
+    .small{
+      font-size:12px;
+      color:rgba(233,238,252,.60);
+    }
+
+    .footerLinks{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.8;
+    }
+
+    .footerLinks a{color:var(--link)}
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      background:rgba(0,0,0,.55);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .15s ease;
+    }
+
+    .toast.show{opacity:1}
+
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+  </style>
 </head>
 <body>
 <header class="topbar">
@@ -194,6 +534,7 @@ textarea{min-height:140px; resize:vertical}
     </a>
     <nav aria-label="Primary">
       <a href="/tools.html">All Tools</a>
+      <a class="active" href="/tools/jwt-decoder.html" aria-current="page">JWT Decoder</a>
       <a href="/about.html">About</a>
       <a href="/contact.html">Contact</a>
     </nav>
@@ -201,53 +542,130 @@ textarea{min-height:140px; resize:vertical}
 </header>
 
 <main class="wrap">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <a href="/tools.html">Tools</a>
+    <span>/</span>
+    <span>JWT Decoder</span>
+  </nav>
 
-<section class="card">
-  <div class="pill">🔐 Dev Tool · 🧾 Decode only</div>
-  <h1>JWT Decoder</h1>
-  <p class="sub">Paste a JSON Web Token and decode the header & payload. <strong>Note:</strong> this tool does not verify signatures.</p>
-
-  <label for="jwt">JWT</label>
-  <textarea id="jwt" class="input mono" spellcheck="false" placeholder="eyJhbGciOi..."></textarea>
-
-  <div class="row" style="margin-top:10px;">
-    <button class="btn primary" id="decodeBtn" type="button">Decode</button>
-    <button class="btn ghost" id="copyHeader" type="button">Copy Header</button>
-    <button class="btn ghost" id="copyPayload" type="button">Copy Payload</button>
-    <button class="btn ghost" id="clearBtn" type="button">Clear</button>
-  </div>
-
-  <div class="hr"></div>
-
-  <div class="grid">
-    <div>
-      <div class="kv">
-        <div>
-          <strong>Header (JSON)</strong>
-          <div class="help" id="hStatus">—</div>
-        </div>
-        <button class="btn ghost" type="button" id="prettyH">Prettify</button>
-      </div>
-      <textarea id="headerOut" class="input mono" spellcheck="false" placeholder="{}"></textarea>
+  <section class="card">
+    <div class="badges" aria-label="Highlights">
+      <span class="badge">🔐 Dev Tool</span>
+      <span class="badge">🧾 Decode only</span>
+      <span class="badge">🔒 Runs locally</span>
+      <span class="badge">⚡ Fast</span>
     </div>
 
-    <div>
-      <div class="kv">
-        <div>
-          <strong>Payload (JSON)</strong>
-          <div class="help" id="pStatus">—</div>
-        </div>
-        <button class="btn ghost" type="button" id="prettyP">Prettify</button>
-      </div>
-      <textarea id="payloadOut" class="input mono" spellcheck="false" placeholder="{}"></textarea>
-    </div>
-  </div>
+    <h1>JWT Decoder</h1>
+    <p class="sub">
+      Paste a JSON Web Token to decode the header and payload instantly. This tool is useful for debugging, development,
+      inspecting claims, and viewing token metadata. <strong>Important:</strong> it does not verify signatures or confirm token validity.
+    </p>
 
-  <div class="hr"></div>
-  <div class="help">
-    Security tip: Don’t paste real production tokens on untrusted devices. This page runs in your browser.
-  </div>
-</section>
+    <label for="jwt">JWT</label>
+    <textarea id="jwt" class="input mono" spellcheck="false" placeholder="eyJhbGciOi..."></textarea>
+
+    <div class="row" style="margin-top:10px;">
+      <button class="btn primary" id="decodeBtn" type="button">Decode</button>
+      <button class="btn ghost" id="copyHeader" type="button">Copy Header</button>
+      <button class="btn ghost" id="copyPayload" type="button">Copy Payload</button>
+      <button class="btn ghost" id="clearBtn" type="button">Clear</button>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="grid">
+      <section aria-labelledby="header-title">
+        <h2 id="header-title" class="sr-only">JWT header output</h2>
+        <div class="kv">
+          <div>
+            <strong>Header (JSON)</strong>
+            <div class="help" id="hStatus">—</div>
+          </div>
+          <button class="btn ghost" type="button" id="prettyH">Prettify</button>
+        </div>
+        <textarea id="headerOut" class="input mono" spellcheck="false" placeholder="{}"></textarea>
+      </section>
+
+      <section aria-labelledby="payload-title">
+        <h2 id="payload-title" class="sr-only">JWT payload output</h2>
+        <div class="kv">
+          <div>
+            <strong>Payload (JSON)</strong>
+            <div class="help" id="pStatus">—</div>
+          </div>
+          <button class="btn ghost" type="button" id="prettyP">Prettify</button>
+        </div>
+        <textarea id="payloadOut" class="input mono" spellcheck="false" placeholder="{}"></textarea>
+      </section>
+    </div>
+
+    <div class="hr"></div>
+    <div class="help">
+      Security tip: Avoid pasting real production tokens on shared or untrusted devices. This page decodes locally in your browser,
+      but decoding is not the same as verification.
+    </div>
+
+    <section class="metaGrid" aria-label="Additional information">
+      <div>
+        <h2 class="sectionTitle">Frequently asked questions</h2>
+
+        <div class="faqItem">
+          <div class="help"><strong>What does this JWT decoder do?</strong><br>It decodes the header and payload parts of a JWT so you can inspect them as text or JSON.</div>
+        </div>
+
+        <div class="faqItem">
+          <div class="help"><strong>Does it verify the signature?</strong><br>No. This tool does not verify signatures and does not confirm whether a token is trustworthy.</div>
+        </div>
+
+        <div class="faqItem">
+          <div class="help"><strong>Can I prettify the decoded JSON?</strong><br>Yes. Use the Prettify buttons to format the decoded header or payload.</div>
+        </div>
+
+        <div class="faqItem">
+          <div class="help"><strong>Does this tool run locally?</strong><br>Yes. Decoding happens in your browser for speed and privacy.</div>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="sectionTitle">Why use this tool?</h2>
+        <p class="help" style="margin-top:0;">
+          This JWT decoder is useful for developers, QA, API testing, authentication debugging, claim inspection, and viewing token metadata during development.
+          It provides a quick way to inspect token contents without sending them to a server.
+        </p>
+
+        <h2 class="sectionTitle" style="margin-top:16px;">Related tools</h2>
+        <div class="footerLinks">
+          <a href="/tools/json-formatter.html">JSON Formatter</a> ·
+          <a href="/tools/base64-encoder.html">Base64 Encoder</a> ·
+          <a href="/tools/uuid-generator.html">UUID Generator</a> ·
+          <a href="/tools/time-zone-converter.html">Time Zone Converter</a>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <footer class="footer" aria-label="Footer">
+    <div class="footerLinks">
+      <a href="/tools.html">All Tools</a> ·
+      <a href="/tools/json-formatter.html">JSON Formatter</a> ·
+      <a href="/tools/base64-encoder.html">Base64 Encoder</a> ·
+      <a href="/tools/uuid-generator.html">UUID Generator</a> ·
+      <a href="/tools/countdown-timer.html">Countdown Timer</a>
+    </div>
+    <div class="small" style="margin-top:10px;">
+      © <span id="year"></span> InstantQR.io ·
+      <a href="/privacy.html">Privacy</a> ·
+      <a href="/terms.html">Terms</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/sitemap.xml">Sitemap</a>
+    </div>
+  </footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function(){
@@ -259,14 +677,17 @@ textarea{min-height:140px; resize:vertical}
 
   function b64urlToString(b64url){
     const pad = '='.repeat((4 - (b64url.length % 4)) % 4);
-    const b64 = (b64url + pad).replace(/-/g,'+').replace(/_/g,'/');
+    const b64 = (b64url + pad).replace(/-/g, '+').replace(/_/g, '/');
     const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
     return new TextDecoder().decode(bytes);
   }
 
   function safeJsonParse(s){
-    try { return { ok:true, value: JSON.parse(s) }; }
-    catch(e){ return { ok:false, error: String(e) }; }
+    try{
+      return { ok:true, value: JSON.parse(s) };
+    }catch(e){
+      return { ok:false, error: String(e) };
+    }
   }
 
   function decode(){
@@ -276,10 +697,16 @@ textarea{min-height:140px; resize:vertical}
     hStatus.textContent = '—';
     pStatus.textContent = '—';
 
-    if(!token){ toast('Paste a JWT'); return; }
+    if(!token){
+      toast('Paste a JWT');
+      return;
+    }
 
     const parts = token.split('.');
-    if(parts.length < 2){ toast('Invalid JWT format'); return; }
+    if(parts.length < 2){
+      toast('Invalid JWT format');
+      return;
+    }
 
     try{
       const headerStr = b64urlToString(parts[0]);
@@ -295,18 +722,21 @@ textarea{min-height:140px; resize:vertical}
       pStatus.innerHTML = pj.ok ? '<span class="ok">Valid JSON</span>' : '<span class="warn">Not JSON</span>';
 
       toast('Decoded');
-    } catch(e){
+    }catch(e){
       toast('Decode failed');
     }
   }
 
   function prettify(el){
     const s = (el.value || '').trim();
-    if(!s){ toast('Nothing to format'); return; }
+    if(!s){
+      toast('Nothing to format');
+      return;
+    }
     try{
       el.value = JSON.stringify(JSON.parse(s), null, 2);
       toast('Prettified');
-    } catch(e){
+    }catch(e){
       toast('Not valid JSON');
     }
   }
@@ -314,17 +744,30 @@ textarea{min-height:140px; resize:vertical}
   document.getElementById('decodeBtn').addEventListener('click', decode);
   document.getElementById('prettyH').addEventListener('click', () => prettify(headerOut));
   document.getElementById('prettyP').addEventListener('click', () => prettify(payloadOut));
-  document.getElementById('clearBtn').addEventListener('click', () => { jwtEl.value=''; headerOut.value=''; payloadOut.value=''; toast('Cleared'); });
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    jwtEl.value = '';
+    headerOut.value = '';
+    payloadOut.value = '';
+    hStatus.textContent = '—';
+    pStatus.textContent = '—';
+    toast('Cleared');
+  });
 
   document.getElementById('copyHeader').addEventListener('click', async () => {
     const v = (headerOut.value || '').trim();
-    if(!v){ toast('Nothing to copy'); return; }
+    if(!v){
+      toast('Nothing to copy');
+      return;
+    }
     await copyText(v);
   });
 
   document.getElementById('copyPayload').addEventListener('click', async () => {
     const v = (payloadOut.value || '').trim();
-    if(!v){ toast('Nothing to copy'); return; }
+    if(!v){
+      toast('Nothing to copy');
+      return;
+    }
     await copyText(v);
   });
 
@@ -338,13 +781,6 @@ textarea{min-height:140px; resize:vertical}
 })();
 </script>
 
-  <footer class="footer" aria-label="Footer">
-    <div class="small">© <span id="year"></span> InstantQR.io · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.xml">Sitemap</a></div>
-  </footer>
-</main>
-
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -357,10 +793,10 @@ textarea{min-height:140px; resize:vertical}
   }
 
   async function copyText(text){
-    try {
+    try{
       await navigator.clipboard.writeText(text);
       toast('Copied');
-    } catch(e) {
+    }catch(e){
       const ta = document.createElement('textarea');
       ta.value = text;
       ta.style.position = 'fixed';
