@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+</script>
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+crossorigin="anonymous"></script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Subnet Calculator | CIDR Network Calculator | InstantQR</title>
+
+<meta name="description" content="Free subnet calculator to compute network address, broadcast address, CIDR blocks, and usable host ranges instantly.">
+
+<link rel="canonical" href="https://instantqr.io/tools/subnet-calculator.html">
+
+<meta name="robots" content="index,follow">
+
+<style>
+
+body{
+font-family:system-ui,-apple-system,Segoe UI,Roboto;
+background:#0b1220;
+color:#fff;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+h1{
+font-size:34px;
+margin-bottom:10px;
+}
+
+.card{
+background:#121b2f;
+padding:25px;
+border-radius:12px;
+margin-top:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:6px;
+border:1px solid #333;
+background:#0b1220;
+color:white;
+}
+
+button{
+margin-top:15px;
+padding:12px 20px;
+border:none;
+background:#3b82f6;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2563eb;
+}
+
+.result{
+margin-top:20px;
+font-family:monospace;
+background:#0b1220;
+padding:15px;
+border-radius:8px;
+line-height:1.6;
+}
+
+.label{
+color:#9ca3af;
+}
+
+.value{
+color:#22c55e;
+}
+
+footer{
+margin-top:40px;
+font-size:14px;
+color:#aaa;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<nav>
+<a href="/">Home</a> /
+<a href="/tools.html">Tools</a> /
+Subnet Calculator
+</nav>
+
+<h1>Subnet Calculator</h1>
+
+<p>Calculate network details for an IPv4 address and CIDR block.</p>
+
+<div class="card">
+
+<label>IP Address</label>
+<input id="ip" placeholder="192.168.1.1">
+
+<label>CIDR Prefix</label>
+<input id="cidr" placeholder="24">
+
+<button onclick="calculate()">Calculate</button>
+
+<div id="result" class="result"></div>
+
+</div>
+
+<footer>
+
+<h2>What is Subnetting?</h2>
+
+<p>
+Subnetting divides a large IP network into smaller subnetworks to improve routing efficiency and security.
+</p>
+
+<h2>What is CIDR?</h2>
+
+<p>
+CIDR (Classless Inter-Domain Routing) defines how many bits of the IP address represent the network portion.
+</p>
+
+</footer>
+
+</div>
+
+<script>
+
+function ipToInt(ip){
+
+return ip.split('.').reduce((acc,oct)=> (acc<<8)+parseInt(oct),0)
+
+}
+
+function intToIp(int){
+
+return [
+(int>>>24)&255,
+(int>>>16)&255,
+(int>>>8)&255,
+int&255
+].join('.')
+
+}
+
+function calculate(){
+
+let ip=document.getElementById("ip").value
+let cidr=parseInt(document.getElementById("cidr").value)
+let result=document.getElementById("result")
+
+if(!ip || isNaN(cidr)){
+result.innerHTML="Enter valid IP and CIDR"
+return
+}
+
+let ipInt=ipToInt(ip)
+
+let mask = cidr === 0 ? 0 : (~0 << (32-cidr)) >>> 0
+
+let network = ipInt & mask
+let broadcast = network | (~mask >>>0)
+
+let firstHost = network + 1
+let lastHost = broadcast - 1
+
+let hosts = Math.pow(2,32-cidr) - 2
+
+result.innerHTML = `
+<div><span class="label">Network Address:</span> <span class="value">${intToIp(network)}</span></div>
+<div><span class="label">Broadcast Address:</span> <span class="value">${intToIp(broadcast)}</span></div>
+<div><span class="label">First Host:</span> <span class="value">${intToIp(firstHost)}</span></div>
+<div><span class="label">Last Host:</span> <span class="value">${intToIp(lastHost)}</span></div>
+<div><span class="label">Usable Hosts:</span> <span class="value">${hosts}</span></div>
+<div><span class="label">Subnet Mask:</span> <span class="value">${intToIp(mask)}</span></div>
+`
+
+}
+
+</script>
+
+</body>
+</html>
