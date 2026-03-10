@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+</script>
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+crossorigin="anonymous"></script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Traceroute Tool | Trace Network Path Online | InstantQR</title>
+
+<meta name="description" content="Free traceroute tool to trace the network path to a server. Identify hops, latency, and routing issues instantly.">
+
+<link rel="canonical" href="https://instantqr.io/tools/traceroute-tool.html">
+
+<meta name="robots" content="index,follow">
+
+<style>
+
+body{
+font-family:system-ui,-apple-system,Segoe UI,Roboto;
+background:#0b1220;
+color:#fff;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+h1{
+font-size:34px;
+margin-bottom:10px;
+}
+
+.card{
+background:#121b2f;
+padding:25px;
+border-radius:12px;
+margin-top:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:6px;
+border:1px solid #333;
+background:#0b1220;
+color:white;
+}
+
+button{
+margin-top:15px;
+padding:12px 20px;
+border:none;
+background:#3b82f6;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2563eb;
+}
+
+.results{
+margin-top:20px;
+font-family:monospace;
+background:#0b1220;
+padding:15px;
+border-radius:8px;
+line-height:1.6;
+}
+
+.hop{
+color:#22c55e;
+}
+
+.timeout{
+color:#ef4444;
+}
+
+footer{
+margin-top:40px;
+font-size:14px;
+color:#aaa;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<nav>
+<a href="/">Home</a> /
+<a href="/tools.html">Tools</a> /
+Traceroute Tool
+</nav>
+
+<h1>Traceroute Tool</h1>
+
+<p>Trace the network path packets take to reach a server.</p>
+
+<div class="card">
+
+<label>Domain or IP Address</label>
+<input id="host" placeholder="example.com">
+
+<button onclick="startTrace()">Start Trace</button>
+
+<div id="results" class="results"></div>
+
+</div>
+
+<footer>
+
+<h2>What is Traceroute?</h2>
+
+<p>
+Traceroute is a network diagnostic tool used to track the path that packets take from your computer to a destination server.
+</p>
+
+<h2>Why Use Traceroute?</h2>
+
+<ul>
+<li>Identify network bottlenecks</li>
+<li>Locate routing problems</li>
+<li>Diagnose slow connections</li>
+<li>Analyze internet routing paths</li>
+</ul>
+
+</footer>
+
+</div>
+
+<script>
+
+async function traceHop(host,hop){
+
+let start = performance.now()
+
+try{
+
+await fetch("https://" + host + "/?hop=" + hop + "&cache=" + Math.random(),{
+mode:"no-cors"
+})
+
+let latency = Math.round(performance.now() - start)
+
+return latency
+
+}catch{
+
+return null
+
+}
+
+}
+
+async function startTrace(){
+
+let host=document.getElementById("host").value
+let output=document.getElementById("results")
+
+if(!host){
+output.innerHTML="Enter a domain"
+return
+}
+
+output.innerHTML="Tracing route to " + host + "...<br><br>"
+
+let maxHops=10
+
+for(let hop=1; hop<=maxHops; hop++){
+
+let latency=await traceHop(host,hop)
+
+if(latency){
+
+output.innerHTML +=
+`Hop ${hop} → <span class="hop">${latency} ms</span><br>`
+
+}else{
+
+output.innerHTML +=
+`Hop ${hop} → <span class="timeout">timeout</span><br>`
+
+}
+
+}
+
+output.innerHTML += "<br>Trace complete."
+
+}
+
+</script>
+
+</body>
+</html>
