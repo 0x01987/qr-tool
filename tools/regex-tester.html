@@ -1,189 +1,339 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-6213N2G8R2');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
 
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Regex Tester | InstantQR</title>
-<meta name="description" content="Test JavaScript regex patterns with flags, matches, and replacements." />
-<meta name="robots" content="index,follow" />
-<link rel="canonical" href="https://instantqr.io/tools/regex-tester.html" />
-<link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
-<link rel="alternate icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
-<meta name="theme-color" content="#0b0f19" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-<style>
-:root{
-  --bg:#0b1220;
-  --panel: rgba(255,255,255,.04);
-  --panel2: rgba(255,255,255,.06);
-  --text:#e7eefc;
-  --muted:#a9b7d6;
-  --brand:#69a6ff;
-  --ok:#19c37d;
-  --warn:#fbbf24;
-  --bad:#ef4444;
-  --border: rgba(255,255,255,.10);
-  --shadow: 0 12px 40px rgba(0,0,0,.45);
-  --radius: 18px;
-  --radius2: 22px;
-  --max: 980px;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
-    radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
-    radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
-    linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
-}
-a{color:inherit; text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:var(--max); margin:0 auto; padding:18px}
-.topbar{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter: blur(10px);
-  background: rgba(7, 11, 20, .55);
-  border-bottom: 1px solid var(--border);
-}
-.topbar .inner{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:14px 18px;
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-}
-.brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
-.brand img{height:32px; width:auto; display:block}
-nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
-nav a{
-  color:var(--muted);
-  font-size:14px;
-  padding:8px 10px;
-  border-radius:12px;
-}
-nav a:hover{color:var(--text); background: rgba(255,255,255,.06); text-decoration:none}
+  <title>Regex Tester | JavaScript Regular Expression Tester Online | InstantQR.io</title>
+  <meta name="description" content="Free online regex tester for JavaScript regular expressions. Test patterns, flags, matches, capture groups, and replacements instantly in your browser. Fast, private, and mobile friendly." />
+  <meta name="keywords" content="regex tester, regular expression tester, javascript regex tester, regex replace tool, regex matcher, regex flags tester, regex capture groups, regex online" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0b0f19" />
+  <meta name="format-detection" content="telephone=no" />
 
-h1{margin:14px 0 6px; font-size: clamp(26px, 3.5vw, 36px); letter-spacing:-.6px}
-.sub{margin:0 0 16px; color:var(--muted); line-height:1.5}
+  <link rel="canonical" href="https://instantqr.io/tools/regex-tester.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate" hreflang="en" href="https://instantqr.io/tools/regex-tester.html" />
 
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  border:1px solid var(--border);
-  border-radius: var(--radius2);
-  box-shadow: var(--shadow);
-  padding:16px;
-}
-.grid{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
-@media (max-width: 860px){ .grid{grid-template-columns:1fr} }
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR.io" />
+  <meta property="og:title" content="Regex Tester | JavaScript Regular Expression Tester Online | InstantQR.io" />
+  <meta property="og:description" content="Test JavaScript regular expressions with live matches, flags, capture groups, and replacement output." />
+  <meta property="og:url" content="https://instantqr.io/tools/regex-tester.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+  <meta property="og:image:alt" content="InstantQR Regex Tester tool" />
+  <meta property="og:locale" content="en_US" />
 
-label{display:block; font-size:13px; color:var(--muted); margin:8px 0 6px}
-.input, textarea, select{
-  width:100%;
-  padding:12px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(0,0,0,.14);
-  color: var(--text);
-  outline:none;
-  font-size:14px;
-}
-textarea{min-height:140px; resize:vertical}
-.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:10px 14px;
-  border-radius: 999px;
-  font-weight:700;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
-  color: var(--text);
-  text-decoration:none;
-  gap:8px;
-  white-space:nowrap;
-  cursor:pointer;
-  transition: transform .12s ease, filter .12s ease, background .12s ease;
-  user-select:none;
-}
-.btn:hover{ transform: translateY(-1px); text-decoration:none; }
-.btn.primary{
-  border: 0;
-  background: linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
-  box-shadow: 0 14px 28px rgba(105,166,255,.22);
-}
-.btn.primary:hover{ filter:brightness(1.06); }
-.btn.ghost:hover{ background: rgba(255,255,255,.10); }
-.pill{
-  display:inline-flex; align-items:center; gap:8px;
-  padding:8px 12px;
-  border-radius:999px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.10);
-  color: var(--muted);
-  font-size:13px;
-}
-.kv{
-  display:flex; gap:10px; align-items:flex-start; justify-content:space-between;
-  border:1px solid rgba(255,255,255,.10);
-  border-radius: 14px;
-  background: rgba(0,0,0,.10);
-  padding:12px;
-}
-.kv strong{display:block; font-size:13px; color:var(--muted); font-weight:700}
-.kv code, .mono{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 13px;
-  word-break: break-all;
-}
-.help{color:var(--muted); font-size:13px; line-height:1.55}
-.ok{color:var(--ok)}
-.bad{color:var(--bad)}
-.warn{color:var(--warn)}
-.hr{height:1px; background: rgba(255,255,255,.10); margin:14px 0}
-.footer{
-  margin-top: 18px;
-  padding: 16px 0 32px;
-  border-top: 1px solid rgba(255,255,255,.10);
-  color: var(--muted);
-  font-size: 13px;
-}
-.footer a{color:var(--muted)}
-.footer a:hover{color:var(--text); text-decoration:none}
-.small{font-size:12px; color:rgba(233,238,252,.60)}
-.toast{
-  position: fixed;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,.55);
-  border: 1px solid rgba(255,255,255,.12);
-  color: var(--text);
-  padding: 10px 14px;
-  border-radius: 999px;
-  box-shadow: var(--shadow);
-  opacity: 0;
-  pointer-events:none;
-  transition: opacity .15s ease;
-}
-.toast.show{opacity:1}
-</style>
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Regex Tester | InstantQR.io" />
+  <meta name="twitter:description" content="Free online JavaScript regex tester with matches, flags, capture groups, and replacement output." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
 
+  <!-- Structured Data: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Regex Tester",
+    "applicationCategory":"DeveloperApplication",
+    "operatingSystem":"Web",
+    "url":"https://instantqr.io/tools/regex-tester.html",
+    "description":"Free online JavaScript regex tester for patterns, flags, matches, capture groups, and replacements.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io",
+      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Is this regex tester free to use?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The InstantQR regex tester is free to use."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What regex engine does this tool use?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This tool uses your browser’s JavaScript RegExp engine."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this regex tester support flags and capture groups?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can test JavaScript regex flags, capture groups, named groups, and replacements."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this regex tester run locally?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. Pattern testing and replacements happen in your browser without intentionally sending text anywhere."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "@id":"https://instantqr.io/tools/regex-tester.html#breadcrumb",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Regex Tester",
+        "item":"https://instantqr.io/tools/regex-tester.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: WebPage -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Regex Tester",
+    "url":"https://instantqr.io/tools/regex-tester.html",
+    "description":"Test JavaScript regular expressions with matches, flags, capture groups, and replacements online.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR.io",
+      "url":"https://instantqr.io/"
+    },
+    "breadcrumb":{
+      "@id":"https://instantqr.io/tools/regex-tester.html#breadcrumb"
+    }
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --link:#cfe0ff;
+      --brand:#69a6ff;
+      --ok:#19c37d;
+      --warn:#fbbf24;
+      --bad:#ef4444;
+      --border:rgba(255,255,255,.10);
+      --shadow:0 12px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:22px;
+      --max:980px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+    }
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:blur(10px);
+      background:rgba(7, 11, 20, .55);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px; color:var(--text);
+    }
+    .brand img{height:32px; width:auto; display:block}
+    nav{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end;
+    }
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    nav a:hover{color:var(--text); background:rgba(255,255,255,.06); text-decoration:none}
+    nav a.active{
+      color:var(--text);
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .breadcrumbs{
+      display:flex; flex-wrap:wrap; gap:6px;
+      margin:8px 0 14px;
+      font-size:12px;
+      color:rgba(233,238,252,.60);
+    }
+    .breadcrumbs a{color:var(--link)}
+    h1{margin:14px 0 6px; font-size:clamp(26px, 3.5vw, 36px); letter-spacing:-.6px}
+    .sub{margin:0 0 16px; color:var(--muted); line-height:1.55; max-width:76ch}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media (max-width:860px){ .grid{grid-template-columns:1fr} }
+    .badges{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px}
+    .badge,.pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted); font-size:13px;
+    }
+    label{display:block; font-size:13px; color:var(--muted); margin:8px 0 6px}
+    .input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.14);
+      color:var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    .input:focus, textarea:focus, select:focus{
+      border-color:rgba(105,166,255,.85);
+      box-shadow:0 0 0 3px rgba(105,166,255,.16);
+    }
+    textarea{min-height:160px; resize:vertical}
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+      gap:8px;
+      white-space:nowrap;
+      cursor:pointer;
+      transition:transform .12s ease, filter .12s ease, background .12s ease;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px); text-decoration:none}
+    .btn.primary{
+      border:0;
+      background:linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
+      box-shadow:0 14px 28px rgba(105,166,255,.22);
+    }
+    .btn.primary:hover{filter:brightness(1.06)}
+    .btn.ghost:hover{background:rgba(255,255,255,.10)}
+    .kv{
+      display:flex; gap:10px; align-items:flex-start; justify-content:space-between;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:14px;
+      background:rgba(0,0,0,.10);
+      padding:12px;
+    }
+    .kv strong{display:block; font-size:13px; color:var(--muted); font-weight:700}
+    .kv code, .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      font-size:13px; word-break:break-all;
+    }
+    .help{color:var(--muted); font-size:13px; line-height:1.55}
+    .ok{color:var(--ok)}
+    .bad{color:var(--bad)}
+    .warn{color:var(--warn)}
+    .hr{height:1px; background:rgba(255,255,255,.10); margin:14px 0}
+    .metaGrid{
+      display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px;
+    }
+    @media (max-width:860px){ .metaGrid{grid-template-columns:1fr} }
+    .sectionTitle{margin:0 0 10px; font-size:16px; font-weight:900; letter-spacing:.2px}
+    .faqItem{margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,.10)}
+    .faqItem:first-of-type{margin-top:0; padding-top:0; border-top:0}
+    .footer{
+      margin-top:18px; padding:16px 0 32px; border-top:1px solid rgba(255,255,255,.10);
+      color:var(--muted); font-size:13px; line-height:1.8;
+    }
+    .footer a{color:var(--muted)}
+    .footer a:hover{color:var(--text); text-decoration:none}
+    .small{font-size:12px; color:rgba(233,238,252,.60)}
+    .footerLinks{margin-top:10px; color:var(--muted); font-size:13px; line-height:1.8}
+    .footerLinks a{color:var(--link)}
+    .toast{
+      position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
+      background:rgba(0,0,0,.55);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--text);
+      padding:10px 14px; border-radius:999px; box-shadow:var(--shadow);
+      opacity:0; pointer-events:none; transition:opacity .15s ease;
+    }
+    .toast.show{opacity:1}
+  </style>
 </head>
 <body>
 <header class="topbar">
@@ -194,6 +344,7 @@ textarea{min-height:140px; resize:vertical}
     </a>
     <nav aria-label="Primary">
       <a href="/tools.html">All Tools</a>
+      <a class="active" href="/tools/regex-tester.html" aria-current="page">Regex Tester</a>
       <a href="/about.html">About</a>
       <a href="/contact.html">Contact</a>
     </nav>
@@ -201,67 +352,145 @@ textarea{min-height:140px; resize:vertical}
 </header>
 
 <main class="wrap">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <a href="/tools.html">Tools</a>
+    <span>/</span>
+    <span>Regex Tester</span>
+  </nav>
 
-<section class="card">
-  <div class="pill">🔎 Dev Tool · ✨ Regex</div>
-  <h1>Regex Tester</h1>
-  <p class="sub">Test JavaScript regular expressions with live matches. Supports flags and capture groups.</p>
-
-  <div class="grid">
-    <div>
-      <label for="pattern">Pattern</label>
-      <input id="pattern" class="input mono" placeholder="e.g., (\\w+)@(\\w+\\.\\w+)" />
-
-      <label for="flags">Flags</label>
-      <input id="flags" class="input mono" placeholder="e.g., gi" value="g" />
-
-      <div class="row" style="margin-top:10px;">
-        <button class="btn primary" id="runBtn" type="button">Run</button>
-        <button class="btn ghost" id="clearBtn" type="button">Clear</button>
-        <span class="pill" id="status">—</span>
-      </div>
-
-      <div class="hr"></div>
-
-      <label for="replace">Replacement (optional)</label>
-      <input id="replace" class="input mono" placeholder="e.g., $1 [at] $2" />
-
-      <div class="row" style="margin-top:10px;">
-        <button class="btn ghost" id="replaceBtn" type="button">Apply Replace</button>
-        <button class="btn ghost" id="copyReplaced" type="button">Copy Result</button>
-      </div>
-
-      <div class="kv" style="margin-top:10px;">
-        <div style="min-width:0;">
-          <strong>Replaced Output</strong>
-          <div class="help mono" id="replacedOut" style="white-space:pre-wrap; word-break:break-word;">—</div>
-        </div>
-      </div>
+  <section class="card">
+    <div class="badges" aria-label="Highlights">
+      <span class="badge">🔎 Dev Tool</span>
+      <span class="badge">✨ Regex</span>
+      <span class="badge">🔒 Runs locally</span>
+      <span class="badge">⚡ Fast</span>
     </div>
 
-    <div>
-      <label for="text">Test Text</label>
-      <textarea id="text" class="input mono" spellcheck="false" placeholder="Paste text here…"></textarea>
+    <h1>Regex Tester</h1>
+    <p class="sub">
+      Test JavaScript regular expressions with live matches, flags, capture groups, and replacements.
+      Useful for validation, parsing, search patterns, text cleanup, and development workflows.
+    </p>
 
-      <div class="hr"></div>
+    <div class="grid">
+      <section aria-labelledby="pattern-title">
+        <h2 id="pattern-title" class="sr-only">Regex pattern and replacement tools</h2>
 
-      <div class="kv">
-        <div>
-          <strong>Matches</strong>
-          <div class="help" id="matchCount">—</div>
+        <label for="pattern">Pattern</label>
+        <input id="pattern" class="input mono" placeholder="e.g., (\\w+)@(\\w+\\.\\w+)" />
+
+        <label for="flags">Flags</label>
+        <input id="flags" class="input mono" placeholder="e.g., gi" value="g" />
+
+        <div class="row" style="margin-top:10px;">
+          <button class="btn primary" id="runBtn" type="button">Run</button>
+          <button class="btn ghost" id="clearBtn" type="button">Clear</button>
+          <span class="pill" id="status">—</span>
         </div>
-        <button class="btn ghost" id="copyMatches" type="button">Copy JSON</button>
+
+        <div class="hr"></div>
+
+        <label for="replace">Replacement (optional)</label>
+        <input id="replace" class="input mono" placeholder="e.g., $1 [at] $2" />
+
+        <div class="row" style="margin-top:10px;">
+          <button class="btn ghost" id="replaceBtn" type="button">Apply Replace</button>
+          <button class="btn ghost" id="copyReplaced" type="button">Copy Result</button>
+        </div>
+
+        <div class="kv" style="margin-top:10px;">
+          <div style="min-width:0;">
+            <strong>Replaced Output</strong>
+            <div class="help mono" id="replacedOut" style="white-space:pre-wrap; word-break:break-word;">—</div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="text-title">
+        <h2 id="text-title" class="sr-only">Regex test text and matches</h2>
+
+        <label for="text">Test Text</label>
+        <textarea id="text" class="input mono" spellcheck="false" placeholder="Paste text here…"></textarea>
+
+        <div class="hr"></div>
+
+        <div class="kv">
+          <div>
+            <strong>Matches</strong>
+            <div class="help" id="matchCount">—</div>
+          </div>
+          <button class="btn ghost" id="copyMatches" type="button">Copy JSON</button>
+        </div>
+
+        <textarea id="matches" class="input mono" spellcheck="false" placeholder="[]"></textarea>
+      </section>
+    </div>
+
+    <div class="hr"></div>
+    <div class="help">
+      Uses the browser’s JavaScript <span class="mono">RegExp</span> engine. Some PCRE-only features may not work the same way.
+    </div>
+
+    <section class="metaGrid" aria-label="Additional information">
+      <div>
+        <h2 class="sectionTitle">Frequently asked questions</h2>
+
+        <div class="faqItem">
+          <div class="help"><strong>What regex engine does this tool use?</strong><br>It uses your browser’s JavaScript RegExp engine.</div>
+        </div>
+
+        <div class="faqItem">
+          <div class="help"><strong>Does it support flags and capture groups?</strong><br>Yes. You can test flags, numbered capture groups, and named groups supported by JavaScript.</div>
+        </div>
+
+        <div class="faqItem">
+          <div class="help"><strong>Can I test replacements?</strong><br>Yes. Enter a replacement string to preview how JavaScript string replacement behaves.</div>
+        </div>
+
+        <div class="faqItem">
+          <div class="help"><strong>Does this regex tester run locally?</strong><br>Yes. Matching and replacement happen in your browser for privacy and speed.</div>
+        </div>
       </div>
 
-      <textarea id="matches" class="input mono" spellcheck="false" placeholder="[]"></textarea>
-    </div>
-  </div>
+      <div>
+        <h2 class="sectionTitle">Why use this tool?</h2>
+        <p class="help" style="margin-top:0;">
+          This regex tester is useful for developers, QA, form validation, parsing text, search patterns, input sanitization, log analysis, and data cleanup.
+          It gives you a fast way to inspect JavaScript regex matches and replacement results without leaving your browser.
+        </p>
 
-  <div class="hr"></div>
-  <div class="help">
-    Uses the browser’s JavaScript RegExp engine. Some PCRE-only features may not work.
-  </div>
-</section>
+        <h2 class="sectionTitle" style="margin-top:16px;">Related tools</h2>
+        <div class="footerLinks">
+          <a href="/tools/json-formatter.html">JSON Formatter</a> ·
+          <a href="/tools/base64-encoder.html">Base64 Encoder</a> ·
+          <a href="/tools/uuid-generator.html">UUID Generator</a> ·
+          <a href="/tools/jwt-decoder.html">JWT Decoder</a>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <footer class="footer" aria-label="Footer">
+    <div class="footerLinks">
+      <a href="/tools.html">All Tools</a> ·
+      <a href="/tools/json-formatter.html">JSON Formatter</a> ·
+      <a href="/tools/base64-encoder.html">Base64 Encoder</a> ·
+      <a href="/tools/uuid-generator.html">UUID Generator</a> ·
+      <a href="/tools/countdown-timer.html">Countdown Timer</a>
+    </div>
+    <div class="small" style="margin-top:10px;">
+      © <span id="year"></span> InstantQR.io ·
+      <a href="/privacy.html">Privacy</a> ·
+      <a href="/terms.html">Terms</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/sitemap.xml">Sitemap</a>
+    </div>
+  </footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function(){
@@ -302,7 +531,7 @@ textarea{min-height:140px; resize:vertical}
       matchesEl.value = JSON.stringify(out, null, 2);
       matchCount.textContent = out.length + ' match(es)';
       status.innerHTML = '<span class="ok">OK</span>';
-    } catch(e){
+    }catch(e){
       status.innerHTML = '<span class="bad">Invalid RegExp</span>';
       matchesEl.value = JSON.stringify({ error: String(e) }, null, 2);
       matchCount.textContent = '—';
@@ -315,31 +544,43 @@ textarea{min-height:140px; resize:vertical}
     const t = text.value || '';
     const r = replace.value || '';
 
-    if(!p){ toast('Enter a pattern'); return; }
+    if(!p){
+      toast('Enter a pattern');
+      return;
+    }
 
     try{
       const re = new RegExp(p, f);
       const replaced = t.replace(re, r);
       replacedOut.textContent = replaced;
       toast('Replaced');
-    } catch(e){
+    }catch(e){
       toast('Replace failed');
       replacedOut.textContent = '—';
     }
   }
 
-  document.getElementById('runBtn').addEventListener('click', () => { run(); toast('Updated'); });
+  document.getElementById('runBtn').addEventListener('click', () => {
+    run();
+    toast('Updated');
+  });
   document.getElementById('replaceBtn').addEventListener('click', applyReplace);
 
   document.getElementById('copyMatches').addEventListener('click', async () => {
     const v = matchesEl.value || '';
-    if(!v.trim()){ toast('Nothing to copy'); return; }
+    if(!v.trim()){
+      toast('Nothing to copy');
+      return;
+    }
     await copyText(v);
   });
 
   document.getElementById('copyReplaced').addEventListener('click', async () => {
     const v = replacedOut.textContent || '';
-    if(!v.trim() || v==='—'){ toast('Nothing to copy'); return; }
+    if(!v.trim() || v === '—'){
+      toast('Nothing to copy');
+      return;
+    }
     await copyText(v);
   });
 
@@ -367,13 +608,6 @@ textarea{min-height:140px; resize:vertical}
 })();
 </script>
 
-  <footer class="footer" aria-label="Footer">
-    <div class="small">© <span id="year"></span> InstantQR.io · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.xml">Sitemap</a></div>
-  </footer>
-</main>
-
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -386,10 +620,10 @@ textarea{min-height:140px; resize:vertical}
   }
 
   async function copyText(text){
-    try {
+    try{
       await navigator.clipboard.writeText(text);
       toast('Copied');
-    } catch(e) {
+    }catch(e){
       const ta = document.createElement('textarea');
       ta.value = text;
       ta.style.position = 'fixed';
