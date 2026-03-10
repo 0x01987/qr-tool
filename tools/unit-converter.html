@@ -26,6 +26,8 @@
   <meta name="format-detection" content="telephone=no" />
   <link rel="canonical" href="https://instantqr.io/tools/unit-converter.html" />
   <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
   <link rel="alternate" hreflang="en" href="https://instantqr.io/tools/unit-converter.html" />
 
   <!-- Open Graph -->
@@ -179,7 +181,6 @@
     }
 
     *{box-sizing:border-box}
-
     html{scroll-behavior:smooth}
 
     body{
@@ -482,6 +483,48 @@
       border-top:0;
     }
 
+    .convertGrid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+
+    @media (max-width:520px){
+      .convertGrid{grid-template-columns:1fr}
+    }
+
+    .convertLink{
+      display:block;
+      text-decoration:none;
+      padding:12px;
+      border-radius:14px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      transition:border-color .15s ease, transform .15s ease, background .15s ease;
+    }
+
+    .convertLink:hover{
+      border-color:rgba(59,130,246,.85);
+      background:#0c1426;
+      transform:translateY(-1px);
+      text-decoration:none;
+    }
+
+    .convertLink strong{
+      display:block;
+      color:var(--text);
+      font-size:13px;
+      margin-bottom:4px;
+    }
+
+    .convertLink span{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.6;
+    }
+
     .footerLinks{
       margin-top:14px;
       text-align:center;
@@ -682,12 +725,73 @@
         </aside>
       </div>
 
+      <section class="box" style="margin-top:14px;" aria-labelledby="popular-conversions-title">
+        <h2 id="popular-conversions-title" class="sectionTitle">Popular Conversion Pages</h2>
+        <div class="convertGrid">
+          <a class="convertLink" href="/tools/c-to-f.html">
+            <strong>Celsius to Fahrenheit</strong>
+            <span>Convert °C to °F instantly.</span>
+          </a>
+
+          <a class="convertLink" href="/tools/f-to-c.html">
+            <strong>Fahrenheit to Celsius</strong>
+            <span>Convert °F to °C quickly.</span>
+          </a>
+
+          <a class="convertLink" href="/tools/cm-to-inches.html">
+            <strong>Centimeters to Inches</strong>
+            <span>Convert cm to inches online.</span>
+          </a>
+
+          <a class="convertLink" href="/tools/inches-to-cm.html">
+            <strong>Inches to Centimeters</strong>
+            <span>Convert inches to cm instantly.</span>
+          </a>
+
+          <a class="convertLink" href="/tools/cups-to-grams.html">
+            <strong>Cups to Grams</strong>
+            <span>Convert cups to grams for cooking and baking.</span>
+          </a>
+
+          <a class="convertLink" href="/tools/grams-to-cups.html">
+            <strong>Grams to Cups</strong>
+            <span>Convert grams to cups quickly.</span>
+          </a>
+
+          <a class="convertLink" href="/tools/kg-to-lbs.html">
+            <strong>Kilograms to Pounds</strong>
+            <span>Convert kg to lbs fast.</span>
+          </a>
+
+          <a class="convertLink" href="/tools/lbs-to-kg.html">
+            <strong>Pounds to Kilograms</strong>
+            <span>Convert lbs to kg fast.</span>
+          </a>
+
+          <a class="convertLink" href="/tools/kmh-to-mph.html">
+            <strong>KM/H to MPH</strong>
+            <span>Convert kilometers per hour to miles per hour.</span>
+          </a>
+
+          <a class="convertLink" href="/tools/mph-to-kmh.html">
+            <strong>MPH to KM/H</strong>
+            <span>Convert miles per hour to kilometers per hour.</span>
+          </a>
+        </div>
+      </section>
+
       <div class="footerLinks">
         <div style="margin-bottom:8px;">
-          <a href="/tools/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
-          <a href="/tools/url-qr-code-generator.html">URL QR Generator</a> ·
-          <a href="/tools/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
-          <a href="/tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+          <a href="/tools/c-to-f.html">C to F</a> ·
+          <a href="/tools/f-to-c.html">F to C</a> ·
+          <a href="/tools/cm-to-inches.html">cm to inches</a> ·
+          <a href="/tools/inches-to-cm.html">inches to cm</a> ·
+          <a href="/tools/cups-to-grams.html">cups to grams</a> ·
+          <a href="/tools/grams-to-cups.html">grams to cups</a> ·
+          <a href="/tools/kg-to-lbs.html">kg to lbs</a> ·
+          <a href="/tools/lbs-to-kg.html">lbs to kg</a> ·
+          <a href="/tools/kmh-to-mph.html">km/h to mph</a> ·
+          <a href="/tools/mph-to-kmh.html">mph to km/h</a>
         </div>
         <div>
           <a href="/about.html">About</a> ·
