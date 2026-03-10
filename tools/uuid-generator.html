@@ -1,189 +1,532 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-6213N2G8R2');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
 
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>UUID Generator | InstantQR</title>
-<meta name="description" content="Generate secure UUID v4 identifiers instantly. Runs locally in your browser." />
-<meta name="robots" content="index,follow" />
-<link rel="canonical" href="https://instantqr.io/tools/uuid-generator.html" />
-<link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
-<link rel="alternate icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
-<meta name="theme-color" content="#0b0f19" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-<style>
-:root{
-  --bg:#0b1220;
-  --panel: rgba(255,255,255,.04);
-  --panel2: rgba(255,255,255,.06);
-  --text:#e7eefc;
-  --muted:#a9b7d6;
-  --brand:#69a6ff;
-  --ok:#19c37d;
-  --warn:#fbbf24;
-  --bad:#ef4444;
-  --border: rgba(255,255,255,.10);
-  --shadow: 0 12px 40px rgba(0,0,0,.45);
-  --radius: 18px;
-  --radius2: 22px;
-  --max: 980px;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
-    radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
-    radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
-    linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
-}
-a{color:inherit; text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:var(--max); margin:0 auto; padding:18px}
-.topbar{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter: blur(10px);
-  background: rgba(7, 11, 20, .55);
-  border-bottom: 1px solid var(--border);
-}
-.topbar .inner{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:14px 18px;
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-}
-.brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
-.brand img{height:32px; width:auto; display:block}
-nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
-nav a{
-  color:var(--muted);
-  font-size:14px;
-  padding:8px 10px;
-  border-radius:12px;
-}
-nav a:hover{color:var(--text); background: rgba(255,255,255,.06); text-decoration:none}
+  <title>UUID Generator | Generate UUID v4 Online | InstantQR.io</title>
+  <meta name="description" content="Free online UUID generator for secure UUID v4 identifiers. Generate one or many UUIDs instantly for development, APIs, databases, and test data. Privacy-first and runs locally in your browser." />
+  <meta name="keywords" content="uuid generator, uuid v4 generator, guid generator, random id generator, uuid online, developer tools, secure uuid, generate uuid" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0b0f19" />
+  <meta name="format-detection" content="telephone=no" />
 
-h1{margin:14px 0 6px; font-size: clamp(26px, 3.5vw, 36px); letter-spacing:-.6px}
-.sub{margin:0 0 16px; color:var(--muted); line-height:1.5}
+  <link rel="canonical" href="https://instantqr.io/tools/uuid-generator.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate" hreflang="en" href="https://instantqr.io/tools/uuid-generator.html" />
 
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  border:1px solid var(--border);
-  border-radius: var(--radius2);
-  box-shadow: var(--shadow);
-  padding:16px;
-}
-.grid{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
-@media (max-width: 860px){ .grid{grid-template-columns:1fr} }
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR.io" />
+  <meta property="og:title" content="UUID Generator | Generate UUID v4 Online | InstantQR.io" />
+  <meta property="og:description" content="Generate secure UUID v4 identifiers instantly for apps, databases, APIs, and testing. Runs locally in your browser." />
+  <meta property="og:url" content="https://instantqr.io/tools/uuid-generator.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+  <meta property="og:image:alt" content="InstantQR UUID Generator" />
+  <meta property="og:locale" content="en_US" />
 
-label{display:block; font-size:13px; color:var(--muted); margin:8px 0 6px}
-.input, textarea, select{
-  width:100%;
-  padding:12px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(0,0,0,.14);
-  color: var(--text);
-  outline:none;
-  font-size:14px;
-}
-textarea{min-height:140px; resize:vertical}
-.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:10px 14px;
-  border-radius: 999px;
-  font-weight:700;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
-  color: var(--text);
-  text-decoration:none;
-  gap:8px;
-  white-space:nowrap;
-  cursor:pointer;
-  transition: transform .12s ease, filter .12s ease, background .12s ease;
-  user-select:none;
-}
-.btn:hover{ transform: translateY(-1px); text-decoration:none; }
-.btn.primary{
-  border: 0;
-  background: linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
-  box-shadow: 0 14px 28px rgba(105,166,255,.22);
-}
-.btn.primary:hover{ filter:brightness(1.06); }
-.btn.ghost:hover{ background: rgba(255,255,255,.10); }
-.pill{
-  display:inline-flex; align-items:center; gap:8px;
-  padding:8px 12px;
-  border-radius:999px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.10);
-  color: var(--muted);
-  font-size:13px;
-}
-.kv{
-  display:flex; gap:10px; align-items:flex-start; justify-content:space-between;
-  border:1px solid rgba(255,255,255,.10);
-  border-radius: 14px;
-  background: rgba(0,0,0,.10);
-  padding:12px;
-}
-.kv strong{display:block; font-size:13px; color:var(--muted); font-weight:700}
-.kv code, .mono{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 13px;
-  word-break: break-all;
-}
-.help{color:var(--muted); font-size:13px; line-height:1.55}
-.ok{color:var(--ok)}
-.bad{color:var(--bad)}
-.warn{color:var(--warn)}
-.hr{height:1px; background: rgba(255,255,255,.10); margin:14px 0}
-.footer{
-  margin-top: 18px;
-  padding: 16px 0 32px;
-  border-top: 1px solid rgba(255,255,255,.10);
-  color: var(--muted);
-  font-size: 13px;
-}
-.footer a{color:var(--muted)}
-.footer a:hover{color:var(--text); text-decoration:none}
-.small{font-size:12px; color:rgba(233,238,252,.60)}
-.toast{
-  position: fixed;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,.55);
-  border: 1px solid rgba(255,255,255,.12);
-  color: var(--text);
-  padding: 10px 14px;
-  border-radius: 999px;
-  box-shadow: var(--shadow);
-  opacity: 0;
-  pointer-events:none;
-  transition: opacity .15s ease;
-}
-.toast.show{opacity:1}
-</style>
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="UUID Generator | InstantQR.io" />
+  <meta name="twitter:description" content="Free online UUID v4 generator for secure random identifiers. Fast, private, and browser-based." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
 
+  <!-- Structured Data: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"UUID Generator",
+    "applicationCategory":"DeveloperApplication",
+    "operatingSystem":"Web",
+    "url":"https://instantqr.io/tools/uuid-generator.html",
+    "description":"Free online UUID v4 generator for secure random identifiers.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io",
+      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Is this UUID generator free to use?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The InstantQR UUID generator is free to use."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What type of UUID does this tool generate?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This tool generates RFC 4122 compliant UUID version 4 identifiers."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this UUID generator run locally?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. UUID generation happens in your browser using crypto.randomUUID when available, with a secure fallback."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I generate multiple UUIDs at once?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can generate 1, 5, 10, 25, or 50 UUIDs at once."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "@id":"https://instantqr.io/tools/uuid-generator.html#breadcrumb",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"UUID Generator",
+        "item":"https://instantqr.io/tools/uuid-generator.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: WebPage -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"UUID Generator",
+    "url":"https://instantqr.io/tools/uuid-generator.html",
+    "description":"Generate RFC 4122 UUID v4 identifiers instantly online.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR.io",
+      "url":"https://instantqr.io/"
+    },
+    "breadcrumb":{
+      "@id":"https://instantqr.io/tools/uuid-generator.html#breadcrumb"
+    }
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:rgba(255,255,255,.04);
+      --panel2:rgba(255,255,255,.06);
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --link:#cfe0ff;
+      --brand:#69a6ff;
+      --ok:#19c37d;
+      --warn:#fbbf24;
+      --bad:#ef4444;
+      --border:rgba(255,255,255,.10);
+      --shadow:0 12px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:22px;
+      --max:980px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 12%, rgba(25,195,125,.14), transparent 50%),
+        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+    }
+
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:18px;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(10px);
+      background:rgba(7,11,20,.55);
+      border-bottom:1px solid var(--border);
+    }
+
+    .topbar .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+      color:var(--text);
+    }
+
+    .brand img{
+      height:32px;
+      width:auto;
+      display:block;
+    }
+
+    nav{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+
+    nav a:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    nav a.active{
+      color:var(--text);
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .breadcrumbs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin:8px 0 14px;
+      font-size:12px;
+      color:rgba(233,238,252,.60);
+    }
+
+    .breadcrumbs a{
+      color:var(--link);
+      text-decoration:none;
+    }
+
+    .breadcrumbs a:hover{text-decoration:underline}
+
+    h1{
+      margin:14px 0 6px;
+      font-size:clamp(26px, 3.5vw, 36px);
+      letter-spacing:-.6px;
+    }
+
+    .sub{
+      margin:0 0 16px;
+      color:var(--muted);
+      line-height:1.55;
+      max-width:76ch;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    @media (max-width:860px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .badge,
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    label{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      margin:8px 0 6px;
+    }
+
+    .input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.14);
+      color:var(--text);
+      outline:none;
+      font-size:14px;
+    }
+
+    .input:focus, textarea:focus, select:focus{
+      border-color:rgba(105,166,255,.85);
+      box-shadow:0 0 0 3px rgba(105,166,255,.16);
+    }
+
+    textarea{
+      min-height:160px;
+      resize:vertical;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+      gap:8px;
+      white-space:nowrap;
+      cursor:pointer;
+      transition:transform .12s ease, filter .12s ease, background .12s ease;
+      user-select:none;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      text-decoration:none;
+    }
+
+    .btn.primary{
+      border:0;
+      background:linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
+      box-shadow:0 14px 28px rgba(105,166,255,.22);
+    }
+
+    .btn.primary:hover{filter:brightness(1.06)}
+    .btn.ghost:hover{background:rgba(255,255,255,.10)}
+
+    .kv{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      justify-content:space-between;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:14px;
+      background:rgba(0,0,0,.10);
+      padding:12px;
+      margin-top:10px;
+    }
+
+    .kv strong{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .kv code, .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      font-size:13px;
+      word-break:break-all;
+    }
+
+    .help{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .ok{color:var(--ok)}
+    .bad{color:var(--bad)}
+    .warn{color:var(--warn)}
+
+    .hr{
+      height:1px;
+      background:rgba(255,255,255,.10);
+      margin:14px 0;
+    }
+
+    .metaGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    @media (max-width:860px){
+      .metaGrid{grid-template-columns:1fr}
+    }
+
+    .sectionTitle{
+      margin:0 0 10px;
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+
+    .faqItem{
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px solid rgba(255,255,255,.10);
+    }
+
+    .faqItem:first-of-type{
+      margin-top:0;
+      padding-top:0;
+      border-top:0;
+    }
+
+    .footer{
+      margin-top:18px;
+      padding:16px 0 32px;
+      border-top:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.8;
+    }
+
+    .footer a{color:var(--muted)}
+    .footer a:hover{color:var(--text);text-decoration:none}
+
+    .small{
+      font-size:12px;
+      color:rgba(233,238,252,.60);
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      background:rgba(0,0,0,.55);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .15s ease;
+    }
+
+    .toast.show{opacity:1}
+
+    .footerLinks{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.8;
+    }
+
+    .footerLinks a{color:var(--link)}
+
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+  </style>
 </head>
 <body>
 <header class="topbar">
@@ -194,6 +537,7 @@ textarea{min-height:140px; resize:vertical}
     </a>
     <nav aria-label="Primary">
       <a href="/tools.html">All Tools</a>
+      <a class="active" href="/tools/uuid-generator.html" aria-current="page">UUID Generator</a>
       <a href="/about.html">About</a>
       <a href="/contact.html">Contact</a>
     </nav>
@@ -201,39 +545,131 @@ textarea{min-height:140px; resize:vertical}
 </header>
 
 <main class="wrap">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <a href="/tools.html">Tools</a>
+    <span>/</span>
+    <span>UUID Generator</span>
+  </nav>
 
-<section class="card">
-  <div class="pill">🧩 Dev Tool · 🔒 Runs locally</div>
-  <h1>UUID Generator</h1>
-  <p class="sub">Generate RFC 4122 UUIDs (v4). Use for IDs, test data, and development.</p>
+  <section class="card">
+    <div class="badges" aria-label="Highlights">
+      <span class="badge">🧩 Dev Tool</span>
+      <span class="badge">🔒 Runs locally</span>
+      <span class="badge">⚡ Fast</span>
+      <span class="badge">✅ No signup</span>
+    </div>
 
-  <div class="grid">
-    <div>
-      <label for="count">How many?</label>
-      <select id="count" class="input">
-        <option value="1">1</option>
-        <option value="5" selected>5</option>
-        <option value="10">10</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-      </select>
+    <h1>UUID Generator</h1>
+    <p class="sub">
+      Generate RFC 4122 UUID version 4 identifiers instantly. Useful for databases, APIs, test data, object IDs, sessions,
+      and development workflows. Runs locally in your browser for privacy and speed.
+    </p>
 
-      <div class="row" style="margin-top:10px;">
-        <button class="btn primary" id="genBtn" type="button">Generate</button>
-        <button class="btn ghost" id="copyBtn" type="button">Copy All</button>
-        <button class="btn ghost" id="clearBtn" type="button">Clear</button>
+    <div class="grid">
+      <section aria-labelledby="generator-title">
+        <h2 id="generator-title" class="sr-only">UUID generator controls</h2>
+
+        <label for="count">How many?</label>
+        <select id="count" class="input">
+          <option value="1">1</option>
+          <option value="5" selected>5</option>
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+        </select>
+
+        <div class="row" style="margin-top:10px;">
+          <button class="btn primary" id="genBtn" type="button">Generate</button>
+          <button class="btn ghost" id="copyBtn" type="button">Copy All</button>
+          <button class="btn ghost" id="clearBtn" type="button">Clear</button>
+        </div>
+
+        <div class="hr"></div>
+        <p class="help">
+          Tip: Uses <span class="mono">crypto.randomUUID()</span> when available, with a secure fallback using
+          <span class="mono">crypto.getRandomValues()</span>.
+        </p>
+      </section>
+
+      <section aria-labelledby="output-title">
+        <h2 id="output-title" class="sr-only">Generated UUID output</h2>
+
+        <label for="out">UUIDs</label>
+        <textarea id="out" class="input mono" spellcheck="false" placeholder="Click Generate…"></textarea>
+
+        <div class="kv">
+          <div>
+            <strong>Format</strong>
+            <code>8-4-4-4-12</code>
+          </div>
+          <div>
+            <strong>Version</strong>
+            <code>v4</code>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="metaGrid" aria-label="Additional information">
+      <div>
+        <h2 class="sectionTitle">Frequently asked questions</h2>
+
+        <div class="faqItem">
+          <div class="help"><strong>What type of UUID does this tool generate?</strong><br>This tool generates RFC 4122 compliant UUID version 4 identifiers.</div>
+        </div>
+
+        <div class="faqItem">
+          <div class="help"><strong>Can I generate multiple UUIDs at once?</strong><br>Yes. You can generate 1, 5, 10, 25, or 50 UUIDs in one click.</div>
+        </div>
+
+        <div class="faqItem">
+          <div class="help"><strong>Does this UUID generator run locally?</strong><br>Yes. Generation happens in your browser for speed and privacy.</div>
+        </div>
+
+        <div class="faqItem">
+          <div class="help"><strong>What are UUIDs used for?</strong><br>UUIDs are commonly used for record IDs, tokens, API objects, sessions, testing, and distributed systems.</div>
+        </div>
       </div>
 
-      <div class="hr"></div>
-      <p class="help">Tip: Uses <span class="mono">crypto.randomUUID()</span> when available with a secure fallback.</p>
-    </div>
+      <div>
+        <h2 class="sectionTitle">Why use this tool?</h2>
+        <p class="help" style="margin-top:0;">
+          This UUID generator is useful for developers, QA workflows, sample data, backend services, databases, and frontend applications that need unique identifiers.
+          It is simple, fast, and works without sending data anywhere.
+        </p>
 
-    <div>
-      <label for="out">UUIDs</label>
-      <textarea id="out" class="input mono" spellcheck="false" placeholder="Click Generate…"></textarea>
+        <h2 class="sectionTitle" style="margin-top:16px;">Related tools</h2>
+        <div class="footerLinks">
+          <a href="/tools/json-formatter.html">JSON Formatter</a> ·
+          <a href="/tools/base64-encoder.html">Base64 Encoder</a> ·
+          <a href="/tools/time-zone-converter.html">Time Zone Converter</a> ·
+          <a href="/tools/world-clock.html">World Clock</a>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <footer class="footer" aria-label="Footer">
+    <div class="footerLinks">
+      <a href="/tools.html">All Tools</a> ·
+      <a href="/tools/password.html">Password Generator</a> ·
+      <a href="/tools/json-formatter.html">JSON Formatter</a> ·
+      <a href="/tools/base64-encoder.html">Base64 Encoder</a> ·
+      <a href="/tools/countdown-timer.html">Countdown Timer</a>
     </div>
-  </div>
-</section>
+    <div class="small" style="margin-top:10px;">
+      © <span id="year"></span> InstantQR.io ·
+      <a href="/privacy.html">Privacy</a> ·
+      <a href="/terms.html">Terms</a> ·
+      <a href="/contact.html">Contact</a> ·
+      <a href="/sitemap.xml">Sitemap</a>
+    </div>
+  </footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function(){
@@ -266,29 +702,29 @@ textarea{min-height:140px; resize:vertical}
   function generate(){
     const n = parseInt(countEl.value || '1', 10);
     const items = [];
-    for(let i=0;i<n;i++) items.push(uuid());
-    out.value = items.join('\\n');
+    for(let i = 0; i < n; i++) items.push(uuid());
+    out.value = items.join('\n');
     toast('Generated');
   }
 
   genBtn.addEventListener('click', generate);
-  clearBtn.addEventListener('click', () => { out.value=''; toast('Cleared'); });
+  clearBtn.addEventListener('click', () => {
+    out.value = '';
+    toast('Cleared');
+  });
+
   copyBtn.addEventListener('click', async () => {
     const v = (out.value || '').trim();
-    if(!v){ toast('Nothing to copy'); return; }
+    if(!v){
+      toast('Nothing to copy');
+      return;
+    }
     await copyText(v);
   });
 
   generate();
 })();
 </script>
-
-  <footer class="footer" aria-label="Footer">
-    <div class="small">© <span id="year"></span> InstantQR.io · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.xml">Sitemap</a></div>
-  </footer>
-</main>
-
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -302,10 +738,10 @@ textarea{min-height:140px; resize:vertical}
   }
 
   async function copyText(text){
-    try {
+    try{
       await navigator.clipboard.writeText(text);
       toast('Copied');
-    } catch(e) {
+    }catch(e){
       const ta = document.createElement('textarea');
       ta.value = text;
       ta.style.position = 'fixed';
