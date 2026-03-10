@@ -7,56 +7,331 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
-  
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Base64 Encoder / Decoder | InstantQR</title>
-  <meta name="description" content="Encode and decode Base64 instantly (text and files). Privacy-first: everything runs locally in your browser." />
-  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Base64 Encoder / Decoder | Text, File & Data URL Base64 Tool | InstantQR.io</title>
+  <meta name="description" content="Free online Base64 encoder and decoder for text and files. Encode text to Base64, decode Base64 to text, convert files to Base64, and download files from Base64. Fast, private, and runs locally in your browser." />
+  <meta name="keywords" content="base64 encoder, base64 decoder, text to base64, base64 to text, file to base64, base64 to file, data url encoder, base64 tool online" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0b0f19" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/base64-encoder.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="alternate" hreflang="en" href="https://instantqr.io/tools/base64-encoder.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR.io" />
+  <meta property="og:title" content="Base64 Encoder / Decoder | InstantQR.io" />
+  <meta property="og:description" content="Encode and decode Base64 for text and files. Supports raw Base64, data URLs, file upload, and Base64-to-file download." />
+  <meta property="og:url" content="https://instantqr.io/tools/base64-encoder.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+  <meta property="og:image:alt" content="InstantQR Base64 Encoder and Decoder tool" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Base64 Encoder / Decoder | InstantQR.io" />
+  <meta name="twitter:description" content="Free online Base64 tool for text, files, and data URLs. Fast, private, and browser-based." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+
+  <!-- Structured Data: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Base64 Encoder / Decoder",
+    "applicationCategory":"DeveloperApplication",
+    "operatingSystem":"Web",
+    "url":"https://instantqr.io/tools/base64-encoder.html",
+    "description":"Free online Base64 encoder and decoder for text, files, and data URLs.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io",
+      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Is this Base64 encoder free to use?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The Base64 encoder and decoder tool is free to use."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I encode and decode Base64 text?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can encode plain text to Base64 and decode Base64 back to text directly in your browser."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I convert files to Base64?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can upload a file or drag and drop a file to convert it to Base64 or a data URL."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I download a file from Base64?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. Paste raw Base64 or a data URL into the input field, choose a filename, and download the decoded file."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "@id":"https://instantqr.io/tools/base64-encoder.html#breadcrumb",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Base64 Encoder / Decoder",
+        "item":"https://instantqr.io/tools/base64-encoder.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: WebPage -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Base64 Encoder / Decoder",
+    "url":"https://instantqr.io/tools/base64-encoder.html",
+    "description":"Encode and decode Base64 for text, files, and data URLs online.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR.io",
+      "url":"https://instantqr.io/"
+    },
+    "breadcrumb":{
+      "@id":"https://instantqr.io/tools/base64-encoder.html#breadcrumb"
+    }
+  }
+  </script>
 
   <style>
-    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
-    body { margin:0; background:#0b0f19; color:#e7eaf2; }
-    .wrap { max-width: 1100px; margin:0 auto; padding: 22px; }
-    .card {
-      background:#121a2a; border:1px solid #22304e; border-radius:18px;
-      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    :root{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      --bg:#0b0f19;
+      --card:#121a2a;
+      --panel:#0e1525;
+      --border:#22304e;
+      --border2:#2a3a5f;
+      --text:#e7eaf2;
+      --muted:#b8c0d6;
+      --muted2:#8ea0c8;
+      --link:#cfe0ff;
+      --brand:#3b82f6;
+      --good:#9fffb8;
+      --bad:#ff9fb3;
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+      color-scheme:dark;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(900px 540px at 12% 8%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    .wrap{max-width:1100px;margin:0 auto;padding:22px}
+    .card{
+      background:#121a2a;
+      border:1px solid #22304e;
+      border-radius:18px;
+      padding:18px;
+      box-shadow:var(--shadow);
     }
 
     .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; flex-wrap:wrap; margin-bottom:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:2px 2px 10px;
+      border-bottom:1px solid rgba(34,48,78,.55);
+      margin-bottom:12px;
     }
+
     .brand{
-      display:flex; align-items:baseline; gap:10px;
-      text-decoration:none; color:#e7eaf2;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:#e7eaf2;
+      font-weight:900;
+      letter-spacing:-.2px;
+      min-width:0;
     }
-    .brand strong{ font-size:16px; letter-spacing:.2px; }
-    .brand span{ color:#8ea0c8; font-size:12px; }
 
-    .toolnav{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .brand img{
+      height:30px;
+      width:auto;
+      display:block;
+    }
+
+    .brand span{
+      font-size:16px;
+    }
+
+    .toolnav{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
     .toolnav a{
-      padding:8px 10px; border-radius:999px;
-      background:#0b1222; border:1px solid #2a3a5f;
-      color:#b8c0d6; font-size:12px; text-decoration:none; font-weight:700;
+      padding:10px 12px;
+      border-radius:12px;
+      background:#0b1222;
+      border:1px solid #2a3a5f;
+      color:#cfe0ff;
+      font-size:12px;
+      text-decoration:none;
+      font-weight:800;
+      user-select:none;
     }
-    .toolnav a:hover{ border-color:#3b82f6; color:#e7eaf2; }
-    .toolnav a.active{ border-color:#3b82f6; color:#e7eaf2; }
 
-    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    h1{ margin:0; font-size:24px; }
-    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
+    .toolnav a:hover{border-color:#3b82f6;color:#e7eaf2}
+    .toolnav a.active{border-color:#3b82f6;color:#e7eaf2}
 
-    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-top:14px; }
-    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+    .breadcrumbs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin:4px 0 14px;
+      font-size:12px;
+      color:#8ea0c8;
+    }
 
-    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; }
-    label{ display:block; font-size:12px; color:#b8c0d6; margin-bottom:6px; }
+    .breadcrumbs a{
+      color:#cfe0ff;
+      text-decoration:none;
+    }
+
+    .breadcrumbs a:hover{text-decoration:underline}
+
+    header{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    h1{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-.3px;
+    }
+
+    .sub{
+      margin:8px 0 0;
+      color:#b8c0d6;
+      font-size:13px;
+      line-height:1.6;
+      max-width:78ch;
+    }
+
+    .badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .badge{
+      padding:7px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid #2a3a5f;
+      color:#b8c0d6;
+      font-size:12px;
+      user-select:none;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    @media (max-width:860px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .box{
+      background:#0e1525;
+      border:1px solid #2a3a5f;
+      border-radius:16px;
+      padding:14px;
+    }
+
+    label{
+      display:block;
+      font-size:12px;
+      color:#b8c0d6;
+      margin-bottom:6px;
+    }
 
     textarea, input, select{
       width:100%;
@@ -68,44 +343,98 @@ crossorigin="anonymous"></script>
       outline:none;
       font-size:14px;
     }
-    textarea{
-      min-height: 260px;
-      resize: vertical;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px;
-      line-height: 1.6;
-      white-space: pre;
-      tab-size: 2;
+
+    textarea:focus, input:focus, select:focus{
+      border-color:rgba(59,130,246,.85);
+      box-shadow:0 0 0 3px rgba(59,130,246,.18);
     }
 
-    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px; }
-    .row2{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:10px; }
-    @media (max-width: 520px){ .row2{ grid-template-columns: 1fr; } }
+    textarea{
+      min-height:260px;
+      resize:vertical;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      font-size:12px;
+      line-height:1.6;
+      white-space:pre;
+      tab-size:2;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:10px;
+    }
+
+    .row2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    @media (max-width:520px){
+      .row2{grid-template-columns:1fr}
+    }
 
     button{
-      border:0; border-radius:14px; padding:12px 14px;
-      background:#3b82f6; color:white; font-weight:800; cursor:pointer;
+      border:0;
+      border-radius:14px;
+      padding:12px 14px;
+      background:#3b82f6;
+      color:white;
+      font-weight:800;
+      cursor:pointer;
     }
-    button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
-    button.ghost{ background:#0b1222; border:1px solid #2a3a5f; color:#b8c0d6; }
-    button:disabled{ opacity:.55; cursor:not-allowed; }
+
+    button:hover{filter:brightness(1.04)}
+    button.secondary{background:#1f2a44;border:1px solid #2a3a5f}
+    button.ghost{background:#0b1222;border:1px solid #2a3a5f;color:#b8c0d6}
+    button:disabled{opacity:.55;cursor:not-allowed}
 
     .pill{
-      display:flex; align-items:center; gap:8px;
-      padding:7px 10px; border-radius:999px;
-      background:#0b1222; border:1px solid #2a3a5f;
-      color:#b8c0d6; font-size:12px; user-select:none;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid #2a3a5f;
+      color:#b8c0d6;
+      font-size:12px;
+      user-select:none;
     }
-    .pill input{ margin:0; }
 
-    .hint{ color:#b8c0d6; font-size:12px; line-height:1.55; }
-    .tiny{ color:#8ea0c8; font-size:12px; }
-    .error{ color:#ff9fb3; font-size:12px; }
-    .ok{ color:#9fffb8; font-size:12px; }
+    .pill input{margin:0}
+
+    .hint{
+      color:#b8c0d6;
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    .tiny{
+      color:#8ea0c8;
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .error{
+      color:#ff9fb3;
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .ok{
+      color:#9fffb8;
+      font-size:12px;
+      line-height:1.55;
+    }
 
     .status{
       margin-top:10px;
-      padding:10px 12px;
+      padding:12px;
       border-radius:14px;
       border:1px dashed rgba(184,192,214,.35);
       background:#0b1222;
@@ -115,12 +444,50 @@ crossorigin="anonymous"></script>
     }
 
     .dropZone{
-      border-radius: 16px;
-      transition: box-shadow .15s ease, border-color .15s ease;
+      border-radius:16px;
+      transition:box-shadow .15s ease, border-color .15s ease;
     }
+
     .dropZone.dragover{
-      box-shadow: 0 0 0 2px rgba(59,130,246,.35);
+      box-shadow:0 0 0 2px rgba(59,130,246,.35);
       border-color:#3b82f6;
+    }
+
+    .divider{
+      margin:16px 0 10px;
+      height:1px;
+      background:#22304e;
+      border:0;
+    }
+
+    .sectionTitle{
+      margin:0;
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+
+    .metaGrid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    @media (max-width:860px){
+      .metaGrid{grid-template-columns:1fr}
+    }
+
+    .faqItem{
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px solid rgba(42,58,95,.55);
+    }
+
+    .faqItem:first-of-type{
+      margin-top:0;
+      padding-top:0;
+      border-top:0;
     }
 
     .footerLinks{
@@ -128,9 +495,32 @@ crossorigin="anonymous"></script>
       text-align:center;
       color:#8ea0c8;
       font-size:12px;
+      line-height:1.8;
     }
-    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
-    .footerLinks a:hover{ text-decoration:underline; }
+
+    .footerLinks a{
+      color:#cfe0ff;
+      text-decoration:none;
+    }
+
+    .footerLinks a:hover{text-decoration:underline}
+
+    code{
+      color:#cfe0ff;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    }
+
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
   </style>
 </head>
 
@@ -139,34 +529,54 @@ crossorigin="anonymous"></script>
     <div class="card">
 
       <div class="topbar">
-        <a class="brand" href="/">
-          <strong>InstantQR</strong>
-          <span>privacy-first tools</span>
+        <a class="brand" href="/" aria-label="InstantQR Home">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+          <span>InstantQR</span>
         </a>
+
         <nav class="toolnav" aria-label="Tools">
           <a href="/">Home</a>
-          <a href="/password.html">Password Generator</a>
-          <a href="/unit-converter.html">Unit Converter</a>
-          <a href="/ip-lookup.html">IP Lookup</a>
-          <a href="/json-formatter.html">JSON Formatter</a>
-          <a href="/time-zone-converter.html">Time Zone Converter</a>
-          <a class="active" href="/base64-encoder.html">Base64 Encoder</a>
-          <a href="world-clock.html">World Clock</a>
+          <a href="/tools/password.html">Password Generator</a>
+          <a href="/tools/unit-converter.html">Unit Converter</a>
+          <a href="/tools/ip-lookup.html">IP Lookup</a>
+          <a href="/tools/json-formatter.html">JSON Formatter</a>
+          <a href="/tools/time-zone-converter.html">Time Zone Converter</a>
+          <a class="active" href="/tools/base64-encoder.html" aria-current="page">Base64 Encoder</a>
+          <a href="/tools/world-clock.html">World Clock</a>
         </nav>
       </div>
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/tools.html">Tools</a>
+        <span>/</span>
+        <span>Base64 Encoder / Decoder</span>
+      </nav>
 
       <header>
         <div>
           <h1>Base64 Encoder / Decoder</h1>
-          <div class="sub">Encode/decode Base64 for text and files. Everything runs locally in your browser.</div>
+          <div class="sub">
+            Encode and decode Base64 for text, files, and data URLs. Convert files to Base64, paste Base64 to download files,
+            and keep everything private by running locally in your browser.
+          </div>
+          <div class="badges" aria-label="Highlights">
+            <span class="badge">⚡ Fast</span>
+            <span class="badge">🔒 Local</span>
+            <span class="badge">📱 Mobile friendly</span>
+            <span class="badge">✅ No signup</span>
+          </div>
         </div>
       </header>
 
       <div class="grid">
         <!-- Left: Input -->
-        <div class="box dropZone" id="dropZone">
+        <section class="box dropZone" id="dropZone" aria-labelledby="input-title">
+          <h2 id="input-title" class="sr-only">Base64 input and file tools</h2>
+
           <label for="input">Input (Text or Base64)</label>
-          <textarea id="input" placeholder="Paste text OR Base64 here..."></textarea>
+          <textarea id="input" placeholder="Paste text or Base64 here..."></textarea>
 
           <div class="row2">
             <div>
@@ -198,11 +608,11 @@ crossorigin="anonymous"></script>
             </label>
           </div>
 
-          <hr style="margin:16px 0 10px; height:1px; background:#22304e; border:0;" />
+          <hr class="divider" />
 
-          <h2 style="margin:0; font-size:16px; font-weight:900;">File → Base64</h2>
+          <h2 class="sectionTitle">File to Base64</h2>
           <div class="hint" style="margin-top:6px;">
-            Upload or drag & drop a file here. We’ll convert it to Base64 locally.
+            Upload or drag and drop a file here to convert it to Base64 locally. You can output either raw Base64 or a data URL.
           </div>
 
           <div class="row">
@@ -214,11 +624,11 @@ crossorigin="anonymous"></script>
 
           <div class="tiny" style="margin-top:8px;" id="fileInfo">No file loaded.</div>
 
-          <hr style="margin:16px 0 10px; height:1px; background:#22304e; border:0;" />
+          <hr class="divider" />
 
-          <h2 style="margin:0; font-size:16px; font-weight:900;">Base64 → Download File</h2>
+          <h2 class="sectionTitle">Base64 to Downloadable File</h2>
           <div class="hint" style="margin-top:6px;">
-            Paste Base64 (raw or data URL) into Input, then click “Download File”.
+            Paste raw Base64 or a data URL into the input box, choose a filename, and click Download File.
           </div>
 
           <div class="row2">
@@ -238,16 +648,18 @@ crossorigin="anonymous"></script>
 
           <div class="status" aria-live="polite">
             <div class="tiny">Status</div>
-            <div id="statusLine" class="hint">Paste text/Base64 or upload a file to begin.</div>
+            <div id="statusLine" class="hint">Paste text or Base64, or upload a file to begin.</div>
           </div>
 
           <div class="tiny" style="margin-top:10px;">
-            Tip: Drag & drop a file anywhere in this left box.
+            Tip: Drag and drop a file anywhere in this left panel.
           </div>
-        </div>
+        </section>
 
         <!-- Right: Output -->
-        <div class="box">
+        <section class="box" aria-labelledby="output-title">
+          <h2 id="output-title" class="sr-only">Base64 output</h2>
+
           <label for="output">Output</label>
           <textarea id="output" readonly placeholder="Output will appear here..."></textarea>
 
@@ -257,22 +669,61 @@ crossorigin="anonymous"></script>
           </div>
 
           <div class="hint" style="margin-top:10px;">
-            Privacy-first: encoding/decoding happens in your browser. No data is uploaded to InstantQR servers.
+            Privacy-first: encoding and decoding happen in your browser. No data is uploaded to InstantQR servers.
+          </div>
+        </section>
+      </div>
+
+      <section class="metaGrid" aria-label="Additional information">
+        <div class="box">
+          <h2 class="sectionTitle">Frequently asked questions</h2>
+
+          <div class="faqItem">
+            <div class="hint"><strong>Is this Base64 tool free?</strong><br>Yes. It is free to use.</div>
+          </div>
+
+          <div class="faqItem">
+            <div class="hint"><strong>Can I encode and decode text?</strong><br>Yes. You can convert plain text to Base64 and decode Base64 back to text.</div>
+          </div>
+
+          <div class="faqItem">
+            <div class="hint"><strong>Can I convert files to Base64?</strong><br>Yes. Upload or drag and drop a file to convert it to Base64 locally.</div>
+          </div>
+
+          <div class="faqItem">
+            <div class="hint"><strong>Can I download a file from Base64?</strong><br>Yes. Paste Base64 or a data URL and download the decoded file.</div>
           </div>
         </div>
-      </div>
+
+        <div class="box">
+          <h2 class="sectionTitle">Why use this tool?</h2>
+          <p class="hint" style="margin-top:0;">
+            This tool is useful for developers, API testing, data URLs, email-safe content, file transport, debugging, and working with encoded assets.
+            It supports text encoding, text decoding, file-to-Base64 conversion, and Base64-to-file download in one place.
+          </p>
+
+          <h2 class="sectionTitle" style="margin-top:16px;">Related tools</h2>
+          <p class="hint" style="margin-top:0;">
+            <a href="/tools/json-formatter.html">JSON Formatter</a> ·
+            <a href="/tools/ip-lookup.html">IP Lookup</a> ·
+            <a href="/tools/time-zone-converter.html">Time Zone Converter</a>
+          </p>
+        </div>
+      </section>
 
       <div class="footerLinks">
         <div style="margin-bottom:8px;">
-          <a href="/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
-          <a href="/url-qr-code-generator.html">URL QR Generator</a> ·
-          <a href="/create-qr-code-for-wifi.html">Create WiFi QR Code</a>
+          <a href="/tools/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
+          <a href="/tools/url-qr-code-generator.html">URL QR Generator</a> ·
+          <a href="/tools/create-qr-code-for-wifi.html">Create WiFi QR Code</a> ·
+          <a href="/tools/json-formatter.html">JSON Formatter</a>
         </div>
         <div>
           <a href="/about.html">About</a> ·
           <a href="/privacy.html">Privacy</a> ·
           <a href="/terms.html">Terms</a> ·
-          <a href="/contact.html">Contact</a>
+          <a href="/contact.html">Contact</a> ·
+          <a href="/sitemap.xml">Sitemap</a>
         </div>
       </div>
 
@@ -312,18 +763,17 @@ crossorigin="anonymous"></script>
     let lastFileName = "";
     let lastFileType = "";
 
-    function setStatus(msg, type="hint"){
+    function setStatus(msg, type = "hint"){
       statusLine.className = type;
       statusLine.textContent = msg;
     }
 
-    // UTF-8 safe Base64
     function base64EncodeUtf8(str){
       const bytes = new TextEncoder().encode(str);
       let bin = "";
       const chunk = 0x8000;
-      for(let i=0; i<bytes.length; i+=chunk){
-        bin += String.fromCharCode(...bytes.slice(i, i+chunk));
+      for(let i = 0; i < bytes.length; i += chunk){
+        bin += String.fromCharCode(...bytes.slice(i, i + chunk));
       }
       return btoa(bin);
     }
@@ -331,7 +781,7 @@ crossorigin="anonymous"></script>
     function base64DecodeUtf8(b64){
       const bin = atob(b64);
       const bytes = new Uint8Array(bin.length);
-      for(let i=0; i<bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      for(let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
       return new TextDecoder().decode(bytes);
     }
 
@@ -346,7 +796,6 @@ crossorigin="anonymous"></script>
     }
 
     function splitDataUrl(s){
-      // data:mime;base64,XXXX
       const m = s.match(/^data:([^;]+);base64,(.*)$/s);
       if(!m) return null;
       return { mime: m[1], b64: m[2] };
@@ -360,10 +809,9 @@ crossorigin="anonymous"></script>
         if(mode === "encode"){
           const b64 = base64EncodeUtf8(raw);
           outputEl.value = b64;
-          setStatus("Encoded text → Base64 ✔", "ok");
+          setStatus("Encoded text to Base64 ✔", "ok");
         }else{
           const cleaned = normalizeB64(raw);
-          // allow data URL pasted even in decode mode
           let b64 = cleaned;
           if(isDataUrl(cleaned)){
             const parts = splitDataUrl(cleaned);
@@ -371,7 +819,7 @@ crossorigin="anonymous"></script>
           }
           const text = base64DecodeUtf8(b64);
           outputEl.value = text;
-          setStatus("Decoded Base64 → text ✔", "ok");
+          setStatus("Decoded Base64 to text ✔", "ok");
         }
       }catch(e){
         outputEl.value = "";
@@ -384,7 +832,7 @@ crossorigin="anonymous"></script>
       try{
         await navigator.clipboard.writeText(text);
         btn.textContent = okLabel;
-        setTimeout(()=> btn.textContent = baseLabel, 1200);
+        setTimeout(() => btn.textContent = baseLabel, 1200);
       }catch{
         const t = document.createElement("textarea");
         t.value = text;
@@ -393,7 +841,7 @@ crossorigin="anonymous"></script>
         document.execCommand("copy");
         document.body.removeChild(t);
         btn.textContent = okLabel;
-        setTimeout(()=> btn.textContent = baseLabel, 1200);
+        setTimeout(() => btn.textContent = baseLabel, 1200);
       }
     }
 
@@ -411,7 +859,7 @@ crossorigin="anonymous"></script>
       const a = inputEl.value;
       inputEl.value = outputEl.value;
       outputEl.value = a;
-      setStatus("Swapped input/output.", "ok");
+      setStatus("Swapped input and output.", "ok");
     }
 
     function loadSample(){
@@ -431,16 +879,14 @@ crossorigin="anonymous"></script>
       setStatus("Cleared.", "hint");
     }
 
-    // ----- File -> Base64 -----
     async function fileToBase64(file){
       const buf = await file.arrayBuffer();
       const bytes = new Uint8Array(buf);
 
-      // Convert bytes -> base64
       let bin = "";
       const chunk = 0x8000;
-      for(let i=0; i<bytes.length; i+=chunk){
-        bin += String.fromCharCode(...bytes.slice(i, i+chunk));
+      for(let i = 0; i < bytes.length; i += chunk){
+        bin += String.fromCharCode(...bytes.slice(i, i + chunk));
       }
       return btoa(bin);
     }
@@ -449,7 +895,7 @@ crossorigin="anonymous"></script>
       if(!file) return;
       lastFileName = file.name || "file.bin";
       lastFileType = file.type || "";
-      fileInfo.textContent = `Loading: ${lastFileName} (${(file.size/1024).toFixed(1)} KB) …`;
+      fileInfo.textContent = `Loading: ${lastFileName} (${(file.size / 1024).toFixed(1)} KB)…`;
 
       try{
         const b64 = await fileToBase64(file);
@@ -458,28 +904,26 @@ crossorigin="anonymous"></script>
         const mime = lastFileType || "application/octet-stream";
         lastFileDataUrl = `data:${mime};base64,${b64}`;
 
-        const mode = fileModeEl.value; // raw | dataurl
+        const mode = fileModeEl.value;
         const out = (mode === "dataurl") ? lastFileDataUrl : lastFileBase64;
 
         outputEl.value = out;
-        fileInfo.textContent = `Loaded: ${lastFileName} (${(file.size/1024).toFixed(1)} KB) • MIME: ${mime || "unknown"}`;
+        fileInfo.textContent = `Loaded: ${lastFileName} (${(file.size / 1024).toFixed(1)} KB) • MIME: ${mime || "unknown"}`;
 
-        // suggest filename in download section
         outFilenameEl.value = lastFileName || "file.bin";
         if(lastFileType) outMimeEl.value = lastFileType;
 
-        setStatus("File → Base64 ✔", "ok");
+        setStatus("File to Base64 ✔", "ok");
       }catch(e){
         fileInfo.textContent = "No file loaded.";
         setStatus("File error: " + (e.message || String(e)), "error");
       }
     }
 
-    // Base64 -> file
     function base64ToBytes(b64){
       const bin = atob(b64);
       const bytes = new Uint8Array(bin.length);
-      for(let i=0; i<bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      for(let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
       return bytes;
     }
 
@@ -496,7 +940,7 @@ crossorigin="anonymous"></script>
     function downloadFileFromInput(){
       const raw = inputEl.value || "";
       if(!raw.trim()){
-        setStatus("Paste Base64 (or a data URL) into Input first.", "error");
+        setStatus("Paste Base64 or a data URL into Input first.", "error");
         return;
       }
 
@@ -520,12 +964,15 @@ crossorigin="anonymous"></script>
       }
     }
 
-    // Drag & drop
-    function prevent(e){ e.preventDefault(); e.stopPropagation(); }
-    dropZone.addEventListener("dragenter", (e)=>{ prevent(e); dropZone.classList.add("dragover"); });
-    dropZone.addEventListener("dragover", (e)=>{ prevent(e); dropZone.classList.add("dragover"); });
-    dropZone.addEventListener("dragleave", (e)=>{ prevent(e); dropZone.classList.remove("dragover"); });
-    dropZone.addEventListener("drop", async (e)=>{
+    function prevent(e){
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    dropZone.addEventListener("dragenter", (e) => { prevent(e); dropZone.classList.add("dragover"); });
+    dropZone.addEventListener("dragover", (e) => { prevent(e); dropZone.classList.add("dragover"); });
+    dropZone.addEventListener("dragleave", (e) => { prevent(e); dropZone.classList.remove("dragover"); });
+    dropZone.addEventListener("drop", async (e) => {
       prevent(e);
       dropZone.classList.remove("dragover");
       const file = e.dataTransfer?.files?.[0];
@@ -533,16 +980,21 @@ crossorigin="anonymous"></script>
       else setStatus("No file detected.", "error");
     });
 
-    // Events
     runBtn.addEventListener("click", run);
     swapBtn.addEventListener("click", swapIO);
     sampleBtn.addEventListener("click", loadSample);
     clearBtn.addEventListener("click", clearAll);
 
-    copyOutBtn.addEventListener("click", () => copyText(outputEl.value, copyOutBtn, "Copied!", "Copy Output"));
+    copyOutBtn.addEventListener("click", () =>
+      copyText(outputEl.value, copyOutBtn, "Copied!", "Copy Output")
+    );
+
     downloadOutBtn.addEventListener("click", () => {
       const text = outputEl.value || "";
-      if(!text){ setStatus("Nothing to download.", "error"); return; }
+      if(!text){
+        setStatus("Nothing to download.", "error");
+        return;
+      }
       downloadText(text, "output.txt");
       setStatus("Downloaded output.txt ✔", "ok");
     });
@@ -555,7 +1007,6 @@ crossorigin="anonymous"></script>
     });
 
     fileModeEl.addEventListener("change", () => {
-      // if a file is already loaded, refresh output format
       if(lastFileBase64){
         outputEl.value = (fileModeEl.value === "dataurl") ? lastFileDataUrl : lastFileBase64;
         setStatus("Updated file output format.", "ok");
@@ -564,27 +1015,31 @@ crossorigin="anonymous"></script>
 
     copyFileB64Btn.addEventListener("click", () => {
       const text = (fileModeEl.value === "dataurl") ? lastFileDataUrl : lastFileBase64;
-      if(!text){ setStatus("Upload a file first.", "error"); return; }
+      if(!text){
+        setStatus("Upload a file first.", "error");
+        return;
+      }
       copyText(text, copyFileB64Btn, "Copied!", "Copy Base64");
       setStatus("Copied file Base64 ✔", "ok");
     });
 
     downloadB64Btn.addEventListener("click", () => {
       const text = (fileModeEl.value === "dataurl") ? lastFileDataUrl : lastFileBase64;
-      if(!text){ setStatus("Upload a file first.", "error"); return; }
-      const name = (lastFileName ? (lastFileName + ".base64.txt") : "file.base64.txt");
+      if(!text){
+        setStatus("Upload a file first.", "error");
+        return;
+      }
+      const name = (lastFileName ? `${lastFileName}.base64.txt` : "file.base64.txt");
       downloadText(text, name);
       setStatus("Downloaded Base64 text ✔", "ok");
     });
 
     downloadFileBtn.addEventListener("click", downloadFileFromInput);
 
-    // Auto run when mode changes (optional nice UX)
     modeEl.addEventListener("change", () => {
       if((inputEl.value || "").trim()) run();
     });
 
-    // Init sample
     loadSample();
   </script>
 </body>
