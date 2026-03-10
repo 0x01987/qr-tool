@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Canonical Tag Checker | Check rel=canonical Tag and URL Canonicalization | InstantQR</title>
+  <meta name="description" content="Check a page’s rel=canonical tag, final URL, HTTP status, and redirect chain with this fast canonical tag checker. Free, responsive, and privacy-first by InstantQR.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="author" content="InstantQR">
+  <meta name="theme-color" content="#0b1220">
+  <link rel="canonical" href="https://instantqr.io/seo-tools/canonical-tag-checker.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="InstantQR">
+  <meta property="og:title" content="Canonical Tag Checker | InstantQR">
+  <meta property="og:description" content="Check rel=canonical tags, final URLs, and redirects with a fast canonical tag checker.">
+  <meta property="og:url" content="https://instantqr.io/seo-tools/canonical-tag-checker.html">
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Canonical Tag Checker | InstantQR">
+  <meta name="twitter:description" content="Check rel=canonical tags, final URLs, and redirects with a fast canonical tag checker.">
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg">
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#111a2b;
+      --panel:#0d1525;
+      --text:#e7eefc;
+      --muted:#9db0d1;
+      --border:rgba(255,255,255,.08);
+      --brand:#69a6ff;
+      --good:#39d98a;
+      --warn:#f5c451;
+      --bad:#ff7b91;
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+      --radius:18px;
+      --max:1040px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.16), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.10), transparent 50%),
+        linear-gradient(180deg,#0b1220,#070b14 60%,#060912);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:auto;padding:24px}
+    .skip{
+      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+    }
+    .skip:focus{
+      left:14px;top:14px;width:auto;height:auto;z-index:9999;
+      padding:10px 12px;border-radius:12px;background:#08101d;color:#fff;border:1px solid var(--border);
+    }
+    .sr-only{
+      position:absolute!important;
+      width:1px!important;
+      height:1px!important;
+      padding:0!important;
+      margin:-1px!important;
+      overflow:hidden!important;
+      clip:rect(0,0,0,0)!important;
+      white-space:nowrap!important;
+      border:0!important;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .logo img{height:32px;width:auto;display:block}
+    nav{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      text-decoration:none;
+    }
+    nav a:hover{color:#fff}
+
+    .hero{
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
+    }
+    h1{
+      font-size:34px;
+      margin:0 0 6px;
+      line-height:1.1;
+      letter-spacing:-.6px;
+    }
+    .sub{
+      color:var(--muted);
+      margin:0;
+      line-height:1.6;
+      max-width:780px;
+    }
+    .metaRow{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .metaPill{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12px;
+      color:var(--muted);
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+    }
+
+    .grid{
+      display:grid;
+      gap:16px;
+      margin-top:20px;
+    }
+    .panel{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .row{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      align-items:end;
+    }
+    .row2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width:800px){
+      .row,.row2{grid-template-columns:1fr}
+    }
+
+    label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    input,button,textarea{
+      font:inherit;
+    }
+    input, textarea{
+      width:100%;
+      padding:13px 14px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#08101d;
+      color:#fff;
+      outline:none;
+    }
+    input:focus, textarea:focus{
+      border-color:#3b82f6;
+      box-shadow:0 0 0 3px rgba(59,130,246,.18);
+    }
+    input::placeholder, textarea::placeholder{color:rgba(231,238,252,.55)}
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:13px 14px;
+      min-width:120px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#13203a;
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .btn:hover{
+      border-color:#3b82f6;
+      text-decoration:none;
+    }
+    .btn.primary{
+      background:linear-gradient(180deg,#2e6ef7,#2459cb);
+      border-color:transparent;
+    }
+
+    .note{
+      margin-top:10px;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      font-size:12px;
+      color:var(--muted);
+    }
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--warn);
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+    @media (max-width:900px){
+      .cards{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:560px){
+      .cards{grid-template-columns:1fr}
+    }
+
+    .miniCard{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px;
+    }
+    .miniLabel{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .miniValue{
+      font-size:16px;
+      font-weight:800;
+      word-break:break-word;
+    }
+    .good{color:var(--good)}
+    .warn{color:var(--warn)}
+    .bad{color:var(--bad)}
+
+    .sectionTitle{
+      margin:0 0 10px;
+      font-size:20px;
+      letter-spacing:-.3px;
+    }
+
+    .tableWrap{
+      overflow:auto;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#0b1323;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:700px;
+    }
+    th, td{
+      text-align:left;
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size:13px;
+    }
+    th{
+      color:#d8e6ff;
+      font-size:12px;
+      background:rgba(255,255,255,.04);
+    }
+
+    .code{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      word-break:break-all;
+    }
+
+    .resultBox{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#0b1323;
+      padding:14px;
+    }
+    .resultBox + .resultBox{margin-top:12px}
+
+    .faq{
+      margin-top:16px;
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:rgba(255,255,255,.03);
+    }
+    .faq h2{
+      margin:0 0 10px;
+      font-size:22px;
+    }
+    details{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:12px 0;
+    }
+    details:first-of-type{border-top:0;padding-top:0}
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:800;
+    }
+    summary::-webkit-details-marker{display:none}
+    .faq p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    footer{
+      margin-top:40px;
+      padding-top:20px;
+      border-top:1px solid var(--border);
+      font-size:13px;
+      color:var(--muted);
+    }
+    footer a{
+      color:var(--muted);
+      text-decoration:none;
+      margin-right:10px;
+    }
+    footer a:hover{color:white}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Canonical Tag Checker",
+    "applicationCategory":"DeveloperApplication",
+    "operatingSystem":"Web",
+    "url":"https://instantqr.io/seo-tools/canonical-tag-checker.html",
+    "description":"Check rel=canonical tags, final URLs, HTTP status, and redirect chains with InstantQR's free canonical tag checker.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What does a canonical tag checker do?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A canonical tag checker helps you verify a page’s rel=canonical tag, compare it with the final crawled URL, and spot canonical mismatches or redirect issues."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why is canonical important for SEO?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Canonical tags help search engines understand which version of a page should be treated as the preferred version when duplicate or similar pages exist."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can this checker read any website directly?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Direct browser requests can be blocked by CORS on many sites. This tool supports direct checks when allowed and includes a raw HTML mode so you can paste page source when direct fetch is restricted."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What should I do if the canonical URL is different from the final URL?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Review whether the canonical target is intentional. In many cases, the canonical URL should match the preferred indexable URL after redirects."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+  <header>
+    <a class="logo" href="/" aria-label="InstantQR Home">
+      <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+      <span>InstantQR</span>
+    </a>
+
+    <nav aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/guides/guides.html">Guides</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <h1>Canonical Tag Checker</h1>
+      <p class="sub">
+        Check a page’s canonical setup fast. Inspect the final URL, rel=canonical value, HTTP status, redirect chain, and common SEO issues. This tool works best with CORS-friendly URLs and also supports raw HTML paste for sites that block direct browser fetching.
+      </p>
+
+      <div class="metaRow" aria-label="Highlights">
+        <span class="metaPill">🔎 Canonical tag check</span>
+        <span class="metaPill">↪️ Redirect visibility</span>
+        <span class="metaPill">⚡ Fast + responsive</span>
+        <span class="metaPill">🔒 Privacy-first</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="row">
+          <div>
+            <label for="urlInput">Page URL</label>
+            <input id="urlInput" type="url" placeholder="https://example.com/page" inputmode="url">
+          </div>
+          <div class="actions">
+            <button class="btn primary" id="checkBtn" type="button">Check URL</button>
+            <button class="btn" id="sampleBtn" type="button">Load Sample</button>
+          </div>
+        </div>
+
+        <div class="row2" style="margin-top:12px;">
+          <div>
+            <label for="htmlInput">Raw HTML (fallback mode)</label>
+            <textarea id="htmlInput" rows="8" placeholder="Paste full HTML here if direct fetch is blocked by CORS..."></textarea>
+          </div>
+          <div>
+            <label for="baseUrlInput">Base URL for pasted HTML</label>
+            <input id="baseUrlInput" type="url" placeholder="https://example.com/page">
+            <div class="note">
+              Use raw HTML mode when the site blocks browser fetches. If you paste HTML, the tool can still read the canonical tag and resolve relative canonicals against the base URL.
+            </div>
+            <div style="margin-top:12px" class="actions">
+              <button class="btn" id="parseHtmlBtn" type="button">Parse HTML</button>
+              <button class="btn" id="clearBtn" type="button">Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <span class="status" aria-live="polite">
+            <span class="dot" id="statusDot"></span>
+            <span id="statusText">Ready</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="sectionTitle">Canonical Summary</h2>
+        <div class="cards">
+          <div class="miniCard">
+            <div class="miniLabel">HTTP Status</div>
+            <div class="miniValue" id="httpStatus">—</div>
+          </div>
+          <div class="miniCard">
+            <div class="miniLabel">Final URL</div>
+            <div class="miniValue code" id="finalUrl">—</div>
+          </div>
+          <div class="miniCard">
+            <div class="miniLabel">Canonical URL</div>
+            <div class="miniValue code" id="canonicalUrl">—</div>
+          </div>
+          <div class="miniCard">
+            <div class="miniLabel">Assessment</div>
+            <div class="miniValue" id="assessment">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="sectionTitle">Details</h2>
+
+        <div class="resultBox">
+          <div class="miniLabel">Canonical Tag Found</div>
+          <div class="miniValue" id="canonicalFound">—</div>
+        </div>
+
+        <div class="resultBox">
+          <div class="miniLabel">Meta Robots</div>
+          <div class="miniValue code" id="robotsMeta">—</div>
+        </div>
+
+        <div class="resultBox">
+          <div class="miniLabel">Notes</div>
+          <div class="miniValue" id="notes">—</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="sectionTitle">Redirect Chain</h2>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>URL</th>
+                <th>Status</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody id="redirectBody">
+              <tr>
+                <td>—</td>
+                <td class="code">No data yet</td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">
+          Browser fetches do not always expose the full redirect chain. This tool shows what it can determine from the final response and your pasted HTML.
+        </div>
+      </div>
+
+      <div class="faq">
+        <h2>FAQ</h2>
+
+        <details open>
+          <summary>What does a canonical tag checker do?</summary>
+          <p>A canonical tag checker helps you verify a page’s rel=canonical tag, compare it with the final crawled URL, and spot canonical mismatches or redirect issues.</p>
+        </details>
+
+        <details>
+          <summary>Why is canonical important for SEO?</summary>
+          <p>Canonical tags help search engines understand which version of a page should be treated as the preferred version when duplicate or similar pages exist.</p>
+        </details>
+
+        <details>
+          <summary>Why can direct checks fail?</summary>
+          <p>Many websites block browser fetches with CORS rules. If that happens, use the raw HTML mode by pasting the page source and base URL.</p>
+        </details>
+
+        <details>
+          <summary>Should the canonical URL match the final URL?</summary>
+          <p>Often yes. In many clean setups, the canonical URL matches the final preferred URL after redirects. Differences can be valid, but they should be intentional.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <a href="/tools.html">All Tools</a>
+      <a href="/guides.html">Guides</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div style="margin-top:8px;">
+      © <span id="year"></span> InstantQR.io
+    </div>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const els = {
+    year: document.getElementById("year"),
+    urlInput: document.getElementById("urlInput"),
+    htmlInput: document.getElementById("htmlInput"),
+    baseUrlInput: document.getElementById("baseUrlInput"),
+    checkBtn: document.getElementById("checkBtn"),
+    parseHtmlBtn: document.getElementById("parseHtmlBtn"),
+    sampleBtn: document.getElementById("sampleBtn"),
+    clearBtn: document.getElementById("clearBtn"),
+    statusDot: document.getElementById("statusDot"),
+    statusText: document.getElementById("statusText"),
+    httpStatus: document.getElementById("httpStatus"),
+    finalUrl: document.getElementById("finalUrl"),
+    canonicalUrl: document.getElementById("canonicalUrl"),
+    assessment: document.getElementById("assessment"),
+    canonicalFound: document.getElementById("canonicalFound"),
+    robotsMeta: document.getElementById("robotsMeta"),
+    notes: document.getElementById("notes"),
+    redirectBody: document.getElementById("redirectBody")
+  };
+
+  els.year.textContent = new Date().getFullYear();
+
+  function setStatus(kind, text) {
+    const map = {
+      ready: "#f5c451",
+      loading: "#f5c451",
+      ok: "#39d98a",
+      warn: "#f5c451",
+      bad: "#ff7b91"
+    };
+    els.statusDot.style.background = map[kind] || map.ready;
+    els.statusText.textContent = text;
+  }
+
+  function normalizeUrl(input) {
+    let v = (input || "").trim();
+    if (!v) return "";
+    if (!/^https?:\/\//i.test(v)) v = "https://" + v;
+    return v;
+  }
+
+  function escapeHtml(str) {
+    return String(str ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
+  }
+
+  function safeText(el, value, cls) {
+    el.className = "miniValue" + (cls ? " " + cls : "");
+    el.textContent = value || "—";
+  }
+
+  function resetOutput() {
+    safeText(els.httpStatus, "—");
+    safeText(els.finalUrl, "—", "code");
+    safeText(els.canonicalUrl, "—", "code");
+    safeText(els.assessment, "—");
+    safeText(els.canonicalFound, "—");
+    safeText(els.robotsMeta, "—", "code");
+    safeText(els.notes, "—");
+    els.redirectBody.innerHTML = `
+      <tr>
+        <td>—</td>
+        <td class="code">No data yet</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+    `;
+  }
+
+  function parseDocumentFromHtml(html) {
+    const parser = new DOMParser();
+    return parser.parseFromString(html, "text/html");
+  }
+
+  function getCanonicalInfo(doc, baseUrl) {
+    const canonicalEl = doc.querySelector('link[rel="canonical"]');
+    const robotsEl = doc.querySelector('meta[name="robots"], meta[name="googlebot"]');
+
+    const rawCanonical = canonicalEl ? (canonicalEl.getAttribute("href") || "").trim() : "";
+    let resolvedCanonical = rawCanonical;
+
+    try {
+      if (rawCanonical && baseUrl) {
+        resolvedCanonical = new URL(rawCanonical, baseUrl).href;
+      }
+    } catch {}
+
+    const robots = robotsEl ? (robotsEl.getAttribute("content") || "").trim() : "";
+
+    return {
+      rawCanonical,
+      resolvedCanonical,
+      robots
+    };
+  }
+
+  function compareUrls(finalUrl, canonicalUrl) {
+    if (!canonicalUrl) {
+      return {
+        label: "No canonical found",
+        cls: "warn",
+        note: "No rel=canonical tag was detected in the HTML."
+      };
+    }
+
+    if (!finalUrl) {
+      return {
+        label: "Canonical found",
+        cls: "good",
+        note: "A canonical tag was detected, but no final fetch URL was available for comparison."
+      };
+    }
+
+    if (finalUrl === canonicalUrl) {
+      return {
+        label: "Canonical matches final URL",
+        cls: "good",
+        note: "The canonical URL matches the final resolved URL."
+      };
+    }
+
+    try {
+      const f = new URL(finalUrl);
+      const c = new URL(canonicalUrl);
+
+      const sameNoHash =
+        f.origin + f.pathname + f.search === c.origin + c.pathname + c.search;
+
+      if (sameNoHash) {
+        return {
+          label: "Canonical differs only by hash",
+          cls: "warn",
+          note: "The canonical and final URL differ only by fragment/hash."
+        };
+      }
+    } catch {}
+
+    return {
+      label: "Canonical differs from final URL",
+      cls: "warn",
+      note: "Review whether the canonical target is intentional."
+    };
+  }
+
+  async function fetchPage(url) {
+    const res = await fetch(url, { method: "GET", redirect: "follow" });
+    const text = await res.text();
+    return {
+      status: res.status,
+      finalUrl: res.url || url,
+      html: text
+    };
+  }
+
+  function renderRedirectRows(rows) {
+    if (!rows || !rows.length) {
+      els.redirectBody.innerHTML = `
+        <tr>
+          <td>1</td>
+          <td class="code">${escapeHtml(els.finalUrl.textContent)}</td>
+          <td>${escapeHtml(els.httpStatus.textContent)}</td>
+          <td>Final response</td>
+        </tr>
+      `;
+      return;
+    }
+
+    els.redirectBody.innerHTML = rows.map((row, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td class="code">${escapeHtml(row.url)}</td>
+        <td>${escapeHtml(String(row.status ?? "—"))}</td>
+        <td>${escapeHtml(row.type || "Response")}</td>
+      </tr>
+    `).join("");
+  }
+
+  function renderAnalysis({ status, finalUrl, canonical, robots, assessment, note, sourceMode }) {
+    safeText(els.httpStatus, status ? String(status) : sourceMode === "html" ? "HTML mode" : "—");
+    safeText(els.finalUrl, finalUrl || (sourceMode === "html" ? "Not fetched in HTML mode" : "—"), "code");
+    safeText(els.canonicalUrl, canonical || "—", "code");
+    safeText(els.assessment, assessment.label, assessment.cls);
+    safeText(els.canonicalFound, canonical ? "Yes" : "No", canonical ? "good" : "warn");
+    safeText(els.robotsMeta, robots || "Not found", "code");
+    safeText(els.notes, note || "—");
+  }
+
+  async function runUrlCheck() {
+    const url = normalizeUrl(els.urlInput.value);
+    if (!url) {
+      setStatus("bad", "Enter a URL");
+      return;
+    }
+
+    resetOutput();
+    setStatus("loading", "Checking URL…");
+
+    try {
+      const page = await fetchPage(url);
+      const doc = parseDocumentFromHtml(page.html);
+      const info = getCanonicalInfo(doc, page.finalUrl);
+      const assessment = compareUrls(page.finalUrl, info.resolvedCanonical);
+
+      renderAnalysis({
+        status: page.status,
+        finalUrl: page.finalUrl,
+        canonical: info.resolvedCanonical || info.rawCanonical,
+        robots: info.robots,
+        assessment,
+        note: assessment.note,
+        sourceMode: "fetch"
+      });
+
+      renderRedirectRows([
+        { url, status: url === page.finalUrl ? page.status : "—", type: url === page.finalUrl ? "Final response" : "Requested URL" },
+        ...(url !== page.finalUrl ? [{ url: page.finalUrl, status: page.status, type: "Final response" }] : [])
+      ]);
+
+      setStatus("ok", "Check complete");
+    } catch (err) {
+      renderAnalysis({
+        status: "",
+        finalUrl: "",
+        canonical: "",
+        robots: "",
+        assessment: { label: "Direct fetch blocked", cls: "bad" },
+        note: "This site may block browser fetches with CORS. Use raw HTML mode below.",
+        sourceMode: "fetch"
+      });
+      renderRedirectRows([]);
+      setStatus("bad", "Direct fetch failed");
+    }
+  }
+
+  function runHtmlCheck() {
+    const html = (els.htmlInput.value || "").trim();
+    const baseUrl = normalizeUrl(els.baseUrlInput.value);
+
+    if (!html) {
+      setStatus("bad", "Paste HTML to parse");
+      return;
+    }
+
+    resetOutput();
+    setStatus("loading", "Parsing HTML…");
+
+    try {
+      const doc = parseDocumentFromHtml(html);
+      const info = getCanonicalInfo(doc, baseUrl);
+      const assessment = compareUrls(baseUrl, info.resolvedCanonical || info.rawCanonical);
+
+      renderAnalysis({
+        status: "",
+        finalUrl: baseUrl,
+        canonical: info.resolvedCanonical || info.rawCanonical,
+        robots: info.robots,
+        assessment,
+        note: assessment.note + " Parsed from pasted HTML.",
+        sourceMode: "html"
+      });
+
+      renderRedirectRows(baseUrl ? [{ url: baseUrl, status: "—", type: "Base URL" }] : []);
+      setStatus("ok", "HTML parsed");
+    } catch (err) {
+      setStatus("bad", "Could not parse HTML");
+      safeText(els.notes, "The pasted HTML could not be parsed.");
+    }
+  }
+
+  function loadSample() {
+    const sampleUrl = "https://example.com/sample-page";
+    const sampleHtml = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sample Page</title>
+  <link rel="canonical" href="https://example.com/sample-page">
+  <meta name="robots" content="index,follow">
+</head>
+<body>
+  <h1>Sample</h1>
+</body>
+</html>`;
+    els.urlInput.value = "";
+    els.baseUrlInput.value = sampleUrl;
+    els.htmlInput.value = sampleHtml;
+    runHtmlCheck();
+  }
+
+  function clearAll() {
+    els.urlInput.value = "";
+    els.baseUrlInput.value = "";
+    els.htmlInput.value = "";
+    resetOutput();
+    setStatus("ready", "Ready");
+  }
+
+  els.checkBtn.addEventListener("click", runUrlCheck);
+  els.parseHtmlBtn.addEventListener("click", runHtmlCheck);
+  els.sampleBtn.addEventListener("click", loadSample);
+  els.clearBtn.addEventListener("click", clearAll);
+
+  els.urlInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") runUrlCheck();
+  });
+
+  resetOutput();
+  setStatus("ready", "Ready");
+})();
+</script>
+</body>
+</html>
