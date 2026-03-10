@@ -7,91 +7,451 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
   <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Time Zone Converter | InstantQR</title>
-  <meta name="description" content="Convert times between time zones instantly. Supports IANA time zones. Privacy-first: runs locally in your browser." />
-  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Time Zone Converter | Convert Time Between Cities & Time Zones | InstantQR.io</title>
+  <meta name="description" content="Free online time zone converter. Convert time between cities and IANA time zones instantly, compare UTC offsets, and copy results. Privacy-first and runs locally in your browser." />
+  <meta name="keywords" content="time zone converter, world time converter, convert time zones, city time converter, UTC converter, timezone calculator, IANA timezone converter, meeting planner" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0b0f19" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/time-zone-converter.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="alternate" hreflang="en" href="https://instantqr.io/tools/time-zone-converter.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR.io" />
+  <meta property="og:title" content="Time Zone Converter | Convert Time Between Cities & Time Zones | InstantQR.io" />
+  <meta property="og:description" content="Convert times between IANA time zones instantly. Compare UTC offsets, copy results, and run everything locally in your browser." />
+  <meta property="og:url" content="https://instantqr.io/tools/time-zone-converter.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+  <meta property="og:image:alt" content="InstantQR Time Zone Converter tool" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Time Zone Converter | InstantQR.io" />
+  <meta name="twitter:description" content="Free online time zone converter for cities and IANA time zones. Fast, private, and mobile friendly." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+
+  <!-- Structured Data: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Time Zone Converter",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Web",
+    "url":"https://instantqr.io/tools/time-zone-converter.html",
+    "description":"Free online time zone converter for IANA time zones and city time comparisons.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io",
+      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Is this time zone converter free to use?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The InstantQR time zone converter is free to use."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool support IANA time zones?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The tool supports official IANA time zones such as America/Phoenix, Europe/London, and Asia/Tokyo."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does the time zone converter store my data?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. Conversions run locally in your browser and no time data is intentionally stored or sent anywhere."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I compare UTC offsets between time zones?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The tool shows the offset difference and each selected time zone's UTC offset for the chosen time."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "@id":"https://instantqr.io/tools/time-zone-converter.html#breadcrumb",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Time Zone Converter",
+        "item":"https://instantqr.io/tools/time-zone-converter.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: WebPage -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Time Zone Converter",
+    "url":"https://instantqr.io/tools/time-zone-converter.html",
+    "description":"Convert times between cities and IANA time zones instantly online.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR.io",
+      "url":"https://instantqr.io/"
+    },
+    "breadcrumb":{
+      "@id":"https://instantqr.io/tools/time-zone-converter.html#breadcrumb"
+    }
+  }
+  </script>
 
   <style>
-    :root { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
-    body { margin:0; background:#0b0f19; color:#e7eaf2; }
-    .wrap { max-width: 1100px; margin:0 auto; padding: 22px; }
-    .card {
-      background:#121a2a; border:1px solid #22304e; border-radius:18px;
-      padding:18px; box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    :root{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      --bg:#0b0f19;
+      --card:#121a2a;
+      --panel:#0e1525;
+      --border:#22304e;
+      --border2:#2a3a5f;
+      --text:#e7eaf2;
+      --muted:#b8c0d6;
+      --muted2:#8ea0c8;
+      --link:#cfe0ff;
+      --brand:#3b82f6;
+      --success:#22c55e;
+      --success-soft:rgba(34,197,94,.10);
+      --danger:#ff9fb3;
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:16px;
+      --max:1100px;
+      color-scheme:dark;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(900px 540px at 12% 8%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:var(--shadow);
     }
 
     .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; flex-wrap:wrap; margin-bottom:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:2px 2px 10px;
+      border-bottom:1px solid rgba(34,48,78,.55);
+      margin-bottom:12px;
     }
+
     .brand{
-      display:flex; align-items:baseline; gap:10px;
-      text-decoration:none; color:#e7eaf2;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:900;
+      letter-spacing:-.2px;
+      min-width:0;
     }
-    .brand strong{ font-size:16px; letter-spacing:.2px; }
-    .brand span{ color:#8ea0c8; font-size:12px; }
 
-    .toolnav{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .brand img{
+      height:30px;
+      width:auto;
+      display:block;
+    }
+
+    .brand span{
+      font-size:16px;
+    }
+
+    .toolnav{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
     .toolnav a{
-      padding:8px 10px; border-radius:999px;
-      background:#0b1222; border:1px solid #2a3a5f;
-      color:#b8c0d6; font-size:12px; text-decoration:none; font-weight:700;
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--link);
+      font-size:12px;
+      text-decoration:none;
+      font-weight:800;
+      user-select:none;
     }
-    .toolnav a:hover{ border-color:#3b82f6; color:#e7eaf2; }
-    .toolnav a.active{ border-color:#3b82f6; color:#e7eaf2; }
 
-    header{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    h1{ margin:0; font-size:24px; }
-    .sub{ margin:6px 0 0; color:#b8c0d6; font-size:13px; }
+    .toolnav a:hover{
+      border-color:rgba(59,130,246,.85);
+      color:var(--text);
+    }
 
-    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-top:14px; }
-    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+    .toolnav a.active{
+      border-color:rgba(59,130,246,.95);
+      color:var(--text);
+    }
 
-    .box{ background:#0e1525; border:1px solid #2a3a5f; border-radius:16px; padding:14px; }
-    label{ display:block; font-size:12px; color:#b8c0d6; margin-bottom:6px; }
+    .breadcrumbs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin:4px 0 14px;
+      font-size:12px;
+      color:var(--muted2);
+    }
+
+    .breadcrumbs a{
+      color:var(--link);
+      text-decoration:none;
+    }
+
+    .breadcrumbs a:hover{text-decoration:underline}
+
+    header{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    h1{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-.3px;
+    }
+
+    .sub{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.65;
+      max-width:78ch;
+    }
+
+    .badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .badge{
+      padding:7px 10px;
+      border-radius:999px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--muted);
+      font-size:12px;
+      user-select:none;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    @media (max-width:860px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .box{
+      background:var(--panel);
+      border:1px solid var(--border2);
+      border-radius:16px;
+      padding:14px;
+    }
+
+    label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
 
     input, select{
-      width:100%; padding:12px 10px; border-radius:14px;
-      border:1px solid #2a3a5f; background:#0b1222; color:#e7eaf2; outline:none;
+      width:100%;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid var(--border2);
+      background:#0b1222;
+      color:var(--text);
+      outline:none;
       font-size:14px;
     }
 
-    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-    @media (max-width: 520px){ .row{ grid-template-columns: 1fr; } }
-
-    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
-    button{
-      border:0; border-radius:14px; padding:12px 14px;
-      background:#3b82f6; color:white; font-weight:800; cursor:pointer;
+    input:focus, select:focus{
+      border-color:rgba(59,130,246,.85);
+      box-shadow:0 0 0 3px rgba(59,130,246,.18);
     }
-    button.secondary{ background:#1f2a44; border:1px solid #2a3a5f; }
-    button.ghost{ background:#0b1222; border:1px solid #2a3a5f; color:#b8c0d6; }
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    @media (max-width:520px){
+      .row{grid-template-columns:1fr}
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    button{
+      border:0;
+      border-radius:14px;
+      padding:12px 14px;
+      background:var(--brand);
+      color:white;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    button:hover{filter:brightness(1.05)}
+
+    button.secondary{
+      background:#1f2a44;
+      border:1px solid var(--border2);
+    }
+
+    button.ghost{
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--muted);
+    }
 
     .pill{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      padding:10px 12px; border-radius:16px;
-      background:#0b1222; border:1px solid #2a3a5f; margin-top:10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px;
+      border-radius:16px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      margin-top:10px;
     }
-    .pill .k{ color:#8ea0c8; font-size:12px; }
-    .pill .v{ font-weight:900; font-size:14px; }
 
-    .hint{ color:#b8c0d6; font-size:12px; line-height:1.55; }
-    .tiny{ color:#8ea0c8; font-size:12px; }
-    .error{ color:#ff9fb3; font-size:12px; }
-    .ok{ color:#9fffb8; font-size:12px; }
+    .pill .k{
+      color:var(--muted2);
+      font-size:12px;
+    }
+
+    .pill .v{
+      font-weight:900;
+      font-size:14px;
+      line-height:1.5;
+      word-break:break-word;
+    }
+
+    .hint{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    .tiny{
+      color:var(--muted2);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .error{
+      color:var(--danger);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .ok{
+      color:#86efac;
+      font-size:12px;
+      line-height:1.55;
+    }
 
     .status{
-      margin-top:10px;
-      padding:10px 12px;
+      margin-top:12px;
+      padding:12px;
       border-radius:14px;
       border:1px dashed rgba(184,192,214,.35);
       background:#0b1222;
@@ -100,14 +460,73 @@ crossorigin="anonymous"></script>
       gap:6px;
     }
 
+    .status.good{
+      border-color:rgba(34,197,94,.35);
+      background:linear-gradient(180deg, rgba(11,18,34,1) 0%, rgba(7,14,28,1) 100%);
+      box-shadow:inset 0 0 0 1px rgba(34,197,94,.04);
+    }
+
+    .metaGrid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    @media (max-width:860px){
+      .metaGrid{grid-template-columns:1fr}
+    }
+
+    .sectionTitle{
+      margin:0 0 10px;
+      font-size:15px;
+      font-weight:900;
+      letter-spacing:-.2px;
+    }
+
+    .faqItem{
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px solid rgba(42,58,95,.55);
+    }
+
+    .faqItem:first-of-type{
+      margin-top:0;
+      padding-top:0;
+      border-top:0;
+    }
+
+    code{
+      color:var(--link);
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    }
+
     .footerLinks{
       margin-top:14px;
       text-align:center;
-      color:#8ea0c8;
+      color:var(--muted2);
       font-size:12px;
+      line-height:1.8;
     }
-    .footerLinks a{ color:#cfe0ff; text-decoration:none; }
-    .footerLinks a:hover{ text-decoration:underline; }
+
+    .footerLinks a{
+      color:var(--link);
+      text-decoration:none;
+    }
+
+    .footerLinks a:hover{text-decoration:underline}
+
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
   </style>
 </head>
 
@@ -116,33 +535,53 @@ crossorigin="anonymous"></script>
     <div class="card">
 
       <div class="topbar">
-        <a class="brand" href="/">
-          <strong>InstantQR</strong>
-          <span>privacy-first tools</span>
+        <a class="brand" href="/" aria-label="InstantQR Home">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+          <span>InstantQR</span>
         </a>
+
         <nav class="toolnav" aria-label="Tools">
-          <a href="/">QR Generator</a>
+          <a href="/">HOME</a>
           <a href="/tools/password.html">Password Generator</a>
           <a href="/tools/unit-converter.html">Unit Converter</a>
           <a href="/tools/ip-lookup.html">IP Lookup</a>
           <a href="/tools/json-formatter.html">JSON Formatter</a>
-          <a class="active" href="/tools/time-zone-converter.html">Time Zone Converter</a>
+          <a class="active" href="/tools/time-zone-converter.html" aria-current="page">Time Zone Converter</a>
           <a href="/tools/base64-encoder.html">Base64 Encoder</a>
           <a href="/tools/countdown-timer.html">Countdown Timer</a>
           <a href="/tools/world-clock.html">World Clock</a>
         </nav>
       </div>
 
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/tools.html">Tools</a>
+        <span>/</span>
+        <span>Time Zone Converter</span>
+      </nav>
+
       <header>
         <div>
           <h1>Time Zone Converter</h1>
-          <div class="sub">Convert times between time zones instantly. Runs locally in your browser.</div>
+          <div class="sub">
+            Convert times between cities and IANA time zones instantly. Compare UTC offsets, swap locations,
+            use current time, and copy results. Privacy-first: everything runs locally in your browser.
+          </div>
+          <div class="badges" aria-label="Highlights">
+            <span class="badge">⚡ Fast</span>
+            <span class="badge">🔒 Local</span>
+            <span class="badge">📱 Mobile friendly</span>
+            <span class="badge">✅ No signup</span>
+          </div>
         </div>
       </header>
 
       <div class="grid">
         <!-- Controls -->
-        <div class="box">
+        <section class="box" aria-labelledby="controls-title">
+          <h2 id="controls-title" class="sr-only">Time zone converter controls</h2>
+
           <div class="row">
             <div>
               <label for="date">Date</label>
@@ -174,18 +613,20 @@ crossorigin="anonymous"></script>
             <button class="secondary" id="copyBtn" type="button">Copy Result</button>
           </div>
 
-          <div class="status" aria-live="polite">
+          <div class="status" id="statusBox" aria-live="polite">
             <div class="tiny">Status</div>
-            <div id="statusLine" class="hint">Pick date/time + zones, then click Convert.</div>
+            <div id="statusLine" class="hint">Pick date/time and time zones, then click Convert.</div>
           </div>
 
           <div class="hint" style="margin-top:10px;">
-            Tip: This tool uses official IANA time zones (e.g., <code>America/Phoenix</code>, <code>Europe/London</code>).
+            Tip: This tool uses official IANA time zones such as <code>America/Phoenix</code>, <code>Europe/London</code>, and <code>Asia/Tokyo</code>.
           </div>
-        </div>
+        </section>
 
         <!-- Output -->
-        <div class="box">
+        <section class="box" aria-labelledby="results-title">
+          <h2 id="results-title" class="sr-only">Conversion results</h2>
+
           <div class="pill">
             <div>
               <div class="k">From</div>
@@ -213,19 +654,59 @@ crossorigin="anonymous"></script>
           <div class="hint" style="margin-top:10px;">
             Privacy-first: conversion happens locally using <code>Intl.DateTimeFormat</code>. No time data is sent anywhere.
           </div>
-        </div>
+        </section>
       </div>
+
+      <section class="metaGrid" aria-label="Additional information">
+        <div class="box">
+          <h2 class="sectionTitle">Frequently asked questions</h2>
+
+          <div class="faqItem">
+            <div class="hint"><strong>Is this time zone converter free?</strong><br>Yes. It is free to use.</div>
+          </div>
+
+          <div class="faqItem">
+            <div class="hint"><strong>Does it support IANA time zones?</strong><br>Yes. It supports official zones like America/Phoenix, Europe/London, and Asia/Tokyo.</div>
+          </div>
+
+          <div class="faqItem">
+            <div class="hint"><strong>Does it store my inputs?</strong><br>No. Conversions run locally in your browser.</div>
+          </div>
+
+          <div class="faqItem">
+            <div class="hint"><strong>Can I compare UTC offsets?</strong><br>Yes. The result area shows the time difference and UTC offsets for the selected time.</div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h2 class="sectionTitle">Why use this tool?</h2>
+          <p class="hint" style="margin-top:0;">
+            This converter is useful for international meetings, remote work, travel planning, customer support, and comparing local time across regions.
+            It is designed to be fast, mobile friendly, privacy-first, and easy to use.
+          </p>
+
+          <h2 class="sectionTitle" style="margin-top:16px;">Related tools</h2>
+          <p class="hint" style="margin-top:0;">
+            <a href="/tools/world-clock.html">World Clock</a> ·
+            <a href="/tools/countdown-timer.html">Countdown Timer</a> ·
+            <a href="/tools/unit-converter.html">Unit Converter</a>
+          </p>
+        </div>
+      </section>
 
       <div class="footerLinks">
         <div style="margin-bottom:8px;">
           <a href="/tools/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
           <a href="/tools/url-qr-code-generator.html">URL QR Generator</a> ·
+          <a href="/tools/world-clock.html">World Clock</a> ·
+          <a href="/tools/base64-encoder.html">Base64 Encoder</a>
         </div>
         <div>
           <a href="/about.html">About</a> ·
           <a href="/privacy.html">Privacy</a> ·
           <a href="/terms.html">Terms</a> ·
-          <a href="/contact.html">Contact</a>
+          <a href="/contact.html">Contact</a> ·
+          <a href="/sitemap.xml">Sitemap</a>
         </div>
       </div>
 
@@ -242,6 +723,7 @@ crossorigin="anonymous"></script>
     const nowBtn = document.getElementById("nowBtn");
     const copyBtn = document.getElementById("copyBtn");
     const statusLine = document.getElementById("statusLine");
+    const statusBox = document.getElementById("statusBox");
 
     const fromOut = document.getElementById("fromOut");
     const toOut = document.getElementById("toOut");
@@ -262,8 +744,10 @@ crossorigin="anonymous"></script>
     ];
 
     function setStatus(msg, type="hint"){
+      statusBox.classList.remove("good");
       statusLine.className = type;
       statusLine.textContent = msg;
+      if (type === "ok") statusBox.classList.add("good");
     }
 
     function getAllTimeZones(){
@@ -292,7 +776,7 @@ crossorigin="anonymous"></script>
       const now = new Date();
       dateEl.value = `${now.getFullYear()}-${pad2(now.getMonth()+1)}-${pad2(now.getDate())}`;
       timeEl.value = `${pad2(now.getHours())}:${pad2(now.getMinutes())}`;
-      setStatus("Loaded current local date/time.", "ok");
+      setStatus("Loaded current local date and time.", "ok");
       convert();
     }
 
@@ -310,7 +794,7 @@ crossorigin="anonymous"></script>
       const parts = new Intl.DateTimeFormat("en-US", {
         timeZone,
         hour:"2-digit", minute:"2-digit",
-        timeZoneName: "shortOffset"
+        timeZoneName:"shortOffset"
       }).formatToParts(date);
       const tzPart = parts.find(p => p.type === "timeZoneName");
       if(!tzPart) return 0;
@@ -319,7 +803,7 @@ crossorigin="anonymous"></script>
       const sign = m[1] === "-" ? -1 : 1;
       const hh = Number(m[2] || 0);
       const mm = Number(m[3] || 0);
-      return sign * (hh*60 + mm);
+      return sign * (hh * 60 + mm);
     }
 
     function dateTimeInZoneToInstant(dateStr, timeStr, timeZone){
@@ -327,9 +811,9 @@ crossorigin="anonymous"></script>
       const [h,m] = timeStr.split(":").map(Number);
 
       let guess = new Date(Date.UTC(Y, M-1, D, h, m, 0));
-      for(let i=0; i<3; i++){
+      for(let i = 0; i < 3; i++){
         const off = getOffsetMinutes(guess, timeZone);
-        const desiredUTC = Date.UTC(Y, M-1, D, h, m, 0) - off*60*1000;
+        const desiredUTC = Date.UTC(Y, M-1, D, h, m, 0) - off * 60 * 1000;
         guess = new Date(desiredUTC);
       }
       return guess;
@@ -373,24 +857,23 @@ crossorigin="anonymous"></script>
 
         const sign = diffMin >= 0 ? "+" : "-";
         const abs = Math.abs(diffMin);
-        const hh = Math.floor(abs/60);
+        const hh = Math.floor(abs / 60);
         const mm = abs % 60;
         diffOut.textContent = `${sign}${hh}h ${mm}m`;
 
-        // show UTC offsets cleanly
         const fmtOff = (mins) => {
           const s = mins >= 0 ? "+" : "-";
           const a = Math.abs(mins);
-          const h = Math.floor(a/60);
-          const m = a%60;
-          return `UTC${s}${h}${m?(":" + String(m).padStart(2,"0")):""}`;
+          const h = Math.floor(a / 60);
+          const m = a % 60;
+          return `UTC${s}${h}${m ? ":" + String(m).padStart(2,"0") : ""}`;
         };
 
         fromMeta.textContent = `${fromTz} (${fmtOff(offFrom)})`;
         toMeta.textContent = `${toTz} (${fmtOff(offTo)})`;
-        dstOut.textContent = `Offsets at this time: ${fromTz}=${offFrom} min, ${toTz}=${offTo} min`;
+        dstOut.textContent = `Offsets at this time: ${fromTz} = ${fmtOff(offFrom)}, ${toTz} = ${fmtOff(offTo)}`;
 
-        setStatus("Converted ✔", "ok");
+        setStatus("Converted successfully.", "ok");
         updateNowLabels();
       }catch(e){
         setStatus("Conversion error: " + (e.message || String(e)), "error");
@@ -404,9 +887,10 @@ crossorigin="anonymous"></script>
       try{
         await navigator.clipboard.writeText(text);
         copyBtn.textContent = "Copied!";
-        setTimeout(()=>copyBtn.textContent="Copy Result", 1200);
+        setStatus("Result copied to clipboard.", "ok");
+        setTimeout(() => copyBtn.textContent = "Copy Result", 1200);
       }catch{
-        setStatus("Copy failed (clipboard blocked).", "error");
+        setStatus("Copy failed. Clipboard may be blocked by your browser.", "error");
       }
     }
 
@@ -415,7 +899,6 @@ crossorigin="anonymous"></script>
       fromEl.value = toEl.value;
       toEl.value = a;
 
-      // If swap produced empty (edge case), force valid options
       if(!fromEl.value && fromEl.options.length) fromEl.selectedIndex = 0;
       if(!toEl.value && toEl.options.length) toEl.selectedIndex = 0;
 
@@ -436,8 +919,6 @@ crossorigin="anonymous"></script>
       fillSelect(toEl, ordered);
 
       const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
-
-      // ensure selected values exist in the dropdown
       fromEl.value = ordered.includes(localTz) ? localTz : "UTC";
 
       let target = (fromEl.value === "America/Phoenix") ? "UTC" : "America/Phoenix";
