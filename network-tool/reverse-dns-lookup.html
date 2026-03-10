@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+</script>
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+crossorigin="anonymous"></script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Reverse DNS Lookup | PTR Record Checker | InstantQR</title>
+
+<meta name="description" content="Perform reverse DNS lookup to find the hostname associated with an IP address. Check PTR records instantly.">
+
+<link rel="canonical" href="https://instantqr.io/tools/reverse-dns-lookup.html">
+
+<meta name="robots" content="index,follow">
+
+<style>
+
+body{
+font-family:system-ui,-apple-system,Segoe UI,Roboto;
+background:#0b1220;
+color:#fff;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+h1{
+font-size:34px;
+margin-bottom:10px;
+}
+
+.card{
+background:#121b2f;
+padding:25px;
+border-radius:12px;
+margin-top:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:6px;
+border:1px solid #333;
+background:#0b1220;
+color:white;
+}
+
+button{
+margin-top:15px;
+padding:12px 20px;
+border:none;
+background:#3b82f6;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2563eb;
+}
+
+.results{
+margin-top:20px;
+font-family:monospace;
+background:#0b1220;
+padding:15px;
+border-radius:8px;
+line-height:1.6;
+}
+
+.good{color:#22c55e}
+.bad{color:#ef4444}
+
+footer{
+margin-top:40px;
+font-size:14px;
+color:#aaa;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<nav>
+<a href="/">Home</a> /
+<a href="/tools.html">Tools</a> /
+Reverse DNS Lookup
+</nav>
+
+<h1>Reverse DNS Lookup</h1>
+
+<p>Find the hostname associated with an IP address.</p>
+
+<div class="card">
+
+<label>IP Address</label>
+<input id="ip" placeholder="8.8.8.8">
+
+<button onclick="lookup()">Lookup PTR Record</button>
+
+<div id="results" class="results"></div>
+
+</div>
+
+<footer>
+
+<h2>What is Reverse DNS?</h2>
+
+<p>
+Reverse DNS (rDNS) resolves an IP address back to a domain name using a PTR record.
+</p>
+
+<h2>Why Reverse DNS Matters</h2>
+
+<ul>
+<li>Email server validation</li>
+<li>Security analysis</li>
+<li>Network troubleshooting</li>
+<li>Server identification</li>
+</ul>
+
+</footer>
+
+</div>
+
+<script>
+
+async function lookup(){
+
+let ip=document.getElementById("ip").value
+let output=document.getElementById("results")
+
+if(!ip){
+output.innerHTML="Enter an IP address"
+return
+}
+
+output.innerHTML="Looking up PTR record..."
+
+try{
+
+let response=await fetch(`https://dns.google/resolve?name=${ip}.in-addr.arpa&type=PTR`)
+let data=await response.json()
+
+if(data.Answer){
+
+let result=""
+
+data.Answer.forEach(r=>{
+result += r.data + "\n"
+})
+
+output.innerHTML="<span class='good'>" + result + "</span>"
+
+}else{
+
+output.innerHTML="<span class='bad'>No PTR record found.</span>"
+
+}
+
+}catch(e){
+
+output.innerHTML="Lookup failed."
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
