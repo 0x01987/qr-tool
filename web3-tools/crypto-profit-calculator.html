@@ -1,54 +1,111 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Canonical cleanup: redirect duplicate /index.html style URLs if needed -->
+  <script>
+    (function () {
+      var p = window.location.pathname;
+      if (p.endsWith('/crypto-profit-calculator.html/') || p.endsWith('/crypto-profit-calculator.html/index.html')) {
+        window.location.replace('https://instantqr.io/web3-tools/crypto-profit-calculator.html' + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
-  
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>Crypto Profit Calculator (ROI) | Profit/Loss, Fees, Break-even | InstantQR.io</title>
-  <meta name="description" content="Free crypto profit & ROI calculator. Enter buy price, sell price, and quantity or investment to instantly see profit/loss, ROI %, break-even price, fees, and tax estimate. Privacy-first: runs locally in your browser." />
-  <meta name="robots" content="index,follow" />
+  <title>Crypto Profit Calculator (ROI) | Profit, Loss, Fees & Break-even | InstantQR.io</title>
+  <meta name="description" content="Free crypto profit calculator with ROI, fees, tax estimate, cost basis, net proceeds, and break-even sell price. Fast, privacy-friendly, and runs locally in your browser." />
+  <meta name="keywords" content="crypto profit calculator, crypto roi calculator, bitcoin profit calculator, ethereum roi calculator, profit loss calculator, crypto fees calculator, break even calculator, web3 tools" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#0b0f19" />
+  <meta name="author" content="InstantQR.io" />
+
   <link rel="canonical" href="https://instantqr.io/web3-tools/crypto-profit-calculator.html" />
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
 
-  <!-- Open Graph / Twitter -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Crypto Profit Calculator (ROI) | InstantQR.io" />
-  <meta property="og:description" content="Instant crypto profit/loss + ROI with fees and break-even. Privacy-first." />
+  <meta property="og:description" content="Calculate crypto profit, loss, ROI, fees, tax estimate, and break-even sell price instantly." />
   <meta property="og:url" content="https://instantqr.io/web3-tools/crypto-profit-calculator.html" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:site_name" content="InstantQR.io" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
 
-  <!-- ✅ SoftwareApplication schema -->
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Crypto Profit Calculator (ROI) | InstantQR.io" />
+  <meta name="twitter:description" content="Instant crypto profit/loss, ROI, fees, and break-even calculator." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+
+  <!-- SoftwareApplication schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"SoftwareApplication",
     "name":"Crypto Profit Calculator (ROI)",
-    "applicationCategory":"UtilitiesApplication",
+    "applicationCategory":"FinanceApplication",
     "operatingSystem":"Web",
     "url":"https://instantqr.io/web3-tools/crypto-profit-calculator.html",
+    "description":"Free crypto profit calculator that estimates profit/loss, ROI, fees, tax, cost basis, net proceeds, and break-even sell price.",
     "publisher":{
       "@type":"Organization",
-      "name":"InstantQR",
+      "name":"InstantQR.io",
       "url":"https://instantqr.io",
       "logo":"https://instantqr.io/assets/instantqr-logo.svg"
     },
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
   }
   </script>
 
-  <!-- ✅ FAQ schema -->
+  <!-- Breadcrumb schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Web3 Tools",
+        "item":"https://instantqr.io/web3-tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Crypto Profit Calculator",
+        "item":"https://instantqr.io/web3-tools/crypto-profit-calculator.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- FAQ schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -57,17 +114,34 @@ crossorigin="anonymous"></script>
       {
         "@type":"Question",
         "name":"How do I calculate crypto profit and ROI?",
-        "acceptedAnswer":{"@type":"Answer","text":"Enter buy price and sell price, then choose Quantity mode (coin amount) or Investment mode (amount spent). The calculator shows net profit/loss after optional fees plus ROI percent and a break-even sell price."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Enter the buy price and sell price, then choose Quantity mode or Investment mode. The calculator estimates gross and net profit/loss, ROI percentage, optional fees, tax estimate, and break-even sell price."
+        }
       },
       {
         "@type":"Question",
-        "name":"Does this calculator include fees?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes. Add optional buy and sell fees as either a percentage or a flat amount. Results update instantly."}
+        "name":"Does this crypto calculator include fees?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can add optional buy fees and sell fees as either a percentage or a flat amount."
+        }
       },
       {
         "@type":"Question",
         "name":"Is my data sent to a server?",
-        "acceptedAnswer":{"@type":"Answer","text":"No. This tool runs locally in your browser. Your inputs are not uploaded."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. This calculator runs locally in your browser and does not upload your inputs."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does tax affect net profit in this tool?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Tax is shown separately as an estimate on positive gains. It is not subtracted from the displayed net profit/loss unless you choose to interpret it that way manually."
+        }
       }
     ]
   }
@@ -75,76 +149,76 @@ crossorigin="anonymous"></script>
 
   <style>
     :root{
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-
-      --bg:#0b0f19;
-      --card:#121a2a;
-      --panel:#0e1525;
-
+      --bg:#08101f;
+      --bg2:#0e1729;
+      --card:#121c31;
+      --panel:#0d1527;
+      --soft:#0b1222;
       --border:#22304e;
-      --border2:#2a3a5f;
-
-      --text:#e7eaf2;
-      --muted:#b8c0d6;
-      --muted2:#8ea0c8;
-      --link:#cfe0ff;
-
+      --border2:#2d3d63;
+      --text:#e7ecf7;
+      --muted:#b6c2dd;
+      --muted2:#91a4cb;
+      --link:#d6e6ff;
       --brand:#3b82f6;
+      --brand2:#38bdf8;
       --good:#34d399;
       --warn:#fbbf24;
       --bad:#fb7185;
-
-      --shadow: 0 12px 40px rgba(0,0,0,.35);
-      --radius:18px;
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+      --radius:20px;
       --radius2:16px;
-
-      --max:1080px;
-      color-scheme: dark;
+      --max:1160px;
+      color-scheme:dark;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
-    *{ box-sizing:border-box; }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       background:
         radial-gradient(900px 540px at 12% 8%, rgba(59,130,246,.18), transparent 55%),
         radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
-        var(--bg);
+        linear-gradient(180deg, var(--bg), var(--bg2));
       color:var(--text);
-      line-height:1.45;
+      line-height:1.5;
     }
-    a{ color:var(--link); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
 
-    .wrap{ max-width:var(--max); margin:0 auto; padding:22px; }
-    .card{
-      background:var(--card);
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:20px}
+    .shell{
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
       border:1px solid var(--border);
       border-radius:var(--radius);
       padding:18px;
       box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
     }
 
-    /* Topbar (matches your other pages) */
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
       flex-wrap:wrap;
-      padding:2px 2px 10px;
+      padding:2px 2px 14px;
       border-bottom:1px solid rgba(34,48,78,.55);
-      margin-bottom:12px;
+      margin-bottom:16px;
     }
+
     .brand{
       display:flex;
       align-items:center;
       gap:10px;
-      text-decoration:none;
       color:var(--text);
       font-weight:900;
       letter-spacing:-.2px;
     }
-    .brand img{ height:30px; width:auto; display:block; }
-    .brand span{ font-size:16px; }
+    .brand img{height:32px;width:auto;display:block}
+    .brand span{font-size:16px}
 
     .nav{
       display:flex;
@@ -156,46 +230,62 @@ crossorigin="anonymous"></script>
       display:inline-block;
       padding:10px 12px;
       border-radius:12px;
-      background:#0b1222;
+      background:var(--soft);
       border:1px solid var(--border2);
       color:var(--text);
-      text-decoration:none;
       font-weight:800;
       font-size:12px;
-      user-select:none;
     }
-    .nav a:hover{ border-color: rgba(59,130,246,.85); }
-    .nav a.active{ border-color: rgba(59,130,246,.95); }
+    .nav a:hover{border-color:rgba(59,130,246,.85);text-decoration:none}
+    .nav a.active{border-color:rgba(59,130,246,.95)}
 
-    /* Hero */
+    .breadcrumbs{
+      font-size:12px;
+      color:var(--muted2);
+      margin-bottom:12px;
+    }
+    .breadcrumbs a{color:var(--muted2)}
+    .breadcrumbs span{color:var(--text)}
+
     .hero{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns:1.15fr .85fr;
       gap:14px;
       align-items:start;
-      margin-top:10px;
+      margin-top:2px;
     }
-    @media (max-width: 920px){ .hero{ grid-template-columns:1fr; } }
+    @media (max-width:920px){.hero{grid-template-columns:1fr}}
 
-    h1{ margin:0; font-size:28px; letter-spacing:-.3px; }
-    .sub{ margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.6; max-width:72ch; }
+    h1{
+      margin:0;
+      font-size:32px;
+      letter-spacing:-.5px;
+      line-height:1.1;
+    }
+    .sub{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+      max-width:75ch;
+    }
 
     .kpis{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns:repeat(3,1fr);
       gap:10px;
-      margin-top:14px;
+      margin-top:16px;
     }
-    @media (max-width: 920px){ .kpis{ grid-template-columns:1fr; } }
+    @media (max-width:920px){.kpis{grid-template-columns:1fr}}
 
     .kpi{
       border:1px solid var(--border2);
-      background:#0b1222;
+      background:var(--soft);
       border-radius:14px;
       padding:12px;
     }
-    .kpi .t{ color:var(--muted2); font-size:12px; }
-    .kpi .v{ font-size:16px; font-weight:900; margin-top:4px; }
+    .kpi .t{color:var(--muted2);font-size:12px}
+    .kpi .v{font-size:17px;font-weight:900;margin-top:4px;word-break:break-word}
 
     .panel{
       background:var(--panel);
@@ -208,45 +298,58 @@ crossorigin="anonymous"></script>
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      margin-bottom:10px;
+      margin-bottom:12px;
     }
-    .panelHeader .title{ font-weight:900; letter-spacing:-.1px; }
+    .panelHeader .title{
+      font-weight:900;
+      letter-spacing:-.15px;
+      font-size:16px;
+    }
     .badge{
       font-size:12px;
       color:var(--muted);
       border:1px solid var(--border2);
-      background:#0b1222;
+      background:var(--soft);
       padding:6px 10px;
       border-radius:999px;
       user-select:none;
+      white-space:nowrap;
+    }
+
+    .tipList{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
     }
 
     .twoCols{
       display:grid;
-      grid-template-columns: 1.05fr .95fr;
+      grid-template-columns:1.06fr .94fr;
       gap:14px;
       align-items:start;
       margin-top:14px;
     }
-    @media (max-width: 920px){ .twoCols{ grid-template-columns:1fr; } }
+    @media (max-width:920px){.twoCols{grid-template-columns:1fr}}
 
-    .segRow{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+    .segRow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
     .seg{
       cursor:pointer;
-      user-select:none;
       border:1px solid var(--border2);
-      background:#0b1222;
+      background:var(--soft);
       padding:10px 12px;
       border-radius:999px;
       font-size:12px;
       color:var(--muted);
       font-weight:900;
-      transition: border-color .12s ease, filter .12s ease;
+      transition:border-color .12s ease, transform .12s ease;
     }
-    .seg:hover{ border-color: rgba(59,130,246,.75); }
+    .seg:hover{border-color:rgba(59,130,246,.75);transform:translateY(-1px)}
     .seg[aria-pressed="true"]{
-      border-color: rgba(59,130,246,.95);
-      color: var(--text);
+      border-color:rgba(59,130,246,.95);
+      color:var(--text);
+      box-shadow:0 0 0 3px rgba(59,130,246,.12);
     }
 
     label{
@@ -257,31 +360,33 @@ crossorigin="anonymous"></script>
       align-items:baseline;
       gap:8px;
       margin-bottom:6px;
+      font-weight:700;
     }
-    .hint{ color: var(--muted2); font-size:12px; }
+    .hint{color:var(--muted2);font-size:12px;font-weight:500}
 
-    input, select{
+    input,select{
       width:100%;
-      padding:12px 10px;
+      padding:12px 11px;
       border-radius:14px;
       border:1px solid var(--border2);
-      background:#0b1222;
+      background:var(--soft);
       color:var(--text);
       outline:none;
       font-size:14px;
+      transition:border-color .15s ease, box-shadow .15s ease;
     }
-    input:focus, select:focus{
-      border-color: rgba(59,130,246,.85);
-      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+    input:focus,select:focus{
+      border-color:rgba(59,130,246,.9);
+      box-shadow:0 0 0 3px rgba(59,130,246,.18);
     }
-    input::placeholder{ color:#64748b; }
+    input::placeholder{color:#6e82aa}
 
     .grid{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns:1fr 1fr;
       gap:12px;
     }
-    @media (max-width: 520px){ .grid{ grid-template-columns:1fr; } }
+    @media (max-width:560px){.grid{grid-template-columns:1fr}}
 
     .actions{
       display:flex;
@@ -293,83 +398,108 @@ crossorigin="anonymous"></script>
     .btn{
       cursor:pointer;
       border:1px solid var(--border2);
-      background:#0b1222;
+      background:var(--soft);
       color:var(--text);
-      padding:11px 12px;
+      padding:11px 13px;
       border-radius:14px;
       font-weight:900;
+      transition:border-color .12s ease, transform .12s ease;
     }
-    .btn:hover{ border-color: rgba(59,130,246,.75); }
+    .btn:hover{border-color:rgba(59,130,246,.75);transform:translateY(-1px)}
     .btn.primary{
-      background: var(--brand);
-      border-color: transparent;
-      color:white;
+      background:linear-gradient(135deg, var(--brand), var(--brand2));
+      border-color:transparent;
+      color:#fff;
     }
     .btn.danger{
-      border-color: rgba(251,113,133,.55);
-      background: rgba(251,113,133,.12);
+      border-color:rgba(251,113,133,.5);
+      background:rgba(251,113,133,.12);
     }
 
-    .note{ margin-top:10px; color:var(--muted); font-size:12px; line-height:1.6; }
+    .note{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.65;
+    }
 
-    /* Results */
     .barWrap{
       border:1px solid var(--border2);
-      background:#0b1222;
+      background:var(--soft);
       border-radius:14px;
       padding:12px;
       margin-bottom:12px;
     }
-    .barRow{ display:flex; justify-content:space-between; gap:12px; color:var(--muted); font-size:12px; margin-bottom:8px; }
+    .barRow{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      color:var(--muted);
+      font-size:12px;
+      margin-bottom:8px;
+    }
     .bar{
       height:12px;
       border-radius:999px;
-      background: rgba(184,192,214,.12);
+      background:rgba(184,192,214,.12);
       overflow:hidden;
       border:1px solid rgba(184,192,214,.18);
     }
     .fill{
       height:100%;
       width:0%;
-      background: linear-gradient(90deg, rgba(52,211,153,.95), rgba(59,130,246,.85));
-      transition: width .18s ease;
+      background:linear-gradient(90deg, rgba(52,211,153,.95), rgba(59,130,246,.85));
+      transition:width .18s ease;
     }
     .fill.neg{
-      background: linear-gradient(90deg, rgba(251,113,133,.95), rgba(251,191,36,.80));
+      background:linear-gradient(90deg, rgba(251,113,133,.95), rgba(251,191,36,.8));
     }
 
     .statGrid{
       display:grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns:repeat(2,1fr);
       gap:10px;
     }
-    @media (max-width: 520px){ .statGrid{ grid-template-columns:1fr; } }
+    @media (max-width:560px){.statGrid{grid-template-columns:1fr}}
 
     .stat{
       border:1px solid var(--border2);
-      background:#0b1222;
+      background:var(--soft);
       border-radius:14px;
       padding:12px;
     }
-    .stat .k{ color:var(--muted); font-size:12px; display:flex; gap:8px; justify-content:space-between; align-items:center; }
-    .stat .val{ margin-top:6px; font-size:18px; font-weight:900; letter-spacing:.2px; }
+    .stat .k{
+      color:var(--muted);
+      font-size:12px;
+      display:flex;
+      gap:8px;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .stat .val{
+      margin-top:6px;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:.15px;
+      word-break:break-word;
+    }
 
     .pill{
       font-size:11px;
       padding:4px 8px;
       border-radius:999px;
       border:1px solid rgba(184,192,214,.28);
-      background: rgba(184,192,214,.10);
-      color: var(--muted);
+      background:rgba(184,192,214,.1);
+      color:var(--muted);
       white-space:nowrap;
     }
-    .pill.ok{ border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.12); color: #bff7e0; }
-    .pill.bad{ border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.12); color: #ffd1da; }
-    .pill.warn{ border-color: rgba(251,191,36,.35); background: rgba(251,191,36,.10); color: #ffe3a8; }
+    .pill.ok{border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.12);color:#bff7e0}
+    .pill.bad{border-color:rgba(251,113,133,.35);background:rgba(251,113,133,.12);color:#ffd1da}
+    .pill.warn{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.10);color:#ffe3a8}
 
     details{
       border:1px solid var(--border2);
-      background:#0b1222;
+      background:var(--soft);
       border-radius:14px;
       padding:10px 12px;
       margin-top:10px;
@@ -380,53 +510,69 @@ crossorigin="anonymous"></script>
       color:var(--text);
       list-style:none;
     }
-    details summary::-webkit-details-marker{ display:none; }
+    details summary::-webkit-details-marker{display:none}
     details .faq{
       margin-top:10px;
       color:var(--muted);
       font-size:13px;
-      line-height:1.65;
+      line-height:1.7;
     }
 
-    /* Footer (matches your other pages) */
-    .footerLinks{
-      margin-top:14px;
+    .contentBlocks{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:16px;
+    }
+    @media (max-width:920px){.contentBlocks{grid-template-columns:1fr}}
+
+    .contentBlocks .panel p,
+    .contentBlocks .panel li{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    footer{
+      margin-top:16px;
       text-align:center;
       color:var(--muted2);
       font-size:12px;
+      border-top:1px solid rgba(34,48,78,.55);
+      padding-top:14px;
     }
-    .footerLinks a{ color:var(--link); }
+    footer a{color:var(--link)}
   </style>
 </head>
-
 <body>
   <div class="wrap">
-    <div class="card">
+    <div class="shell">
 
-      <!-- Topbar -->
       <div class="topbar">
         <a class="brand" href="/" aria-label="InstantQR Home">
-          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
           <span>InstantQR</span>
         </a>
 
         <nav class="nav" aria-label="Tools">
-          <a href="/">QR Generator</a>
-          <a href="/tools/password.html">Password</a>
-          <a href="/tools/unit-converter.html">Unit Converter</a>
-          <a href="/tools/ip-lookup.html">IP Lookup</a>
-          <a href="/tools/web3-gas-fee-estimator.html">Gas Fees</a>
+          <a href="/">Home</a>
+          <a href="/tools.html">All Tools</a>
+          <a href="/seo-tools.html">SEO Tools</a>
+          <a href="/web3-tools/web3-tools.html">Web3 Tools</a>
           <a class="active" href="/web3-tools/crypto-profit-calculator.html">Profit Calc</a>
         </nav>
       </div>
 
-      <!-- Hero -->
+      <div class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> / <a href="/web3-tools/web3-tools.html">Web3 Tools</a> / <span>Crypto Profit Calculator</span>
+      </div>
+
       <section class="hero">
         <div>
           <h1>Crypto Profit / ROI Calculator</h1>
           <p class="sub">
-            Calculate profit/loss, ROI %, break-even sell price, and optional buy/sell fees + tax estimate.
-            Privacy-first: runs locally in your browser.
+            Calculate crypto profit or loss, ROI, cost basis, net proceeds, optional buy and sell fees,
+            tax estimate, and break-even sell price. Fast, responsive, and privacy-friendly.
           </p>
 
           <div class="kpis" aria-label="Quick stats">
@@ -445,23 +591,22 @@ crossorigin="anonymous"></script>
           </div>
         </div>
 
-        <div class="panel" role="region" aria-label="Tips">
+        <aside class="panel" aria-label="Quick tips">
           <div class="panelHeader">
-            <div class="title">Fast tips</div>
+            <div class="title">Quick tips</div>
             <div class="badge">Runs locally</div>
           </div>
-          <div class="note" style="margin:0;">
-            • Use <b>Quantity</b> if you know coin amount (e.g., 0.25 BTC).<br/>
-            • Use <b>Investment</b> if you only know what you spent (e.g., $500).<br/>
-            • Add fees to match exchanges/DEX/network costs.<br/>
-            • Taxes are optional and shown separately (estimate).
-          </div>
-        </div>
+          <ul class="tipList">
+            <li>Use <strong>Quantity</strong> mode if you know the exact coin amount.</li>
+            <li>Use <strong>Investment</strong> mode if you only know how much you spent.</li>
+            <li>Add fees to better match exchange, DEX, or network costs.</li>
+            <li>Tax is optional and shown separately as an estimate.</li>
+          </ul>
+        </aside>
       </section>
 
       <section class="twoCols">
-        <!-- Inputs -->
-        <div class="panel" role="region" aria-label="Calculator inputs">
+        <section class="panel" aria-label="Calculator inputs">
           <div class="panelHeader">
             <div class="title">Inputs</div>
             <div class="badge" id="privacyBadge">Live</div>
@@ -475,7 +620,7 @@ crossorigin="anonymous"></script>
           <div class="grid">
             <div>
               <label for="asset">Asset / Symbol <span class="hint">optional</span></label>
-              <input id="asset" type="text" inputmode="text" placeholder="BTC, ETH, SOL…" maxlength="10" />
+              <input id="asset" type="text" inputmode="text" placeholder="BTC, ETH, SOL..." maxlength="10" />
             </div>
 
             <div>
@@ -492,22 +637,22 @@ crossorigin="anonymous"></script>
 
             <div>
               <label for="buyPrice">Buy price (per coin) <span class="hint">required</span></label>
-              <input id="buyPrice" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g., 42000" />
+              <input id="buyPrice" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 42000" />
             </div>
 
             <div>
               <label for="sellPrice">Sell price (per coin) <span class="hint">required</span></label>
-              <input id="sellPrice" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g., 52000" />
+              <input id="sellPrice" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 52000" />
             </div>
 
             <div id="qtyWrap">
               <label for="quantity">Quantity (coins) <span class="hint">required in Quantity mode</span></label>
-              <input id="quantity" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g., 0.25" />
+              <input id="quantity" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 0.25" />
             </div>
 
             <div id="invWrap" style="display:none;">
               <label for="investment">Investment amount <span class="hint">required in Investment mode</span></label>
-              <input id="investment" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g., 500" />
+              <input id="investment" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 500" />
             </div>
 
             <div>
@@ -520,7 +665,7 @@ crossorigin="anonymous"></script>
             </div>
 
             <div>
-              <label for="buyFeeValue">Buy fee value <span class="hint">e.g., 0.6 or 5</span></label>
+              <label for="buyFeeValue">Buy fee value <span class="hint">e.g. 0.6 or 5</span></label>
               <input id="buyFeeValue" type="number" inputmode="decimal" min="0" step="any" placeholder="0" />
             </div>
 
@@ -534,13 +679,13 @@ crossorigin="anonymous"></script>
             </div>
 
             <div>
-              <label for="sellFeeValue">Sell fee value <span class="hint">e.g., 0.6 or 5</span></label>
+              <label for="sellFeeValue">Sell fee value <span class="hint">e.g. 0.6 or 5</span></label>
               <input id="sellFeeValue" type="number" inputmode="decimal" min="0" step="any" placeholder="0" />
             </div>
 
             <div>
               <label for="taxRate">Tax rate (optional) <span class="hint">percent (%)</span></label>
-              <input id="taxRate" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g., 20" />
+              <input id="taxRate" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 20" />
             </div>
 
             <div>
@@ -560,10 +705,9 @@ crossorigin="anonymous"></script>
           </div>
 
           <div class="note" id="statusMsg" aria-live="polite"></div>
-        </div>
+        </section>
 
-        <!-- Results -->
-        <div class="panel" role="region" aria-label="Results">
+        <section class="panel" aria-label="Results">
           <div class="panelHeader">
             <div class="title">Results</div>
             <div class="badge" id="resultBadge">Instant</div>
@@ -575,7 +719,7 @@ crossorigin="anonymous"></script>
               <div><span id="barPct">0.00%</span></div>
             </div>
             <div class="bar"><div class="fill" id="barFill"></div></div>
-            <div class="note" style="margin-top:8px;">Bar shows ROI magnitude (capped at ±200% for display).</div>
+            <div class="note" style="margin-top:8px;">Bar shows ROI magnitude capped at ±200% for display.</div>
           </div>
 
           <div class="statGrid">
@@ -600,7 +744,7 @@ crossorigin="anonymous"></script>
             </div>
 
             <div class="stat">
-              <div class="k">Break-even sell price <span class="pill" id="bePill">Net = $0</span></div>
+              <div class="k">Break-even sell price <span class="pill" id="bePill">Net = 0</span></div>
               <div class="val" id="breakeven">$0.00</div>
             </div>
 
@@ -623,30 +767,59 @@ crossorigin="anonymous"></script>
           <details>
             <summary>How it’s calculated</summary>
             <div class="faq">
-              <b>Gross P/L</b> = (Sell Price − Buy Price) × Quantity<br/>
-              <b>Fees</b> can be flat or percent, applied to buy and sell totals.<br/>
-              <b>Net P/L</b> = Net Proceeds − Cost Basis<br/>
-              <b>ROI</b> = Net P/L ÷ Cost Basis × 100%<br/><br/>
-              <b>Break-even price</b> estimates the sell price needed so net P/L ≈ 0 (including fees).
+              <strong>Gross P/L</strong> = (Sell Price − Buy Price) × Quantity<br />
+              <strong>Buy fee</strong> and <strong>sell fee</strong> can each be set as a percent or flat amount.<br />
+              <strong>Cost basis</strong> = Buy Total + Buy Fee<br />
+              <strong>Net proceeds</strong> = Sell Total − Sell Fee<br />
+              <strong>Net P/L</strong> = Net Proceeds − Cost Basis<br />
+              <strong>ROI</strong> = Net P/L ÷ Cost Basis × 100%<br /><br />
+              <strong>Break-even sell price</strong> estimates the price needed so net profit/loss is approximately zero after fees.
             </div>
           </details>
 
           <details>
             <summary>FAQ</summary>
             <div class="faq">
-              <b>Do you save my inputs?</b> No. Everything runs locally in your browser.<br/>
-              <b>Is tax included in net profit?</b> No. Tax is shown separately as an estimate on positive gains.<br/>
-              <b>Can I share a calculation?</b> Yes—use “Copy share link” to generate a URL with your inputs.
+              <strong>Do you save my inputs?</strong> No. Everything runs locally in your browser.<br />
+              <strong>Is tax included in net profit?</strong> No. Tax is shown separately as an estimate on gains.<br />
+              <strong>Can I share a calculation?</strong> Yes. Use “Copy share link” to generate a URL with your current inputs.
             </div>
           </details>
-        </div>
+        </section>
       </section>
 
-      <!-- Footer -->
-      <div class="footerLinks">
+      <section class="contentBlocks">
+        <section class="panel">
+          <div class="panelHeader">
+            <div class="title">About this crypto calculator</div>
+          </div>
+          <p>
+            This crypto profit calculator helps traders and investors estimate net profit or loss from a trade using
+            buy price, sell price, quantity or investment amount, optional fees, and optional tax rate.
+          </p>
+          <p>
+            It is useful for Bitcoin, Ethereum, Solana, and other crypto assets when you want a quick ROI estimate
+            without sending your inputs to a server.
+          </p>
+        </section>
+
+        <section class="panel">
+          <div class="panelHeader">
+            <div class="title">Best practices</div>
+          </div>
+          <ul>
+            <li>Always include realistic buy and sell fees for better accuracy.</li>
+            <li>Use quantity mode when you know the exact number of coins or tokens.</li>
+            <li>Use investment mode when you only know how much money was spent.</li>
+            <li>Compare break-even price before exiting a position.</li>
+          </ul>
+        </section>
+      </section>
+
+      <footer>
         <div style="margin-bottom:8px;">
           <a href="/tools/wifi-qr-code-generator.html">WiFi QR Code Generator</a> ·
-          <a href="/tools/url-qr-code-generator.html">QR Code Generator</a> ·
+          <a href="/tools/url-qr-code-generator.html">URL QR Code Generator</a> ·
           <a href="/tools/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
           <a href="/web3-tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
         </div>
@@ -656,22 +829,20 @@ crossorigin="anonymous"></script>
           <a href="/terms.html">Terms</a> ·
           <a href="/contact.html">Contact</a>
         </div>
-      </div>
+      </footer>
 
     </div>
   </div>
 
   <script>
-  // ✅ Fast + responsive: calculator only (crypto + stock ticker removed)
   (() => {
     const $ = (id) => document.getElementById(id);
-    const clamp = (n,a,b) => Math.min(b, Math.max(a,n));
+    const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
     const safeNum = (v) => {
       const n = Number(String(v ?? "").trim());
       return Number.isFinite(n) ? n : 0;
     };
 
-    // Elements
     const modeQtyBtn = $("modeQty");
     const modeInvBtn = $("modeInv");
     const qtyWrap = $("qtyWrap");
@@ -683,17 +854,14 @@ crossorigin="anonymous"></script>
     const sellPrice = $("sellPrice");
     const quantity = $("quantity");
     const investment = $("investment");
-
     const buyFeeType = $("buyFeeType");
     const buyFeeValue = $("buyFeeValue");
     const sellFeeType = $("sellFeeType");
     const sellFeeValue = $("sellFeeValue");
-
     const taxRate = $("taxRate");
     const decimals = $("decimals");
     const statusMsg = $("statusMsg");
 
-    // Results
     const netPL = $("netPL");
     const grossPL = $("grossPL");
     const fees = $("fees");
@@ -716,10 +884,9 @@ crossorigin="anonymous"></script>
     const barPct = $("barPct");
     const barLabel = $("barLabel");
 
-    let mode = "qty"; // "qty" | "inv"
+    let mode = "qty";
     let lastCalc = null;
 
-    // Intl formatter cache (fast)
     const moneyFmtCache = new Map();
     function moneyFmt(cur, dec){
       const key = cur + ":" + dec;
@@ -727,12 +894,12 @@ crossorigin="anonymous"></script>
       let fmt;
       try{
         fmt = new Intl.NumberFormat(undefined, {
-          style:"currency",
-          currency:cur,
+          style: "currency",
+          currency: cur,
           minimumFractionDigits: dec,
           maximumFractionDigits: dec
         });
-      }catch{
+      } catch {
         fmt = null;
       }
       moneyFmtCache.set(key, fmt);
@@ -744,20 +911,22 @@ crossorigin="anonymous"></script>
       if (fmt) return fmt.format(amount);
       return (amount || 0).toFixed(dec);
     }
+
     function formatPct(p){
-      if(!Number.isFinite(p)) return "—";
+      if (!Number.isFinite(p)) return "—";
       return `${p.toFixed(2)}%`;
     }
+
     function setPill(el, kind, text){
-      el.classList.remove("ok","bad","warn");
-      if(kind) el.classList.add(kind);
+      el.classList.remove("ok", "bad", "warn");
+      if (kind) el.classList.add(kind);
       el.textContent = text;
     }
 
     function computeFee(total, type, value){
       const v = safeNum(value);
-      if(type === "pct") return total * (v / 100);
-      if(type === "flat") return v;
+      if (type === "pct") return total * (v / 100);
+      if (type === "flat") return v;
       return 0;
     }
 
@@ -771,11 +940,11 @@ crossorigin="anonymous"></script>
       const p = new URLSearchParams();
       p.set("mode", mode);
       const sym = (asset.value || "").trim().toUpperCase();
-      if(sym) p.set("asset", sym);
+      if (sym) p.set("asset", sym);
       p.set("cur", currency.value || "USD");
       p.set("bp", String(safeNum(buyPrice.value)));
       p.set("sp", String(safeNum(sellPrice.value)));
-      if(mode === "qty") p.set("qty", String(safeNum(quantity.value)));
+      if (mode === "qty") p.set("qty", String(safeNum(quantity.value)));
       else p.set("inv", String(safeNum(investment.value)));
       p.set("bft", buyFeeType.value);
       p.set("bfv", String(safeNum(buyFeeValue.value)));
@@ -786,23 +955,20 @@ crossorigin="anonymous"></script>
       return p;
     }
 
-    // Debounced URL updates (fast typing)
     let urlTimer = null;
     function scheduleUrlReplace(){
       if (urlTimer) clearTimeout(urlTimer);
       urlTimer = setTimeout(() => {
         try{
-          const p = buildParams();
-          const url = `${location.pathname}?${p.toString()}`;
+          const url = `${location.pathname}?${buildParams().toString()}`;
           history.replaceState(null, "", url);
-        }catch{}
+        } catch {}
       }, 250);
     }
 
     function calculate(){
       const cur = currency.value || "USD";
       const dec = Number(decimals.value || "2");
-
       const bp = safeNum(buyPrice.value);
       const sp = safeNum(sellPrice.value);
       const qty = getQty(bp);
@@ -820,22 +986,21 @@ crossorigin="anonymous"></script>
       const net = proceeds - basis;
 
       const hasInputs = (bp > 0 && sp > 0 && qty > 0);
-      const roiPct = (basis > 0) ? (net / basis * 100) : (hasInputs ? 0 : NaN);
+      const roiPct = basis > 0 ? (net / basis * 100) : (hasInputs ? 0 : NaN);
 
       const tr = safeNum(taxRate.value);
       const taxEst = (net > 0 && tr > 0) ? (net * (tr / 100)) : 0;
 
-      // Break-even sell price including sell fee
       let be = 0;
-      if(qty > 0){
-        let pct = 0, flat = 0;
-        if(sellFeeType.value === "pct") pct = safeNum(sellFeeValue.value) / 100;
-        if(sellFeeType.value === "flat") flat = safeNum(sellFeeValue.value);
+      if (qty > 0) {
+        let pct = 0;
+        let flat = 0;
+        if (sellFeeType.value === "pct") pct = safeNum(sellFeeValue.value) / 100;
+        if (sellFeeType.value === "flat") flat = safeNum(sellFeeValue.value);
         const denom = qty * (1 - pct);
         be = denom > 0 ? (basis + flat) / denom : 0;
       }
 
-      // UI updates
       netPL.textContent = formatMoney(net, cur, dec);
       grossPL.textContent = formatMoney(gross, cur, dec);
       fees.textContent = formatMoney(totalFees, cur, dec);
@@ -845,54 +1010,54 @@ crossorigin="anonymous"></script>
       costBasis.textContent = formatMoney(basis, cur, dec);
       netProceeds.textContent = formatMoney(proceeds, cur, dec);
 
-      kpiMode.textContent = (mode === "qty") ? "Quantity" : "Investment";
+      kpiMode.textContent = mode === "qty" ? "Quantity" : "Investment";
       kpiPL.textContent = formatMoney(net, cur, dec);
       kpiROI.textContent = formatPct(roiPct);
 
-      if(!hasInputs){
+      if (!hasInputs) {
         setPill(plPill, "warn", "Need inputs");
         setPill(roiPill, "warn", "Need inputs");
-      }else if(net > 0){
+      } else if (net > 0) {
         setPill(plPill, "ok", "Profit");
         setPill(roiPill, "ok", "Positive");
-      }else if(net < 0){
+      } else if (net < 0) {
         setPill(plPill, "bad", "Loss");
         setPill(roiPill, "bad", "Negative");
-      }else{
+      } else {
         setPill(plPill, "warn", "Even");
         setPill(roiPill, "warn", "0%");
       }
 
       const feeHint = [];
-      if(buyFeeType.value !== "none") feeHint.push("buy");
-      if(sellFeeType.value !== "none") feeHint.push("sell");
+      if (buyFeeType.value !== "none") feeHint.push("buy");
+      if (sellFeeType.value !== "none") feeHint.push("sell");
       feesPill.textContent = feeHint.length ? feeHint.join(" + ") : "None";
-      taxPill.style.opacity = (tr > 0) ? 1 : 0.65;
+      taxPill.style.opacity = tr > 0 ? 1 : 0.65;
 
       const capped = clamp(Number.isFinite(roiPct) ? roiPct : 0, -200, 200);
       const width = Math.abs(capped) / 200 * 100;
       barPct.textContent = formatPct(Number.isFinite(roiPct) ? roiPct : 0);
 
-      if(capped >= 0){
+      if (capped >= 0) {
         barLabel.textContent = "Net performance (profit)";
         barFill.classList.remove("neg");
-      }else{
+      } else {
         barLabel.textContent = "Net performance (loss)";
         barFill.classList.add("neg");
       }
       barFill.style.width = `${width}%`;
 
       const sym = (asset.value || "").trim().toUpperCase();
-      if(hasInputs){
-        const qtyText = (mode === "qty") ? `${qty}` : `${qty.toFixed(8)}`;
-        statusMsg.textContent = sym ? `Calculated for ${sym} • Qty: ${qtyText}` : `Calculated • Qty: ${qtyText}`;
-      }else{
-        statusMsg.textContent = "Enter buy price, sell price, and quantity (or investment) to see results.";
+      if (hasInputs) {
+        const qtyText = mode === "qty" ? `${qty}` : `${qty.toFixed(8)}`;
+        statusMsg.textContent = sym
+          ? `Calculated for ${sym} • Qty: ${qtyText}`
+          : `Calculated • Qty: ${qtyText}`;
+      } else {
+        statusMsg.textContent = "Enter buy price, sell price, and quantity or investment to see results.";
       }
 
       lastCalc = { net, roiPct, qty, sym, cur, dec, bp, sp, totalFees, be, taxEst, basis, proceeds };
-
-      // fast + non-blocking URL update
       scheduleUrlReplace();
     }
 
@@ -912,25 +1077,21 @@ crossorigin="anonymous"></script>
     function loadFromUrl(){
       const p = new URLSearchParams(location.search);
       const m = p.get("mode");
-      if(m === "inv" || m === "qty") mode = m;
+      if (m === "inv" || m === "qty") mode = m;
 
-      asset.value = (p.get("asset") || "").toUpperCase().slice(0,10);
-      if(p.get("cur")) currency.value = p.get("cur");
+      asset.value = (p.get("asset") || "").toUpperCase().slice(0, 10);
+      if (p.get("cur")) currency.value = p.get("cur");
 
       buyPrice.value = p.get("bp") || "";
       sellPrice.value = p.get("sp") || "";
-
       quantity.value = p.get("qty") || "";
       investment.value = p.get("inv") || "";
-
       buyFeeType.value = p.get("bft") || "none";
       buyFeeValue.value = p.get("bfv") || "";
-
       sellFeeType.value = p.get("sft") || "none";
       sellFeeValue.value = p.get("sfv") || "";
-
       taxRate.value = p.get("tax") || "";
-      if(p.get("dec")) decimals.value = p.get("dec");
+      if (p.get("dec")) decimals.value = p.get("dec");
 
       setMode(mode);
     }
@@ -939,7 +1100,7 @@ crossorigin="anonymous"></script>
       try{
         await navigator.clipboard.writeText(txt);
         return true;
-      }catch{
+      } catch {
         const ta = document.createElement("textarea");
         ta.value = txt;
         ta.style.position = "fixed";
@@ -950,7 +1111,7 @@ crossorigin="anonymous"></script>
           document.execCommand("copy");
           document.body.removeChild(ta);
           return true;
-        }catch{
+        } catch {
           document.body.removeChild(ta);
           return false;
         }
@@ -959,17 +1120,16 @@ crossorigin="anonymous"></script>
 
     $("copyLinkBtn").addEventListener("click", async () => {
       try{
-        const p = buildParams();
-        const url = `${location.pathname}?${p.toString()}`;
+        const url = `${location.pathname}?${buildParams().toString()}`;
         history.pushState(null, "", url);
-      }catch{}
+      } catch {}
 
       const ok = await copyText(location.href);
       statusMsg.textContent = ok ? "Share link copied." : "Could not copy link. You can manually copy the URL.";
     });
 
     $("copySummaryBtn").addEventListener("click", async () => {
-      if(!lastCalc){
+      if (!lastCalc) {
         statusMsg.textContent = "Enter values first.";
         return;
       }
@@ -1004,21 +1164,18 @@ Link: ${location.href}`;
       taxRate.value = "";
       decimals.value = "2";
       setMode("qty");
-      try{ history.pushState(null, "", location.pathname); }catch{}
+      try { history.pushState(null, "", location.pathname); } catch {}
       statusMsg.textContent = "Reset complete.";
     });
 
-    // Live calc
-    const inputs = [
+    [
       asset, currency, buyPrice, sellPrice, quantity, investment,
       buyFeeType, buyFeeValue, sellFeeType, sellFeeValue, taxRate, decimals
-    ];
-    inputs.forEach(el => {
-      el.addEventListener("input", calculate, { passive:true });
-      el.addEventListener("change", calculate, { passive:true });
+    ].forEach(el => {
+      el.addEventListener("input", calculate, { passive: true });
+      el.addEventListener("change", calculate, { passive: true });
     });
 
-    // Init
     loadFromUrl();
     calculate();
   })();
