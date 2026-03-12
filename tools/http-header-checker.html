@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+</script>
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+crossorigin="anonymous"></script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>HTTP Header Checker | Inspect Server Headers | InstantQR</title>
+
+<meta name="description" content="Check HTTP response headers for any website. Inspect server headers, caching rules, security headers and redirects instantly.">
+
+<link rel="canonical" href="https://instantqr.io/tools/http-header-checker.html">
+
+<meta name="robots" content="index,follow">
+
+<style>
+
+body{
+font-family:system-ui,-apple-system,Segoe UI,Roboto;
+background:#0b1220;
+color:#fff;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+h1{
+font-size:34px;
+margin-bottom:10px;
+}
+
+.card{
+background:#121b2f;
+padding:25px;
+border-radius:12px;
+margin-top:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:6px;
+border:1px solid #333;
+background:#0b1220;
+color:white;
+}
+
+button{
+margin-top:15px;
+padding:12px 20px;
+border:none;
+background:#3b82f6;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2563eb;
+}
+
+.results{
+margin-top:20px;
+font-family:monospace;
+background:#0b1220;
+padding:15px;
+border-radius:8px;
+white-space:pre-wrap;
+line-height:1.6;
+}
+
+footer{
+margin-top:40px;
+font-size:14px;
+color:#aaa;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<nav>
+<a href="/">Home</a> /
+<a href="/tools.html">Tools</a> /
+HTTP Header Checker
+</nav>
+
+<h1>HTTP Header Checker</h1>
+
+<p>Inspect HTTP response headers from any website.</p>
+
+<div class="card">
+
+<label>Website URL</label>
+<input id="url" placeholder="https://example.com">
+
+<button onclick="checkHeaders()">Check Headers</button>
+
+<div id="results" class="results"></div>
+
+</div>
+
+<footer>
+
+<h2>What Are HTTP Headers?</h2>
+
+<p>
+HTTP headers are key-value pairs sent between a client and server that provide metadata about a request or response.
+</p>
+
+<h2>Why Check HTTP Headers?</h2>
+
+<ul>
+<li>Debug caching problems</li>
+<li>Inspect security headers</li>
+<li>Analyze redirects</li>
+<li>Understand server configuration</li>
+</ul>
+
+</footer>
+
+</div>
+
+<script>
+
+async function checkHeaders(){
+
+let url=document.getElementById("url").value
+let output=document.getElementById("results")
+
+if(!url){
+output.innerHTML="Enter a URL"
+return
+}
+
+output.innerHTML="Fetching headers..."
+
+try{
+
+let response = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(url))
+
+let headers = [...response.headers.entries()]
+
+let text="Status: " + response.status + "\n\n"
+
+headers.forEach(h=>{
+text += h[0] + ": " + h[1] + "\n"
+})
+
+output.innerHTML=text
+
+}catch(e){
+
+output.innerHTML="Unable to fetch headers."
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
