@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Transaction Status Checker | Ethereum Tx Lookup | InstantQR</title>
+  <meta name="description" content="Check Ethereum transaction status instantly. Lookup pending, successful, or failed transactions with block, gas, value, sender, receiver, and confirmation details." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <link rel="canonical" href="https://instantqr.io/web3-tools/transaction-status-checker.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Transaction Status Checker | Ethereum Tx Lookup" />
+  <meta property="og:description" content="Lookup Ethereum transaction status, gas usage, block number, confirmations, and more." />
+  <meta property="og:url" content="https://instantqr.io/web3-tools/transaction-status-checker.html" />
+  <meta property="og:site_name" content="InstantQR" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Transaction Status Checker | Ethereum Tx Lookup" />
+  <meta name="twitter:description" content="Free Ethereum transaction checker with status, confirmations, gas, and block details." />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#121b2f;
+      --card:#0a1428;
+      --line:rgba(255,255,255,.10);
+      --text:#f8fafc;
+      --muted:#94a3b8;
+      --blue:#3b82f6;
+      --blue2:#2563eb;
+      --green:#22c55e;
+      --yellow:#f59e0b;
+      --red:#ef4444;
+      --shadow:0 16px 44px rgba(0,0,0,.28);
+      --radius:18px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,.13), transparent 24%),
+        radial-gradient(circle at top right, rgba(34,197,94,.08), transparent 20%),
+        linear-gradient(180deg,#0b1220 0%,#09101d 100%);
+      line-height:1.55;
+    }
+
+    a{color:#93c5fd;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(10px);
+      background:rgba(11,18,32,.82);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      min-height:70px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--text);
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    .brand img{
+      width:36px;
+      height:36px;
+      display:block;
+    }
+
+    .navlinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+    }
+
+    .navlinks a{
+      color:var(--muted);
+      font-weight:600;
+      font-size:.95rem;
+    }
+
+    .navlinks a:hover{
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .hero{
+      padding:28px 0 12px;
+    }
+
+    .breadcrumbs{
+      color:var(--muted);
+      font-size:.92rem;
+      margin-bottom:14px;
+    }
+
+    .breadcrumbs a{color:var(--muted)}
+    .breadcrumbs span{color:var(--text)}
+
+    .heroCard,.card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border-radius:24px;
+      box-shadow:var(--shadow);
+    }
+
+    .heroCard{padding:28px}
+    .cardInner{padding:22px}
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      background:rgba(59,130,246,.10);
+      border:1px solid rgba(59,130,246,.24);
+      color:#bfdbfe;
+      border-radius:999px;
+      font-size:.9rem;
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(2rem,4vw,3.1rem);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+
+    h2{
+      margin:0 0 14px;
+      letter-spacing:-.02em;
+      font-size:1.18rem;
+    }
+
+    .lead{
+      margin:0;
+      max-width:860px;
+      color:var(--muted);
+      font-size:1.04rem;
+    }
+
+    .main{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:22px;
+      padding:22px 0;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    label{
+      color:#dbeafe;
+      font-size:.95rem;
+      font-weight:700;
+    }
+
+    .hint{
+      color:var(--muted);
+      font-size:.86rem;
+      margin-top:-2px;
+    }
+
+    input{
+      width:100%;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0a1428;
+      color:var(--text);
+      border-radius:14px;
+      padding:14px;
+      font:inherit;
+      outline:none;
+      transition:border-color .18s ease, transform .18s ease;
+    }
+
+    input:focus{
+      border-color:rgba(59,130,246,.7);
+      transform:translateY(-1px);
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    button{
+      appearance:none;
+      border:none;
+      border-radius:14px;
+      padding:14px 18px;
+      font:inherit;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .18s ease;
+    }
+
+    button:hover{transform:translateY(-1px)}
+
+    .btnPrimary{
+      background:linear-gradient(135deg,var(--blue),var(--blue2));
+      color:#fff;
+      box-shadow:0 10px 28px rgba(37,99,235,.24);
+    }
+
+    .btnGhost{
+      background:#0a1428;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+
+    .quickList{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .chip{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#0a1428;
+      color:var(--text);
+      font-size:.9rem;
+      cursor:pointer;
+    }
+
+    .status{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .ok{color:var(--green)}
+    .warn{color:var(--yellow)}
+    .bad{color:var(--red)}
+
+    .summaryGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .summaryCard{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      min-height:96px;
+    }
+
+    .summaryCard .k{
+      color:var(--muted);
+      font-size:.88rem;
+      margin-bottom:6px;
+    }
+
+    .summaryCard .v{
+      font-size:1.08rem;
+      font-weight:800;
+      letter-spacing:-.02em;
+      word-break:break-word;
+    }
+
+    .heroStatus{
+      border-radius:18px;
+      padding:18px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      margin-bottom:14px;
+    }
+
+    .heroStatus .label{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-bottom:8px;
+      font-weight:700;
+    }
+
+    .heroStatus .value{
+      font-size:2rem;
+      font-weight:900;
+      letter-spacing:-.03em;
+      line-height:1;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      word-break:break-all;
+    }
+
+    .tableWrap{
+      overflow:auto;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#0a1428;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:660px;
+    }
+
+    th,td{
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      text-align:left;
+      vertical-align:top;
+      font-size:.95rem;
+    }
+
+    th{
+      color:#cbd5e1;
+      background:rgba(255,255,255,.02);
+      font-weight:800;
+    }
+
+    td{
+      color:#e2e8f0;
+    }
+
+    .empty{
+      padding:18px;
+      border:1px dashed rgba(255,255,255,.14);
+      border-radius:16px;
+      color:var(--muted);
+      background:rgba(255,255,255,.02);
+    }
+
+    .section{
+      padding:8px 0 6px;
+    }
+
+    .contentCard{
+      padding:22px;
+    }
+
+    .contentCard p,.contentCard li{
+      color:var(--muted);
+    }
+
+    details{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.012));
+      margin-top:12px;
+    }
+
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+
+    summary::-webkit-details-marker{display:none}
+    details p{margin:10px 0 0}
+
+    footer{
+      padding:28px 0 46px;
+      color:var(--muted);
+    }
+
+    .footerCard{
+      border-top:1px solid var(--line);
+      padding-top:18px;
+    }
+
+    .footerLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 14px;
+      margin-top:12px;
+    }
+
+    @media (max-width: 980px){
+      .main{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 780px){
+      .container{width:min(var(--max), calc(100% - 20px))}
+      .nav{
+        padding:8px 0;
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .heroCard,.cardInner,.contentCard{padding:18px}
+      .summaryGrid{grid-template-columns:1fr}
+      table{min-width:560px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Transaction Status Checker",
+    "url":"https://instantqr.io/web3-tools/transaction-status-checker.html",
+    "description":"Check Ethereum transaction status, confirmations, gas usage, and block details.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    },
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+        {"@type":"ListItem","position":2,"name":"Web3 Tools","item":"https://instantqr.io/web3-tools.html"},
+        {"@type":"ListItem","position":3,"name":"Transaction Status Checker","item":"https://instantqr.io/web3-tools/transaction-status-checker.html"}
+      ]
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What does a transaction status checker do?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A transaction status checker helps you verify whether a blockchain transaction is pending, successful, failed, or not found."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I check Ethereum transaction confirmations here?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. This tool shows block inclusion and estimated confirmation count based on the latest block height."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Do I need a wallet connection to use this tool?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. You only need the transaction hash."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can this tool show failed transactions?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. If the transaction receipt is available, the tool can identify successful or failed execution."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <span>InstantQR</span>
+      </a>
+      <nav class="navlinks" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/web3-tools.html">Web3 Tools</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> / <a href="/web3-tools.html">Web3 Tools</a> / <span>Transaction Status Checker</span>
+      </nav>
+
+      <div class="heroCard">
+        <div class="eyebrow">Ethereum Transaction Tool</div>
+        <h1>Transaction Status Checker</h1>
+        <p class="lead">
+          Check Ethereum transaction status instantly. See whether a transaction is pending, successful, failed, or not found,
+          along with confirmations, gas usage, block details, value, and sender/receiver information.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main class="container main">
+    <section class="card">
+      <div class="cardInner">
+        <h2>Check Transaction</h2>
+
+        <div class="field">
+          <label for="txHash">Transaction Hash</label>
+          <input id="txHash" type="text" placeholder="0x..." />
+          <div class="hint">Enter a 66-character Ethereum transaction hash.</div>
+        </div>
+
+        <div class="actions">
+          <button class="btnPrimary" id="checkBtn" type="button">Check Status</button>
+          <button class="btnGhost" id="clearBtn" type="button">Clear</button>
+        </div>
+
+        <div class="quickList">
+          <button class="chip" type="button" data-example="0x5f6d53b9b8d2f9f6a8ab0fcb6b4eb5d6b95c4ac4e0f09f4081c3b08c4f1f0e2a">Sample tx format</button>
+        </div>
+
+        <div class="status" id="status">Ready.</div>
+      </div>
+    </section>
+
+    <aside class="card">
+      <div class="cardInner">
+        <h2>Transaction Summary</h2>
+
+        <div class="heroStatus">
+          <div class="label">Current Status</div>
+          <div class="value" id="statusHero">—</div>
+        </div>
+
+        <div class="summaryGrid">
+          <div class="summaryCard">
+            <div class="k">Confirmations</div>
+            <div class="v" id="confirmations">—</div>
+          </div>
+          <div class="summaryCard">
+            <div class="k">Block Number</div>
+            <div class="v" id="blockNumber">—</div>
+          </div>
+          <div class="summaryCard">
+            <div class="k">Value</div>
+            <div class="v" id="valueEth">—</div>
+          </div>
+          <div class="summaryCard">
+            <div class="k">Gas Used</div>
+            <div class="v" id="gasUsed">—</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <section class="section">
+    <div class="container">
+      <div class="card contentCard">
+        <h2>Details</h2>
+        <div id="resultsArea" class="empty">Enter a transaction hash to view details here.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="card contentCard">
+        <h2>Why use a transaction status checker?</h2>
+        <p>
+          A transaction checker helps users confirm whether a blockchain transfer or smart contract interaction has been included in a block,
+          is still pending, or failed during execution. This is useful for payments, swaps, NFT activity, and general on-chain troubleshooting.
+        </p>
+        <p>
+          It can also help identify whether high gas fees were consumed, whether a transaction reverted, and how many confirmations it has received.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="card contentCard">
+        <h2>Frequently Asked Questions</h2>
+
+        <details>
+          <summary>What does pending mean?</summary>
+          <p>Pending means the transaction has been broadcast to the network but has not yet been included in a confirmed block.</p>
+        </details>
+
+        <details>
+          <summary>What does failed mean?</summary>
+          <p>Failed means the transaction was included in a block but the execution reverted or did not complete successfully.</p>
+        </details>
+
+        <details>
+          <summary>How many confirmations are enough?</summary>
+          <p>It depends on the use case, but many users treat 1 to 3 confirmations as a basic signal and 12 or more as stronger finality for normal transfers.</p>
+        </details>
+
+        <details>
+          <summary>Why would a transaction not be found?</summary>
+          <p>A transaction may not be found if the hash is incorrect, the transaction has not propagated yet, or the public RPC endpoint has not indexed it yet.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footerCard">
+      <div>Fast, privacy-friendly Web3 tools by InstantQR.</div>
+      <div class="footerLinks">
+        <a href="/">Home</a>
+        <a href="/web3-tools.html">Web3 Tools</a>
+        <a href="/web3-tools/block-explorer-lite.html">Block Explorer Lite</a>
+        <a href="/web3-tools/gas-tracker.html">Gas Tracker</a>
+        <a href="/web3-tools/web3-gas-fee-estimator.html">Gas Fee Estimator</a>
+        <a href="/web3-tools/token-contract-analyzer.html">Token Contract Analyzer</a>
+        <a href="/web3-tools/dca-calculator.html">DCA Calculator</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const RPC_URL = 'https://cloudflare-eth.com';
+
+      const els = {
+        txHash: document.getElementById('txHash'),
+        checkBtn: document.getElementById('checkBtn'),
+        clearBtn: document.getElementById('clearBtn'),
+        status: document.getElementById('status'),
+        statusHero: document.getElementById('statusHero'),
+        confirmations: document.getElementById('confirmations'),
+        blockNumber: document.getElementById('blockNumber'),
+        valueEth: document.getElementById('valueEth'),
+        gasUsed: document.getElementById('gasUsed'),
+        resultsArea: document.getElementById('resultsArea'),
+        chips: Array.from(document.querySelectorAll('.chip'))
+      };
+
+      function setStatus(text, type){
+        els.status.className = 'status';
+        if (type === 'ok') els.status.classList.add('ok');
+        if (type === 'warn') els.status.classList.add('warn');
+        if (type === 'bad') els.status.classList.add('bad');
+        els.status.textContent = text;
+      }
+
+      async function rpc(method, params = []){
+        const res = await fetch(RPC_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            jsonrpc: '2.0',
+            id: Date.now(),
+            method,
+            params
+          })
+        });
+
+        if (!res.ok) throw new Error('RPC request failed');
+        const data = await res.json();
+        if (data.error) throw new Error(data.error.message || 'RPC error');
+        return data.result;
+      }
+
+      function isTxHash(v){
+        return /^0x[a-fA-F0-9]{64}$/.test(v.trim());
+      }
+
+      function hexToInt(hex){
+        return parseInt(hex || '0x0', 16);
+      }
+
+      function weiHexToEth(hex){
+        try {
+          const wei = BigInt(hex || '0x0');
+          return Number(wei) / 1e18;
+        } catch {
+          return 0;
+        }
+      }
+
+      function gweiHexToGwei(hex){
+        return hexToInt(hex || '0x0') / 1e9;
+      }
+
+      function formatNum(v){
+        return Number.isFinite(v) ? v.toLocaleString() : '—';
+      }
+
+      function formatEth(v){
+        return Number.isFinite(v)
+          ? v.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 6 }) + ' ETH'
+          : '—';
+      }
+
+      function formatGwei(v){
+        return Number.isFinite(v)
+          ? v.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' gwei'
+          : '—';
+      }
+
+      function formatDate(unixSeconds){
+        if (!Number.isFinite(unixSeconds)) return '—';
+        return new Date(unixSeconds * 1000).toLocaleString();
+      }
+
+      function shortHash(v, start = 10, end = 8){
+        if (!v || v.length <= start + end) return v || '—';
+        return v.slice(0, start) + '…' + v.slice(-end);
+      }
+
+      function escapeHtml(str){
+        return String(str ?? '')
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#039;');
+      }
+
+      function updateHeroStatus(text, cls){
+        els.statusHero.textContent = text;
+        els.statusHero.className = 'value';
+        if (cls) els.statusHero.classList.add(cls);
+      }
+
+      function clearSummary(){
+        updateHeroStatus('—', '');
+        els.confirmations.textContent = '—';
+        els.blockNumber.textContent = '—';
+        els.valueEth.textContent = '—';
+        els.gasUsed.textContent = '—';
+      }
+
+      function renderDetails(rows){
+        return `
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr><th>Field</th><th>Value</th></tr>
+              </thead>
+              <tbody>
+                ${rows.map(([k,v]) => `<tr><td>${escapeHtml(k)}</td><td class="mono">${v}</td></tr>`).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      async function checkTransaction(){
+        const hash = els.txHash.value.trim();
+
+        if (!isTxHash(hash)) {
+          setStatus('Enter a valid Ethereum transaction hash.', 'warn');
+          clearSummary();
+          els.resultsArea.className = 'empty';
+          els.resultsArea.innerHTML = 'Please enter a valid 66-character transaction hash.';
+          return;
+        }
+
+        setStatus('Checking transaction…');
+        els.resultsArea.className = '';
+        clearSummary();
+
+        try {
+          const [tx, receipt, latestBlockHex] = await Promise.all([
+            rpc('eth_getTransactionByHash', [hash]),
+            rpc('eth_getTransactionReceipt', [hash]),
+            rpc('eth_blockNumber')
+          ]);
+
+          if (!tx) {
+            updateHeroStatus('Not Found', 'warn');
+            setStatus('Transaction not found.', 'warn');
+            els.resultsArea.className = 'empty';
+            els.resultsArea.innerHTML = 'Transaction not found. Double-check the hash or try again in a moment.';
+            return;
+          }
+
+          let blockData = null;
+          if (tx.blockNumber) {
+            try {
+              blockData = await rpc('eth_getBlockByNumber', [tx.blockNumber, false]);
+            } catch (e) {}
+          }
+
+          const latestBlock = hexToInt(latestBlockHex);
+          const blockNumber = tx.blockNumber ? hexToInt(tx.blockNumber) : null;
+          const confirmations = blockNumber != null ? Math.max(0, latestBlock - blockNumber + 1) : 0;
+          const value = weiHexToEth(tx.value || '0x0');
+          const gasPrice = gweiHexToGwei(tx.gasPrice || '0x0');
+          const gasLimit = hexToInt(tx.gas || '0x0');
+          const gasUsed = receipt && receipt.gasUsed ? hexToInt(receipt.gasUsed) : null;
+          const nonce = hexToInt(tx.nonce || '0x0');
+          const txIndex = tx.transactionIndex ? hexToInt(tx.transactionIndex) : null;
+          const timestamp = blockData && blockData.timestamp ? hexToInt(blockData.timestamp) : null;
+
+          let txStatusText = 'Pending';
+          let txStatusClass = 'warn';
+
+          if (receipt && typeof receipt.status !== 'undefined') {
+            if (receipt.status === '0x1') {
+              txStatusText = 'Success';
+              txStatusClass = 'ok';
+            } else if (receipt.status === '0x0') {
+              txStatusText = 'Failed';
+              txStatusClass = 'bad';
+            }
+          }
+
+          updateHeroStatus(txStatusText, txStatusClass);
+          els.confirmations.textContent = formatNum(confirmations);
+          els.blockNumber.textContent = blockNumber != null ? formatNum(blockNumber) : 'Pending';
+          els.valueEth.textContent = formatEth(value);
+          els.gasUsed.textContent = gasUsed != null ? formatNum(gasUsed) : 'Pending';
+
+          const rows = [
+            ['Transaction Hash', escapeHtml(hash)],
+            ['Status', escapeHtml(txStatusText)],
+            ['Confirmations', escapeHtml(formatNum(confirmations))],
+            ['Block Number', escapeHtml(blockNumber != null ? String(blockNumber) : 'Pending')],
+            ['Timestamp', escapeHtml(timestamp != null ? formatDate(timestamp) : 'Pending / unavailable')],
+            ['From', escapeHtml(tx.from || '—')],
+            ['To', escapeHtml(tx.to || 'Contract creation / unavailable')],
+            ['Value', escapeHtml(formatEth(value))],
+            ['Gas Price', escapeHtml(formatGwei(gasPrice))],
+            ['Gas Limit', escapeHtml(formatNum(gasLimit))],
+            ['Gas Used', escapeHtml(gasUsed != null ? formatNum(gasUsed) : 'Pending')],
+            ['Nonce', escapeHtml(formatNum(nonce))],
+            ['Transaction Index', escapeHtml(txIndex != null ? formatNum(txIndex) : 'Pending')],
+            ['Current Latest Block', escapeHtml(formatNum(latestBlock))]
+          ];
+
+          els.resultsArea.innerHTML = `
+            <div class="summaryGrid" style="margin-bottom:14px">
+              <div class="summaryCard">
+                <div class="k">From</div>
+                <div class="v mono">${escapeHtml(shortHash(tx.from || '—'))}</div>
+              </div>
+              <div class="summaryCard">
+                <div class="k">To</div>
+                <div class="v mono">${escapeHtml(shortHash(tx.to || 'Contract creation'))}</div>
+              </div>
+              <div class="summaryCard">
+                <div class="k">Gas Price</div>
+                <div class="v">${escapeHtml(formatGwei(gasPrice))}</div>
+              </div>
+              <div class="summaryCard">
+                <div class="k">Timestamp</div>
+                <div class="v">${escapeHtml(timestamp != null ? formatDate(timestamp) : 'Pending')}</div>
+              </div>
+            </div>
+            ${renderDetails(rows)}
+          `;
+
+          setStatus('Transaction lookup complete.', 'ok');
+
+          try {
+            const url = new URL(window.location.href);
+            url.searchParams.set('tx', hash);
+            history.replaceState(null, '', url.toString());
+          } catch(e){}
+        } catch (err) {
+          updateHeroStatus('Lookup Failed', 'bad');
+          setStatus('Unable to fetch transaction right now.', 'bad');
+          els.resultsArea.className = 'empty';
+          els.resultsArea.innerHTML = 'Lookup failed. The public RPC endpoint may be temporarily unavailable or rate-limited.';
+        }
+      }
+
+      function clearAll(){
+        els.txHash.value = '';
+        clearSummary();
+        updateHeroStatus('—', '');
+        setStatus('Ready.');
+        els.resultsArea.className = 'empty';
+        els.resultsArea.innerHTML = 'Enter a transaction hash to view details here.';
+        try {
+          const url = new URL(window.location.href);
+          url.search = '';
+          history.replaceState(null, '', url.toString());
+        } catch(e){}
+      }
+
+      function initFromQuery(){
+        const params = new URLSearchParams(window.location.search);
+        const tx = params.get('tx');
+        if (tx) {
+          els.txHash.value = tx;
+          checkTransaction();
+        }
+      }
+
+      els.checkBtn.addEventListener('click', checkTransaction);
+      els.clearBtn.addEventListener('click', clearAll);
+      els.txHash.addEventListener('keydown', function(e){
+        if (e.key === 'Enter') checkTransaction();
+      });
+
+      els.chips.forEach(chip => {
+        chip.addEventListener('click', function(){
+          els.txHash.value = this.getAttribute('data-example') || '';
+        });
+      });
+
+      initFromQuery();
+    })();
+  </script>
+</body>
+</html>
