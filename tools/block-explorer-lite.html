@@ -1,0 +1,1075 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Block Explorer Lite | Ethereum Address, Tx & Block Lookup | InstantQR</title>
+  <meta name="description" content="Free lightweight Ethereum block explorer. Look up wallet addresses, transaction hashes, and block numbers with a fast, privacy-friendly interface." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <link rel="canonical" href="https://instantqr.io/web3-tools/block-explorer-lite.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Block Explorer Lite | Ethereum Address, Tx & Block Lookup" />
+  <meta property="og:description" content="Lookup Ethereum wallet addresses, transaction hashes, and blocks with a clean lightweight explorer." />
+  <meta property="og:url" content="https://instantqr.io/web3-tools/block-explorer-lite.html" />
+  <meta property="og:site_name" content="InstantQR" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Block Explorer Lite | Ethereum Address, Tx & Block Lookup" />
+  <meta name="twitter:description" content="Free lightweight Ethereum explorer for addresses, transactions, and blocks." />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#121b2f;
+      --panel-2:#0f172a;
+      --card:#0d1528;
+      --line:rgba(255,255,255,.10);
+      --text:#f8fafc;
+      --muted:#94a3b8;
+      --blue:#3b82f6;
+      --blue-2:#2563eb;
+      --green:#22c55e;
+      --red:#ef4444;
+      --yellow:#f59e0b;
+      --shadow:0 16px 44px rgba(0,0,0,.28);
+      --radius:18px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,.12), transparent 26%),
+        radial-gradient(circle at top right, rgba(34,197,94,.08), transparent 20%),
+        linear-gradient(180deg, #0b1220 0%, #0a1020 100%);
+      line-height:1.55;
+    }
+
+    a{color:#93c5fd;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(10px);
+      background:rgba(11,18,32,.8);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      min-height:70px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--text);
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    .brand img{
+      width:36px;
+      height:36px;
+      display:block;
+    }
+
+    .navlinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+    }
+
+    .navlinks a{
+      color:var(--muted);
+      font-weight:600;
+      font-size:.95rem;
+    }
+
+    .navlinks a:hover{
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .hero{
+      padding:28px 0 12px;
+    }
+
+    .breadcrumbs{
+      color:var(--muted);
+      font-size:.92rem;
+      margin-bottom:14px;
+    }
+
+    .breadcrumbs a{color:var(--muted)}
+    .breadcrumbs span{color:var(--text)}
+
+    .heroCard,
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border-radius:24px;
+      box-shadow:var(--shadow);
+    }
+
+    .heroCard{
+      padding:28px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      background:rgba(59,130,246,.10);
+      border:1px solid rgba(59,130,246,.24);
+      color:#bfdbfe;
+      border-radius:999px;
+      font-size:.9rem;
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(2rem, 4vw, 3.1rem);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+
+    .lead{
+      margin:0;
+      max-width:860px;
+      color:var(--muted);
+      font-size:1.04rem;
+    }
+
+    .main{
+      display:grid;
+      grid-template-columns: 1.06fr .94fr;
+      gap:22px;
+      padding:22px 0;
+    }
+
+    .cardInner{
+      padding:22px;
+    }
+
+    h2{
+      margin:0 0 14px;
+      letter-spacing:-.02em;
+      font-size:1.18rem;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .field.full{grid-column:1 / -1}
+
+    label{
+      color:#dbeafe;
+      font-size:.95rem;
+      font-weight:700;
+    }
+
+    .hint{
+      margin-top:-2px;
+      color:var(--muted);
+      font-size:.86rem;
+    }
+
+    input, select, textarea{
+      width:100%;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0a1428;
+      color:var(--text);
+      border-radius:14px;
+      padding:14px;
+      font:inherit;
+      outline:none;
+      transition:border-color .18s ease, transform .18s ease;
+    }
+
+    input:focus, select:focus, textarea:focus{
+      border-color:rgba(59,130,246,.7);
+      transform:translateY(-1px);
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    button{
+      appearance:none;
+      border:none;
+      border-radius:14px;
+      padding:14px 18px;
+      font:inherit;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .18s ease, opacity .18s ease;
+    }
+
+    button:hover{transform:translateY(-1px)}
+    .btnPrimary{
+      background:linear-gradient(135deg, var(--blue), var(--blue-2));
+      color:#fff;
+      box-shadow:0 10px 28px rgba(37,99,235,.24);
+    }
+    .btnGhost{
+      background:#0a1428;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+
+    .quickList{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .chip{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#0a1428;
+      color:var(--text);
+      font-size:.9rem;
+      cursor:pointer;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .stat{
+      background:#0a1428;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      min-height:95px;
+    }
+
+    .stat .k{
+      font-size:.86rem;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+
+    .stat .v{
+      font-size:1.08rem;
+      font-weight:800;
+      letter-spacing:-.02em;
+      word-break:break-word;
+    }
+
+    .panel{
+      background:#0a1428;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .status{
+      margin-top:14px;
+      font-size:.96rem;
+      color:var(--muted);
+    }
+
+    .ok{color:var(--green)}
+    .bad{color:var(--red)}
+    .warn{color:var(--yellow)}
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      word-break:break-all;
+    }
+
+    .tableWrap{
+      overflow:auto;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#0a1428;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:640px;
+    }
+
+    th, td{
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      text-align:left;
+      vertical-align:top;
+      font-size:.95rem;
+    }
+
+    th{
+      color:#cbd5e1;
+      background:rgba(255,255,255,.02);
+      font-weight:800;
+    }
+
+    td{
+      color:#e2e8f0;
+    }
+
+    .empty{
+      padding:18px;
+      border:1px dashed rgba(255,255,255,.14);
+      border-radius:16px;
+      color:var(--muted);
+      background:rgba(255,255,255,.02);
+    }
+
+    .section{
+      padding:8px 0 6px;
+    }
+
+    .contentCard{
+      padding:22px;
+    }
+
+    .contentCard p,
+    .contentCard li{
+      color:var(--muted);
+    }
+
+    details{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.012));
+      margin-top:12px;
+    }
+
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+
+    summary::-webkit-details-marker{display:none}
+    details p{margin:10px 0 0}
+
+    .footerLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 14px;
+      margin-top:12px;
+    }
+
+    footer{
+      padding:28px 0 46px;
+      color:var(--muted);
+    }
+
+    .footerCard{
+      border-top:1px solid var(--line);
+      padding-top:18px;
+    }
+
+    @media (max-width: 980px){
+      .main{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 720px){
+      .container{
+        width:min(var(--max), calc(100% - 20px));
+      }
+
+      .nav{
+        padding:8px 0;
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .heroCard, .cardInner, .contentCard{
+        padding:18px;
+      }
+
+      .grid, .stats{
+        grid-template-columns:1fr;
+      }
+
+      table{
+        min-width:560px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Block Explorer Lite",
+    "url":"https://instantqr.io/web3-tools/block-explorer-lite.html",
+    "description":"Lightweight Ethereum block explorer for address, transaction, and block lookups.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    },
+    "breadcrumb":{
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+        {"@type":"ListItem","position":2,"name":"Web3 Tools","item":"https://instantqr.io/web3-tools.html"},
+        {"@type":"ListItem","position":3,"name":"Block Explorer Lite","item":"https://instantqr.io/web3-tools/block-explorer-lite.html"}
+      ]
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What does Block Explorer Lite do?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Block Explorer Lite lets you look up Ethereum wallet addresses, transaction hashes, and block numbers using a lightweight browser-based interface."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I use this tool without creating an account?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The tool is free to use and does not require an account."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool support Ethereum addresses and transaction hashes?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can search for standard Ethereum wallet addresses, 66-character transaction hashes, and block numbers."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Is this a full block explorer?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This is a lightweight explorer focused on quick lookups. It is intended to be simpler and faster than a full-featured blockchain explorer."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <span>InstantQR</span>
+      </a>
+      <nav class="navlinks" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/web3-tools.html">Web3 Tools</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> / <a href="/web3-tools.html">Web3 Tools</a> / <span>Block Explorer Lite</span>
+      </nav>
+
+      <div class="heroCard">
+        <div class="eyebrow">Ethereum Utility</div>
+        <h1>Block Explorer Lite</h1>
+        <p class="lead">
+          Look up Ethereum addresses, transaction hashes, and block numbers with a fast lightweight interface.
+          Great for quick wallet checks, transaction status lookups, and simple block inspection.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main class="container main">
+    <section class="card" aria-labelledby="lookup-title">
+      <div class="cardInner">
+        <h2 id="lookup-title">Lookup</h2>
+
+        <div class="grid">
+          <div class="field full">
+            <label for="network">Network</label>
+            <select id="network">
+              <option value="eth">Ethereum Mainnet</option>
+            </select>
+            <div class="hint">This lightweight version currently focuses on Ethereum mainnet.</div>
+          </div>
+
+          <div class="field full">
+            <label for="query">Address, transaction hash, or block number</label>
+            <input id="query" type="text" placeholder="0x..., transaction hash, or block number" />
+            <div class="hint">Examples: wallet address, 66-character tx hash, or a numeric block height.</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btnPrimary" id="lookupBtn" type="button">Search</button>
+          <button class="btnGhost" id="clearBtn" type="button">Clear</button>
+        </div>
+
+        <div class="quickList" aria-label="Example searches">
+          <button class="chip" data-example="0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe" type="button">Sample address</button>
+          <button class="chip" data-example="18000000" type="button">Sample block</button>
+          <button class="chip" data-example="0x5f6d53b9b8d2f9f6a8ab0fcb6b4eb5d6b95c4ac4e0f09f4081c3b08c4f1f0e2a" type="button">Sample tx format</button>
+        </div>
+
+        <div class="status" id="status">Ready.</div>
+      </div>
+    </section>
+
+    <aside class="card">
+      <div class="cardInner">
+        <h2>Quick Summary</h2>
+        <div class="stats">
+          <div class="stat">
+            <div class="k">Detected Type</div>
+            <div class="v" id="detectedType">—</div>
+          </div>
+          <div class="stat">
+            <div class="k">Network</div>
+            <div class="v" id="detectedNetwork">Ethereum</div>
+          </div>
+          <div class="stat">
+            <div class="k">Current Block</div>
+            <div class="v" id="latestBlock">Loading…</div>
+          </div>
+          <div class="stat">
+            <div class="k">Latest Gas Hint</div>
+            <div class="v" id="gasHint">—</div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:14px">
+          <strong style="display:block;margin-bottom:8px">What you can look up</strong>
+          <div style="color:var(--muted);font-size:.95rem">
+            Wallet addresses, transaction hashes, and block numbers. Results are kept intentionally simple for quick inspection.
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <section class="section">
+    <div class="container">
+      <div class="card contentCard">
+        <h2>Results</h2>
+        <div id="resultsArea" class="empty">Search for an Ethereum address, transaction hash, or block number to see results here.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="card contentCard">
+        <h2>About this lightweight block explorer</h2>
+        <p>
+          Block Explorer Lite is built for quick Ethereum lookups without the clutter of a full explorer.
+          It focuses on the most useful information first: balances, transaction status, block basics, and readable summaries.
+        </p>
+        <p>
+          This tool is useful for traders, developers, Web3 builders, and anyone who wants a fast way to inspect on-chain activity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="card contentCard">
+        <h2>Frequently Asked Questions</h2>
+
+        <details>
+          <summary>What can I search in this tool?</summary>
+          <p>You can search Ethereum wallet addresses, transaction hashes, and numeric block numbers.</p>
+        </details>
+
+        <details>
+          <summary>Does this explorer support tokens and internal transactions?</summary>
+          <p>This lightweight version focuses on core address, transaction, and block data rather than full token history and internal traces.</p>
+        </details>
+
+        <details>
+          <summary>Why use a lite explorer?</summary>
+          <p>A lite explorer is faster and easier to use when you only need essential information without advanced analytics or heavy page loads.</p>
+        </details>
+
+        <details>
+          <summary>Is this tool free?</summary>
+          <p>Yes. It is free to use and designed to be quick and simple.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footerCard">
+      <div>Fast, privacy-friendly tools by InstantQR.</div>
+      <div class="footerLinks">
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/web3-tools.html">Web3 Tools</a>
+        <a href="/web3-tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+        <a href="/web3-tools/dca-calculator.html">DCA Calculator</a>
+        <a href="/web3-tools/token-contract-analyzer.html">Token Contract Analyzer</a>
+        <a href="/web3-tools/wallet-approval-checker.html">Wallet Approval Checker</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const RPC_URL = 'https://cloudflare-eth.com';
+
+      const els = {
+        query: document.getElementById('query'),
+        network: document.getElementById('network'),
+        lookupBtn: document.getElementById('lookupBtn'),
+        clearBtn: document.getElementById('clearBtn'),
+        status: document.getElementById('status'),
+        detectedType: document.getElementById('detectedType'),
+        detectedNetwork: document.getElementById('detectedNetwork'),
+        latestBlock: document.getElementById('latestBlock'),
+        gasHint: document.getElementById('gasHint'),
+        resultsArea: document.getElementById('resultsArea'),
+        chips: Array.from(document.querySelectorAll('.chip'))
+      };
+
+      function setStatus(text, type){
+        els.status.className = 'status';
+        if (type === 'ok') els.status.classList.add('ok');
+        if (type === 'bad') els.status.classList.add('bad');
+        if (type === 'warn') els.status.classList.add('warn');
+        els.status.textContent = text;
+      }
+
+      async function rpc(method, params = []){
+        const res = await fetch(RPC_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            jsonrpc: '2.0',
+            id: Date.now(),
+            method,
+            params
+          })
+        });
+
+        if (!res.ok) throw new Error('Network request failed');
+        const data = await res.json();
+        if (data.error) throw new Error(data.error.message || 'RPC error');
+        return data.result;
+      }
+
+      function isAddress(v){
+        return /^0x[a-fA-F0-9]{40}$/.test(v.trim());
+      }
+
+      function isTxHash(v){
+        return /^0x[a-fA-F0-9]{64}$/.test(v.trim());
+      }
+
+      function isBlockNumber(v){
+        return /^\d+$/.test(v.trim());
+      }
+
+      function hexToInt(hex){
+        if (!hex) return 0;
+        return parseInt(hex, 16);
+      }
+
+      function hexToEth(hex){
+        const wei = BigInt(hex || '0x0');
+        const eth = Number(wei) / 1e18;
+        return eth;
+      }
+
+      function formatEth(num){
+        if (!Number.isFinite(num)) return '0 ETH';
+        return num.toLocaleString(undefined, {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 6
+        }) + ' ETH';
+      }
+
+      function formatNum(num){
+        if (!Number.isFinite(num)) return '—';
+        return num.toLocaleString();
+      }
+
+      function formatDate(unixSeconds){
+        if (!unixSeconds) return '—';
+        const d = new Date(unixSeconds * 1000);
+        return d.toLocaleString();
+      }
+
+      function shortHash(v, start = 10, end = 8){
+        if (!v || v.length <= start + end) return v || '—';
+        return v.slice(0, start) + '…' + v.slice(-end);
+      }
+
+      function escapeHtml(str){
+        return String(str ?? '')
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#039;');
+      }
+
+      function renderKeyValueTable(rows){
+        return `
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr><th>Field</th><th>Value</th></tr>
+              </thead>
+              <tbody>
+                ${rows.map(([k,v]) => `<tr><td>${escapeHtml(k)}</td><td class="mono">${v}</td></tr>`).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      async function loadTopSummary(){
+        try {
+          const [blockHex, gasHex] = await Promise.all([
+            rpc('eth_blockNumber'),
+            rpc('eth_gasPrice')
+          ]);
+          els.latestBlock.textContent = formatNum(hexToInt(blockHex));
+          els.gasHint.textContent = formatNum(Math.round(hexToInt(gasHex) / 1e9)) + ' Gwei';
+        } catch (e) {
+          els.latestBlock.textContent = 'Unavailable';
+          els.gasHint.textContent = 'Unavailable';
+        }
+      }
+
+      async function lookupAddress(address){
+        els.detectedType.textContent = 'Address';
+        setStatus('Looking up address…');
+
+        const [balanceHex, txCountHex, latestHex] = await Promise.all([
+          rpc('eth_getBalance', [address, 'latest']),
+          rpc('eth_getTransactionCount', [address, 'latest']),
+          rpc('eth_blockNumber')
+        ]);
+
+        const latestBlock = hexToInt(latestHex);
+        const balanceEth = hexToEth(balanceHex);
+        const txCount = hexToInt(txCountHex);
+
+        const rows = [
+          ['Address', escapeHtml(address)],
+          ['Balance', escapeHtml(formatEth(balanceEth))],
+          ['Transaction Count (nonce)', escapeHtml(formatNum(txCount))],
+          ['Latest Known Block', escapeHtml(formatNum(latestBlock))]
+        ];
+
+        els.resultsArea.innerHTML = `
+          <div class="stats" style="margin-bottom:14px">
+            <div class="stat">
+              <div class="k">Address</div>
+              <div class="v mono">${escapeHtml(address)}</div>
+            </div>
+            <div class="stat">
+              <div class="k">Balance</div>
+              <div class="v">${escapeHtml(formatEth(balanceEth))}</div>
+            </div>
+            <div class="stat">
+              <div class="k">Transaction Count</div>
+              <div class="v">${escapeHtml(formatNum(txCount))}</div>
+            </div>
+            <div class="stat">
+              <div class="k">Latest Block</div>
+              <div class="v">${escapeHtml(formatNum(latestBlock))}</div>
+            </div>
+          </div>
+          ${renderKeyValueTable(rows)}
+        `;
+
+        setStatus('Address lookup complete.', 'ok');
+      }
+
+      async function lookupTransaction(hash){
+        els.detectedType.textContent = 'Transaction';
+        setStatus('Looking up transaction…');
+
+        const [tx, receipt] = await Promise.all([
+          rpc('eth_getTransactionByHash', [hash]),
+          rpc('eth_getTransactionReceipt', [hash])
+        ]);
+
+        if (!tx) {
+          els.resultsArea.innerHTML = `<div class="empty">Transaction not found.</div>`;
+          setStatus('Transaction not found.', 'warn');
+          return;
+        }
+
+        const valueEth = hexToEth(tx.value || '0x0');
+        const gas = hexToInt(tx.gas || '0x0');
+        const gasPriceGwei = tx.gasPrice ? (hexToInt(tx.gasPrice) / 1e9) : null;
+        const statusText = receipt ? (receipt.status === '0x1' ? 'Success' : 'Failed') : 'Pending';
+
+        const rows = [
+          ['Hash', escapeHtml(tx.hash || hash)],
+          ['Status', escapeHtml(statusText)],
+          ['Block Number', escapeHtml(tx.blockNumber ? String(hexToInt(tx.blockNumber)) : 'Pending')],
+          ['From', escapeHtml(tx.from || '—')],
+          ['To', escapeHtml(tx.to || 'Contract creation / unavailable')],
+          ['Value', escapeHtml(formatEth(valueEth))],
+          ['Gas Limit', escapeHtml(formatNum(gas))],
+          ['Gas Price', escapeHtml(gasPriceGwei != null ? gasPriceGwei.toLocaleString(undefined,{maximumFractionDigits:2}) + ' Gwei' : '—')],
+          ['Nonce', escapeHtml(formatNum(hexToInt(tx.nonce || '0x0')))],
+          ['Transaction Index', escapeHtml(tx.transactionIndex ? String(hexToInt(tx.transactionIndex)) : '—')]
+        ];
+
+        els.resultsArea.innerHTML = `
+          <div class="stats" style="margin-bottom:14px">
+            <div class="stat">
+              <div class="k">Status</div>
+              <div class="v ${statusText === 'Success' ? 'ok' : (statusText === 'Failed' ? 'bad' : 'warn')}">${escapeHtml(statusText)}</div>
+            </div>
+            <div class="stat">
+              <div class="k">Value</div>
+              <div class="v">${escapeHtml(formatEth(valueEth))}</div>
+            </div>
+            <div class="stat">
+              <div class="k">From</div>
+              <div class="v mono">${escapeHtml(shortHash(tx.from || '—'))}</div>
+            </div>
+            <div class="stat">
+              <div class="k">To</div>
+              <div class="v mono">${escapeHtml(shortHash(tx.to || 'Contract creation'))}</div>
+            </div>
+          </div>
+          ${renderKeyValueTable(rows)}
+        `;
+
+        setStatus('Transaction lookup complete.', 'ok');
+      }
+
+      async function lookupBlock(blockNumberDecimal){
+        els.detectedType.textContent = 'Block';
+        setStatus('Looking up block…');
+
+        const blockHex = '0x' + Number(blockNumberDecimal).toString(16);
+        const block = await rpc('eth_getBlockByNumber', [blockHex, false]);
+
+        if (!block) {
+          els.resultsArea.innerHTML = `<div class="empty">Block not found.</div>`;
+          setStatus('Block not found.', 'warn');
+          return;
+        }
+
+        const txCount = Array.isArray(block.transactions) ? block.transactions.length : 0;
+        const rows = [
+          ['Block Number', escapeHtml(String(hexToInt(block.number || '0x0')))],
+          ['Hash', escapeHtml(block.hash || '—')],
+          ['Parent Hash', escapeHtml(block.parentHash || '—')],
+          ['Timestamp', escapeHtml(formatDate(hexToInt(block.timestamp || '0x0')))],
+          ['Miner / Validator Fee Recipient', escapeHtml(block.miner || '—')],
+          ['Gas Used', escapeHtml(formatNum(hexToInt(block.gasUsed || '0x0')))],
+          ['Gas Limit', escapeHtml(formatNum(hexToInt(block.gasLimit || '0x0')))],
+          ['Transactions', escapeHtml(formatNum(txCount))],
+          ['Size', escapeHtml(formatNum(hexToInt(block.size || '0x0')) + ' bytes')]
+        ];
+
+        let txHtml = '';
+        if (txCount > 0) {
+          const preview = block.transactions.slice(0, 10).map((txHash, idx) => `
+            <tr>
+              <td>${idx + 1}</td>
+              <td class="mono">${escapeHtml(txHash)}</td>
+            </tr>
+          `).join('');
+
+          txHtml = `
+            <div style="margin-top:16px">
+              <h2 style="margin-bottom:10px">Transaction Preview</h2>
+              <div class="tableWrap">
+                <table>
+                  <thead>
+                    <tr><th>#</th><th>Transaction Hash</th></tr>
+                  </thead>
+                  <tbody>${preview}</tbody>
+                </table>
+              </div>
+            </div>
+          `;
+        }
+
+        els.resultsArea.innerHTML = `
+          <div class="stats" style="margin-bottom:14px">
+            <div class="stat">
+              <div class="k">Block Number</div>
+              <div class="v">${escapeHtml(String(hexToInt(block.number || '0x0')))}</div>
+            </div>
+            <div class="stat">
+              <div class="k">Transactions</div>
+              <div class="v">${escapeHtml(formatNum(txCount))}</div>
+            </div>
+            <div class="stat">
+              <div class="k">Gas Used</div>
+              <div class="v">${escapeHtml(formatNum(hexToInt(block.gasUsed || '0x0')))}</div>
+            </div>
+            <div class="stat">
+              <div class="k">Timestamp</div>
+              <div class="v">${escapeHtml(formatDate(hexToInt(block.timestamp || '0x0')))}</div>
+            </div>
+          </div>
+          ${renderKeyValueTable(rows)}
+          ${txHtml}
+        `;
+
+        setStatus('Block lookup complete.', 'ok');
+      }
+
+      async function runLookup(){
+        const q = els.query.value.trim();
+        if (!q) {
+          setStatus('Enter an address, transaction hash, or block number.', 'warn');
+          els.resultsArea.innerHTML = `<div class="empty">No query entered yet.</div>`;
+          els.detectedType.textContent = '—';
+          return;
+        }
+
+        try {
+          if (isAddress(q)) {
+            await lookupAddress(q);
+          } else if (isTxHash(q)) {
+            await lookupTransaction(q);
+          } else if (isBlockNumber(q)) {
+            await lookupBlock(q);
+          } else {
+            els.detectedType.textContent = 'Unknown';
+            els.resultsArea.innerHTML = `
+              <div class="empty">
+                Input format not recognized. Enter a valid Ethereum address, 66-character transaction hash, or numeric block number.
+              </div>
+            `;
+            setStatus('Unrecognized input format.', 'warn');
+          }
+
+          try {
+            const url = new URL(window.location.href);
+            url.searchParams.set('q', q);
+            history.replaceState(null, '', url.toString());
+          } catch(e){}
+        } catch (err) {
+          els.resultsArea.innerHTML = `
+            <div class="empty">
+              Lookup failed. This can happen if the public RPC endpoint is temporarily unavailable or rate-limited. Try again in a moment.
+            </div>
+          `;
+          setStatus('Lookup failed.', 'bad');
+        }
+      }
+
+      function clearAll(){
+        els.query.value = '';
+        els.detectedType.textContent = '—';
+        els.resultsArea.innerHTML = 'Search for an Ethereum address, transaction hash, or block number to see results here.';
+        els.resultsArea.className = 'empty';
+        setStatus('Ready.');
+        try {
+          const url = new URL(window.location.href);
+          url.search = '';
+          history.replaceState(null, '', url.toString());
+        } catch(e){}
+      }
+
+      function initFromQuery(){
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('q');
+        if (q) {
+          els.query.value = q;
+          runLookup();
+        }
+      }
+
+      els.lookupBtn.addEventListener('click', runLookup);
+      els.clearBtn.addEventListener('click', clearAll);
+      els.query.addEventListener('keydown', function(e){
+        if (e.key === 'Enter') runLookup();
+      });
+
+      els.chips.forEach(chip => {
+        chip.addEventListener('click', function(){
+          els.query.value = this.getAttribute('data-example') || '';
+        });
+      });
+
+      loadTopSummary();
+      initFromQuery();
+    })();
+  </script>
+</body>
+</html>
