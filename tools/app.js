@@ -28,6 +28,7 @@
   let qrInstance = null;
   let canvasEl = null;
   let autoTimer = null;
+  let qrLibraryReady = typeof window.QRious !== "undefined";
 
   function getMode() {
     return (els.mode?.value || "text").toLowerCase();
@@ -140,8 +141,8 @@
   function generateQR() {
     clearStatus();
 
-    if (typeof window.QRious === "undefined") {
-      setStatus("QR generator library failed to load. Please refresh and try again.", "error");
+    if (!qrLibraryReady || typeof window.QRious === "undefined") {
+      setStatus("QR generator library is still loading. Please try again in a moment.", "error");
       return;
     }
 
@@ -287,6 +288,16 @@
     showPlaceholder();
     bindEvents();
   }
+
+  document.addEventListener("qrious-ready", () => {
+    qrLibraryReady = true;
+    setStatus("", "");
+  });
+
+  document.addEventListener("qrious-failed", () => {
+    qrLibraryReady = false;
+    setStatus("QR generator library failed to load. Please refresh and try again.", "error");
+  });
 
   window.InstantQRApp = {
     generateQR,
