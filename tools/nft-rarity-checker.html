@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+</script>
+
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+crossorigin="anonymous"></script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>NFT Rarity Checker | Calculate NFT Trait Rarity | InstantQR</title>
+
+<meta name="description" content="Check NFT rarity by analyzing trait frequency and rarity scores. Upload NFT metadata JSON and calculate rarity instantly.">
+
+<link rel="canonical" href="https://instantqr.io/web3-tools/nft-rarity-checker.html">
+
+<meta name="robots" content="index,follow">
+
+<style>
+
+body{
+font-family:system-ui,-apple-system,Segoe UI,Roboto;
+background:#0b1220;
+color:white;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#121b2f;
+padding:25px;
+border-radius:12px;
+margin-top:20px;
+}
+
+textarea,input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:6px;
+border:1px solid #333;
+background:#0b1220;
+color:white;
+}
+
+button{
+margin-top:15px;
+padding:12px 20px;
+border:none;
+background:#3b82f6;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2563eb;
+}
+
+.result{
+margin-top:20px;
+background:#0b1220;
+padding:15px;
+border-radius:8px;
+font-family:monospace;
+}
+
+table{
+width:100%;
+margin-top:15px;
+border-collapse:collapse;
+}
+
+td,th{
+border-bottom:1px solid #333;
+padding:8px;
+text-align:left;
+}
+
+th{
+color:#9ca3af;
+}
+
+footer{
+margin-top:40px;
+color:#aaa;
+font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<nav>
+<a href="/">Home</a> /
+<a href="/web3-tools.html">Web3 Tools</a> /
+NFT Rarity Checker
+</nav>
+
+<h1>NFT Rarity Checker</h1>
+
+<p>Upload NFT metadata JSON to analyze trait rarity and rarity scores.</p>
+
+<div class="card">
+
+<label>Upload NFT Metadata JSON</label>
+<input type="file" id="file">
+
+<button onclick="analyze()">Analyze Rarity</button>
+
+<div id="result" class="result"></div>
+
+</div>
+
+<footer>
+
+<h2>What is NFT Rarity?</h2>
+
+<p>
+NFT rarity measures how uncommon certain traits are within a collection. NFTs with rare attributes tend to have higher value in many collections.
+</p>
+
+<h2>How Rarity is Calculated</h2>
+
+<p>
+Trait rarity is calculated by dividing the total collection size by the number of NFTs containing a specific trait.
+</p>
+
+</footer>
+
+</div>
+
+<script>
+
+async function analyze(){
+
+let file=document.getElementById("file").files[0]
+let output=document.getElementById("result")
+
+if(!file){
+output.innerHTML="Upload metadata JSON"
+return
+}
+
+let text=await file.text()
+let data=JSON.parse(text)
+
+let traits={}
+
+data.forEach(nft=>{
+nft.attributes.forEach(attr=>{
+let key=attr.trait_type + ":" + attr.value
+
+if(!traits[key]) traits[key]=0
+traits[key]++
+})
+})
+
+let total=data.length
+
+let table="<table><tr><th>Trait</th><th>Count</th><th>Rarity Score</th></tr>"
+
+for(let t in traits){
+
+let count=traits[t]
+let score=(total/count).toFixed(2)
+
+table+=`<tr><td>${t}</td><td>${count}</td><td>${score}</td></tr>`
+
+}
+
+table+="</table>"
+
+output.innerHTML=table
+
+}
+
+</script>
+
+</body>
+</html>
