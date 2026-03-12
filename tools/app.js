@@ -4,7 +4,6 @@
   const $ = (id) => document.getElementById(id);
 
   const els = {
-    form: $("qrForm"),
     mode: $("qrMode"),
 
     text: $("text"),
@@ -25,7 +24,7 @@
     status: $("status")
   };
 
-  let canvasEl = null;
+  let lastCanvas = null;
   let autoTimer = null;
   let qrLibraryReady = typeof window.QRious !== "undefined";
 
@@ -111,41 +110,33 @@
     return url;
   }
 
-  function createCanvas(size) {
+  function showPlaceholder() {
+    if (!els.qrWrap) return;
+    els.qrWrap.innerHTML = `<div class="hint">Your QR code will appear here.</div>`;
+    lastCanvas = null;
+  }
+
+  function renderCanvas(canvas, size) {
     if (!els.qrWrap) {
       throw new Error("QR preview container is missing.");
     }
 
-    els.qrWrap.innerHTML = "";
-
     const canvasWrap = document.createElement("div");
     canvasWrap.className = "canvasWrap";
 
-    canvasEl = document.createElement("canvas");
-    canvasEl.setAttribute("aria-label", "Generated QR code");
+    canvas.style.display = "block";
+    canvas.style.width = "100%";
+    canvas.style.maxWidth = size + "px";
+    canvas.style.height = "auto";
+    canvas.style.background = "#ffffff";
+    canvas.style.borderRadius = "12px";
 
-    // Set intrinsic size BEFORE drawing
-    canvasEl.width = size;
-    canvasEl.height = size;
+    canvasWrap.appendChild(canvas);
 
-    // Only CSS sizing after that
-    canvasEl.style.display = "block";
-    canvasEl.style.width = "100%";
-    canvasEl.style.maxWidth = size + "px";
-    canvasEl.style.height = "auto";
-    canvasEl.style.background = "#ffffff";
-    canvasEl.style.borderRadius = "12px";
-
-    canvasWrap.appendChild(canvasEl);
+    els.qrWrap.innerHTML = "";
     els.qrWrap.appendChild(canvasWrap);
 
-    return canvasEl;
-  }
-
-  function showPlaceholder() {
-    if (!els.qrWrap) return;
-    els.qrWrap.innerHTML = `<div class="hint">Your QR code will appear here.</div>`;
-    canvasEl = null;
+    lastCanvas = canvas;
   }
 
   function generateQR() {
@@ -168,11 +159,7 @@
     const level = getSafeLevel();
 
     try {
-      const canvas = createCanvas(size);
-
-      // Draw once after canvas sizing is complete
-      new window.QRious({
-        element: canvas,
+      const qr = new window.QRious({
         value: payload,
         size: size,
         level: level,
@@ -181,6 +168,7 @@
         foreground: "black"
       });
 
+      renderCanvas(qr.canvas, size);
       setStatus("QR code generated successfully.", "ok");
     } catch (err) {
       setStatus("Unable to generate the QR code. Please try again.", "error");
@@ -190,7 +178,7 @@
   function downloadPNG() {
     clearStatus();
 
-    if (!canvasEl) {
+    if (!lastCanvas) {
       setStatus("Generate a QR code before downloading.", "error");
       return;
     }
@@ -200,7 +188,7 @@
       const fileName = mode === "wifi" ? "wifi-qr-code.png" : "url-qr-code.png";
 
       const link = document.createElement("a");
-      link.href = canvasEl.toDataURL("image/png");
+      link.href = lastCanvas.toDataURL("image/png");
       link.download = fileName;
       document.body.appendChild(link);
       link.click();
@@ -265,7 +253,7 @@
 
     els.security?.addEventListener("change", () => {
       syncWifiState();
-      if (canvasEl) generateQR();
+      if (lastCanvas) generateQR();
     });
 
     [els.text, els.ssid, els.password].forEach((el) => {
@@ -277,7 +265,7 @@
     [els.hidden, els.size, els.level].forEach((el) => {
       if (!el) return;
       el.addEventListener("change", () => {
-        if (canvasEl) generateQR();
+        if (lastCanvas) generateQR();
       });
     });
 
@@ -296,7 +284,7 @@
 
   document.addEventListener("qrious-ready", () => {
     qrLibraryReady = true;
-    setStatus("", "");
+    clearStatus();
   });
 
   document.addEventListener("qrious-failed", () => {
