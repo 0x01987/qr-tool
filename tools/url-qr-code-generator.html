@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google Analytics -->
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -22,11 +22,9 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="theme-color" content="#0b0f19" />
   <meta name="author" content="InstantQR" />
-  <meta name="application-name" content="InstantQR" />
   <link rel="canonical" href="https://instantqr.io/tools/url-qr-code-generator.html" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="InstantQR" />
   <meta property="og:title" content="Free URL QR Code Generator | InstantQR.io" />
   <meta property="og:description" content="Create a QR code for any website link and download as PNG. Fast, free, and privacy-first." />
   <meta property="og:url" content="https://instantqr.io/tools/url-qr-code-generator.html" />
@@ -45,7 +43,7 @@
 
   <style>
     :root{
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       --bg:#0b0f19;
       --card:#121a2a;
       --panel:#0e1525;
@@ -56,12 +54,13 @@
       --muted2:#8ea0c8;
       --link:#cfe0ff;
       --brand:#3b82f6;
+      --brand2:#19c37d;
       --danger:#ff9fb3;
       --ok:#9ff7c2;
-      --shadow:0 12px 40px rgba(0,0,0,.35);
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
       --radius:18px;
       --radius2:16px;
-      --max:980px;
+      --max: 980px;
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
@@ -74,16 +73,17 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
-    a{color:var(--link);text-decoration:none}
-    a:hover{text-decoration:underline}
-    code{color:var(--link)}
-    .wrap{max-width:var(--max);margin:0 auto;padding:22px}
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    code{ color:var(--link); }
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px;}
     .card{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:var(--radius);
       padding:18px;
-      box-shadow:var(--shadow);
+      box-shadow: var(--shadow);
     }
 
     .topbar{
@@ -105,7 +105,7 @@
       font-weight:900;
       letter-spacing:-.2px;
     }
-    .brand img{height:30px;width:auto;display:block}
+    .brand img{ height:30px; width:auto; display:block; }
     .nav{
       display:flex;
       gap:10px;
@@ -119,11 +119,12 @@
       background:#0b1222;
       border:1px solid var(--border2);
       color:var(--link);
+      text-decoration:none;
       font-weight:800;
       font-size:12px;
       user-select:none;
     }
-    .nav a:hover{border-color:rgba(59,130,246,.85)}
+    .nav a:hover{ border-color: rgba(59,130,246,.85); }
 
     .hero{
       display:flex;
@@ -170,19 +171,19 @@
       border-radius:var(--radius2);
       padding:14px;
     }
-    .info h2{margin:0 0 8px;font-size:16px}
-    .info p,.info li{color:var(--muted);font-size:13px;line-height:1.7}
-    .info ol,.info ul{padding-left:18px;margin:8px 0 0}
-    .tiny{color:var(--muted2);font-size:12px}
+    .info h2{ margin:0 0 8px; font-size:16px; }
+    .info p, .info li{ color:var(--muted); font-size:13px; line-height:1.7; }
+    .info ol, .info ul{ padding-left:18px; margin:8px 0 0; }
+    .tiny{ color:var(--muted2); font-size:12px; }
 
     .grid{
       display:grid;
-      grid-template-columns:1.2fr .8fr;
+      grid-template-columns: 1.2fr .8fr;
       gap:14px;
       margin-top:14px;
       align-items:start;
     }
-    @media (max-width:860px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
 
     .box{
       background:var(--panel);
@@ -190,8 +191,8 @@
       border-radius:var(--radius2);
       padding:14px;
     }
-    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
-    input,select,textarea{
+    label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
+    input, select, textarea{
       width:100%;
       padding:12px 10px;
       border-radius:14px;
@@ -204,19 +205,14 @@
       min-height:120px;
       resize:vertical;
     }
-    input:focus,select:focus,textarea:focus{
-      border-color:rgba(59,130,246,.85);
-      box-shadow:0 0 0 3px rgba(59,130,246,.18);
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(59,130,246,.85);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
     }
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:520px){.row{grid-template-columns:1fr}}
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    @media (max-width: 520px){ .row{ grid-template-columns: 1fr; } }
 
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
     button{
       appearance:none;
       border:0;
@@ -228,17 +224,23 @@
       cursor:pointer;
       transition:.15s ease;
     }
-    button:hover{filter:brightness(1.05);transform:translateY(-1px)}
+    button:hover{ filter:brightness(1.05); transform:translateY(-1px); }
     button.secondary{
       background:#0b1222;
       border:1px solid var(--border2);
       color:var(--text);
       font-weight:800;
     }
-    button.secondary:hover{border-color:rgba(59,130,246,.7)}
+    button.secondary:hover{ border-color: rgba(59,130,246,.7); }
+    button:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+      transform:none;
+      filter:none;
+    }
 
     .qrWrap{
-      width:min(320px,100%);
+      width:min(320px, 100%);
       aspect-ratio:1/1;
       border-radius:16px;
       background:#0b1222;
@@ -250,8 +252,8 @@
       padding:10px;
       margin-inline:auto;
     }
-    .preview{display:flex;flex-direction:column;align-items:center;gap:10px}
-    .hint{color:var(--muted);font-size:12px;text-align:center}
+    .preview{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .hint{ color:var(--muted); font-size:12px; text-align:center; }
     .canvasWrap{
       width:100%;
       height:100%;
@@ -275,8 +277,8 @@
       font-size:12px;
       display:none;
     }
-    .status.error{color:var(--danger);display:block}
-    .status.ok{color:var(--ok);display:block}
+    .status.error{ color:var(--danger); display:block; }
+    .status.ok{ color:var(--ok); display:block; }
 
     .faq{
       margin-top:14px;
@@ -285,7 +287,7 @@
       border-radius:var(--radius2);
       padding:14px;
     }
-    .faq h2{margin:0 0 10px;font-size:16px}
+    .faq h2{ margin:0 0 10px; font-size:16px; }
     details{
       background:#0b1222;
       border:1px solid var(--border2);
@@ -299,8 +301,8 @@
       color:var(--text);
       list-style:none;
     }
-    summary::-webkit-details-marker{display:none}
-    details p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.7}
+    summary::-webkit-details-marker{ display:none; }
+    details p{ margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.7; }
 
     .footerLinks{
       margin-top:14px;
@@ -308,8 +310,8 @@
       color:var(--muted2);
       font-size:12px;
     }
-    .footerLinks a{color:var(--link);text-decoration:none}
-    .footerLinks a:hover{text-decoration:underline}
+    .footerLinks a{ color:var(--link); text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
   </style>
 
   <script type="application/ld+json">
@@ -424,6 +426,7 @@
       </section>
 
       <div class="grid">
+
         <div class="box">
           <label for="text">Website URL</label>
           <textarea
@@ -435,7 +438,7 @@
             aria-describedby="urlHelp"
           ></textarea>
           <div class="tiny" id="urlHelp" style="margin-top:8px;">
-            Tip: use the full URL with <code>https://</code> for best compatibility. If you paste <code>example.com</code>, this tool will add <code>https://</code> only and will not rewrite the rest of what you typed.
+            Tip: use the full URL with <code>https://</code> for best compatibility. If you paste <code>example.com</code>, this tool will automatically convert it to <code>https://example.com</code>.
           </div>
 
           <div class="row" style="margin-top:12px;">
@@ -465,10 +468,11 @@
 
         <div class="box preview">
           <div class="qrWrap" id="qrWrap">
-            <div class="hint">Your URL QR code will appear here.</div>
+            <div class="hint" id="placeholder">Your URL QR code will appear here.</div>
           </div>
           <div class="hint">Tip: test-scan before printing or publishing.</div>
         </div>
+
       </div>
 
       <section class="info" aria-label="Why use a URL QR code">
@@ -524,7 +528,34 @@
     </div>
   </div>
 
-  <script src="/tools/vendor/qrious.min.js"></script>
+  <script>
+    (function(){
+      const primarySrc = "https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js";
+      const fallbackSrc = "https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js";
+
+      function loadScript(src, onload, onerror){
+        const s = document.createElement("script");
+        s.src = src;
+        s.async = true;
+        s.onload = onload;
+        s.onerror = onerror;
+        document.head.appendChild(s);
+      }
+
+      function bootWhenReady(){
+        if (window.QRious) {
+          window.__qrLibReady = true;
+          document.dispatchEvent(new CustomEvent("qrious-ready"));
+        }
+      }
+
+      loadScript(primarySrc, bootWhenReady, function(){
+        loadScript(fallbackSrc, bootWhenReady, function(){
+          document.dispatchEvent(new CustomEvent("qrious-failed"));
+        });
+      });
+    })();
+  </script>
 
   <script>
     const textEl = document.getElementById("text");
@@ -534,15 +565,17 @@
     const downloadBtn = document.getElementById("downloadBtn");
     const clearBtn = document.getElementById("clearBtn");
     const qrWrap = document.getElementById("qrWrap");
+    const placeholder = document.getElementById("placeholder");
     const statusEl = document.getElementById("status");
 
-    let lastCanvas = null;
+    let qr = null;
+    let canvas = null;
     let autoTimer = null;
 
     function setStatus(message, type){
       statusEl.textContent = message || "";
       statusEl.className = "status" + (type ? " " + type : "");
-      statusEl.style.display = message ? "block" : "none";
+      if (!message) statusEl.className = "status";
     }
 
     function normalizeUrl(raw){
@@ -564,7 +597,7 @@
         throw new Error("Only http:// and https:// URLs are supported.");
       }
 
-      return value;
+      return parsed.toString();
     }
 
     function getSafeSize(){
@@ -573,26 +606,24 @@
       return Math.min(1024, Math.max(128, n));
     }
 
-    function renderCanvas(canvas, size){
+    function ensureCanvas(){
+      if (canvas) return canvas;
+      canvas = document.createElement("canvas");
+      canvas.width = getSafeSize();
+      canvas.height = getSafeSize();
+
       const holder = document.createElement("div");
       holder.className = "canvasWrap";
-
-      canvas.style.display = "block";
-      canvas.style.width = "100%";
-      canvas.style.maxWidth = size + "px";
-      canvas.style.height = "auto";
-      canvas.style.background = "#ffffff";
-      canvas.style.borderRadius = "12px";
-
       holder.appendChild(canvas);
+
       qrWrap.innerHTML = "";
       qrWrap.appendChild(holder);
-      lastCanvas = canvas;
+      return canvas;
     }
 
     function generateQr(){
-      if (typeof window.QRious === "undefined") {
-        setStatus("QR library failed to load. Make sure /tools/vendor/qrious.min.js exists.", "error");
+      if (!window.QRious) {
+        setStatus("QR library is still loading. Please try again in a moment.", "error");
         return;
       }
 
@@ -607,21 +638,32 @@
       const size = getSafeSize();
       const level = levelEl.value || "M";
 
-      try {
-        const qr = new QRious({
-          value: value,
-          size: size,
-          level: level,
-          padding: 10,
-          background: "#ffffff",
-          foreground: "#000000"
-        });
+      textEl.value = value;
+      const el = ensureCanvas();
 
-        if (!qr || !qr.canvas) {
-          throw new Error("QR canvas could not be created.");
+      try {
+        if (!qr) {
+          qr = new QRious({
+            element: el,
+            value,
+            size,
+            level,
+            padding: 10,
+            background: "white",
+            foreground: "black"
+          });
+        } else {
+          qr.value = value;
+          qr.size = size;
+          qr.level = level;
+          qr.background = "white";
+          qr.foreground = "black";
+          qr.padding = 10;
         }
 
-        renderCanvas(qr.canvas, size);
+        el.style.width = "100%";
+        el.style.maxWidth = size + "px";
+        el.style.height = "auto";
         setStatus("QR code generated successfully.", "ok");
       } catch (err) {
         setStatus("Unable to generate the QR code. Please try again.", "error");
@@ -629,15 +671,16 @@
     }
 
     function downloadQr(){
-      if (!lastCanvas) {
+      if (!canvas) {
         setStatus("Generate a QR code before downloading.", "error");
         return;
       }
 
       try {
         const link = document.createElement("a");
-        link.href = lastCanvas.toDataURL("image/png");
-        link.download = "url-qr-code.png";
+        const cleanName = "url-qr-code.png";
+        link.href = canvas.toDataURL("image/png");
+        link.download = cleanName;
         document.body.appendChild(link);
         link.click();
         link.remove();
@@ -651,8 +694,9 @@
       textEl.value = "";
       sizeEl.value = "320";
       levelEl.value = "M";
-      lastCanvas = null;
-      qrWrap.innerHTML = '<div class="hint">Your URL QR code will appear here.</div>';
+      qr = null;
+      canvas = null;
+      qrWrap.innerHTML = '<div class="hint" id="placeholder">Your URL QR code will appear here.</div>';
       setStatus("", "");
       textEl.focus();
     }
@@ -670,8 +714,8 @@
 
     textEl.addEventListener("paste", () => setTimeout(maybeAutoGenerate, 40));
     textEl.addEventListener("input", maybeAutoGenerate);
-    sizeEl.addEventListener("change", () => { if (lastCanvas) generateQr(); });
-    levelEl.addEventListener("change", () => { if (lastCanvas) generateQr(); });
+    sizeEl.addEventListener("change", () => { if (canvas) generateQr(); });
+    levelEl.addEventListener("change", () => { if (canvas) generateQr(); });
 
     textEl.addEventListener("keydown", (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
@@ -679,12 +723,18 @@
       }
     });
 
-    const params = new URLSearchParams(window.location.search);
-    const paramUrl = params.get("url");
-    if (paramUrl) {
-      textEl.value = paramUrl;
-      generateQr();
-    }
+    document.addEventListener("qrious-ready", () => {
+      const params = new URLSearchParams(window.location.search);
+      const paramUrl = params.get("url");
+      if (paramUrl) {
+        textEl.value = paramUrl;
+        generateQr();
+      }
+    });
+
+    document.addEventListener("qrious-failed", () => {
+      setStatus("The QR generator library failed to load. Check your connection or try again.", "error");
+    });
   </script>
 </body>
 </html>
