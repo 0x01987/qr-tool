@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Staking Rewards Calculator | Crypto APY, APR & Compound Earnings | InstantQR.io</title>
+  <meta name="description" content="Free staking rewards calculator for crypto investors. Estimate staking earnings with APY or APR, validator fee, compounding frequency, token price, and recurring contributions." />
+  <meta name="keywords" content="staking rewards calculator, crypto staking calculator, APY calculator, APR calculator, compound staking calculator, validator fee calculator, staking profit calculator, web3 staking tool" />
+  <meta name="author" content="InstantQR.io" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="theme-color" content="#0b1020" />
+
+  <link rel="canonical" href="https://instantqr.io/web3-tools/staking-rewards-calculator.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Staking Rewards Calculator | Crypto APY, APR & Compound Earnings" />
+  <meta property="og:description" content="Estimate staking rewards, final balance, profit, validator fee impact, and portfolio value over time." />
+  <meta property="og:url" content="https://instantqr.io/web3-tools/staking-rewards-calculator.html" />
+  <meta property="og:site_name" content="InstantQR.io" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Staking Rewards Calculator | Crypto APY, APR & Compound Earnings" />
+  <meta name="twitter:description" content="Free crypto staking calculator with APY, APR, compounding, validator fee, token price, and recurring contribution support." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+
+  <style>
+    :root{
+      --bg:#070b16;
+      --bg2:#0c1327;
+      --panel:#101933;
+      --panel2:#121f3e;
+      --text:#eaf1ff;
+      --muted:#9fb0d3;
+      --line:rgba(255,255,255,.09);
+      --accent:#6ea8fe;
+      --accent2:#7cf0c8;
+      --good:#72e7a5;
+      --warn:#ffd56a;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:22px;
+      --radius-sm:14px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1100px 560px at 10% -10%, rgba(110,168,254,.18), transparent 55%),
+        radial-gradient(900px 520px at 100% 0%, rgba(124,240,200,.10), transparent 50%),
+        linear-gradient(180deg, #09101f 0%, #070b16 100%);
+      min-height:100vh;
+    }
+
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .container{max-width:var(--max);margin:0 auto;padding:0 20px}
+    .topbar{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:saturate(140%) blur(14px);
+      background:rgba(7,11,22,.72);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;min-height:72px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      color:#fff;font-weight:800;letter-spacing:.2px;
+    }
+    .brand img{width:34px;height:34px;display:block}
+    .navlinks{display:flex;gap:16px;flex-wrap:wrap}
+    .navlinks a{
+      color:var(--muted);font-weight:600;font-size:.96rem;
+    }
+    .navlinks a:hover{color:#fff;text-decoration:none}
+
+    .hero{padding:28px 0 18px}
+    .breadcrumbs{
+      display:flex;flex-wrap:wrap;gap:8px;
+      color:var(--muted);font-size:.95rem;margin:6px 0 18px;
+    }
+    .breadcrumbs span{opacity:.65}
+    .heroCard{
+      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      border-radius:28px;
+      padding:28px;
+      overflow:hidden;
+      position:relative;
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute;inset:auto -120px -120px auto;
+      width:280px;height:280px;border-radius:50%;
+      background:radial-gradient(circle, rgba(110,168,254,.14), transparent 65%);
+      pointer-events:none;
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      background:rgba(110,168,254,.10);
+      border:1px solid rgba(110,168,254,.18);
+      color:#dbe8ff;font-weight:700;font-size:.86rem;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(2rem, 4vw, 3.35rem);
+      line-height:1.05;
+      letter-spacing:-.03em;
+    }
+    .lead{
+      margin:0;
+      max-width:860px;
+      color:var(--muted);
+      font-size:1.06rem;
+      line-height:1.72;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:22px;
+      margin:22px 0 18px;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+    .card h2,.card h3{
+      margin:0 0 16px;
+      letter-spacing:-.02em;
+    }
+    .muted{color:var(--muted)}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .field.full{grid-column:1/-1}
+    label{
+      font-weight:700;
+      font-size:.95rem;
+      color:#edf4ff;
+    }
+    .sub{
+      color:var(--muted);
+      font-size:.84rem;
+      line-height:1.45;
+    }
+    input,select{
+      width:100%;
+      appearance:none;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0a1328;
+      color:#fff;
+      border-radius:14px;
+      padding:14px 14px;
+      font-size:1rem;
+      outline:none;
+      transition:border-color .18s ease, box-shadow .18s ease, transform .04s ease;
+    }
+    input:focus,select:focus{
+      border-color:rgba(110,168,254,.55);
+      box-shadow:0 0 0 4px rgba(110,168,254,.14);
+    }
+    .actions{
+      display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;
+    }
+    button{
+      appearance:none;border:none;cursor:pointer;
+      border-radius:14px;padding:14px 18px;font-weight:800;
+      font-size:1rem;
+      transition:transform .04s ease, opacity .18s ease, box-shadow .2s ease;
+    }
+    button:active{transform:translateY(1px)}
+    .btnPrimary{
+      background:linear-gradient(135deg, var(--accent), #90bbff);
+      color:#081120;
+      box-shadow:0 10px 28px rgba(110,168,254,.28);
+    }
+    .btnGhost{
+      background:#0c1730;color:#e7efff;border:1px solid rgba(255,255,255,.08);
+    }
+
+    .quickStats{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+    .stat{
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.01));
+      border-radius:18px;
+      padding:16px;
+    }
+    .stat .k{
+      color:var(--muted);
+      font-size:.86rem;
+      margin-bottom:8px;
+    }
+    .stat .v{
+      font-size:1.4rem;
+      font-weight:800;
+      letter-spacing:-.02em;
+      word-break:break-word;
+    }
+    .stat .v.small{font-size:1.08rem}
+
+    .resultList{
+      margin-top:14px;
+      display:grid;
+      gap:12px;
+    }
+    .resultRow{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding:14px 16px;border-radius:16px;
+      background:#0a1328;border:1px solid rgba(255,255,255,.08);
+    }
+    .resultRow .name{color:var(--muted);font-weight:700}
+    .resultRow .value{font-weight:800;font-size:1.03rem;text-align:right}
+
+    .note{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(124,240,200,.08);
+      border:1px solid rgba(124,240,200,.16);
+      color:#dffcf2;
+      line-height:1.6;
+      font-size:.95rem;
+    }
+
+    .section{padding:8px 0 14px}
+    .section h2{
+      margin:0 0 14px;
+      font-size:1.6rem;
+      letter-spacing:-.02em;
+    }
+
+    .three{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+    .mini{
+      padding:20px;
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid var(--line);
+    }
+    .mini h3{margin:0 0 10px;font-size:1.05rem}
+    .mini p{margin:0;color:var(--muted);line-height:1.7}
+
+    .faq{
+      display:grid;
+      gap:14px;
+    }
+    details{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border-radius:18px;
+      padding:16px 18px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin:12px 0 0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .footer{
+      padding:28px 0 56px;
+      color:var(--muted);
+    }
+    .footerCard{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.015));
+      border-radius:22px;
+      padding:22px;
+    }
+    .footerLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 14px;
+      margin:12px 0 0;
+    }
+    .footerLinks a{color:#d7e4ff}
+    .mono{
+      font-variant-numeric:tabular-nums;
+      font-feature-settings:"tnum" 1;
+    }
+
+    @media (max-width: 980px){
+      .layout{grid-template-columns:1fr}
+      .three{grid-template-columns:1fr}
+    }
+    @media (max-width: 680px){
+      .grid,.quickStats{grid-template-columns:1fr}
+      .heroCard,.card,.footerCard{padding:18px}
+      .nav{min-height:64px}
+      h1{font-size:2rem}
+      .resultRow{align-items:flex-start;flex-direction:column}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"InstantQR.io Staking Rewards Calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "url":"https://instantqr.io/web3-tools/staking-rewards-calculator.html",
+    "description":"Free staking rewards calculator for crypto investors. Estimate APY, APR, validator fee impact, compounding rewards, and total portfolio value.",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Web3 Tools",
+        "item":"https://instantqr.io/web3-tools/web3-tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Staking Rewards Calculator",
+        "item":"https://instantqr.io/web3-tools/staking-rewards-calculator.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is a staking rewards calculator?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A staking rewards calculator estimates how much crypto you may earn by staking tokens over time based on APY or APR, compounding frequency, validator fee, and optional recurring contributions."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What is the difference between APY and APR?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"APR is the simple yearly rate without compounding. APY includes the effect of compounding, which can increase total rewards depending on how often earnings are restaked."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this crypto staking calculator support compounding?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can choose no compounding or common compounding intervals such as daily, weekly, monthly, quarterly, or yearly to estimate more realistic staking outcomes."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How does validator fee affect staking rewards?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Validator fee reduces the gross reward rate before rewards are added to your balance. A higher fee lowers your net annual return and your final staking profit."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <span>InstantQR.io</span>
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/web3-tools/web3-tools.html">Web3 Tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>›</span>
+        <a href="/web3-tools/web3-tools.html">Web3 Tools</a>
+        <span>›</span>
+        <span>Staking Rewards Calculator</span>
+      </nav>
+
+      <div class="heroCard">
+        <div class="eyebrow">Web3 Calculator</div>
+        <h1>Staking Rewards Calculator</h1>
+        <p class="lead">
+          Estimate staking rewards, compounding growth, validator fee impact, and total portfolio value.
+          Fast, responsive, and built for crypto investors who want a clean APY and APR projection tool.
+        </p>
+      </div>
+    </section>
+
+    <section class="layout">
+      <div class="card">
+        <h2>Enter staking details</h2>
+        <div class="grid">
+          <div class="field">
+            <label for="initialStake">Initial stake</label>
+            <input id="initialStake" type="number" min="0" step="any" value="1000" inputmode="decimal" />
+            <div class="sub">Starting amount of tokens you plan to stake.</div>
+          </div>
+
+          <div class="field">
+            <label for="rateValue">Rate (%)</label>
+            <input id="rateValue" type="number" min="0" step="any" value="12" inputmode="decimal" />
+            <div class="sub">Enter the advertised APR or APY.</div>
+          </div>
+
+          <div class="field">
+            <label for="rateType">Rate type</label>
+            <select id="rateType">
+              <option value="apy" selected>APY</option>
+              <option value="apr">APR</option>
+            </select>
+            <div class="sub">APY already includes compounding. APR does not.</div>
+          </div>
+
+          <div class="field">
+            <label for="validatorFee">Validator fee (%)</label>
+            <input id="validatorFee" type="number" min="0" max="100" step="any" value="5" inputmode="decimal" />
+            <div class="sub">Fee deducted from rewards, not from principal.</div>
+          </div>
+
+          <div class="field">
+            <label for="durationValue">Duration</label>
+            <input id="durationValue" type="number" min="0" step="any" value="12" inputmode="decimal" />
+            <div class="sub">How long the stake stays active.</div>
+          </div>
+
+          <div class="field">
+            <label for="durationUnit">Duration unit</label>
+            <select id="durationUnit">
+              <option value="days">Days</option>
+              <option value="months" selected>Months</option>
+              <option value="years">Years</option>
+            </select>
+            <div class="sub">Days, months, or years.</div>
+          </div>
+
+          <div class="field">
+            <label for="compound">Compounding</label>
+            <select id="compound">
+              <option value="0">No compounding</option>
+              <option value="365">Daily</option>
+              <option value="52">Weekly</option>
+              <option value="12" selected>Monthly</option>
+              <option value="4">Quarterly</option>
+              <option value="1">Yearly</option>
+            </select>
+            <div class="sub">How often rewards are restaked.</div>
+          </div>
+
+          <div class="field">
+            <label for="monthlyContribution">Recurring contribution</label>
+            <input id="monthlyContribution" type="number" min="0" step="any" value="0" inputmode="decimal" />
+            <div class="sub">Optional token amount added each month.</div>
+          </div>
+
+          <div class="field">
+            <label for="tokenPrice">Token price (optional)</label>
+            <input id="tokenPrice" type="number" min="0" step="any" value="0" inputmode="decimal" />
+            <div class="sub">Used to estimate portfolio value in fiat.</div>
+          </div>
+
+          <div class="field">
+            <label for="currency">Currency</label>
+            <select id="currency">
+              <option value="USD" selected>USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="CAD">CAD</option>
+              <option value="AUD">AUD</option>
+              <option value="JPY">JPY</option>
+              <option value="ETH">ETH</option>
+              <option value="BTC">BTC</option>
+            </select>
+            <div class="sub">Display currency for estimated value.</div>
+          </div>
+
+          <div class="field full">
+            <label for="notes">Notes</label>
+            <input id="notes" type="text" placeholder="Optional: ETH staking, SOL validator, ADA pool, etc." />
+            <div class="sub">Purely optional and stays in your browser only.</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btnPrimary" id="calculateBtn" type="button">Calculate rewards</button>
+          <button class="btnGhost" id="resetBtn" type="button">Reset</button>
+          <button class="btnGhost" id="shareBtn" type="button">Copy share link</button>
+        </div>
+
+        <div class="note">
+          This calculator is for estimation only. Real staking returns can change based on network inflation, lock-up periods,
+          slashing risk, validator uptime, token price volatility, and protocol-specific reward mechanics.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Estimated results</h2>
+
+        <div class="quickStats">
+          <div class="stat">
+            <div class="k">Final token balance</div>
+            <div class="v mono" id="finalBalance">0</div>
+          </div>
+          <div class="stat">
+            <div class="k">Net rewards earned</div>
+            <div class="v mono" id="netRewards">0</div>
+          </div>
+          <div class="stat">
+            <div class="k">Total contributions</div>
+            <div class="v mono" id="totalContributions">0</div>
+          </div>
+          <div class="stat">
+            <div class="k">Estimated portfolio value</div>
+            <div class="v mono small" id="portfolioValue">—</div>
+          </div>
+        </div>
+
+        <div class="resultList" aria-live="polite">
+          <div class="resultRow">
+            <div class="name">Effective annual rate after validator fee</div>
+            <div class="value mono" id="effectiveRate">0%</div>
+          </div>
+          <div class="resultRow">
+            <div class="name">Gross rewards before fee</div>
+            <div class="value mono" id="grossRewards">0</div>
+          </div>
+          <div class="resultRow">
+            <div class="name">Validator fees on rewards</div>
+            <div class="value mono" id="feeAmount">0</div>
+          </div>
+          <div class="resultRow">
+            <div class="name">Average monthly reward</div>
+            <div class="value mono" id="avgMonthlyReward">0</div>
+          </div>
+          <div class="resultRow">
+            <div class="name">Compounding mode</div>
+            <div class="value mono" id="compoundLabel">Monthly</div>
+          </div>
+          <div class="resultRow">
+            <div class="name">Staking period</div>
+            <div class="value mono" id="periodLabel">12 months</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Why use this staking calculator?</h2>
+      <div class="three">
+        <div class="mini">
+          <h3>See realistic reward estimates</h3>
+          <p>Model net returns after validator fee, instead of looking only at the advertised staking rate.</p>
+        </div>
+        <div class="mini">
+          <h3>Test compounding strategies</h3>
+          <p>Compare no restaking against daily, weekly, monthly, quarterly, or yearly compounding.</p>
+        </div>
+        <div class="mini">
+          <h3>Measure long-term growth</h3>
+          <p>Add recurring contributions to estimate how a staking position could grow over months or years.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <h2>How to use the staking rewards calculator</h2>
+        <p class="muted" style="margin:0;line-height:1.8">
+          Enter your initial token amount, choose whether the published rate is APR or APY, set your validator fee,
+          select the staking duration, and choose how often rewards are compounded. Add an optional monthly contribution
+          if you plan to keep buying and staking more tokens over time. You can also enter the token price to estimate
+          portfolio value in fiat.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Frequently asked questions</h2>
+      <div class="faq">
+        <details>
+          <summary>What is the difference between APR and APY in staking?</summary>
+          <p>
+            APR is the simple annual percentage rate and does not include compounding. APY includes the effect of
+            compounding over a year. If a protocol advertises APY, it usually assumes rewards are being restaked.
+          </p>
+        </details>
+
+        <details>
+          <summary>Does validator fee reduce my principal?</summary>
+          <p>
+            Usually no. Validator fee is typically taken from the rewards you earn, not your original staked amount.
+            This tool models the fee as a reduction to rewards, which lowers the effective annual return.
+          </p>
+        </details>
+
+        <details>
+          <summary>Why is token price optional?</summary>
+          <p>
+            Some users only want to estimate token growth. Others also want a fiat value estimate. If you enter a token
+            price, the calculator multiplies your final token balance by that price to estimate portfolio value.
+          </p>
+        </details>
+
+        <details>
+          <summary>Can this calculator predict actual staking returns?</summary>
+          <p>
+            No. It is an estimate only. Real returns depend on protocol emissions, network conditions, slashing risk,
+            lock-up rules, variable reward rates, and token price changes.
+          </p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footerCard">
+        <strong>Explore more InstantQR.io tools</strong>
+        <div class="footerLinks">
+          <a href="/web3-tools/web3-tools.html">Web3 Tools</a>
+          <a href="/web3-tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+          <a href="/web3-tools/dca-calculator.html">DCA Calculator</a>
+          <a href="/web3-tools/gas-tracker.html">Gas Tracker</a>
+          <a href="/web3-tools/transaction-status-checker.html">Transaction Status Checker</a>
+          <a href="/web3-tools/token-contract-analyzer.html">Token Contract Analyzer</a>
+          <a href="/tools.html">All Tools</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+
+      const els = {
+        initialStake: $("initialStake"),
+        rateValue: $("rateValue"),
+        rateType: $("rateType"),
+        validatorFee: $("validatorFee"),
+        durationValue: $("durationValue"),
+        durationUnit: $("durationUnit"),
+        compound: $("compound"),
+        monthlyContribution: $("monthlyContribution"),
+        tokenPrice: $("tokenPrice"),
+        currency: $("currency"),
+        notes: $("notes"),
+
+        finalBalance: $("finalBalance"),
+        netRewards: $("netRewards"),
+        totalContributions: $("totalContributions"),
+        portfolioValue: $("portfolioValue"),
+        effectiveRate: $("effectiveRate"),
+        grossRewards: $("grossRewards"),
+        feeAmount: $("feeAmount"),
+        avgMonthlyReward: $("avgMonthlyReward"),
+        compoundLabel: $("compoundLabel"),
+        periodLabel: $("periodLabel"),
+
+        calculateBtn: $("calculateBtn"),
+        resetBtn: $("resetBtn"),
+        shareBtn: $("shareBtn")
+      };
+
+      function toNum(v) {
+        const n = parseFloat(v);
+        return Number.isFinite(n) ? n : 0;
+      }
+
+      function clamp(n, min, max) {
+        return Math.min(Math.max(n, min), max);
+      }
+
+      function durationToYears(value, unit) {
+        if (unit === "days") return value / 365;
+        if (unit === "months") return value / 12;
+        return value;
+      }
+
+      function durationToMonths(value, unit) {
+        if (unit === "days") return value / 30.4167;
+        if (unit === "years") return value * 12;
+        return value;
+      }
+
+      function formatToken(value) {
+        if (!Number.isFinite(value)) return "0";
+        return value.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: value >= 1000 ? 2 : 6
+        });
+      }
+
+      function formatCurrency(value, currency) {
+        if (!Number.isFinite(value)) return "—";
+        const fiat = ["USD","EUR","GBP","CAD","AUD","JPY"];
+        if (fiat.includes(currency)) {
+          return new Intl.NumberFormat(undefined, {
+            style: "currency",
+            currency,
+            maximumFractionDigits: 2
+          }).format(value);
+        }
+        return `${formatToken(value)} ${currency}`;
+      }
+
+      function compoundLabel(n) {
+        if (n === 0) return "No compounding";
+        if (n === 365) return "Daily";
+        if (n === 52) return "Weekly";
+        if (n === 12) return "Monthly";
+        if (n === 4) return "Quarterly";
+        if (n === 1) return "Yearly";
+        return `${n}x/year`;
+      }
+
+      function periodLabel(value, unit) {
+        const v = Number(value);
+        if (!Number.isFinite(v)) return "";
+        const singular = { days: "day", months: "month", years: "year" };
+        const plural = { days: "days", months: "months", years: "years" };
+        return `${v} ${Math.abs(v) === 1 ? singular[unit] : plural[unit]}`;
+      }
+
+      function calculate() {
+        const initialStake = Math.max(0, toNum(els.initialStake.value));
+        const inputRate = Math.max(0, toNum(els.rateValue.value)) / 100;
+        const rateType = els.rateType.value;
+        const validatorFee = clamp(toNum(els.validatorFee.value), 0, 100) / 100;
+        const durationValue = Math.max(0, toNum(els.durationValue.value));
+        const durationUnit = els.durationUnit.value;
+        const compoundsPerYear = parseInt(els.compound.value, 10);
+        const monthlyContribution = Math.max(0, toNum(els.monthlyContribution.value));
+        const tokenPrice = Math.max(0, toNum(els.tokenPrice.value));
+        const currency = els.currency.value;
+
+        const years = durationToYears(durationValue, durationUnit);
+        const months = durationToMonths(durationValue, durationUnit);
+
+        let grossAnnualRate;
+        if (rateType === "apy") {
+          grossAnnualRate = inputRate;
+        } else {
+          grossAnnualRate = inputRate;
+        }
+
+        const netAnnualRate = grossAnnualRate * (1 - validatorFee);
+
+        let balance = initialStake;
+        let totalAdded = initialStake;
+        let grossRewards = 0;
+        let netRewards = 0;
+
+        const steps = Math.max(1, Math.ceil(months));
+        const monthlyRateFromAPR = netAnnualRate / 12;
+        const monthlyRateFromAPY = Math.pow(1 + netAnnualRate, 1 / 12) - 1;
+
+        if (compoundsPerYear === 0) {
+          let grossNoComp;
+          let netNoComp;
+
+          if (rateType === "apr") {
+            grossNoComp = initialStake * grossAnnualRate * years;
+            netNoComp = initialStake * netAnnualRate * years;
+          } else {
+            grossNoComp = initialStake * grossAnnualRate * years;
+            netNoComp = initialStake * netAnnualRate * years;
+          }
+
+          const recurringMonths = Math.max(0, Math.floor(months));
+          const addedRecurring = monthlyContribution * recurringMonths;
+
+          balance = initialStake + addedRecurring + netNoComp;
+          totalAdded = initialStake + addedRecurring;
+          grossRewards = grossNoComp;
+          netRewards = netNoComp;
+        } else {
+          const periods = Math.max(1, Math.round(compoundsPerYear * years));
+          const periodYears = years / periods;
+          const contributionPerPeriod = monthlyContribution * (12 / compoundsPerYear);
+
+          if (rateType === "apr") {
+            const grossPeriodicRate = grossAnnualRate / compoundsPerYear;
+            const netPeriodicRate = netAnnualRate / compoundsPerYear;
+
+            for (let i = 0; i < periods; i++) {
+              const grossPeriodReward = balance * grossPeriodicRate;
+              const netPeriodReward = balance * netPeriodicRate;
+              grossRewards += grossPeriodReward;
+              netRewards += netPeriodReward;
+              balance += netPeriodReward;
+
+              if (i < periods - 1 && contributionPerPeriod > 0) {
+                balance += contributionPerPeriod;
+                totalAdded += contributionPerPeriod;
+              }
+            }
+          } else {
+            const grossPeriodicRate = Math.pow(1 + grossAnnualRate, 1 / compoundsPerYear) - 1;
+            const netPeriodicRate = Math.pow(1 + netAnnualRate, 1 / compoundsPerYear) - 1;
+
+            for (let i = 0; i < periods; i++) {
+              const grossPeriodReward = balance * grossPeriodicRate;
+              const netPeriodReward = balance * netPeriodicRate;
+              grossRewards += grossPeriodReward;
+              netRewards += netPeriodReward;
+              balance += netPeriodReward;
+
+              if (i < periods - 1 && contributionPerPeriod > 0) {
+                balance += contributionPerPeriod;
+                totalAdded += contributionPerPeriod;
+              }
+            }
+          }
+        }
+
+        const feeAmount = Math.max(0, grossRewards - netRewards);
+        const estValue = tokenPrice > 0 ? balance * tokenPrice : NaN;
+        const avgMonthlyReward = months > 0 ? netRewards / months : 0;
+
+        els.finalBalance.textContent = formatToken(balance);
+        els.netRewards.textContent = formatToken(netRewards);
+        els.totalContributions.textContent = formatToken(totalAdded);
+        els.portfolioValue.textContent = Number.isFinite(estValue) ? formatCurrency(estValue, currency) : "—";
+        els.effectiveRate.textContent = (netAnnualRate * 100).toFixed(2) + "%";
+        els.grossRewards.textContent = formatToken(grossRewards);
+        els.feeAmount.textContent = formatToken(feeAmount);
+        els.avgMonthlyReward.textContent = formatToken(avgMonthlyReward);
+        els.compoundLabel.textContent = compoundLabel(compoundsPerYear);
+        els.periodLabel.textContent = periodLabel(durationValue, durationUnit);
+      }
+
+      function resetForm() {
+        els.initialStake.value = "1000";
+        els.rateValue.value = "12";
+        els.rateType.value = "apy";
+        els.validatorFee.value = "5";
+        els.durationValue.value = "12";
+        els.durationUnit.value = "months";
+        els.compound.value = "12";
+        els.monthlyContribution.value = "0";
+        els.tokenPrice.value = "0";
+        els.currency.value = "USD";
+        els.notes.value = "";
+        updateUrl(false);
+        calculate();
+      }
+
+      function updateUrl(push = true) {
+        const params = new URLSearchParams();
+        params.set("stake", els.initialStake.value || "0");
+        params.set("rate", els.rateValue.value || "0");
+        params.set("type", els.rateType.value);
+        params.set("fee", els.validatorFee.value || "0");
+        params.set("dur", els.durationValue.value || "0");
+        params.set("unit", els.durationUnit.value);
+        params.set("comp", els.compound.value);
+        params.set("add", els.monthlyContribution.value || "0");
+        params.set("price", els.tokenPrice.value || "0");
+        params.set("cur", els.currency.value);
+        if (els.notes.value.trim()) params.set("note", els.notes.value.trim());
+
+        const newUrl = window.location.pathname + "?" + params.toString();
+        if (push) history.replaceState(null, "", newUrl);
+      }
+
+      function loadFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.has("stake")) els.initialStake.value = params.get("stake");
+        if (params.has("rate")) els.rateValue.value = params.get("rate");
+        if (params.has("type")) els.rateType.value = params.get("type");
+        if (params.has("fee")) els.validatorFee.value = params.get("fee");
+        if (params.has("dur")) els.durationValue.value = params.get("dur");
+        if (params.has("unit")) els.durationUnit.value = params.get("unit");
+        if (params.has("comp")) els.compound.value = params.get("comp");
+        if (params.has("add")) els.monthlyContribution.value = params.get("add");
+        if (params.has("price")) els.tokenPrice.value = params.get("price");
+        if (params.has("cur")) els.currency.value = params.get("cur");
+        if (params.has("note")) els.notes.value = params.get("note");
+      }
+
+      async function copyShareLink() {
+        updateUrl(true);
+        const url = window.location.href;
+        try {
+          await navigator.clipboard.writeText(url);
+          els.shareBtn.textContent = "Link copied";
+          setTimeout(() => els.shareBtn.textContent = "Copy share link", 1400);
+        } catch (e) {
+          const ta = document.createElement("textarea");
+          ta.value = url;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          ta.remove();
+          els.shareBtn.textContent = "Link copied";
+          setTimeout(() => els.shareBtn.textContent = "Copy share link", 1400);
+        }
+      }
+
+      [
+        els.initialStake, els.rateValue, els.rateType, els.validatorFee,
+        els.durationValue, els.durationUnit, els.compound, els.monthlyContribution,
+        els.tokenPrice, els.currency, els.notes
+      ].forEach(el => {
+        el.addEventListener("input", () => {
+          updateUrl(true);
+          calculate();
+        });
+        el.addEventListener("change", () => {
+          updateUrl(true);
+          calculate();
+        });
+      });
+
+      els.calculateBtn.addEventListener("click", () => {
+        updateUrl(true);
+        calculate();
+      });
+      els.resetBtn.addEventListener("click", resetForm);
+      els.shareBtn.addEventListener("click", copyShareLink);
+
+      loadFromUrl();
+      calculate();
+    })();
+  </script>
+</body>
+</html>
