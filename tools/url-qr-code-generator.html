@@ -414,7 +414,7 @@
       <section class="info" aria-label="How to create a QR code for a website">
         <h2>How to Create a QR Code for a Website</h2>
         <ol>
-          <li>Enter your website URL below and include <strong>https://</strong>.</li>
+          <li>Enter your website URL below.</li>
           <li>Click <strong>Generate</strong>.</li>
           <li>Download your QR code as a PNG image.</li>
         </ol>
@@ -431,14 +431,14 @@
           <label for="text">Website URL</label>
           <textarea
             id="text"
-            placeholder="https://example.com"
+            placeholder="example.com or https://example.com"
             inputmode="url"
             autocomplete="off"
             spellcheck="false"
             aria-describedby="urlHelp"
           ></textarea>
           <div class="tiny" id="urlHelp" style="margin-top:8px;">
-            Tip: use the full URL with <code>https://</code> for best compatibility. If you paste <code>example.com</code>, this tool will automatically convert it to <code>https://example.com</code>.
+            This tool uses exactly what you enter. It will not auto-add <code>https://</code>.
           </div>
 
           <div class="row" style="margin-top:12px;">
@@ -487,7 +487,7 @@
         <h2 style="margin-top:16px;">Best Practices</h2>
         <ul>
           <li>Always test the QR code before printing or publishing.</li>
-          <li>Use a short, clean URL if possible for easier scanning.</li>
+          <li>Use the exact URL format you want encoded.</li>
           <li>Choose <strong>M</strong> or <strong>H</strong> error correction for printed materials.</li>
           <li>Use larger sizes like 512px+ for posters and signage.</li>
         </ul>
@@ -498,7 +498,7 @@
 
         <details>
           <summary>How do I create a QR code for a website?</summary>
-          <p>Paste your full website link, click Generate, then download the QR code as a PNG image.</p>
+          <p>Paste your website link exactly as you want it encoded, click Generate, then download the QR code as a PNG image.</p>
         </details>
 
         <details>
@@ -507,8 +507,8 @@
         </details>
 
         <details>
-          <summary>Should I include https:// in my link?</summary>
-          <p>Yes. Using the full URL helps scanners open the correct website reliably.</p>
+          <summary>Will this tool add https:// automatically?</summary>
+          <p>No. This version uses exactly what you type and does not auto-add a scheme.</p>
         </details>
 
         <details>
@@ -565,11 +565,9 @@
     const downloadBtn = document.getElementById("downloadBtn");
     const clearBtn = document.getElementById("clearBtn");
     const qrWrap = document.getElementById("qrWrap");
-    const placeholder = document.getElementById("placeholder");
     const statusEl = document.getElementById("status");
 
-    let qr = null;
-    let canvas = null;
+    let lastCanvas = null;
     let autoTimer = null;
 
     function setStatus(message, type){
@@ -578,26 +576,10 @@
       if (!message) statusEl.className = "status";
     }
 
-    function normalizeUrl(raw){
-      let value = (raw || "").trim();
+    function getRawValue(raw){
+      const value = (raw || "").trim();
       if (!value) throw new Error("Please enter a website URL.");
-
-      if (!/^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(value)) {
-        value = "https://" + value;
-      }
-
-      let parsed;
-      try {
-        parsed = new URL(value);
-      } catch {
-        throw new Error("Please enter a valid URL.");
-      }
-
-      if (!/^https?:$/.test(parsed.protocol)) {
-        throw new Error("Only http:// and https:// URLs are supported.");
-      }
-
-      return parsed.toString();
+      return value;
     }
 
     function getSafeSize(){
@@ -629,7 +611,7 @@
 
       let value;
       try {
-        value = normalizeUrl(textEl.value);
+        value = getRawValue(textEl.value);
       } catch (err) {
         setStatus(err.message, "error");
         return;
@@ -638,7 +620,6 @@
       const size = getSafeSize();
       const level = levelEl.value || "M";
 
-      textEl.value = value;
       const el = ensureCanvas();
 
       try {
