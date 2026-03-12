@@ -25,7 +25,6 @@
     status: $("status")
   };
 
-  let qrInstance = null;
   let canvasEl = null;
   let autoTimer = null;
   let qrLibraryReady = typeof window.QRious !== "undefined";
@@ -112,7 +111,7 @@
     return url;
   }
 
-  function createCanvas() {
+  function createCanvas(size) {
     if (!els.qrWrap) {
       throw new Error("QR preview container is missing.");
     }
@@ -125,6 +124,18 @@
     canvasEl = document.createElement("canvas");
     canvasEl.setAttribute("aria-label", "Generated QR code");
 
+    // Set intrinsic size BEFORE drawing
+    canvasEl.width = size;
+    canvasEl.height = size;
+
+    // Only CSS sizing after that
+    canvasEl.style.display = "block";
+    canvasEl.style.width = "100%";
+    canvasEl.style.maxWidth = size + "px";
+    canvasEl.style.height = "auto";
+    canvasEl.style.background = "#ffffff";
+    canvasEl.style.borderRadius = "12px";
+
     canvasWrap.appendChild(canvasEl);
     els.qrWrap.appendChild(canvasWrap);
 
@@ -134,7 +145,6 @@
   function showPlaceholder() {
     if (!els.qrWrap) return;
     els.qrWrap.innerHTML = `<div class="hint">Your QR code will appear here.</div>`;
-    qrInstance = null;
     canvasEl = null;
   }
 
@@ -158,23 +168,18 @@
     const level = getSafeLevel();
 
     try {
-      const canvas = canvasEl || createCanvas();
+      const canvas = createCanvas(size);
 
-      qrInstance = new window.QRious({
+      // Draw once after canvas sizing is complete
+      new window.QRious({
         element: canvas,
         value: payload,
-        size,
-        level,
+        size: size,
+        level: level,
         padding: 10,
         background: "white",
         foreground: "black"
       });
-
-      canvas.width = size;
-      canvas.height = size;
-      canvas.style.width = "100%";
-      canvas.style.maxWidth = size + "px";
-      canvas.style.height = "auto";
 
       setStatus("QR code generated successfully.", "ok");
     } catch (err) {
