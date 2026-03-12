@@ -1,139 +1,358 @@
-// QR library must be loaded before this script
+// app.js
+// Safe shared QR generator logic for InstantQR
+// Supports:
+// - text/url QR pages
+// - WiFi QR pages
+// - mixed pages with type pills
+//
+// Requires QRious to be loaded before generate() is called.
 
-const pills = Array.from(document.querySelectorAll(".pill"));
-const textForm = document.getElementById("textForm");
-const wifiForm = document.getElementById("wifiForm");
+(function () {
+  "use strict";
 
-const textEl = document.getElementById("text");
-const ssidEl = document.getElementById("ssid");
-const secEl = document.getElementById("security");
-const passEl = document.getElementById("password");
-const hiddenEl = document.getElementById("hidden");
+  const $ = (id) => document.getElementById(id);
+  const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
-const sizeEl = document.getElementById("size");
-const levelEl = document.getElementById("level");
+  const pills = $$(".pill");
+  const typeBar = $("typeBar");
 
-const generateBtn = document.getElementById("generateBtn");
-const downloadBtn = document.getElementById("downloadBtn");
-const clearBtn = document.getElementById("clearBtn");
+  const textForm = $("textForm");
+  const wifiForm = $("wifiForm");
 
-const qrWrap = document.getElementById("qrWrap");
-const errorEl = document.getElementById("error");
+  const textEl = $("text");
+  const ssidEl = $("ssid");
+  const secEl = $("security");
+  const passEl = $("password");
+  const hiddenEl = $("hidden");
+  const showPassEl = $("showPass");
 
-let currentType = "text";
-let lastCanvas = null;
+  const sizeEl = $("size");
+  const levelEl = $("level");
 
-function setType(t){
-  currentType = t;
-  pills.forEach(p => p.classList.toggle("active", p.dataset.type === t));
-  textForm.style.display = t === "text" ? "block" : "none";
-  wifiForm.style.display = t === "wifi" ? "block" : "none";
-  hideError();
-}
+  const generateBtn = $("generateBtn");
+  const downloadBtn = $("downloadBtn");
+  const clearBtn = $("clearBtn");
 
-function hideError(){ errorEl.style.display = "none"; errorEl.textContent = ""; }
-function showError(msg){ errorEl.textContent = msg; errorEl.style.display = "block"; }
+  const qrWrap = $("qrWrap");
+  const errorEl = $("error") || $("status");
 
-function escWifi(s){
-  return (s || "").replace(/([\\;,:"])/g, "\\$1");
-}
+  let currentType = detectInitialType();
+  let lastCanvas = null;
+  let qrInstance = null;
 
-function buildPayload(){
-  if(currentType === "text"){
-    const v = (textEl.value || "").trim();
-    if(!v) throw new Error("Enter text or a URL.");
-    return v;
+  function detectInitialType() {
+    if (wifiForm && !textForm) return "wifi";
+    if (textForm && !wifiForm) return "text";
+    return "text";
   }
 
-  const ssid = (ssidEl.value || "").trim();
-  if(!ssid) throw new Error("Enter Wi-Fi name (SSID).");
+  function hasEl(el) {
+    return !!el;
+  }
 
-  const sec = secEl.value; // WPA | WEP | nopass
-  const hidden = hiddenEl.value; // true | false
-  const pass = (passEl.value || "").trim();
+  function setType(type) {
+    currentType = type === "wifi" ? "wifi" : "text";
 
-  if(sec !== "nopass" && !pass) throw new Error("Enter Wi-Fi password (or choose No password).");
+    pills.forEach((p) => {
+      p.classList.toggle("active", p.dataset.type === currentType);
+    });
 
-  return `WIFI:T:${sec};S:${escWifi(ssid)};P:${escWifi(pass)};H:${hidden};;`;
-}
-
-function clearQR(){
-  qrWrap.innerHTML = `<div class="hint">Your QR code will appear here.</div>`;
-  lastCanvas = null;
-}
-
-function generate(){
-  hideError();
-  try{
-    if(typeof QRious === "undefined"){
-      throw new Error("QR library failed to load. If you’re offline or blocked, download qrious.min.js and host it locally.");
+    if (textForm) {
+      textForm.style.display = currentType === "text" ? "block" : "none";
+    }
+    if (wifiForm) {
+      wifiForm.style.display = currentType === "wifi" ? "block" : "none";
     }
 
-    const payload = buildPayload();
-    const size = Math.max(128, Math.min(1024, parseInt(sizeEl.value || "320", 10)));
-    const level = levelEl.value;
+    hideError();
+  }
 
-    clearQR();
+  function hideError() {
+    if (!errorEl) return;
+    errorEl.textContent = "";
+    errorEl.style.display = "none";
+    errorEl.classList.remove("error", "ok");
+  }
 
-    const qr = new QRious({ value: payload, size, level });
+  function showError(msg) {
+    if (!errorEl) return;
+    errorEl.textContent = msg;
+    errorEl.style.display = "block";
+    errorEl.classList.remove("ok");
+    errorEl.classList.add("error");
+  }
 
-    const canvas = qr.canvas;
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
-    canvas.style.borderRadius = "12px";
-    canvas.style.background = "#ffffff";
+  function showOk(msg) {
+    if (!errorEl) return;
+    errorEl.textContent = msg;
+    errorEl.style.display = "block";
+    errorEl.classList.remove("error");
+    errorEl.classList.add("ok");
+  }
+
+  function escWifi(value) {
+    return String(value || "")
+      .replace(/\\/g, "\\\\")
+      .replace(/;/g, "\\;")
+      .replace(/,/g, "\\,")
+      .replace(/:/g, "\\:");
+  }
+
+  function normalizeUrl(value) {
+    let v = String(value || "").trim();
+    if (!v) throw new Error("Enter a URL.");
+
+    if (!/^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(v)) {
+      v = "https://" + v;
+    }
+
+    let parsed;
+    try {
+      parsed = new URL(v);
+    } catch {
+      throw new Error("Enter a valid URL.");
+    }
+
+    if (!/^https?:$/.test(parsed.protocol)) {
+      throw new Error("Only http:// and https:// URLs are supported.");
+    }
+
+    return parsed.toString();
+  }
+
+  function getSafeSize() {
+    const raw = parseInt(sizeEl?.value || "320", 10);
+    if (!Number.isFinite(raw)) return 320;
+    return Math.max(128, Math.min(1024, raw));
+  }
+
+  function getSafeLevel() {
+    const level = String(levelEl?.value || "M").toUpperCase();
+    return ["L", "M", "Q", "H"].includes(level) ? level : "M";
+  }
+
+  function buildPayload() {
+    if (currentType === "text") {
+      if (!textEl) throw new Error("Text input is missing.");
+      const value = normalizeUrl(textEl.value);
+      textEl.value = value;
+      return value;
+    }
+
+    if (!ssidEl || !secEl || !hiddenEl) {
+      throw new Error("WiFi fields are missing.");
+    }
+
+    const ssid = String(ssidEl.value || "").trim();
+    const sec = String(secEl.value || "WPA");
+    const hidden = String(hiddenEl.value || "false");
+    const pass = String(passEl?.value || "").trim();
+
+    if (!ssid) throw new Error("Enter Wi-Fi name (SSID).");
+    if (sec !== "nopass" && !pass) {
+      throw new Error("Enter Wi-Fi password or choose No password.");
+    }
+
+    return `WIFI:T:${sec};S:${escWifi(ssid)};P:${escWifi(pass)};H:${hidden};;`;
+  }
+
+  function clearQR() {
+    if (!qrWrap) return;
+    qrWrap.innerHTML = `<div class="hint">Your QR code will appear here.</div>`;
+    lastCanvas = null;
+    qrInstance = null;
+  }
+
+  function ensureCanvas() {
+    if (!qrWrap) throw new Error("QR preview container is missing.");
 
     qrWrap.innerHTML = "";
-    qrWrap.appendChild(canvas);
 
-    lastCanvas = canvas;
-  }catch(err){
-    showError(err.message || "Could not generate QR code.");
+    const wrap = document.createElement("div");
+    wrap.className = "canvasWrap";
+    wrap.style.width = "100%";
+    wrap.style.height = "100%";
+    wrap.style.display = "flex";
+    wrap.style.alignItems = "center";
+    wrap.style.justifyContent = "center";
+    wrap.style.background = "#ffffff";
+    wrap.style.borderRadius = "12px";
+    wrap.style.overflow = "hidden";
+
+    const canvas = document.createElement("canvas");
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    canvas.style.maxWidth = "100%";
+    canvas.style.maxHeight = "100%";
+    canvas.style.display = "block";
+    canvas.style.background = "#ffffff";
+    canvas.style.borderRadius = "12px";
+
+    wrap.appendChild(canvas);
+    qrWrap.appendChild(wrap);
+
+    return canvas;
   }
-}
 
-function downloadPNG(){
-  hideError();
-  if(!lastCanvas){
-    showError("Generate a QR code first.");
-    return;
+  function generate() {
+    hideError();
+
+    try {
+      if (typeof window.QRious === "undefined") {
+        throw new Error("QR library failed to load.");
+      }
+
+      const payload = buildPayload();
+      const size = getSafeSize();
+      const level = getSafeLevel();
+      const canvas = ensureCanvas();
+
+      qrInstance = new window.QRious({
+        element: canvas,
+        value: payload,
+        size,
+        level,
+        background: "white",
+        foreground: "black",
+        padding: 10
+      });
+
+      canvas.width = size;
+      canvas.height = size;
+      canvas.style.maxWidth = size + "px";
+      canvas.style.maxHeight = size + "px";
+
+      lastCanvas = canvas;
+      showOk("QR code generated.");
+    } catch (err) {
+      showError(err?.message || "Could not generate QR code.");
+    }
   }
-  const a = document.createElement("a");
-  a.download = "qr-code.png";
-  a.href = lastCanvas.toDataURL("image/png");
-  a.click();
-}
 
-function clearAll(){
-  hideError();
-  textEl.value = "";
-  ssidEl.value = "";
-  passEl.value = "";
-  secEl.value = "WPA";
-  hiddenEl.value = "false";
-  sizeEl.value = "320";
-  levelEl.value = "M";
-  clearQR();
-}
+  function downloadPNG() {
+    hideError();
 
-// Events
-document.getElementById("typeBar").addEventListener("click", (e) => {
-  const pill = e.target.closest(".pill");
-  if(!pill) return;
-  setType(pill.dataset.type);
-});
+    if (!lastCanvas) {
+      showError("Generate a QR code first.");
+      return;
+    }
 
-generateBtn.addEventListener("click", generate);
-downloadBtn.addEventListener("click", downloadPNG);
-clearBtn.addEventListener("click", clearAll);
-
-document.addEventListener("keydown", (e) => {
-  if(e.target && e.target.tagName === "TEXTAREA"){
-    if(e.key === "Enter" && (e.ctrlKey || e.metaKey)) generate();
-    return;
+    try {
+      const a = document.createElement("a");
+      a.download = currentType === "wifi" ? "wifi-qr-code.png" : "url-qr-code.png";
+      a.href = lastCanvas.toDataURL("image/png");
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      showOk("PNG download started.");
+    } catch {
+      showError("Could not download PNG.");
+    }
   }
-  if(e.key === "Enter") generate();
-});
 
-// Init
-setType("text");
+  function clearAll() {
+    hideError();
+
+    if (textEl) textEl.value = "";
+    if (ssidEl) ssidEl.value = "";
+    if (passEl) passEl.value = "";
+    if (secEl) secEl.value = "WPA";
+    if (hiddenEl) hiddenEl.value = "false";
+    if (sizeEl) sizeEl.value = "320";
+    if (levelEl) levelEl.value = "M";
+
+    if (showPassEl && passEl) {
+      showPassEl.checked = false;
+      passEl.type = "password";
+    }
+
+    syncPasswordState();
+    clearQR();
+
+    if (currentType === "wifi" && ssidEl) ssidEl.focus();
+    if (currentType === "text" && textEl) textEl.focus();
+  }
+
+  function syncPasswordState() {
+    if (!secEl || !passEl) return;
+
+    const noPass = secEl.value === "nopass";
+    passEl.disabled = noPass;
+    passEl.placeholder = noPass ? "(No password)" : "••••••••";
+    if (noPass) passEl.value = "";
+  }
+
+  function debounce(fn, delay) {
+    let t = null;
+    return function () {
+      clearTimeout(t);
+      t = setTimeout(fn, delay);
+    };
+  }
+
+  const autoGenerate = debounce(() => {
+    try {
+      if (currentType === "text" && textEl && String(textEl.value || "").trim()) {
+        generate();
+      }
+      if (currentType === "wifi" && ssidEl && String(ssidEl.value || "").trim()) {
+        generate();
+      }
+    } catch (_) {}
+  }, 350);
+
+  if (typeBar) {
+    typeBar.addEventListener("click", (e) => {
+      const pill = e.target.closest(".pill");
+      if (!pill) return;
+      setType(pill.dataset.type);
+    });
+  }
+
+  if (generateBtn) generateBtn.addEventListener("click", generate);
+  if (downloadBtn) downloadBtn.addEventListener("click", downloadPNG);
+  if (clearBtn) clearBtn.addEventListener("click", clearAll);
+
+  if (showPassEl && passEl) {
+    showPassEl.addEventListener("change", () => {
+      passEl.type = showPassEl.checked ? "text" : "password";
+    });
+  }
+
+  if (secEl) {
+    secEl.addEventListener("change", () => {
+      syncPasswordState();
+      autoGenerate();
+    });
+  }
+
+  [textEl, ssidEl, passEl].forEach((el) => {
+    if (!el) return;
+    el.addEventListener("input", autoGenerate);
+    el.addEventListener("paste", () => setTimeout(autoGenerate, 40));
+  });
+
+  [hiddenEl, sizeEl, levelEl].forEach((el) => {
+    if (!el) return;
+    el.addEventListener("change", autoGenerate);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    const tag = e.target?.tagName;
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+      generate();
+      return;
+    }
+    if (e.key === "Enter" && tag !== "TEXTAREA" && tag !== "INPUT" && tag !== "SELECT") {
+      generate();
+    }
+  });
+
+  window.setType = setType;
+  window.generateQR = generate;
+  window.downloadQR = downloadPNG;
+  window.clearQRForm = clearAll;
+
+  syncPasswordState();
+  setType(currentType);
+})();
