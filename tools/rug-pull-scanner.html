@@ -1,0 +1,1196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Rug Pull Scanner | Token Risk Checker for ETH, BSC, Base, Arbitrum & Polygon | InstantQR.io</title>
+  <meta name="description" content="Free rug pull scanner for EVM tokens. Check honeypot risk, owner privileges, mintability, taxes, liquidity, pair age, suspicious controls, and token risk signals instantly." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="canonical" href="https://instantqr.io/web3-tools/rug-pull-scanner.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Rug Pull Scanner | InstantQR.io" />
+  <meta property="og:description" content="Scan token contracts for rug-pull risk signals including honeypot behavior, owner privileges, mintability, taxes, liquidity, and pair age." />
+  <meta property="og:url" content="https://instantqr.io/web3-tools/rug-pull-scanner.html" />
+  <meta property="og:site_name" content="InstantQR.io" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rug Pull Scanner | InstantQR.io" />
+  <meta name="twitter:description" content="Free token risk scanner for ETH, BSC, Base, Arbitrum, Polygon, and more." />
+
+  <style>
+    :root{
+      --bg:#08111f;
+      --bg2:#0d1830;
+      --panel:#111c33;
+      --panel2:#13213d;
+      --text:#eaf1ff;
+      --muted:#9fb0d3;
+      --line:rgba(255,255,255,.09);
+      --brand:#66d9ef;
+      --brand2:#7c9cff;
+      --good:#23c55e;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+      --chip:#192743;
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --radius:20px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font:16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(102,217,239,.18), transparent 50%),
+        radial-gradient(1000px 500px at 100% 0%, rgba(124,156,255,.16), transparent 45%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      min-height:100vh;
+    }
+
+    a{color:#b8ddff;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      margin-bottom:22px
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;font-weight:800;color:#fff;
+      letter-spacing:.2px
+    }
+    .brand img{width:40px;height:40px;border-radius:12px;display:block}
+    .brand .small{display:block;color:var(--muted);font-weight:600;font-size:.9rem}
+
+    .navlinks{display:flex;gap:14px;flex-wrap:wrap}
+    .navlinks a{
+      color:var(--muted);
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      padding:10px 14px;border-radius:999px
+    }
+
+    .hero{
+      display:grid;grid-template-columns:1.15fr .85fr;gap:22px;
+      align-items:stretch;margin-bottom:22px
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .heroMain{padding:28px}
+    .hero h1{
+      margin:0 0 12px;
+      font-size:clamp(2rem, 4vw, 3.4rem);
+      line-height:1.05;
+      letter-spacing:-.03em
+    }
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      max-width:64ch
+    }
+
+    .pillRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .pill{
+      padding:10px 14px;border-radius:999px;border:1px solid var(--line);
+      background:rgba(255,255,255,.035);color:#dbe7ff;font-weight:700;font-size:.92rem
+    }
+
+    .heroSide{
+      padding:24px;display:flex;flex-direction:column;justify-content:center
+    }
+    .heroStat{
+      display:flex;align-items:flex-start;gap:12px;margin-bottom:14px
+    }
+    .heroStat:last-child{margin-bottom:0}
+    .dot{
+      width:12px;height:12px;border-radius:50%;margin-top:8px;
+      box-shadow:0 0 0 6px rgba(255,255,255,.03)
+    }
+    .dot.good{background:var(--good)}
+    .dot.warn{background:var(--warn)}
+    .dot.bad{background:var(--bad)}
+    .heroStat strong{display:block;font-size:1rem}
+    .heroStat span{display:block;color:var(--muted);font-size:.95rem}
+
+    .tool{
+      padding:24px;margin-bottom:22px
+    }
+
+    .grid{
+      display:grid;grid-template-columns:1.15fr .85fr;gap:18px
+    }
+
+    .field{margin-bottom:16px}
+    .field label{
+      display:block;margin-bottom:8px;font-weight:700;color:#d9e7ff
+    }
+    .field input,.field select{
+      width:100%;padding:14px 15px;
+      border-radius:14px;border:1px solid var(--line);
+      background:#0b1730;color:#fff;outline:none;
+      font:inherit
+    }
+    .field input::placeholder{color:#7f92bb}
+    .hint{font-size:.92rem;color:var(--muted);margin-top:8px}
+
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
+    .btn{
+      appearance:none;border:none;cursor:pointer;
+      padding:14px 18px;border-radius:14px;font:inherit;font-weight:800;
+      transition:.2s transform ease,.2s opacity ease,.2s background ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    .btnPrimary{
+      background:linear-gradient(135deg, var(--brand), var(--brand2));
+      color:#07101f
+    }
+    .btnGhost{
+      background:transparent;border:1px solid var(--line);color:#dce8ff
+    }
+
+    .status{
+      margin-top:12px;color:var(--muted);min-height:24px
+    }
+
+    .meterWrap{
+      padding:20px;border:1px solid var(--line);border-radius:18px;
+      background:rgba(255,255,255,.02)
+    }
+    .meterTitle{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}
+    .scoreBadge{
+      display:inline-flex;align-items:center;gap:8px;
+      border-radius:999px;padding:8px 12px;font-weight:800;font-size:.92rem
+    }
+    .scoreBadge.safe{background:rgba(35,197,94,.12);color:#9ef0b8;border:1px solid rgba(35,197,94,.25)}
+    .scoreBadge.caution{background:rgba(245,158,11,.12);color:#ffd38c;border:1px solid rgba(245,158,11,.25)}
+    .scoreBadge.high{background:rgba(239,68,68,.12);color:#ffb0b0;border:1px solid rgba(239,68,68,.25)}
+
+    .meter{
+      position:relative;height:16px;border-radius:999px;background:
+      linear-gradient(90deg, rgba(35,197,94,.9) 0%, rgba(245,158,11,.9) 55%, rgba(239,68,68,.95) 100%);
+      overflow:hidden;border:1px solid rgba(255,255,255,.08)
+    }
+    .meterNeedle{
+      position:absolute;top:-6px;width:3px;height:28px;background:#fff;
+      box-shadow:0 0 0 1px rgba(0,0,0,.2),0 0 12px rgba(255,255,255,.75);
+      border-radius:99px;left:0;transform:translateX(-50%);
+      transition:left .35s ease
+    }
+    .meterScale{
+      display:flex;justify-content:space-between;color:var(--muted);
+      font-size:.84rem;margin-top:8px
+    }
+
+    .sectionTitle{
+      margin:0 0 14px;font-size:1.2rem;letter-spacing:-.02em
+    }
+
+    .stats{
+      display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
+    }
+    .stat{
+      padding:16px;border-radius:16px;background:rgba(255,255,255,.025);
+      border:1px solid var(--line)
+    }
+    .stat .k{display:block;color:var(--muted);font-size:.85rem;margin-bottom:6px}
+    .stat .v{display:block;font-weight:800;font-size:1.05rem;word-break:break-word}
+
+    .results{
+      display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px
+    }
+
+    .panel{padding:20px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:999px;border:1px solid var(--line);
+      background:var(--chip);font-weight:700;font-size:.92rem
+    }
+    .chip.good{color:#abefc6}
+    .chip.warn{color:#ffd79a}
+    .chip.bad{color:#ffb2b2}
+    .chip.neutral{color:#dae6ff}
+
+    .list{
+      display:grid;gap:10px
+    }
+    .listItem{
+      padding:14px 16px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(255,255,255,.02)
+    }
+    .listItem strong{display:block;margin-bottom:4px}
+    .listItem span{color:var(--muted)}
+
+    .twoCol{
+      display:grid;grid-template-columns:1fr 1fr;gap:18px
+    }
+
+    .notice{
+      padding:16px 18px;border-radius:16px;border:1px solid var(--line);
+      background:rgba(255,255,255,.025);color:var(--muted)
+    }
+
+    .faq, .content{
+      padding:24px;margin-bottom:22px
+    }
+    .faq details{
+      border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+      background:rgba(255,255,255,.02);margin-bottom:12px
+    }
+    .faq summary{cursor:pointer;font-weight:800}
+    .faq p{color:var(--muted)}
+
+    .footer{
+      padding:26px 0 40px;color:var(--muted);text-align:center
+    }
+    .footer .footerLinks{margin-top:10px}
+    .footer .footerLinks a{color:#cfe0ff}
+
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    .hidden{display:none!important}
+
+    @media (max-width: 980px){
+      .hero,.grid,.results,.twoCol{grid-template-columns:1fr}
+    }
+    @media (max-width: 680px){
+      .wrap{padding:16px}
+      .tool,.heroMain,.heroSide,.faq,.content,.panel{padding:18px}
+      .stats{grid-template-columns:1fr}
+      .navlinks{display:none}
+      .topbar{align-items:flex-start}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"Rug Pull Scanner",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "url":"https://instantqr.io/web3-tools/rug-pull-scanner.html",
+    "description":"Free token rug-pull scanner that checks honeypot signals, owner privileges, mintability, taxes, liquidity, pair age, and token risk indicators."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Web3 Tools","item":"https://instantqr.io/web3-tools/web3-tools.html"},
+      {"@type":"ListItem","position":3,"name":"Rug Pull Scanner","item":"https://instantqr.io/web3-tools/rug-pull-scanner.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What does a rug pull scanner check?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A rug pull scanner checks token risk signals such as honeypot behavior, owner privileges, mintability, transfer restrictions, tax settings, liquidity conditions, pair age, and other contract or market warnings."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can a rug pull scanner guarantee a token is safe?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. A rug pull scanner cannot guarantee safety. It provides a risk estimate based on available on-chain and market signals. Always combine scanner results with your own research."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Which chains does this scanner support?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This version is focused on EVM chains such as Ethereum, BNB Chain, Base, Arbitrum, Polygon, Avalanche, Optimism, and Fantom."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar" aria-label="Top navigation">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <div>
+          <div>InstantQR.io</div>
+          <span class="small">Fast crypto utility tools</span>
+        </div>
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/web3-tools/web3-tools.html">Web3 Tools</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="card heroMain">
+        <div style="font-size:.92rem;color:#9dc6ff;font-weight:800;margin-bottom:10px;">WEB3 SECURITY TOOL</div>
+        <h1>Rug Pull Scanner</h1>
+        <p>
+          Scan EVM token contracts for rug-pull risk signals including honeypot behavior, suspicious owner controls,
+          mintability, tax settings, liquidity concerns, and market context — in a clean, fast, mobile-friendly interface.
+        </p>
+        <div class="pillRow">
+          <span class="pill">Honeypot checks</span>
+          <span class="pill">Owner privilege analysis</span>
+          <span class="pill">Liquidity context</span>
+          <span class="pill">Tax signal review</span>
+          <span class="pill">Responsive UI</span>
+        </div>
+      </div>
+
+      <aside class="card heroSide" aria-label="Scanner highlights">
+        <div class="heroStat">
+          <div class="dot bad"></div>
+          <div>
+            <strong>Flags critical risks</strong>
+            <span>Highlights honeypot, blacklist, pausability, minting, proxy risks, and strong owner controls.</span>
+          </div>
+        </div>
+        <div class="heroStat">
+          <div class="dot warn"></div>
+          <div>
+            <strong>Uses multiple signals</strong>
+            <span>Combines contract security data with DEX market context like liquidity, age, and FDV.</span>
+          </div>
+        </div>
+        <div class="heroStat">
+          <div class="dot good"></div>
+          <div>
+            <strong>Frontend-only</strong>
+            <span>No wallet connection required. Paste a token contract and scan.</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <main class="card tool">
+      <div class="grid">
+        <section>
+          <h2 class="sectionTitle">Scan token</h2>
+
+          <div class="field">
+            <label for="chain">Select chain</label>
+            <select id="chain" aria-label="Select blockchain network">
+              <option value="1" data-dex="ethereum">Ethereum</option>
+              <option value="56" data-dex="bsc">BNB Chain</option>
+              <option value="8453" data-dex="base">Base</option>
+              <option value="42161" data-dex="arbitrum">Arbitrum</option>
+              <option value="137" data-dex="polygon">Polygon</option>
+              <option value="43114" data-dex="avalanche">Avalanche</option>
+              <option value="10" data-dex="optimism">Optimism</option>
+              <option value="250" data-dex="fantom">Fantom</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="address">Token contract address</label>
+            <input id="address" class="mono" type="text" placeholder="0x..." spellcheck="false" autocomplete="off" />
+            <div class="hint">Paste an EVM token contract address. This scanner is optimized for EVM tokens.</div>
+          </div>
+
+          <div class="actions">
+            <button id="scanBtn" class="btn btnPrimary" type="button">Scan token</button>
+            <button id="fillExampleBtn" class="btn btnGhost" type="button">Use example</button>
+            <button id="resetBtn" class="btn btnGhost" type="button">Reset</button>
+          </div>
+
+          <div id="status" class="status" aria-live="polite"></div>
+        </section>
+
+        <aside>
+          <div class="meterWrap">
+            <div class="meterTitle">
+              <strong>Risk score</strong>
+              <span id="scoreBadge" class="scoreBadge caution">Waiting for scan</span>
+            </div>
+            <div class="meter" aria-hidden="true">
+              <div id="meterNeedle" class="meterNeedle"></div>
+            </div>
+            <div class="meterScale">
+              <span>Low</span>
+              <span>Medium</span>
+              <span>High</span>
+            </div>
+            <div style="margin-top:14px;color:var(--muted)" id="scoreSummary">
+              Enter a supported token contract and run a scan.
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div id="resultArea" class="hidden">
+        <div class="results">
+          <section class="card panel">
+            <h3 class="sectionTitle">Quick summary</h3>
+            <div class="stats" id="summaryStats"></div>
+          </section>
+
+          <section class="card panel">
+            <h3 class="sectionTitle">Top risk signals</h3>
+            <div id="riskChips" class="chips"></div>
+          </section>
+        </div>
+
+        <div class="results">
+          <section class="card panel">
+            <h3 class="sectionTitle">Contract & security analysis</h3>
+            <div id="securityList" class="list"></div>
+          </section>
+
+          <section class="card panel">
+            <h3 class="sectionTitle">DEX & market context</h3>
+            <div id="marketList" class="list"></div>
+          </section>
+        </div>
+
+        <div class="twoCol" style="margin-top:18px">
+          <section class="card panel">
+            <h3 class="sectionTitle">Interpretation</h3>
+            <div id="interpretation" class="notice"></div>
+          </section>
+          <section class="card panel">
+            <h3 class="sectionTitle">Important note</h3>
+            <div class="notice">
+              This scanner estimates risk based on publicly available contract and market signals. A low or medium score
+              does <strong>not</strong> guarantee safety. Tokens can still fail due to hidden wallets, insider dumping,
+              social engineering, fake renounce claims, or off-chain manipulation.
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <section class="card content">
+      <h2 class="sectionTitle">How this rug pull scanner works</h2>
+      <p style="color:var(--muted);margin:0">
+        The scanner combines token security indicators with market context. It looks for red flags such as honeypot
+        behavior, modifiable taxes, mintability, transfer pausing, blacklist/whitelist controls, owner privileges,
+        proxy usage, low liquidity, and extremely new trading pairs. It then converts those signals into a weighted risk score.
+      </p>
+    </section>
+
+    <section class="card faq">
+      <h2 class="sectionTitle">FAQ</h2>
+
+      <details>
+        <summary>What is a rug pull in crypto?</summary>
+        <p>
+          A rug pull is when a token’s team or insiders drain liquidity, dump supply, block selling, or otherwise exploit
+          users after attracting buyers.
+        </p>
+      </details>
+
+      <details>
+        <summary>What is a honeypot token?</summary>
+        <p>
+          A honeypot is a token that users can buy but cannot sell normally, often because of restrictive contract logic
+          or hidden controls.
+        </p>
+      </details>
+
+      <details>
+        <summary>Why does liquidity matter?</summary>
+        <p>
+          Very low liquidity can make price manipulation easier and can leave buyers unable to exit without extreme slippage.
+        </p>
+      </details>
+
+      <details>
+        <summary>Why does token age matter?</summary>
+        <p>
+          Brand-new pairs can be more dangerous because there is less history, less community validation, and more room
+          for fast liquidity removal or insider dumping.
+        </p>
+      </details>
+    </section>
+
+    <footer class="footer">
+      <div>© <span id="year"></span> InstantQR.io</div>
+      <div class="footerLinks">
+        <a href="/web3-tools/web3-tools.html">Web3 Tools</a> ·
+        <a href="/tools.html">All Tools</a> ·
+        <a href="/about.html">About</a> ·
+        <a href="/privacy.html">Privacy</a> ·
+        <a href="/terms.html">Terms</a> ·
+        <a href="/contact.html">Contact</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    const chainSelect = $("chain");
+    const addressInput = $("address");
+    const scanBtn = $("scanBtn");
+    const fillExampleBtn = $("fillExampleBtn");
+    const resetBtn = $("resetBtn");
+    const statusEl = $("status");
+    const resultArea = $("resultArea");
+    const summaryStats = $("summaryStats");
+    const riskChips = $("riskChips");
+    const securityList = $("securityList");
+    const marketList = $("marketList");
+    const interpretation = $("interpretation");
+    const scoreBadge = $("scoreBadge");
+    const scoreSummary = $("scoreSummary");
+    const meterNeedle = $("meterNeedle");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const EXAMPLES = {
+      "1": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+      "56": "0x55d398326f99059fF775485246999027B3197955",
+      "8453": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "42161": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+      "137": "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+      "43114": "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7",
+      "10": "0x0b2c639c533813f4aa9d7837caf62653d097ff85",
+      "250": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75"
+    };
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function setStatus(message, isError = false) {
+      statusEl.textContent = message || "";
+      statusEl.style.color = isError ? "var(--bad)" : "var(--muted)";
+    }
+
+    function normalizeBool(value) {
+      if (value === true || value === "1" || value === 1 || value === "true") return true;
+      if (value === false || value === "0" || value === 0 || value === "false") return false;
+      return null;
+    }
+
+    function asNumber(value) {
+      if (value === null || value === undefined || value === "") return null;
+      const n = Number(value);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function formatCompact(value, maxFrac = 2) {
+      const n = asNumber(value);
+      if (n === null) return "N/A";
+      return new Intl.NumberFormat(undefined, {
+        notation: "compact",
+        maximumFractionDigits: maxFrac
+      }).format(n);
+    }
+
+    function formatMoney(value) {
+      const n = asNumber(value);
+      if (n === null) return "N/A";
+      return new Intl.NumberFormat(undefined, {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: n >= 1000 ? 0 : 2
+      }).format(n);
+    }
+
+    function formatPercent(value) {
+      const n = asNumber(value);
+      if (n === null) return "N/A";
+      return `${n}%`;
+    }
+
+    function shortenAddress(addr) {
+      if (!addr || typeof addr !== "string") return "N/A";
+      return addr.length > 14 ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : addr;
+    }
+
+    function isValidEvmAddress(address) {
+      return /^0x[a-fA-F0-9]{40}$/.test(address.trim());
+    }
+
+    function timeAgo(timestampMs) {
+      const t = asNumber(timestampMs);
+      if (!t) return "N/A";
+      const diff = Date.now() - t;
+      if (diff < 0) return "Just now";
+      const minute = 60 * 1000;
+      const hour = 60 * minute;
+      const day = 24 * hour;
+      const month = 30 * day;
+      const year = 365 * day;
+
+      if (diff < hour) return `${Math.max(1, Math.round(diff / minute))} min ago`;
+      if (diff < day) return `${Math.round(diff / hour)} hr ago`;
+      if (diff < month) return `${Math.round(diff / day)} day${Math.round(diff / day) === 1 ? "" : "s"} ago`;
+      if (diff < year) return `${Math.round(diff / month)} month${Math.round(diff / month) === 1 ? "" : "s"} ago`;
+      return `${Math.round(diff / year)} year${Math.round(diff / year) === 1 ? "" : "s"} ago`;
+    }
+
+    async function safeJsonFetch(url, label) {
+      const res = await fetch(url, {
+        method: "GET",
+        headers: { "Accept": "application/json" },
+        cache: "no-store"
+      });
+      if (!res.ok) {
+        throw new Error(`${label} failed with status ${res.status}`);
+      }
+      return await res.json();
+    }
+
+    async function fetchGoPlusSecurity(chainId, tokenAddress) {
+      const url = `https://api.gopluslabs.io/api/v1/token_security/${encodeURIComponent(chainId)}?contract_addresses=${encodeURIComponent(tokenAddress)}`;
+      return safeJsonFetch(url, "GoPlus token security");
+    }
+
+    async function fetchGoPlusRugPull(chainId, tokenAddress) {
+      const url = `https://api.gopluslabs.io/api/v1/rugpull_detecting/${encodeURIComponent(chainId)}?contract_addresses=${encodeURIComponent(tokenAddress)}`;
+      try {
+        return await safeJsonFetch(url, "GoPlus rug-pull detection");
+      } catch (err) {
+        return { __error: err.message };
+      }
+    }
+
+    async function fetchDexData(dexChain, tokenAddress) {
+      const directUrl = `https://api.dexscreener.com/token-pairs/v1/${encodeURIComponent(dexChain)}/${encodeURIComponent(tokenAddress)}`;
+      try {
+        return await safeJsonFetch(directUrl, "DEX Screener");
+      } catch (err) {
+        const searchUrl = `https://api.dexscreener.com/latest/dex/search?q=${encodeURIComponent(tokenAddress)}`;
+        const search = await safeJsonFetch(searchUrl, "DEX Screener search");
+        const pairs = Array.isArray(search?.pairs) ? search.pairs : [];
+        return pairs.filter(p => String(p.chainId || "").toLowerCase() === String(dexChain).toLowerCase());
+      }
+    }
+
+    function getTokenSecurityRecord(apiJson, tokenAddress) {
+      const result = apiJson?.result || {};
+      const lower = tokenAddress.toLowerCase();
+      for (const key of Object.keys(result)) {
+        if (key.toLowerCase() === lower) return result[key] || {};
+      }
+      return {};
+    }
+
+    function pickBestPair(pairs, tokenAddress) {
+      if (!Array.isArray(pairs) || !pairs.length) return null;
+      const addr = tokenAddress.toLowerCase();
+      const filtered = pairs.filter(p =>
+        String(p?.baseToken?.address || "").toLowerCase() === addr ||
+        String(p?.quoteToken?.address || "").toLowerCase() === addr
+      );
+      const source = filtered.length ? filtered : pairs.slice();
+      source.sort((a, b) => {
+        const liqA = asNumber(a?.liquidity?.usd) || 0;
+        const liqB = asNumber(b?.liquidity?.usd) || 0;
+        const volA = asNumber(a?.volume?.h24) || 0;
+        const volB = asNumber(b?.volume?.h24) || 0;
+        return (liqB + volB * 0.2) - (liqA + volA * 0.2);
+      });
+      return source[0] || null;
+    }
+
+    function createChip(text, tone = "neutral") {
+      return `<span class="chip ${tone}">${escapeHtml(text)}</span>`;
+    }
+
+    function listItem(title, value, note = "") {
+      return `
+        <div class="listItem">
+          <strong>${escapeHtml(title)}</strong>
+          <span>${escapeHtml(value)}${note ? ` — ${escapeHtml(note)}` : ""}</span>
+        </div>
+      `;
+    }
+
+    function addRiskSignal(signals, text, severity = "warn") {
+      signals.push({ text, severity });
+    }
+
+    function pushFinding(findings, label, value, note, order = 0) {
+      findings.push({ label, value, note, order });
+    }
+
+    function buildAnalysis(security, rugData, pair, chainName, tokenAddress) {
+      let score = 0;
+      const signals = [];
+      const findings = [];
+      const marketFindings = [];
+
+      const bool = (k) => normalizeBool(security?.[k]);
+      const num = (k) => asNumber(security?.[k]);
+
+      const buyTax = num("buy_tax");
+      const sellTax = num("sell_tax");
+      const ownerAddress = security?.owner_address || "";
+      const creatorAddress = security?.creator_address || "";
+      const holderCount = num("holder_count");
+      const lpHolderCount = num("lp_holder_count");
+
+      const isHoneypot = bool("is_honeypot");
+      const cannotSellAll = bool("cannot_sell_all");
+      const cannotBuy = bool("cannot_buy");
+      const isBlacklisted = bool("is_blacklisted");
+      const isWhitelisted = bool("is_whitelisted");
+      const transferPausable = bool("transfer_pausable");
+      const tradingCooldown = bool("trading_cooldown");
+      const antiWhale = bool("is_anti_whale");
+      const isMintable = bool("is_mintable");
+      const slippageMod = bool("slippage_modifiable");
+      const personalSlipMod = bool("personal_slippage_modifiable");
+      const hiddenOwner = bool("hidden_owner");
+      const ownerCanChangeBalance = bool("owner_change_balance");
+      const canTakeBackOwnership = bool("can_take_back_ownership");
+      const isProxy = bool("is_proxy");
+      const selfDestruct = bool("selfdestruct");
+      const externalCall = bool("external_call");
+      const isOpenSource = bool("is_open_source");
+      const isTrueToken = bool("is_true_token");
+      const trustList = bool("is_in_dex");
+      const isLocked = bool("is_locked");
+
+      if (isHoneypot === true) {
+        score += 45;
+        addRiskSignal(signals, "Honeypot signal detected", "bad");
+      }
+
+      if (cannotSellAll === true) {
+        score += 20;
+        addRiskSignal(signals, "Cannot sell all detected", "bad");
+      }
+
+      if (cannotBuy === true) {
+        score += 8;
+        addRiskSignal(signals, "Buy restrictions detected", "warn");
+      }
+
+      if (transferPausable === true) {
+        score += 18;
+        addRiskSignal(signals, "Transfers can be paused", "bad");
+      }
+
+      if (isBlacklisted === true) {
+        score += 18;
+        addRiskSignal(signals, "Blacklist capability detected", "bad");
+      }
+
+      if (isWhitelisted === true) {
+        score += 8;
+        addRiskSignal(signals, "Whitelist restriction capability", "warn");
+      }
+
+      if (tradingCooldown === true) {
+        score += 6;
+        addRiskSignal(signals, "Trading cooldown logic", "warn");
+      }
+
+      if (antiWhale === true) {
+        score += 5;
+        addRiskSignal(signals, "Anti-whale logic present", "warn");
+      }
+
+      if (isMintable === true) {
+        score += 18;
+        addRiskSignal(signals, "Token is mintable", "bad");
+      }
+
+      if (slippageMod === true || personalSlipMod === true) {
+        score += 12;
+        addRiskSignal(signals, "Taxes or slippage can be modified", "bad");
+      }
+
+      if ((buyTax !== null && buyTax > 10) || (sellTax !== null && sellTax > 10)) {
+        score += 12;
+        addRiskSignal(signals, "High tax detected", "bad");
+      } else if ((buyTax !== null && buyTax > 5) || (sellTax !== null && sellTax > 5)) {
+        score += 6;
+        addRiskSignal(signals, "Moderate tax detected", "warn");
+      }
+
+      if (hiddenOwner === true) {
+        score += 18;
+        addRiskSignal(signals, "Hidden owner detected", "bad");
+      }
+
+      if (ownerCanChangeBalance === true) {
+        score += 20;
+        addRiskSignal(signals, "Owner can change balances", "bad");
+      }
+
+      if (canTakeBackOwnership === true) {
+        score += 12;
+        addRiskSignal(signals, "Ownership can be reclaimed", "bad");
+      }
+
+      if (isProxy === true) {
+        score += 10;
+        addRiskSignal(signals, "Proxy contract detected", "warn");
+      }
+
+      if (selfDestruct === true) {
+        score += 16;
+        addRiskSignal(signals, "Self-destruct capability detected", "bad");
+      }
+
+      if (externalCall === true) {
+        score += 8;
+        addRiskSignal(signals, "External call capability detected", "warn");
+      }
+
+      if (isOpenSource === false) {
+        score += 14;
+        addRiskSignal(signals, "Source code not open/verified", "bad");
+      }
+
+      if (holderCount !== null && holderCount < 50) {
+        score += 10;
+        addRiskSignal(signals, "Very low holder count", "warn");
+      } else if (holderCount !== null && holderCount < 200) {
+        score += 5;
+        addRiskSignal(signals, "Low holder count", "warn");
+      }
+
+      const liquidityUsd = asNumber(pair?.liquidity?.usd);
+      const volume24h = asNumber(pair?.volume?.h24);
+      const marketCap = asNumber(pair?.marketCap);
+      const fdv = asNumber(pair?.fdv);
+      const pairAgeMs = asNumber(pair?.pairCreatedAt);
+
+      if (liquidityUsd !== null && liquidityUsd < 10000) {
+        score += 18;
+        addRiskSignal(signals, "Very low liquidity", "bad");
+      } else if (liquidityUsd !== null && liquidityUsd < 50000) {
+        score += 10;
+        addRiskSignal(signals, "Low liquidity", "warn");
+      }
+
+      if (pairAgeMs) {
+        const ageHours = (Date.now() - pairAgeMs) / (1000 * 60 * 60);
+        if (ageHours < 24) {
+          score += 14;
+          addRiskSignal(signals, "Trading pair is less than 24 hours old", "bad");
+        } else if (ageHours < 72) {
+          score += 8;
+          addRiskSignal(signals, "Trading pair is very new", "warn");
+        }
+      }
+
+      if (fdv !== null && liquidityUsd !== null && liquidityUsd > 0) {
+        const ratio = fdv / liquidityUsd;
+        if (ratio > 200) {
+          score += 12;
+          addRiskSignal(signals, "FDV is extremely high relative to liquidity", "bad");
+        } else if (ratio > 80) {
+          score += 6;
+          addRiskSignal(signals, "FDV is high relative to liquidity", "warn");
+        }
+      }
+
+      if (volume24h !== null && liquidityUsd !== null && volume24h > liquidityUsd * 20) {
+        score += 5;
+        addRiskSignal(signals, "Unusually high volume relative to liquidity", "warn");
+      }
+
+      const rugTextSignals = [];
+      if (rugData && !rugData.__error) {
+        const raw = JSON.stringify(rugData).toLowerCase();
+        if (raw.includes("high_risk") || raw.includes("\"risk_level\":\"high\"") || raw.includes("\"is_rugpull\":\"1\"")) {
+          score += 18;
+          addRiskSignal(signals, "Rug-pull API reports elevated risk", "bad");
+        } else if (raw.includes("medium")) {
+          score += 8;
+          addRiskSignal(signals, "Rug-pull API reports moderate risk", "warn");
+        }
+        if (raw.includes("fake_lp_burn")) rugTextSignals.push("Possible fake LP burn");
+        if (raw.includes("hidden_mint")) rugTextSignals.push("Possible hidden mint logic");
+        if (raw.includes("unlock")) rugTextSignals.push("Liquidity unlock-related warning");
+      }
+
+      for (const rt of rugTextSignals) addRiskSignal(signals, rt, "warn");
+
+      score = Math.max(0, Math.min(100, Math.round(score)));
+
+      pushFinding(findings, "Chain", chainName, "", 1);
+      pushFinding(findings, "Token address", shortenAddress(tokenAddress), tokenAddress, 2);
+      pushFinding(findings, "Open source / verified", isOpenSource === null ? "Unknown" : isOpenSource ? "Yes" : "No", "", 3);
+      pushFinding(findings, "Proxy contract", isProxy === null ? "Unknown" : isProxy ? "Yes" : "No", "", 4);
+      pushFinding(findings, "Honeypot", isHoneypot === null ? "Unknown" : isHoneypot ? "Yes" : "No", "", 5);
+      pushFinding(findings, "Mintable", isMintable === null ? "Unknown" : isMintable ? "Yes" : "No", "", 6);
+      pushFinding(findings, "Blacklist capability", isBlacklisted === null ? "Unknown" : isBlacklisted ? "Yes" : "No", "", 7);
+      pushFinding(findings, "Whitelist logic", isWhitelisted === null ? "Unknown" : isWhitelisted ? "Yes" : "No", "", 8);
+      pushFinding(findings, "Transfer pausability", transferPausable === null ? "Unknown" : transferPausable ? "Yes" : "No", "", 9);
+      pushFinding(findings, "Owner address", ownerAddress ? shortenAddress(ownerAddress) : "Unknown", ownerAddress || "", 10);
+      pushFinding(findings, "Creator address", creatorAddress ? shortenAddress(creatorAddress) : "Unknown", creatorAddress || "", 11);
+      pushFinding(findings, "Buy tax", formatPercent(buyTax), "", 12);
+      pushFinding(findings, "Sell tax", formatPercent(sellTax), "", 13);
+      pushFinding(findings, "Holder count", holderCount === null ? "N/A" : holderCount.toLocaleString(), "", 14);
+      pushFinding(findings, "LP holder count", lpHolderCount === null ? "N/A" : lpHolderCount.toLocaleString(), "", 15);
+      pushFinding(findings, "Owner can change balances", ownerCanChangeBalance === null ? "Unknown" : ownerCanChangeBalance ? "Yes" : "No", "", 16);
+      pushFinding(findings, "Can take back ownership", canTakeBackOwnership === null ? "Unknown" : canTakeBackOwnership ? "Yes" : "No", "", 17);
+      pushFinding(findings, "Self-destruct function", selfDestruct === null ? "Unknown" : selfDestruct ? "Yes" : "No", "", 18);
+      pushFinding(findings, "External call capability", externalCall === null ? "Unknown" : externalCall ? "Yes" : "No", "", 19);
+      pushFinding(findings, "Recognized on DEX", trustList === null ? "Unknown" : trustList ? "Yes" : "No", "", 20);
+      pushFinding(findings, "Locked flag", isLocked === null ? "Unknown" : isLocked ? "Yes" : "No", "", 21);
+      pushFinding(findings, "True token flag", isTrueToken === null ? "Unknown" : isTrueToken ? "Yes" : "No", "", 22);
+
+      pushFinding(marketFindings, "Main pair", pair?.dexId ? `${pair.dexId} (${pair?.quoteToken?.symbol || "quote"})` : "N/A", "", 1);
+      pushFinding(marketFindings, "Liquidity", formatMoney(liquidityUsd), "", 2);
+      pushFinding(marketFindings, "24h volume", formatMoney(volume24h), "", 3);
+      pushFinding(marketFindings, "Market cap", formatMoney(marketCap), "", 4);
+      pushFinding(marketFindings, "FDV", formatMoney(fdv), "", 5);
+      pushFinding(marketFindings, "Pair age", pairAgeMs ? timeAgo(pairAgeMs) : "N/A", "", 6);
+      pushFinding(marketFindings, "Price (USD)", pair?.priceUsd ? `$${pair.priceUsd}` : "N/A", "", 7);
+      pushFinding(marketFindings, "24h buys / sells", pair?.txns?.h24 ? `${pair.txns.h24.buys || 0} / ${pair.txns.h24.sells || 0}` : "N/A", "", 8);
+      pushFinding(marketFindings, "5m buys / sells", pair?.txns?.m5 ? `${pair.txns.m5.buys || 0} / ${pair.txns.m5.sells || 0}` : "N/A", "", 9);
+      pushFinding(marketFindings, "Price change 24h", pair?.priceChange?.h24 != null ? `${pair.priceChange.h24}%` : "N/A", "", 10);
+      pushFinding(marketFindings, "Boosted", pair?.boosts?.active ? "Yes" : "No", "", 11);
+
+      let rating = "Low risk";
+      let badgeClass = "safe";
+      if (score >= 70) {
+        rating = "High risk";
+        badgeClass = "high";
+      } else if (score >= 35) {
+        rating = "Medium risk";
+        badgeClass = "caution";
+      }
+
+      let interpretationText = "";
+      if (score >= 70) {
+        interpretationText = "This token shows multiple strong risk indicators commonly associated with scam tokens or high-control contracts. Avoid treating it as safe without deep manual review.";
+      } else if (score >= 35) {
+        interpretationText = "This token has notable caution signals. It may still be legitimate, but the current contract and market profile deserves careful review before interacting.";
+      } else {
+        interpretationText = "The scanner found fewer major red flags than usual, but that does not eliminate risk. Continue with manual research and position sizing discipline.";
+      }
+
+      if (!pair) {
+        interpretationText += " Also note: no strong DEX pair data was found, which reduces confidence in the market-side analysis.";
+      }
+
+      signals.sort((a, b) => {
+        const rank = { bad: 0, warn: 1, neutral: 2, good: 3 };
+        return (rank[a.severity] ?? 9) - (rank[b.severity] ?? 9);
+      });
+
+      return {
+        score,
+        rating,
+        badgeClass,
+        signals: signals.slice(0, 10),
+        findings: findings.sort((a, b) => a.order - b.order),
+        marketFindings: marketFindings.sort((a, b) => a.order - b.order),
+        interpretationText,
+        summary: {
+          chain: chainName,
+          holders: holderCount,
+          liquidityUsd,
+          pairAgeMs,
+          buyTax,
+          sellTax
+        }
+      };
+    }
+
+    function renderAnalysis(analysis) {
+      resultArea.classList.remove("hidden");
+
+      scoreBadge.className = `scoreBadge ${analysis.badgeClass}`;
+      scoreBadge.textContent = `${analysis.rating} • ${analysis.score}/100`;
+
+      scoreSummary.textContent =
+        analysis.rating === "High risk"
+          ? "Multiple strong warnings detected."
+          : analysis.rating === "Medium risk"
+          ? "Several caution signals were detected."
+          : "Fewer major red flags were found in this scan.";
+
+      meterNeedle.style.left = `${analysis.score}%`;
+
+      summaryStats.innerHTML = `
+        <div class="stat">
+          <span class="k">Chain</span>
+          <span class="v">${escapeHtml(analysis.summary.chain || "N/A")}</span>
+        </div>
+        <div class="stat">
+          <span class="k">Holders</span>
+          <span class="v">${analysis.summary.holders == null ? "N/A" : Number(analysis.summary.holders).toLocaleString()}</span>
+        </div>
+        <div class="stat">
+          <span class="k">Liquidity</span>
+          <span class="v">${formatMoney(analysis.summary.liquidityUsd)}</span>
+        </div>
+        <div class="stat">
+          <span class="k">Pair age</span>
+          <span class="v">${analysis.summary.pairAgeMs ? escapeHtml(timeAgo(analysis.summary.pairAgeMs)) : "N/A"}</span>
+        </div>
+        <div class="stat">
+          <span class="k">Buy tax</span>
+          <span class="v">${escapeHtml(formatPercent(analysis.summary.buyTax))}</span>
+        </div>
+        <div class="stat">
+          <span class="k">Sell tax</span>
+          <span class="v">${escapeHtml(formatPercent(analysis.summary.sellTax))}</span>
+        </div>
+      `;
+
+      riskChips.innerHTML = analysis.signals.length
+        ? analysis.signals.map(s => createChip(s.text, s.severity)).join("")
+        : createChip("No major risk signals surfaced from the available scan data", "good");
+
+      securityList.innerHTML = analysis.findings.map(item => listItem(item.label, item.value, item.note)).join("");
+      marketList.innerHTML = analysis.marketFindings.map(item => listItem(item.label, item.value, item.note)).join("");
+      interpretation.textContent = analysis.interpretationText;
+    }
+
+    function resetUI(full = false) {
+      if (full) {
+        resultArea.classList.add("hidden");
+        summaryStats.innerHTML = "";
+        riskChips.innerHTML = "";
+        securityList.innerHTML = "";
+        marketList.innerHTML = "";
+        interpretation.innerHTML = "";
+        scoreBadge.className = "scoreBadge caution";
+        scoreBadge.textContent = "Waiting for scan";
+        scoreSummary.textContent = "Enter a supported token contract and run a scan.";
+        meterNeedle.style.left = "0%";
+        setStatus("");
+      }
+    }
+
+    async function runScan() {
+      const chainId = chainSelect.value;
+      const dexChain = chainSelect.options[chainSelect.selectedIndex].dataset.dex;
+      const chainName = chainSelect.options[chainSelect.selectedIndex].text;
+      const tokenAddress = addressInput.value.trim();
+
+      resetUI(true);
+
+      if (!tokenAddress) {
+        setStatus("Please enter a token contract address.", true);
+        return;
+      }
+
+      if (!isValidEvmAddress(tokenAddress)) {
+        setStatus("Please enter a valid EVM contract address starting with 0x.", true);
+        return;
+      }
+
+      scanBtn.disabled = true;
+      fillExampleBtn.disabled = true;
+      resetBtn.disabled = true;
+      setStatus("Scanning token security, rug-pull signals, and DEX market data...");
+
+      try {
+        const [securityJson, rugJson, dexJson] = await Promise.all([
+          fetchGoPlusSecurity(chainId, tokenAddress),
+          fetchGoPlusRugPull(chainId, tokenAddress),
+          fetchDexData(dexChain, tokenAddress).catch(() => null)
+        ]);
+
+        const security = getTokenSecurityRecord(securityJson, tokenAddress);
+        if (!security || !Object.keys(security).length) {
+          throw new Error("No token security data was returned for this address on the selected chain.");
+        }
+
+        const pairs = Array.isArray(dexJson) ? dexJson : Array.isArray(dexJson?.pairs) ? dexJson.pairs : [];
+        const bestPair = pickBestPair(pairs, tokenAddress);
+
+        const analysis = buildAnalysis(security, rugJson, bestPair, chainName, tokenAddress);
+        renderAnalysis(analysis);
+
+        const hadDex = !!bestPair;
+        const hadRugApiError = !!rugJson?.__error;
+        setStatus(
+          hadDex
+            ? (hadRugApiError
+                ? "Scan completed. Contract security and DEX data loaded. Rug-pull beta endpoint returned limited data."
+                : "Scan completed successfully.")
+            : (hadRugApiError
+                ? "Scan completed with contract security data. DEX context or rug-pull beta data was limited."
+                : "Scan completed with contract security data. DEX pair data was limited or unavailable.")
+        );
+      } catch (err) {
+        setStatus(err.message || "Scan failed. Please try again.", true);
+      } finally {
+        scanBtn.disabled = false;
+        fillExampleBtn.disabled = false;
+        resetBtn.disabled = false;
+      }
+    }
+
+    scanBtn.addEventListener("click", runScan);
+
+    addressInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") runScan();
+    });
+
+    fillExampleBtn.addEventListener("click", () => {
+      const chainId = chainSelect.value;
+      addressInput.value = EXAMPLES[chainId] || "";
+      setStatus("Example token loaded.");
+    });
+
+    resetBtn.addEventListener("click", () => {
+      addressInput.value = "";
+      resetUI(true);
+    });
+
+    chainSelect.addEventListener("change", () => {
+      const current = addressInput.value.trim();
+      if (!current || current === Object.values(EXAMPLES).find(v => v === current)) {
+        addressInput.value = EXAMPLES[chainSelect.value] || "";
+      }
+    });
+
+    // Prefill example on load for better UX
+    addressInput.value = EXAMPLES[chainSelect.value] || "";
+  </script>
+</body>
+</html>
