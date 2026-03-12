@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google Analytics -->
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -17,25 +17,23 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-  <title>Free URL QR Code Generator | Create Website QR Code Online | InstantQR.io</title>
-  <meta name="description" content="Generate a QR code for any website URL instantly. Create free URL QR codes online and download as PNG. Fast, privacy-first, mobile-friendly, and no signup required." />
+  <title>Free URL QR Code Generator | Create Website QR Code | InstantQR.io</title>
+  <meta name="description" content="Generate a QR code for any website URL instantly. Create free URL QR codes online and download as PNG. No signup required. Fast, privacy-first, and mobile-friendly." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="theme-color" content="#0b0f19" />
   <meta name="author" content="InstantQR" />
-  <meta name="application-name" content="InstantQR" />
   <link rel="canonical" href="https://instantqr.io/tools/url-qr-code-generator.html" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="InstantQR" />
   <meta property="og:title" content="Free URL QR Code Generator | InstantQR.io" />
-  <meta property="og:description" content="Create a QR code for any website link and download it as PNG. Fast, free, and privacy-first." />
+  <meta property="og:description" content="Create a QR code for any website link and download as PNG. Fast, free, and privacy-first." />
   <meta property="og:url" content="https://instantqr.io/tools/url-qr-code-generator.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="URL QR Code Generator by InstantQR" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free URL QR Code Generator | InstantQR.io" />
-  <meta name="twitter:description" content="Create a QR code for any website link and download it as PNG. Fast, free, and privacy-first." />
+  <meta name="twitter:description" content="Create a QR code for any website link and download as PNG. Fast, free, and privacy-first." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
@@ -56,12 +54,13 @@
       --muted2:#8ea0c8;
       --link:#cfe0ff;
       --brand:#3b82f6;
-      --ok:#9ff7c2;
+      --brand2:#19c37d;
       --danger:#ff9fb3;
-      --shadow:0 12px 40px rgba(0,0,0,.35);
+      --ok:#9ff7c2;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
       --radius:18px;
       --radius2:16px;
-      --max:980px;
+      --max: 980px;
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
@@ -74,17 +73,19 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
-    a{color:var(--link);text-decoration:none}
-    a:hover{text-decoration:underline}
-    code{color:var(--link)}
-    .wrap{max-width:var(--max);margin:0 auto;padding:22px}
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    code{ color:var(--link); }
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px;}
     .card{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:var(--radius);
       padding:18px;
-      box-shadow:var(--shadow);
+      box-shadow: var(--shadow);
     }
+
     .topbar{
       display:flex;
       align-items:center;
@@ -99,11 +100,12 @@
       display:flex;
       align-items:center;
       gap:10px;
+      text-decoration:none;
       color:var(--text);
       font-weight:900;
       letter-spacing:-.2px;
     }
-    .brand img{height:30px;width:auto;display:block}
+    .brand img{ height:30px; width:auto; display:block; }
     .nav{
       display:flex;
       gap:10px;
@@ -117,10 +119,13 @@
       background:#0b1222;
       border:1px solid var(--border2);
       color:var(--link);
+      text-decoration:none;
       font-weight:800;
       font-size:12px;
+      user-select:none;
     }
-    .nav a:hover{border-color:rgba(59,130,246,.85)}
+    .nav a:hover{ border-color: rgba(59,130,246,.85); }
+
     .hero{
       display:flex;
       align-items:flex-start;
@@ -131,10 +136,10 @@
     }
     .hero h1{
       margin:0;
-      font-size:clamp(24px,4vw,30px);
-      line-height:1.1;
+      font-size:clamp(24px, 4vw, 30px);
       letter-spacing:-.3px;
       max-width:24ch;
+      line-height:1.1;
     }
     .hero p{
       margin:8px 0 0;
@@ -156,7 +161,9 @@
       border:1px solid var(--border2);
       color:var(--muted);
       font-size:12px;
+      user-select:none;
     }
+
     .info{
       margin-top:14px;
       background:var(--panel);
@@ -164,26 +171,28 @@
       border-radius:var(--radius2);
       padding:14px;
     }
-    .info h2{margin:0 0 8px;font-size:16px}
-    .info p,.info li{color:var(--muted);font-size:13px;line-height:1.7}
-    .info ol,.info ul{padding-left:18px;margin:8px 0 0}
-    .tiny{color:var(--muted2);font-size:12px}
+    .info h2{ margin:0 0 8px; font-size:16px; }
+    .info p, .info li{ color:var(--muted); font-size:13px; line-height:1.7; }
+    .info ol, .info ul{ padding-left:18px; margin:8px 0 0; }
+    .tiny{ color:var(--muted2); font-size:12px; }
+
     .grid{
       display:grid;
-      grid-template-columns:1.2fr .8fr;
+      grid-template-columns: 1.2fr .8fr;
       gap:14px;
       margin-top:14px;
       align-items:start;
     }
-    @media (max-width:860px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+
     .box{
       background:var(--panel);
       border:1px solid var(--border2);
       border-radius:var(--radius2);
       padding:14px;
     }
-    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
-    input,select,textarea{
+    label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
+    input, select, textarea{
       width:100%;
       padding:12px 10px;
       border-radius:14px;
@@ -192,14 +201,18 @@
       color:var(--text);
       outline:none;
     }
-    textarea{min-height:120px;resize:vertical}
-    input:focus,select:focus,textarea:focus{
-      border-color:rgba(59,130,246,.85);
-      box-shadow:0 0 0 3px rgba(59,130,246,.18);
+    textarea{
+      min-height:120px;
+      resize:vertical;
     }
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:520px){.row{grid-template-columns:1fr}}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(59,130,246,.85);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+    }
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    @media (max-width: 520px){ .row{ grid-template-columns: 1fr; } }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
     button{
       appearance:none;
       border:0;
@@ -211,15 +224,23 @@
       cursor:pointer;
       transition:.15s ease;
     }
-    button:hover{filter:brightness(1.05);transform:translateY(-1px)}
+    button:hover{ filter:brightness(1.05); transform:translateY(-1px); }
     button.secondary{
       background:#0b1222;
       border:1px solid var(--border2);
       color:var(--text);
       font-weight:800;
     }
+    button.secondary:hover{ border-color: rgba(59,130,246,.7); }
+    button:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+      transform:none;
+      filter:none;
+    }
+
     .qrWrap{
-      width:min(320px,100%);
+      width:min(320px, 100%);
       aspect-ratio:1/1;
       border-radius:16px;
       background:#0b1222;
@@ -231,8 +252,8 @@
       padding:10px;
       margin-inline:auto;
     }
-    .preview{display:flex;flex-direction:column;align-items:center;gap:10px}
-    .hint{color:var(--muted);font-size:12px;text-align:center}
+    .preview{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .hint{ color:var(--muted); font-size:12px; text-align:center; }
     .canvasWrap{
       width:100%;
       height:100%;
@@ -249,14 +270,16 @@
       height:auto;
       image-rendering:pixelated;
     }
+
     .status{
       min-height:18px;
       margin-top:8px;
       font-size:12px;
       display:none;
     }
-    .status.error{color:var(--danger);display:block}
-    .status.ok{color:var(--ok);display:block}
+    .status.error{ color:var(--danger); display:block; }
+    .status.ok{ color:var(--ok); display:block; }
+
     .faq{
       margin-top:14px;
       background:var(--panel);
@@ -264,7 +287,7 @@
       border-radius:var(--radius2);
       padding:14px;
     }
-    .faq h2{margin:0 0 10px;font-size:16px}
+    .faq h2{ margin:0 0 10px; font-size:16px; }
     details{
       background:#0b1222;
       border:1px solid var(--border2);
@@ -278,14 +301,17 @@
       color:var(--text);
       list-style:none;
     }
-    summary::-webkit-details-marker{display:none}
-    details p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.7}
+    summary::-webkit-details-marker{ display:none; }
+    details p{ margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.7; }
+
     .footerLinks{
       margin-top:14px;
       text-align:center;
       color:var(--muted2);
       font-size:12px;
     }
+    .footerLinks a{ color:var(--link); text-decoration:none; }
+    .footerLinks a:hover{ text-decoration:underline; }
   </style>
 
   <script type="application/ld+json">
@@ -296,7 +322,6 @@
     "applicationCategory":"UtilitiesApplication",
     "operatingSystem":"Web",
     "url":"https://instantqr.io/tools/url-qr-code-generator.html",
-    "description":"Generate a QR code for any website URL online and download it as PNG.",
     "publisher":{
       "@type":"Organization",
       "name":"InstantQR",
@@ -308,18 +333,6 @@
       "price":"0",
       "priceCurrency":"USD"
     }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"BreadcrumbList",
-    "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
-      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools.html"},
-      {"@type":"ListItem","position":3,"name":"URL QR Code Generator","item":"https://instantqr.io/tools/url-qr-code-generator.html"}
-    ]
   }
   </script>
 
@@ -341,7 +354,7 @@
         "name":"Does InstantQR store my URL?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"No. This tool runs in your browser and does not intentionally store your input."
+          "text":"InstantQR is privacy-first. The tool runs in your browser and does not intentionally store your input."
         }
       },
       {
@@ -349,7 +362,7 @@
         "name":"Should I include https:// in my link?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Yes. Using the full URL helps scanners open the correct website reliably."
+          "text":"Yes. Using a full URL that starts with https:// helps ensure scanners open the correct website."
         }
       },
       {
@@ -357,33 +370,39 @@
         "name":"Can I use tracking links?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Yes. You can generate a QR code for UTM links, campaign URLs, and other tracked website links."
+          "text":"Yes. You can generate a QR code for any URL, including UTM or campaign tracking links."
         }
       }
     ]
   }
   </script>
 </head>
+
 <body>
   <div class="wrap">
     <div class="card">
+
       <div class="topbar">
         <a class="brand" href="/" aria-label="InstantQR Home">
-          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
           <span>InstantQR</span>
         </a>
+
         <nav class="nav" aria-label="Primary navigation">
           <a href="/">Home</a>
           <a href="/tools.html">All Tools</a>
-          <a href="/tools/wifi-qr-code-generator.html">WiFi QR</a>
+          <a href="/tools/wifi-qr-code-generator.html">WiFi QR Code Generator</a>
         </nav>
       </div>
 
       <section class="hero">
         <div>
           <h1>URL QR Code Generator</h1>
-          <p>Create a QR code for any website link and let people open it instantly with a phone scan. Paste your URL, generate the code, and download it as PNG.</p>
-          <div class="badges">
+          <p>
+            Create a QR code for any website link and let people open it instantly with a phone scan.
+            Paste your URL, generate your code, and download it as a PNG.
+          </p>
+          <div class="badges" aria-label="Highlights">
             <span class="badge">⚡ Fast</span>
             <span class="badge">🔒 Privacy-first</span>
             <span class="badge">🌐 Website links</span>
@@ -392,76 +411,85 @@
         </div>
       </section>
 
-      <section class="info">
-        <h2>How to create a QR code for a website</h2>
+      <section class="info" aria-label="How to create a QR code for a website">
+        <h2>How to Create a QR Code for a Website</h2>
         <ol>
-          <li>Paste your website link below.</li>
+          <li>Enter your website URL below and include <strong>https://</strong>.</li>
           <li>Click <strong>Generate</strong>.</li>
-          <li>Download the QR code as a PNG image.</li>
+          <li>Download your QR code as a PNG image.</li>
         </ol>
-        <p style="margin-top:10px;">Use URL QR codes for websites, menus, landing pages, event links, portfolios, app pages, and marketing campaigns.</p>
+
+        <p style="margin-top:10px;">
+          Use this free URL QR code generator to share websites, landing pages, restaurant menus,
+          event pages, portfolios, app download pages, or social profiles. Anyone can scan the code using a phone camera.
+        </p>
       </section>
 
       <div class="grid">
+
         <div class="box">
-          <form id="qrForm" onsubmit="return false;">
-            <input type="hidden" id="qrMode" value="text" />
+          <label for="text">Website URL</label>
+          <textarea
+            id="text"
+            placeholder="https://example.com"
+            inputmode="url"
+            autocomplete="off"
+            spellcheck="false"
+            aria-describedby="urlHelp"
+          ></textarea>
+          <div class="tiny" id="urlHelp" style="margin-top:8px;">
+            Tip: use the full URL with <code>https://</code> for best compatibility. If you paste <code>example.com</code>, this tool will automatically convert it to <code>https://example.com</code>.
+          </div>
 
-            <label for="text">Website URL</label>
-            <textarea id="text" placeholder="https://example.com" autocomplete="off" spellcheck="false"></textarea>
-            <div class="tiny" style="margin-top:8px;">
-              Tip: if you enter <code>example.com</code>, the tool will convert it to <code>https://example.com</code>.
+          <div class="row" style="margin-top:12px;">
+            <div>
+              <label for="size">Size (px)</label>
+              <input id="size" type="number" min="128" max="1024" step="32" value="320" />
             </div>
-
-            <div class="row" style="margin-top:12px;">
-              <div>
-                <label for="size">Size (px)</label>
-                <input id="size" type="number" min="128" max="1024" step="32" value="320" />
-              </div>
-              <div>
-                <label for="level">Error correction</label>
-                <select id="level">
-                  <option value="L">L (smallest)</option>
-                  <option value="M" selected>M (recommended)</option>
-                  <option value="Q">Q</option>
-                  <option value="H">H (best)</option>
-                </select>
-              </div>
+            <div>
+              <label for="level">Error correction</label>
+              <select id="level">
+                <option value="L">L (smallest)</option>
+                <option value="M" selected>M (recommended)</option>
+                <option value="Q">Q</option>
+                <option value="H">H (best)</option>
+              </select>
             </div>
+          </div>
 
-            <div class="actions">
-              <button id="generateBtn" type="button">Generate</button>
-              <button id="downloadBtn" class="secondary" type="button">Download PNG</button>
-              <button id="clearBtn" class="secondary" type="button">Clear</button>
-            </div>
+          <div class="actions">
+            <button id="generateBtn" type="button">Generate</button>
+            <button class="secondary" id="downloadBtn" type="button">Download PNG</button>
+            <button class="secondary" id="clearBtn" type="button">Clear</button>
+          </div>
 
-            <div id="status" class="status" aria-live="polite"></div>
-          </form>
+          <div class="status" id="status" aria-live="polite"></div>
         </div>
 
         <div class="box preview">
           <div class="qrWrap" id="qrWrap">
-            <div class="hint">Your QR code will appear here.</div>
+            <div class="hint" id="placeholder">Your URL QR code will appear here.</div>
           </div>
-          <div class="hint">Test the QR code before printing or publishing.</div>
+          <div class="hint">Tip: test-scan before printing or publishing.</div>
         </div>
+
       </div>
 
-      <section class="info">
-        <h2>Why use a URL QR code?</h2>
+      <section class="info" aria-label="Why use a URL QR code">
+        <h2>Why Use a URL QR Code?</h2>
         <ul>
           <li>Share links instantly without typing</li>
           <li>Print on flyers, posters, menus, and business cards</li>
-          <li>Use campaign or UTM links for marketing</li>
+          <li>Use UTM or tracking links for marketing campaigns</li>
           <li>Make offline promotions interactive</li>
         </ul>
 
-        <h2 style="margin-top:16px;">Best practices</h2>
+        <h2 style="margin-top:16px;">Best Practices</h2>
         <ul>
-          <li>Always test the QR code before publishing.</li>
-          <li>Use a clean URL if possible.</li>
+          <li>Always test the QR code before printing or publishing.</li>
+          <li>Use a short, clean URL if possible for easier scanning.</li>
           <li>Choose <strong>M</strong> or <strong>H</strong> error correction for printed materials.</li>
-          <li>Use larger sizes like 512px+ for posters and signs.</li>
+          <li>Use larger sizes like 512px+ for posters and signage.</li>
         </ul>
       </section>
 
@@ -470,7 +498,7 @@
 
         <details>
           <summary>How do I create a QR code for a website?</summary>
-          <p>Paste your website URL, click Generate, then download the QR code as PNG.</p>
+          <p>Paste your full website link, click Generate, then download the QR code as a PNG image.</p>
         </details>
 
         <details>
@@ -480,12 +508,12 @@
 
         <details>
           <summary>Should I include https:// in my link?</summary>
-          <p>Yes. A full URL improves compatibility and helps scanners open the correct website.</p>
+          <p>Yes. Using the full URL helps scanners open the correct website reliably.</p>
         </details>
 
         <details>
           <summary>Can I use tracking links?</summary>
-          <p>Yes. UTM and campaign links work normally in generated QR codes.</p>
+          <p>Yes. You can generate a QR code for UTM links, campaign URLs, and other tracked website links.</p>
         </details>
       </section>
 
@@ -496,6 +524,7 @@
         <a href="/contact.html">Contact</a> ·
         <a href="/sitemap.xml">Sitemap</a>
       </div>
+
     </div>
   </div>
 
@@ -513,19 +542,199 @@
         document.head.appendChild(s);
       }
 
-      function ready(){
+      function bootWhenReady(){
         if (window.QRious) {
+          window.__qrLibReady = true;
           document.dispatchEvent(new CustomEvent("qrious-ready"));
         }
       }
 
-      loadScript(primarySrc, ready, function(){
-        loadScript(fallbackSrc, ready, function(){
+      loadScript(primarySrc, bootWhenReady, function(){
+        loadScript(fallbackSrc, bootWhenReady, function(){
           document.dispatchEvent(new CustomEvent("qrious-failed"));
         });
       });
     })();
   </script>
-  <script src="/tools/app.js"></script>
+
+  <script>
+    const textEl = document.getElementById("text");
+    const sizeEl = document.getElementById("size");
+    const levelEl = document.getElementById("level");
+    const generateBtn = document.getElementById("generateBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const qrWrap = document.getElementById("qrWrap");
+    const placeholder = document.getElementById("placeholder");
+    const statusEl = document.getElementById("status");
+
+    let qr = null;
+    let canvas = null;
+    let autoTimer = null;
+
+    function setStatus(message, type){
+      statusEl.textContent = message || "";
+      statusEl.className = "status" + (type ? " " + type : "");
+      if (!message) statusEl.className = "status";
+    }
+
+    function normalizeUrl(raw){
+      let value = (raw || "").trim();
+      if (!value) throw new Error("Please enter a website URL.");
+
+      if (!/^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(value)) {
+        value = "https://" + value;
+      }
+
+      let parsed;
+      try {
+        parsed = new URL(value);
+      } catch {
+        throw new Error("Please enter a valid URL.");
+      }
+
+      if (!/^https?:$/.test(parsed.protocol)) {
+        throw new Error("Only http:// and https:// URLs are supported.");
+      }
+
+      return parsed.toString();
+    }
+
+    function getSafeSize(){
+      const n = parseInt(sizeEl.value, 10);
+      if (!Number.isFinite(n)) return 320;
+      return Math.min(1024, Math.max(128, n));
+    }
+
+    function ensureCanvas(){
+      if (canvas) return canvas;
+      canvas = document.createElement("canvas");
+      canvas.width = getSafeSize();
+      canvas.height = getSafeSize();
+
+      const holder = document.createElement("div");
+      holder.className = "canvasWrap";
+      holder.appendChild(canvas);
+
+      qrWrap.innerHTML = "";
+      qrWrap.appendChild(holder);
+      return canvas;
+    }
+
+    function generateQr(){
+      if (!window.QRious) {
+        setStatus("QR library is still loading. Please try again in a moment.", "error");
+        return;
+      }
+
+      let value;
+      try {
+        value = normalizeUrl(textEl.value);
+      } catch (err) {
+        setStatus(err.message, "error");
+        return;
+      }
+
+      const size = getSafeSize();
+      const level = levelEl.value || "M";
+
+      textEl.value = value;
+      const el = ensureCanvas();
+
+      try {
+        if (!qr) {
+          qr = new QRious({
+            element: el,
+            value,
+            size,
+            level,
+            padding: 10,
+            background: "white",
+            foreground: "black"
+          });
+        } else {
+          qr.value = value;
+          qr.size = size;
+          qr.level = level;
+          qr.background = "white";
+          qr.foreground = "black";
+          qr.padding = 10;
+        }
+
+        el.style.width = "100%";
+        el.style.maxWidth = size + "px";
+        el.style.height = "auto";
+        setStatus("QR code generated successfully.", "ok");
+      } catch (err) {
+        setStatus("Unable to generate the QR code. Please try again.", "error");
+      }
+    }
+
+    function downloadQr(){
+      if (!canvas) {
+        setStatus("Generate a QR code before downloading.", "error");
+        return;
+      }
+
+      try {
+        const link = document.createElement("a");
+        const cleanName = "url-qr-code.png";
+        link.href = canvas.toDataURL("image/png");
+        link.download = cleanName;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setStatus("PNG download started.", "ok");
+      } catch (err) {
+        setStatus("Unable to download PNG on this device/browser.", "error");
+      }
+    }
+
+    function clearAll(){
+      textEl.value = "";
+      sizeEl.value = "320";
+      levelEl.value = "M";
+      qr = null;
+      canvas = null;
+      qrWrap.innerHTML = '<div class="hint" id="placeholder">Your URL QR code will appear here.</div>';
+      setStatus("", "");
+      textEl.focus();
+    }
+
+    function maybeAutoGenerate(){
+      clearTimeout(autoTimer);
+      autoTimer = setTimeout(() => {
+        if ((textEl.value || "").trim()) generateQr();
+      }, 350);
+    }
+
+    generateBtn.addEventListener("click", generateQr);
+    downloadBtn.addEventListener("click", downloadQr);
+    clearBtn.addEventListener("click", clearAll);
+
+    textEl.addEventListener("paste", () => setTimeout(maybeAutoGenerate, 40));
+    textEl.addEventListener("input", maybeAutoGenerate);
+    sizeEl.addEventListener("change", () => { if (canvas) generateQr(); });
+    levelEl.addEventListener("change", () => { if (canvas) generateQr(); });
+
+    textEl.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+        generateQr();
+      }
+    });
+
+    document.addEventListener("qrious-ready", () => {
+      const params = new URLSearchParams(window.location.search);
+      const paramUrl = params.get("url");
+      if (paramUrl) {
+        textEl.value = paramUrl;
+        generateQr();
+      }
+    });
+
+    document.addEventListener("qrious-failed", () => {
+      setStatus("The QR generator library failed to load. Check your connection or try again.", "error");
+    });
+  </script>
 </body>
 </html>
