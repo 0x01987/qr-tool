@@ -549,7 +549,7 @@
       let value = (raw || "").trim();
       if (!value) throw new Error("Please enter a website URL.");
 
-      if (!/^[a-zA-Z][a-zA-Z\\d+\\-.]*:/.test(value)) {
+      if (!/^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(value)) {
         value = "https://" + value;
       }
 
@@ -564,8 +564,6 @@
         throw new Error("Only http:// and https:// URLs are supported.");
       }
 
-      // Keep the user's typed URL format after scheme normalization.
-      // This avoids auto-adding a trailing slash.
       return value;
     }
 
@@ -615,9 +613,13 @@
           size: size,
           level: level,
           padding: 10,
-          background: "white",
-          foreground: "black"
+          background: "#ffffff",
+          foreground: "#000000"
         });
+
+        if (!qr || !qr.canvas) {
+          throw new Error("QR canvas could not be created.");
+        }
 
         renderCanvas(qr.canvas, size);
         setStatus("QR code generated successfully.", "ok");
