@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -22,12 +22,13 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="theme-color" content="#0b0f19" />
   <meta name="author" content="InstantQR" />
+  <meta name="application-name" content="InstantQR" />
   <link rel="canonical" href="https://instantqr.io/tools/wifi-qr-code-generator.html" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
   <meta property="og:title" content="Create a WiFi QR Code | InstantQR.io" />
-  <meta property="og:description" content="Create a WiFi QR code for guests to scan and join instantly. Free, fast, and privacy-first. Download as PNG." />
+  <meta property="og:description" content="Create a WiFi QR code for guests to scan and join instantly. Download as PNG. Fast and privacy-first." />
   <meta property="og:url" content="https://instantqr.io/tools/wifi-qr-code-generator.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="WiFi QR Code Generator by InstantQR" />
@@ -57,10 +58,10 @@
       --brand:#3b82f6;
       --ok:#9ff7c2;
       --danger:#ff9fb3;
-      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --shadow:0 12px 40px rgba(0,0,0,.35);
       --radius:18px;
       --radius2:16px;
-      --max: 980px;
+      --max:980px;
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
@@ -73,19 +74,17 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
-    a{ color:var(--link); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-    code{ color:var(--link); }
-
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px;}
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+    code{color:var(--link)}
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px}
     .card{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:var(--radius);
       padding:18px;
-      box-shadow: var(--shadow);
+      box-shadow:var(--shadow);
     }
-
     .topbar{
       display:flex;
       align-items:center;
@@ -100,12 +99,11 @@
       display:flex;
       align-items:center;
       gap:10px;
-      text-decoration:none;
       color:var(--text);
       font-weight:900;
       letter-spacing:-.2px;
     }
-    .brand img{ height:30px; width:auto; display:block; }
+    .brand img{height:30px;width:auto;display:block}
     .nav{
       display:flex;
       gap:10px;
@@ -119,13 +117,10 @@
       background:#0b1222;
       border:1px solid var(--border2);
       color:var(--link);
-      text-decoration:none;
       font-weight:800;
       font-size:12px;
-      user-select:none;
     }
-    .nav a:hover{ border-color: rgba(59,130,246,.85); }
-
+    .nav a:hover{border-color:rgba(59,130,246,.85)}
     .hero{
       display:flex;
       align-items:flex-start;
@@ -136,10 +131,10 @@
     }
     .hero h1{
       margin:0;
-      font-size:clamp(24px, 4vw, 30px);
+      font-size:clamp(24px,4vw,30px);
+      line-height:1.1;
       letter-spacing:-.3px;
       max-width:22ch;
-      line-height:1.1;
     }
     .hero p{
       margin:8px 0 0;
@@ -161,9 +156,7 @@
       border:1px solid var(--border2);
       color:var(--muted);
       font-size:12px;
-      user-select:none;
     }
-
     .info{
       margin-top:14px;
       background:var(--panel);
@@ -171,28 +164,26 @@
       border-radius:var(--radius2);
       padding:14px;
     }
-    .info h2{ margin:0 0 8px; font-size:16px; }
-    .info p, .info li{ color:var(--muted); font-size:13px; line-height:1.7; }
-    .info ol, .info ul{ padding-left:18px; margin:8px 0 0; }
-    .tiny{ color:var(--muted2); font-size:12px; }
-
+    .info h2{margin:0 0 8px;font-size:16px}
+    .info p,.info li{color:var(--muted);font-size:13px;line-height:1.7}
+    .info ol,.info ul{padding-left:18px;margin:8px 0 0}
+    .tiny{color:var(--muted2);font-size:12px}
     .grid{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns:1.2fr .8fr;
       gap:14px;
       margin-top:14px;
       align-items:start;
     }
-    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
-
+    @media (max-width:860px){.grid{grid-template-columns:1fr}}
     .box{
       background:var(--panel);
       border:1px solid var(--border2);
       border-radius:var(--radius2);
       padding:14px;
     }
-    label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
-    input, select{
+    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+    input,select{
       width:100%;
       padding:12px 10px;
       border-radius:14px;
@@ -201,18 +192,14 @@
       color:var(--text);
       outline:none;
     }
-    input:focus, select:focus{
-      border-color: rgba(59,130,246,.85);
-      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+    input:focus,select:focus{
+      border-color:rgba(59,130,246,.85);
+      box-shadow:0 0 0 3px rgba(59,130,246,.18);
     }
-    input:disabled{
-      opacity:.65;
-      cursor:not-allowed;
-    }
-    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-    @media (max-width: 520px){ .row{ grid-template-columns: 1fr; } }
-
-    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    input:disabled{opacity:.65;cursor:not-allowed}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:520px){.row{grid-template-columns:1fr}}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     button{
       appearance:none;
       border:0;
@@ -224,23 +211,15 @@
       cursor:pointer;
       transition:.15s ease;
     }
-    button:hover{ filter:brightness(1.05); transform:translateY(-1px); }
+    button:hover{filter:brightness(1.05);transform:translateY(-1px)}
     button.secondary{
       background:#0b1222;
       border:1px solid var(--border2);
       color:var(--text);
       font-weight:800;
     }
-    button.secondary:hover{ border-color: rgba(59,130,246,.7); }
-    button:disabled{
-      opacity:.55;
-      cursor:not-allowed;
-      transform:none;
-      filter:none;
-    }
-
     .qrWrap{
-      width:min(320px, 100%);
+      width:min(320px,100%);
       aspect-ratio:1/1;
       border-radius:16px;
       background:#0b1222;
@@ -252,9 +231,8 @@
       padding:10px;
       margin-inline:auto;
     }
-    .preview{ display:flex; flex-direction:column; align-items:center; gap:10px; }
-    .hint{ color:var(--muted); font-size:12px; text-align:center; }
-
+    .preview{display:flex;flex-direction:column;align-items:center;gap:10px}
+    .hint{color:var(--muted);font-size:12px;text-align:center}
     .canvasWrap{
       width:100%;
       height:100%;
@@ -271,16 +249,14 @@
       height:auto;
       image-rendering:pixelated;
     }
-
     .status{
       min-height:18px;
       margin-top:8px;
       font-size:12px;
       display:none;
     }
-    .status.error{ color:var(--danger); display:block; }
-    .status.ok{ color:var(--ok); display:block; }
-
+    .status.error{color:var(--danger);display:block}
+    .status.ok{color:var(--ok);display:block}
     .faq{
       margin-top:14px;
       background:var(--panel);
@@ -288,7 +264,7 @@
       border-radius:var(--radius2);
       padding:14px;
     }
-    .faq h2{ margin:0 0 10px; font-size:16px; }
+    .faq h2{margin:0 0 10px;font-size:16px}
     details{
       background:#0b1222;
       border:1px solid var(--border2);
@@ -302,28 +278,48 @@
       color:var(--text);
       list-style:none;
     }
-    summary::-webkit-details-marker{ display:none; }
-    details p{ margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.7; }
-
+    summary::-webkit-details-marker{display:none}
+    details p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.7}
     .footerLinks{
       margin-top:14px;
       text-align:center;
       color:var(--muted2);
       font-size:12px;
     }
-    .footerLinks a{ color:var(--link); text-decoration:none; }
-    .footerLinks a:hover{ text-decoration:underline; }
   </style>
 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"Create a WiFi QR Code",
+    "@type":"SoftwareApplication",
+    "name":"WiFi QR Code Generator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Web",
     "url":"https://instantqr.io/tools/wifi-qr-code-generator.html",
-    "description":"Create a WiFi QR code for guests to scan and join instantly.",
-    "isPartOf":{"@type":"WebSite","name":"InstantQR","url":"https://instantqr.io/"},
-    "publisher":{"@type":"Organization","name":"InstantQR","url":"https://instantqr.io","logo":"https://instantqr.io/assets/instantqr-logo.svg"}
+    "description":"Create a WiFi QR code for guests to scan and connect instantly.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io",
+      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools.html"},
+      {"@type":"ListItem","position":3,"name":"WiFi QR Code Generator","item":"https://instantqr.io/tools/wifi-qr-code-generator.html"}
+    ]
   }
   </script>
 
@@ -335,53 +331,59 @@
       {
         "@type":"Question",
         "name":"What is a WiFi QR code?",
-        "acceptedAnswer":{"@type":"Answer","text":"A WiFi QR code contains your SSID, password, and security type so guests can scan to connect instantly."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A WiFi QR code contains your SSID, password, and security type so guests can scan to connect instantly."
+        }
       },
       {
         "@type":"Question",
         "name":"Which security type should I choose?",
-        "acceptedAnswer":{"@type":"Answer","text":"Most networks use WPA/WPA2/WPA3. Choose WEP only for older routers. Choose No password only for open networks."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Most networks use WPA or WPA2/WPA3. Choose WEP only for older routers. Choose No password only for open networks."
+        }
       },
       {
         "@type":"Question",
         "name":"Does InstantQR store my WiFi password?",
-        "acceptedAnswer":{"@type":"Answer","text":"InstantQR is privacy-first. The generator runs in your browser and does not intentionally store WiFi credentials."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. This tool runs in your browser and does not intentionally store WiFi credentials."
+        }
       },
       {
         "@type":"Question",
         "name":"What size should I use for printing?",
-        "acceptedAnswer":{"@type":"Answer","text":"Use at least 320px for easy scanning. For posters or signs, 512px or larger can improve reliability."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Use at least 320px for easy scanning. For posters or signs, 512px or larger can improve reliability."
+        }
       }
     ]
   }
   </script>
 </head>
-
 <body>
   <div class="wrap">
     <div class="card">
-
       <div class="topbar">
         <a class="brand" href="/" aria-label="InstantQR Home">
-          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
           <span>InstantQR</span>
         </a>
-
         <nav class="nav" aria-label="Primary navigation">
           <a href="/">Home</a>
           <a href="/tools.html">All Tools</a>
-          <a href="/tools/url-qr-code-generator.html">URL QR Code Generator</a>
+          <a href="/tools/url-qr-code-generator.html">URL QR</a>
         </nav>
       </div>
 
       <section class="hero">
         <div>
           <h1>Create a WiFi QR Code</h1>
-          <p>
-            Let guests connect to your Wi-Fi by scanning a QR code — no typing needed.
-            Enter your SSID and password, choose security, generate, and download as PNG.
-          </p>
-          <div class="badges" aria-label="Highlights">
+          <p>Let guests connect to your Wi-Fi by scanning a QR code instead of typing the password. Enter your network details, generate the QR code, and download it as PNG.</p>
+          <div class="badges">
             <span class="badge">⚡ Fast</span>
             <span class="badge">🔒 Privacy-first</span>
             <span class="badge">📱 iPhone & Android</span>
@@ -390,110 +392,111 @@
         </div>
       </section>
 
-      <section class="info" aria-label="How to create a WiFi QR code">
-        <h2>Step-by-step</h2>
+      <section class="info">
+        <h2>How to create a WiFi QR code</h2>
         <ol>
           <li>Enter your Wi-Fi name (SSID).</li>
-          <li>Select security type, usually <strong>WPA</strong>.</li>
-          <li>Enter your Wi-Fi password unless the network is open.</li>
+          <li>Select your security type, usually <strong>WPA</strong>.</li>
+          <li>Enter the password unless the network is open.</li>
           <li>Click <strong>Generate</strong> and download your PNG.</li>
         </ol>
-
-        <div class="tiny" style="margin-top:10px;">
-          Privacy note: QR generation runs locally in your browser and we do not intentionally store your Wi-Fi details.
-        </div>
+        <p style="margin-top:10px;">WiFi QR codes are useful for homes, rentals, offices, cafes, restaurants, and event check-in tables.</p>
       </section>
 
       <div class="grid">
         <div class="box">
-          <div class="row">
-            <div>
-              <label for="ssid">Wi-Fi name (SSID)</label>
-              <input id="ssid" type="text" placeholder="MyWiFi" autocomplete="off" maxlength="128" />
-            </div>
-            <div>
-              <label for="security">Security</label>
-              <select id="security">
-                <option value="WPA" selected>WPA/WPA2/WPA3 (recommended)</option>
-                <option value="WEP">WEP (older)</option>
-                <option value="nopass">No password (open)</option>
-              </select>
-            </div>
-          </div>
+          <form id="qrForm" onsubmit="return false;">
+            <input type="hidden" id="qrMode" value="wifi" />
 
-          <div class="row" style="margin-top:12px;">
-            <div>
-              <label for="password">Password</label>
-              <input id="password" type="password" placeholder="••••••••" autocomplete="off" maxlength="128" />
-              <div class="tiny" style="margin-top:6px;">
-                <label style="display:flex;gap:8px;align-items:center;margin:0;color:var(--muted);">
-                  <input id="showPass" type="checkbox" style="width:auto;margin:0;" />
-                  Show password
-                </label>
+            <div class="row">
+              <div>
+                <label for="ssid">Wi-Fi name (SSID)</label>
+                <input id="ssid" type="text" placeholder="MyWiFi" autocomplete="off" maxlength="128" />
+              </div>
+              <div>
+                <label for="security">Security</label>
+                <select id="security">
+                  <option value="WPA" selected>WPA/WPA2/WPA3 (recommended)</option>
+                  <option value="WEP">WEP (older)</option>
+                  <option value="nopass">No password (open)</option>
+                </select>
               </div>
             </div>
-            <div>
-              <label for="hidden">Hidden network</label>
-              <select id="hidden">
-                <option value="false" selected>No</option>
-                <option value="true">Yes</option>
-              </select>
+
+            <div class="row" style="margin-top:12px;">
+              <div>
+                <label for="password">Password</label>
+                <input id="password" type="password" placeholder="••••••••" autocomplete="off" maxlength="128" />
+                <div class="tiny" style="margin-top:6px;">
+                  <label style="display:flex;gap:8px;align-items:center;margin:0;color:var(--muted);">
+                    <input id="showPass" type="checkbox" style="width:auto;margin:0;" />
+                    Show password
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label for="hidden">Hidden network</label>
+                <select id="hidden">
+                  <option value="false" selected>No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </div>
             </div>
-          </div>
 
-          <div class="tiny" style="margin-top:10px;">
-            WiFi QR format:
-            <code>WIFI:T:WPA;S:SSID;P:password;H:false;;</code>
-          </div>
-
-          <div class="row" style="margin-top:12px;">
-            <div>
-              <label for="size">Size (px)</label>
-              <input id="size" type="number" min="128" max="1024" step="32" value="320" />
+            <div class="tiny" style="margin-top:10px;">
+              WiFi QR format:
+              <code>WIFI:T:WPA;S:SSID;P:password;H:false;;</code>
             </div>
-            <div>
-              <label for="level">Error correction</label>
-              <select id="level">
-                <option value="L">L (smallest)</option>
-                <option value="M" selected>M (recommended)</option>
-                <option value="Q">Q</option>
-                <option value="H">H (best)</option>
-              </select>
+
+            <div class="row" style="margin-top:12px;">
+              <div>
+                <label for="size">Size (px)</label>
+                <input id="size" type="number" min="128" max="1024" step="32" value="320" />
+              </div>
+              <div>
+                <label for="level">Error correction</label>
+                <select id="level">
+                  <option value="L">L (smallest)</option>
+                  <option value="M" selected>M (recommended)</option>
+                  <option value="Q">Q</option>
+                  <option value="H">H (best)</option>
+                </select>
+              </div>
             </div>
-          </div>
 
-          <div class="actions">
-            <button id="generateBtn" type="button">Generate</button>
-            <button class="secondary" id="downloadBtn" type="button">Download PNG</button>
-            <button class="secondary" id="clearBtn" type="button">Clear</button>
-          </div>
+            <div class="actions">
+              <button id="generateBtn" type="button">Generate</button>
+              <button id="downloadBtn" class="secondary" type="button">Download PNG</button>
+              <button id="clearBtn" class="secondary" type="button">Clear</button>
+            </div>
 
-          <div class="status" id="status" aria-live="polite"></div>
+            <div id="status" class="status" aria-live="polite"></div>
+          </form>
         </div>
 
         <div class="box preview">
           <div class="qrWrap" id="qrWrap">
-            <div class="hint" id="placeholder">Your WiFi QR code will appear here.</div>
+            <div class="hint">Your QR code will appear here.</div>
           </div>
-          <div class="hint">Tip: test-scan before printing or sharing.</div>
+          <div class="hint">Test before printing or sharing.</div>
         </div>
       </div>
 
-      <section class="info" aria-label="Where to use WiFi QR codes">
+      <section class="info">
         <h2>Where to use a WiFi QR code</h2>
         <ul>
           <li>Home guest Wi-Fi</li>
-          <li>Airbnb and rentals</li>
+          <li>Airbnb and rental properties</li>
           <li>Cafes and restaurants</li>
-          <li>Offices and reception desks</li>
-          <li>Events and check-in tables</li>
+          <li>Office reception areas</li>
+          <li>Events and pop-up venues</li>
         </ul>
 
-        <h2 style="margin-top:16px;">Tips for best results</h2>
+        <h2 style="margin-top:16px;">Best practices</h2>
         <ul>
-          <li>Use at least <strong>320px</strong>, or 512px+ for signs and posters.</li>
-          <li>Choose error correction <strong>M</strong> or <strong>H</strong> for printed materials.</li>
-          <li>SSID is case-sensitive, so double-check spelling.</li>
+          <li>Use at least <strong>320px</strong> for reliable scanning.</li>
+          <li>Use <strong>M</strong> or <strong>H</strong> error correction for printed materials.</li>
+          <li>Double-check SSID spelling because it is case-sensitive.</li>
           <li>Most modern networks should use <strong>WPA</strong>.</li>
         </ul>
       </section>
@@ -503,7 +506,7 @@
 
         <details>
           <summary>What is a WiFi QR code?</summary>
-          <p>A WiFi QR code stores your SSID, password, and security type so guests can scan to connect instantly.</p>
+          <p>A WiFi QR code stores your network name, password, and security type so guests can scan to connect instantly.</p>
         </details>
 
         <details>
@@ -513,12 +516,12 @@
 
         <details>
           <summary>Which security type should I choose?</summary>
-          <p>Most networks use WPA/WPA2/WPA3. Choose WEP only for older routers. Choose “No password” only for open networks.</p>
+          <p>Most networks use WPA/WPA2/WPA3. Choose WEP only for older routers. Choose No password only for open networks.</p>
         </details>
 
         <details>
           <summary>What size should I use for printing?</summary>
-          <p>Use at least 320px for easy scanning. For posters, 512px or larger can improve reliability.</p>
+          <p>Use at least 320px. For posters or signs, 512px or larger can improve reliability.</p>
         </details>
       </section>
 
@@ -546,221 +549,19 @@
         document.head.appendChild(s);
       }
 
-      function bootWhenReady(){
+      function ready(){
         if (window.QRious) {
           document.dispatchEvent(new CustomEvent("qrious-ready"));
         }
       }
 
-      loadScript(primarySrc, bootWhenReady, function(){
-        loadScript(fallbackSrc, bootWhenReady, function(){
+      loadScript(primarySrc, ready, function(){
+        loadScript(fallbackSrc, ready, function(){
           document.dispatchEvent(new CustomEvent("qrious-failed"));
         });
       });
     })();
   </script>
-
-  <script>
-    const ssidEl = document.getElementById("ssid");
-    const securityEl = document.getElementById("security");
-    const passwordEl = document.getElementById("password");
-    const hiddenEl = document.getElementById("hidden");
-    const showPassEl = document.getElementById("showPass");
-    const sizeEl = document.getElementById("size");
-    const levelEl = document.getElementById("level");
-    const generateBtn = document.getElementById("generateBtn");
-    const downloadBtn = document.getElementById("downloadBtn");
-    const clearBtn = document.getElementById("clearBtn");
-    const qrWrap = document.getElementById("qrWrap");
-    const statusEl = document.getElementById("status");
-
-    let qr = null;
-    let canvas = null;
-    let autoTimer = null;
-
-    function setStatus(message, type){
-      statusEl.textContent = message || "";
-      statusEl.className = "status" + (type ? " " + type : "");
-      if (!message) statusEl.className = "status";
-    }
-
-    function escapeWifiValue(value){
-      return String(value || "")
-        .replace(/\\/g, "\\\\")
-        .replace(/;/g, "\\;")
-        .replace(/,/g, "\\,")
-        .replace(/:/g, "\\:");
-    }
-
-    function buildWifiString(){
-      const ssid = (ssidEl.value || "").trim();
-      const security = securityEl.value || "WPA";
-      const hidden = hiddenEl.value === "true" ? "true" : "false";
-      const password = passwordEl.value || "";
-
-      if (!ssid) {
-        throw new Error("Please enter your Wi-Fi name (SSID).");
-      }
-
-      if (security !== "nopass" && !password) {
-        throw new Error("Please enter your Wi-Fi password, or choose No password for open networks.");
-      }
-
-      const safeSsid = escapeWifiValue(ssid);
-      const safePass = escapeWifiValue(password);
-
-      return `WIFI:T:${security};S:${safeSsid};P:${safePass};H:${hidden};;`;
-    }
-
-    function getSafeSize(){
-      const n = parseInt(sizeEl.value, 10);
-      if (!Number.isFinite(n)) return 320;
-      return Math.min(1024, Math.max(128, n));
-    }
-
-    function syncPasswordState(){
-      const noPass = securityEl.value === "nopass";
-      passwordEl.disabled = noPass;
-      passwordEl.placeholder = noPass ? "(No password)" : "••••••••";
-      if (noPass) passwordEl.value = "";
-    }
-
-    function ensureCanvas(){
-      if (canvas) return canvas;
-      canvas = document.createElement("canvas");
-      canvas.width = getSafeSize();
-      canvas.height = getSafeSize();
-
-      const holder = document.createElement("div");
-      holder.className = "canvasWrap";
-      holder.appendChild(canvas);
-
-      qrWrap.innerHTML = "";
-      qrWrap.appendChild(holder);
-      return canvas;
-    }
-
-    function generateQr(){
-      if (!window.QRious) {
-        setStatus("QR library is still loading. Please try again in a moment.", "error");
-        return;
-      }
-
-      let value;
-      try {
-        value = buildWifiString();
-      } catch (err) {
-        setStatus(err.message, "error");
-        return;
-      }
-
-      const size = getSafeSize();
-      const level = levelEl.value || "M";
-      const el = ensureCanvas();
-
-      try {
-        if (!qr) {
-          qr = new QRious({
-            element: el,
-            value,
-            size,
-            level,
-            padding: 10,
-            background: "white",
-            foreground: "black"
-          });
-        } else {
-          qr.value = value;
-          qr.size = size;
-          qr.level = level;
-          qr.padding = 10;
-          qr.background = "white";
-          qr.foreground = "black";
-        }
-
-        el.style.width = "100%";
-        el.style.maxWidth = size + "px";
-        el.style.height = "auto";
-        setStatus("WiFi QR code generated successfully.", "ok");
-      } catch (err) {
-        setStatus("Unable to generate the WiFi QR code. Please try again.", "error");
-      }
-    }
-
-    function downloadQr(){
-      if (!canvas) {
-        setStatus("Generate a WiFi QR code before downloading.", "error");
-        return;
-      }
-
-      try {
-        const link = document.createElement("a");
-        link.href = canvas.toDataURL("image/png");
-        link.download = "wifi-qr-code.png";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        setStatus("PNG download started.", "ok");
-      } catch (err) {
-        setStatus("Unable to download PNG on this device/browser.", "error");
-      }
-    }
-
-    function clearAll(){
-      ssidEl.value = "";
-      securityEl.value = "WPA";
-      passwordEl.value = "";
-      hiddenEl.value = "false";
-      if (showPassEl) showPassEl.checked = false;
-      passwordEl.type = "password";
-      sizeEl.value = "320";
-      levelEl.value = "M";
-      qr = null;
-      canvas = null;
-      qrWrap.innerHTML = '<div class="hint">Your WiFi QR code will appear here.</div>';
-      setStatus("", "");
-      syncPasswordState();
-      ssidEl.focus();
-    }
-
-    function scheduleAutoGenerate(){
-      clearTimeout(autoTimer);
-      autoTimer = setTimeout(() => {
-        if ((ssidEl.value || "").trim()) generateQr();
-      }, 350);
-    }
-
-    showPassEl.addEventListener("change", () => {
-      passwordEl.type = showPassEl.checked ? "text" : "password";
-    });
-
-    securityEl.addEventListener("change", () => {
-      syncPasswordState();
-      if (canvas) generateQr();
-    });
-
-    [ssidEl, passwordEl, hiddenEl].forEach(el => {
-      el.addEventListener("input", scheduleAutoGenerate);
-      el.addEventListener("change", scheduleAutoGenerate);
-      el.addEventListener("paste", () => setTimeout(scheduleAutoGenerate, 40));
-    });
-
-    sizeEl.addEventListener("change", () => { if (canvas) generateQr(); });
-    levelEl.addEventListener("change", () => { if (canvas) generateQr(); });
-
-    generateBtn.addEventListener("click", generateQr);
-    downloadBtn.addEventListener("click", downloadQr);
-    clearBtn.addEventListener("click", clearAll);
-
-    document.addEventListener("qrious-ready", () => {
-      syncPasswordState();
-    });
-
-    document.addEventListener("qrious-failed", () => {
-      setStatus("The QR generator library failed to load. Check your connection or try again.", "error");
-    });
-
-    syncPasswordState();
-  </script>
+  <script src="/tools/app.js"></script>
 </body>
 </html>
