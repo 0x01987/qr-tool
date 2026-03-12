@@ -1,0 +1,1360 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>DeFi TVL Tracker | Track Protocol & Chain TVL Live | InstantQR.io</title>
+  <meta name="description" content="Fast DeFi TVL tracker for protocols and chains. Search, filter, sort, compare live TVL, view 1d and 7d changes, and inspect protocol details in a clean responsive dashboard." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="canonical" href="https://instantqr.io/web3-tools/defi-tvl-tracker.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="DeFi TVL Tracker | Track Protocol & Chain TVL Live" />
+  <meta property="og:description" content="Monitor DeFi TVL across protocols and chains with fast filters, sorting, and protocol details." />
+  <meta property="og:url" content="https://instantqr.io/web3-tools/defi-tvl-tracker.html" />
+  <meta property="og:site_name" content="InstantQR.io" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DeFi TVL Tracker | Track Protocol & Chain TVL Live" />
+  <meta name="twitter:description" content="Search, filter, sort, and inspect DeFi TVL data fast on desktop and mobile." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+
+  <style>
+    :root{
+      --bg:#07111f;
+      --bg2:#0c1730;
+      --panel:#0f1b34;
+      --panel2:#122143;
+      --text:#eaf1ff;
+      --muted:#9db0d3;
+      --line:rgba(255,255,255,.09);
+      --accent:#6ea8ff;
+      --accent2:#8ef0c5;
+      --good:#3ddc97;
+      --bad:#ff6b81;
+      --warn:#ffcf5a;
+      --shadow:0 10px 35px rgba(0,0,0,.28);
+      --radius:22px;
+      --radius-sm:14px;
+      --max:1240px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1000px 500px at 10% -10%, rgba(110,168,255,.14), transparent 60%),
+        radial-gradient(800px 460px at 100% 0%, rgba(142,240,197,.09), transparent 60%),
+        linear-gradient(180deg, #07111f 0%, #091528 100%);
+      line-height:1.45;
+    }
+
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+    button,input,select{font:inherit}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:20px}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:10px 0 18px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;color:var(--text);min-width:0;
+    }
+    .brand img{width:38px;height:38px;border-radius:10px}
+    .brand strong{display:block;font-size:1rem}
+    .brand span{display:block;color:var(--muted);font-size:.9rem}
+
+    .hero{
+      display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:stretch;
+      margin:8px 0 18px;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .hero-main{padding:24px}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:.82rem;font-weight:700;letter-spacing:.02em;
+      color:#cfe0ff;background:rgba(110,168,255,.12);
+      border:1px solid rgba(110,168,255,.22);
+      padding:8px 12px;border-radius:999px;
+    }
+    h1{
+      margin:14px 0 10px;font-size:clamp(1.85rem,4vw,3rem);line-height:1.06;
+      letter-spacing:-.03em;
+    }
+    .lead{
+      margin:0 0 16px;color:var(--muted);font-size:1.03rem;max-width:66ch;
+    }
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+    .btn{
+      appearance:none;border:none;border-radius:14px;padding:12px 16px;
+      background:linear-gradient(180deg,#6ea8ff,#4b89f0);
+      color:#fff;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(78,133,240,.25);
+      transition:transform .15s ease, opacity .15s ease, border-color .15s ease, background .15s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.secondary{
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border:1px solid var(--line);
+      box-shadow:none;
+    }
+    .btn.ghost{
+      background:transparent;color:var(--muted);border:1px solid var(--line);box-shadow:none;
+    }
+
+    .hero-side{
+      padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;
+      align-content:start;
+    }
+    .miniStat{
+      padding:16px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid var(--line);
+      min-height:102px;
+    }
+    .miniStat .k{font-size:.84rem;color:var(--muted);margin-bottom:8px}
+    .miniStat .v{font-size:1.45rem;font-weight:800;letter-spacing:-.02em}
+    .miniStat .s{margin-top:6px;color:var(--muted);font-size:.85rem}
+    .pos{color:var(--good)}
+    .neg{color:var(--bad)}
+
+    .notice{
+      margin:0 0 18px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:rgba(110,168,255,.08);
+      color:#dce8ff;
+      border:1px solid rgba(110,168,255,.18);
+      font-size:.95rem;
+    }
+    .notice strong{
+      color:#ffffff;
+    }
+
+    .toolbar{
+      padding:16px;display:grid;grid-template-columns:2.2fr repeat(4,1fr) auto;gap:12px;
+      align-items:center;margin-bottom:16px;
+    }
+    .field{display:flex;flex-direction:column;gap:6px}
+    .label{font-size:.8rem;color:var(--muted);font-weight:700}
+
+    .input, .select{
+      width:100%;
+      min-width:0;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      color:var(--text);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:14px;
+      padding:12px 14px;
+      outline:none;
+      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    .input::placeholder{
+      color:var(--muted);
+    }
+
+    .input:focus, .select:focus{
+      border-color:rgba(110,168,255,.55);
+      box-shadow:0 0 0 3px rgba(110,168,255,.12);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.035));
+    }
+
+    .select{
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      cursor:pointer;
+      padding-right:44px;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #cfe0ff 50%),
+        linear-gradient(135deg, #cfe0ff 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) calc(50% - 3px),
+        calc(100% - 12px) calc(50% - 3px);
+      background-size:6px 6px, 6px 6px;
+      background-repeat:no-repeat;
+    }
+
+    .select:hover{
+      border-color:rgba(255,255,255,.16);
+    }
+
+    .select option{
+      background:#0f1b34;
+      color:var(--text);
+    }
+
+    .switcher{
+      display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px;
+    }
+    .pill{
+      border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);
+      border-radius:999px;padding:10px 14px;font-weight:700;cursor:pointer;
+      transition:background .15s ease,border-color .15s ease,color .15s ease,transform .15s ease;
+    }
+    .pill:hover{transform:translateY(-1px)}
+    .pill.active{
+      color:#fff;background:rgba(110,168,255,.16);border-color:rgba(110,168,255,.28);
+    }
+
+    .stats{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px;
+    }
+    .stat{
+      padding:18px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.025));
+      border:1px solid var(--line);
+    }
+    .stat .t{font-size:.86rem;color:var(--muted);margin-bottom:6px}
+    .stat .n{font-size:1.65rem;font-weight:800;letter-spacing:-.03em}
+    .stat .sub{font-size:.85rem;color:var(--muted);margin-top:6px}
+
+    .tableWrap{
+      overflow:auto;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.02)
+    }
+    table{
+      width:100%;border-collapse:collapse;min-width:960px;
+    }
+    thead th{
+      position:sticky;top:0;z-index:2;
+      text-align:left;padding:14px;background:#0e1a31;color:#d9e5ff;font-size:.82rem;
+      border-bottom:1px solid var(--line);white-space:nowrap;
+    }
+    tbody td{
+      padding:14px;border-bottom:1px solid var(--line);vertical-align:middle;
+    }
+    tbody tr:hover{background:rgba(255,255,255,.03)}
+    .rank{
+      display:inline-grid;place-items:center;width:30px;height:30px;border-radius:999px;
+      background:rgba(255,255,255,.05);border:1px solid var(--line);font-weight:800;font-size:.86rem;
+    }
+    .proto{
+      display:flex;align-items:center;gap:12px;min-width:220px;
+    }
+    .protoIcon{
+      width:34px;height:34px;border-radius:10px;object-fit:cover;background:#15274b;border:1px solid var(--line)
+    }
+    .protoName{font-weight:800}
+    .protoMeta{font-size:.84rem;color:var(--muted)}
+    .tag{
+      display:inline-flex;align-items:center;padding:7px 10px;border-radius:999px;
+      background:rgba(255,255,255,.045);border:1px solid var(--line);color:#dce7ff;font-size:.8rem;font-weight:700;
+      white-space:nowrap;
+    }
+    .rowBtn{
+      border:none;background:transparent;color:var(--accent);font-weight:800;cursor:pointer;padding:0;
+    }
+    .muted{color:var(--muted)}
+    .empty, .loading, .error{
+      padding:28px;text-align:center;color:var(--muted)
+    }
+    .error{color:#ffd0d7}
+    .tiny{
+      font-size:.84rem;color:var(--muted)
+    }
+
+    .footer{
+      margin:28px 0 20px;padding:18px;border:1px solid var(--line);border-radius:20px;
+      background:rgba(255,255,255,.02);color:var(--muted)
+    }
+    .footerLinks{
+      display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:10px
+    }
+
+    .modal{
+      position:fixed;inset:0;background:rgba(3,7,16,.72);backdrop-filter:blur(8px);
+      display:none;align-items:flex-end;justify-content:center;padding:18px;z-index:50;
+    }
+    .modal.open{display:flex}
+    .sheet{
+      width:min(100%,980px);max-height:min(92vh,900px);overflow:auto;
+      border-radius:24px;background:linear-gradient(180deg,#0e1a31,#0b162c);
+      border:1px solid var(--line);box-shadow:var(--shadow);
+    }
+    .sheetHead{
+      position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;gap:14px;align-items:flex-start;
+      padding:18px 18px 14px;background:rgba(10,18,37,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);
+    }
+    .sheetBody{padding:18px}
+    .sheetGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+    .detailStats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
+    .detailCard{
+      padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.03)
+    }
+    .canvasWrap{
+      border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.02);padding:10px;
+    }
+    canvas{width:100%;height:320px;display:block}
+    .list{
+      display:flex;flex-wrap:wrap;gap:8px;margin-top:8px
+    }
+
+    .faq{
+      margin-top:22px;padding:18px
+    }
+    .faq h2{margin:0 0 10px;font-size:1.25rem}
+    details{
+      border:1px solid var(--line);border-radius:16px;padding:14px 16px;background:rgba(255,255,255,.025)
+    }
+    details + details{margin-top:10px}
+    summary{cursor:pointer;font-weight:800}
+    details p{margin:10px 0 0;color:var(--muted)}
+
+    @media (max-width: 1080px){
+      .hero{grid-template-columns:1fr}
+      .toolbar{grid-template-columns:1fr 1fr 1fr}
+      .toolbar .grow{grid-column:1/-1}
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .sheetGrid{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 720px){
+      .wrap{padding:14px}
+      .toolbar{grid-template-columns:1fr 1fr}
+      .toolbar .grow,
+      .toolbar .full{grid-column:1/-1}
+      .stats{grid-template-columns:1fr}
+      .hero-side{grid-template-columns:1fr 1fr}
+      .miniStat .v{font-size:1.2rem}
+      .detailStats{grid-template-columns:1fr}
+      .sheetHead{padding:16px}
+      .sheetBody{padding:16px}
+    }
+
+    @media (max-width: 540px){
+      .topbar{align-items:flex-start;flex-direction:column}
+      .hero-main{padding:18px}
+      .hero-side{grid-template-columns:1fr}
+      .toolbar{grid-template-columns:1fr}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"InstantQR.io DeFi TVL Tracker",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Web",
+    "url":"https://instantqr.io/web3-tools/defi-tvl-tracker.html",
+    "description":"Responsive DeFi TVL tracker for protocols and chains with search, filters, sorting, and protocol detail views.",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is TVL in DeFi?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"TVL stands for Total Value Locked. It represents the value of assets deposited into a DeFi protocol or aggregated across a blockchain ecosystem."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this DeFi TVL tracker support protocol details?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can open a protocol detail view to inspect current TVL, key metadata, supported chains, and historical TVL if the data source provides it."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can this tool work with a proxy endpoint?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. For the most reliable production setup, point the source config to your own serverless proxy or backend cache, then keep the public endpoints as fallback."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar" aria-label="Header">
+      <a class="brand" href="/web3-tools/web3-tools.html" aria-label="InstantQR Web3 Tools">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <span>
+          <strong>InstantQR.io</strong>
+          <span>Web3 Tools</span>
+        </span>
+      </a>
+      <nav class="tiny" aria-label="Breadcrumb">
+        <a href="/">Home</a> / <a href="/web3-tools/web3-tools.html">Web3 Tools</a> / <span class="muted">DeFi TVL Tracker</span>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-main card">
+        <div class="eyebrow">Live DeFi Analytics</div>
+        <h1>DeFi TVL Tracker</h1>
+        <p class="lead">
+          Fast, super responsive, and reliable TVL tracking for DeFi protocols and chains.
+          Search, filter, sort, compare, and open protocol detail views with historical TVL charts.
+        </p>
+        <div class="hero-actions">
+          <button class="btn" id="refreshBtn" type="button">Refresh data</button>
+          <button class="btn secondary" id="jumpTableBtn" type="button">Jump to tracker</button>
+        </div>
+      </div>
+
+      <aside class="hero-side card" aria-label="Quick stats">
+        <div class="miniStat">
+          <div class="k">Mode</div>
+          <div class="v" id="modeLabel">Protocols</div>
+          <div class="s">Switch between protocols and chains</div>
+        </div>
+        <div class="miniStat">
+          <div class="k">Cache</div>
+          <div class="v" id="cacheState">Ready</div>
+          <div class="s" id="cacheSub">Smart local cache enabled</div>
+        </div>
+        <div class="miniStat">
+          <div class="k">Last updated</div>
+          <div class="v" id="lastUpdated">—</div>
+          <div class="s">Auto-detects fresh vs cached data</div>
+        </div>
+        <div class="miniStat">
+          <div class="k">Status</div>
+          <div class="v" id="apiStatus">Idle</div>
+          <div class="s">Timeout + fallback + stale support</div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="notice" id="proxyNotice">
+      <strong>Reliable data loading:</strong> this tool is built to use a fast cached source when available, with automatic fallback to public endpoints.
+    </div>
+
+    <section class="stats" aria-label="Overview stats">
+      <div class="stat card">
+        <div class="t">Tracked items</div>
+        <div class="n" id="statTracked">—</div>
+        <div class="sub" id="statTrackedSub">Protocols or chains shown</div>
+      </div>
+      <div class="stat card">
+        <div class="t">Aggregate TVL</div>
+        <div class="n" id="statTvl">—</div>
+        <div class="sub">Based on current filtered results</div>
+      </div>
+      <div class="stat card">
+        <div class="t">Median TVL</div>
+        <div class="n" id="statMedian">—</div>
+        <div class="sub">Helps spot concentration</div>
+      </div>
+      <div class="stat card">
+        <div class="t">24h trend</div>
+        <div class="n" id="statChange">—</div>
+        <div class="sub">Average visible 24h change</div>
+      </div>
+    </section>
+
+    <div class="switcher" role="tablist" aria-label="View selector">
+      <button class="pill active" id="tabProtocols" role="tab" aria-selected="true" type="button">Protocols</button>
+      <button class="pill" id="tabChains" role="tab" aria-selected="false" type="button">Chains</button>
+    </div>
+
+    <section id="tracker" class="card">
+      <div class="toolbar">
+        <div class="field grow">
+          <label class="label" for="searchInput">Search</label>
+          <input class="input" id="searchInput" type="search" placeholder="Search protocol, chain, category, symbol..." autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label class="label" for="categoryFilter">Category</label>
+          <select class="select" id="categoryFilter">
+            <option value="">All</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="label" for="chainFilter">Chain</label>
+          <select class="select" id="chainFilter">
+            <option value="">All</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="label" for="sortBy">Sort by</label>
+          <select class="select" id="sortBy">
+            <option value="tvl-desc">TVL: High to Low</option>
+            <option value="tvl-asc">TVL: Low to High</option>
+            <option value="change1d-desc">24h: Best</option>
+            <option value="change1d-asc">24h: Worst</option>
+            <option value="change7d-desc">7d: Best</option>
+            <option value="change7d-asc">7d: Worst</option>
+            <option value="name-asc">Name: A to Z</option>
+            <option value="name-desc">Name: Z to A</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="label" for="limitSelect">Rows</label>
+          <select class="select" id="limitSelect">
+            <option>25</option>
+            <option selected>50</option>
+            <option>100</option>
+            <option>250</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label class="label">&nbsp;</label>
+          <button class="btn secondary" id="resetBtn" type="button">Reset filters</button>
+        </div>
+      </div>
+
+      <div id="tableHost" class="tableWrap" aria-live="polite">
+        <div class="loading" id="loadingState">Loading DeFi TVL data…</div>
+      </div>
+    </section>
+
+    <section class="faq card">
+      <h2>DeFi TVL Tracker FAQ</h2>
+      <details>
+        <summary>What can I use this DeFi TVL tracker for?</summary>
+        <p>Use it to monitor protocol and chain TVL, compare categories, inspect short-term changes, and quickly identify where capital is concentrated in DeFi.</p>
+      </details>
+      <details>
+        <summary>Why include a proxy-ready setup?</summary>
+        <p>A proxy or serverless cache improves reliability, avoids browser-side rate limits, and gives you a stable source even when public endpoints change behavior.</p>
+      </details>
+      <details>
+        <summary>Is this mobile friendly?</summary>
+        <p>Yes. The layout is optimized for small screens, fast taps, readable cards, and smooth table scrolling on phones and tablets.</p>
+      </details>
+    </section>
+
+    <footer class="footer card">
+      <div><strong>InstantQR.io</strong> · Fast utility tools for web, SEO, network, and Web3 users.</div>
+      <div class="footerLinks">
+        <a href="/web3-tools/web3-tools.html">Web3 Tools</a>
+        <a href="/web3-tools/wallet-approval-checker.html">Wallet Approval Checker</a>
+        <a href="/web3-tools/token-contract-analyzer.html">Token Contract Analyzer</a>
+        <a href="/web3-tools/gas-tracker.html">Gas Tracker</a>
+        <a href="/web3-tools/dca-calculator.html">DCA Calculator</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="modal" id="detailModal" aria-hidden="true">
+    <div class="sheet">
+      <div class="sheetHead">
+        <div>
+          <div class="tiny muted">Protocol details</div>
+          <h2 id="detailTitle" style="margin:4px 0 0;font-size:1.6rem">Loading…</h2>
+        </div>
+        <button class="btn ghost" id="closeModalBtn" type="button" aria-label="Close detail view">Close</button>
+      </div>
+      <div class="sheetBody">
+        <div id="detailLoading" class="loading">Loading protocol detail…</div>
+        <div id="detailError" class="error" style="display:none"></div>
+
+        <div id="detailContent" style="display:none">
+          <div class="sheetGrid">
+            <div>
+              <div class="detailStats">
+                <div class="detailCard">
+                  <div class="tiny muted">Current TVL</div>
+                  <div id="detailTvl" style="font-size:1.55rem;font-weight:800;margin-top:6px">—</div>
+                </div>
+                <div class="detailCard">
+                  <div class="tiny muted">Category</div>
+                  <div id="detailCategory" style="font-size:1.05rem;font-weight:800;margin-top:6px">—</div>
+                </div>
+                <div class="detailCard">
+                  <div class="tiny muted">24h change</div>
+                  <div id="detail1d" style="font-size:1.05rem;font-weight:800;margin-top:6px">—</div>
+                </div>
+                <div class="detailCard">
+                  <div class="tiny muted">7d change</div>
+                  <div id="detail7d" style="font-size:1.05rem;font-weight:800;margin-top:6px">—</div>
+                </div>
+              </div>
+
+              <div class="detailCard" style="margin-bottom:14px">
+                <div class="tiny muted">Description</div>
+                <div id="detailDescription" style="margin-top:8px;color:var(--muted)">—</div>
+              </div>
+
+              <div class="detailCard" style="margin-bottom:14px">
+                <div class="tiny muted">Chains</div>
+                <div class="list" id="detailChains"></div>
+              </div>
+
+              <div class="detailCard">
+                <div class="tiny muted">Links</div>
+                <div class="list" id="detailLinks"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="canvasWrap">
+                <div class="tiny muted" style="padding:4px 4px 10px">Historical TVL</div>
+                <canvas id="tvlChart" width="760" height="360" aria-label="TVL chart"></canvas>
+              </div>
+              <div class="tiny" id="chartMeta" style="margin-top:8px">Historical chart loads when available from the source.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /*
+      Recommended production setup:
+      1) Use your own proxy or serverless cache first
+      2) Keep public endpoints as fallback
+    */
+    const DATA_SOURCES = {
+      protocols: [
+        '/api/defi/protocols',
+        'https://api.llama.fi/protocols',
+        'https://api.llama.fi/lite/protocols'
+      ],
+      chains: [
+        '/api/defi/chains',
+        'https://api.llama.fi/v2/chains',
+        'https://api.llama.fi/chains'
+      ],
+      protocolDetail: [
+        (slug) => `/api/defi/protocol/${encodeURIComponent(slug)}`,
+        (slug) => `https://api.llama.fi/protocol/${encodeURIComponent(slug)}`
+      ]
+    };
+
+    const CACHE_TTL_MS = 5 * 60 * 1000;
+    const FETCH_TIMEOUT_MS = 9000;
+    const STATE = {
+      mode: 'protocols',
+      protocols: [],
+      chains: [],
+      filtered: [],
+      fresh: false,
+      usingStale: false,
+      lastUpdatedISO: '',
+      activeDetail: null
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    function fmtMoney(n) {
+      if (!isFinite(Number(n))) return '—';
+      const v = Number(n);
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        notation: v >= 1e9 ? 'compact' : 'standard',
+        maximumFractionDigits: v >= 1e9 ? 2 : 0
+      }).format(v);
+    }
+
+    function fmtCompact(n) {
+      if (!isFinite(Number(n))) return '—';
+      return new Intl.NumberFormat('en-US', {
+        notation: 'compact',
+        maximumFractionDigits: 2
+      }).format(Number(n));
+    }
+
+    function fmtPct(n) {
+      if (!isFinite(Number(n))) return '—';
+      const v = Number(n);
+      const sign = v > 0 ? '+' : '';
+      return `${sign}${v.toFixed(2)}%`;
+    }
+
+    function escapeHtml(str='') {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function setStatus(status, sub='') {
+      $('apiStatus').textContent = status;
+      if (sub) $('cacheSub').textContent = sub;
+    }
+
+    function setCacheState(label, sub='') {
+      $('cacheState').textContent = label;
+      if (sub) $('cacheSub').textContent = sub;
+    }
+
+    function lastUpdatedLabel(iso) {
+      if (!iso) return '—';
+      const d = new Date(iso);
+      return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    }
+
+    function cacheGet(key) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || !parsed.timestamp || !parsed.data) return null;
+        return parsed;
+      } catch {
+        return null;
+      }
+    }
+
+    function cacheSet(key, data) {
+      try {
+        localStorage.setItem(key, JSON.stringify({
+          timestamp: Date.now(),
+          data
+        }));
+      } catch {}
+    }
+
+    async function fetchJsonWithTimeout(url) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+      try {
+        const res = await fetch(url, {
+          method: 'GET',
+          headers: { 'accept': 'application/json' },
+          signal: controller.signal,
+          cache: 'no-store'
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return await res.json();
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    async function fetchFirstWorking(urls) {
+      let lastErr = null;
+      for (const url of urls) {
+        try {
+          const json = await fetchJsonWithTimeout(url);
+          return { ok: true, url, data: json };
+        } catch (err) {
+          lastErr = err;
+        }
+      }
+      return { ok: false, error: lastErr || new Error('All endpoints failed') };
+    }
+
+    async function getDataset(name, urls) {
+      const key = `defi-tvl-tracker:${name}`;
+      const cached = cacheGet(key);
+      const freshEnough = cached && (Date.now() - cached.timestamp < CACHE_TTL_MS);
+
+      if (freshEnough) {
+        STATE.fresh = false;
+        STATE.usingStale = false;
+        setCacheState('Cached', 'Serving fresh local cache');
+        return { data: cached.data, fromCache: true, stale: false };
+      }
+
+      const live = await fetchFirstWorking(urls);
+      if (live.ok) {
+        cacheSet(key, live.data);
+        STATE.fresh = true;
+        STATE.usingStale = false;
+        setCacheState('Live', 'Fresh data loaded successfully');
+        return { data: live.data, fromCache: false, stale: false };
+      }
+
+      if (cached) {
+        STATE.fresh = false;
+        STATE.usingStale = true;
+        setCacheState('Stale', 'Live fetch failed, serving saved data');
+        return { data: cached.data, fromCache: true, stale: true };
+      }
+
+      throw live.error || new Error('Unable to load data');
+    }
+
+    function normalizeProtocols(data) {
+      if (!Array.isArray(data)) return [];
+      return data
+        .map((p) => {
+          const currentTvl =
+            Number(p.tvl) ||
+            Number(p.currentChainTvls && Object.values(p.currentChainTvls).reduce((a,b) => a + Number(b || 0), 0)) ||
+            0;
+
+          const chainList = Array.isArray(p.chains)
+            ? p.chains
+            : p.chain ? [p.chain] : [];
+
+          return {
+            type: 'protocol',
+            id: p.id || p.slug || p.name,
+            slug: p.slug || p.name?.toLowerCase().replace(/\s+/g, '-'),
+            name: p.name || 'Unknown',
+            symbol: p.symbol || '',
+            category: p.category || 'Unknown',
+            chains: chainList,
+            chainLabel: chainList.join(', '),
+            tvl: currentTvl,
+            change_1d: Number(p.change_1d ?? p.change_1d_percent ?? p.change1d ?? NaN),
+            change_7d: Number(p.change_7d ?? p.change_7d_percent ?? p.change7d ?? NaN),
+            mcap: Number(p.mcap ?? NaN),
+            logo: p.logo || '',
+            url: p.url || '',
+            description: p.description || ''
+          };
+        })
+        .filter(x => x.name);
+    }
+
+    function normalizeChains(data) {
+      if (!Array.isArray(data)) return [];
+      return data.map((c) => ({
+        type: 'chain',
+        id: c.name || c.gecko_id || c.chainId,
+        name: c.name || c.gecko_id || 'Unknown',
+        symbol: c.tokenSymbol || '',
+        category: 'Chain',
+        chains: [c.name || 'Unknown'],
+        chainLabel: c.name || 'Unknown',
+        tvl: Number(c.tvl ?? 0),
+        change_1d: Number(c.change_1d ?? c.change1d ?? NaN),
+        change_7d: Number(c.change_7d ?? c.change7d ?? NaN),
+        mcap: Number(c.mcap ?? NaN),
+        chainId: c.chainId ?? '',
+        gecko_id: c.gecko_id || ''
+      }));
+    }
+
+    function uniqueSorted(values) {
+      return [...new Set(values.filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b)));
+    }
+
+    function fillFilters() {
+      const categorySelect = $('categoryFilter');
+      const chainSelect = $('chainFilter');
+
+      const protocols = STATE.protocols;
+      const categories = uniqueSorted(protocols.map(p => p.category));
+      const chains = uniqueSorted(protocols.flatMap(p => p.chains || []));
+
+      categorySelect.innerHTML = `<option value="">All</option>` +
+        categories.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
+
+      chainSelect.innerHTML = `<option value="">All</option>` +
+        chains.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
+    }
+
+    function getCurrentData() {
+      return STATE.mode === 'protocols' ? STATE.protocols : STATE.chains;
+    }
+
+    function applyFilters() {
+      const q = $('searchInput').value.trim().toLowerCase();
+      const category = $('categoryFilter').value;
+      const chain = $('chainFilter').value;
+      const sort = $('sortBy').value;
+      const limit = Number($('limitSelect').value || 50);
+
+      let rows = [...getCurrentData()];
+
+      if (q) {
+        rows = rows.filter(r => {
+          const hay = [
+            r.name, r.symbol, r.category, r.chainLabel,
+            ...(r.chains || [])
+          ].join(' ').toLowerCase();
+          return hay.includes(q);
+        });
+      }
+
+      if (STATE.mode === 'protocols' && category) {
+        rows = rows.filter(r => r.category === category);
+      }
+
+      if (chain) {
+        rows = rows.filter(r => (r.chains || []).includes(chain) || r.name === chain);
+      }
+
+      rows.sort((a,b) => {
+        switch (sort) {
+          case 'tvl-asc': return (a.tvl||0) - (b.tvl||0);
+          case 'tvl-desc': return (b.tvl||0) - (a.tvl||0);
+          case 'change1d-asc': return (a.change_1d||-999999) - (b.change_1d||-999999);
+          case 'change1d-desc': return (b.change_1d||-999999) - (a.change_1d||-999999);
+          case 'change7d-asc': return (a.change_7d||-999999) - (b.change_7d||-999999);
+          case 'change7d-desc': return (b.change_7d||-999999) - (a.change_7d||-999999);
+          case 'name-desc': return String(b.name).localeCompare(String(a.name));
+          case 'name-asc':
+          default: return String(a.name).localeCompare(String(b.name));
+        }
+      });
+
+      STATE.filtered = rows.slice(0, limit);
+      renderStats(rows);
+      renderTable(STATE.filtered);
+    }
+
+    function median(nums) {
+      const arr = nums.filter(n => isFinite(n)).sort((a,b)=>a-b);
+      if (!arr.length) return NaN;
+      const mid = Math.floor(arr.length/2);
+      return arr.length % 2 ? arr[mid] : (arr[mid-1] + arr[mid]) / 2;
+    }
+
+    function avg(nums) {
+      const arr = nums.filter(n => isFinite(n));
+      if (!arr.length) return NaN;
+      return arr.reduce((a,b)=>a+b,0) / arr.length;
+    }
+
+    function renderStats(allVisibleRows) {
+      const tvls = allVisibleRows.map(r => Number(r.tvl || 0));
+      const sum = tvls.reduce((a,b)=>a+b,0);
+      const med = median(tvls);
+      const avg1d = avg(allVisibleRows.map(r => Number(r.change_1d)));
+
+      $('statTracked').textContent = fmtCompact(allVisibleRows.length);
+      $('statTrackedSub').textContent = STATE.mode === 'protocols'
+        ? 'Matching protocols'
+        : 'Matching chains';
+
+      $('statTvl').textContent = fmtMoney(sum);
+      $('statMedian').textContent = fmtMoney(med);
+      $('statChange').textContent = isFinite(avg1d) ? fmtPct(avg1d) : '—';
+      $('statChange').className = 'n ' + (avg1d > 0 ? 'pos' : avg1d < 0 ? 'neg' : '');
+
+      $('modeLabel').textContent = STATE.mode === 'protocols' ? 'Protocols' : 'Chains';
+    }
+
+    function valueCellPct(value) {
+      if (!isFinite(value)) return '<span class="muted">—</span>';
+      const cls = value > 0 ? 'pos' : value < 0 ? 'neg' : '';
+      return `<span class="${cls}">${fmtPct(value)}</span>`;
+    }
+
+    function buildProtocolsTable(rows) {
+      return `
+        <table aria-label="DeFi protocols TVL table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Protocol</th>
+              <th>Category</th>
+              <th>Chains</th>
+              <th>TVL</th>
+              <th>24h</th>
+              <th>7d</th>
+              <th>MCap</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map((r, i) => `
+              <tr>
+                <td><span class="rank">${i + 1}</span></td>
+                <td>
+                  <div class="proto">
+                    <img class="protoIcon" src="${escapeHtml(r.logo || '/assets/instantqr-logo.svg')}" alt="" loading="lazy"
+                      onerror="this.src='/assets/instantqr-logo.svg'">
+                    <div>
+                      <div class="protoName">${escapeHtml(r.name)}</div>
+                      <div class="protoMeta">${escapeHtml(r.symbol || '—')}</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="tag">${escapeHtml(r.category || 'Unknown')}</span></td>
+                <td><span class="muted">${escapeHtml(r.chains?.slice(0,3).join(', ') || '—')}${(r.chains?.length || 0) > 3 ? ' +' + (r.chains.length - 3) : ''}</span></td>
+                <td>${fmtMoney(r.tvl)}</td>
+                <td>${valueCellPct(r.change_1d)}</td>
+                <td>${valueCellPct(r.change_7d)}</td>
+                <td>${isFinite(r.mcap) ? fmtMoney(r.mcap) : '<span class="muted">—</span>'}</td>
+                <td><button class="rowBtn" type="button" data-slug="${escapeHtml(r.slug || '')}" data-name="${escapeHtml(r.name)}">Open</button></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function buildChainsTable(rows) {
+      return `
+        <table aria-label="DeFi chains TVL table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Chain</th>
+              <th>Token</th>
+              <th>TVL</th>
+              <th>24h</th>
+              <th>7d</th>
+              <th>Chain ID</th>
+              <th>Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map((r, i) => `
+              <tr>
+                <td><span class="rank">${i + 1}</span></td>
+                <td>
+                  <div class="proto">
+                    <img class="protoIcon" src="/assets/instantqr-logo.svg" alt="" loading="lazy">
+                    <div>
+                      <div class="protoName">${escapeHtml(r.name)}</div>
+                      <div class="protoMeta">${escapeHtml(r.gecko_id || 'chain')}</div>
+                    </div>
+                  </div>
+                </td>
+                <td>${escapeHtml(r.symbol || '—')}</td>
+                <td>${fmtMoney(r.tvl)}</td>
+                <td>${valueCellPct(r.change_1d)}</td>
+                <td>${valueCellPct(r.change_7d)}</td>
+                <td>${r.chainId ? escapeHtml(String(r.chainId)) : '<span class="muted">—</span>'}</td>
+                <td><span class="tag">Chain TVL</span></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function renderTable(rows) {
+      const host = $('tableHost');
+
+      if (!rows.length) {
+        host.innerHTML = `<div class="empty">No matching results found. Try a broader search or clear filters.</div>`;
+        return;
+      }
+
+      host.innerHTML = STATE.mode === 'protocols'
+        ? buildProtocolsTable(rows)
+        : buildChainsTable(rows);
+
+      if (STATE.mode === 'protocols') {
+        host.querySelectorAll('[data-slug]').forEach(btn => {
+          btn.addEventListener('click', () => openProtocolDetail(btn.dataset.slug, btn.dataset.name));
+        });
+      }
+    }
+
+    function resetFilters() {
+      $('searchInput').value = '';
+      $('categoryFilter').value = '';
+      $('chainFilter').value = '';
+      $('sortBy').value = 'tvl-desc';
+      $('limitSelect').value = '50';
+      applyFilters();
+    }
+
+    function setMode(mode) {
+      STATE.mode = mode;
+      $('tabProtocols').classList.toggle('active', mode === 'protocols');
+      $('tabChains').classList.toggle('active', mode === 'chains');
+      $('tabProtocols').setAttribute('aria-selected', String(mode === 'protocols'));
+      $('tabChains').setAttribute('aria-selected', String(mode === 'chains'));
+
+      $('categoryFilter').disabled = mode !== 'protocols';
+      applyFilters();
+    }
+
+    async function loadAllData(force=false) {
+      $('loadingState')?.remove();
+      $('tableHost').innerHTML = `<div class="loading">Loading DeFi TVL data…</div>`;
+      setStatus('Loading', 'Fetching protocols and chains');
+
+      if (force) {
+        try {
+          localStorage.removeItem('defi-tvl-tracker:protocols');
+          localStorage.removeItem('defi-tvl-tracker:chains');
+        } catch {}
+      }
+
+      try {
+        const [protocolsRes, chainsRes] = await Promise.all([
+          getDataset('protocols', DATA_SOURCES.protocols),
+          getDataset('chains', DATA_SOURCES.chains)
+        ]);
+
+        STATE.protocols = normalizeProtocols(protocolsRes.data);
+        STATE.chains = normalizeChains(chainsRes.data);
+        STATE.lastUpdatedISO = new Date().toISOString();
+
+        $('lastUpdated').textContent = lastUpdatedLabel(STATE.lastUpdatedISO);
+        fillFilters();
+        setStatus(STATE.usingStale ? 'Stale Data' : STATE.fresh ? 'Live Data' : 'Cached Data');
+
+        applyFilters();
+      } catch (err) {
+        console.error(err);
+        setStatus('Offline', 'No live or cached data available');
+        $('tableHost').innerHTML = `
+          <div class="error">
+            Unable to load TVL data right now.<br>
+            <span class="tiny">Try again in a moment. Cached fallback support is enabled when data is available.</span>
+          </div>`;
+      }
+    }
+
+    async function fetchProtocolDetail(slug) {
+      const urls = DATA_SOURCES.protocolDetail.map(fn => fn(slug));
+      return await fetchFirstWorking(urls);
+    }
+
+    function protocolLinkChip(href, text) {
+      if (!href) return '';
+      return `<a class="tag" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`;
+    }
+
+    function normalizeHistory(detail) {
+      const direct = Array.isArray(detail?.tvl) ? detail.tvl : [];
+      const fromDirect = direct
+        .map(x => ({
+          date: Number(x.date || x.timestamp),
+          tvl: Number(x.totalLiquidityUSD ?? x.totalLiquidityUsd ?? x.tvl ?? x.totalLiquidity ?? 0)
+        }))
+        .filter(x => isFinite(x.date) && isFinite(x.tvl));
+
+      if (fromDirect.length) return fromDirect;
+
+      const chainTvls = detail?.chainTvls || {};
+      const aggregate = new Map();
+
+      Object.values(chainTvls).forEach(val => {
+        const arr = Array.isArray(val?.tvl) ? val.tvl : [];
+        arr.forEach(point => {
+          const date = Number(point.date || point.timestamp);
+          const tvl = Number(point.totalLiquidityUSD ?? point.totalLiquidityUsd ?? point.tvl ?? 0);
+          if (!isFinite(date) || !isFinite(tvl)) return;
+          aggregate.set(date, (aggregate.get(date) || 0) + tvl);
+        });
+      });
+
+      return [...aggregate.entries()]
+        .map(([date, tvl]) => ({ date, tvl }))
+        .sort((a,b) => a.date - b.date);
+    }
+
+    function drawChart(points) {
+      const canvas = $('tvlChart');
+      const ctx = canvas.getContext('2d');
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      const cssW = canvas.clientWidth || 760;
+      const cssH = 320;
+      canvas.width = Math.floor(cssW * ratio);
+      canvas.height = Math.floor(cssH * ratio);
+      ctx.setTransform(ratio,0,0,ratio,0,0);
+      ctx.clearRect(0,0,cssW,cssH);
+
+      const pad = { top: 18, right: 16, bottom: 26, left: 56 };
+      const w = cssW - pad.left - pad.right;
+      const h = cssH - pad.top - pad.bottom;
+
+      if (!points || points.length < 2) {
+        ctx.fillStyle = '#9db0d3';
+        ctx.font = '14px Inter, sans-serif';
+        ctx.fillText('Historical TVL unavailable.', 18, 28);
+        return;
+      }
+
+      const values = points.map(p => p.tvl);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const range = Math.max(max - min, 1);
+      const xStep = w / (points.length - 1);
+
+      ctx.strokeStyle = 'rgba(255,255,255,.08)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let i = 0; i <= 4; i++) {
+        const y = pad.top + (h / 4) * i;
+        ctx.moveTo(pad.left, y);
+        ctx.lineTo(pad.left + w, y);
+      }
+      ctx.stroke();
+
+      ctx.fillStyle = '#9db0d3';
+      ctx.font = '12px Inter, sans-serif';
+      for (let i = 0; i <= 4; i++) {
+        const val = max - (range / 4) * i;
+        const y = pad.top + (h / 4) * i;
+        ctx.fillText(fmtMoney(val), 6, y + 4);
+      }
+
+      ctx.beginPath();
+      points.forEach((p, i) => {
+        const x = pad.left + i * xStep;
+        const y = pad.top + h - ((p.tvl - min) / range) * h;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.lineTo(pad.left + w, pad.top + h);
+      ctx.lineTo(pad.left, pad.top + h);
+      ctx.closePath();
+      const gradient = ctx.createLinearGradient(0, pad.top, 0, pad.top + h);
+      gradient.addColorStop(0, 'rgba(110,168,255,.35)');
+      gradient.addColorStop(1, 'rgba(110,168,255,.03)');
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      ctx.beginPath();
+      points.forEach((p, i) => {
+        const x = pad.left + i * xStep;
+        const y = pad.top + h - ((p.tvl - min) / range) * h;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.strokeStyle = '#6ea8ff';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      const first = points[0];
+      const last = points[points.length - 1];
+      [[first,0],[last,points.length-1]].forEach(([p, i]) => {
+        const x = pad.left + i * xStep;
+        const y = pad.top + h - ((p.tvl - min) / range) * h;
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#8ef0c5';
+        ctx.fill();
+      });
+
+      const firstDate = new Date(first.date * 1000);
+      const lastDate = new Date(last.date * 1000);
+      ctx.fillStyle = '#9db0d3';
+      ctx.fillText(firstDate.toLocaleDateString([], { month:'short', year:'2-digit' }), pad.left, cssH - 6);
+      const lastText = lastDate.toLocaleDateString([], { month:'short', year:'2-digit' });
+      const width = ctx.measureText(lastText).width;
+      ctx.fillText(lastText, pad.left + w - width, cssH - 6);
+    }
+
+    async function openProtocolDetail(slug, name='Protocol') {
+      const modal = $('detailModal');
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+
+      $('detailTitle').textContent = name;
+      $('detailLoading').style.display = 'block';
+      $('detailError').style.display = 'none';
+      $('detailContent').style.display = 'none';
+      drawChart([]);
+
+      try {
+        const res = await fetchProtocolDetail(slug);
+        if (!res.ok) throw res.error || new Error('Detail fetch failed');
+
+        const d = res.data || {};
+        const current = STATE.protocols.find(p => p.slug === slug || p.name === name) || {};
+
+        $('detailTitle').textContent = d.name || current.name || name;
+        $('detailTvl').textContent = fmtMoney(Number(d.currentChainTvls
+          ? Object.values(d.currentChainTvls).reduce((a,b) => a + Number(b || 0), 0)
+          : d.tvl?.[d.tvl.length - 1]?.totalLiquidityUSD ?? current.tvl ?? 0));
+
+        $('detailCategory').textContent = d.category || current.category || 'Unknown';
+        $('detail1d').innerHTML = valueCellPct(Number(d.change_1d ?? current.change_1d));
+        $('detail7d').innerHTML = valueCellPct(Number(d.change_7d ?? current.change_7d));
+        $('detailDescription').textContent = d.description || current.description || 'No description available from source.';
+
+        const chains = Array.isArray(d.chains) ? d.chains : (current.chains || []);
+        $('detailChains').innerHTML = chains.length
+          ? chains.map(c => `<span class="tag">${escapeHtml(c)}</span>`).join('')
+          : `<span class="muted">No chain data available</span>`;
+
+        $('detailLinks').innerHTML = [
+          protocolLinkChip(d.url || current.url, 'Website'),
+          d.twitter ? protocolLinkChip(`https://x.com/${String(d.twitter).replace(/^@/, '')}`, 'X / Twitter') : ''
+        ].filter(Boolean).join('') || `<span class="muted">No external links provided</span>`;
+
+        const history = normalizeHistory(d);
+        drawChart(history);
+        $('chartMeta').textContent = history.length
+          ? `${history.length} historical data points loaded`
+          : 'Historical TVL unavailable from current source response.';
+
+        $('detailLoading').style.display = 'none';
+        $('detailContent').style.display = 'block';
+      } catch (err) {
+        console.error(err);
+        $('detailLoading').style.display = 'none';
+        $('detailError').style.display = 'block';
+        $('detailError').textContent = 'Unable to load protocol detail right now.';
+      }
+    }
+
+    function closeModal() {
+      $('detailModal').classList.remove('open');
+      $('detailModal').setAttribute('aria-hidden', 'true');
+    }
+
+    function bindEvents() {
+      $('tabProtocols').addEventListener('click', () => setMode('protocols'));
+      $('tabChains').addEventListener('click', () => setMode('chains'));
+
+      $('searchInput').addEventListener('input', applyFilters);
+      $('categoryFilter').addEventListener('change', applyFilters);
+      $('chainFilter').addEventListener('change', applyFilters);
+      $('sortBy').addEventListener('change', applyFilters);
+      $('limitSelect').addEventListener('change', applyFilters);
+
+      $('resetBtn').addEventListener('click', resetFilters);
+      $('refreshBtn').addEventListener('click', () => loadAllData(true));
+      $('jumpTableBtn').addEventListener('click', () => {
+        $('tracker').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      $('closeModalBtn').addEventListener('click', closeModal);
+      $('detailModal').addEventListener('click', (e) => {
+        if (e.target === $('detailModal')) closeModal();
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      window.addEventListener('resize', () => {
+        if ($('detailModal').classList.contains('open')) {
+          const title = $('detailTitle').textContent;
+          if (title && $('detailContent').style.display !== 'none') {
+            drawChart([]);
+          }
+        }
+      });
+    }
+
+    bindEvents();
+    loadAllData(false);
+  </script>
+</body>
+</html>
