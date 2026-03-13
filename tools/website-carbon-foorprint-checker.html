@@ -1,0 +1,1211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1020" />
+
+  <title>Website Carbon Footprint Checker | Estimate Page Emissions | InstantQR</title>
+  <meta name="description" content="Free Website Carbon Footprint Checker. Estimate page emissions, annual CO2e impact, transfer size, energy use, and cleaner optimization opportunities for any website." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <link rel="canonical" href="https://instantqr.io/tools/website-carbon-footprint-checker.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Website Carbon Footprint Checker | InstantQR" />
+  <meta property="og:description" content="Estimate page emissions, annual CO2e, energy use, and optimization opportunities for websites." />
+  <meta property="og:url" content="https://instantqr.io/tools/website-carbon-footprint-checker.html" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Website Carbon Footprint Checker | InstantQR" />
+  <meta name="twitter:description" content="Estimate page emissions, annual CO2e, energy use, and optimization opportunities for websites." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+
+  <style>
+    :root{
+      --bg:#08101d;
+      --bg2:#0b1426;
+      --panel:#0e172b;
+      --panel2:#111d35;
+      --text:#edf3ff;
+      --muted:#a9b6d3;
+      --line:rgba(255,255,255,.09);
+      --brand:#5eead4;
+      --brand2:#60a5fa;
+      --danger:#fb7185;
+      --warn:#f59e0b;
+      --ok:#22c55e;
+      --shadow:0 10px 30px rgba(0,0,0,.28);
+      --radius:20px;
+      --radius-sm:14px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 0% -10%, rgba(96,165,250,.18), transparent 45%),
+        radial-gradient(900px 500px at 100% 0%, rgba(94,234,212,.12), transparent 40%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      line-height:1.55;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .wrap{width:min(calc(100% - 32px), var(--max)); margin-inline:auto}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      background:rgba(8,16,29,.72);
+      backdrop-filter:saturate(140%) blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; min-height:68px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.2px;
+    }
+    .brand-badge{
+      width:38px; height:38px; border-radius:12px;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(94,234,212,.24), rgba(96,165,250,.26));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      font-size:15px;
+    }
+    .nav{
+      display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    }
+    .nav a{
+      color:var(--muted);
+      padding:10px 12px; border-radius:12px;
+    }
+    .nav a:hover{background:rgba(255,255,255,.05); color:var(--text)}
+
+    .hero{
+      padding:38px 0 22px;
+    }
+
+    .breadcrumbs{
+      display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+      color:var(--muted); font-size:.95rem; margin-bottom:18px;
+    }
+    .breadcrumbs a:hover{color:var(--text)}
+    .crumb-dot{opacity:.55}
+
+    .hero-card{
+      border:1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)),
+        linear-gradient(180deg, var(--panel), var(--panel2));
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero-grid{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:0;
+    }
+
+    .hero-copy{
+      padding:34px;
+    }
+
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(94,234,212,.25);
+      background:rgba(94,234,212,.08);
+      color:#d8fff8;
+      font-size:.92rem;
+      margin-bottom:16px;
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(2rem, 4vw, 3.2rem);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:1.06rem;
+      max-width:62ch;
+      margin:0 0 22px;
+    }
+
+    .hero-points{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .point{
+      padding:14px 14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+    }
+    .point strong{display:block; margin-bottom:6px; font-size:.98rem}
+    .point span{color:var(--muted); font-size:.93rem}
+
+    .hero-side{
+      padding:22px;
+      border-left:1px solid var(--line);
+      display:flex; align-items:stretch;
+    }
+
+    .calc-card{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+      background:rgba(255,255,255,.03);
+    }
+
+    .grid{
+      display:grid;
+      gap:18px;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+      padding:20px 0 18px;
+    }
+
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.025));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .panel-head{
+      padding:20px 22px 8px;
+    }
+    .panel-head h2{
+      margin:0;
+      font-size:1.2rem;
+      letter-spacing:-.02em;
+    }
+    .panel-head p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:.97rem;
+    }
+
+    .panel-body{padding:18px 22px 22px}
+
+    .form-grid{
+      display:grid; grid-template-columns:1fr 1fr; gap:14px;
+    }
+    .form-grid .full{grid-column:1/-1}
+
+    label{
+      display:block;
+      font-weight:700;
+      font-size:.95rem;
+      margin-bottom:8px;
+    }
+    .hint{
+      color:var(--muted);
+      font-size:.86rem;
+      margin-top:7px;
+    }
+
+    .field, select, button, textarea{
+      width:100%;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0a1326;
+      color:var(--text);
+      border-radius:14px;
+      padding:14px 14px;
+      font:inherit;
+      outline:none;
+      transition:border-color .18s ease, transform .08s ease, background .18s ease;
+    }
+    .field:focus, select:focus, textarea:focus{
+      border-color:rgba(94,234,212,.55);
+      box-shadow:0 0 0 4px rgba(94,234,212,.10);
+    }
+
+    .controls{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top:16px;
+    }
+
+    .btn{
+      appearance:none; cursor:pointer; font-weight:800;
+      border-radius:14px;
+      padding:13px 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0b1630;
+      color:var(--text);
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{
+      background:linear-gradient(135deg, rgba(94,234,212,.18), rgba(96,165,250,.22));
+      border-color:rgba(94,234,212,.35);
+    }
+    .btn.ghost{
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+    }
+
+    .status{
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:.94rem;
+      min-height:48px;
+    }
+    .status.ok{border-color:rgba(34,197,94,.25); color:#d8ffe6; background:rgba(34,197,94,.08)}
+    .status.warn{border-color:rgba(245,158,11,.25); color:#fff0cd; background:rgba(245,158,11,.08)}
+    .status.err{border-color:rgba(251,113,133,.25); color:#ffdbe2; background:rgba(251,113,133,.08)}
+
+    .metric-grid{
+      display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px;
+      margin-top:8px;
+    }
+
+    .metric{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+      padding:16px;
+      min-height:106px;
+    }
+    .metric .k{color:var(--muted); font-size:.86rem; margin-bottom:8px}
+    .metric .v{
+      font-size:clamp(1.25rem, 3vw, 2rem);
+      font-weight:900;
+      letter-spacing:-.03em;
+      line-height:1.05;
+      word-break:break-word;
+    }
+    .metric .s{color:var(--muted); font-size:.9rem; margin-top:8px}
+
+    .score-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:20px;
+      padding:18px;
+      margin-bottom:14px;
+    }
+
+    .score-row{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .score-pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:800;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+    }
+
+    .grade-A{color:#d6ffea; border-color:rgba(34,197,94,.32); background:rgba(34,197,94,.09)}
+    .grade-B{color:#e9ffe0; border-color:rgba(132,204,22,.32); background:rgba(132,204,22,.09)}
+    .grade-C{color:#fff8d6; border-color:rgba(245,158,11,.32); background:rgba(245,158,11,.09)}
+    .grade-D{color:#ffe5d5; border-color:rgba(249,115,22,.32); background:rgba(249,115,22,.09)}
+    .grade-E{color:#ffdce3; border-color:rgba(251,113,133,.32); background:rgba(251,113,133,.09)}
+
+    .gauge{
+      margin-top:16px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      background:rgba(255,255,255,.025);
+    }
+
+    .gauge-track{
+      height:14px;
+      border-radius:999px;
+      overflow:hidden;
+      background:linear-gradient(90deg,#22c55e 0%, #84cc16 20%, #f59e0b 52%, #f97316 76%, #fb7185 100%);
+      position:relative;
+    }
+    .gauge-needle{
+      position:absolute;
+      top:-5px;
+      width:3px;
+      height:24px;
+      background:#fff;
+      border-radius:999px;
+      box-shadow:0 0 0 2px rgba(8,16,29,.8);
+      transform:translateX(-50%);
+      left:0%;
+    }
+
+    .gauge-labels{
+      display:flex; justify-content:space-between;
+      color:var(--muted); font-size:.8rem;
+      margin-top:8px;
+    }
+
+    .tips{
+      display:grid; gap:10px; margin-top:14px;
+    }
+
+    .tip{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      background:rgba(255,255,255,.03);
+    }
+    .tip strong{display:block; margin-bottom:6px}
+    .tip span{color:var(--muted); font-size:.94rem}
+
+    .small-note{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-top:14px;
+    }
+
+    .section{
+      padding:12px 0 10px;
+    }
+
+    .info-grid{
+      display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;
+      margin-top:6px;
+    }
+
+    .info-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+      padding:18px;
+    }
+    .info-card h3{
+      margin:0 0 8px;
+      font-size:1.03rem;
+      letter-spacing:-.02em;
+    }
+    .info-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .faq{
+      display:grid; gap:12px;
+    }
+    details{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+      background:rgba(255,255,255,.03);
+    }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin:10px 0 0;
+      color:var(--muted);
+    }
+
+    footer{
+      padding:28px 0 48px;
+      color:var(--muted);
+    }
+    .footer-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:22px;
+      padding:18px;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,monospace;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid, .grid, .info-grid{grid-template-columns:1fr}
+      .hero-side{border-left:0; border-top:1px solid var(--line)}
+    }
+
+    @media (max-width: 720px){
+      .hero-copy{padding:24px}
+      .hero-side{padding:18px}
+      .panel-body,.panel-head{padding-left:16px; padding-right:16px}
+      .form-grid,.metric-grid,.hero-points{grid-template-columns:1fr}
+      .topbar-inner{min-height:62px}
+      .nav{display:none}
+      .wrap{width:min(calc(100% - 22px), var(--max))}
+      .breadcrumbs{font-size:.9rem}
+      h1{font-size:clamp(1.8rem, 8vw, 2.55rem)}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"Website Carbon Footprint Checker",
+    "url":"https://instantqr.io/tools/website-carbon-footprint-checker.html",
+    "applicationCategory":"DeveloperApplication",
+    "operatingSystem":"Any",
+    "description":"Estimate page emissions, annual CO2e impact, data transfer size, and energy use for a website.",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "publisher":{"@type":"Organization","name":"InstantQR"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools.html"},
+      {"@type":"ListItem","position":3,"name":"Website Carbon Footprint Checker","item":"https://instantqr.io/tools/website-carbon-footprint-checker.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How does this website carbon checker work?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This tool estimates per-page carbon emissions based on transfer size, monthly pageviews, repeat visits, and hosting assumptions. It is designed as a fast browser-safe estimator."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can the tool scan any website automatically?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Automatic scans may be limited by browser CORS restrictions on third-party sites. Same-origin sites and environments with a configured proxy work best. Manual transfer-size entry always works."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Is the result exact?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. The result is an estimate intended for benchmarking and optimization decisions. Actual emissions vary by infrastructure, energy mix, caching, CDN use, and user device conditions."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR Home">
+        <span class="brand-badge">IQ</span>
+        <span>InstantQR</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/tools.html">Tools</a>
+        <a href="/seo-tools.html">SEO Tools</a>
+        <a href="/web3-tools.html">Web3 Tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span class="crumb-dot">/</span>
+          <a href="/tools.html">Tools</a>
+          <span class="crumb-dot">/</span>
+          <span>Website Carbon Footprint Checker</span>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <div class="eyebrow">Fast • Responsive • Privacy-first estimator</div>
+              <h1>Website Carbon Footprint Checker</h1>
+              <p class="sub">
+                Estimate how heavy a webpage is, how much energy it may consume, and how much CO2e it may produce per pageview and over time. Built for quick audits and cleaner web optimization.
+              </p>
+
+              <div class="hero-points">
+                <div class="point">
+                  <strong>Per-page emissions</strong>
+                  <span>Estimate grams of CO2e for each pageview.</span>
+                </div>
+                <div class="point">
+                  <strong>Annual impact</strong>
+                  <span>Project yearly emissions from monthly traffic.</span>
+                </div>
+                <div class="point">
+                  <strong>Actionable fixes</strong>
+                  <span>See optimization ideas based on the result.</span>
+                </div>
+              </div>
+            </div>
+
+            <aside class="hero-side">
+              <div class="calc-card">
+                <div class="score-row">
+                  <div>
+                    <div style="font-size:.9rem;color:var(--muted)">Current estimate</div>
+                    <div id="heroPrimary" style="font-size:2rem;font-weight:900;letter-spacing:-.04em">0.00 g</div>
+                  </div>
+                  <div id="heroGrade" class="score-pill grade-A">Grade A</div>
+                </div>
+
+                <div class="gauge" aria-label="Carbon grade gauge">
+                  <div class="gauge-track">
+                    <div id="heroNeedle" class="gauge-needle"></div>
+                  </div>
+                  <div class="gauge-labels">
+                    <span>Cleaner</span>
+                    <span>Average</span>
+                    <span>Heavier</span>
+                  </div>
+                </div>
+
+                <p class="small-note">
+                  Auto-scan works best for same-origin pages or when you add your own proxy endpoint. Manual size entry always works.
+                </p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap grid">
+        <section class="panel" aria-labelledby="checker-title">
+          <div class="panel-head">
+            <h2 id="checker-title">Check a website</h2>
+            <p>Paste a URL, estimate transfer size automatically where possible, or enter a size manually for a reliable browser-safe calculation.</p>
+          </div>
+          <div class="panel-body">
+            <form id="carbonForm" novalidate>
+              <div class="form-grid">
+                <div class="full">
+                  <label for="urlInput">Website URL</label>
+                  <input id="urlInput" class="field" type="url" inputmode="url" placeholder="https://example.com" autocomplete="url" spellcheck="false" />
+                  <div class="hint">Use the full URL for the page you want to estimate.</div>
+                </div>
+
+                <div>
+                  <label for="pageSizeKb">Transfer Size (KB)</label>
+                  <input id="pageSizeKb" class="field" type="number" min="1" step="1" value="900" />
+                  <div class="hint">Manual entry is the most reliable on static hosting.</div>
+                </div>
+
+                <div>
+                  <label for="monthlyViews">Monthly Pageviews</label>
+                  <input id="monthlyViews" class="field" type="number" min="1" step="1" value="10000" />
+                  <div class="hint">Used to estimate annual impact.</div>
+                </div>
+
+                <div>
+                  <label for="repeatViews">Repeat Views (%)</label>
+                  <input id="repeatViews" class="field" type="number" min="0" max="100" step="1" value="30" />
+                  <div class="hint">Higher repeat views can reduce effective transfer through caching.</div>
+                </div>
+
+                <div>
+                  <label for="greenHosting">Hosting Profile</label>
+                  <select id="greenHosting" aria-label="Hosting profile">
+                    <option value="standard" selected>Standard / unknown hosting</option>
+                    <option value="green">Green hosting / cleaner energy</option>
+                  </select>
+                  <div class="hint">Cleaner hosting applies a lower emissions multiplier.</div>
+                </div>
+
+                <div>
+                  <label for="deviceMix">User Device Mix</label>
+                  <select id="deviceMix" aria-label="User device mix">
+                    <option value="mixed" selected>Mixed devices</option>
+                    <option value="mobile">Mostly mobile</option>
+                    <option value="desktop">Mostly desktop</option>
+                  </select>
+                  <div class="hint">Used as a light adjustment for device/network assumptions.</div>
+                </div>
+              </div>
+
+              <div class="controls">
+                <button class="btn primary" id="estimateBtn" type="submit">Estimate Carbon Footprint</button>
+                <button class="btn" id="scanBtn" type="button">Auto-detect Page Size</button>
+                <button class="btn ghost" id="resetBtn" type="button">Reset</button>
+              </div>
+
+              <div id="statusBox" class="status" role="status" aria-live="polite">
+                Ready. Enter a URL and estimate the page footprint.
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <aside class="panel" aria-labelledby="results-title">
+          <div class="panel-head">
+            <h2 id="results-title">Results</h2>
+            <p>These numbers are estimates designed for benchmarking and optimization, not a direct measurement of real-world emissions.</p>
+          </div>
+          <div class="panel-body">
+            <div class="score-card">
+              <div class="score-row">
+                <div>
+                  <div class="k" style="color:var(--muted);font-size:.88rem">Overall carbon grade</div>
+                  <div id="gradeText" class="score-pill grade-A">Grade A · Cleaner page</div>
+                </div>
+                <div style="text-align:right">
+                  <div class="k" style="color:var(--muted);font-size:.88rem">Measured page</div>
+                  <div id="normalizedUrl" class="mono" style="max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</div>
+                </div>
+              </div>
+
+              <div class="gauge">
+                <div class="gauge-track">
+                  <div id="resultNeedle" class="gauge-needle"></div>
+                </div>
+                <div class="gauge-labels">
+                  <span>A/B</span>
+                  <span>C</span>
+                  <span>D/E</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-grid">
+              <div class="metric">
+                <div class="k">Per pageview</div>
+                <div class="v" id="co2Page">0.00 g</div>
+                <div class="s">Estimated grams CO2e per visit</div>
+              </div>
+
+              <div class="metric">
+                <div class="k">Annual CO2e</div>
+                <div class="v" id="co2Year">0.00 kg</div>
+                <div class="s">Based on your monthly pageviews</div>
+              </div>
+
+              <div class="metric">
+                <div class="k">Transfer size</div>
+                <div class="v" id="transferSize">0 KB</div>
+                <div class="s">Approximate page transfer used</div>
+              </div>
+
+              <div class="metric">
+                <div class="k">Energy use</div>
+                <div class="v" id="energyUse">0.000 Wh</div>
+                <div class="s">Estimated electricity per pageview</div>
+              </div>
+            </div>
+
+            <div class="tips" id="tipsBox">
+              <div class="tip">
+                <strong>Start with image optimization</strong>
+                <span>Large images are often the easiest way to reduce total page transfer size.</span>
+              </div>
+            </div>
+
+            <div class="small-note" id="assumptionNote">
+              Assumptions: browser-safe estimate based on transfer size, repeat-view savings, hosting profile, and lightweight device/network factors.
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>How to lower website emissions</h2>
+            <p>Cleaner pages are usually faster pages. Performance, accessibility, user experience, and sustainability often improve together.</p>
+          </div>
+          <div class="panel-body">
+            <div class="info-grid">
+              <div class="info-card">
+                <h3>Reduce transfer size</h3>
+                <p>Compress images, prefer modern formats, minify CSS and JavaScript, and remove unused assets.</p>
+              </div>
+              <div class="info-card">
+                <h3>Improve caching</h3>
+                <p>Long-lived caching and strong cache headers help repeat visitors download less data.</p>
+              </div>
+              <div class="info-card">
+                <h3>Use cleaner infrastructure</h3>
+                <p>CDNs, efficient hosting, and greener energy sources can reduce the emissions associated with delivery.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Frequently asked questions</h2>
+            <p>Quick answers about how this website carbon checker works.</p>
+          </div>
+          <div class="panel-body faq">
+            <details>
+              <summary>Is this result exact?</summary>
+              <p>No. This tool gives a transparent estimate. Actual emissions vary based on network conditions, caching, CDN behavior, device usage, infrastructure efficiency, and electricity mix.</p>
+            </details>
+
+            <details>
+              <summary>Why might auto-detect fail for some websites?</summary>
+              <p>Browsers block many cross-origin fetches for security reasons. Same-origin scans work best on static sites, and a custom proxy endpoint can be added later for broader coverage.</p>
+            </details>
+
+            <details>
+              <summary>What is the best way to use this tool in production?</summary>
+              <p>Use the manual transfer-size mode today for guaranteed compatibility, then add your own secure fetch proxy for remote page-size scans if you want broader automation.</p>
+            </details>
+
+            <details>
+              <summary>What should I optimize first?</summary>
+              <p>Start with image size, lazy loading, font loading, third-party scripts, unused CSS and JavaScript, caching, and HTML payload size.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-card">
+        Website Carbon Footprint Checker by InstantQR. Fast, responsive, and designed to work well even on static hosting with manual mode as a reliable fallback.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      const form = $("carbonForm");
+      const urlInput = $("urlInput");
+      const pageSizeKb = $("pageSizeKb");
+      const monthlyViews = $("monthlyViews");
+      const repeatViews = $("repeatViews");
+      const greenHosting = $("greenHosting");
+      const deviceMix = $("deviceMix");
+      const statusBox = $("statusBox");
+
+      const estimateBtn = $("estimateBtn");
+      const scanBtn = $("scanBtn");
+      const resetBtn = $("resetBtn");
+
+      const heroPrimary = $("heroPrimary");
+      const heroGrade = $("heroGrade");
+      const heroNeedle = $("heroNeedle");
+
+      const gradeText = $("gradeText");
+      const normalizedUrl = $("normalizedUrl");
+      const resultNeedle = $("resultNeedle");
+
+      const co2Page = $("co2Page");
+      const co2Year = $("co2Year");
+      const transferSize = $("transferSize");
+      const energyUse = $("energyUse");
+      const tipsBox = $("tipsBox");
+      const assumptionNote = $("assumptionNote");
+
+      /*
+        Optional production proxy support:
+        Add your own endpoint(s) that return raw HTML for a target URL.
+        Use {url} as placeholder.
+        Example:
+        "https://your-proxy.example.com/fetch?url={url}"
+
+        Keep empty for secure static-only deployment.
+      */
+      const PROXY_ENDPOINTS = [];
+
+      const EMISSION_FACTORS = {
+        standard: 0.00036, // kg CO2e per MB baseline
+        green: 0.00024     // lower multiplier for cleaner hosting profile
+      };
+
+      const DEVICE_FACTORS = {
+        mobile: 0.95,
+        mixed: 1.00,
+        desktop: 1.06
+      };
+
+      const CACHE_SAVINGS_MAX = 0.38; // max effective reduction from repeat views
+      const GRADE_BREAKS = [0.5, 1.0, 2.0, 3.0]; // grams per pageview
+
+      function setStatus(message, type = "") {
+        statusBox.textContent = message;
+        statusBox.className = "status" + (type ? " " + type : "");
+      }
+
+      function clamp(n, min, max) {
+        return Math.min(max, Math.max(min, n));
+      }
+
+      function safeNumber(value, fallback = 0) {
+        const n = Number(value);
+        return Number.isFinite(n) ? n : fallback;
+      }
+
+      function normalizeUrl(raw) {
+        const trimmed = String(raw || "").trim();
+        if (!trimmed) return "";
+        try {
+          const candidate = /^(https?:)?\/\//i.test(trimmed) ? trimmed : "https://" + trimmed;
+          const url = new URL(candidate);
+          if (!/^https?:$/.test(url.protocol)) return "";
+          return url.toString();
+        } catch {
+          return "";
+        }
+      }
+
+      function formatNumber(n, maxFrac = 2) {
+        return new Intl.NumberFormat(undefined, {
+          maximumFractionDigits: maxFrac
+        }).format(n);
+      }
+
+      function formatFixed(n, digits = 2) {
+        return Number(n).toFixed(digits);
+      }
+
+      function bytesFromText(text) {
+        return new TextEncoder().encode(text).length;
+      }
+
+      function gradeFromGrams(grams) {
+        if (grams < GRADE_BREAKS[0]) return { grade: "A", label: "Cleaner page", cls: "grade-A" };
+        if (grams < GRADE_BREAKS[1]) return { grade: "B", label: "Low impact", cls: "grade-B" };
+        if (grams < GRADE_BREAKS[2]) return { grade: "C", label: "Average impact", cls: "grade-C" };
+        if (grams < GRADE_BREAKS[3]) return { grade: "D", label: "Heavy page", cls: "grade-D" };
+        return { grade: "E", label: "Very heavy page", cls: "grade-E" };
+      }
+
+      function needlePercent(grams) {
+        const maxDisplay = 4.5;
+        return clamp((grams / maxDisplay) * 100, 0, 100);
+      }
+
+      function buildTips({ sizeKb, grams, green, repeatPct }) {
+        const tips = [];
+
+        if (sizeKb > 2000) {
+          tips.push(["Shrink heavy assets", "This page is very large. Compress images, reduce JS bundles, and remove unused libraries."]);
+        } else if (sizeKb > 1000) {
+          tips.push(["Cut transfer size", "Your page is moderately heavy. Review large images, font files, and third-party scripts."]);
+        } else {
+          tips.push(["Keep the page lean", "Your transfer size is reasonable. Focus on caching, image sizing, and third-party script control."]);
+        }
+
+        if (repeatPct < 25) {
+          tips.push(["Improve caching", "A stronger cache strategy can reduce repeat-visit transfer and lower effective emissions."]);
+        }
+
+        if (!green) {
+          tips.push(["Consider cleaner hosting", "A greener hosting or CDN profile can lower the emissions multiplier for every visit."]);
+        }
+
+        if (grams >= 2) {
+          tips.push(["Prioritize performance budget", "Set a page weight budget and keep above-the-fold assets small and fast."]);
+        } else {
+          tips.push(["Protect gains", "Maintain a performance budget so the page stays lightweight as features are added."]);
+        }
+
+        return tips.slice(0, 4);
+      }
+
+      function renderTips(tips) {
+        tipsBox.innerHTML = tips.map(([title, text]) => `
+          <div class="tip">
+            <strong>${escapeHtml(title)}</strong>
+            <span>${escapeHtml(text)}</span>
+          </div>
+        `).join("");
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
+      function calculateEstimate({ sizeKb, monthly, repeatPct, hostMode, deviceMode, url }) {
+        const sizeMb = Math.max(0, sizeKb) / 1024;
+        const repeatRatio = clamp(repeatPct / 100, 0, 1);
+        const cacheSavings = repeatRatio * CACHE_SAVINGS_MAX;
+        const effectiveMb = sizeMb * (1 - cacheSavings);
+
+        const hostFactor = EMISSION_FACTORS[hostMode] || EMISSION_FACTORS.standard;
+        const deviceFactor = DEVICE_FACTORS[deviceMode] || DEVICE_FACTORS.mixed;
+
+        const kgPerView = effectiveMb * hostFactor * deviceFactor;
+        const gramsPerView = kgPerView * 1000;
+        const yearlyKg = kgPerView * monthly * 12;
+        const whPerView = (effectiveMb / 1024) * 810; // derived from 0.81 kWh / GB
+
+        const grade = gradeFromGrams(gramsPerView);
+
+        return {
+          url,
+          sizeKb,
+          sizeMb,
+          effectiveMb,
+          gramsPerView,
+          yearlyKg,
+          whPerView,
+          grade,
+          assumptions: {
+            repeatRatio,
+            cacheSavings,
+            hostFactor,
+            deviceFactor
+          }
+        };
+      }
+
+      function renderResult(result) {
+        const grams = result.gramsPerView;
+        const grade = result.grade;
+        const needle = needlePercent(grams);
+
+        heroPrimary.textContent = `${formatFixed(grams, 2)} g`;
+        heroGrade.className = `score-pill ${grade.cls}`;
+        heroGrade.textContent = `Grade ${grade.grade}`;
+
+        gradeText.className = `score-pill ${grade.cls}`;
+        gradeText.textContent = `Grade ${grade.grade} · ${grade.label}`;
+
+        heroNeedle.style.left = needle + "%";
+        resultNeedle.style.left = needle + "%";
+
+        normalizedUrl.textContent = result.url || "Manual estimate";
+        co2Page.textContent = `${formatFixed(grams, 2)} g`;
+        co2Year.textContent = `${formatFixed(result.yearlyKg, 2)} kg`;
+        transferSize.textContent = result.sizeKb >= 1024
+          ? `${formatFixed(result.sizeMb, 2)} MB`
+          : `${formatNumber(Math.round(result.sizeKb), 0)} KB`;
+        energyUse.textContent = result.whPerView < 1
+          ? `${formatFixed(result.whPerView, 3)} Wh`
+          : `${formatFixed(result.whPerView, 2)} Wh`;
+
+        const green = greenHosting.value === "green";
+        renderTips(buildTips({
+          sizeKb: result.sizeKb,
+          grams,
+          green,
+          repeatPct: safeNumber(repeatViews.value, 30)
+        }));
+
+        assumptionNote.textContent =
+          `Assumptions: ${green ? "cleaner hosting profile" : "standard/unknown hosting"}, ` +
+          `${formatNumber(safeNumber(repeatViews.value, 30), 0)}% repeat views, ` +
+          `${deviceMix.value} device mix, and transfer-size based estimation.`;
+      }
+
+      async function fetchTextWithProxy(url) {
+        if (!PROXY_ENDPOINTS.length) {
+          throw new Error("No proxy endpoint configured for remote scanning.");
+        }
+
+        let lastError = new Error("Remote scan failed.");
+        for (const template of PROXY_ENDPOINTS) {
+          const endpoint = template.replace("{url}", encodeURIComponent(url));
+          try {
+            const res = await fetch(endpoint, {
+              method: "GET",
+              credentials: "omit",
+              cache: "no-store",
+              referrerPolicy: "no-referrer"
+            });
+            if (!res.ok) throw new Error(`Proxy returned ${res.status}`);
+            const text = await res.text();
+            if (!text) throw new Error("Empty response from proxy.");
+            return text;
+          } catch (err) {
+            lastError = err;
+          }
+        }
+        throw lastError;
+      }
+
+      async function trySameOriginFetch(url) {
+        const target = new URL(url);
+        if (target.origin !== location.origin) {
+          throw new Error("Cross-origin page; same-origin fetch unavailable.");
+        }
+
+        const res = await fetch(target.toString(), {
+          method: "GET",
+          credentials: "same-origin",
+          cache: "no-store",
+          headers: { "Accept": "text/html,application/xhtml+xml" }
+        });
+        if (!res.ok) throw new Error(`Fetch failed with ${res.status}`);
+        return await res.text();
+      }
+
+      async function autoDetectPageSize(url) {
+        const normalized = normalizeUrl(url);
+        if (!normalized) throw new Error("Enter a valid URL first.");
+
+        try {
+          const html = await trySameOriginFetch(normalized);
+          return { sizeBytes: bytesFromText(html), mode: "same-origin HTML scan" };
+        } catch (sameOriginError) {
+          try {
+            const html = await fetchTextWithProxy(normalized);
+            return { sizeBytes: bytesFromText(html), mode: "proxy HTML scan" };
+          } catch (proxyError) {
+            throw new Error(
+              "Automatic scan is blocked for this page in a static browser context. " +
+              "Enter transfer size manually or add your own secure proxy endpoint."
+            );
+          }
+        }
+      }
+
+      function readInputs() {
+        const normalized = normalizeUrl(urlInput.value);
+        const size = clamp(safeNumber(pageSizeKb.value, 900), 1, 500000);
+        const monthly = clamp(safeNumber(monthlyViews.value, 10000), 1, 1000000000);
+        const repeatPct = clamp(safeNumber(repeatViews.value, 30), 0, 100);
+
+        return {
+          url: normalized,
+          sizeKb: size,
+          monthly,
+          repeatPct,
+          hostMode: greenHosting.value === "green" ? "green" : "standard",
+          deviceMode: deviceMix.value || "mixed"
+        };
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = readInputs();
+
+        if (urlInput.value.trim() && !data.url) {
+          setStatus("Please enter a valid website URL.", "err");
+          return;
+        }
+
+        const result = calculateEstimate(data);
+        renderResult(result);
+        setStatus("Estimate updated successfully.", "ok");
+      });
+
+      scanBtn.addEventListener("click", async () => {
+        const normalized = normalizeUrl(urlInput.value);
+        if (!normalized) {
+          setStatus("Enter a valid URL before running auto-detect.", "err");
+          return;
+        }
+
+        scanBtn.disabled = true;
+        scanBtn.textContent = "Detecting…";
+        setStatus("Attempting to estimate page size automatically…", "warn");
+
+        try {
+          const scan = await autoDetectPageSize(normalized);
+          const kb = Math.max(1, Math.round(scan.sizeBytes / 1024));
+          pageSizeKb.value = String(kb);
+
+          const result = calculateEstimate({
+            ...readInputs(),
+            url: normalized,
+            sizeKb: kb
+          });
+          renderResult(result);
+
+          setStatus(`Auto-detect completed using ${scan.mode}. Transfer size updated to about ${formatNumber(kb, 0)} KB.`, "ok");
+        } catch (err) {
+          setStatus(err && err.message ? err.message : "Unable to auto-detect page size.", "warn");
+        } finally {
+          scanBtn.disabled = false;
+          scanBtn.textContent = "Auto-detect Page Size";
+        }
+      });
+
+      resetBtn.addEventListener("click", () => {
+        urlInput.value = "";
+        pageSizeKb.value = "900";
+        monthlyViews.value = "10000";
+        repeatViews.value = "30";
+        greenHosting.value = "standard";
+        deviceMix.value = "mixed";
+
+        const result = calculateEstimate({
+          url: "",
+          sizeKb: 900,
+          monthly: 10000,
+          repeatPct: 30,
+          hostMode: "standard",
+          deviceMode: "mixed"
+        });
+        renderResult(result);
+        setStatus("Reset complete.", "ok");
+      });
+
+      [pageSizeKb, monthlyViews, repeatViews, greenHosting, deviceMix].forEach((el) => {
+        el.addEventListener("input", () => {
+          const data = readInputs();
+          const result = calculateEstimate(data);
+          renderResult(result);
+        });
+        el.addEventListener("change", () => {
+          const data = readInputs();
+          const result = calculateEstimate(data);
+          renderResult(result);
+        });
+      });
+
+      urlInput.addEventListener("input", () => {
+        normalizedUrl.textContent = normalizeUrl(urlInput.value) || "—";
+      });
+
+      const initial = calculateEstimate({
+        url: "",
+        sizeKb: 900,
+        monthly: 10000,
+        repeatPct: 30,
+        hostMode: "standard",
+        deviceMode: "mixed"
+      });
+      renderResult(initial);
+    })();
+  </script>
+</body>
+</html>
