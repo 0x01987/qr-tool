@@ -7,11 +7,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
   <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+  <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
@@ -19,27 +19,38 @@
 
   <title>SEO Tools | Free Meta, SERP, Sitemap, Robots.txt & Canonical Tools | InstantQR</title>
   <meta name="description" content="Free SEO tools by InstantQR: meta title preview, meta description preview, SERP preview, robots.txt generator, sitemap generator, canonical tag checker, and keyword density checker." />
-  <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://instantqr.io/seo-tools.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#0b0f19" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/seo-tools.html" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:title" content="SEO Tools | Free Meta, SERP, Sitemap, Robots.txt & Canonical Tools" />
   <meta property="og:description" content="Fast, free SEO tools for titles, descriptions, SERP previews, sitemaps, robots.txt, canonical checks, and keyword density." />
-  <meta property="og:url" content="https://instantqr.io/seo-tools.html" />
+  <meta property="og:url" content="https://instantqr.io/tools/seo-tools.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR SEO tools for SERP preview, metadata, sitemap, robots.txt, canonical tags, and keyword density." />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="SEO Tools | InstantQR" />
   <meta name="twitter:description" content="Free SEO tools for meta tags, SERP previews, sitemaps, robots.txt, canonical tags, and keyword density." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta name="twitter:image:alt" content="InstantQR SEO tools for SERP preview, metadata, sitemap, robots.txt, canonical tags, and keyword density." />
 
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
-  <meta name="theme-color" content="#0b0f19" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
 
   <style>
     :root{
@@ -56,6 +67,7 @@
       --radius2:22px;
       --max:1140px;
       --shadow:0 12px 40px rgba(0,0,0,.45);
+      --focus:0 0 0 3px rgba(105,166,255,.28);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -73,7 +85,16 @@
     }
     a{color:inherit;text-decoration:none}
     a:hover{text-decoration:underline}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
     .wrap{max-width:var(--max);margin:auto;padding:24px}
+
+    .skip{
+      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+    }
+    .skip:focus{
+      left:14px;top:14px;width:auto;height:auto;z-index:9999;
+      padding:10px 12px;border-radius:12px;background:#08101d;color:#fff;border:1px solid var(--border);
+    }
 
     .topbar{
       position:sticky;
@@ -216,6 +237,21 @@
       outline:none;
     }
     .search::placeholder{color:rgba(231,238,252,.55)}
+    .search:focus{
+      border-color:var(--brand);
+      box-shadow:0 0 0 3px rgba(105,166,255,.16);
+    }
+
+    .empty{
+      display:none;
+      margin-top:14px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:13px;
+    }
 
     .section{
       padding:18px 0 8px;
@@ -260,7 +296,7 @@
       gap:16px;
       margin-top:22px;
     }
-    .card{
+    .tool-card{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:var(--radius);
@@ -273,7 +309,7 @@
       transition:.15s;
       min-height:116px;
     }
-    .card:hover{
+    .tool-card:hover{
       transform:translateY(-3px);
       border-color:#3b82f6;
       text-decoration:none;
@@ -331,6 +367,14 @@
       border-radius:16px;
       background:var(--card2);
       padding:16px;
+      color:inherit;
+      text-decoration:none;
+      transition:.15s;
+    }
+    .guideCard:hover{
+      transform:translateY(-2px);
+      border-color:#3b82f6;
+      text-decoration:none;
     }
     .guideCard h3{
       margin:0 0 6px;
@@ -366,6 +410,75 @@
       line-height:1.55;
     }
 
+    .related{
+      margin-top:26px;
+      padding:20px;
+      border:1px solid var(--border);
+      border-radius:20px;
+      background:var(--card2);
+    }
+    .related h2{
+      margin:0 0 10px;
+      font-size:24px;
+    }
+    .related p{
+      margin:0 0 12px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .relatedLinks{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .relatedLinks a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      font-size:13px;
+      font-weight:700;
+      text-decoration:none;
+    }
+    .relatedLinks a:hover{
+      border-color:#3b82f6;
+      text-decoration:none;
+    }
+
+    .faq{
+      margin-top:26px;
+      padding:20px;
+      border:1px solid var(--border);
+      border-radius:20px;
+      background:var(--card2);
+    }
+    .faq h2{
+      margin:0 0 10px;
+      font-size:24px;
+    }
+    details{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:12px 0;
+    }
+    details:first-of-type{border-top:0;padding-top:0}
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:800;
+    }
+    summary::-webkit-details-marker{display:none}
+    .faq p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+
     .footer{
       margin-top:40px;
       padding-top:20px;
@@ -394,6 +507,8 @@
       .heroCard{padding:20px}
       .cta{width:100%}
       .heroActions .cta{flex:1}
+      .relatedLinks{flex-direction:column}
+      .relatedLinks a{width:100%}
     }
   </style>
 
@@ -403,7 +518,7 @@
     "@context":"https://schema.org",
     "@type":"CollectionPage",
     "name":"SEO Tools",
-    "url":"https://instantqr.io/seo-tools.html",
+    "url":"https://instantqr.io/tools/seo-tools.html",
     "description":"Free SEO tools by InstantQR including meta title preview, meta description preview, SERP preview, robots.txt generator, sitemap generator, canonical tag checker, and keyword density checker."
   }
   </script>
@@ -414,48 +529,13 @@
     "@type":"ItemList",
     "name":"InstantQR SEO Tools",
     "itemListElement":[
-      {
-        "@type":"ListItem",
-        "position":1,
-        "url":"https://instantqr.io/seo-tools/meta-title-preview.html",
-        "name":"Meta Title Preview"
-      },
-      {
-        "@type":"ListItem",
-        "position":2,
-        "url":"https://instantqr.io/seo-tools/meta-description-preview.html",
-        "name":"Meta Description Preview"
-      },
-      {
-        "@type":"ListItem",
-        "position":3,
-        "url":"https://instantqr.io/seo-tools/serp-preview-tool.html",
-        "name":"SERP Preview Tool"
-      },
-      {
-        "@type":"ListItem",
-        "position":4,
-        "url":"https://instantqr.io/seo-tools/robots-txt-generator.html",
-        "name":"Robots.txt Generator"
-      },
-      {
-        "@type":"ListItem",
-        "position":5,
-        "url":"https://instantqr.io/seo-tools/sitemap-generator.html",
-        "name":"Sitemap Generator"
-      },
-      {
-        "@type":"ListItem",
-        "position":6,
-        "url":"https://instantqr.io/seo-tools/canonical-tag-checker.html",
-        "name":"Canonical Tag Checker"
-      },
-      {
-        "@type":"ListItem",
-        "position":7,
-        "url":"https://instantqr.io/seo-tools/keyword-density-checker.html",
-        "name":"Keyword Density Checker"
-      }
+      {"@type":"ListItem","position":1,"url":"https://instantqr.io/tools/meta-title-preview.html","name":"Meta Title Preview"},
+      {"@type":"ListItem","position":2,"url":"https://instantqr.io/tools/meta-description-preview.html","name":"Meta Description Preview"},
+      {"@type":"ListItem","position":3,"url":"https://instantqr.io/tools/serp-preview-tool.html","name":"SERP Preview Tool"},
+      {"@type":"ListItem","position":4,"url":"https://instantqr.io/tools/robots-txt-generator.html","name":"Robots.txt Generator"},
+      {"@type":"ListItem","position":5,"url":"https://instantqr.io/tools/sitemap-generator.html","name":"Sitemap Generator"},
+      {"@type":"ListItem","position":6,"url":"https://instantqr.io/tools/canonical-tag-checker.html","name":"Canonical Tag Checker"},
+      {"@type":"ListItem","position":7,"url":"https://instantqr.io/tools/keyword-density-checker.html","name":"Keyword Density Checker"}
     ]
   }
   </script>
@@ -495,6 +575,8 @@
 </head>
 
 <body>
+  <a class="skip" href="#main">Skip to content</a>
+
   <header class="topbar">
     <div class="inner">
       <a class="logo" href="/" aria-label="InstantQR Home">
@@ -502,19 +584,20 @@
         <span>InstantQR</span>
       </a>
 
-      <nav>
+      <nav aria-label="Primary">
         <a href="/">Home</a>
-        <a href="/tools.html">Tools</a>
-        <a href="/seo-tools.html">SEO Tools</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
+        <a href="/guides/guides.html">Guides</a>
         <a href="/about.html">About</a>
         <a href="/contact.html">Contact</a>
       </nav>
 
-      <a class="cta primary" href="/tools.html">All Tools →</a>
+      <a class="cta primary" href="/tools/tools.html">All Tools →</a>
     </div>
   </header>
 
-  <main class="wrap">
+  <main id="main" class="wrap">
     <section class="hero" aria-label="SEO Tools Hero">
       <div class="heroCard">
         <div class="pill">🚀 Fast • 🔍 SEO-Focused • ✅ Free Tools</div>
@@ -527,13 +610,15 @@
 
         <div class="heroActions">
           <a class="cta primary" href="#tools">Browse SEO Tools</a>
-          <a class="cta" href="/seo-tools/meta-title-description-best-practices.html">Read SEO Guide</a>
-          <a class="cta" href="/tools.html">All InstantQR Tools</a>
+          <a class="cta" href="/guides/meta-title-description-best-practices.html">Read SEO Guide</a>
+          <a class="cta" href="/tools/tools.html">All InstantQR Tools</a>
         </div>
 
         <div class="searchRow">
           <input id="search" class="search" placeholder="Search SEO tools (meta, SERP, robots, sitemap, canonical, keyword...)" aria-label="Search SEO tools">
         </div>
+
+        <div class="empty" id="empty">No SEO tools matched your search. Try: meta, title, description, SERP, sitemap, robots, canonical, keyword.</div>
 
         <div class="quickStats">
           <div class="stat">
@@ -562,7 +647,7 @@
 
       <div class="grid" id="grid">
 
-        <a class="card" href="/seo-tools/meta-title-preview.html" data-tags="seo meta title preview serp snippet google title length">
+        <a class="tool-card" href="/tools/meta-title-preview.html" data-tags="seo meta title preview serp snippet google title length">
           <div class="icon">🔎</div>
           <div class="cardBody">
             <div class="cardTop">
@@ -573,7 +658,7 @@
           </div>
         </a>
 
-        <a class="card" href="/seo-tools/meta-description-preview.html" data-tags="seo meta description preview serp snippet google search">
+        <a class="tool-card" href="/tools/meta-description-preview.html" data-tags="seo meta description preview serp snippet google search">
           <div class="icon">📝</div>
           <div class="cardBody">
             <div class="cardTop">
@@ -584,7 +669,7 @@
           </div>
         </a>
 
-        <a class="card" href="/seo-tools/serp-preview-tool.html" data-tags="seo serp preview google snippet title description mobile desktop">
+        <a class="tool-card" href="/tools/serp-preview-tool.html" data-tags="seo serp preview google snippet title description mobile desktop">
           <div class="icon">📊</div>
           <div class="cardBody">
             <div class="cardTop">
@@ -595,7 +680,7 @@
           </div>
         </a>
 
-        <a class="card" href="/seo-tools/robots-txt-generator.html" data-tags="seo robots txt generator crawler indexing sitemap robots">
+        <a class="tool-card" href="/tools/robots-txt-generator.html" data-tags="seo robots txt generator crawler indexing sitemap robots">
           <div class="icon">🤖</div>
           <div class="cardBody">
             <div class="cardTop">
@@ -606,7 +691,7 @@
           </div>
         </a>
 
-        <a class="card" href="/seo-tools/sitemap-generator.html" data-tags="seo sitemap xml generator search engine indexing crawl">
+        <a class="tool-card" href="/tools/sitemap-generator.html" data-tags="seo sitemap xml generator search engine indexing crawl">
           <div class="icon">🗺️</div>
           <div class="cardBody">
             <div class="cardTop">
@@ -617,7 +702,7 @@
           </div>
         </a>
 
-        <a class="card" href="/seo-tools/canonical-tag-checker.html" data-tags="seo canonical tag checker duplicate content rel canonical index">
+        <a class="tool-card" href="/tools/canonical-tag-checker.html" data-tags="seo canonical tag checker duplicate content rel canonical index">
           <div class="icon">🔗</div>
           <div class="cardBody">
             <div class="cardTop">
@@ -628,7 +713,7 @@
           </div>
         </a>
 
-        <a class="card" href="/seo-tools/keyword-density-checker.html" data-tags="seo keyword density checker frequency content analysis on page">
+        <a class="tool-card" href="/tools/keyword-density-checker.html" data-tags="seo keyword density checker frequency content analysis on page">
           <div class="icon">📈</div>
           <div class="cardBody">
             <div class="cardTop">
@@ -662,6 +747,20 @@
       </div>
     </section>
 
+    <section class="related" aria-label="Popular related SEO tools">
+      <h2>Popular related SEO tools</h2>
+      <p>Jump straight into the most commonly used SEO utilities for snippets, crawl control, indexing support, and page analysis.</p>
+      <div class="relatedLinks">
+        <a href="/tools/serp-preview-tool.html">SERP Preview Tool</a>
+        <a href="/tools/meta-title-preview.html">Meta Title Preview</a>
+        <a href="/tools/meta-description-preview.html">Meta Description Preview</a>
+        <a href="/tools/sitemap-generator.html">Sitemap Generator</a>
+        <a href="/tools/robots-txt-generator.html">Robots.txt Generator</a>
+        <a href="/tools/canonical-tag-checker.html">Canonical Tag Checker</a>
+        <a href="/tools/keyword-density-checker.html">Keyword Density Checker</a>
+      </div>
+    </section>
+
     <section class="section" aria-label="Related SEO guides">
       <h2>Related SEO Guides</h2>
       <p>Learn the basics and improve implementation across your site with these supporting guides.</p>
@@ -689,11 +788,31 @@
       </div>
     </section>
 
+    <section class="faq" aria-label="SEO tools FAQ">
+      <h2>FAQ</h2>
+
+      <details open>
+        <summary>Are these SEO tools free to use?</summary>
+        <p>Yes. InstantQR SEO tools are free to use and designed to be fast and privacy-first.</p>
+      </details>
+
+      <details>
+        <summary>Do these SEO tools work on mobile?</summary>
+        <p>Yes. The tools are responsive and work across phones, tablets, and desktop browsers.</p>
+      </details>
+
+      <details>
+        <summary>Which SEO tool should I use first?</summary>
+        <p>Most users start with SERP Preview, Meta Title Preview, and Meta Description Preview, then use Robots.txt Generator, Sitemap Generator, and Canonical Tag Checker as needed.</p>
+      </details>
+    </section>
+
     <footer class="footer">
       <div>
         <a href="/">Home</a>
-        <a href="/tools.html">All Tools</a>
-        <a href="/seo-tools.html">SEO Tools</a>
+        <a href="/tools/tools.html">All Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
+        <a href="/guides/guides.html">Guides</a>
         <a href="/about.html">About</a>
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
@@ -706,19 +825,47 @@
     </footer>
   </main>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+  <script defer>
+    (function () {
+      const yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    const search = document.getElementById("search");
-    const cards = document.querySelectorAll(".card");
+      const search = document.getElementById("search");
+      const cards = Array.from(document.querySelectorAll(".tool-card"));
+      const empty = document.getElementById("empty");
 
-    search.addEventListener("input", () => {
-      const q = (search.value || "").toLowerCase().trim();
-      cards.forEach(card => {
-        const text = ((card.dataset.tags || "") + " " + card.innerText).toLowerCase();
-        card.classList.toggle("hidden", !text.includes(q));
+      if (!search || !cards.length || !empty) return;
+
+      function applySearch() {
+        const q = (search.value || "").toLowerCase().trim();
+        let shown = 0;
+
+        for (const card of cards) {
+          const text = (((card.dataset.tags || "") + " " + (card.textContent || "")).toLowerCase());
+          const visible = !q || text.includes(q);
+          card.classList.toggle("hidden", !visible);
+          if (visible) shown++;
+        }
+
+        empty.style.display = shown === 0 ? "block" : "none";
+      }
+
+      search.addEventListener("input", applySearch);
+
+      search.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          applySearch();
+        }
       });
-    });
+
+      const params = new URLSearchParams(window.location.search);
+      const qs = params.get("q");
+      if (qs) {
+        search.value = qs;
+        applySearch();
+      }
+    })();
   </script>
 </body>
 </html>
