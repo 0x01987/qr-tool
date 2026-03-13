@@ -12,47 +12,61 @@
 
   <!-- Google AdSense -->
   <script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>Block Explorer Lite | Ethereum Address, Tx & Block Lookup | InstantQR</title>
+  <title>Block Explorer Lite | Ethereum Address, Tx &amp; Block Lookup | InstantQR</title>
   <meta name="description" content="Free lightweight Ethereum block explorer. Look up wallet addresses, transaction hashes, and block numbers with a fast, privacy-friendly interface." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="theme-color" content="#0b1220" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
 
-  <link rel="canonical" href="https://instantqr.io/web3-tools/block-explorer-lite.html" />
+  <link rel="canonical" href="https://instantqr.io/tools/block-explorer-lite.html" />
   <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Block Explorer Lite | Ethereum Address, Tx & Block Lookup" />
+  <meta property="og:title" content="Block Explorer Lite | Ethereum Address, Tx &amp; Block Lookup" />
   <meta property="og:description" content="Lookup Ethereum wallet addresses, transaction hashes, and blocks with a clean lightweight explorer." />
-  <meta property="og:url" content="https://instantqr.io/web3-tools/block-explorer-lite.html" />
+  <meta property="og:url" content="https://instantqr.io/tools/block-explorer-lite.html" />
   <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR Block Explorer Lite tool preview" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Block Explorer Lite | Ethereum Address, Tx & Block Lookup" />
+  <meta name="twitter:title" content="Block Explorer Lite | Ethereum Address, Tx &amp; Block Lookup" />
   <meta name="twitter:description" content="Free lightweight Ethereum explorer for addresses, transactions, and blocks." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <style>
     :root{
-      --bg:#0b1220;
-      --panel:#121b2f;
-      --panel-2:#0f172a;
-      --card:#0d1528;
-      --line:rgba(255,255,255,.10);
-      --text:#f8fafc;
+      --bg:#081120;
+      --bg2:#0f172a;
+      --panel:#111c34;
+      --panel2:#16233f;
+      --text:#e5eefc;
       --muted:#94a3b8;
-      --blue:#3b82f6;
-      --blue-2:#2563eb;
-      --green:#22c55e;
-      --red:#ef4444;
-      --yellow:#f59e0b;
-      --shadow:0 16px 44px rgba(0,0,0,.28);
-      --radius:18px;
+      --line:rgba(255,255,255,.08);
+      --brand:#60a5fa;
+      --brand2:#22c55e;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --ok:#10b981;
+      --shadow:0 12px 35px rgba(0,0,0,.28);
+      --radius:20px;
+      --radius-sm:14px;
       --max:1180px;
+      --focus:0 0 0 4px rgba(96,165,250,.16);
     }
 
     *{box-sizing:border-box}
@@ -62,165 +76,193 @@
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at top left, rgba(59,130,246,.12), transparent 26%),
-        radial-gradient(circle at top right, rgba(34,197,94,.08), transparent 20%),
-        linear-gradient(180deg, #0b1220 0%, #0a1020 100%);
+        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 28%),
+        linear-gradient(180deg, #07101d 0%, #0b1324 55%, #081120 100%);
+      min-height:100vh;
       line-height:1.55;
     }
 
-    a{color:#93c5fd;text-decoration:none}
+    a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
+    img{max-width:100%}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
 
-    .container{
-      width:min(var(--max), calc(100% - 32px));
-      margin:0 auto;
+    .skip{
+      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+    }
+    .skip:focus{
+      left:12px;top:12px;width:auto;height:auto;
+      padding:10px 12px;border-radius:12px;
+      background:#0b172d;color:#fff;border:1px solid var(--line);z-index:999;
     }
 
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:30;
-      backdrop-filter:blur(10px);
-      background:rgba(11,18,32,.8);
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(14px);
+      background:rgba(8,17,32,.78);
       border-bottom:1px solid var(--line);
     }
-
-    .nav{
-      min-height:70px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
+    .topbar-inner{
+      max-width:var(--max);margin:0 auto;
+      padding:12px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
     }
-
     .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
+      display:flex;align-items:center;gap:12px;
+      color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;
+    }
+    .brand-logo{
+      width:38px;height:38px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.18));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .brand-logo img{width:24px;height:24px;display:block}
+    .top-links{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    }
+    .top-links a{
       color:var(--text);
-      font-weight:800;
-      letter-spacing:.2px;
-    }
-
-    .brand img{
-      width:36px;
-      height:36px;
-      display:block;
-    }
-
-    .navlinks{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-    }
-
-    .navlinks a{
-      color:var(--muted);
-      font-weight:600;
       font-size:.95rem;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid transparent;
     }
-
-    .navlinks a:hover{
-      color:var(--text);
+    .top-links a:hover{
       text-decoration:none;
+      background:rgba(255,255,255,.04);
+      border-color:var(--line);
     }
 
-    .hero{
-      padding:28px 0 12px;
-    }
-
+    .hero{padding:34px 0 20px}
     .breadcrumbs{
       color:var(--muted);
       font-size:.92rem;
       margin-bottom:14px;
+      overflow:auto;
+      white-space:nowrap;
+    }
+    .breadcrumbs a{color:var(--muted)}
+    .breadcrumbs span{margin:0 8px;color:#64748b}
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
     }
 
-    .breadcrumbs a{color:var(--muted)}
-    .breadcrumbs span{color:var(--text)}
-
-    .heroCard,
     .card{
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
       border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      border-radius:24px;
+      border-radius:var(--radius);
       box-shadow:var(--shadow);
     }
 
-    .heroCard{
-      padding:28px;
-    }
-
+    .hero-main{padding:28px}
     .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      background:rgba(59,130,246,.10);
-      border:1px solid rgba(59,130,246,.24);
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:.85rem;font-weight:700;
       color:#bfdbfe;
-      border-radius:999px;
-      font-size:.9rem;
-      font-weight:800;
+      background:rgba(96,165,250,.10);
+      border:1px solid rgba(96,165,250,.22);
+      padding:8px 12px;border-radius:999px;
       margin-bottom:14px;
     }
-
     h1{
-      margin:0 0 10px;
-      font-size:clamp(2rem, 4vw, 3.1rem);
-      line-height:1.08;
+      margin:0 0 12px;
+      font-size:clamp(2rem,4vw,3rem);
+      line-height:1.06;
       letter-spacing:-.03em;
     }
-
-    .lead{
+    .hero p{
       margin:0;
-      max-width:860px;
-      color:var(--muted);
-      font-size:1.04rem;
+      color:#cbd5e1;
+      max-width:800px;
+      font-size:1.03rem;
     }
-
-    .main{
-      display:grid;
-      grid-template-columns: 1.06fr .94fr;
-      gap:22px;
-      padding:22px 0;
+    .hero-actions{
+      margin-top:18px;
+      display:flex;gap:12px;flex-wrap:wrap;
     }
+    .btn{
+      appearance:none;border:0;cursor:pointer;
+      font:inherit;font-weight:800;
+      border-radius:14px;padding:13px 16px;
+      transition:.18s ease;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg, var(--brand), #3b82f6);
+      color:#fff;
+      box-shadow:0 10px 26px rgba(59,130,246,.28);
+    }
+    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03);text-decoration:none}
+    .btn-secondary{
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+    }
+    .btn-secondary:hover{background:rgba(255,255,255,.06);text-decoration:none}
 
-    .cardInner{
+    .hero-side{
       padding:22px;
+      display:grid;
+      gap:12px;
+      align-content:start;
+    }
+    .mini-stat{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    .mini-stat .label{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-bottom:4px;
+    }
+    .mini-stat .value{
+      font-weight:800;
+      font-size:1.15rem;
+      color:#fff;
+      word-break:break-word;
     }
 
-    h2{
-      margin:0 0 14px;
+    .section{padding:14px 0 10px}
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1.06fr .94fr;
+      gap:18px;
+      align-items:start;
+    }
+    .tool-panel,.info-panel,.content-card{padding:22px}
+    .tool-panel h2,.info-panel h2,.content h2,.content h3{
+      margin:0 0 10px;
       letter-spacing:-.02em;
-      font-size:1.18rem;
     }
-
-    .grid{
+    .sub{
+      color:var(--muted);
+      font-size:.96rem;
+      margin-bottom:18px;
+    }
+    .form-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:14px;
     }
-
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-
-    .field.full{grid-column:1 / -1}
-
+    .full{grid-column:1/-1}
     label{
-      color:#dbeafe;
-      font-size:.95rem;
+      display:block;
+      font-size:.94rem;
       font-weight:700;
+      margin-bottom:8px;
+      color:#dbeafe;
     }
-
-    .hint{
-      margin-top:-2px;
-      color:var(--muted);
-      font-size:.86rem;
-    }
-
     input, select, textarea{
       width:100%;
       border:1px solid rgba(255,255,255,.12);
@@ -232,10 +274,15 @@
       outline:none;
       transition:border-color .18s ease, transform .18s ease;
     }
-
     input:focus, select:focus, textarea:focus{
       border-color:rgba(59,130,246,.7);
       transform:translateY(-1px);
+    }
+
+    .hint,.tiny,.disclaimer{
+      color:var(--muted);
+      font-size:.86rem;
+      line-height:1.45;
     }
 
     .actions{
@@ -243,29 +290,6 @@
       gap:12px;
       flex-wrap:wrap;
       margin-top:18px;
-    }
-
-    button{
-      appearance:none;
-      border:none;
-      border-radius:14px;
-      padding:14px 18px;
-      font:inherit;
-      font-weight:800;
-      cursor:pointer;
-      transition:transform .18s ease, opacity .18s ease;
-    }
-
-    button:hover{transform:translateY(-1px)}
-    .btnPrimary{
-      background:linear-gradient(135deg, var(--blue), var(--blue-2));
-      color:#fff;
-      box-shadow:0 10px 28px rgba(37,99,235,.24);
-    }
-    .btnGhost{
-      background:#0a1428;
-      color:var(--text);
-      border:1px solid var(--line);
     }
 
     .quickList{
@@ -312,7 +336,7 @@
       word-break:break-word;
     }
 
-    .panel{
+    .panel,.summary-box{
       background:#0a1428;
       border:1px solid var(--line);
       border-radius:16px;
@@ -325,9 +349,9 @@
       color:var(--muted);
     }
 
-    .ok{color:var(--green)}
-    .bad{color:var(--red)}
-    .warn{color:var(--yellow)}
+    .ok{color:var(--ok)}
+    .bad{color:var(--danger)}
+    .warn{color:var(--warn)}
 
     .mono{
       font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
@@ -361,9 +385,7 @@
       font-weight:800;
     }
 
-    td{
-      color:#e2e8f0;
-    }
+    td{color:#e2e8f0}
 
     .empty{
       padding:18px;
@@ -373,19 +395,12 @@
       background:rgba(255,255,255,.02);
     }
 
-    .section{
-      padding:8px 0 6px;
+    .content{
+      margin-top:20px;
+      display:grid;
+      gap:18px;
     }
-
-    .contentCard{
-      padding:22px;
-    }
-
-    .contentCard p,
-    .contentCard li{
-      color:var(--muted);
-    }
-
+    .content p,.content li{color:#cbd5e1}
     details{
       border:1px solid var(--line);
       border-radius:16px;
@@ -398,56 +413,45 @@
       cursor:pointer;
       font-weight:800;
       list-style:none;
+      color:#fff;
     }
-
     summary::-webkit-details-marker{display:none}
     details p{margin:10px 0 0}
 
-    .footerLinks{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px 14px;
-      margin-top:12px;
-    }
-
-    footer{
-      padding:28px 0 46px;
+    .footer{
+      padding:28px 0 42px;
       color:var(--muted);
     }
-
-    .footerCard{
+    .footer-box{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 0 0;
       border-top:1px solid var(--line);
-      padding-top:18px;
     }
+    .footer-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .footer-links a{color:var(--muted)}
+    .footer-links a:hover{color:var(--text);text-decoration:none}
 
     @media (max-width: 980px){
-      .main{
-        grid-template-columns:1fr;
-      }
+      .hero-grid,.tool-grid{grid-template-columns:1fr}
+      .info-panel{position:relative;top:auto}
     }
 
     @media (max-width: 720px){
-      .container{
-        width:min(var(--max), calc(100% - 20px));
-      }
-
-      .nav{
-        padding:8px 0;
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .heroCard, .cardInner, .contentCard{
-        padding:18px;
-      }
-
-      .grid, .stats{
-        grid-template-columns:1fr;
-      }
-
-      table{
-        min-width:560px;
-      }
+      .hero-main,.hero-side,.tool-panel,.info-panel,.content-card{padding:18px}
+      .topbar-inner{padding:10px 14px}
+      .top-links{display:none}
+      .form-grid,.stats{grid-template-columns:1fr}
+      .btn{width:100%}
+      .actions .btn{width:auto;flex:1 1 180px}
+      table{min-width:560px}
     }
   </style>
 
@@ -456,7 +460,7 @@
     "@context":"https://schema.org",
     "@type":"WebPage",
     "name":"Block Explorer Lite",
-    "url":"https://instantqr.io/web3-tools/block-explorer-lite.html",
+    "url":"https://instantqr.io/tools/block-explorer-lite.html",
     "description":"Lightweight Ethereum block explorer for address, transaction, and block lookups.",
     "isPartOf":{
       "@type":"WebSite",
@@ -467,8 +471,8 @@
       "@type":"BreadcrumbList",
       "itemListElement":[
         {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
-        {"@type":"ListItem","position":2,"name":"Web3 Tools","item":"https://instantqr.io/web3-tools.html"},
-        {"@type":"ListItem","position":3,"name":"Block Explorer Lite","item":"https://instantqr.io/web3-tools/block-explorer-lite.html"}
+        {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+        {"@type":"ListItem","position":3,"name":"Block Explorer Lite","item":"https://instantqr.io/tools/block-explorer-lite.html"}
       ]
     }
   }
@@ -516,118 +520,150 @@
   </script>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
+
   <header class="topbar">
-    <div class="container nav">
+    <div class="topbar-inner">
       <a class="brand" href="/" aria-label="InstantQR home">
-        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
         <span>InstantQR</span>
       </a>
-      <nav class="navlinks" aria-label="Primary navigation">
+      <nav class="top-links" aria-label="Primary">
         <a href="/">Home</a>
-        <a href="/tools.html">Tools</a>
-        <a href="/web3-tools.html">Web3 Tools</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/guides/guides.html">Guides</a>
         <a href="/about.html">About</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a> / <a href="/web3-tools.html">Web3 Tools</a> / <span>Block Explorer Lite</span>
-      </nav>
-
-      <div class="heroCard">
-        <div class="eyebrow">Ethereum Utility</div>
-        <h1>Block Explorer Lite</h1>
-        <p class="lead">
-          Look up Ethereum addresses, transaction hashes, and block numbers with a fast lightweight interface.
-          Great for quick wallet checks, transaction status lookups, and simple block inspection.
-        </p>
+  <main id="main" class="wrap">
+    <section class="hero">
+      <div class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="/tools/tools.html">Tools</a><span>›</span>
+        <span>Block Explorer Lite</span>
       </div>
-    </div>
-  </section>
 
-  <main class="container main">
-    <section class="card" aria-labelledby="lookup-title">
-      <div class="cardInner">
-        <h2 id="lookup-title">Lookup</h2>
-
-        <div class="grid">
-          <div class="field full">
-            <label for="network">Network</label>
-            <select id="network">
-              <option value="eth">Ethereum Mainnet</option>
-            </select>
-            <div class="hint">This lightweight version currently focuses on Ethereum mainnet.</div>
-          </div>
-
-          <div class="field full">
-            <label for="query">Address, transaction hash, or block number</label>
-            <input id="query" type="text" placeholder="0x..., transaction hash, or block number" />
-            <div class="hint">Examples: wallet address, 66-character tx hash, or a numeric block height.</div>
+      <div class="hero-grid">
+        <div class="card hero-main">
+          <div class="eyebrow">Ethereum Utility • Privacy-First • Browser-Based</div>
+          <h1>Block Explorer Lite</h1>
+          <p>
+            Look up Ethereum addresses, transaction hashes, and block numbers with a fast lightweight interface.
+            Great for quick wallet checks, transaction status lookups, and simple block inspection.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#tool">Use Explorer</a>
+            <a class="btn btn-secondary" href="/tools/tools.html">Browse All Tools</a>
           </div>
         </div>
 
-        <div class="actions">
-          <button class="btnPrimary" id="lookupBtn" type="button">Search</button>
-          <button class="btnGhost" id="clearBtn" type="button">Clear</button>
-        </div>
-
-        <div class="quickList" aria-label="Example searches">
-          <button class="chip" data-example="0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe" type="button">Sample address</button>
-          <button class="chip" data-example="18000000" type="button">Sample block</button>
-          <button class="chip" data-example="0x5f6d53b9b8d2f9f6a8ab0fcb6b4eb5d6b95c4ac4e0f09f4081c3b08c4f1f0e2a" type="button">Sample tx format</button>
-        </div>
-
-        <div class="status" id="status">Ready.</div>
+        <aside class="card hero-side" aria-label="Tool highlights">
+          <div class="mini-stat">
+            <div class="label">Network</div>
+            <div class="value">Ethereum Mainnet</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Search types</div>
+            <div class="value">Address, tx hash, block</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Best for</div>
+            <div class="value">Quick on-chain checks</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Style</div>
+            <div class="value">Simple and lightweight</div>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <aside class="card">
-      <div class="cardInner">
-        <h2>Quick Summary</h2>
-        <div class="stats">
-          <div class="stat">
-            <div class="k">Detected Type</div>
-            <div class="v" id="detectedType">—</div>
+    <section class="section" id="tool">
+      <div class="tool-grid">
+        <section class="card tool-panel" aria-labelledby="lookup-title">
+          <h2 id="lookup-title">Lookup</h2>
+          <div class="sub">
+            Search an Ethereum wallet address, transaction hash, or block number. This lightweight version focuses on quick mainnet lookups.
           </div>
-          <div class="stat">
-            <div class="k">Network</div>
-            <div class="v" id="detectedNetwork">Ethereum</div>
-          </div>
-          <div class="stat">
-            <div class="k">Current Block</div>
-            <div class="v" id="latestBlock">Loading…</div>
-          </div>
-          <div class="stat">
-            <div class="k">Latest Gas Hint</div>
-            <div class="v" id="gasHint">—</div>
-          </div>
-        </div>
 
-        <div class="panel" style="margin-top:14px">
-          <strong style="display:block;margin-bottom:8px">What you can look up</strong>
-          <div style="color:var(--muted);font-size:.95rem">
-            Wallet addresses, transaction hashes, and block numbers. Results are kept intentionally simple for quick inspection.
+          <div class="form-grid">
+            <div class="full">
+              <label for="network">Network</label>
+              <select id="network">
+                <option value="eth">Ethereum Mainnet</option>
+              </select>
+              <div class="hint">This lightweight version currently focuses on Ethereum mainnet.</div>
+            </div>
+
+            <div class="full">
+              <label for="query">Address, transaction hash, or block number</label>
+              <input id="query" type="text" placeholder="0x..., transaction hash, or block number" />
+              <div class="hint">Examples: wallet address, 66-character tx hash, or a numeric block height.</div>
+            </div>
           </div>
-        </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="lookupBtn" type="button">Search</button>
+            <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
+          </div>
+
+          <div class="quickList" aria-label="Example searches">
+            <button class="chip" data-example="0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe" type="button">Sample address</button>
+            <button class="chip" data-example="18000000" type="button">Sample block</button>
+            <button class="chip" data-example="0x5f6d53b9b8d2f9f6a8ab0fcb6b4eb5d6b95c4ac4e0f09f4081c3b08c4f1f0e2a" type="button">Sample tx format</button>
+          </div>
+
+          <div class="summary-box" style="margin-top:16px;">
+            <p class="hint" id="status">Ready.</p>
+          </div>
+        </section>
+
+        <aside class="card info-panel">
+          <h2>Quick Summary</h2>
+          <div class="stats">
+            <div class="stat">
+              <div class="k">Detected Type</div>
+              <div class="v" id="detectedType">—</div>
+            </div>
+            <div class="stat">
+              <div class="k">Network</div>
+              <div class="v" id="detectedNetwork">Ethereum</div>
+            </div>
+            <div class="stat">
+              <div class="k">Current Block</div>
+              <div class="v" id="latestBlock">Loading…</div>
+            </div>
+            <div class="stat">
+              <div class="k">Latest Gas Hint</div>
+              <div class="v" id="gasHint">—</div>
+            </div>
+          </div>
+
+          <div class="panel" style="margin-top:14px">
+            <strong style="display:block;margin-bottom:8px">What you can look up</strong>
+            <div class="hint">
+              Wallet addresses, transaction hashes, and block numbers. Results are intentionally simplified for quick inspection.
+            </div>
+          </div>
+
+          <div class="disclaimer" style="margin-top:14px;">
+            This lite explorer uses a public Ethereum RPC endpoint. Temporary rate limits or endpoint downtime can affect results.
+          </div>
+        </aside>
       </div>
-    </aside>
-  </main>
+    </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="card contentCard">
+    <section class="content">
+      <article class="card content-card">
         <h2>Results</h2>
         <div id="resultsArea" class="empty">Search for an Ethereum address, transaction hash, or block number to see results here.</div>
-      </div>
-    </div>
-  </section>
+      </article>
 
-  <section class="section">
-    <div class="container">
-      <div class="card contentCard">
+      <article class="card content-card">
         <h2>About this lightweight block explorer</h2>
         <p>
           Block Explorer Lite is built for quick Ethereum lookups without the clutter of a full explorer.
@@ -636,13 +672,9 @@
         <p>
           This tool is useful for traders, developers, Web3 builders, and anyone who wants a fast way to inspect on-chain activity.
         </p>
-      </div>
-    </div>
-  </section>
+      </article>
 
-  <section class="section">
-    <div class="container">
-      <div class="card contentCard">
+      <article class="card content-card">
         <h2>Frequently Asked Questions</h2>
 
         <details>
@@ -664,30 +696,31 @@
           <summary>Is this tool free?</summary>
           <p>Yes. It is free to use and designed to be quick and simple.</p>
         </details>
-      </div>
-    </div>
-  </section>
+      </article>
+    </section>
 
-  <footer>
-    <div class="container footerCard">
-      <div>Fast, privacy-friendly tools by InstantQR.</div>
-      <div class="footerLinks">
-        <a href="/">Home</a>
-        <a href="/tools.html">Tools</a>
-        <a href="/web3-tools.html">Web3 Tools</a>
-        <a href="/web3-tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
-        <a href="/web3-tools/dca-calculator.html">DCA Calculator</a>
-        <a href="/web3-tools/token-contract-analyzer.html">Token Contract Analyzer</a>
-        <a href="/web3-tools/wallet-approval-checker.html">Wallet Approval Checker</a>
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/guides/guides.html">Guides</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+        </div>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </main>
 
   <script>
     (function(){
       const RPC_URL = 'https://cloudflare-eth.com';
 
       const els = {
+        year: document.getElementById('year'),
         query: document.getElementById('query'),
         network: document.getElementById('network'),
         lookupBtn: document.getElementById('lookupBtn'),
@@ -701,8 +734,10 @@
         chips: Array.from(document.querySelectorAll('.chip'))
       };
 
+      if (els.year) els.year.textContent = new Date().getFullYear();
+
       function setStatus(text, type){
-        els.status.className = 'status';
+        els.status.className = 'hint';
         if (type === 'ok') els.status.classList.add('ok');
         if (type === 'bad') els.status.classList.add('bad');
         if (type === 'warn') els.status.classList.add('warn');
@@ -746,8 +781,7 @@
 
       function hexToEth(hex){
         const wei = BigInt(hex || '0x0');
-        const eth = Number(wei) / 1e18;
-        return eth;
+        return Number(wei) / 1e18;
       }
 
       function formatEth(num){
@@ -833,6 +867,7 @@
           ['Latest Known Block', escapeHtml(formatNum(latestBlock))]
         ];
 
+        els.resultsArea.className = '';
         els.resultsArea.innerHTML = `
           <div class="stats" style="margin-bottom:14px">
             <div class="stat">
@@ -868,7 +903,8 @@
         ]);
 
         if (!tx) {
-          els.resultsArea.innerHTML = `<div class="empty">Transaction not found.</div>`;
+          els.resultsArea.className = 'empty';
+          els.resultsArea.innerHTML = `Transaction not found.`;
           setStatus('Transaction not found.', 'warn');
           return;
         }
@@ -891,6 +927,7 @@
           ['Transaction Index', escapeHtml(tx.transactionIndex ? String(hexToInt(tx.transactionIndex)) : '—')]
         ];
 
+        els.resultsArea.className = '';
         els.resultsArea.innerHTML = `
           <div class="stats" style="margin-bottom:14px">
             <div class="stat">
@@ -924,7 +961,8 @@
         const block = await rpc('eth_getBlockByNumber', [blockHex, false]);
 
         if (!block) {
-          els.resultsArea.innerHTML = `<div class="empty">Block not found.</div>`;
+          els.resultsArea.className = 'empty';
+          els.resultsArea.innerHTML = `Block not found.`;
           setStatus('Block not found.', 'warn');
           return;
         }
@@ -966,6 +1004,7 @@
           `;
         }
 
+        els.resultsArea.className = '';
         els.resultsArea.innerHTML = `
           <div class="stats" style="margin-bottom:14px">
             <div class="stat">
@@ -996,7 +1035,8 @@
         const q = els.query.value.trim();
         if (!q) {
           setStatus('Enter an address, transaction hash, or block number.', 'warn');
-          els.resultsArea.innerHTML = `<div class="empty">No query entered yet.</div>`;
+          els.resultsArea.className = 'empty';
+          els.resultsArea.innerHTML = 'No query entered yet.';
           els.detectedType.textContent = '—';
           return;
         }
@@ -1010,11 +1050,8 @@
             await lookupBlock(q);
           } else {
             els.detectedType.textContent = 'Unknown';
-            els.resultsArea.innerHTML = `
-              <div class="empty">
-                Input format not recognized. Enter a valid Ethereum address, 66-character transaction hash, or numeric block number.
-              </div>
-            `;
+            els.resultsArea.className = 'empty';
+            els.resultsArea.innerHTML = 'Input format not recognized. Enter a valid Ethereum address, 66-character transaction hash, or numeric block number.';
             setStatus('Unrecognized input format.', 'warn');
           }
 
@@ -1024,11 +1061,8 @@
             history.replaceState(null, '', url.toString());
           } catch(e){}
         } catch (err) {
-          els.resultsArea.innerHTML = `
-            <div class="empty">
-              Lookup failed. This can happen if the public RPC endpoint is temporarily unavailable or rate-limited. Try again in a moment.
-            </div>
-          `;
+          els.resultsArea.className = 'empty';
+          els.resultsArea.innerHTML = 'Lookup failed. This can happen if the public RPC endpoint is temporarily unavailable or rate-limited. Try again in a moment.';
           setStatus('Lookup failed.', 'bad');
         }
       }
@@ -1036,8 +1070,8 @@
       function clearAll(){
         els.query.value = '';
         els.detectedType.textContent = '—';
-        els.resultsArea.innerHTML = 'Search for an Ethereum address, transaction hash, or block number to see results here.';
         els.resultsArea.className = 'empty';
+        els.resultsArea.innerHTML = 'Search for an Ethereum address, transaction hash, or block number to see results here.';
         setStatus('Ready.');
         try {
           const url = new URL(window.location.href);
@@ -1058,7 +1092,10 @@
       els.lookupBtn.addEventListener('click', runLookup);
       els.clearBtn.addEventListener('click', clearAll);
       els.query.addEventListener('keydown', function(e){
-        if (e.key === 'Enter') runLookup();
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          runLookup();
+        }
       });
 
       els.chips.forEach(chip => {
