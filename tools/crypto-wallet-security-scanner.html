@@ -11,7 +11,8 @@
   </script>
 
   <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
@@ -22,23 +23,33 @@
   <meta name="keywords" content="crypto wallet security scanner, wallet safety checker, web3 wallet scanner, wallet approval risk checker, crypto security tool, seed phrase safety, wallet phishing checker, metamask security, revoke wallet approvals, wallet security audit tool" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
 
-  <link rel="canonical" href="https://instantqr.io/web3-tools/crypto-wallet-security-scanner.html" />
+  <link rel="canonical" href="https://instantqr.io/tools/crypto-wallet-security-scanner.html" />
   <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Crypto Wallet Security Scanner | InstantQR" />
   <meta property="og:description" content="Free browser-based crypto wallet security scanner. Check wallet hygiene, phishing exposure, approval risks, and key security practices instantly." />
-  <meta property="og:url" content="https://instantqr.io/web3-tools/crypto-wallet-security-scanner.html" />
+  <meta property="og:url" content="https://instantqr.io/tools/crypto-wallet-security-scanner.html" />
   <meta property="og:site_name" content="InstantQR" />
-  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR Crypto Wallet Security Scanner tool preview" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Crypto Wallet Security Scanner | InstantQR" />
   <meta name="twitter:description" content="Review your crypto wallet security posture with this free, fast, privacy-first tool." />
-  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <style>
     :root{
@@ -58,6 +69,7 @@
       --radius:20px;
       --radius-sm:14px;
       --max:1180px;
+      --focus:0 0 0 4px rgba(96,165,250,.16);
     }
 
     *{box-sizing:border-box}
@@ -77,6 +89,17 @@
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
     img{max-width:100%}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
+
+    .skip{
+      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+    }
+    .skip:focus{
+      left:12px;top:12px;width:auto;height:auto;
+      padding:10px 12px;border-radius:12px;
+      background:#0b172d;color:#fff;border:1px solid var(--line);z-index:999;
+    }
+
     .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
     .topbar{
       position:sticky;top:0;z-index:40;
@@ -183,7 +206,7 @@
       color:#fff;
       box-shadow:0 10px 26px rgba(59,130,246,.28);
     }
-    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03)}
+    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03);text-decoration:none}
     .btn-secondary{
       color:var(--text);
       background:rgba(255,255,255,.04);
@@ -294,6 +317,7 @@
       border:1px solid var(--line);
       border-radius:16px;
       background:rgba(255,255,255,.03);
+      cursor:pointer;
     }
 
     .check input{
@@ -522,7 +546,6 @@
     }
   </style>
 
-  <!-- BreadcrumbList -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -538,19 +561,18 @@
         "@type":"ListItem",
         "position":2,
         "name":"Web3 Tools",
-        "item":"https://instantqr.io/web3-tools/web3-tools.html"
+        "item":"https://instantqr.io/tools/web3-tools.html"
       },
       {
         "@type":"ListItem",
         "position":3,
         "name":"Crypto Wallet Security Scanner",
-        "item":"https://instantqr.io/web3-tools/crypto-wallet-security-scanner.html"
+        "item":"https://instantqr.io/tools/crypto-wallet-security-scanner.html"
       }
     ]
   }
   </script>
 
-  <!-- SoftwareApplication -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -560,7 +582,7 @@
     "operatingSystem":"Any",
     "isAccessibleForFree":true,
     "browserRequirements":"Requires JavaScript. Works in modern browsers.",
-    "url":"https://instantqr.io/web3-tools/crypto-wallet-security-scanner.html",
+    "url":"https://instantqr.io/tools/crypto-wallet-security-scanner.html",
     "description":"Free browser-based crypto wallet security scanner that helps users review wallet hygiene, approval risk, phishing exposure, seed phrase practices, and core Web3 security habits.",
     "publisher":{
       "@type":"Organization",
@@ -570,7 +592,6 @@
   }
   </script>
 
-  <!-- FAQPage -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -613,9 +634,11 @@
   </script>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
+
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="/">
+      <a class="brand" href="/" aria-label="InstantQR home">
         <span class="brand-logo">
           <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
         </span>
@@ -624,18 +647,19 @@
 
       <nav class="top-links" aria-label="Primary">
         <a href="/">Home</a>
-        <a href="/tools.html">Tools</a>
-        <a href="/web3-tools/web3-tools.html">Web3 Tools</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides/guides.html">Guides</a>
         <a href="/about.html">About</a>
       </nav>
     </div>
   </header>
 
-  <main class="wrap">
+  <main id="main" class="wrap">
     <section class="hero">
       <div class="breadcrumbs" aria-label="Breadcrumb">
         <a href="/">Home</a><span>›</span>
-        <a href="/web3-tools/web3-tools.html">Web3 Tools</a><span>›</span>
+        <a href="/tools/web3-tools.html">Web3 Tools</a><span>›</span>
         <span>Crypto Wallet Security Scanner</span>
       </div>
 
@@ -648,7 +672,7 @@
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#scanner">Scan Wallet Security</a>
-            <a class="btn btn-secondary" href="/web3-tools/web3-tools.html">Browse Web3 Tools</a>
+            <a class="btn btn-secondary" href="/tools/web3-tools.html">Browse Web3 Tools</a>
           </div>
         </div>
 
@@ -808,7 +832,7 @@
           <h2 id="results-title">Scan results</h2>
 
           <div class="score-wrap">
-            <div class="meter" id="meter" style="--percent:72;--meterColor:#10b981;">
+            <div class="meter" id="meter" style="--percent:72;--meterColor:#f59e0b;">
               <div class="meter-content">
                 <div class="score" id="scoreValue">72</div>
                 <div class="score-label">Wallet security score</div>
@@ -930,8 +954,9 @@
         <div>© <span id="year"></span> InstantQR</div>
         <div class="footer-links">
           <a href="/">Home</a>
-          <a href="/tools.html">Tools</a>
-          <a href="/web3-tools/web3-tools.html">Web3 Tools</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/guides/guides.html">Guides</a>
           <a href="/about.html">About</a>
           <a href="/privacy.html">Privacy</a>
           <a href="/terms.html">Terms</a>
@@ -959,7 +984,9 @@
         year: $('year')
       };
 
-      const checks = Array.from({ length: 10 }, (_, i) => $('c' + (i + 1)));
+      if (!els.walletAddress || !els.scanBtn || !els.resetBtn || !els.year) return;
+
+      const checks = Array.from({ length: 10 }, (_, i) => $('c' + (i + 1))).filter(Boolean);
 
       els.year.textContent = new Date().getFullYear();
 
@@ -1084,9 +1111,8 @@
         };
       }
 
-      function buildFindings(score, validation) {
+      function buildFindings(validation) {
         const selected = checks.map(c => c.checked);
-
         const findings = [];
 
         findings.push({
@@ -1094,41 +1120,26 @@
           text: validation.text
         });
 
-        if (selected[2]) {
-          findings.push({
-            title: 'Approval hygiene',
-            text: 'Good practice detected: you review approvals regularly, which helps reduce exposure to stale or unlimited token allowances.'
-          });
-        } else {
-          findings.push({
-            title: 'Approval hygiene',
-            text: 'Approval review is missing. Consider checking and revoking unused token allowances, especially after using unfamiliar dApps.'
-          });
-        }
+        findings.push({
+          title: 'Approval hygiene',
+          text: selected[2]
+            ? 'Good practice detected: you review approvals regularly, which helps reduce exposure to stale or unlimited token allowances.'
+            : 'Approval review is missing. Consider checking and revoking unused token allowances, especially after using unfamiliar dApps.'
+        });
 
-        if (selected[5]) {
-          findings.push({
-            title: 'Phishing resistance',
-            text: 'Good practice detected: verifying URLs and dApps before connecting helps prevent clone-site and fake-support attacks.'
-          });
-        } else {
-          findings.push({
-            title: 'Phishing resistance',
-            text: 'Domain verification appears weak. Double-check website URLs, social links, and bookmarks before connecting your wallet.'
-          });
-        }
+        findings.push({
+          title: 'Phishing resistance',
+          text: selected[5]
+            ? 'Good practice detected: verifying URLs and dApps before connecting helps prevent clone-site and fake-support attacks.'
+            : 'Domain verification appears weak. Double-check website URLs, social links, and bookmarks before connecting your wallet.'
+        });
 
-        if (selected[1] && selected[7]) {
-          findings.push({
-            title: 'Key / recovery safety',
-            text: 'Your recovery-phrase handling appears strong. Keeping recovery material offline and out of cloud apps is a major security win.'
-          });
-        } else {
-          findings.push({
-            title: 'Key / recovery safety',
-            text: 'Recovery phrase safety needs attention. Never store a seed phrase in screenshots, cloud notes, chat apps, or email.'
-          });
-        }
+        findings.push({
+          title: 'Key / recovery safety',
+          text: selected[1] && selected[7]
+            ? 'Your recovery-phrase handling appears strong. Keeping recovery material offline and out of cloud apps is a major security win.'
+            : 'Recovery phrase safety needs attention. Never store a seed phrase in screenshots, cloud notes, chat apps, or email.'
+        });
 
         if (!selected[3]) {
           findings.push({
@@ -1157,7 +1168,7 @@
       function renderResults() {
         const { score, validation } = getSecurityScore();
         const badge = badgeInfo(score);
-        const findings = buildFindings(score, validation);
+        const findings = buildFindings(validation);
 
         els.meter.style.setProperty('--percent', score);
         els.meter.style.setProperty('--meterColor', badge.color);
