@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroRoundedEl = document.getElementById('heroRounded');
   const queryLabelEl = document.getElementById('queryLabel');
 
-  if (!fahrenheitEl || !celsiusEl || !decimalsEl || !resultTextEl) return;
+  if (!fahrenheitEl || !celsiusEl || !decimalsEl || !resultTextEl) {
+    console.error('f-to-c.js: required DOM elements not found');
+    return;
+  }
 
   let lastEdited = 'fahrenheit';
 
@@ -148,15 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  [fahrenheitEl, celsiusEl].forEach((el) => {
-    el.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        runConversion();
-      }
-    });
-  });
-
   document.querySelectorAll('.quick button[data-fill]').forEach((btn) => {
     btn.addEventListener('click', () => {
       fahrenheitEl.value = btn.dataset.fill || '';
@@ -164,6 +158,15 @@ document.addEventListener('DOMContentLoaded', () => {
       lastEdited = 'fahrenheit';
       convertFromF();
       fahrenheitEl.focus();
+    });
+  });
+
+  [fahrenheitEl, celsiusEl].forEach((el) => {
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        runConversion();
+      }
     });
   });
 
