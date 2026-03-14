@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- =========================
+       Analytics / Monetization
+       ========================= -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <!-- =========================
+       Core Meta
+       ========================= -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>[[TOOL_TITLE]] | InstantQR</title>
+  <meta name="description" content="[[META_DESCRIPTION]]" />
+  <meta name="keywords" content="[[META_KEYWORDS]]" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="application-name" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/[[SLUG]].html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+
+  <!-- Performance -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+
+  <!-- =========================
+       Open Graph / Twitter
+       ========================= -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="[[TOOL_TITLE]] | InstantQR" />
+  <meta property="og:description" content="[[META_DESCRIPTION]]" />
+  <meta property="og:url" content="https://instantqr.io/tools/[[SLUG]].html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="[[TOOL_TITLE]] tool page preview on InstantQR" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="[[TOOL_TITLE]] | InstantQR" />
+  <meta name="twitter:description" content="[[META_DESCRIPTION]]" />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <!-- =========================
+       Styles
+       ========================= -->
+  <style>
+    :root{
+      --bg:#081120;
+      --bg2:#0f172a;
+      --panel:#111c34;
+      --panel2:#16233f;
+      --text:#e5eefc;
+      --muted:#94a3b8;
+      --line:rgba(255,255,255,.08);
+      --brand:#60a5fa;
+      --brand2:#22c55e;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --ok:#10b981;
+      --shadow:0 12px 35px rgba(0,0,0,.28);
+      --radius:20px;
+      --radius-sm:14px;
+      --max:1180px;
+      --focus:0 0 0 4px rgba(96,165,250,.16);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 28%),
+        linear-gradient(180deg, #07101d 0%, #0b1324 55%, #081120 100%);
+      min-height:100vh;
+      line-height:1.55;
+    }
+
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
+
+    .skip{
+      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+    }
+    .skip:focus{
+      left:12px;top:12px;width:auto;height:auto;
+      padding:10px 12px;border-radius:12px;
+      background:#0b172d;color:#fff;border:1px solid var(--line);z-index:999;
+    }
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+
+    .topbar{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(14px);
+      background:rgba(8,17,32,.78);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width:var(--max);margin:0 auto;
+      padding:12px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;
+    }
+    .brand-logo{
+      width:38px;height:38px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.18));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .brand-logo img{width:24px;height:24px;display:block}
+
+    .top-links{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    }
+    .top-links a{
+      color:var(--text);
+      font-size:.95rem;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid transparent;
+    }
+    .top-links a:hover{
+      text-decoration:none;
+      background:rgba(255,255,255,.04);
+      border-color:var(--line);
+    }
+
+    .hero{padding:34px 0 20px}
+    .breadcrumbs{
+      color:var(--muted);
+      font-size:.92rem;
+      margin-bottom:14px;
+      overflow:auto;
+      white-space:nowrap;
+    }
+    .breadcrumbs a{color:var(--muted)}
+    .breadcrumbs span{margin:0 8px;color:#64748b}
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-main{padding:28px}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:.85rem;font-weight:700;
+      color:#bfdbfe;
+      background:rgba(96,165,250,.10);
+      border:1px solid rgba(96,165,250,.22);
+      padding:8px 12px;border-radius:999px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(2rem,4vw,3rem);
+      line-height:1.06;
+      letter-spacing:-.03em;
+    }
+    .hero p{
+      margin:0;
+      color:#cbd5e1;
+      max-width:800px;
+      font-size:1.03rem;
+    }
+    .hero-actions{
+      margin-top:18px;
+      display:flex;gap:12px;flex-wrap:wrap;
+    }
+
+    .btn{
+      appearance:none;border:0;cursor:pointer;
+      font:inherit;font-weight:800;
+      border-radius:14px;padding:13px 16px;
+      transition:.18s ease;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg, var(--brand), #3b82f6);
+      color:#fff;
+      box-shadow:0 10px 26px rgba(59,130,246,.28);
+    }
+    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03);text-decoration:none}
+    .btn-secondary{
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+    }
+    .btn-secondary:hover{background:rgba(255,255,255,.06);text-decoration:none}
+
+    .hero-side{
+      padding:22px;
+      display:grid;
+      gap:12px;
+      align-content:start;
+    }
+    .mini-stat{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    .mini-stat .label{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-bottom:4px;
+    }
+    .mini-stat .value{
+      font-weight:800;
+      font-size:1.05rem;
+      color:#fff;
+    }
+
+    .section{padding:14px 0 10px}
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .tool-panel,.info-panel,.content-card{padding:22px}
+
+    .tool-panel h2,.info-panel h2,.content h2,.content h3{
+      margin:0 0 10px;
+      letter-spacing:-.02em;
+    }
+
+    .subtle{
+      color:var(--muted);
+      font-size:.96rem;
+      margin-bottom:18px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .full{grid-column:1/-1}
+
+    label{
+      display:block;
+      font-size:.94rem;
+      font-weight:700;
+      margin-bottom:8px;
+      color:#dbeafe;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="time"],
+    input[type="datetime-local"],
+    input[type="url"],
+    select,
+    textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0a1427;
+      color:#fff;
+      padding:14px 14px;
+      font:inherit;
+      outline:none;
+      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    input:focus,select:focus,textarea:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 4px rgba(96,165,250,.14);
+      background:#0b172d;
+    }
+
+    .helper{
+      color:var(--muted);
+      font-size:.85rem;
+      margin-top:6px;
+      line-height:1.45;
+    }
+
+    .actions{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .result-box{
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      margin-bottom:14px;
+    }
+    .result-box p{margin:0;color:#dbeafe}
+
+    .results{
+      display:grid;
+      gap:10px;
+    }
+    .result-item{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:12px 13px;
+    }
+    .result-item strong{
+      display:block;
+      margin-bottom:5px;
+      color:#fff;
+      font-size:.95rem;
+    }
+    .result-item span{
+      color:#cbd5e1;
+      font-size:.92rem;
+      line-height:1.45;
+    }
+
+    .content{
+      margin-top:20px;
+      display:grid;
+      gap:18px;
+    }
+    .content p{
+      color:#cbd5e1;
+      margin:0 0 12px;
+      line-height:1.65;
+    }
+    .content ul{
+      margin:10px 0 0 18px;
+      color:#cbd5e1;
+    }
+    .content li{margin:8px 0}
+
+    .faq{
+      display:grid;
+      gap:12px;
+      margin-top:12px;
+    }
+    details{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      color:#fff;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin:10px 0 0;
+      color:#cbd5e1;
+      line-height:1.6;
+    }
+
+    .related-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .related-links a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+    .related-links a:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .footer{
+      padding:28px 0 42px;
+      color:var(--muted);
+    }
+    .footer-box{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 0 0;
+      border-top:1px solid var(--line);
+    }
+    .footer-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .footer-links a{color:var(--muted)}
+    .footer-links a:hover{color:var(--text);text-decoration:none}
+
+    .hidden{display:none !important}
+
+    @media (max-width: 980px){
+      .hero-grid,.tool-grid{grid-template-columns:1fr}
+      .info-panel{position:relative;top:auto}
+    }
+
+    @media (max-width: 700px){
+      .form-grid{grid-template-columns:1fr}
+      .hero-main,.hero-side,.tool-panel,.info-panel,.content-card{padding:18px}
+      .topbar-inner{padding:10px 14px}
+      .top-links{display:none}
+      h1{font-size:2rem}
+      .btn{width:100%}
+      .actions .btn{width:auto;flex:1 1 180px}
+    }
+  </style>
+
+  <!-- =========================
+       Structured Data
+       ========================= -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"[[TOOL_TITLE]]",
+        "item":"https://instantqr.io/tools/[[SLUG]].html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"[[TOOL_TITLE]]",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/[[SLUG]].html",
+    "description":"[[META_DESCRIPTION]]",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"[[FAQ_1_Q]]",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"[[FAQ_1_A]]"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"[[FAQ_2_Q]]",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"[[FAQ_2_A]]"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"[[FAQ_3_Q]]",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"[[FAQ_3_A]]"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
+
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides/guides.html">Guides</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero">
+      <div class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="/tools/tools.html">Tools</a><span>›</span>
+        <span>[[TOOL_TITLE]]</span>
+      </div>
+
+      <div class="hero-grid">
+        <div class="card hero-main">
+          <div class="eyebrow">[[EYEBROW_TEXT]]</div>
+          <h1>[[TOOL_TITLE]]</h1>
+          <p>[[HERO_DESCRIPTION]]</p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#tool">Use Tool</a>
+            <a class="btn btn-secondary" href="/tools/tools.html">Browse All Tools</a>
+          </div>
+        </div>
+
+        <aside class="card hero-side" aria-label="Tool highlights">
+          <div class="mini-stat">
+            <div class="label">Runs locally</div>
+            <div class="value">Browser-based workflow</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Built for speed</div>
+            <div class="value">Fast + responsive UI</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Privacy-first</div>
+            <div class="value">No signup required</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Best for</div>
+            <div class="value">[[BEST_FOR_TEXT]]</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="tool">
+      <div class="tool-grid">
+        <!-- LEFT: Main tool UI -->
+        <section class="card tool-panel" aria-labelledby="tool-title">
+          <h2 id="tool-title">[[TOOL_SECTION_TITLE]]</h2>
+          <div class="subtle">[[TOOL_SECTION_SUBTEXT]]</div>
+
+          <div class="form-grid">
+            <!-- =========================
+                 REPLACE THIS AREA
+                 with each tool’s inputs
+                 ========================= -->
+
+            <div class="full">
+              <label for="mainInput">Example input</label>
+              <input id="mainInput" type="text" placeholder="Replace this with your tool input..." />
+              <div class="helper">This is a reusable placeholder field. Swap it for your actual tool UI.</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="runBtn" type="button">Run Tool</button>
+            <button class="btn btn-secondary" id="resetBtn" type="button">Reset</button>
+          </div>
+        </section>
+
+        <!-- RIGHT: Results / summary -->
+        <aside class="card info-panel" aria-labelledby="results-title">
+          <h2 id="results-title">Results</h2>
+
+          <div class="result-box">
+            <p id="summaryText">Your tool results, summary, score, or output preview can appear here.</p>
+          </div>
+
+          <div class="results" id="resultsList">
+            <div class="result-item">
+              <strong>Status</strong>
+              <span>Waiting for input.</span>
+            </div>
+            <div class="result-item">
+              <strong>Output</strong>
+              <span>Replace this with tool-specific output.</span>
+            </div>
+            <div class="result-item">
+              <strong>Notes</strong>
+              <span>Add practical notes, warnings, or tips here.</span>
+            </div>
+          </div>
+
+          <div class="helper" style="margin-top:14px;">
+            Privacy note: where possible, tools should run locally in the browser and avoid sending user data to third parties.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content">
+      <article class="card content-card">
+        <h2>How this tool works</h2>
+        <p>[[HOW_IT_WORKS_PARAGRAPH_1]]</p>
+        <p>[[HOW_IT_WORKS_PARAGRAPH_2]]</p>
+      </article>
+
+      <article class="card content-card">
+        <h2>Why use this tool?</h2>
+        <p>[[WHY_USE_IT_PARAGRAPH]]</p>
+        <ul>
+          <li>[[BENEFIT_1]]</li>
+          <li>[[BENEFIT_2]]</li>
+          <li>[[BENEFIT_3]]</li>
+        </ul>
+      </article>
+
+      <article class="card content-card">
+        <h2>Related tools</h2>
+        <div class="related-links">
+          <a href="/tools/tools.html">All Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/guides/guides.html">Guides</a>
+        </div>
+      </article>
+
+      <article class="card content-card">
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+          <details open>
+            <summary>[[FAQ_1_Q]]</summary>
+            <p>[[FAQ_1_A]]</p>
+          </details>
+
+          <details>
+            <summary>[[FAQ_2_Q]]</summary>
+            <p>[[FAQ_2_A]]</p>
+          </details>
+
+          <details>
+            <summary>[[FAQ_3_Q]]</summary>
+            <p>[[FAQ_3_A]]</p>
+          </details>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/guides/guides.html">Guides</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Example starter behavior only.
+      // Replace this with each tool's real logic.
+      const runBtn = document.getElementById('runBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const mainInput = document.getElementById('mainInput');
+      const summaryText = document.getElementById('summaryText');
+      const resultsList = document.getElementById('resultsList');
+
+      function runExample() {
+        const value = (mainInput?.value || '').trim();
+
+        if (!value) {
+          summaryText.textContent = 'Please enter a value first.';
+          resultsList.innerHTML = `
+            <div class="result-item">
+              <strong>Status</strong>
+              <span>No input provided.</span>
+            </div>
+          `;
+          return;
+        }
+
+        summaryText.textContent = 'Tool ran successfully.';
+        resultsList.innerHTML = `
+          <div class="result-item">
+            <strong>Status</strong>
+            <span>Success</span>
+          </div>
+          <div class="result-item">
+            <strong>Input received</strong>
+            <span>${escapeHtml(value)}</span>
+          </div>
+          <div class="result-item">
+            <strong>Next step</strong>
+            <span>Replace this demo behavior with the actual tool logic.</span>
+          </div>
+        `;
+      }
+
+      function resetExample() {
+        if (mainInput) mainInput.value = '';
+        summaryText.textContent = 'Your tool results, summary, score, or output preview can appear here.';
+        resultsList.innerHTML = `
+          <div class="result-item">
+            <strong>Status</strong>
+            <span>Waiting for input.</span>
+          </div>
+          <div class="result-item">
+            <strong>Output</strong>
+            <span>Replace this with tool-specific output.</span>
+          </div>
+          <div class="result-item">
+            <strong>Notes</strong>
+            <span>Add practical notes, warnings, or tips here.</span>
+          </div>
+        `;
+      }
+
+      function escapeHtml(str) {
+        return String(str).replace(/[&<>"']/g, function (m) {
+          return ({
+            '&':'&amp;',
+            '<':'&lt;',
+            '>':'&gt;',
+            '"':'&quot;',
+            "'":'&#39;'
+          })[m];
+        });
+      }
+
+      runBtn?.addEventListener('click', runExample);
+      resetBtn?.addEventListener('click', resetExample);
+    })();
+  </script>
+</body>
+</html>
