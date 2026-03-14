@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- =========================
+       Analytics / Monetization
+       ========================= -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,40 +12,65 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-  crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
 
+  <!-- =========================
+       Core Meta
+       ========================= -->
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>DNS Propagation Checker | Check A, AAAA, CNAME, MX, TXT, NS & SOA | InstantQR</title>
-  <meta name="description" content="Fast DNS propagation checker to compare A, AAAA, CNAME, MX, TXT, NS, and SOA records across public DNS resolvers. Clean responsive UI with standout green results." />
+  <meta name="description" content="Fast DNS propagation checker to compare A, AAAA, CNAME, MX, TXT, NS, and SOA records across public DNS resolvers. Clean responsive UI for quick DNS troubleshooting." />
+  <meta name="keywords" content="dns propagation checker, dns checker, dns propagation, dns lookup, a record checker, aaaa checker, cname checker, mx checker, txt checker, ns checker, soa checker, domain dns test" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-  <meta name="theme-color" content="#0b1220" />
+  <meta name="author" content="InstantQR" />
+  <meta name="application-name" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
 
   <link rel="canonical" href="https://instantqr.io/tools/dns-propagation-checker.html" />
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
 
+  <!-- Performance -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="preconnect" href="https://dns.google" crossorigin>
+  <link rel="preconnect" href="https://dns64.dns.google" crossorigin>
+  <link rel="preconnect" href="https://cloudflare-dns.com" crossorigin>
+  <link rel="preconnect" href="https://security.cloudflare-dns.com" crossorigin>
+  <link rel="preconnect" href="https://family.cloudflare-dns.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="//dns.google">
+  <link rel="dns-prefetch" href="//dns64.dns.google">
+  <link rel="dns-prefetch" href="//cloudflare-dns.com">
+  <link rel="dns-prefetch" href="//security.cloudflare-dns.com">
+  <link rel="dns-prefetch" href="//family.cloudflare-dns.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+
+  <!-- =========================
+       Open Graph / Twitter
+       ========================= -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="DNS Propagation Checker | InstantQR" />
-  <meta property="og:description" content="Check DNS propagation fast across major public resolvers for A, AAAA, CNAME, MX, TXT, NS, and SOA records." />
+  <meta property="og:description" content="Check DNS propagation fast across public DNS resolvers for A, AAAA, CNAME, MX, TXT, NS, and SOA records." />
   <meta property="og:url" content="https://instantqr.io/tools/dns-propagation-checker.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="InstantQR DNS Propagation Checker" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="DNS Propagation Checker | InstantQR" />
-  <meta name="twitter:description" content="Fast DNS propagation checker across public DNS resolvers with standout green results." />
+  <meta name="twitter:description" content="Fast DNS propagation checker across public DNS resolvers for common DNS record types." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
-
-  <link rel="preconnect" href="https://dns.google" crossorigin>
-  <link rel="preconnect" href="https://cloudflare-dns.com" crossorigin>
 
   <!-- WebPage -->
   <script type="application/ld+json">
@@ -61,14 +88,23 @@
   }
   </script>
 
-  <!-- CollectionPage -->
+  <!-- SoftwareApplication -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"CollectionPage",
+    "@type":"SoftwareApplication",
     "name":"DNS Propagation Checker",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
     "url":"https://instantqr.io/tools/dns-propagation-checker.html",
-    "description":"Check DNS propagation for A, AAAA, CNAME, MX, TXT, NS, and SOA records across public DNS resolvers."
+    "description":"Check DNS propagation for A, AAAA, CNAME, MX, TXT, NS, and SOA records across public DNS resolvers.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
   }
   </script>
 
@@ -88,7 +124,7 @@
         "@type":"ListItem",
         "position":2,
         "name":"Tools",
-        "item":"https://instantqr.io/tools.html"
+        "item":"https://instantqr.io/tools/tools.html"
       },
       {
         "@type":"ListItem",
@@ -135,7 +171,7 @@
         "name":"How do I know if my DNS change has propagated?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"If multiple resolvers return the same expected value and the propagation percentage is high, your DNS change is likely visible across most of the internet."
+          "text":"If multiple resolvers return the same expected value and the weighted propagation percentage is high, your DNS change is likely visible across most real-world public DNS paths."
         }
       }
     ]
@@ -144,106 +180,105 @@
 
   <style>
     :root{
-      --bg:#0b1220;
-      --text:#e7eefc;
-      --muted:#a9b7d6;
-      --brand:#69a6ff;
+      --bg:#081120;
+      --bg2:#0f172a;
+      --panel:#111c34;
+      --panel2:#16233f;
+      --text:#e5eefc;
+      --muted:#94a3b8;
+      --line:rgba(255,255,255,.08);
+      --brand:#60a5fa;
+      --brand2:#22c55e;
+      --warn:#f59e0b;
+      --danger:#ef4444;
       --ok:#19c37d;
       --okbg:rgba(25,195,125,.14);
-      --warn:#ffcc66;
       --bad:#ff6b6b;
       --badbg:rgba(255,107,107,.12);
-      --border:rgba(255,255,255,.10);
-      --shadow:0 12px 40px rgba(0,0,0,.45);
+      --shadow:0 12px 35px rgba(0,0,0,.28);
       --radius:18px;
       --radius2:22px;
       --max:1180px;
-      --focus:0 0 0 3px rgba(105,166,255,.35);
+      --focus:0 0 0 4px rgba(96,165,250,.16);
+      --border:rgba(255,255,255,.10);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
-        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
-        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.12), transparent 50%),
-        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 28%),
+        linear-gradient(180deg, #07101d 0%, #0b1324 55%, #081120 100%);
+      min-height:100vh;
+      line-height:1.55;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
 
-    a{color:inherit;text-decoration:none}
+    a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
     :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
+    img{max-width:100%}
 
     .skip{
       position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
     }
     .skip:focus{
-      left:14px;top:14px;width:auto;height:auto;z-index:9999;
-      padding:10px 12px;border-radius:12px;background:#08101d;color:#fff;
-      border:1px solid var(--border);
+      left:12px;top:12px;width:auto;height:auto;
+      padding:10px 12px;border-radius:12px;
+      background:#0b172d;color:#fff;border:1px solid var(--line);z-index:999;
     }
 
-    .wrap{max-width:var(--max);margin:0 auto;padding:20px}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px 24px}
 
     .topbar{
-      position:sticky;top:0;z-index:50;
-      backdrop-filter:blur(10px);
-      background:rgba(7,11,20,.55);
-      border-bottom:1px solid var(--border);
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(14px);
+      background:rgba(8,17,32,.78);
+      border-bottom:1px solid var(--line);
     }
-    .topbar .inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 20px;
+    .topbar-inner{
+      max-width:var(--max);margin:0 auto;
+      padding:12px 16px;
       display:flex;align-items:center;justify-content:space-between;gap:14px;
     }
-    .brandRow{
-      display:flex;align-items:center;gap:10px;
-      font-weight:800;letter-spacing:.2px;
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;
     }
-    .brandRow img{display:block;height:34px;width:auto}
-    nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    nav a{
-      color:var(--muted);
-      font-size:14px;
-      padding:8px 10px;
-      border-radius:12px;
+    .brand-logo{
+      width:38px;height:38px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.18));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      flex:0 0 auto;
     }
-    nav a:hover{
-      color:var(--text);
-      background:rgba(255,255,255,.06);
-      text-decoration:none;
-    }
+    .brand-logo img{width:24px;height:24px;display:block}
 
-    .cta{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 14px;border-radius:999px;
-      font-weight:800;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
+    .top-links{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    }
+    .top-links a{
       color:var(--text);
+      font-size:.95rem;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid transparent;
+    }
+    .top-links a:hover{
       text-decoration:none;
-      gap:8px;white-space:nowrap;cursor:pointer;
-      transition:transform .12s ease, filter .12s ease, background .12s ease;
-      user-select:none;
+      background:rgba(255,255,255,.04);
+      border-color:var(--line);
     }
-    .cta:hover{transform:translateY(-1px);text-decoration:none}
-    .cta.primary{
-      border:0;
-      background:linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
-      box-shadow:0 14px 28px rgba(105,166,255,.22);
-    }
-    .cta.primary:hover{filter:brightness(1.06)}
-    .cta.ghost:hover{background:rgba(255,255,255,.10)}
 
     .breadcrumb{
-      margin:14px 0 10px;
+      margin:18px 0 10px;
       font-size:12px;
       color:rgba(233,238,252,.72);
     }
@@ -266,8 +301,8 @@
 
     .hero{
       margin-top:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      border:1px solid var(--line);
       border-radius:var(--radius2);
       box-shadow:var(--shadow);
       padding:24px;
@@ -278,17 +313,17 @@
       content:"";
       position:absolute;inset:-2px;
       background:
-        radial-gradient(700px 280px at 20% 20%, rgba(105,166,255,.20), transparent 60%),
-        radial-gradient(520px 240px at 80% 40%, rgba(25,195,125,.14), transparent 55%);
+        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
       pointer-events:none;
     }
     .hero>*{position:relative}
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       padding:8px 12px;border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      color:var(--muted);font-size:13px;
+      background:rgba(96,165,250,.10);
+      border:1px solid rgba(96,165,250,.22);
+      color:#bfdbfe;font-size:13px;font-weight:700;
     }
     h1{
       margin:14px 0 10px;
@@ -298,7 +333,7 @@
     }
     .sub{
       margin:0;
-      color:var(--muted);
+      color:#cbd5e1;
       line-height:1.6;
       max-width:70ch;
       font-size:16px;
@@ -307,7 +342,7 @@
     .controls{
       margin-top:18px;
       display:grid;
-      grid-template-columns: minmax(240px, 1.3fr) 160px 160px auto;
+      grid-template-columns:minmax(240px,1.3fr) 160px 160px auto;
       gap:10px;
       align-items:end;
     }
@@ -316,18 +351,47 @@
       margin:0 0 6px;
       font-size:13px;
       color:var(--muted);
+      font-weight:700;
     }
     .input,.select{
       width:100%;
       padding:12px 12px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.14);
+      background:#0a1427;
       color:var(--text);
       outline:none;
       font-size:14px;
     }
+    .input:focus,.select:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 4px rgba(96,165,250,.14);
+      background:#0b172d;
+    }
     .input::placeholder{color:rgba(233,238,252,.55)}
+
+    .cta{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:10px 14px;border-radius:14px;
+      font-weight:800;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+      gap:8px;white-space:nowrap;cursor:pointer;
+      transition:transform .12s ease, filter .12s ease, background .12s ease;
+      user-select:none;
+      font:inherit;
+    }
+    .cta:hover{transform:translateY(-1px);text-decoration:none}
+    .cta.primary{
+      border:0;
+      background:linear-gradient(135deg, var(--brand), #3b82f6);
+      box-shadow:0 10px 26px rgba(59,130,246,.28);
+      color:#fff;
+    }
+    .cta.primary:hover{filter:brightness(1.06)}
+    .cta.ghost:hover{background:rgba(255,255,255,.10)}
 
     .quick{
       display:flex;gap:8px;flex-wrap:wrap;margin-top:12px
@@ -478,7 +542,7 @@
     .resolver{
       font-weight:800;
       color:var(--text);
-      min-width:140px;
+      min-width:160px;
     }
     .resolver small{
       display:block;
@@ -505,6 +569,10 @@
       background:linear-gradient(180deg, rgba(255,107,107,.14), rgba(255,107,107,.07));
       border-color:rgba(255,107,107,.30);
     }
+    .resultBox.pending{
+      background:rgba(255,255,255,.03);
+      border-color:rgba(255,255,255,.10);
+    }
     .resultTop{
       display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;
       margin-bottom:6px;
@@ -515,6 +583,7 @@
     }
     .resultStatus.ok{color:#c8ffe9}
     .resultStatus.bad{color:#ffd3d3}
+    .resultStatus.pending{color:#bfdbfe}
     .mono{
       font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
       word-break:break-word;
@@ -574,6 +643,7 @@
       cursor:pointer;
       font-weight:800;
       list-style:none;
+      color:#fff;
     }
     summary::-webkit-details-marker{display:none}
     details p{
@@ -584,18 +654,28 @@
     }
 
     .footer{
-      margin-top:22px;
-      padding:18px 0 36px;
-      border-top:1px solid rgba(255,255,255,.10);
+      padding:28px 0 42px;
       color:var(--muted);
-      font-size:13px;
     }
-    .footRow{
-      display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    .footer-box{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 0 0;
+      border-top:1px solid var(--line);
     }
+    .footer-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .footer-links a{color:var(--muted)}
+    .footer-links a:hover{color:var(--text);text-decoration:none}
 
     @media (max-width: 980px){
-      nav{display:none}
+      .top-links{display:none}
       .controls{grid-template-columns:1fr 1fr}
       .summary{grid-template-columns:1fr 1fr}
       .helpBox{grid-template-columns:1fr}
@@ -604,6 +684,8 @@
       .controls{grid-template-columns:1fr}
       .summary{grid-template-columns:1fr}
       .cta{width:100%}
+      .topbar-inner{padding:10px 14px}
+      .wrap{padding:0 16px 24px}
     }
   </style>
 </head>
@@ -612,20 +694,21 @@
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="topbar">
-    <div class="inner">
-      <a class="brandRow" href="/" aria-label="InstantQR Home">
-        <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
         <span>InstantQR</span>
       </a>
 
-      <nav aria-label="Primary">
-        <a href="/tools.html">All Tools</a>
-        <a href="/tools/dns-lookup.html">DNS Lookup</a>
-        <a href="/guides.html">Guides</a>
-        <a href="/contact.html">Contact</a>
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides/guides.html">Guides</a>
       </nav>
-
-      <a class="cta primary" href="/tools/dns-lookup.html">DNS Lookup →</a>
     </div>
   </header>
 
@@ -633,13 +716,13 @@
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <ol>
         <li><a href="/">Home</a></li>
-        <li><a href="/tools.html">Tools</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
         <li><span aria-current="page">DNS Propagation Checker</span></li>
       </ol>
     </nav>
 
     <section class="hero" aria-label="DNS Propagation Checker">
-      <div class="pill">⚡ Fast • 🌍 Multi-resolver • ✅ Standout green results</div>
+      <div class="pill">⚡ Faster results • 🌍 Weighted propagation • ✅ Broader resolver set</div>
       <h1>DNS Propagation Checker</h1>
       <p class="sub">
         Check whether your DNS changes are visible across multiple major public resolvers.
@@ -685,19 +768,19 @@
 
       <div class="summary" aria-label="Propagation summary">
         <div class="sumCard greenGlow">
-          <div class="sumLabel">Matched / Visible</div>
+          <div class="sumLabel">Weighted score</div>
           <div class="sumValue" id="matchedCount">—</div>
-          <div class="sumNote">Resolvers returning the expected or current record clearly.</div>
+          <div class="sumNote">Primary public resolvers count more than filtered variants.</div>
         </div>
         <div class="sumCard">
           <div class="sumLabel">Propagation %</div>
           <div class="sumValue" id="propPercent">—</div>
-          <div class="sumNote">Quick signal for how widely the record is visible.</div>
+          <div class="sumNote">Weighted real-world propagation signal.</div>
         </div>
         <div class="sumCard">
           <div class="sumLabel">Consensus Value</div>
           <div class="sumValue small mono" id="consensusValue">—</div>
-          <div class="sumNote">Most common answer across resolvers.</div>
+          <div class="sumNote">Most common answer from primary resolvers first.</div>
         </div>
         <div class="sumCard">
           <div class="sumLabel">Query</div>
@@ -711,7 +794,7 @@
       <div class="panelHead">
         <div>
           <div class="panelTitle">Resolver Results</div>
-          <div class="panelSub">Green results stand out when records are found and matched.</div>
+          <div class="panelSub">Rows render as each resolver finishes, so you see answers sooner.</div>
         </div>
 
         <div class="statusLine">
@@ -732,6 +815,7 @@
               <tr>
                 <th>Resolver</th>
                 <th>Result</th>
+                <th>Weight</th>
                 <th>TTL</th>
                 <th>Latency</th>
               </tr>
@@ -746,6 +830,7 @@
                 </td>
                 <td class="ttl">—</td>
                 <td class="ttl">—</td>
+                <td class="ttl">—</td>
               </tr>
             </tbody>
           </table>
@@ -753,17 +838,17 @@
 
         <div class="helpBox">
           <div class="helpCard">
-            <h3>How to read this</h3>
+            <h3>How scoring works</h3>
             <p>
-              Strong green results mean the resolver returned a record and it matches the expected value
-              or the current consensus. Mixed results usually mean propagation is still in progress.
+              Standard public resolvers are weighted highest. Security and Family resolvers still count,
+              but they count less because they may intentionally filter or alter some domains.
             </p>
           </div>
           <div class="helpCard">
-            <h3>Tip</h3>
+            <h3>Why this feels faster</h3>
             <p>
-              For planned DNS changes, lower TTL ahead of time when possible. After changes, compare A, CNAME,
-              MX, TXT, or NS records depending on what you updated.
+              The checker now updates the table immediately when each resolver returns instead of waiting for
+              every request to finish before showing results.
             </p>
           </div>
         </div>
@@ -789,35 +874,24 @@
       </details>
 
       <details>
-        <summary>How do I know if my DNS changes have propagated?</summary>
-        <p>If multiple resolvers return the same expected value and the propagation percentage is high, your DNS change is likely visible across most of the internet.</p>
+        <summary>Why are some resolvers weighted differently?</summary>
+        <p>Standard public resolvers better represent common DNS resolution paths. Security and family-safe resolvers can apply additional filtering, so they are useful secondary signals but should not dominate the score.</p>
       </details>
     </section>
 
-    <footer class="footer" aria-label="Footer">
-      <div class="footRow">
-        <div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-            <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" style="height:28px;width:auto;display:block;" />
-            <strong style="color:var(--text);font-size:16px;">InstantQR</strong>
-          </div>
-          <div class="small">Fast tools. Clean results. Privacy-first design.</div>
-          <div class="small" style="margin-top:8px;">© <span id="year"></span> InstantQR.io</div>
-        </div>
-
-        <div>
-          <div style="margin-bottom:8px;">
-            <a href="/tools.html">Tools</a> ·
-            <a href="/guides/dns-propagation-explained.html">DNS Propagation Guide</a> ·
-            <a href="/tools/dns-lookup.html">DNS Lookup</a> ·
-            <a href="/sitemap.xml">Sitemap</a>
-          </div>
-          <div>
-            <a href="/about.html">About</a> ·
-            <a href="/privacy.html">Privacy</a> ·
-            <a href="/terms.html">Terms</a> ·
-            <a href="/contact.html">Contact</a>
-          </div>
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/guides/guides.html">Guides</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
         </div>
       </div>
     </footer>
@@ -825,10 +899,46 @@
 
   <script>
     const RESOLVERS = [
-      { name: "Google DNS", provider: "dns.google", url: "https://dns.google/resolve" },
-      { name: "Cloudflare DNS", provider: "cloudflare-dns.com", url: "https://cloudflare-dns.com/dns-query" },
-      { name: "Google DNS (repeat)", provider: "dns.google", url: "https://dns.google/resolve?cd=0" },
-      { name: "Cloudflare DNS (repeat)", provider: "cloudflare-dns.com", url: "https://cloudflare-dns.com/dns-query?cd=false" }
+      {
+        id: "google",
+        name: "Google Public DNS",
+        provider: "dns.google",
+        url: "https://dns.google/resolve",
+        kind: "standard",
+        weight: 1.0
+      },
+      {
+        id: "google64",
+        name: "Google DNS64",
+        provider: "dns64.dns.google",
+        url: "https://dns64.dns.google/resolve",
+        kind: "dns64",
+        weight: 0.7
+      },
+      {
+        id: "cloudflare",
+        name: "Cloudflare 1.1.1.1",
+        provider: "cloudflare-dns.com",
+        url: "https://cloudflare-dns.com/dns-query",
+        kind: "standard",
+        weight: 1.0
+      },
+      {
+        id: "cfsecurity",
+        name: "Cloudflare Security",
+        provider: "security.cloudflare-dns.com",
+        url: "https://security.cloudflare-dns.com/dns-query",
+        kind: "security",
+        weight: 0.55
+      },
+      {
+        id: "cffamily",
+        name: "Cloudflare Family",
+        provider: "family.cloudflare-dns.com",
+        url: "https://family.cloudflare-dns.com/dns-query",
+        kind: "family",
+        weight: 0.45
+      }
     ];
 
     const domainEl = document.getElementById("domain");
@@ -848,6 +958,7 @@
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     let lastSummary = "";
+    let activeRunId = 0;
 
     function normalizeDomain(input){
       let s = (input || "").trim();
@@ -903,64 +1014,172 @@
       }
     }
 
+    function getHeadersForResolver(resolver) {
+      return { "accept":"application/dns-json" };
+    }
+
     async function queryResolver(resolver, domain, type){
       const base = resolver.url.includes("?") ? resolver.url + "&" : resolver.url + "?";
       const url = `${base}name=${encodeURIComponent(domain)}&type=${encodeURIComponent(type)}`;
       const started = performance.now();
 
-      const res = await fetch(url, {
-        headers: { "accept":"application/dns-json" }
-      });
-      const ms = Math.round(performance.now() - started);
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      const json = await res.json();
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4500);
 
-      const answers = Array.isArray(json.Answer) ? json.Answer : [];
-      const text = formatAnswer(answers);
-      const ttl = answers.length ? (answers[0].TTL ?? "—") : "—";
+      try {
+        const res = await fetch(url, {
+          headers: getHeadersForResolver(resolver),
+          cache: "no-store",
+          signal: controller.signal
+        });
+
+        const ms = Math.round(performance.now() - started);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+
+        const json = await res.json();
+        const answers = Array.isArray(json.Answer) ? json.Answer : [];
+        const text = formatAnswer(answers);
+        const ttl = answers.length ? (answers[0].TTL ?? "—") : "—";
+
+        return {
+          id: resolver.id,
+          resolver: resolver.name,
+          provider: resolver.provider,
+          kind: resolver.kind,
+          weight: resolver.weight,
+          ok: answers.length > 0,
+          answers,
+          text,
+          ttl,
+          ms,
+          raw: json
+        };
+      } finally {
+        clearTimeout(timeoutId);
+      }
+    }
+
+    function getConsensus(results){
+      const visibleRows = results.filter(r => r && r.ok && r.text);
+
+      const primaryPool = visibleRows
+        .filter(r => r.kind === "standard")
+        .map(r => r.text.trim())
+        .filter(Boolean);
+
+      const secondaryPool = visibleRows
+        .filter(r => r.kind === "dns64")
+        .map(r => r.text.trim())
+        .filter(Boolean);
+
+      const fallbackPool = visibleRows
+        .map(r => r.text.trim())
+        .filter(Boolean);
+
+      if (primaryPool.length) return mostCommon(primaryPool);
+      if (secondaryPool.length) return mostCommon(secondaryPool);
+      if (fallbackPool.length) return mostCommon(fallbackPool);
+      return "";
+    }
+
+    function isMatch(row, expected, consensus){
+      if (!row || !row.ok || !row.text) return false;
+      const value = row.text.toLowerCase();
+      if (expected) return value.includes(expected.toLowerCase());
+      if (consensus) return value === consensus.toLowerCase();
+      return false;
+    }
+
+    function computeWeightedStats(results, expected, consensus){
+      let totalWeight = 0;
+      let matchedWeight = 0;
+      let visibleWeight = 0;
+
+      results.forEach(row => {
+        if (!row) return;
+        totalWeight += row.weight;
+
+        if (row.ok && row.text) {
+          visibleWeight += row.weight;
+        }
+
+        if (isMatch(row, expected, consensus)) {
+          matchedWeight += row.weight;
+        }
+      });
+
+      const percent = totalWeight > 0
+        ? Math.round((matchedWeight / totalWeight) * 100)
+        : 0;
 
       return {
-        resolver: resolver.name,
-        provider: resolver.provider,
-        ok: answers.length > 0,
-        answers,
-        text,
-        ttl,
-        ms,
-        raw: json
+        totalWeight,
+        matchedWeight,
+        visibleWeight,
+        percent
       };
     }
 
-    function renderRows(rows, expected, consensus){
-      resultsBody.innerHTML = "";
+    function getWeightLabel(weight){
+      if (weight >= 1) return "Primary";
+      if (weight >= 0.7) return "Medium";
+      return "Secondary";
+    }
 
-      rows.forEach(row => {
-        const tr = document.createElement("tr");
+    function makePendingRow(resolver){
+      return `
+        <tr id="row-${resolver.id}">
+          <td class="resolver">
+            ${escapeHtml(resolver.name)}
+            <small>${escapeHtml(resolver.provider)}</small>
+          </td>
+          <td class="resultCell">
+            <div class="resultBox pending">
+              <div class="resultTop">
+                <div class="resultStatus pending">Checking…</div>
+                <div class="small muted">Waiting for response</div>
+              </div>
+              <div class="mono muted">Query in progress.</div>
+            </div>
+          </td>
+          <td class="ttl">${escapeHtml(getWeightLabel(resolver.weight))}</td>
+          <td class="ttl">—</td>
+          <td class="ttl">—</td>
+        </tr>
+      `;
+    }
 
-        let match = false;
-        const normalizedText = (row.text || "").toLowerCase();
-        const normalizedExpected = (expected || "").toLowerCase();
-        const normalizedConsensus = (consensus || "").toLowerCase();
+    function makeRowHtml(row, expected, consensus){
+      const match = isMatch(row, expected, consensus);
 
-        if (normalizedExpected) {
-          match = normalizedText.includes(normalizedExpected);
-        } else if (normalizedConsensus) {
-          match = normalizedText === normalizedConsensus;
-        }
+      const boxClass = row.ok
+        ? (match ? "resultBox ok" : "resultBox")
+        : "resultBox bad";
 
-        const boxClass = row.ok
-          ? (match ? "resultBox ok" : "resultBox")
-          : "resultBox bad";
+      const statusClass = row.ok
+        ? (match ? "resultStatus ok" : "resultStatus")
+        : "resultStatus bad";
 
-        const statusClass = row.ok
-          ? (match ? "resultStatus ok" : "resultStatus")
-          : "resultStatus bad";
+      let statusText = row.ok
+        ? (match ? "Visible / Match" : "Visible")
+        : "No answer";
 
-        const statusText = row.ok
-          ? (match ? "Visible / Match" : "Visible")
-          : "No answer";
+      if (row.ok && row.kind === "dns64") {
+        statusText = match ? "Visible / Match (DNS64)" : "Visible (DNS64)";
+      }
+      if (row.ok && row.kind === "security") {
+        statusText = match ? "Visible / Match (Security)" : "Visible (Security)";
+      }
+      if (row.ok && row.kind === "family") {
+        statusText = match ? "Visible / Match (Family)" : "Visible (Family)";
+      }
 
-        tr.innerHTML = `
+      const detailText = row.ok
+        ? "Record returned"
+        : (row.error ? row.error : "Nothing returned");
+
+      return `
+        <tr id="row-${row.id}">
           <td class="resolver">
             ${escapeHtml(row.resolver)}
             <small>${escapeHtml(row.provider)}</small>
@@ -969,16 +1188,70 @@
             <div class="${boxClass}">
               <div class="resultTop">
                 <div class="${statusClass}">${escapeHtml(statusText)}</div>
-                <div class="small muted">${row.ok ? "Record returned" : "Nothing returned"}</div>
+                <div class="small muted">${escapeHtml(detailText)}</div>
               </div>
               <div class="mono">${row.text ? escapeHtml(row.text) : '<span class="muted">No record found or not returned by resolver.</span>'}</div>
             </div>
           </td>
+          <td class="ttl">${escapeHtml(getWeightLabel(row.weight))}</td>
           <td class="ttl">${escapeHtml(String(row.ttl))}</td>
           <td class="ttl">${escapeHtml(String(row.ms))} ms</td>
-        `;
-        resultsBody.appendChild(tr);
+        </tr>
+      `;
+    }
+
+    function rerenderRows(results, expected, consensus){
+      RESOLVERS.forEach(resolver => {
+        const target = document.getElementById(`row-${resolver.id}`);
+        if (!target) return;
+
+        const row = results.find(r => r && r.id === resolver.id);
+        const html = row ? makeRowHtml(row, expected, consensus) : makePendingRow(resolver);
+
+        target.outerHTML = html;
       });
+    }
+
+    function initPendingTable(){
+      resultsBody.innerHTML = RESOLVERS.map(makePendingRow).join("");
+    }
+
+    function updateSummary(results, domain, type, expected){
+      const consensus = getConsensus(results);
+      const stats = computeWeightedStats(results, expected, consensus);
+
+      consensusValueEl.textContent = consensus || "No consensus";
+      matchedCountEl.textContent = `${stats.matchedWeight.toFixed(2)}/${stats.totalWeight.toFixed(2)}`;
+      propPercentEl.textContent = `${stats.percent}%`;
+      queryLabelEl.textContent = `${domain} / ${type}`;
+
+      rerenderRows(results, expected, consensus);
+
+      const completed = results.filter(Boolean).length;
+      const standardOk = results.filter(r => r && r.kind === "standard" && r.ok).length;
+
+      if (completed < RESOLVERS.length) {
+        setStatus(`Checking… ${completed}/${RESOLVERS.length}`, "");
+      } else if (stats.matchedWeight > 0) {
+        if (standardOk >= 2 && stats.percent >= 75) {
+          setStatus("Strong propagation", "ok");
+        } else {
+          setStatus("Partial propagation", "ok");
+        }
+      } else {
+        setStatus("No clear propagation yet", "bad");
+      }
+
+      lastSummary =
+`DNS Propagation Checker
+Domain: ${domain}
+Type: ${type}
+Expected: ${expected || "(none)"}
+Consensus: ${consensus || "(none)"}
+Weighted Match: ${stats.matchedWeight.toFixed(2)}/${stats.totalWeight.toFixed(2)}
+Propagation: ${stats.percent}%
+
+${results.filter(Boolean).map(r => `- ${r.resolver}: ${r.text || "No answer"} | Weight: ${r.weight} | TTL: ${r.ttl} | Latency: ${r.ms}ms`).join("\n")}`;
     }
 
     async function runCheck(){
@@ -992,6 +1265,9 @@
         return;
       }
 
+      activeRunId += 1;
+      const runId = activeRunId;
+
       queryLabelEl.textContent = `${domain} / ${type}`;
       matchedCountEl.textContent = "…";
       propPercentEl.textContent = "…";
@@ -1002,63 +1278,46 @@
       checkBtn.disabled = true;
       checkBtn.textContent = "Checking…";
 
+      const results = [];
+      initPendingTable();
+
       try{
-        const results = await Promise.all(
-          RESOLVERS.map(r =>
-            queryResolver(r, domain, type).catch(err => ({
-              resolver: r.name,
-              provider: r.provider,
+        const tasks = RESOLVERS.map(async (resolver, index) => {
+          let row;
+          try {
+            row = await queryResolver(resolver, domain, type);
+          } catch (err) {
+            row = {
+              id: resolver.id,
+              resolver: resolver.name,
+              provider: resolver.provider,
+              kind: resolver.kind,
+              weight: resolver.weight,
               ok: false,
               answers: [],
               text: "",
               ttl: "—",
               ms: "—",
-              error: String(err)
-            }))
-          )
-        );
-
-        const visibleRows = results.filter(r => r.ok && r.text);
-        const values = visibleRows.map(r => r.text.trim()).filter(Boolean);
-        const consensus = values.length ? mostCommon(values) : "";
-        consensusValueEl.textContent = consensus || "No consensus";
-
-        let matched = 0;
-        results.forEach(r => {
-          if (!r.ok || !r.text) return;
-          const val = r.text.toLowerCase();
-          if (expected) {
-            if (val.includes(expected.toLowerCase())) matched++;
-          } else if (consensus && val === consensus.toLowerCase()) {
-            matched++;
+              error: err && err.name === "AbortError" ? "Timed out" : String(err)
+            };
           }
+
+          if (runId !== activeRunId) return;
+
+          results[index] = row;
+          updateSummary(results, domain, type, expected);
         });
 
-        const total = results.length;
-        const percent = total ? Math.round((matched / total) * 100) : 0;
+        await Promise.all(tasks);
 
-        matchedCountEl.textContent = `${matched}/${total}`;
-        propPercentEl.textContent = `${percent}%`;
+        if (runId !== activeRunId) return;
 
-        renderRows(results, expected, consensus);
-
-        if (matched > 0) {
-          setStatus(percent >= 75 ? "Strong propagation" : "Partial propagation", "ok");
-        } else {
-          setStatus("No clear propagation yet", "bad");
-        }
-
-        lastSummary =
-`DNS Propagation Checker
-Domain: ${domain}
-Type: ${type}
-Expected: ${expected || "(none)"}
-Consensus: ${consensus || "(none)"}
-Matched: ${matched}/${total}
-Propagation: ${percent}%
-
-${results.map(r => `- ${r.resolver}: ${r.text || "No answer"} | TTL: ${r.ttl} | Latency: ${r.ms}ms`).join("\n")}`;
+        loader.classList.remove("show");
+        checkBtn.disabled = false;
+        checkBtn.textContent = "Check Propagation";
       } catch (err){
+        if (runId !== activeRunId) return;
+
         resultsBody.innerHTML = `
           <tr>
             <td class="resolver">Error</td>
@@ -1072,13 +1331,13 @@ ${results.map(r => `- ${r.resolver}: ${r.text || "No answer"} | TTL: ${r.ttl} | 
             </td>
             <td class="ttl">—</td>
             <td class="ttl">—</td>
+            <td class="ttl">—</td>
           </tr>
         `;
-        matchedCountEl.textContent = "0/0";
+        matchedCountEl.textContent = "0.00/0.00";
         propPercentEl.textContent = "0%";
         consensusValueEl.textContent = "—";
         setStatus("Request failed", "bad");
-      } finally {
         loader.classList.remove("show");
         checkBtn.disabled = false;
         checkBtn.textContent = "Check Propagation";
@@ -1086,11 +1345,19 @@ ${results.map(r => `- ${r.resolver}: ${r.text || "No answer"} | TTL: ${r.ttl} | 
     }
 
     checkBtn.addEventListener("click", runCheck);
+
     domainEl.addEventListener("keydown", e => {
-      if (e.key === "Enter"){ e.preventDefault(); runCheck(); }
+      if (e.key === "Enter"){
+        e.preventDefault();
+        runCheck();
+      }
     });
+
     expectedEl.addEventListener("keydown", e => {
-      if (e.key === "Enter"){ e.preventDefault(); runCheck(); }
+      if (e.key === "Enter"){
+        e.preventDefault();
+        runCheck();
+      }
     });
 
     document.querySelectorAll(".quick button").forEach(btn => {
