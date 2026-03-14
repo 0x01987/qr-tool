@@ -42,14 +42,12 @@
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="preconnect" href="https://dns.google" crossorigin>
-  <link rel="preconnect" href="https://dns64.dns.google" crossorigin>
   <link rel="preconnect" href="https://cloudflare-dns.com" crossorigin>
   <link rel="preconnect" href="https://security.cloudflare-dns.com" crossorigin>
   <link rel="preconnect" href="https://family.cloudflare-dns.com" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
   <link rel="dns-prefetch" href="//dns.google">
-  <link rel="dns-prefetch" href="//dns64.dns.google">
   <link rel="dns-prefetch" href="//cloudflare-dns.com">
   <link rel="dns-prefetch" href="//security.cloudflare-dns.com">
   <link rel="dns-prefetch" href="//family.cloudflare-dns.com">
@@ -722,7 +720,7 @@
     </nav>
 
     <section class="hero" aria-label="DNS Propagation Checker">
-      <div class="pill">⚡ Faster results • 🌍 Weighted propagation • ✅ Broader resolver set</div>
+      <div class="pill">⚡ Faster results • 🌍 Weighted propagation • ✅ Template-matched background</div>
       <h1>DNS Propagation Checker</h1>
       <p class="sub">
         Check whether your DNS changes are visible across multiple major public resolvers.
@@ -794,7 +792,7 @@
       <div class="panelHead">
         <div>
           <div class="panelTitle">Resolver Results</div>
-          <div class="panelSub">Rows render as each resolver finishes, so you see answers sooner.</div>
+          <div class="panelSub">Results appear as each resolver finishes. DNS64 was removed from live checks to avoid slow or misleading browser behavior.</div>
         </div>
 
         <div class="statusLine">
@@ -845,10 +843,10 @@
             </p>
           </div>
           <div class="helpCard">
-            <h3>Why this feels faster</h3>
+            <h3>Why DNS64 was removed</h3>
             <p>
-              The checker now updates the table immediately when each resolver returns instead of waiting for
-              every request to finish before showing results.
+              DNS64 is meant for IPv6-only and NAT64 scenarios, not as a normal public browser check path.
+              Removing it avoids pointless timeouts and makes the tool feel faster and more realistic.
             </p>
           </div>
         </div>
@@ -906,14 +904,6 @@
         url: "https://dns.google/resolve",
         kind: "standard",
         weight: 1.0
-      },
-      {
-        id: "google64",
-        name: "Google DNS64",
-        provider: "dns64.dns.google",
-        url: "https://dns64.dns.google/resolve",
-        kind: "dns64",
-        weight: 0.7
       },
       {
         id: "cloudflare",
@@ -1014,7 +1004,7 @@
       }
     }
 
-    function getHeadersForResolver(resolver) {
+    function getHeadersForResolver(){
       return { "accept":"application/dns-json" };
     }
 
@@ -1024,11 +1014,11 @@
       const started = performance.now();
 
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 4500);
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
 
       try {
         const res = await fetch(url, {
-          headers: getHeadersForResolver(resolver),
+          headers: getHeadersForResolver(),
           cache: "no-store",
           signal: controller.signal
         });
@@ -1067,17 +1057,11 @@
         .map(r => r.text.trim())
         .filter(Boolean);
 
-      const secondaryPool = visibleRows
-        .filter(r => r.kind === "dns64")
-        .map(r => r.text.trim())
-        .filter(Boolean);
-
       const fallbackPool = visibleRows
         .map(r => r.text.trim())
         .filter(Boolean);
 
       if (primaryPool.length) return mostCommon(primaryPool);
-      if (secondaryPool.length) return mostCommon(secondaryPool);
       if (fallbackPool.length) return mostCommon(fallbackPool);
       return "";
     }
@@ -1093,16 +1077,10 @@
     function computeWeightedStats(results, expected, consensus){
       let totalWeight = 0;
       let matchedWeight = 0;
-      let visibleWeight = 0;
 
       results.forEach(row => {
         if (!row) return;
         totalWeight += row.weight;
-
-        if (row.ok && row.text) {
-          visibleWeight += row.weight;
-        }
-
         if (isMatch(row, expected, consensus)) {
           matchedWeight += row.weight;
         }
@@ -1112,17 +1090,11 @@
         ? Math.round((matchedWeight / totalWeight) * 100)
         : 0;
 
-      return {
-        totalWeight,
-        matchedWeight,
-        visibleWeight,
-        percent
-      };
+      return { totalWeight, matchedWeight, percent };
     }
 
     function getWeightLabel(weight){
       if (weight >= 1) return "Primary";
-      if (weight >= 0.7) return "Medium";
       return "Secondary";
     }
 
@@ -1164,9 +1136,6 @@
         ? (match ? "Visible / Match" : "Visible")
         : "No answer";
 
-      if (row.ok && row.kind === "dns64") {
-        statusText = match ? "Visible / Match (DNS64)" : "Visible (DNS64)";
-      }
       if (row.ok && row.kind === "security") {
         statusText = match ? "Visible / Match (Security)" : "Visible (Security)";
       }
@@ -1231,7 +1200,7 @@
       const standardOk = results.filter(r => r && r.kind === "standard" && r.ok).length;
 
       if (completed < RESOLVERS.length) {
-        setStatus(`Checking… ${completed}/${RESOLVERS.length}`, "");
+        setStatus(`Checking… ${completed}/${RESOLVERS.length}`);
       } else if (stats.matchedWeight > 0) {
         if (standardOk >= 2 && stats.percent >= 75) {
           setStatus("Strong propagation", "ok");
@@ -1303,7 +1272,6 @@ ${results.filter(Boolean).map(r => `- ${r.resolver}: ${r.text || "No answer"} | 
           }
 
           if (runId !== activeRunId) return;
-
           results[index] = row;
           updateSummary(results, domain, type, expected);
         });
