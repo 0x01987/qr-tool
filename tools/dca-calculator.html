@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google Analytics -->
+  <!-- =========================
+       Analytics / Monetization
+       ========================= -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,48 +12,71 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <!-- Google AdSense -->
   <script async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
+  <!-- =========================
+       Core Meta
+       ========================= -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>DCA Calculator | Dollar Cost Averaging Crypto Calculator | InstantQR</title>
-  <meta name="description" content="Free DCA calculator for crypto investors. Calculate average cost, total invested, coin accumulation, profit/loss, ROI, break-even price, and compare DCA vs lump sum instantly." />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="description" content="Free DCA calculator for crypto investors. Calculate average cost, total invested, coin accumulation, profit or loss, ROI, break-even price, and compare DCA vs lump sum instantly." />
+  <meta name="keywords" content="dca calculator, dollar cost averaging calculator, crypto dca calculator, bitcoin dca calculator, ethereum dca calculator, crypto investment calculator, average cost calculator, lump sum vs dca" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="application-name" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
 
-  <link rel="canonical" href="https://instantqr.io/web3-tools/dca-calculator.html" />
-  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="canonical" href="https://instantqr.io/tools/dca-calculator.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
 
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+
+  <!-- =========================
+       Open Graph / Twitter
+       ========================= -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="DCA Calculator | Dollar Cost Averaging Crypto Calculator" />
-  <meta property="og:description" content="Calculate crypto DCA performance, average entry price, ROI, current value, and compare against lump sum investing." />
-  <meta property="og:url" content="https://instantqr.io/web3-tools/dca-calculator.html" />
   <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="DCA Calculator | Dollar Cost Averaging Crypto Calculator | InstantQR" />
+  <meta property="og:description" content="Calculate crypto DCA performance, average entry price, ROI, current value, and compare against lump sum investing." />
+  <meta property="og:url" content="https://instantqr.io/tools/dca-calculator.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR DCA Calculator tool preview" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="DCA Calculator | Dollar Cost Averaging Crypto Calculator" />
+  <meta name="twitter:title" content="DCA Calculator | Dollar Cost Averaging Crypto Calculator | InstantQR" />
   <meta name="twitter:description" content="Free crypto DCA calculator with average cost, ROI, current value, and lump sum comparison." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <style>
     :root{
       --bg:#081120;
-      --panel:#0f172a;
-      --panel-2:#111c34;
-      --text:#e5eefb;
-      --muted:#9fb0cc;
-      --line:rgba(255,255,255,.1);
+      --bg2:#0f172a;
+      --panel:#111c34;
+      --panel2:#16233f;
+      --text:#e5eefc;
+      --muted:#94a3b8;
+      --line:rgba(255,255,255,.08);
       --brand:#60a5fa;
-      --brand-2:#22c55e;
+      --brand2:#22c55e;
       --warn:#f59e0b;
       --danger:#ef4444;
-      --shadow:0 12px 40px rgba(0,0,0,.28);
+      --ok:#10b981;
+      --shadow:0 12px 35px rgba(0,0,0,.28);
       --radius:20px;
       --radius-sm:14px;
-      --max:1160px;
+      --max:1180px;
+      --focus:0 0 0 4px rgba(96,165,250,.16);
     }
 
     *{box-sizing:border-box}
@@ -59,468 +84,548 @@
     body{
       margin:0;
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
       background:
         radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
-        radial-gradient(circle at top right, rgba(34,197,94,.10), transparent 26%),
-        linear-gradient(180deg,#081120 0%, #0b1220 100%);
-      color:var(--text);
-      line-height:1.6;
+        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 28%),
+        linear-gradient(180deg, #07101d 0%, #0b1324 55%, #081120 100%);
+      min-height:100vh;
+      line-height:1.55;
     }
 
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
+    img{max-width:100%}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
 
-    .container{
-      width:min(var(--max), calc(100% - 32px));
-      margin:0 auto;
+    .skip{
+      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
     }
+    .skip:focus{
+      left:12px;top:12px;width:auto;height:auto;
+      padding:10px 12px;border-radius:12px;
+      background:#0b172d;color:#fff;border:1px solid var(--line);z-index:999;
+    }
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter:blur(10px);
-      background:rgba(8,17,32,.76);
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(14px);
+      background:rgba(8,17,32,.78);
       border-bottom:1px solid var(--line);
     }
-
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      min-height:68px;
+    .topbar-inner{
+      max-width:var(--max);margin:0 auto;
+      padding:12px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
     }
-
     .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      color:var(--text);
-      font-weight:800;
-      letter-spacing:.2px;
+      display:flex;align-items:center;gap:12px;
+      color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;
     }
-
-    .brand img{
-      width:36px;
-      height:36px;
-      display:block;
-    }
-
-    .navlinks{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    .navlinks a{
-      color:var(--muted);
-      font-weight:600;
-      font-size:.96rem;
-    }
-
-    .navlinks a:hover{color:var(--text);text-decoration:none}
-
-    .hero{
-      padding:28px 0 12px;
-    }
-
-    .breadcrumbs{
-      font-size:.92rem;
-      color:var(--muted);
-      margin-bottom:14px;
-    }
-
-    .breadcrumbs a{color:var(--muted)}
-    .breadcrumbs span{color:var(--text)}
-
-    .heroCard{
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:28px;
+    .brand-logo{
+      width:38px;height:38px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.18));
+      border:1px solid rgba(255,255,255,.08);
       box-shadow:var(--shadow);
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .brand-logo img{width:24px;height:24px;display:block}
+    .top-links{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    }
+    .top-links a{
+      color:var(--text);
+      font-size:.95rem;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid transparent;
+    }
+    .top-links a:hover{
+      text-decoration:none;
+      background:rgba(255,255,255,.04);
+      border-color:var(--line);
     }
 
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(96,165,250,.28);
-      background:rgba(96,165,250,.08);
-      color:#bfdbfe;
-      font-size:.9rem;
-      font-weight:700;
-      margin-bottom:14px;
-    }
-
-    h1{
-      margin:0 0 10px;
-      font-size:clamp(2rem,4vw,3.2rem);
-      line-height:1.08;
-      letter-spacing:-.03em;
-    }
-
-    .lead{
-      margin:0;
-      max-width:820px;
+    .hero{padding:34px 0 20px}
+    .breadcrumbs{
       color:var(--muted);
-      font-size:1.05rem;
+      font-size:.92rem;
+      margin-bottom:14px;
+      overflow:auto;
+      white-space:nowrap;
     }
+    .breadcrumbs a{color:var(--muted)}
+    .breadcrumbs span{margin:0 8px;color:#64748b}
 
-    .main{
+    .hero-grid{
       display:grid;
       grid-template-columns:1.1fr .9fr;
-      gap:22px;
-      padding:22px 0 26px;
+      gap:18px;
+      align-items:stretch;
     }
 
     .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
       border:1px solid var(--line);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
     }
 
-    .cardInner{padding:22px}
-
-    .card h2{
-      margin:0 0 14px;
-      font-size:1.2rem;
-      letter-spacing:-.01em;
+    .hero-main{padding:28px}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:.85rem;font-weight:700;
+      color:#bfdbfe;
+      background:rgba(96,165,250,.10);
+      border:1px solid rgba(96,165,250,.22);
+      padding:8px 12px;border-radius:999px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(2rem,4vw,3rem);
+      line-height:1.06;
+      letter-spacing:-.03em;
+    }
+    .hero p{
+      margin:0;
+      color:#cbd5e1;
+      max-width:800px;
+      font-size:1.03rem;
+    }
+    .hero-actions{
+      margin-top:18px;
+      display:flex;gap:12px;flex-wrap:wrap;
     }
 
-    .grid{
+    .btn{
+      appearance:none;border:0;cursor:pointer;
+      font:inherit;font-weight:800;
+      border-radius:14px;padding:13px 16px;
+      transition:.18s ease;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg, var(--brand), #3b82f6);
+      color:#fff;
+      box-shadow:0 10px 26px rgba(59,130,246,.28);
+    }
+    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03);text-decoration:none}
+    .btn-secondary{
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+    }
+    .btn-secondary:hover{background:rgba(255,255,255,.06);text-decoration:none}
+
+    .hero-side{
+      padding:22px;
+      display:grid;
+      gap:12px;
+      align-content:start;
+    }
+    .mini-stat{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    .mini-stat .label{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-bottom:4px;
+    }
+    .mini-stat .value{
+      font-weight:800;
+      font-size:1.1rem;
+      color:#fff;
+    }
+
+    .section{padding:14px 0 10px}
+
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1.06fr .94fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .tool-panel,.info-panel,.content-card{padding:22px}
+
+    .tool-panel h2,.info-panel h2,.content h2,.content h3{
+      margin:0 0 10px;
+      letter-spacing:-.02em;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:.96rem;
+      margin-bottom:18px;
+      line-height:1.55;
+    }
+
+    .form-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:14px;
     }
-
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-
-    .field.full{grid-column:1 / -1}
+    .full{grid-column:1/-1}
 
     label{
-      font-size:.95rem;
+      display:block;
+      font-size:.94rem;
       font-weight:700;
-      color:#d8e4fb;
+      margin-bottom:8px;
+      color:#dbeafe;
     }
 
-    .hint{
-      color:var(--muted);
-      font-size:.86rem;
-      margin-top:-3px;
-    }
-
-    input, select{
+    input[type="text"], input[type="number"], select, textarea{
       width:100%;
-      border:1px solid rgba(255,255,255,.12);
-      background:#0a1428;
-      color:var(--text);
       border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0a1427;
+      color:#fff;
       padding:14px 14px;
       font:inherit;
       outline:none;
-      transition:border-color .18s ease, transform .18s ease;
+      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    textarea{
+      min-height:140px;
+      resize:vertical;
+      line-height:1.55;
+    }
+    input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 4px rgba(96,165,250,.14);
+      background:#0b172d;
     }
 
-    input:focus, select:focus{
-      border-color:rgba(96,165,250,.7);
-      transform:translateY(-1px);
+    .helper{
+      color:var(--muted);
+      font-size:.85rem;
+      margin-top:6px;
+      line-height:1.45;
     }
 
-    .actions{
+    .actions,.tiny-actions{
       display:flex;
       gap:12px;
       flex-wrap:wrap;
-      margin-top:18px;
     }
+    .actions{margin-top:18px}
+    .tiny-actions{margin-top:10px}
 
-    button{
+    .tiny-btn{
       appearance:none;
-      border:none;
-      border-radius:14px;
-      padding:14px 18px;
-      font:inherit;
-      font-weight:800;
-      cursor:pointer;
-      transition:transform .18s ease, opacity .18s ease, box-shadow .18s ease;
-    }
-
-    button:hover{transform:translateY(-1px)}
-    .btnPrimary{
-      background:linear-gradient(135deg, var(--brand), #2563eb);
-      color:white;
-      box-shadow:0 10px 28px rgba(37,99,235,.26);
-    }
-    .btnGhost{
-      background:#0a1428;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
       color:var(--text);
-      border:1px solid var(--line);
+      border-radius:12px;
+      padding:9px 12px;
+      font:inherit;
+      font-size:.9rem;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .tiny-btn:hover{
+      background:rgba(255,255,255,.06);
+      border-color:rgba(96,165,250,.35);
     }
 
-    .resultsWrap{
+    .inline-stats{
+      margin-top:12px;
       display:grid;
-      gap:14px;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
     }
-
-    .resultHero{
-      border-radius:18px;
-      padding:18px;
+    .inline-stat{
       border:1px solid var(--line);
-      background:
-        radial-gradient(circle at top left, rgba(34,197,94,.12), transparent 38%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:12px;
     }
-
-    .resultHero h3{
-      margin:0 0 8px;
-      font-size:1rem;
-      color:#d7f8e1;
-    }
-
-    .bigValue{
-      font-size:clamp(1.8rem, 4vw, 2.6rem);
-      font-weight:900;
-      letter-spacing:-.03em;
-      line-height:1.05;
-      margin:0;
-    }
-
-    .subline{
-      margin-top:8px;
+    .inline-stat .k{
       color:var(--muted);
-      font-size:.94rem;
+      font-size:.82rem;
+      margin-bottom:4px;
     }
-
-    .stats{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
-
-    .stat{
-      background:#0a1428;
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px;
-    }
-
-    .stat .k{
-      color:var(--muted);
-      font-size:.88rem;
-      margin-bottom:6px;
-    }
-
-    .stat .v{
-      font-size:1.18rem;
+    .inline-stat .v{
+      color:#fff;
       font-weight:800;
-      letter-spacing:-.02em;
+      font-size:1rem;
       word-break:break-word;
     }
 
-    .positive{color:#4ade80}
-    .negative{color:#f87171}
-    .neutral{color:#f8fafc}
-
-    .compareBox{
-      background:#0a1428;
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px;
+    .info-panel{
+      position:sticky;
+      top:76px;
     }
 
-    .compareTitle{
-      margin:0 0 10px;
-      font-size:1rem;
-      font-weight:800;
+    .result-hero{
+      padding:18px;
+      border-radius:18px;
+      background:rgba(16,185,129,.08);
+      border:1px solid rgba(16,185,129,.24);
+      margin-bottom:14px;
+    }
+    .result-hero .label{
+      color:#bdebd8;
+      font-size:.92rem;
+      margin-bottom:6px;
+      font-weight:700;
+    }
+    .result-hero .value{
+      font-size:clamp(1.5rem,4vw,2.6rem);
+      font-weight:900;
+      letter-spacing:-.03em;
+      color:#d1fae5;
+      line-height:1.08;
+      word-break:break-word;
+    }
+    .result-hero .summary{
+      margin-top:8px;
+      color:#cfe8da;
+      font-size:.94rem;
+      line-height:1.55;
     }
 
-    .compareGrid{
+    .stats-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:12px;
+      gap:10px;
     }
-
-    .mini{
+    .stat-item{
       border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
       border-radius:14px;
-      padding:14px;
-      background:rgba(255,255,255,.02);
+      padding:12px 13px;
     }
-
-    .mini .t{
-      color:var(--muted);
-      font-size:.88rem;
-      margin-bottom:6px;
+    .stat-item strong{
+      display:block;
+      margin-bottom:5px;
+      color:#fff;
+      font-size:.92rem;
     }
-
-    .mini .n{
-      font-size:1.08rem;
+    .stat-item span{
+      color:#cbd5e1;
+      font-size:1.05rem;
       font-weight:800;
+      line-height:1.3;
+      word-break:break-word;
     }
+
+    .compare-box{
+      margin-top:14px;
+      padding:16px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .compare-box h3{
+      margin:0 0 10px;
+      font-size:1rem;
+    }
+    .compare-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    .compare-card{
+      border:1px solid var(--line);
+      background:#0a1427;
+      border-radius:14px;
+      padding:12px;
+    }
+    .compare-card .k{
+      color:var(--muted);
+      font-size:.85rem;
+      margin-bottom:5px;
+    }
+    .compare-card .v{
+      font-weight:800;
+      font-size:1.02rem;
+      color:#fff;
+      word-break:break-word;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:.82rem;
+      font-weight:700;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:#dbeafe;
+    }
+    .pill.ok{background:rgba(16,185,129,.10);border-color:rgba(16,185,129,.25);color:#c8f4df}
+    .pill.warn{background:rgba(245,158,11,.10);border-color:rgba(245,158,11,.22);color:#fde7bf}
+    .pill.bad{background:rgba(239,68,68,.10);border-color:rgba(239,68,68,.22);color:#ffd1d1}
+
+    .positive{color:#4ade80 !important}
+    .negative{color:#f87171 !important}
+    .neutral{color:#fff !important}
 
     .note{
-      margin-top:10px;
-      color:var(--muted);
-      font-size:.9rem;
+      border-left:4px solid var(--brand);
+      padding:12px 14px;
+      background:rgba(96,165,250,.08);
+      border-radius:0 14px 14px 0;
+      color:#dbeafe;
+      margin-top:12px;
+      line-height:1.55;
     }
 
-    .section{
-      padding:8px 0 6px;
+    .content{
+      margin-top:20px;
+      display:grid;
+      gap:18px;
     }
-
-    .contentCard{
-      padding:22px;
+    .content p{
+      color:#cbd5e1;
+      margin:0 0 12px;
+      line-height:1.65;
     }
-
-    .contentCard p,
-    .contentCard li{
-      color:var(--muted);
+    .content ul{
+      margin:10px 0 0 18px;
+      color:#cbd5e1;
     }
-
-    .contentCard h2,
-    .contentCard h3{
-      margin-top:0;
-      letter-spacing:-.01em;
-    }
+    .content li{margin:8px 0}
 
     .faq{
       display:grid;
       gap:12px;
+      margin-top:12px;
     }
-
     details{
       border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
       border-radius:16px;
       padding:14px 16px;
-      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.012));
     }
-
     summary{
       cursor:pointer;
       font-weight:800;
-      color:var(--text);
+      color:#fff;
       list-style:none;
     }
-
     summary::-webkit-details-marker{display:none}
-    details p{margin:10px 0 0}
-
-    .toolLinks{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:10px;
+    details p{
+      margin:10px 0 0;
+      color:#cbd5e1;
+      line-height:1.6;
     }
 
-    .toolLinks a{
-      display:block;
-      padding:12px 14px;
-      background:#0a1428;
-      border:1px solid var(--line);
-      border-radius:14px;
-      color:var(--text);
-      font-weight:700;
-    }
-
-    footer{
-      padding:28px 0 46px;
-      color:var(--muted);
-    }
-
-    .footerCard{
-      border-top:1px solid var(--line);
-      padding-top:18px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-
-    .footerLinks{
+    .related-links{
       display:flex;
       flex-wrap:wrap;
-      gap:10px 14px;
+      gap:10px;
+      margin-top:10px;
+    }
+    .related-links a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+    .related-links a:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
     }
 
-    .footerLinks a{color:var(--muted)}
+    .footer{
+      padding:28px 0 42px;
+      color:var(--muted);
+    }
+    .footer-box{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 0 0;
+      border-top:1px solid var(--line);
+    }
+    .footer-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .footer-links a{color:var(--muted)}
+    .footer-links a:hover{color:var(--text);text-decoration:none}
 
     @media (max-width: 980px){
-      .main{
-        grid-template-columns:1fr;
-      }
+      .hero-grid,.tool-grid{grid-template-columns:1fr}
+      .info-panel{position:relative;top:auto}
     }
 
-    @media (max-width: 720px){
-      .container{
-        width:min(var(--max), calc(100% - 20px));
-      }
-
-      .heroCard,
-      .cardInner,
-      .contentCard{
-        padding:18px;
-      }
-
-      .grid,
-      .stats,
-      .compareGrid,
-      .toolLinks{
-        grid-template-columns:1fr;
-      }
-
-      .nav{
-        padding:8px 0;
-        align-items:flex-start;
-        flex-direction:column;
-      }
-
-      .navlinks{
-        justify-content:flex-start;
-      }
+    @media (max-width: 700px){
+      .form-grid,.stats-grid,.compare-grid,.inline-stats{grid-template-columns:1fr}
+      .hero-main,.hero-side,.tool-panel,.info-panel,.content-card{padding:18px}
+      .topbar-inner{padding:10px 14px}
+      .top-links{display:none}
+      h1{font-size:2rem}
+      .btn{width:100%}
+      .actions .btn{width:auto;flex:1 1 180px}
+      .tiny-actions .tiny-btn{flex:1 1 180px}
     }
   </style>
+
+  <!-- =========================
+       Structured Data
+       ========================= -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"DCA Calculator",
+        "item":"https://instantqr.io/tools/dca-calculator.html"
+      }
+    ]
+  }
+  </script>
 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"WebPage",
+    "@type":"SoftwareApplication",
     "name":"DCA Calculator",
-    "url":"https://instantqr.io/web3-tools/dca-calculator.html",
-    "description":"Free crypto dollar cost averaging calculator to estimate average buy price, ROI, profit or loss, break-even price, and compare DCA against lump sum investing.",
-    "isPartOf":{
-      "@type":"WebSite",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/dca-calculator.html",
+    "description":"Free crypto dollar-cost averaging calculator to estimate average buy price, ROI, profit or loss, break-even price, and compare DCA against lump sum investing.",
+    "publisher":{
+      "@type":"Organization",
       "name":"InstantQR",
       "url":"https://instantqr.io/"
-    },
-    "breadcrumb":{
-      "@type":"BreadcrumbList",
-      "itemListElement":[
-        {
-          "@type":"ListItem",
-          "position":1,
-          "name":"Home",
-          "item":"https://instantqr.io/"
-        },
-        {
-          "@type":"ListItem",
-          "position":2,
-          "name":"Web3 Tools",
-          "item":"https://instantqr.io/web3-tools/web3-tools.html"
-        },
-        {
-          "@type":"ListItem",
-          "position":3,
-          "name":"DCA Calculator",
-          "item":"https://instantqr.io/web3-tools/dca-calculator.html"
-        }
-      ]
     }
   }
   </script>
@@ -567,253 +672,295 @@
   </script>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
+
   <header class="topbar">
-    <div class="container nav">
+    <div class="topbar-inner">
       <a class="brand" href="/" aria-label="InstantQR home">
-        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
         <span>InstantQR</span>
       </a>
-      <nav class="navlinks" aria-label="Primary navigation">
+
+      <nav class="top-links" aria-label="Primary">
         <a href="/">Home</a>
         <a href="/tools.html">Tools</a>
-        <a href="/web3-tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides.html">Guides</a>
         <a href="/about.html">About</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a> / <a href="/web3-tools/web3-tools.html">Web3 Tools</a> / <span>DCA Calculator</span>
-      </nav>
-
-      <div class="heroCard">
-        <div class="eyebrow">Crypto Investing Tool</div>
-        <h1>DCA Calculator</h1>
-        <p class="lead">
-          Calculate your crypto dollar-cost averaging strategy instantly. Estimate average buy price, total coins accumulated,
-          current portfolio value, break-even level, ROI, and compare DCA against a lump sum entry.
-        </p>
+  <main id="main" class="wrap">
+    <section class="hero">
+      <div class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="/tools.html">Tools</a><span>›</span>
+        <span>DCA Calculator</span>
       </div>
-    </div>
-  </section>
 
-  <main class="container main">
-    <section class="card" aria-labelledby="calculator-title">
-      <div class="cardInner">
-        <h2 id="calculator-title">Calculator Inputs</h2>
+      <div class="hero-grid">
+        <div class="card hero-main">
+          <div class="eyebrow">Crypto Investing • DCA Strategy • Browser-Based</div>
+          <h1>DCA Calculator</h1>
+          <p>Calculate your crypto dollar-cost averaging strategy instantly. Estimate average buy price, total coins accumulated, current portfolio value, break-even level, ROI, and compare DCA against a lump sum entry.</p>
 
-        <div class="grid">
-          <div class="field">
-            <label for="currency">Currency</label>
-            <select id="currency">
-              <option value="$">USD ($)</option>
-              <option value="€">EUR (€)</option>
-              <option value="£">GBP (£)</option>
-              <option value="¥">JPY (¥)</option>
-              <option value="₹">INR (₹)</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="asset">Asset Name / Symbol</label>
-            <input id="asset" type="text" placeholder="Example: BTC" />
-          </div>
-
-          <div class="field">
-            <label for="investment">Recurring Investment Amount</label>
-            <input id="investment" type="number" min="0" step="0.01" placeholder="100" value="100" />
-            <div class="hint">Amount invested each interval.</div>
-          </div>
-
-          <div class="field">
-            <label for="periods">Number of Purchases</label>
-            <input id="periods" type="number" min="1" step="1" placeholder="12" value="12" />
-            <div class="hint">Example: 12 weekly or monthly buys.</div>
-          </div>
-
-          <div class="field">
-            <label for="freq">Purchase Frequency</label>
-            <select id="freq">
-              <option value="daily">Daily</option>
-              <option value="weekly" selected>Weekly</option>
-              <option value="biweekly">Biweekly</option>
-              <option value="monthly">Monthly</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="currentPrice">Current Asset Price</label>
-            <input id="currentPrice" type="number" min="0" step="0.00000001" placeholder="65000" value="65000" />
-          </div>
-
-          <div class="field full">
-            <label for="prices">Purchase Prices</label>
-            <input id="prices" type="text" placeholder="Enter prices separated by commas: 70000,68000,64000,61000..." value="70000,68000,64000,61000,59000,62000,60000,63000,65000,66000,64000,62000" />
-            <div class="hint">Enter one price for each purchase. If fewer prices are entered than the number of purchases, the tool will use the last entered price for the remaining buys.</div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#calculator">Use DCA Calculator</a>
+            <a class="btn btn-secondary" href="/tools.html">Browse Tools</a>
           </div>
         </div>
 
-        <div class="actions">
-          <button class="btnPrimary" id="calcBtn" type="button">Calculate DCA</button>
-          <button class="btnGhost" id="resetBtn" type="button">Reset</button>
-        </div>
+        <aside class="card hero-side" aria-label="Tool highlights">
+          <div class="mini-stat">
+            <div class="label">Easy input</div>
+            <div class="value">Comma, space, or line-by-line prices</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Live updates</div>
+            <div class="value">Auto-calculates as you type</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Built for speed</div>
+            <div class="value">Fast, responsive, browser-only</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Compares</div>
+            <div class="value">DCA vs lump sum instantly</div>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <aside class="resultsWrap">
-      <section class="card">
-        <div class="cardInner">
-          <div class="resultHero">
-            <h3>Current Portfolio Value</h3>
-            <p class="bigValue" id="portfolioValue">$0.00</p>
-            <div class="subline" id="summaryLine">Enter your numbers to calculate DCA performance.</div>
+    <section class="section" id="calculator">
+      <div class="tool-grid">
+        <section class="card tool-panel" aria-labelledby="calculator-title">
+          <h2 id="calculator-title">Calculator inputs</h2>
+          <div class="sub">Enter your recurring investment, number of buys, current asset price, and historical purchase prices. The tool automatically cleans your price list and reuses the last price if you enter fewer prices than periods.</div>
+
+          <div class="form-grid">
+            <div>
+              <label for="currency">Currency</label>
+              <select id="currency">
+                <option value="$">USD ($)</option>
+                <option value="€">EUR (€)</option>
+                <option value="£">GBP (£)</option>
+                <option value="¥">JPY (¥)</option>
+                <option value="₹">INR (₹)</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="asset">Asset name / symbol</label>
+              <input id="asset" type="text" placeholder="Example: BTC" />
+            </div>
+
+            <div>
+              <label for="investment">Recurring investment amount</label>
+              <input id="investment" type="number" min="0" step="0.01" placeholder="100" value="100" />
+              <div class="helper">Amount invested on each buy.</div>
+            </div>
+
+            <div>
+              <label for="periods">Number of purchases</label>
+              <input id="periods" type="number" min="1" step="1" placeholder="12" value="12" />
+              <div class="helper">How many total DCA buys you made or plan to make.</div>
+            </div>
+
+            <div>
+              <label for="freq">Purchase frequency</label>
+              <select id="freq">
+                <option value="daily">Daily</option>
+                <option value="weekly" selected>Weekly</option>
+                <option value="biweekly">Biweekly</option>
+                <option value="monthly">Monthly</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="currentPrice">Current asset price</label>
+              <input id="currentPrice" type="number" min="0" step="0.00000001" placeholder="65000" value="65000" />
+              <div class="helper">Used to calculate current value, profit/loss, and ROI.</div>
+            </div>
+
+            <div class="full">
+              <label for="prices">Purchase prices</label>
+              <textarea id="prices" placeholder="Paste prices separated by commas, spaces, or new lines">70000,68000,64000,61000,59000,62000,60000,63000,65000,66000,64000,62000</textarea>
+              <div class="helper">Examples: <code>70000, 68000, 64000</code> or one price per line.</div>
+
+              <div class="tiny-actions">
+                <button class="tiny-btn" id="normalizeBtn" type="button">Normalize List</button>
+                <button class="tiny-btn" id="fillCurrentBtn" type="button">Use Current Price for All</button>
+                <button class="tiny-btn" id="sampleBtn" type="button">Load Sample</button>
+                <button class="tiny-btn" id="copyLinkBtn" type="button">Copy Share Link</button>
+              </div>
+
+              <div class="inline-stats" aria-label="Input summary">
+                <div class="inline-stat">
+                  <div class="k">Prices detected</div>
+                  <div class="v" id="pricesDetected">0</div>
+                </div>
+                <div class="inline-stat">
+                  <div class="k">Prices used</div>
+                  <div class="v" id="pricesUsed">0</div>
+                </div>
+                <div class="inline-stat">
+                  <div class="k">Input status</div>
+                  <div class="v" id="inputStatus">Waiting</div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="stats" style="margin-top:14px">
-            <div class="stat">
-              <div class="k">Total Invested</div>
-              <div class="v" id="totalInvested">$0.00</div>
+          <div class="actions">
+            <button class="btn btn-primary" id="calcBtn" type="button">Calculate DCA</button>
+            <button class="btn btn-secondary" id="copySummaryBtn" type="button">Copy Results</button>
+            <button class="btn btn-secondary" id="resetBtn" type="button">Reset</button>
+          </div>
+
+          <div class="note" id="statusBox">
+            Enter your recurring investment, current price, and at least one purchase price to see live DCA results.
+          </div>
+        </section>
+
+        <aside class="card info-panel" aria-labelledby="results-title">
+          <h2 id="results-title">Results</h2>
+
+          <div class="result-hero">
+            <div class="label">Current portfolio value</div>
+            <div class="value" id="portfolioValue">$0.00</div>
+            <div class="summary" id="summaryLine">Enter your numbers to calculate DCA performance.</div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-item">
+              <strong>Total invested</strong>
+              <span id="totalInvested">$0.00</span>
             </div>
-            <div class="stat">
-              <div class="k">Total Coins Accumulated</div>
-              <div class="v" id="totalCoins">0</div>
+            <div class="stat-item">
+              <strong>Total coins accumulated</strong>
+              <span id="totalCoins">0</span>
             </div>
-            <div class="stat">
-              <div class="k">Average Cost Basis</div>
-              <div class="v" id="avgCost">$0.00</div>
+            <div class="stat-item">
+              <strong>Average cost basis</strong>
+              <span id="avgCost">$0.00</span>
             </div>
-            <div class="stat">
-              <div class="k">Break-Even Price</div>
-              <div class="v" id="breakEven">$0.00</div>
+            <div class="stat-item">
+              <strong>Break-even price</strong>
+              <span id="breakEven">$0.00</span>
             </div>
-            <div class="stat">
-              <div class="k">Profit / Loss</div>
-              <div class="v neutral" id="profitLoss">$0.00</div>
+            <div class="stat-item">
+              <strong>Profit / loss</strong>
+              <span class="neutral" id="profitLoss">$0.00</span>
             </div>
-            <div class="stat">
-              <div class="k">ROI</div>
-              <div class="v neutral" id="roi">0.00%</div>
+            <div class="stat-item">
+              <strong>ROI</strong>
+              <span class="neutral" id="roi">0.00%</span>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section class="card">
-        <div class="cardInner">
-          <div class="compareBox">
-            <p class="compareTitle">DCA vs Lump Sum Comparison</p>
-            <div class="compareGrid">
-              <div class="mini">
-                <div class="t">DCA Current Value</div>
-                <div class="n" id="dcaValueCompare">$0.00</div>
+          <div class="compare-box">
+            <h3>DCA vs lump sum comparison</h3>
+            <div class="compare-grid">
+              <div class="compare-card">
+                <div class="k">DCA current value</div>
+                <div class="v" id="dcaValueCompare">$0.00</div>
               </div>
-              <div class="mini">
-                <div class="t">Lump Sum Current Value</div>
-                <div class="n" id="lumpValue">$0.00</div>
+              <div class="compare-card">
+                <div class="k">Lump sum current value</div>
+                <div class="v" id="lumpValue">$0.00</div>
               </div>
-              <div class="mini">
-                <div class="t">DCA Coins</div>
-                <div class="n" id="dcaCoinsCompare">0</div>
+              <div class="compare-card">
+                <div class="k">DCA coins</div>
+                <div class="v" id="dcaCoinsCompare">0</div>
               </div>
-              <div class="mini">
-                <div class="t">Lump Sum Coins</div>
-                <div class="n" id="lumpCoins">0</div>
+              <div class="compare-card">
+                <div class="k">Lump sum coins</div>
+                <div class="v" id="lumpCoins">0</div>
               </div>
             </div>
-            <div class="note" id="compareNote">
+            <div class="helper" id="compareNote" style="margin-top:10px;">
               Comparison assumes the entire total invested amount was bought at the first entered purchase price.
             </div>
           </div>
-        </div>
-      </section>
-    </aside>
-  </main>
 
-  <section class="section">
-    <div class="container">
-      <div class="card contentCard">
+          <div class="tiny-actions" style="margin-top:14px;">
+            <span class="pill ok" id="liveState">Live calculation enabled</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content">
+      <article class="card content-card">
         <h2>How this DCA calculator works</h2>
-        <p>
-          Dollar-cost averaging is a strategy where you invest a fixed amount at regular intervals instead of deploying all capital at once.
-          This calculator helps estimate how much of an asset you would accumulate across multiple buy points and what that position would be worth today.
-        </p>
-        <p>
-          It is especially useful for crypto investors comparing recurring buys against a lump sum approach. Since prices move constantly,
-          DCA can smooth your average entry over time and reduce the impact of buying at a single peak.
-        </p>
-      </div>
-    </div>
-  </section>
+        <p>Dollar-cost averaging is a strategy where you invest a fixed amount at regular intervals instead of putting all of your capital in at once. This calculator estimates how much of an asset you would accumulate across multiple buy points and what that position would be worth at today’s price.</p>
+        <p>It is especially useful for crypto investors comparing recurring buys against a lump sum approach. Since prices move constantly, DCA can smooth your average entry over time and reduce the impact of buying at a single peak.</p>
+      </article>
 
-  <section class="section">
-    <div class="container">
-      <div class="card contentCard">
-        <h2>Frequently Asked Questions</h2>
+      <article class="card content-card">
+        <h2>What the results mean</h2>
+        <ul>
+          <li><strong>Total invested:</strong> The sum of all recurring purchases.</li>
+          <li><strong>Total coins accumulated:</strong> The total amount of crypto bought across all periods.</li>
+          <li><strong>Average cost basis:</strong> Your blended entry price across all purchases.</li>
+          <li><strong>Break-even price:</strong> The price where your position would roughly be flat.</li>
+          <li><strong>ROI:</strong> Your current profit or loss relative to total invested capital.</li>
+        </ul>
+      </article>
+
+      <article class="card content-card">
+        <h2>Related tools</h2>
+        <div class="related-links">
+          <a href="/tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+          <a href="/tools/web3-gas-fee-estimator.html">Web3 Gas Fee Estimator</a>
+          <a href="/tools/token-contract-analyzer.html">Token Contract Analyzer</a>
+          <a href="/tools/wallet-approval-checker.html">Wallet Approval Checker</a>
+        </div>
+      </article>
+
+      <article class="card content-card">
+        <h2>Frequently asked questions</h2>
         <div class="faq">
-          <details>
-            <summary>What is dollar-cost averaging in crypto?</summary>
-            <p>
-              Dollar-cost averaging means investing a fixed amount of money into a cryptocurrency on a recurring schedule such as weekly or monthly,
-              regardless of the current market price.
-            </p>
+          <details open>
+            <summary>What is a DCA calculator?</summary>
+            <p>A DCA calculator estimates the outcome of investing a fixed amount at different price levels over time. It helps you understand total invested amount, accumulated coins, average cost basis, and current profit or loss.</p>
           </details>
 
           <details>
-            <summary>How is the average buy price calculated?</summary>
-            <p>
-              Your average buy price is your total invested amount divided by the total amount of coins accumulated across all purchases.
-            </p>
+            <summary>How is average cost calculated?</summary>
+            <p>Average cost is calculated by dividing total dollars invested by total coins accumulated. This gives your blended entry price across all purchases.</p>
           </details>
 
           <details>
-            <summary>Why compare DCA to lump sum?</summary>
-            <p>
-              The comparison helps you see whether spreading purchases over time would have outperformed or underperformed putting the same total
-              amount in all at once at the first buy price.
-            </p>
+            <summary>What is the difference between DCA and lump sum investing?</summary>
+            <p>DCA spreads purchases across multiple price points, while lump sum invests the entire amount at one price. DCA can reduce timing risk, while lump sum may outperform if the asset rises immediately.</p>
           </details>
 
           <details>
-            <summary>Does this calculator save my investment data?</summary>
-            <p>
-              No. This calculator runs entirely in your browser and does not require an account.
-            </p>
+            <summary>Does this crypto DCA calculator store my data?</summary>
+            <p>No. This tool runs locally in your browser and does not require signup or store your inputs.</p>
           </details>
         </div>
-      </div>
-    </div>
-  </section>
+      </article>
+    </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="card contentCard">
-        <h2>More Web3 tools</h2>
-        <div class="toolLinks">
-          <a href="/web3-tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
-          <a href="/web3-tools/web3-gas-fee-estimator.html">Web3 Gas Fee Estimator</a>
-          <a href="/web3-tools/token-contract-analyzer.html">Token Contract Analyzer</a>
-          <a href="/web3-tools/wallet-approval-checker.html">Wallet Approval Checker</a>
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools.html">Tools</a>
+          <a href="/guides.html">Guides</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container footerCard">
-      <div>Free, fast, and privacy-friendly tools by InstantQR.</div>
-      <div class="footerLinks">
-        <a href="/">Home</a>
-        <a href="/tools.html">Tools</a>
-        <a href="/web3-tools/web3-tools.html">Web3 Tools</a>
-        <a href="/about.html">About</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </main>
 
   <script>
     (function () {
@@ -827,6 +974,17 @@
         prices: document.getElementById('prices'),
         calcBtn: document.getElementById('calcBtn'),
         resetBtn: document.getElementById('resetBtn'),
+        normalizeBtn: document.getElementById('normalizeBtn'),
+        fillCurrentBtn: document.getElementById('fillCurrentBtn'),
+        sampleBtn: document.getElementById('sampleBtn'),
+        copyLinkBtn: document.getElementById('copyLinkBtn'),
+        copySummaryBtn: document.getElementById('copySummaryBtn'),
+        pricesDetected: document.getElementById('pricesDetected'),
+        pricesUsed: document.getElementById('pricesUsed'),
+        inputStatus: document.getElementById('inputStatus'),
+        statusBox: document.getElementById('statusBox'),
+        liveState: document.getElementById('liveState'),
+        year: document.getElementById('year'),
 
         portfolioValue: document.getElementById('portfolioValue'),
         summaryLine: document.getElementById('summaryLine'),
@@ -850,11 +1008,15 @@
 
       function parsePrices(str) {
         return (str || '')
-          .split(',')
+          .split(/[\s,]+/)
           .map(s => s.trim())
           .filter(Boolean)
           .map(s => parseFloat(s))
           .filter(n => Number.isFinite(n) && n > 0);
+      }
+
+      function normalizePriceString(str) {
+        return parsePrices(str).join(', ');
       }
 
       function formatMoney(value, symbol) {
@@ -888,6 +1050,26 @@
         else node.classList.add('neutral');
       }
 
+      function setInputSummary(detected, used, ok) {
+        els.pricesDetected.textContent = String(detected);
+        els.pricesUsed.textContent = String(used);
+        els.inputStatus.textContent = ok ? 'Ready' : 'Need inputs';
+      }
+
+      function updateUrl(asset, symbol, recurringInvestment, periods, currentPrice, prices) {
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.set('asset', asset || 'BTC');
+          url.searchParams.set('currency', symbol);
+          url.searchParams.set('investment', recurringInvestment);
+          url.searchParams.set('periods', periods);
+          url.searchParams.set('freq', els.freq.value);
+          url.searchParams.set('currentPrice', currentPrice);
+          url.searchParams.set('prices', prices.join(','));
+          history.replaceState(null, '', url.toString());
+        } catch (e) {}
+      }
+
       function calculate() {
         const symbol = els.currency.value || '$';
         const asset = (els.asset.value || 'asset').trim();
@@ -895,9 +1077,12 @@
         const periods = Math.max(1, Math.floor(safeNum(els.periods.value)));
         const currentPrice = safeNum(els.currentPrice.value);
         let prices = parsePrices(els.prices.value);
+        const detectedCount = prices.length;
 
         if (!recurringInvestment || !currentPrice || prices.length === 0) {
+          setInputSummary(detectedCount, 0, false);
           els.summaryLine.textContent = 'Please enter a recurring investment, current price, and at least one purchase price.';
+          els.statusBox.textContent = 'Please enter a recurring investment, current price, and at least one valid purchase price.';
           return;
         }
 
@@ -950,7 +1135,7 @@
         } else if (diff < 0) {
           compareText = `Your DCA strategy is underperforming lump sum by ${formatMoney(Math.abs(diff), symbol)} based on the entered prices.`;
         } else {
-          compareText = `Your DCA and lump sum results are currently the same based on the entered prices.`;
+          compareText = 'Your DCA and lump sum results are currently the same based on the entered prices.';
         }
 
         els.compareNote.textContent = compareText + ` Assumption: ${periods} ${freqLabel} purchases at ${formatMoney(recurringInvestment, symbol)} each.`;
@@ -959,17 +1144,17 @@
         els.summaryLine.textContent =
           `After ${periods} purchases, your ${asset} DCA position is at a ${direction} with an average cost of ${formatMoney(avgCost, symbol)}.`;
 
-        try {
-          const url = new URL(window.location.href);
-          url.searchParams.set('asset', asset || 'BTC');
-          url.searchParams.set('currency', symbol);
-          url.searchParams.set('investment', recurringInvestment);
-          url.searchParams.set('periods', periods);
-          url.searchParams.set('freq', els.freq.value);
-          url.searchParams.set('currentPrice', currentPrice);
-          url.searchParams.set('prices', prices.join(','));
-          history.replaceState(null, '', url.toString());
-        } catch (e) {}
+        setInputSummary(detectedCount, prices.length, true);
+
+        if (detectedCount < periods) {
+          els.statusBox.textContent = `Detected ${detectedCount} price${detectedCount === 1 ? '' : 's'}. The calculator reused the last entered price to reach ${periods} total purchases.`;
+        } else if (detectedCount > periods) {
+          els.statusBox.textContent = `Detected ${detectedCount} prices. Only the first ${periods} were used because your purchase count is set to ${periods}.`;
+        } else {
+          els.statusBox.textContent = `Using ${periods} purchase prices with ${formatMoney(recurringInvestment, symbol)} invested per ${freqLabel.replace('ly','')} purchase.`;
+        }
+
+        updateUrl(asset, symbol, recurringInvestment, periods, currentPrice, prices);
       }
 
       function reset() {
@@ -979,7 +1164,7 @@
         els.periods.value = '12';
         els.freq.value = 'weekly';
         els.currentPrice.value = '65000';
-        els.prices.value = '70000,68000,64000,61000,59000,62000,60000,63000,65000,66000,64000,62000';
+        els.prices.value = '70000, 68000, 64000, 61000, 59000, 62000, 60000, 63000, 65000, 66000, 64000, 62000';
 
         els.portfolioValue.textContent = '$0.00';
         els.summaryLine.textContent = 'Enter your numbers to calculate DCA performance.';
@@ -994,17 +1179,32 @@
         els.dcaCoinsCompare.textContent = '0';
         els.lumpCoins.textContent = '0';
         els.compareNote.textContent = 'Comparison assumes the entire total invested amount was bought at the first entered purchase price.';
+        els.statusBox.textContent = 'Enter your recurring investment, current price, and at least one purchase price to see live DCA results.';
 
         els.profitLoss.classList.remove('positive', 'negative');
         els.profitLoss.classList.add('neutral');
         els.roi.classList.remove('positive', 'negative');
         els.roi.classList.add('neutral');
 
+        setInputSummary(parsePrices(els.prices.value).length, parsePrices(els.prices.value).length, true);
+
         try {
           const url = new URL(window.location.href);
           url.search = '';
           history.replaceState(null, '', url.toString());
         } catch (e) {}
+
+        calculate();
+      }
+
+      function loadSample() {
+        els.asset.value = 'BTC';
+        els.investment.value = '150';
+        els.periods.value = '12';
+        els.freq.value = 'weekly';
+        els.currentPrice.value = '68500';
+        els.prices.value = '70000\n68000\n64000\n61000\n59000\n62000\n60000\n63000\n65000\n66000\n64000\n62000';
+        calculate();
       }
 
       function loadFromQuery() {
@@ -1015,18 +1215,94 @@
         if (params.has('periods')) els.periods.value = params.get('periods') || '12';
         if (params.has('freq')) els.freq.value = params.get('freq') || 'weekly';
         if (params.has('currentPrice')) els.currentPrice.value = params.get('currentPrice') || '65000';
-        if (params.has('prices')) els.prices.value = params.get('prices') || '';
+        if (params.has('prices')) els.prices.value = (params.get('prices') || '').replace(/,/g, ', ');
       }
+
+      async function copyText(text) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch (e) {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            return true;
+          } catch (err) {
+            document.body.removeChild(ta);
+            return false;
+          }
+        }
+      }
+
+      let liveTimer = null;
+      function scheduleCalc() {
+        clearTimeout(liveTimer);
+        liveTimer = setTimeout(calculate, 80);
+      }
+
+      els.normalizeBtn.addEventListener('click', function () {
+        els.prices.value = normalizePriceString(els.prices.value);
+        calculate();
+      });
+
+      els.fillCurrentBtn.addEventListener('click', function () {
+        const periods = Math.max(1, Math.floor(safeNum(els.periods.value)));
+        const price = safeNum(els.currentPrice.value);
+        if (!price) {
+          els.statusBox.textContent = 'Enter a current price first.';
+          return;
+        }
+        els.prices.value = Array.from({ length: periods }, () => price).join(', ');
+        calculate();
+      });
+
+      els.sampleBtn.addEventListener('click', loadSample);
+
+      els.copyLinkBtn.addEventListener('click', async function () {
+        calculate();
+        const ok = await copyText(window.location.href);
+        els.statusBox.textContent = ok ? 'Share link copied.' : 'Could not copy share link.';
+      });
+
+      els.copySummaryBtn.addEventListener('click', async function () {
+        calculate();
+        const text =
+`DCA Calculator — InstantQR
+Asset: ${(els.asset.value || 'Asset').trim()}
+Recurring investment: ${els.currency.value}${safeNum(els.investment.value)}
+Purchases: ${Math.max(1, Math.floor(safeNum(els.periods.value)))}
+Current price: ${els.currency.value}${safeNum(els.currentPrice.value)}
+
+Current value: ${els.portfolioValue.textContent}
+Total invested: ${els.totalInvested.textContent}
+Total coins: ${els.totalCoins.textContent}
+Average cost: ${els.avgCost.textContent}
+Profit/Loss: ${els.profitLoss.textContent}
+ROI: ${els.roi.textContent}
+
+Link: ${window.location.href}`;
+        const ok = await copyText(text);
+        els.statusBox.textContent = ok ? 'Results copied.' : 'Could not copy results.';
+      });
 
       els.calcBtn.addEventListener('click', calculate);
       els.resetBtn.addEventListener('click', reset);
 
-      ['investment','periods','currentPrice','prices'].forEach(id => {
-        document.getElementById(id).addEventListener('keydown', function (e) {
-          if (e.key === 'Enter') calculate();
-        });
+      [
+        els.currency, els.asset, els.investment, els.periods, els.freq,
+        els.currentPrice, els.prices
+      ].forEach(function (el) {
+        el.addEventListener('input', scheduleCalc, { passive: true });
+        el.addEventListener('change', scheduleCalc, { passive: true });
       });
 
+      els.year.textContent = new Date().getFullYear();
       loadFromQuery();
       calculate();
     })();
