@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Analytics -->
+  <!-- =========================
+       Analytics / Monetization
+       ========================= -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,381 +12,822 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <!-- AdSense -->
   <script async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
+  <!-- =========================
+       Core Meta
+       ========================= -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>DeFi TVL Tracker | Track Protocol & Chain TVL Live | InstantQR.io</title>
-  <meta name="description" content="Fast DeFi TVL tracker for protocols and chains. Search, filter, sort, compare live TVL, view 1d and 7d changes, and inspect protocol details in a clean responsive dashboard." />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
-  <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://instantqr.io/web3-tools/defi-tvl-tracker.html" />
-  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <title>DeFi TVL Tracker | InstantQR</title>
+  <meta name="description" content="Fast DeFi TVL tracker for protocols and chains. Search, filter, sort, compare live TVL, view 24h and 7d changes, inspect protocol details, and monitor trending DeFi gainers in a clean responsive dashboard." />
+  <meta name="keywords" content="defi tvl tracker, total value locked tracker, defi protocols tvl, chain tvl tracker, defi analytics dashboard, live tvl tracker, trending defi protocols, top gainers defi, protocol tvl chart" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="application-name" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
 
+  <link rel="canonical" href="https://instantqr.io/tools/defi-tvl-tracker.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+
+  <!-- =========================
+       Open Graph / Twitter
+       ========================= -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="DeFi TVL Tracker | Track Protocol & Chain TVL Live" />
-  <meta property="og:description" content="Monitor DeFi TVL across protocols and chains with fast filters, sorting, and protocol details." />
-  <meta property="og:url" content="https://instantqr.io/web3-tools/defi-tvl-tracker.html" />
-  <meta property="og:site_name" content="InstantQR.io" />
-  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="DeFi TVL Tracker | InstantQR" />
+  <meta property="og:description" content="Track DeFi TVL across protocols and chains with fast filters, trending gainers, protocol details, and historical TVL charts." />
+  <meta property="og:url" content="https://instantqr.io/tools/defi-tvl-tracker.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="DeFi TVL Tracker tool page preview on InstantQR" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="DeFi TVL Tracker | Track Protocol & Chain TVL Live" />
-  <meta name="twitter:description" content="Search, filter, sort, and inspect DeFi TVL data fast on desktop and mobile." />
-  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+  <meta name="twitter:title" content="DeFi TVL Tracker | InstantQR" />
+  <meta name="twitter:description" content="Track DeFi TVL, top gainers, protocol changes, and chain TVL in a fast responsive dashboard." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <style>
     :root{
-      --bg:#07111f;
-      --bg2:#0c1730;
-      --panel:#0f1b34;
-      --panel2:#122143;
-      --text:#eaf1ff;
-      --muted:#9db0d3;
-      --line:rgba(255,255,255,.09);
-      --accent:#6ea8ff;
-      --accent2:#8ef0c5;
-      --good:#3ddc97;
-      --bad:#ff6b81;
-      --warn:#ffcf5a;
-      --shadow:0 10px 35px rgba(0,0,0,.28);
-      --radius:22px;
+      --bg:#081120;
+      --bg2:#0f172a;
+      --panel:#111c34;
+      --panel2:#16233f;
+      --text:#e5eefc;
+      --muted:#94a3b8;
+      --line:rgba(255,255,255,.08);
+      --brand:#60a5fa;
+      --brand2:#22c55e;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --ok:#10b981;
+      --shadow:0 12px 35px rgba(0,0,0,.28);
+      --radius:20px;
       --radius-sm:14px;
-      --max:1240px;
+      --max:1180px;
+      --focus:0 0 0 4px rgba(96,165,250,.16);
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1000px 500px at 10% -10%, rgba(110,168,255,.14), transparent 60%),
-        radial-gradient(800px 460px at 100% 0%, rgba(142,240,197,.09), transparent 60%),
-        linear-gradient(180deg, #07111f 0%, #091528 100%);
-      line-height:1.45;
+        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 28%),
+        linear-gradient(180deg, #07101d 0%, #0b1324 55%, #081120 100%);
+      min-height:100vh;
+      line-height:1.55;
     }
 
-    a{color:var(--accent);text-decoration:none}
-    img{max-width:100%;display:block}
-    button,input,select{font:inherit}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
 
-    .wrap{max-width:var(--max);margin:0 auto;padding:20px}
+    .skip{
+      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+    }
+    .skip:focus{
+      left:12px;top:12px;width:auto;height:auto;
+      padding:10px 12px;border-radius:12px;
+      background:#0b172d;color:#fff;border:1px solid var(--line);z-index:999;
+    }
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+
     .topbar{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(14px);
+      background:rgba(8,17,32,.78);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width:var(--max);margin:0 auto;
+      padding:12px 16px;
       display:flex;align-items:center;justify-content:space-between;gap:14px;
-      padding:10px 0 18px;
     }
     .brand{
-      display:flex;align-items:center;gap:12px;color:var(--text);min-width:0;
+      display:flex;align-items:center;gap:12px;
+      color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;
     }
-    .brand img{width:38px;height:38px;border-radius:10px}
-    .brand strong{display:block;font-size:1rem}
-    .brand span{display:block;color:var(--muted);font-size:.9rem}
+    .brand-logo{
+      width:38px;height:38px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.18));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .brand-logo img{width:24px;height:24px;display:block}
 
-    .hero{
-      display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:stretch;
-      margin:8px 0 18px;
+    .top-links{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
     }
+    .top-links a{
+      color:var(--text);
+      font-size:.95rem;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid transparent;
+    }
+    .top-links a:hover{
+      text-decoration:none;
+      background:rgba(255,255,255,.04);
+      border-color:var(--line);
+    }
+
+    .hero{padding:34px 0 20px}
+    .breadcrumbs{
+      color:var(--muted);
+      font-size:.92rem;
+      margin-bottom:14px;
+      overflow:auto;
+      white-space:nowrap;
+    }
+    .breadcrumbs a{color:var(--muted)}
+    .breadcrumbs span{margin:0 8px;color:#64748b}
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
     .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
       border:1px solid var(--line);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      backdrop-filter: blur(10px);
     }
-    .hero-main{padding:24px}
+
+    .hero-main{padding:28px}
     .eyebrow{
       display:inline-flex;align-items:center;gap:8px;
-      font-size:.82rem;font-weight:700;letter-spacing:.02em;
-      color:#cfe0ff;background:rgba(110,168,255,.12);
-      border:1px solid rgba(110,168,255,.22);
+      font-size:.85rem;font-weight:700;
+      color:#bfdbfe;
+      background:rgba(96,165,250,.10);
+      border:1px solid rgba(96,165,250,.22);
       padding:8px 12px;border-radius:999px;
+      margin-bottom:14px;
     }
     h1{
-      margin:14px 0 10px;font-size:clamp(1.85rem,4vw,3rem);line-height:1.06;
+      margin:0 0 12px;
+      font-size:clamp(2rem,4vw,3rem);
+      line-height:1.06;
       letter-spacing:-.03em;
     }
-    .lead{
-      margin:0 0 16px;color:var(--muted);font-size:1.03rem;max-width:66ch;
+    .hero p{
+      margin:0;
+      color:#cbd5e1;
+      max-width:800px;
+      font-size:1.03rem;
     }
-    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+    .hero-actions{
+      margin-top:18px;
+      display:flex;gap:12px;flex-wrap:wrap;
+    }
+
     .btn{
-      appearance:none;border:none;border-radius:14px;padding:12px 16px;
-      background:linear-gradient(180deg,#6ea8ff,#4b89f0);
-      color:#fff;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(78,133,240,.25);
-      transition:transform .15s ease, opacity .15s ease, border-color .15s ease, background .15s ease;
+      appearance:none;border:0;cursor:pointer;
+      font:inherit;font-weight:800;
+      border-radius:14px;padding:13px 16px;
+      transition:.18s ease;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
     }
-    .btn:hover{transform:translateY(-1px)}
-    .btn.secondary{
-      background:rgba(255,255,255,.04);
+    .btn-primary{
+      background:linear-gradient(135deg, var(--brand), #3b82f6);
+      color:#fff;
+      box-shadow:0 10px 26px rgba(59,130,246,.28);
+    }
+    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03);text-decoration:none}
+    .btn-secondary{
       color:var(--text);
+      background:rgba(255,255,255,.04);
       border:1px solid var(--line);
-      box-shadow:none;
     }
-    .btn.ghost{
-      background:transparent;color:var(--muted);border:1px solid var(--line);box-shadow:none;
+    .btn-secondary:hover{background:rgba(255,255,255,.06);text-decoration:none}
+    .btn-ghost{
+      color:var(--text);
+      background:transparent;
+      border:1px solid var(--line);
     }
+    .btn-ghost:hover{background:rgba(255,255,255,.04);text-decoration:none}
 
     .hero-side{
-      padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;
+      padding:22px;
+      display:grid;
+      gap:12px;
       align-content:start;
     }
-    .miniStat{
-      padding:16px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid var(--line);
-      min-height:102px;
-    }
-    .miniStat .k{font-size:.84rem;color:var(--muted);margin-bottom:8px}
-    .miniStat .v{font-size:1.45rem;font-weight:800;letter-spacing:-.02em}
-    .miniStat .s{margin-top:6px;color:var(--muted);font-size:.85rem}
-    .pos{color:var(--good)}
-    .neg{color:var(--bad)}
-
-    .notice{
-      margin:0 0 18px;
-      padding:12px 14px;
+    .mini-stat{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
       border-radius:16px;
-      background:rgba(110,168,255,.08);
-      color:#dce8ff;
-      border:1px solid rgba(110,168,255,.18);
-      font-size:.95rem;
+      padding:14px 16px;
     }
-    .notice strong{
-      color:#ffffff;
+    .mini-stat .label{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-bottom:4px;
+    }
+    .mini-stat .value{
+      font-weight:800;
+      font-size:1.05rem;
+      color:#fff;
     }
 
-    .toolbar{
-      padding:16px;display:grid;grid-template-columns:2.2fr repeat(4,1fr) auto;gap:12px;
-      align-items:center;margin-bottom:16px;
+    .section{padding:14px 0 10px}
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:18px;
+      align-items:start;
     }
-    .field{display:flex;flex-direction:column;gap:6px}
-    .label{font-size:.8rem;color:var(--muted);font-weight:700}
 
-    .input, .select{
+    .tool-panel,.info-panel,.content-card{padding:22px}
+
+    .tool-panel h2,.info-panel h2,.content h2,.content h3{
+      margin:0 0 10px;
+      letter-spacing:-.02em;
+    }
+
+    .subtle{
+      color:var(--muted);
+      font-size:.96rem;
+      margin-bottom:18px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .full{grid-column:1/-1}
+
+    label{
+      display:block;
+      font-size:.94rem;
+      font-weight:700;
+      margin-bottom:8px;
+      color:#dbeafe;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="time"],
+    input[type="datetime-local"],
+    input[type="url"],
+    input[type="search"],
+    select,
+    textarea{
       width:100%;
-      min-width:0;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      color:var(--text);
-      border:1px solid rgba(255,255,255,.1);
       border-radius:14px;
-      padding:12px 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0a1427;
+      color:#fff;
+      padding:14px 14px;
+      font:inherit;
       outline:none;
       transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
     }
 
-    .input::placeholder{
+    input:focus,select:focus,textarea:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 4px rgba(96,165,250,.14);
+      background:#0b172d;
+    }
+
+    .helper{
       color:var(--muted);
+      font-size:.85rem;
+      margin-top:6px;
+      line-height:1.45;
     }
 
-    .input:focus, .select:focus{
-      border-color:rgba(110,168,255,.55);
-      box-shadow:0 0 0 3px rgba(110,168,255,.12);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.035));
+    .actions{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
     }
 
-    .select{
-      appearance:none;
-      -webkit-appearance:none;
-      -moz-appearance:none;
+    .result-box{
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      margin-bottom:14px;
+    }
+    .result-box p{margin:0;color:#dbeafe}
+
+    .results{
+      display:grid;
+      gap:10px;
+    }
+    .result-item{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:12px 13px;
+    }
+    .result-item strong{
+      display:block;
+      margin-bottom:5px;
+      color:#fff;
+      font-size:.95rem;
+    }
+    .result-item span{
+      color:#cbd5e1;
+      font-size:.92rem;
+      line-height:1.45;
+    }
+
+    .content{
+      margin-top:20px;
+      display:grid;
+      gap:18px;
+    }
+    .content p{
+      color:#cbd5e1;
+      margin:0 0 12px;
+      line-height:1.65;
+    }
+    .content ul{
+      margin:10px 0 0 18px;
+      color:#cbd5e1;
+    }
+    .content li{margin:8px 0}
+
+    .faq{
+      display:grid;
+      gap:12px;
+      margin-top:12px;
+    }
+    details{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    summary{
       cursor:pointer;
-      padding-right:44px;
-      background-image:
-        linear-gradient(45deg, transparent 50%, #cfe0ff 50%),
-        linear-gradient(135deg, #cfe0ff 50%, transparent 50%);
-      background-position:
-        calc(100% - 18px) calc(50% - 3px),
-        calc(100% - 12px) calc(50% - 3px);
-      background-size:6px 6px, 6px 6px;
-      background-repeat:no-repeat;
+      font-weight:800;
+      color:#fff;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin:10px 0 0;
+      color:#cbd5e1;
+      line-height:1.6;
     }
 
-    .select:hover{
-      border-color:rgba(255,255,255,.16);
+    .related-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
     }
-
-    .select option{
-      background:#0f1b34;
+    .related-links a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
       color:var(--text);
+    }
+    .related-links a:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .hidden{display:none !important}
+
+    /* Tool-specific enhancements */
+    .notice{
+      margin:0 0 18px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:rgba(96,165,250,.08);
+      color:#dce8ff;
+      border:1px solid rgba(96,165,250,.18);
+      font-size:.95rem;
+    }
+    .notice strong{color:#ffffff}
+
+    .toolbar-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr 1fr;
+      gap:14px;
+      margin-top:12px;
     }
 
     .switcher{
-      display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:14px 0 8px;
     }
-    .pill{
-      border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);
-      border-radius:999px;padding:10px 14px;font-weight:700;cursor:pointer;
+    .pill-btn{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:700;
+      cursor:pointer;
       transition:background .15s ease,border-color .15s ease,color .15s ease,transform .15s ease;
     }
-    .pill:hover{transform:translateY(-1px)}
-    .pill.active{
-      color:#fff;background:rgba(110,168,255,.16);border-color:rgba(110,168,255,.28);
+    .pill-btn:hover{transform:translateY(-1px)}
+    .pill-btn.active{
+      color:#fff;
+      background:rgba(96,165,250,.16);
+      border-color:rgba(96,165,250,.28);
     }
 
-    .stats{
-      display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px;
+    .overview-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:4px;
     }
-    .stat{
-      padding:18px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.025));
+    .overview-item{
       border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:14px;
     }
-    .stat .t{font-size:.86rem;color:var(--muted);margin-bottom:6px}
-    .stat .n{font-size:1.65rem;font-weight:800;letter-spacing:-.03em}
-    .stat .sub{font-size:.85rem;color:var(--muted);margin-top:6px}
+    .overview-item .k{
+      color:var(--muted);
+      font-size:.86rem;
+      margin-bottom:6px;
+    }
+    .overview-item .v{
+      font-size:1.3rem;
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+
+    .trend-pos{color:#4ade80}
+    .trend-neg{color:#f87171}
+    .trend-neutral{color:#e5eefc}
+
+    .trendingCard{
+      padding:18px;
+      margin:0 0 16px;
+    }
+    .trendingHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .trendingHead h2{
+      margin:4px 0 0;
+      font-size:1.2rem;
+      letter-spacing:-.02em;
+    }
+    .trendingGrid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:12px;
+    }
+    .trendingItem{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border-radius:18px;
+      padding:14px;
+      min-height:124px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .trendingTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .trendingRank{
+      display:inline-grid;
+      place-items:center;
+      min-width:30px;
+      height:30px;
+      padding:0 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line);
+      font-size:.82rem;
+      font-weight:800;
+      color:#fff;
+    }
+    .trendingChange{
+      font-size:.92rem;
+      font-weight:800;
+    }
+    .trendingName{
+      font-size:1rem;
+      font-weight:800;
+      line-height:1.25;
+      word-break:break-word;
+    }
+    .trendingMetaRow{
+      font-size:.86rem;
+      color:var(--muted);
+    }
+    .trendingActions{
+      margin-top:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .trendingTvl{
+      font-size:.92rem;
+      font-weight:700;
+      color:#dce8ff;
+    }
+    .trendingOpen{
+      border:none;
+      background:transparent;
+      color:var(--brand);
+      font-weight:800;
+      cursor:pointer;
+      padding:0;
+    }
+    .trendingOpen:hover{text-decoration:underline}
 
     .tableWrap{
-      overflow:auto;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.02)
+      overflow:auto;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      margin-top:16px;
     }
     table{
-      width:100%;border-collapse:collapse;min-width:960px;
+      width:100%;
+      border-collapse:collapse;
+      min-width:940px;
     }
     thead th{
-      position:sticky;top:0;z-index:2;
-      text-align:left;padding:14px;background:#0e1a31;color:#d9e5ff;font-size:.82rem;
-      border-bottom:1px solid var(--line);white-space:nowrap;
+      position:sticky;
+      top:0;
+      z-index:1;
+      text-align:left;
+      padding:14px;
+      background:#0e1a31;
+      color:#d9e5ff;
+      font-size:.84rem;
+      border-bottom:1px solid var(--line);
+      white-space:nowrap;
     }
     tbody td{
-      padding:14px;border-bottom:1px solid var(--line);vertical-align:middle;
+      padding:14px;
+      border-bottom:1px solid var(--line);
+      vertical-align:middle;
     }
     tbody tr:hover{background:rgba(255,255,255,.03)}
-    .rank{
-      display:inline-grid;place-items:center;width:30px;height:30px;border-radius:999px;
-      background:rgba(255,255,255,.05);border:1px solid var(--line);font-weight:800;font-size:.86rem;
+
+    .rank-badge{
+      display:inline-grid;
+      place-items:center;
+      width:30px;height:30px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line);
+      font-weight:800;
+      font-size:.86rem;
     }
+
     .proto{
-      display:flex;align-items:center;gap:12px;min-width:220px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:220px;
     }
     .protoIcon{
-      width:34px;height:34px;border-radius:10px;object-fit:cover;background:#15274b;border:1px solid var(--line)
+      width:34px;height:34px;
+      border-radius:10px;
+      object-fit:cover;
+      background:#15274b;
+      border:1px solid var(--line);
+      flex:0 0 auto;
     }
     .protoName{font-weight:800}
     .protoMeta{font-size:.84rem;color:var(--muted)}
+
     .tag{
-      display:inline-flex;align-items:center;padding:7px 10px;border-radius:999px;
-      background:rgba(255,255,255,.045);border:1px solid var(--line);color:#dce7ff;font-size:.8rem;font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.045);
+      border:1px solid var(--line);
+      color:#dce7ff;
+      font-size:.8rem;
+      font-weight:700;
       white-space:nowrap;
     }
-    .rowBtn{
-      border:none;background:transparent;color:var(--accent);font-weight:800;cursor:pointer;padding:0;
+
+    .row-btn{
+      border:none;
+      background:transparent;
+      color:var(--brand);
+      font-weight:800;
+      cursor:pointer;
+      padding:0;
     }
-    .muted{color:var(--muted)}
-    .empty, .loading, .error{
-      padding:28px;text-align:center;color:var(--muted)
+    .row-btn:hover{text-decoration:underline}
+
+    .loading,.empty,.error{
+      padding:28px;
+      text-align:center;
+      color:var(--muted);
     }
     .error{color:#ffd0d7}
-    .tiny{
-      font-size:.84rem;color:var(--muted)
-    }
-
-.footer{
-  padding:32px 0 48px;
-  color:var(--muted);
-}
-
-.footer-box{
-  border-top:1px solid var(--line);
-  padding-top:18px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.footer-links{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px 14px;
-}
-
-.footer-links a{
-  color:var(--muted);
-  text-decoration:none;
-}
-
-.footer-links a:hover{
-  color:var(--text);
-}
 
     .modal{
-      position:fixed;inset:0;background:rgba(3,7,16,.72);backdrop-filter:blur(8px);
-      display:none;align-items:flex-end;justify-content:center;padding:18px;z-index:50;
+      position:fixed;
+      inset:0;
+      background:rgba(3,7,16,.72);
+      backdrop-filter:blur(8px);
+      display:none;
+      align-items:flex-end;
+      justify-content:center;
+      padding:18px;
+      z-index:70;
     }
     .modal.open{display:flex}
     .sheet{
-      width:min(100%,980px);max-height:min(92vh,900px);overflow:auto;
-      border-radius:24px;background:linear-gradient(180deg,#0e1a31,#0b162c);
-      border:1px solid var(--line);box-shadow:var(--shadow);
+      width:min(100%,980px);
+      max-height:min(92vh,900px);
+      overflow:auto;
+      border-radius:24px;
+      background:linear-gradient(180deg,#0e1a31,#0b162c);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
     }
     .sheetHead{
-      position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;gap:14px;align-items:flex-start;
-      padding:18px 18px 14px;background:rgba(10,18,37,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);
+      position:sticky;
+      top:0;
+      z-index:2;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:flex-start;
+      padding:18px 18px 14px;
+      background:rgba(10,18,37,.92);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(8px);
     }
     .sheetBody{padding:18px}
-    .sheetGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
-    .detailStats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
+    .sheetGrid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+    }
+    .detailStats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-bottom:14px;
+    }
     .detailCard{
-      padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.03)
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.03);
     }
     .canvasWrap{
-      border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.02);padding:10px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.02);
+      padding:10px;
     }
     canvas{width:100%;height:320px;display:block}
-    .list{
-      display:flex;flex-wrap:wrap;gap:8px;margin-top:8px
+    .chip-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:8px;
+    }
+    .tiny{
+      font-size:.84rem;
+      color:var(--muted);
     }
 
-    .faq{
-      margin-top:22px;padding:18px
+    .footer{
+      padding:28px 0 42px;
+      color:var(--muted);
     }
-    .faq h2{margin:0 0 10px;font-size:1.25rem}
-    details{
-      border:1px solid var(--line);border-radius:16px;padding:14px 16px;background:rgba(255,255,255,.025)
+    .footer-box{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 0 0;
+      border-top:1px solid var(--line);
     }
-    details + details{margin-top:10px}
-    summary{cursor:pointer;font-weight:800}
-    details p{margin:10px 0 0;color:var(--muted)}
+    .footer-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .footer-links a{color:var(--muted)}
+    .footer-links a:hover{color:var(--text);text-decoration:none}
 
     @media (max-width: 1080px){
-      .hero{grid-template-columns:1fr}
-      .toolbar{grid-template-columns:1fr 1fr 1fr}
-      .toolbar .grow{grid-column:1/-1}
-      .stats{grid-template-columns:repeat(2,1fr)}
+      .toolbar-grid{grid-template-columns:1fr 1fr 1fr}
+      .overview-grid{grid-template-columns:repeat(2,1fr)}
+      .trendingGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .sheetGrid{grid-template-columns:1fr}
     }
 
-    @media (max-width: 720px){
-      .wrap{padding:14px}
-      .toolbar{grid-template-columns:1fr 1fr}
-      .toolbar .grow,
-      .toolbar .full{grid-column:1/-1}
-      .stats{grid-template-columns:1fr}
-      .hero-side{grid-template-columns:1fr 1fr}
-      .miniStat .v{font-size:1.2rem}
-      .detailStats{grid-template-columns:1fr}
-      .sheetHead{padding:16px}
-      .sheetBody{padding:16px}
+    @media (max-width: 980px){
+      .hero-grid,.tool-grid{grid-template-columns:1fr}
     }
 
-    @media (max-width: 540px){
-      .topbar{align-items:flex-start;flex-direction:column}
-      .hero-main{padding:18px}
-      .hero-side{grid-template-columns:1fr}
-      .toolbar{grid-template-columns:1fr}
+    @media (max-width: 700px){
+      .form-grid,.toolbar-grid,.overview-grid,.trendingGrid,.detailStats{grid-template-columns:1fr}
+      .hero-main,.hero-side,.tool-panel,.info-panel,.content-card,.trendingCard{padding:18px}
+      .topbar-inner{padding:10px 14px}
+      .top-links{display:none}
+      h1{font-size:2rem}
+      .btn{width:100%}
+      .actions .btn{width:auto;flex:1 1 180px}
+      .trendingHead{flex-direction:column}
     }
   </style>
+
+  <!-- =========================
+       Structured Data
+       ========================= -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"DeFi TVL Tracker",
+        "item":"https://instantqr.io/tools/defi-tvl-tracker.html"
+      }
+    ]
+  }
+  </script>
 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"SoftwareApplication",
-    "name":"InstantQR.io DeFi TVL Tracker",
+    "name":"DeFi TVL Tracker",
     "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Web",
-    "url":"https://instantqr.io/web3-tools/defi-tvl-tracker.html",
-    "description":"Responsive DeFi TVL tracker for protocols and chains with search, filters, sorting, and protocol detail views.",
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/defi-tvl-tracker.html",
+    "description":"Fast DeFi TVL tracker for protocols and chains with search, filters, sorting, trending gainers, and protocol detail views.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
   }
   </script>
 
@@ -398,23 +841,23 @@
         "name":"What is TVL in DeFi?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"TVL stands for Total Value Locked. It represents the value of assets deposited into a DeFi protocol or aggregated across a blockchain ecosystem."
+          "text":"TVL stands for Total Value Locked. It represents the total value of assets deposited into a DeFi protocol or aggregated across a blockchain ecosystem."
         }
       },
       {
         "@type":"Question",
-        "name":"Does this DeFi TVL tracker support protocol details?",
+        "name":"Can I track protocols and chains in this TVL tracker?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Yes. You can open a protocol detail view to inspect current TVL, key metadata, supported chains, and historical TVL if the data source provides it."
+          "text":"Yes. This tool lets you switch between protocol TVL and chain TVL views, then search, filter, sort, and inspect the current data."
         }
       },
       {
         "@type":"Question",
-        "name":"Can this tool work with a proxy endpoint?",
+        "name":"Does this DeFi TVL tracker support trending protocols and historical charts?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Yes. For the most reliable production setup, point the source config to your own serverless proxy or backend cache, then keep the public endpoints as fallback."
+          "text":"Yes. The page includes a trending top gainers widget and a protocol detail view with historical TVL chart support when the data source provides it."
         }
       }
     ]
@@ -422,235 +865,338 @@
   </script>
 </head>
 <body>
-  <div class="wrap">
-    <header class="topbar" aria-label="Header">
-      <a class="brand" href="/web3-tools/web3-tools.html" aria-label="InstantQR Web3 Tools">
-        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
-        <span>
-          <strong>InstantQR.io</strong>
-          <span>Web3 Tools</span>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
         </span>
+        <span>InstantQR</span>
       </a>
-      <nav class="tiny" aria-label="Breadcrumb">
-        <a href="/">Home</a> / <a href="/web3-tools/web3-tools.html">Web3 Tools</a> / <span class="muted">DeFi TVL Tracker</span>
+
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides/guides.html">Guides</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
+  <main id="main" class="wrap">
     <section class="hero">
-      <div class="hero-main card">
-        <div class="eyebrow">Live DeFi Analytics</div>
-        <h1>DeFi TVL Tracker</h1>
-        <p class="lead">
-          Fast, super responsive, and reliable TVL tracking for DeFi protocols and chains.
-          Search, filter, sort, compare, and open protocol detail views with historical TVL charts.
+      <div class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="/tools/tools.html">Tools</a><span>›</span>
+        <span>DeFi TVL Tracker</span>
+      </div>
+
+      <div class="hero-grid">
+        <div class="card hero-main">
+          <div class="eyebrow">Live DeFi Analytics • Protocol + Chain TVL • Responsive Dashboard</div>
+          <h1>DeFi TVL Tracker</h1>
+          <p>
+            Track DeFi TVL across protocols and chains with fast search, sorting, filters, trending gainers, and protocol detail views with historical chart support.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#tool">Use Tool</a>
+            <a class="btn btn-secondary" href="/tools/tools.html">Browse All Tools</a>
+          </div>
+        </div>
+
+        <aside class="card hero-side" aria-label="Tool highlights">
+          <div class="mini-stat">
+            <div class="label">Live view</div>
+            <div class="value">Protocols + chains</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Built for speed</div>
+            <div class="value">Fast filtering + sorting</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Trending widget</div>
+            <div class="value">Top 24h gainers</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Best for</div>
+            <div class="value">Monitoring DeFi capital flows</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="tool">
+      <div class="tool-grid">
+        <section class="card tool-panel" aria-labelledby="tool-title">
+          <h2 id="tool-title">Track DeFi TVL live</h2>
+          <div class="subtle">Search, filter, sort, compare protocols and chains, then open protocol details with a historical TVL chart when available.</div>
+
+          <div class="notice" id="proxyNotice">
+            <strong>Reliable data loading:</strong> this tool is built to use a fast cached source when available, with automatic fallback to public endpoints.
+          </div>
+
+          <div class="switcher" role="tablist" aria-label="View selector">
+            <button class="pill-btn active" id="tabProtocols" role="tab" aria-selected="true" type="button">Protocols</button>
+            <button class="pill-btn" id="tabChains" role="tab" aria-selected="false" type="button">Chains</button>
+          </div>
+
+          <div class="form-grid">
+            <div class="full">
+              <label for="searchInput">Search</label>
+              <input id="searchInput" type="search" placeholder="Search protocol, chain, category, symbol..." autocomplete="off" />
+              <div class="helper">Search by protocol name, chain, token symbol, or category.</div>
+            </div>
+
+            <div>
+              <label for="categoryFilter">Category</label>
+              <select id="categoryFilter">
+                <option value="">All</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="chainFilter">Chain</label>
+              <select id="chainFilter">
+                <option value="">All</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="sortBy">Sort by</label>
+              <select id="sortBy">
+                <option value="tvl-desc">TVL: High to Low</option>
+                <option value="tvl-asc">TVL: Low to High</option>
+                <option value="change1d-desc">24h: Best</option>
+                <option value="change1d-asc">24h: Worst</option>
+                <option value="change7d-desc">7d: Best</option>
+                <option value="change7d-asc">7d: Worst</option>
+                <option value="name-asc">Name: A to Z</option>
+                <option value="name-desc">Name: Z to A</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="limitSelect">Rows</label>
+              <select id="limitSelect">
+                <option>25</option>
+                <option selected>50</option>
+                <option>100</option>
+                <option>250</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="refreshBtn" type="button">Refresh Data</button>
+            <button class="btn btn-secondary" id="resetBtn" type="button">Reset Filters</button>
+            <button class="btn btn-ghost" id="jumpTableBtn" type="button">Jump to Tracker</button>
+          </div>
+
+          <section class="card trendingCard" aria-labelledby="trendingTitle" style="margin-top:18px;">
+            <div class="trendingHead">
+              <div>
+                <div class="tiny">Live momentum snapshot</div>
+                <h2 id="trendingTitle">Trending Protocols / Top Gainers</h2>
+              </div>
+              <div class="tiny" id="trendingMeta">Updates with current filtered data</div>
+            </div>
+
+            <div class="trendingGrid" id="trendingGrid">
+              <div class="loading">Loading top movers…</div>
+            </div>
+          </section>
+
+          <div class="overview-grid" aria-label="Overview stats">
+            <div class="overview-item">
+              <div class="k">Tracked items</div>
+              <div class="v" id="statTracked">—</div>
+            </div>
+            <div class="overview-item">
+              <div class="k">Aggregate TVL</div>
+              <div class="v" id="statTvl">—</div>
+            </div>
+            <div class="overview-item">
+              <div class="k">Median TVL</div>
+              <div class="v" id="statMedian">—</div>
+            </div>
+            <div class="overview-item">
+              <div class="k">24h trend</div>
+              <div class="v" id="statChange">—</div>
+            </div>
+          </div>
+
+          <div class="tableWrap" id="tracker" aria-live="polite">
+            <div class="loading" id="loadingState">Loading DeFi TVL data…</div>
+          </div>
+        </section>
+
+        <aside class="card info-panel" aria-labelledby="results-title">
+          <h2 id="results-title">Tracker summary</h2>
+
+          <div class="result-box">
+            <p id="summaryText">Live DeFi TVL dashboard ready. Load protocols and chains, then search, sort, and inspect the current data.</p>
+          </div>
+
+          <div class="results" id="resultsList">
+            <div class="result-item">
+              <strong>Mode</strong>
+              <span id="modeLabel">Protocols</span>
+            </div>
+            <div class="result-item">
+              <strong>Cache</strong>
+              <span id="cacheState">Ready</span>
+            </div>
+            <div class="result-item">
+              <strong>Cache details</strong>
+              <span id="cacheSub">Smart local cache enabled</span>
+            </div>
+            <div class="result-item">
+              <strong>Last updated</strong>
+              <span id="lastUpdated">—</span>
+            </div>
+            <div class="result-item">
+              <strong>Status</strong>
+              <span id="apiStatus">Idle</span>
+            </div>
+          </div>
+
+          <div class="helper" style="margin-top:14px;">
+            Privacy note: this tool stores short-lived cached responses in your browser for speed and resilience. It does not require an account.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content">
+      <article class="card content-card">
+        <h2>How this DeFi TVL tracker works</h2>
+        <p>
+          This tool loads DeFi TVL data for protocols and chains, then lets you search, filter, and sort the results in a fast browser-based dashboard. It also highlights trending top gainers based on 24-hour changes and can open a protocol detail view when additional metadata and historical TVL are available from the source.
         </p>
-        <div class="hero-actions">
-          <button class="btn" id="refreshBtn" type="button">Refresh data</button>
-          <button class="btn secondary" id="jumpTableBtn" type="button">Jump to tracker</button>
+        <p>
+          For reliability, the tracker is built to use cached browser data when possible and fall back between supported endpoints. That helps the page stay responsive even when public APIs are slow or temporarily unavailable.
+        </p>
+      </article>
+
+      <article class="card content-card">
+        <h2>Why use this tool?</h2>
+        <p>
+          A live TVL dashboard helps you quickly understand where capital is flowing in DeFi. It is useful for spotting protocol momentum, identifying ecosystem concentration, comparing chains, and checking whether a recent move is broad or isolated.
+        </p>
+        <ul>
+          <li>Monitor protocol and chain TVL in one place</li>
+          <li>Find top 24h gainers with a fast trending widget</li>
+          <li>Open protocol details and historical TVL charts when available</li>
+        </ul>
+      </article>
+
+      <article class="card content-card">
+        <h2>Related tools</h2>
+        <div class="related-links">
+          <a href="/tools/dca-calculator.html">DCA Calculator</a>
+          <a href="/tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+          <a href="/tools/gas-tracker.html">Gas Tracker</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
         </div>
-      </div>
+      </article>
 
-      <aside class="hero-side card" aria-label="Quick stats">
-        <div class="miniStat">
-          <div class="k">Mode</div>
-          <div class="v" id="modeLabel">Protocols</div>
-          <div class="s">Switch between protocols and chains</div>
+      <article class="card content-card">
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+          <details open>
+            <summary>What is TVL in DeFi?</summary>
+            <p>TVL stands for Total Value Locked. It represents the total value of assets deposited into a DeFi protocol or aggregated across a blockchain ecosystem.</p>
+          </details>
+
+          <details>
+            <summary>Can I track protocols and chains in this TVL tracker?</summary>
+            <p>Yes. This tool lets you switch between protocol TVL and chain TVL views, then search, filter, sort, and inspect the current data.</p>
+          </details>
+
+          <details>
+            <summary>Does this DeFi TVL tracker support trending protocols and historical charts?</summary>
+            <p>Yes. The page includes a trending top gainers widget and a protocol detail view with historical TVL chart support when the data source provides it.</p>
+          </details>
         </div>
-        <div class="miniStat">
-          <div class="k">Cache</div>
-          <div class="v" id="cacheState">Ready</div>
-          <div class="s" id="cacheSub">Smart local cache enabled</div>
-        </div>
-        <div class="miniStat">
-          <div class="k">Last updated</div>
-          <div class="v" id="lastUpdated">—</div>
-          <div class="s">Auto-detects fresh vs cached data</div>
-        </div>
-        <div class="miniStat">
-          <div class="k">Status</div>
-          <div class="v" id="apiStatus">Idle</div>
-          <div class="s">Timeout + fallback + stale support</div>
-        </div>
-      </aside>
-    </section>
-
-    <div class="notice" id="proxyNotice">
-      <strong>Reliable data loading:</strong> this tool is built to use a fast cached source when available, with automatic fallback to public endpoints.
-    </div>
-
-    <section class="stats" aria-label="Overview stats">
-      <div class="stat card">
-        <div class="t">Tracked items</div>
-        <div class="n" id="statTracked">—</div>
-        <div class="sub" id="statTrackedSub">Protocols or chains shown</div>
-      </div>
-      <div class="stat card">
-        <div class="t">Aggregate TVL</div>
-        <div class="n" id="statTvl">—</div>
-        <div class="sub">Based on current filtered results</div>
-      </div>
-      <div class="stat card">
-        <div class="t">Median TVL</div>
-        <div class="n" id="statMedian">—</div>
-        <div class="sub">Helps spot concentration</div>
-      </div>
-      <div class="stat card">
-        <div class="t">24h trend</div>
-        <div class="n" id="statChange">—</div>
-        <div class="sub">Average visible 24h change</div>
-      </div>
-    </section>
-
-    <div class="switcher" role="tablist" aria-label="View selector">
-      <button class="pill active" id="tabProtocols" role="tab" aria-selected="true" type="button">Protocols</button>
-      <button class="pill" id="tabChains" role="tab" aria-selected="false" type="button">Chains</button>
-    </div>
-
-    <section id="tracker" class="card">
-      <div class="toolbar">
-        <div class="field grow">
-          <label class="label" for="searchInput">Search</label>
-          <input class="input" id="searchInput" type="search" placeholder="Search protocol, chain, category, symbol..." autocomplete="off" />
-        </div>
-
-        <div class="field">
-          <label class="label" for="categoryFilter">Category</label>
-          <select class="select" id="categoryFilter">
-            <option value="">All</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label class="label" for="chainFilter">Chain</label>
-          <select class="select" id="chainFilter">
-            <option value="">All</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label class="label" for="sortBy">Sort by</label>
-          <select class="select" id="sortBy">
-            <option value="tvl-desc">TVL: High to Low</option>
-            <option value="tvl-asc">TVL: Low to High</option>
-            <option value="change1d-desc">24h: Best</option>
-            <option value="change1d-asc">24h: Worst</option>
-            <option value="change7d-desc">7d: Best</option>
-            <option value="change7d-asc">7d: Worst</option>
-            <option value="name-asc">Name: A to Z</option>
-            <option value="name-desc">Name: Z to A</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label class="label" for="limitSelect">Rows</label>
-          <select class="select" id="limitSelect">
-            <option>25</option>
-            <option selected>50</option>
-            <option>100</option>
-            <option>250</option>
-          </select>
-        </div>
-
-        <div class="field full">
-          <label class="label">&nbsp;</label>
-          <button class="btn secondary" id="resetBtn" type="button">Reset filters</button>
-        </div>
-      </div>
-
-      <div id="tableHost" class="tableWrap" aria-live="polite">
-        <div class="loading" id="loadingState">Loading DeFi TVL data…</div>
-      </div>
-    </section>
-
-    <section class="faq card">
-      <h2>DeFi TVL Tracker FAQ</h2>
-      <details>
-        <summary>What can I use this DeFi TVL tracker for?</summary>
-        <p>Use it to monitor protocol and chain TVL, compare categories, inspect short-term changes, and quickly identify where capital is concentrated in DeFi.</p>
-      </details>
-      <details>
-        <summary>Why include a proxy-ready setup?</summary>
-        <p>A proxy or serverless cache improves reliability, avoids browser-side rate limits, and gives you a stable source even when public endpoints change behavior.</p>
-      </details>
-      <details>
-        <summary>Is this mobile friendly?</summary>
-        <p>Yes. The layout is optimized for small screens, fast taps, readable cards, and smooth table scrolling on phones and tablets.</p>
-      </details>
+      </article>
     </section>
 
     <footer class="footer">
-  <div class="footer-box">
-    <div>
-      Fast, privacy-friendly tools built by 
-      <strong>InstantQR.io</strong>
-    </div>
-    <div class="footer-links">
-      <a href="/">Home</a>
-      <a href="/tools.html">Tools</a>
-      <a href="/about.html">About</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-      <a href="/contact.html">Contact</a>
-      <a href="/sitemap.xml">Sitemap</a>
-    </div>
-  </div>
-</footer>
-  </div>
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/guides/guides.html">Guides</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </main>
 
   <div class="modal" id="detailModal" aria-hidden="true">
     <div class="sheet">
       <div class="sheetHead">
         <div>
-          <div class="tiny muted">Protocol details</div>
+          <div class="tiny">Protocol details</div>
           <h2 id="detailTitle" style="margin:4px 0 0;font-size:1.6rem">Loading…</h2>
         </div>
-        <button class="btn ghost" id="closeModalBtn" type="button" aria-label="Close detail view">Close</button>
+        <button class="btn btn-secondary" id="closeModalBtn" type="button" aria-label="Close detail view">Close</button>
       </div>
       <div class="sheetBody">
         <div id="detailLoading" class="loading">Loading protocol detail…</div>
-        <div id="detailError" class="error" style="display:none"></div>
+        <div id="detailError" class="error hidden"></div>
 
-        <div id="detailContent" style="display:none">
+        <div id="detailContent" class="hidden">
           <div class="sheetGrid">
             <div>
               <div class="detailStats">
                 <div class="detailCard">
-                  <div class="tiny muted">Current TVL</div>
+                  <div class="tiny">Current TVL</div>
                   <div id="detailTvl" style="font-size:1.55rem;font-weight:800;margin-top:6px">—</div>
                 </div>
                 <div class="detailCard">
-                  <div class="tiny muted">Category</div>
+                  <div class="tiny">Category</div>
                   <div id="detailCategory" style="font-size:1.05rem;font-weight:800;margin-top:6px">—</div>
                 </div>
                 <div class="detailCard">
-                  <div class="tiny muted">24h change</div>
+                  <div class="tiny">24h change</div>
                   <div id="detail1d" style="font-size:1.05rem;font-weight:800;margin-top:6px">—</div>
                 </div>
                 <div class="detailCard">
-                  <div class="tiny muted">7d change</div>
+                  <div class="tiny">7d change</div>
                   <div id="detail7d" style="font-size:1.05rem;font-weight:800;margin-top:6px">—</div>
                 </div>
               </div>
 
               <div class="detailCard" style="margin-bottom:14px">
-                <div class="tiny muted">Description</div>
+                <div class="tiny">Description</div>
                 <div id="detailDescription" style="margin-top:8px;color:var(--muted)">—</div>
               </div>
 
               <div class="detailCard" style="margin-bottom:14px">
-                <div class="tiny muted">Chains</div>
-                <div class="list" id="detailChains"></div>
+                <div class="tiny">Chains</div>
+                <div class="chip-list" id="detailChains"></div>
               </div>
 
               <div class="detailCard">
-                <div class="tiny muted">Links</div>
-                <div class="list" id="detailLinks"></div>
+                <div class="tiny">Links</div>
+                <div class="chip-list" id="detailLinks"></div>
               </div>
             </div>
 
             <div>
               <div class="canvasWrap">
-                <div class="tiny muted" style="padding:4px 4px 10px">Historical TVL</div>
+                <div class="tiny" style="padding:4px 4px 10px">Historical TVL</div>
                 <canvas id="tvlChart" width="760" height="360" aria-label="TVL chart"></canvas>
               </div>
               <div class="tiny" id="chartMeta" style="margin-top:8px">Historical chart loads when available from the source.</div>
@@ -662,183 +1208,192 @@
   </div>
 
   <script>
-    /*
-      Recommended production setup:
-      1) Use your own proxy or serverless cache first
-      2) Keep public endpoints as fallback
-    */
-    const DATA_SOURCES = {
-      protocols: [
-        '/api/defi/protocols',
-        'https://api.llama.fi/protocols',
-        'https://api.llama.fi/lite/protocols'
-      ],
-      chains: [
-        '/api/defi/chains',
-        'https://api.llama.fi/v2/chains',
-        'https://api.llama.fi/chains'
-      ],
-      protocolDetail: [
-        (slug) => `/api/defi/protocol/${encodeURIComponent(slug)}`,
-        (slug) => `https://api.llama.fi/protocol/${encodeURIComponent(slug)}`
-      ]
-    };
+    (function () {
+      const DATA_SOURCES = {
+        protocols: [
+          '/api/defi/protocols',
+          'https://api.llama.fi/protocols',
+          'https://api.llama.fi/lite/protocols'
+        ],
+        chains: [
+          '/api/defi/chains',
+          'https://api.llama.fi/v2/chains',
+          'https://api.llama.fi/chains'
+        ],
+        protocolDetail: [
+          (slug) => '/api/defi/protocol/' + encodeURIComponent(slug),
+          (slug) => 'https://api.llama.fi/protocol/' + encodeURIComponent(slug)
+        ]
+      };
 
-    const CACHE_TTL_MS = 5 * 60 * 1000;
-    const FETCH_TIMEOUT_MS = 9000;
-    const STATE = {
-      mode: 'protocols',
-      protocols: [],
-      chains: [],
-      filtered: [],
-      fresh: false,
-      usingStale: false,
-      lastUpdatedISO: '',
-      activeDetail: null
-    };
+      const CACHE_TTL_MS = 5 * 60 * 1000;
+      const FETCH_TIMEOUT_MS = 9000;
 
-    const $ = (id) => document.getElementById(id);
+      const STATE = {
+        mode: 'protocols',
+        protocols: [],
+        chains: [],
+        filtered: [],
+        fresh: false,
+        usingStale: false,
+        lastUpdatedISO: '',
+        activeDetail: null
+      };
 
-    function fmtMoney(n) {
-      if (!isFinite(Number(n))) return '—';
-      const v = Number(n);
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        notation: v >= 1e9 ? 'compact' : 'standard',
-        maximumFractionDigits: v >= 1e9 ? 2 : 0
-      }).format(v);
-    }
+      const $ = (id) => document.getElementById(id);
 
-    function fmtCompact(n) {
-      if (!isFinite(Number(n))) return '—';
-      return new Intl.NumberFormat('en-US', {
-        notation: 'compact',
-        maximumFractionDigits: 2
-      }).format(Number(n));
-    }
+      const yearEl = $('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    function fmtPct(n) {
-      if (!isFinite(Number(n))) return '—';
-      const v = Number(n);
-      const sign = v > 0 ? '+' : '';
-      return `${sign}${v.toFixed(2)}%`;
-    }
-
-    function escapeHtml(str='') {
-      return String(str)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#39;');
-    }
-
-    function setStatus(status, sub='') {
-      $('apiStatus').textContent = status;
-      if (sub) $('cacheSub').textContent = sub;
-    }
-
-    function setCacheState(label, sub='') {
-      $('cacheState').textContent = label;
-      if (sub) $('cacheSub').textContent = sub;
-    }
-
-    function lastUpdatedLabel(iso) {
-      if (!iso) return '—';
-      const d = new Date(iso);
-      return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
-    }
-
-    function cacheGet(key) {
-      try {
-        const raw = localStorage.getItem(key);
-        if (!raw) return null;
-        const parsed = JSON.parse(raw);
-        if (!parsed || !parsed.timestamp || !parsed.data) return null;
-        return parsed;
-      } catch {
-        return null;
+      function fmtMoney(n) {
+        if (!isFinite(Number(n))) return '—';
+        const v = Number(n);
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          notation: v >= 1e9 ? 'compact' : 'standard',
+          maximumFractionDigits: v >= 1e9 ? 2 : 0
+        }).format(v);
       }
-    }
 
-    function cacheSet(key, data) {
-      try {
-        localStorage.setItem(key, JSON.stringify({
-          timestamp: Date.now(),
-          data
-        }));
-      } catch {}
-    }
-
-    async function fetchJsonWithTimeout(url) {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
-      try {
-        const res = await fetch(url, {
-          method: 'GET',
-          headers: { 'accept': 'application/json' },
-          signal: controller.signal,
-          cache: 'no-store'
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return await res.json();
-      } finally {
-        clearTimeout(timer);
+      function fmtCompact(n) {
+        if (!isFinite(Number(n))) return '—';
+        return new Intl.NumberFormat('en-US', {
+          notation: 'compact',
+          maximumFractionDigits: 2
+        }).format(Number(n));
       }
-    }
 
-    async function fetchFirstWorking(urls) {
-      let lastErr = null;
-      for (const url of urls) {
+      function fmtPct(n) {
+        if (!isFinite(Number(n))) return '—';
+        const v = Number(n);
+        const sign = v > 0 ? '+' : '';
+        return sign + v.toFixed(2) + '%';
+      }
+
+      function escapeHtml(str) {
+        return String(str || '')
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#39;');
+      }
+
+      function updateSummary(text) {
+        const el = $('summaryText');
+        if (el) el.textContent = text;
+      }
+
+      function setStatus(status, sub) {
+        const statusEl = $('apiStatus');
+        const cacheSubEl = $('cacheSub');
+        if (statusEl) statusEl.textContent = status;
+        if (sub && cacheSubEl) cacheSubEl.textContent = sub;
+      }
+
+      function setCacheState(label, sub) {
+        const cacheEl = $('cacheState');
+        const cacheSubEl = $('cacheSub');
+        if (cacheEl) cacheEl.textContent = label;
+        if (sub && cacheSubEl) cacheSubEl.textContent = sub;
+      }
+
+      function lastUpdatedLabel(iso) {
+        if (!iso) return '—';
+        const d = new Date(iso);
+        return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      }
+
+      function cacheGet(key) {
         try {
-          const json = await fetchJsonWithTimeout(url);
-          return { ok: true, url, data: json };
-        } catch (err) {
-          lastErr = err;
+          const raw = localStorage.getItem(key);
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          if (!parsed || !parsed.timestamp || !parsed.data) return null;
+          return parsed;
+        } catch {
+          return null;
         }
       }
-      return { ok: false, error: lastErr || new Error('All endpoints failed') };
-    }
 
-    async function getDataset(name, urls) {
-      const key = `defi-tvl-tracker:${name}`;
-      const cached = cacheGet(key);
-      const freshEnough = cached && (Date.now() - cached.timestamp < CACHE_TTL_MS);
-
-      if (freshEnough) {
-        STATE.fresh = false;
-        STATE.usingStale = false;
-        setCacheState('Cached', 'Serving fresh local cache');
-        return { data: cached.data, fromCache: true, stale: false };
+      function cacheSet(key, data) {
+        try {
+          localStorage.setItem(key, JSON.stringify({
+            timestamp: Date.now(),
+            data
+          }));
+        } catch {}
       }
 
-      const live = await fetchFirstWorking(urls);
-      if (live.ok) {
-        cacheSet(key, live.data);
-        STATE.fresh = true;
-        STATE.usingStale = false;
-        setCacheState('Live', 'Fresh data loaded successfully');
-        return { data: live.data, fromCache: false, stale: false };
+      async function fetchJsonWithTimeout(url) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
+        try {
+          const res = await fetch(url, {
+            method: 'GET',
+            headers: { 'accept': 'application/json' },
+            signal: controller.signal,
+            cache: 'no-store'
+          });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return await res.json();
+        } finally {
+          clearTimeout(timer);
+        }
       }
 
-      if (cached) {
-        STATE.fresh = false;
-        STATE.usingStale = true;
-        setCacheState('Stale', 'Live fetch failed, serving saved data');
-        return { data: cached.data, fromCache: true, stale: true };
+      async function fetchFirstWorking(urls) {
+        let lastErr = null;
+        for (const url of urls) {
+          try {
+            const json = await fetchJsonWithTimeout(url);
+            return { ok: true, url, data: json };
+          } catch (err) {
+            lastErr = err;
+          }
+        }
+        return { ok: false, error: lastErr || new Error('All endpoints failed') };
       }
 
-      throw live.error || new Error('Unable to load data');
-    }
+      async function getDataset(name, urls) {
+        const key = 'defi-tvl-tracker:' + name;
+        const cached = cacheGet(key);
+        const freshEnough = cached && (Date.now() - cached.timestamp < CACHE_TTL_MS);
 
-    function normalizeProtocols(data) {
-      if (!Array.isArray(data)) return [];
-      return data
-        .map((p) => {
+        if (freshEnough) {
+          STATE.fresh = false;
+          STATE.usingStale = false;
+          setCacheState('Cached', 'Serving fresh local cache');
+          return { data: cached.data, fromCache: true, stale: false };
+        }
+
+        const live = await fetchFirstWorking(urls);
+        if (live.ok) {
+          cacheSet(key, live.data);
+          STATE.fresh = true;
+          STATE.usingStale = false;
+          setCacheState('Live', 'Fresh data loaded successfully');
+          return { data: live.data, fromCache: false, stale: false };
+        }
+
+        if (cached) {
+          STATE.fresh = false;
+          STATE.usingStale = true;
+          setCacheState('Stale', 'Live fetch failed, serving saved data');
+          return { data: cached.data, fromCache: true, stale: true };
+        }
+
+        throw live.error || new Error('Unable to load data');
+      }
+
+      function normalizeProtocols(data) {
+        if (!Array.isArray(data)) return [];
+        return data.map((p) => {
           const currentTvl =
             Number(p.tvl) ||
-            Number(p.currentChainTvls && Object.values(p.currentChainTvls).reduce((a,b) => a + Number(b || 0), 0)) ||
+            Number(p.currentChainTvls && Object.values(p.currentChainTvls).reduce((a, b) => a + Number(b || 0), 0)) ||
             0;
 
           const chainList = Array.isArray(p.chains)
@@ -848,540 +1403,620 @@
           return {
             type: 'protocol',
             id: p.id || p.slug || p.name,
-            slug: p.slug || p.name?.toLowerCase().replace(/\s+/g, '-'),
+            slug: p.slug || (p.name || '').toLowerCase().replace(/\s+/g, '-'),
             name: p.name || 'Unknown',
             symbol: p.symbol || '',
             category: p.category || 'Unknown',
             chains: chainList,
             chainLabel: chainList.join(', '),
             tvl: currentTvl,
-            change_1d: Number(p.change_1d ?? p.change_1d_percent ?? p.change1d ?? NaN),
-            change_7d: Number(p.change_7d ?? p.change_7d_percent ?? p.change7d ?? NaN),
+            change_1d: Number(p.change_1d ?? p.change1d ?? p.change_1d_percent ?? NaN),
+            change_7d: Number(p.change_7d ?? p.change7d ?? p.change_7d_percent ?? NaN),
             mcap: Number(p.mcap ?? NaN),
             logo: p.logo || '',
             url: p.url || '',
             description: p.description || ''
           };
-        })
-        .filter(x => x.name);
-    }
-
-    function normalizeChains(data) {
-      if (!Array.isArray(data)) return [];
-      return data.map((c) => ({
-        type: 'chain',
-        id: c.name || c.gecko_id || c.chainId,
-        name: c.name || c.gecko_id || 'Unknown',
-        symbol: c.tokenSymbol || '',
-        category: 'Chain',
-        chains: [c.name || 'Unknown'],
-        chainLabel: c.name || 'Unknown',
-        tvl: Number(c.tvl ?? 0),
-        change_1d: Number(c.change_1d ?? c.change1d ?? NaN),
-        change_7d: Number(c.change_7d ?? c.change7d ?? NaN),
-        mcap: Number(c.mcap ?? NaN),
-        chainId: c.chainId ?? '',
-        gecko_id: c.gecko_id || ''
-      }));
-    }
-
-    function uniqueSorted(values) {
-      return [...new Set(values.filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b)));
-    }
-
-    function fillFilters() {
-      const categorySelect = $('categoryFilter');
-      const chainSelect = $('chainFilter');
-
-      const protocols = STATE.protocols;
-      const categories = uniqueSorted(protocols.map(p => p.category));
-      const chains = uniqueSorted(protocols.flatMap(p => p.chains || []));
-
-      categorySelect.innerHTML = `<option value="">All</option>` +
-        categories.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
-
-      chainSelect.innerHTML = `<option value="">All</option>` +
-        chains.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
-    }
-
-    function getCurrentData() {
-      return STATE.mode === 'protocols' ? STATE.protocols : STATE.chains;
-    }
-
-    function applyFilters() {
-      const q = $('searchInput').value.trim().toLowerCase();
-      const category = $('categoryFilter').value;
-      const chain = $('chainFilter').value;
-      const sort = $('sortBy').value;
-      const limit = Number($('limitSelect').value || 50);
-
-      let rows = [...getCurrentData()];
-
-      if (q) {
-        rows = rows.filter(r => {
-          const hay = [
-            r.name, r.symbol, r.category, r.chainLabel,
-            ...(r.chains || [])
-          ].join(' ').toLowerCase();
-          return hay.includes(q);
-        });
+        }).filter(x => x.name);
       }
 
-      if (STATE.mode === 'protocols' && category) {
-        rows = rows.filter(r => r.category === category);
+      function normalizeChains(data) {
+        if (!Array.isArray(data)) return [];
+        return data.map((c) => ({
+          type: 'chain',
+          id: c.name || c.gecko_id || c.chainId,
+          slug: '',
+          name: c.name || c.gecko_id || 'Unknown',
+          symbol: c.tokenSymbol || '',
+          category: 'Chain',
+          chains: [c.name || 'Unknown'],
+          chainLabel: c.name || 'Unknown',
+          tvl: Number(c.tvl ?? 0),
+          change_1d: Number(c.change_1d ?? c.change1d ?? NaN),
+          change_7d: Number(c.change_7d ?? c.change7d ?? NaN),
+          mcap: Number(c.mcap ?? NaN),
+          chainId: c.chainId ?? '',
+          gecko_id: c.gecko_id || ''
+        }));
       }
 
-      if (chain) {
-        rows = rows.filter(r => (r.chains || []).includes(chain) || r.name === chain);
+      function uniqueSorted(values) {
+        return [...new Set(values.filter(Boolean))].sort((a, b) => String(a).localeCompare(String(b)));
       }
 
-      rows.sort((a,b) => {
-        switch (sort) {
-          case 'tvl-asc': return (a.tvl||0) - (b.tvl||0);
-          case 'tvl-desc': return (b.tvl||0) - (a.tvl||0);
-          case 'change1d-asc': return (a.change_1d||-999999) - (b.change_1d||-999999);
-          case 'change1d-desc': return (b.change_1d||-999999) - (a.change_1d||-999999);
-          case 'change7d-asc': return (a.change_7d||-999999) - (b.change_7d||-999999);
-          case 'change7d-desc': return (b.change_7d||-999999) - (a.change_7d||-999999);
-          case 'name-desc': return String(b.name).localeCompare(String(a.name));
-          case 'name-asc':
-          default: return String(a.name).localeCompare(String(b.name));
+      function fillFilters() {
+        const categorySelect = $('categoryFilter');
+        const chainSelect = $('chainFilter');
+
+        const protocols = STATE.protocols;
+        const categories = uniqueSorted(protocols.map(p => p.category));
+        const chains = uniqueSorted(protocols.flatMap(p => p.chains || []));
+
+        categorySelect.innerHTML = '<option value="">All</option>' +
+          categories.map(v => '<option value="' + escapeHtml(v) + '">' + escapeHtml(v) + '</option>').join('');
+
+        chainSelect.innerHTML = '<option value="">All</option>' +
+          chains.map(v => '<option value="' + escapeHtml(v) + '">' + escapeHtml(v) + '</option>').join('');
+      }
+
+      function getCurrentData() {
+        return STATE.mode === 'protocols' ? STATE.protocols : STATE.chains;
+      }
+
+      function median(nums) {
+        const arr = nums.filter(n => isFinite(n)).sort((a, b) => a - b);
+        if (!arr.length) return NaN;
+        const mid = Math.floor(arr.length / 2);
+        return arr.length % 2 ? arr[mid] : (arr[mid - 1] + arr[mid]) / 2;
+      }
+
+      function avg(nums) {
+        const arr = nums.filter(n => isFinite(n));
+        if (!arr.length) return NaN;
+        return arr.reduce((a, b) => a + b, 0) / arr.length;
+      }
+
+      function valueCellPct(value) {
+        if (!isFinite(value)) return '<span class="trend-neutral">—</span>';
+        const cls = value > 0 ? 'trend-pos' : value < 0 ? 'trend-neg' : 'trend-neutral';
+        return '<span class="' + cls + '">' + fmtPct(value) + '</span>';
+      }
+
+      function renderTrending(sourceRows) {
+        const host = $('trendingGrid');
+        const meta = $('trendingMeta');
+        if (!host) return;
+
+        const source = (Array.isArray(sourceRows) && sourceRows.length)
+          ? sourceRows
+          : (STATE.mode === 'protocols' ? STATE.protocols : STATE.chains);
+
+        if (!Array.isArray(source) || !source.length) {
+          host.innerHTML = '<div class="loading">No trending data available yet.</div>';
+          if (meta) meta.textContent = 'Waiting for data';
+          return;
         }
-      });
 
-      STATE.filtered = rows.slice(0, limit);
-      renderStats(rows);
-      renderTable(STATE.filtered);
-    }
+        const movers = source
+          .filter(item => isFinite(Number(item.change_1d)) && Number(item.tvl) > 0)
+          .sort((a, b) => Number(b.change_1d) - Number(a.change_1d))
+          .slice(0, 4);
 
-    function median(nums) {
-      const arr = nums.filter(n => isFinite(n)).sort((a,b)=>a-b);
-      if (!arr.length) return NaN;
-      const mid = Math.floor(arr.length/2);
-      return arr.length % 2 ? arr[mid] : (arr[mid-1] + arr[mid]) / 2;
-    }
+        if (!movers.length) {
+          host.innerHTML = '<div class="loading">No top gainers available from the current dataset.</div>';
+          if (meta) meta.textContent = 'No 24h change data found';
+          return;
+        }
 
-    function avg(nums) {
-      const arr = nums.filter(n => isFinite(n));
-      if (!arr.length) return NaN;
-      return arr.reduce((a,b)=>a+b,0) / arr.length;
-    }
+        host.innerHTML = movers.map((item, index) => {
+          const chainsLabel = STATE.mode === 'protocols'
+            ? escapeHtml((item.chains || []).slice(0, 2).join(', ') || '—')
+            : escapeHtml(item.symbol || '—');
 
-    function renderStats(allVisibleRows) {
-      const tvls = allVisibleRows.map(r => Number(r.tvl || 0));
-      const sum = tvls.reduce((a,b)=>a+b,0);
-      const med = median(tvls);
-      const avg1d = avg(allVisibleRows.map(r => Number(r.change_1d)));
+          return `
+            <article class="trendingItem">
+              <div class="trendingTop">
+                <span class="trendingRank">#${index + 1}</span>
+                <span class="trendingChange ${Number(item.change_1d) > 0 ? 'trend-pos' : Number(item.change_1d) < 0 ? 'trend-neg' : 'trend-neutral'}">
+                  ${fmtPct(Number(item.change_1d))}
+                </span>
+              </div>
 
-      $('statTracked').textContent = fmtCompact(allVisibleRows.length);
-      $('statTrackedSub').textContent = STATE.mode === 'protocols'
-        ? 'Matching protocols'
-        : 'Matching chains';
+              <div class="trendingName">${escapeHtml(item.name || 'Unknown')}</div>
+              <div class="trendingMetaRow">${STATE.mode === 'protocols' ? escapeHtml(item.category || 'Unknown') : 'Chain TVL'}</div>
+              <div class="trendingMetaRow">${chainsLabel}</div>
 
-      $('statTvl').textContent = fmtMoney(sum);
-      $('statMedian').textContent = fmtMoney(med);
-      $('statChange').textContent = isFinite(avg1d) ? fmtPct(avg1d) : '—';
-      $('statChange').className = 'n ' + (avg1d > 0 ? 'pos' : avg1d < 0 ? 'neg' : '');
+              <div class="trendingActions">
+                <div class="trendingTvl">${fmtMoney(item.tvl)}</div>
+                ${
+                  STATE.mode === 'protocols'
+                    ? `<button class="trendingOpen" type="button" data-trending-slug="${escapeHtml(item.slug || '')}" data-trending-name="${escapeHtml(item.name || '')}">Open</button>`
+                    : `<span class="tiny">Top gainer</span>`
+                }
+              </div>
+            </article>
+          `;
+        }).join('');
 
-      $('modeLabel').textContent = STATE.mode === 'protocols' ? 'Protocols' : 'Chains';
-    }
+        if (meta) {
+          meta.textContent = STATE.mode === 'protocols'
+            ? 'Top 24h protocol movers'
+            : 'Top 24h chain movers';
+        }
 
-    function valueCellPct(value) {
-      if (!isFinite(value)) return '<span class="muted">—</span>';
-      const cls = value > 0 ? 'pos' : value < 0 ? 'neg' : '';
-      return `<span class="${cls}">${fmtPct(value)}</span>`;
-    }
-
-    function buildProtocolsTable(rows) {
-      return `
-        <table aria-label="DeFi protocols TVL table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Protocol</th>
-              <th>Category</th>
-              <th>Chains</th>
-              <th>TVL</th>
-              <th>24h</th>
-              <th>7d</th>
-              <th>MCap</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${rows.map((r, i) => `
-              <tr>
-                <td><span class="rank">${i + 1}</span></td>
-                <td>
-                  <div class="proto">
-                    <img class="protoIcon" src="${escapeHtml(r.logo || '/assets/instantqr-logo.svg')}" alt="" loading="lazy"
-                      onerror="this.src='/assets/instantqr-logo.svg'">
-                    <div>
-                      <div class="protoName">${escapeHtml(r.name)}</div>
-                      <div class="protoMeta">${escapeHtml(r.symbol || '—')}</div>
-                    </div>
-                  </div>
-                </td>
-                <td><span class="tag">${escapeHtml(r.category || 'Unknown')}</span></td>
-                <td><span class="muted">${escapeHtml(r.chains?.slice(0,3).join(', ') || '—')}${(r.chains?.length || 0) > 3 ? ' +' + (r.chains.length - 3) : ''}</span></td>
-                <td>${fmtMoney(r.tvl)}</td>
-                <td>${valueCellPct(r.change_1d)}</td>
-                <td>${valueCellPct(r.change_7d)}</td>
-                <td>${isFinite(r.mcap) ? fmtMoney(r.mcap) : '<span class="muted">—</span>'}</td>
-                <td><button class="rowBtn" type="button" data-slug="${escapeHtml(r.slug || '')}" data-name="${escapeHtml(r.name)}">Open</button></td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `;
-    }
-
-    function buildChainsTable(rows) {
-      return `
-        <table aria-label="DeFi chains TVL table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Chain</th>
-              <th>Token</th>
-              <th>TVL</th>
-              <th>24h</th>
-              <th>7d</th>
-              <th>Chain ID</th>
-              <th>Reference</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${rows.map((r, i) => `
-              <tr>
-                <td><span class="rank">${i + 1}</span></td>
-                <td>
-                  <div class="proto">
-                    <img class="protoIcon" src="/assets/instantqr-logo.svg" alt="" loading="lazy">
-                    <div>
-                      <div class="protoName">${escapeHtml(r.name)}</div>
-                      <div class="protoMeta">${escapeHtml(r.gecko_id || 'chain')}</div>
-                    </div>
-                  </div>
-                </td>
-                <td>${escapeHtml(r.symbol || '—')}</td>
-                <td>${fmtMoney(r.tvl)}</td>
-                <td>${valueCellPct(r.change_1d)}</td>
-                <td>${valueCellPct(r.change_7d)}</td>
-                <td>${r.chainId ? escapeHtml(String(r.chainId)) : '<span class="muted">—</span>'}</td>
-                <td><span class="tag">Chain TVL</span></td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `;
-    }
-
-    function renderTable(rows) {
-      const host = $('tableHost');
-
-      if (!rows.length) {
-        host.innerHTML = `<div class="empty">No matching results found. Try a broader search or clear filters.</div>`;
-        return;
-      }
-
-      host.innerHTML = STATE.mode === 'protocols'
-        ? buildProtocolsTable(rows)
-        : buildChainsTable(rows);
-
-      if (STATE.mode === 'protocols') {
-        host.querySelectorAll('[data-slug]').forEach(btn => {
-          btn.addEventListener('click', () => openProtocolDetail(btn.dataset.slug, btn.dataset.name));
+        host.querySelectorAll('[data-trending-slug]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            openProtocolDetail(btn.dataset.trendingSlug, btn.dataset.trendingName);
+          });
         });
       }
-    }
 
-    function resetFilters() {
-      $('searchInput').value = '';
-      $('categoryFilter').value = '';
-      $('chainFilter').value = '';
-      $('sortBy').value = 'tvl-desc';
-      $('limitSelect').value = '50';
-      applyFilters();
-    }
+      function renderStats(allVisibleRows) {
+        const tvls = allVisibleRows.map(r => Number(r.tvl || 0));
+        const sum = tvls.reduce((a, b) => a + b, 0);
+        const med = median(tvls);
+        const avg1d = avg(allVisibleRows.map(r => Number(r.change_1d)));
 
-    function setMode(mode) {
-      STATE.mode = mode;
-      $('tabProtocols').classList.toggle('active', mode === 'protocols');
-      $('tabChains').classList.toggle('active', mode === 'chains');
-      $('tabProtocols').setAttribute('aria-selected', String(mode === 'protocols'));
-      $('tabChains').setAttribute('aria-selected', String(mode === 'chains'));
+        $('statTracked').textContent = fmtCompact(allVisibleRows.length);
+        $('statTvl').textContent = fmtMoney(sum);
+        $('statMedian').textContent = fmtMoney(med);
 
-      $('categoryFilter').disabled = mode !== 'protocols';
-      applyFilters();
-    }
+        const changeEl = $('statChange');
+        if (isFinite(avg1d)) {
+          changeEl.textContent = fmtPct(avg1d);
+          changeEl.className = 'v ' + (avg1d > 0 ? 'trend-pos' : avg1d < 0 ? 'trend-neg' : 'trend-neutral');
+        } else {
+          changeEl.textContent = '—';
+          changeEl.className = 'v trend-neutral';
+        }
 
-    async function loadAllData(force=false) {
-      $('loadingState')?.remove();
-      $('tableHost').innerHTML = `<div class="loading">Loading DeFi TVL data…</div>`;
-      setStatus('Loading', 'Fetching protocols and chains');
-
-      if (force) {
-        try {
-          localStorage.removeItem('defi-tvl-tracker:protocols');
-          localStorage.removeItem('defi-tvl-tracker:chains');
-        } catch {}
+        $('modeLabel').textContent = STATE.mode === 'protocols' ? 'Protocols' : 'Chains';
       }
 
-      try {
-        const [protocolsRes, chainsRes] = await Promise.all([
-          getDataset('protocols', DATA_SOURCES.protocols),
-          getDataset('chains', DATA_SOURCES.chains)
-        ]);
+      function buildProtocolsTable(rows) {
+        return `
+          <table aria-label="DeFi protocols TVL table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Protocol</th>
+                <th>Category</th>
+                <th>Chains</th>
+                <th>TVL</th>
+                <th>24h</th>
+                <th>7d</th>
+                <th>MCap</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.map((r, i) => `
+                <tr>
+                  <td><span class="rank-badge">${i + 1}</span></td>
+                  <td>
+                    <div class="proto">
+                      <img class="protoIcon" src="${escapeHtml(r.logo || '/assets/instantqr-logo.svg')}" alt="" loading="lazy" onerror="this.src='/assets/instantqr-logo.svg'">
+                      <div>
+                        <div class="protoName">${escapeHtml(r.name)}</div>
+                        <div class="protoMeta">${escapeHtml(r.symbol || '—')}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag">${escapeHtml(r.category || 'Unknown')}</span></td>
+                  <td><span class="trend-neutral">${escapeHtml(r.chains?.slice(0,3).join(', ') || '—')}${(r.chains?.length || 0) > 3 ? ' +' + (r.chains.length - 3) : ''}</span></td>
+                  <td>${fmtMoney(r.tvl)}</td>
+                  <td>${valueCellPct(r.change_1d)}</td>
+                  <td>${valueCellPct(r.change_7d)}</td>
+                  <td>${isFinite(r.mcap) ? fmtMoney(r.mcap) : '<span class="trend-neutral">—</span>'}</td>
+                  <td><button class="row-btn" type="button" data-slug="${escapeHtml(r.slug || '')}" data-name="${escapeHtml(r.name)}">Open</button></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+      }
 
-        STATE.protocols = normalizeProtocols(protocolsRes.data);
-        STATE.chains = normalizeChains(chainsRes.data);
-        STATE.lastUpdatedISO = new Date().toISOString();
+      function buildChainsTable(rows) {
+        return `
+          <table aria-label="DeFi chains TVL table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Chain</th>
+                <th>Token</th>
+                <th>TVL</th>
+                <th>24h</th>
+                <th>7d</th>
+                <th>Chain ID</th>
+                <th>Reference</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.map((r, i) => `
+                <tr>
+                  <td><span class="rank-badge">${i + 1}</span></td>
+                  <td>
+                    <div class="proto">
+                      <img class="protoIcon" src="/assets/instantqr-logo.svg" alt="" loading="lazy">
+                      <div>
+                        <div class="protoName">${escapeHtml(r.name)}</div>
+                        <div class="protoMeta">${escapeHtml(r.gecko_id || 'chain')}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>${escapeHtml(r.symbol || '—')}</td>
+                  <td>${fmtMoney(r.tvl)}</td>
+                  <td>${valueCellPct(r.change_1d)}</td>
+                  <td>${valueCellPct(r.change_7d)}</td>
+                  <td>${r.chainId ? escapeHtml(String(r.chainId)) : '<span class="trend-neutral">—</span>'}</td>
+                  <td><span class="tag">Chain TVL</span></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+      }
 
-        $('lastUpdated').textContent = lastUpdatedLabel(STATE.lastUpdatedISO);
-        fillFilters();
-        setStatus(STATE.usingStale ? 'Stale Data' : STATE.fresh ? 'Live Data' : 'Cached Data');
+      function renderTable(rows) {
+        const host = $('tracker');
 
+        if (!rows.length) {
+          host.innerHTML = '<div class="empty">No matching results found. Try a broader search or clear filters.</div>';
+          updateSummary('No matching results found for the current filter set.');
+          return;
+        }
+
+        host.innerHTML = STATE.mode === 'protocols'
+          ? buildProtocolsTable(rows)
+          : buildChainsTable(rows);
+
+        if (STATE.mode === 'protocols') {
+          host.querySelectorAll('[data-slug]').forEach(btn => {
+            btn.addEventListener('click', () => openProtocolDetail(btn.dataset.slug, btn.dataset.name));
+          });
+        }
+
+        updateSummary(
+          STATE.mode === 'protocols'
+            ? 'Showing live DeFi protocol TVL data with filters, sorting, top gainers, and protocol detail support.'
+            : 'Showing live chain TVL data with filters, sorting, and top 24h chain gainers.'
+        );
+      }
+
+      function resetFilters() {
+        $('searchInput').value = '';
+        $('categoryFilter').value = '';
+        $('chainFilter').value = '';
+        $('sortBy').value = 'tvl-desc';
+        $('limitSelect').value = '50';
         applyFilters();
-      } catch (err) {
-        console.error(err);
-        setStatus('Offline', 'No live or cached data available');
-        $('tableHost').innerHTML = `
-          <div class="error">
-            Unable to load TVL data right now.<br>
-            <span class="tiny">Try again in a moment. Cached fallback support is enabled when data is available.</span>
-          </div>`;
-      }
-    }
-
-    async function fetchProtocolDetail(slug) {
-      const urls = DATA_SOURCES.protocolDetail.map(fn => fn(slug));
-      return await fetchFirstWorking(urls);
-    }
-
-    function protocolLinkChip(href, text) {
-      if (!href) return '';
-      return `<a class="tag" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`;
-    }
-
-    function normalizeHistory(detail) {
-      const direct = Array.isArray(detail?.tvl) ? detail.tvl : [];
-      const fromDirect = direct
-        .map(x => ({
-          date: Number(x.date || x.timestamp),
-          tvl: Number(x.totalLiquidityUSD ?? x.totalLiquidityUsd ?? x.tvl ?? x.totalLiquidity ?? 0)
-        }))
-        .filter(x => isFinite(x.date) && isFinite(x.tvl));
-
-      if (fromDirect.length) return fromDirect;
-
-      const chainTvls = detail?.chainTvls || {};
-      const aggregate = new Map();
-
-      Object.values(chainTvls).forEach(val => {
-        const arr = Array.isArray(val?.tvl) ? val.tvl : [];
-        arr.forEach(point => {
-          const date = Number(point.date || point.timestamp);
-          const tvl = Number(point.totalLiquidityUSD ?? point.totalLiquidityUsd ?? point.tvl ?? 0);
-          if (!isFinite(date) || !isFinite(tvl)) return;
-          aggregate.set(date, (aggregate.get(date) || 0) + tvl);
-        });
-      });
-
-      return [...aggregate.entries()]
-        .map(([date, tvl]) => ({ date, tvl }))
-        .sort((a,b) => a.date - b.date);
-    }
-
-    function drawChart(points) {
-      const canvas = $('tvlChart');
-      const ctx = canvas.getContext('2d');
-      const ratio = Math.max(window.devicePixelRatio || 1, 1);
-      const cssW = canvas.clientWidth || 760;
-      const cssH = 320;
-      canvas.width = Math.floor(cssW * ratio);
-      canvas.height = Math.floor(cssH * ratio);
-      ctx.setTransform(ratio,0,0,ratio,0,0);
-      ctx.clearRect(0,0,cssW,cssH);
-
-      const pad = { top: 18, right: 16, bottom: 26, left: 56 };
-      const w = cssW - pad.left - pad.right;
-      const h = cssH - pad.top - pad.bottom;
-
-      if (!points || points.length < 2) {
-        ctx.fillStyle = '#9db0d3';
-        ctx.font = '14px Inter, sans-serif';
-        ctx.fillText('Historical TVL unavailable.', 18, 28);
-        return;
       }
 
-      const values = points.map(p => p.tvl);
-      const min = Math.min(...values);
-      const max = Math.max(...values);
-      const range = Math.max(max - min, 1);
-      const xStep = w / (points.length - 1);
+      function applyFilters() {
+        const q = $('searchInput').value.trim().toLowerCase();
+        const category = $('categoryFilter').value;
+        const chain = $('chainFilter').value;
+        const sort = $('sortBy').value;
+        const limit = Number($('limitSelect').value || 50);
 
-      ctx.strokeStyle = 'rgba(255,255,255,.08)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      for (let i = 0; i <= 4; i++) {
-        const y = pad.top + (h / 4) * i;
-        ctx.moveTo(pad.left, y);
-        ctx.lineTo(pad.left + w, y);
-      }
-      ctx.stroke();
+        let rows = [...getCurrentData()];
 
-      ctx.fillStyle = '#9db0d3';
-      ctx.font = '12px Inter, sans-serif';
-      for (let i = 0; i <= 4; i++) {
-        const val = max - (range / 4) * i;
-        const y = pad.top + (h / 4) * i;
-        ctx.fillText(fmtMoney(val), 6, y + 4);
-      }
-
-      ctx.beginPath();
-      points.forEach((p, i) => {
-        const x = pad.left + i * xStep;
-        const y = pad.top + h - ((p.tvl - min) / range) * h;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      });
-      ctx.lineTo(pad.left + w, pad.top + h);
-      ctx.lineTo(pad.left, pad.top + h);
-      ctx.closePath();
-      const gradient = ctx.createLinearGradient(0, pad.top, 0, pad.top + h);
-      gradient.addColorStop(0, 'rgba(110,168,255,.35)');
-      gradient.addColorStop(1, 'rgba(110,168,255,.03)');
-      ctx.fillStyle = gradient;
-      ctx.fill();
-
-      ctx.beginPath();
-      points.forEach((p, i) => {
-        const x = pad.left + i * xStep;
-        const y = pad.top + h - ((p.tvl - min) / range) * h;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      });
-      ctx.strokeStyle = '#6ea8ff';
-      ctx.lineWidth = 2.5;
-      ctx.stroke();
-
-      const first = points[0];
-      const last = points[points.length - 1];
-      [[first,0],[last,points.length-1]].forEach(([p, i]) => {
-        const x = pad.left + i * xStep;
-        const y = pad.top + h - ((p.tvl - min) / range) * h;
-        ctx.beginPath();
-        ctx.arc(x, y, 4, 0, Math.PI * 2);
-        ctx.fillStyle = '#8ef0c5';
-        ctx.fill();
-      });
-
-      const firstDate = new Date(first.date * 1000);
-      const lastDate = new Date(last.date * 1000);
-      ctx.fillStyle = '#9db0d3';
-      ctx.fillText(firstDate.toLocaleDateString([], { month:'short', year:'2-digit' }), pad.left, cssH - 6);
-      const lastText = lastDate.toLocaleDateString([], { month:'short', year:'2-digit' });
-      const width = ctx.measureText(lastText).width;
-      ctx.fillText(lastText, pad.left + w - width, cssH - 6);
-    }
-
-    async function openProtocolDetail(slug, name='Protocol') {
-      const modal = $('detailModal');
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
-
-      $('detailTitle').textContent = name;
-      $('detailLoading').style.display = 'block';
-      $('detailError').style.display = 'none';
-      $('detailContent').style.display = 'none';
-      drawChart([]);
-
-      try {
-        const res = await fetchProtocolDetail(slug);
-        if (!res.ok) throw res.error || new Error('Detail fetch failed');
-
-        const d = res.data || {};
-        const current = STATE.protocols.find(p => p.slug === slug || p.name === name) || {};
-
-        $('detailTitle').textContent = d.name || current.name || name;
-        $('detailTvl').textContent = fmtMoney(Number(d.currentChainTvls
-          ? Object.values(d.currentChainTvls).reduce((a,b) => a + Number(b || 0), 0)
-          : d.tvl?.[d.tvl.length - 1]?.totalLiquidityUSD ?? current.tvl ?? 0));
-
-        $('detailCategory').textContent = d.category || current.category || 'Unknown';
-        $('detail1d').innerHTML = valueCellPct(Number(d.change_1d ?? current.change_1d));
-        $('detail7d').innerHTML = valueCellPct(Number(d.change_7d ?? current.change_7d));
-        $('detailDescription').textContent = d.description || current.description || 'No description available from source.';
-
-        const chains = Array.isArray(d.chains) ? d.chains : (current.chains || []);
-        $('detailChains').innerHTML = chains.length
-          ? chains.map(c => `<span class="tag">${escapeHtml(c)}</span>`).join('')
-          : `<span class="muted">No chain data available</span>`;
-
-        $('detailLinks').innerHTML = [
-          protocolLinkChip(d.url || current.url, 'Website'),
-          d.twitter ? protocolLinkChip(`https://x.com/${String(d.twitter).replace(/^@/, '')}`, 'X / Twitter') : ''
-        ].filter(Boolean).join('') || `<span class="muted">No external links provided</span>`;
-
-        const history = normalizeHistory(d);
-        drawChart(history);
-        $('chartMeta').textContent = history.length
-          ? `${history.length} historical data points loaded`
-          : 'Historical TVL unavailable from current source response.';
-
-        $('detailLoading').style.display = 'none';
-        $('detailContent').style.display = 'block';
-      } catch (err) {
-        console.error(err);
-        $('detailLoading').style.display = 'none';
-        $('detailError').style.display = 'block';
-        $('detailError').textContent = 'Unable to load protocol detail right now.';
-      }
-    }
-
-    function closeModal() {
-      $('detailModal').classList.remove('open');
-      $('detailModal').setAttribute('aria-hidden', 'true');
-    }
-
-    function bindEvents() {
-      $('tabProtocols').addEventListener('click', () => setMode('protocols'));
-      $('tabChains').addEventListener('click', () => setMode('chains'));
-
-      $('searchInput').addEventListener('input', applyFilters);
-      $('categoryFilter').addEventListener('change', applyFilters);
-      $('chainFilter').addEventListener('change', applyFilters);
-      $('sortBy').addEventListener('change', applyFilters);
-      $('limitSelect').addEventListener('change', applyFilters);
-
-      $('resetBtn').addEventListener('click', resetFilters);
-      $('refreshBtn').addEventListener('click', () => loadAllData(true));
-      $('jumpTableBtn').addEventListener('click', () => {
-        $('tracker').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-
-      $('closeModalBtn').addEventListener('click', closeModal);
-      $('detailModal').addEventListener('click', (e) => {
-        if (e.target === $('detailModal')) closeModal();
-      });
-
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal();
-      });
-
-      window.addEventListener('resize', () => {
-        if ($('detailModal').classList.contains('open')) {
-          const title = $('detailTitle').textContent;
-          if (title && $('detailContent').style.display !== 'none') {
-            drawChart([]);
-          }
+        if (q) {
+          rows = rows.filter(r => {
+            const hay = [
+              r.name, r.symbol, r.category, r.chainLabel,
+              ...(r.chains || [])
+            ].join(' ').toLowerCase();
+            return hay.includes(q);
+          });
         }
-      });
-    }
 
-    bindEvents();
-    loadAllData(false);
+        if (STATE.mode === 'protocols' && category) {
+          rows = rows.filter(r => r.category === category);
+        }
+
+        if (chain) {
+          rows = rows.filter(r => (r.chains || []).includes(chain) || r.name === chain);
+        }
+
+        rows.sort((a, b) => {
+          switch (sort) {
+            case 'tvl-asc': return (a.tvl || 0) - (b.tvl || 0);
+            case 'tvl-desc': return (b.tvl || 0) - (a.tvl || 0);
+            case 'change1d-asc': return (a.change_1d || -999999) - (b.change_1d || -999999);
+            case 'change1d-desc': return (b.change_1d || -999999) - (a.change_1d || -999999);
+            case 'change7d-asc': return (a.change_7d || -999999) - (b.change_7d || -999999);
+            case 'change7d-desc': return (b.change_7d || -999999) - (a.change_7d || -999999);
+            case 'name-desc': return String(b.name).localeCompare(String(a.name));
+            case 'name-asc':
+            default: return String(a.name).localeCompare(String(b.name));
+          }
+        });
+
+        STATE.filtered = rows.slice(0, limit);
+        renderTrending(STATE.filtered.length ? STATE.filtered : rows);
+        renderStats(rows);
+        renderTable(STATE.filtered);
+      }
+
+      function setMode(mode) {
+        STATE.mode = mode;
+        $('tabProtocols').classList.toggle('active', mode === 'protocols');
+        $('tabChains').classList.toggle('active', mode === 'chains');
+        $('tabProtocols').setAttribute('aria-selected', String(mode === 'protocols'));
+        $('tabChains').setAttribute('aria-selected', String(mode === 'chains'));
+
+        $('categoryFilter').disabled = mode !== 'protocols';
+        applyFilters();
+      }
+
+      async function loadAllData(force) {
+        $('tracker').innerHTML = '<div class="loading">Loading DeFi TVL data…</div>';
+        setStatus('Loading', 'Fetching protocols and chains');
+
+        if (force) {
+          try {
+            localStorage.removeItem('defi-tvl-tracker:protocols');
+            localStorage.removeItem('defi-tvl-tracker:chains');
+          } catch {}
+        }
+
+        try {
+          const [protocolsRes, chainsRes] = await Promise.all([
+            getDataset('protocols', DATA_SOURCES.protocols),
+            getDataset('chains', DATA_SOURCES.chains)
+          ]);
+
+          STATE.protocols = normalizeProtocols(protocolsRes.data);
+          STATE.chains = normalizeChains(chainsRes.data);
+          STATE.lastUpdatedISO = new Date().toISOString();
+
+          $('lastUpdated').textContent = lastUpdatedLabel(STATE.lastUpdatedISO);
+          fillFilters();
+          setStatus(STATE.usingStale ? 'Stale Data' : STATE.fresh ? 'Live Data' : 'Cached Data');
+
+          applyFilters();
+        } catch (err) {
+          console.error(err);
+          setStatus('Offline', 'No live or cached data available');
+          $('tracker').innerHTML = `
+            <div class="error">
+              Unable to load TVL data right now.<br>
+              <span class="tiny">Try again in a moment. Cached fallback support is enabled when data is available.</span>
+            </div>`;
+          updateSummary('Unable to load TVL data right now. Try again shortly.');
+        }
+      }
+
+      async function fetchProtocolDetail(slug) {
+        const urls = DATA_SOURCES.protocolDetail.map(fn => fn(slug));
+        return await fetchFirstWorking(urls);
+      }
+
+      function protocolLinkChip(href, text) {
+        if (!href) return '';
+        return '<a class="tag" href="' + escapeHtml(href) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(text) + '</a>';
+      }
+
+      function normalizeHistory(detail) {
+        const direct = Array.isArray(detail?.tvl) ? detail.tvl : [];
+        const fromDirect = direct
+          .map(x => ({
+            date: Number(x.date || x.timestamp),
+            tvl: Number(x.totalLiquidityUSD ?? x.totalLiquidityUsd ?? x.tvl ?? x.totalLiquidity ?? 0)
+          }))
+          .filter(x => isFinite(x.date) && isFinite(x.tvl));
+
+        if (fromDirect.length) return fromDirect;
+
+        const chainTvls = detail?.chainTvls || {};
+        const aggregate = new Map();
+
+        Object.values(chainTvls).forEach(val => {
+          const arr = Array.isArray(val?.tvl) ? val.tvl : [];
+          arr.forEach(point => {
+            const date = Number(point.date || point.timestamp);
+            const tvl = Number(point.totalLiquidityUSD ?? point.totalLiquidityUsd ?? point.tvl ?? 0);
+            if (!isFinite(date) || !isFinite(tvl)) return;
+            aggregate.set(date, (aggregate.get(date) || 0) + tvl);
+          });
+        });
+
+        return [...aggregate.entries()]
+          .map(([date, tvl]) => ({ date, tvl }))
+          .sort((a, b) => a.date - b.date);
+      }
+
+      function drawChart(points) {
+        const canvas = $('tvlChart');
+        const ctx = canvas.getContext('2d');
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        const cssW = canvas.clientWidth || 760;
+        const cssH = 320;
+        canvas.width = Math.floor(cssW * ratio);
+        canvas.height = Math.floor(cssH * ratio);
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        ctx.clearRect(0, 0, cssW, cssH);
+
+        const pad = { top: 18, right: 16, bottom: 26, left: 56 };
+        const w = cssW - pad.left - pad.right;
+        const h = cssH - pad.top - pad.bottom;
+
+        if (!points || points.length < 2) {
+          ctx.fillStyle = '#9db0d3';
+          ctx.font = '14px Inter, sans-serif';
+          ctx.fillText('Historical TVL unavailable.', 18, 28);
+          return;
+        }
+
+        const values = points.map(p => p.tvl);
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        const range = Math.max(max - min, 1);
+        const xStep = w / (points.length - 1);
+
+        ctx.strokeStyle = 'rgba(255,255,255,.08)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (let i = 0; i <= 4; i++) {
+          const y = pad.top + (h / 4) * i;
+          ctx.moveTo(pad.left, y);
+          ctx.lineTo(pad.left + w, y);
+        }
+        ctx.stroke();
+
+        ctx.fillStyle = '#9db0d3';
+        ctx.font = '12px Inter, sans-serif';
+        for (let i = 0; i <= 4; i++) {
+          const val = max - (range / 4) * i;
+          const y = pad.top + (h / 4) * i;
+          ctx.fillText(fmtMoney(val), 6, y + 4);
+        }
+
+        ctx.beginPath();
+        points.forEach((p, i) => {
+          const x = pad.left + i * xStep;
+          const y = pad.top + h - ((p.tvl - min) / range) * h;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.lineTo(pad.left + w, pad.top + h);
+        ctx.lineTo(pad.left, pad.top + h);
+        ctx.closePath();
+        const gradient = ctx.createLinearGradient(0, pad.top, 0, pad.top + h);
+        gradient.addColorStop(0, 'rgba(96,165,250,.35)');
+        gradient.addColorStop(1, 'rgba(96,165,250,.03)');
+        ctx.fillStyle = gradient;
+        ctx.fill();
+
+        ctx.beginPath();
+        points.forEach((p, i) => {
+          const x = pad.left + i * xStep;
+          const y = pad.top + h - ((p.tvl - min) / range) * h;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.strokeStyle = '#60a5fa';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        const first = points[0];
+        const last = points[points.length - 1];
+        [[first, 0], [last, points.length - 1]].forEach(([p, i]) => {
+          const x = pad.left + i * xStep;
+          const y = pad.top + h - ((p.tvl - min) / range) * h;
+          ctx.beginPath();
+          ctx.arc(x, y, 4, 0, Math.PI * 2);
+          ctx.fillStyle = '#22c55e';
+          ctx.fill();
+        });
+
+        const firstDate = new Date(first.date * 1000);
+        const lastDate = new Date(last.date * 1000);
+        ctx.fillStyle = '#9db0d3';
+        ctx.fillText(firstDate.toLocaleDateString([], { month:'short', year:'2-digit' }), pad.left, cssH - 6);
+        const lastText = lastDate.toLocaleDateString([], { month:'short', year:'2-digit' });
+        const width = ctx.measureText(lastText).width;
+        ctx.fillText(lastText, pad.left + w - width, cssH - 6);
+      }
+
+      async function openProtocolDetail(slug, name) {
+        const modal = $('detailModal');
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+
+        $('detailTitle').textContent = name || 'Protocol';
+        $('detailLoading').classList.remove('hidden');
+        $('detailError').classList.add('hidden');
+        $('detailContent').classList.add('hidden');
+        drawChart([]);
+
+        try {
+          const res = await fetchProtocolDetail(slug);
+          if (!res.ok) throw res.error || new Error('Detail fetch failed');
+
+          const d = res.data || {};
+          const current = STATE.protocols.find(p => p.slug === slug || p.name === name) || {};
+
+          $('detailTitle').textContent = d.name || current.name || name || 'Protocol';
+          $('detailTvl').textContent = fmtMoney(Number(
+            d.currentChainTvls
+              ? Object.values(d.currentChainTvls).reduce((a, b) => a + Number(b || 0), 0)
+              : d.tvl?.[d.tvl.length - 1]?.totalLiquidityUSD ?? current.tvl ?? 0
+          ));
+
+          $('detailCategory').textContent = d.category || current.category || 'Unknown';
+          $('detail1d').innerHTML = valueCellPct(Number(d.change_1d ?? current.change_1d));
+          $('detail7d').innerHTML = valueCellPct(Number(d.change_7d ?? current.change_7d));
+          $('detailDescription').textContent = d.description || current.description || 'No description available from source.';
+
+          const chains = Array.isArray(d.chains) ? d.chains : (current.chains || []);
+          $('detailChains').innerHTML = chains.length
+            ? chains.map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')
+            : '<span class="trend-neutral">No chain data available</span>';
+
+          $('detailLinks').innerHTML = [
+            protocolLinkChip(d.url || current.url, 'Website'),
+            d.twitter ? protocolLinkChip('https://x.com/' + String(d.twitter).replace(/^@/, ''), 'X / Twitter') : ''
+          ].filter(Boolean).join('') || '<span class="trend-neutral">No external links provided</span>';
+
+          const history = normalizeHistory(d);
+          drawChart(history);
+          $('chartMeta').textContent = history.length
+            ? history.length + ' historical data points loaded'
+            : 'Historical TVL unavailable from current source response.';
+
+          $('detailLoading').classList.add('hidden');
+          $('detailContent').classList.remove('hidden');
+        } catch (err) {
+          console.error(err);
+          $('detailLoading').classList.add('hidden');
+          $('detailError').classList.remove('hidden');
+          $('detailError').textContent = 'Unable to load protocol detail right now.';
+        }
+      }
+
+      function closeModal() {
+        $('detailModal').classList.remove('open');
+        $('detailModal').setAttribute('aria-hidden', 'true');
+      }
+
+      function bindEvents() {
+        $('tabProtocols').addEventListener('click', () => setMode('protocols'));
+        $('tabChains').addEventListener('click', () => setMode('chains'));
+
+        $('searchInput').addEventListener('input', applyFilters);
+        $('categoryFilter').addEventListener('change', applyFilters);
+        $('chainFilter').addEventListener('change', applyFilters);
+        $('sortBy').addEventListener('change', applyFilters);
+        $('limitSelect').addEventListener('change', applyFilters);
+
+        $('resetBtn').addEventListener('click', resetFilters);
+        $('refreshBtn').addEventListener('click', () => loadAllData(true));
+        $('jumpTableBtn').addEventListener('click', () => {
+          $('tracker').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        $('closeModalBtn').addEventListener('click', closeModal);
+        $('detailModal').addEventListener('click', (e) => {
+          if (e.target === $('detailModal')) closeModal();
+        });
+
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeModal();
+        });
+
+        window.addEventListener('resize', () => {
+          if ($('detailModal').classList.contains('open') && !$('detailContent').classList.contains('hidden')) {
+            const detailTitle = $('detailTitle').textContent;
+            if (detailTitle) drawChart([]);
+          }
+        });
+      }
+
+      bindEvents();
+      loadAllData(false);
+    })();
   </script>
 </body>
 </html>
