@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google Analytics -->
+  <!-- =========================
+       Analytics / Monetization
+       ========================= -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,24 +12,29 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <!-- Google AdSense -->
   <script async
-    src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
+  <!-- =========================
+       Core Meta
+       ========================= -->
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>Crypto Wallet Security Scanner | Free Wallet Safety Check Tool | InstantQR</title>
-  <meta name="description" content="Scan your crypto wallet security posture with this free wallet safety checker. Review wallet hygiene, phishing exposure, approval risks, seed phrase safety, hardware wallet usage, and more — fast, private, and browser-based." />
-  <meta name="keywords" content="crypto wallet security scanner, wallet safety checker, web3 wallet scanner, wallet approval risk checker, crypto security tool, seed phrase safety, wallet phishing checker, metamask security, revoke wallet approvals, wallet security audit tool" />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <title>Crypto Wallet Security Scanner | InstantQR</title>
+  <meta name="description" content="Scan your crypto wallet security posture with this free wallet safety checker. Review wallet hygiene, phishing exposure, approval risks, seed phrase safety, hardware wallet usage, and more with a fast, privacy-first browser tool." />
+  <meta name="keywords" content="crypto wallet security scanner, wallet safety checker, web3 wallet scanner, wallet approval risk checker, crypto security tool, seed phrase safety, wallet phishing checker, metamask security, wallet security audit tool" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="application-name" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
 
   <link rel="canonical" href="https://instantqr.io/tools/crypto-wallet-security-scanner.html" />
-  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
 
@@ -35,20 +42,23 @@
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
 
-  <!-- Open Graph -->
+  <!-- =========================
+       Open Graph / Twitter
+       ========================= -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Crypto Wallet Security Scanner | InstantQR" />
-  <meta property="og:description" content="Free browser-based crypto wallet security scanner. Check wallet hygiene, phishing exposure, approval risks, and key security practices instantly." />
-  <meta property="og:url" content="https://instantqr.io/tools/crypto-wallet-security-scanner.html" />
   <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Crypto Wallet Security Scanner | InstantQR" />
+  <meta property="og:description" content="Free browser-based crypto wallet security scanner. Review wallet hygiene, approval risks, phishing exposure, and core security habits instantly." />
+  <meta property="og:url" content="https://instantqr.io/tools/crypto-wallet-security-scanner.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="InstantQR Crypto Wallet Security Scanner tool preview" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Crypto Wallet Security Scanner | InstantQR" />
-  <meta name="twitter:description" content="Review your crypto wallet security posture with this free, fast, privacy-first tool." />
+  <meta name="twitter:description" content="Review your crypto wallet security posture with this fast, privacy-first wallet safety scanner." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <style>
@@ -101,6 +111,7 @@
     }
 
     .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+
     .topbar{
       position:sticky;top:0;z-index:40;
       backdrop-filter:blur(14px);
@@ -166,9 +177,7 @@
       box-shadow:var(--shadow);
     }
 
-    .hero-main{
-      padding:28px;
-    }
+    .hero-main{padding:28px}
     .eyebrow{
       display:inline-flex;align-items:center;gap:8px;
       font-size:.85rem;font-weight:700;
@@ -194,6 +203,7 @@
       margin-top:18px;
       display:flex;gap:12px;flex-wrap:wrap;
     }
+
     .btn{
       appearance:none;border:0;cursor:pointer;
       font:inherit;font-weight:800;
@@ -233,13 +243,11 @@
     }
     .mini-stat .value{
       font-weight:800;
-      font-size:1.15rem;
+      font-size:1.1rem;
       color:#fff;
     }
 
-    .section{
-      padding:14px 0 10px;
-    }
+    .section{padding:14px 0 10px}
 
     .tool-grid{
       display:grid;
@@ -248,9 +256,7 @@
       align-items:start;
     }
 
-    .tool-panel{
-      padding:22px;
-    }
+    .tool-panel,.info-panel,.content-card{padding:22px}
 
     .tool-panel h2,.info-panel h2,.content h2,.content h3{
       margin:0 0 10px;
@@ -268,7 +274,6 @@
       grid-template-columns:1fr 1fr;
       gap:14px;
     }
-
     .full{grid-column:1/-1}
 
     label{
@@ -301,6 +306,7 @@
       color:var(--muted);
       font-size:.85rem;
       margin-top:6px;
+      line-height:1.45;
     }
 
     .checks{
@@ -319,20 +325,18 @@
       background:rgba(255,255,255,.03);
       cursor:pointer;
     }
-
+    .check:hover{background:rgba(255,255,255,.04)}
     .check input{
       margin-top:4px;
       transform:scale(1.15);
       accent-color:#60a5fa;
     }
-
     .check strong{
       display:block;
       margin-bottom:4px;
       color:#fff;
       font-size:.96rem;
     }
-
     .check span{
       display:block;
       color:var(--muted);
@@ -369,7 +373,6 @@
       background:
         conic-gradient(var(--meterColor, #10b981) calc(var(--percent, 0) * 1%), rgba(255,255,255,.08) 0);
     }
-
     .meter::before{
       content:"";
       position:absolute;
@@ -379,21 +382,18 @@
       border:1px solid rgba(255,255,255,.06);
       box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
     }
-
     .meter-content{
       position:relative;
       z-index:1;
       text-align:center;
       padding:20px;
     }
-
     .score{
       font-size:clamp(2rem,5vw,3rem);
       font-weight:900;
       line-height:1;
       letter-spacing:-.04em;
     }
-
     .score-label{
       margin-top:8px;
       font-size:.94rem;
@@ -413,7 +413,6 @@
       letter-spacing:.01em;
       border:1px solid transparent;
     }
-
     .badge.good{color:#d1fae5;background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.24)}
     .badge.warn{color:#fef3c7;background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.24)}
     .badge.danger{color:#fee2e2;background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.24)}
@@ -428,6 +427,7 @@
     .summary-box p{
       margin:0;
       color:#dbeafe;
+      line-height:1.55;
     }
 
     .results{
@@ -449,6 +449,7 @@
     .result-item span{
       color:#cbd5e1;
       font-size:.92rem;
+      line-height:1.45;
     }
 
     .disclaimer{
@@ -463,12 +464,10 @@
       display:grid;
       gap:18px;
     }
-    .content-card{
-      padding:22px;
-    }
     .content p{
       color:#cbd5e1;
       margin:0 0 12px;
+      line-height:1.65;
     }
     .content ul{
       margin:10px 0 0 18px;
@@ -497,6 +496,38 @@
     details p{
       margin:10px 0 0;
       color:#cbd5e1;
+      line-height:1.6;
+    }
+
+    .related-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .related-links a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+    .related-links a:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .note{
+      border-left:4px solid var(--brand);
+      padding:12px 14px;
+      background:rgba(96,165,250,.08);
+      border-radius:0 14px 14px 0;
+      color:#dbeafe;
+      margin-top:12px;
+      line-height:1.55;
     }
 
     .footer{
@@ -520,15 +551,6 @@
     .footer-links a{color:var(--muted)}
     .footer-links a:hover{color:var(--text);text-decoration:none}
 
-    .note{
-      border-left:4px solid var(--brand);
-      padding:12px 14px;
-      background:rgba(96,165,250,.08);
-      border-radius:0 14px 14px 0;
-      color:#dbeafe;
-      margin-top:12px;
-    }
-
     @media (max-width: 980px){
       .hero-grid,.tool-grid{grid-template-columns:1fr}
       .info-panel{position:relative;top:auto}
@@ -546,6 +568,9 @@
     }
   </style>
 
+  <!-- =========================
+       Structured Data
+       ========================= -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -648,9 +673,9 @@
       <nav class="top-links" aria-label="Primary">
         <a href="/">Home</a>
         <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
         <a href="/tools/web3-tools.html">Web3 Tools</a>
         <a href="/guides/guides.html">Guides</a>
-        <a href="/about.html">About</a>
       </nav>
     </div>
   </header>
@@ -667,9 +692,8 @@
         <div class="card hero-main">
           <div class="eyebrow">Web3 Security • Privacy-First • Browser-Based</div>
           <h1>Crypto Wallet Security Scanner</h1>
-          <p>
-            Review your wallet security posture in seconds. This free browser-based tool helps crypto users spot risky habits, improve wallet hygiene, validate public wallet format, and reduce exposure to phishing, approval abuse, and blind-signing mistakes.
-          </p>
+          <p>Review your wallet security posture in seconds. This browser-based tool helps crypto users spot risky habits, improve wallet hygiene, validate public wallet format, and reduce exposure to phishing, approval abuse, and blind-signing mistakes.</p>
+
           <div class="hero-actions">
             <a class="btn btn-primary" href="#scanner">Scan Wallet Security</a>
             <a class="btn btn-secondary" href="/tools/web3-tools.html">Browse Web3 Tools</a>
@@ -683,7 +707,7 @@
           </div>
           <div class="mini-stat">
             <div class="label">Built for speed</div>
-            <div class="value">Instant in-browser results</div>
+            <div class="value">Instant in-browser scoring</div>
           </div>
           <div class="mini-stat">
             <div class="label">Best for</div>
@@ -701,9 +725,7 @@
       <div class="tool-grid">
         <section class="card tool-panel" aria-labelledby="scanner-title">
           <h2 id="scanner-title">Scan your wallet security posture</h2>
-          <div class="sub">
-            Enter a public wallet address if you want format validation, then answer the security questions below. This tool stays in your browser and does not need wallet access.
-          </div>
+          <div class="sub">Enter a public wallet address if you want format validation, then answer the security questions below. This tool stays in your browser and does not need wallet access.</div>
 
           <div class="form-grid">
             <div class="full">
@@ -713,7 +735,7 @@
             </div>
 
             <div>
-              <label for="chain">Primary wallet/network</label>
+              <label for="chain">Primary wallet / network</label>
               <select id="chain">
                 <option value="evm">Ethereum / EVM wallet</option>
                 <option value="btc">Bitcoin wallet</option>
@@ -754,7 +776,7 @@
                 <label class="check">
                   <input type="checkbox" id="c3" />
                   <div>
-                    <strong>I review token approvals / allowances regularly</strong>
+                    <strong>I review token approvals and allowances regularly</strong>
                     <span>Unlimited approvals can remain active long after you stop using a dApp.</span>
                   </div>
                 </label>
@@ -845,9 +867,7 @@
           </div>
 
           <div class="summary-box">
-            <p id="summaryText">
-              Start the scan to review your wallet hygiene, security habits, and public address format.
-            </p>
+            <p id="summaryText">Start the scan to review your wallet hygiene, security habits, and public address format.</p>
           </div>
 
           <div class="results" id="resultsList">
@@ -879,12 +899,8 @@
     <section class="content">
       <article class="card content-card">
         <h2>How this wallet security scanner works</h2>
-        <p>
-          This crypto wallet security scanner helps users review the most common weaknesses in wallet safety: recovery phrase handling, allowance management, device hygiene, phishing habits, blind signing, and wallet separation. It also validates common public address formats for EVM wallets, Bitcoin, and Solana.
-        </p>
-        <p>
-          Because this version is designed for speed, privacy, and broad compatibility, it does not require wallet connection and does not pull blockchain data. That makes it lightweight, fast, and easy to use on both desktop and mobile.
-        </p>
+        <p>This tool helps you review the most common weaknesses in wallet safety: recovery phrase handling, allowance management, device hygiene, phishing habits, blind signing, and wallet separation. It also validates common public address formats for EVM wallets, Bitcoin, and Solana.</p>
+        <p>Because this version is designed for speed, privacy, and broad compatibility, it does not require wallet connection and does not pull blockchain data. That makes it lightweight, fast, and easy to use on both desktop and mobile.</p>
         <ul>
           <li>Check core crypto wallet safety practices in seconds</li>
           <li>Validate public wallet formatting for common chains</li>
@@ -895,9 +911,7 @@
 
       <article class="card content-card">
         <h2>Best practices for crypto wallet security</h2>
-        <p>
-          Good wallet security is not just about using the right app. It is about habits. The strongest crypto users separate wallets by purpose, review approvals, avoid random links, verify domains, and never expose recovery phrases online.
-        </p>
+        <p>Good wallet security is not just about using the right app. It is about habits. The strongest crypto users separate wallets by purpose, review approvals, avoid random links, verify domains, and never expose recovery phrases online.</p>
         <ul>
           <li>Use a hardware wallet for meaningful balances</li>
           <li>Keep a separate burner wallet for testing new dApps</li>
@@ -909,41 +923,41 @@
       </article>
 
       <article class="card content-card">
+        <h2>Related tools</h2>
+        <div class="related-links">
+          <a href="/tools/wallet-approval-checker.html">Wallet Approval Checker</a>
+          <a href="/tools/token-contract-analyzer.html">Token Contract Analyzer</a>
+          <a href="/tools/rug-pull-scanner.html">Rug Pull Scanner</a>
+          <a href="/tools/web3-tools.html">All Web3 Tools</a>
+        </div>
+      </article>
+
+      <article class="card content-card">
         <h2>Frequently asked questions</h2>
         <div class="faq">
-          <details>
+          <details open>
             <summary>What does this crypto wallet security scanner actually scan?</summary>
-            <p>
-              It scans your wallet security posture based on the information you provide, including wallet habits, recovery phrase handling, hardware wallet usage, approval hygiene, and public address formatting. It does not drain-check your wallet or fetch blockchain data in this version.
-            </p>
+            <p>It scans your wallet security posture based on the information you provide, including wallet habits, recovery phrase handling, hardware wallet usage, approval hygiene, and public address formatting. It does not drain-check your wallet or fetch blockchain data in this version.</p>
           </details>
 
           <details>
             <summary>Does this tool connect to MetaMask, Phantom, or other wallets?</summary>
-            <p>
-              No. This version is fully browser-based and does not require a wallet connection. That keeps it fast and privacy-friendly.
-            </p>
+            <p>No. This version is fully browser-based and does not require a wallet connection. That keeps it fast and privacy-friendly.</p>
           </details>
 
           <details>
             <summary>Can this detect malicious token approvals automatically?</summary>
-            <p>
-              Not automatically in this standalone version. A full approval scanner would need chain-specific RPC calls or third-party APIs to inspect current allowances and contracts.
-            </p>
+            <p>Not automatically in this standalone version. A full approval scanner would need chain-specific RPC calls or third-party APIs to inspect current allowances and contracts.</p>
           </details>
 
           <details>
             <summary>Is it safe to paste my wallet address here?</summary>
-            <p>
-              A public wallet address is generally safe to paste into tools like this. Never enter your seed phrase, private key, recovery phrase, or any secret credentials.
-            </p>
+            <p>A public wallet address is generally safe to paste into tools like this. Never enter your seed phrase, private key, recovery phrase, or any secret credentials.</p>
           </details>
 
           <details>
             <summary>Who should use this tool?</summary>
-            <p>
-              It is useful for beginners, traders, NFT users, DeFi users, and anyone who wants a quick security review before interacting with apps, bridges, swaps, or token approvals.
-            </p>
+            <p>It is useful for beginners, traders, NFT users, DeFi users, and anyone who wants a quick security review before interacting with apps, bridges, swaps, or token approvals.</p>
           </details>
         </div>
       </article>
@@ -955,6 +969,7 @@
         <div class="footer-links">
           <a href="/">Home</a>
           <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
           <a href="/tools/web3-tools.html">Web3 Tools</a>
           <a href="/guides/guides.html">Guides</a>
           <a href="/about.html">About</a>
@@ -967,7 +982,7 @@
   </main>
 
   <script>
-    (function () {
+    (() => {
       const $ = (id) => document.getElementById(id);
 
       const els = {
@@ -987,19 +1002,16 @@
       if (!els.walletAddress || !els.scanBtn || !els.resetBtn || !els.year) return;
 
       const checks = Array.from({ length: 10 }, (_, i) => $('c' + (i + 1))).filter(Boolean);
-
       els.year.textContent = new Date().getFullYear();
 
       function escapeHtml(str) {
-        return String(str).replace(/[&<>"']/g, function (m) {
-          return ({
-            '&':'&amp;',
-            '<':'&lt;',
-            '>':'&gt;',
-            '"':'&quot;',
-            "'":'&#39;'
-          })[m];
-        });
+        return String(str).replace(/[&<>"']/g, (m) => ({
+          '&':'&amp;',
+          '<':'&lt;',
+          '>':'&gt;',
+          '"':'&quot;',
+          "'":'&#39;'
+        })[m]);
       }
 
       function isLikelySeedPhrase(input) {
@@ -1022,6 +1034,7 @@
 
       function validateAddressByChain(addr, chain) {
         const trimmed = addr.trim();
+
         if (!trimmed) {
           return {
             state: 'neutral',
@@ -1040,7 +1053,7 @@
 
         if (chain === 'evm') {
           return isValidEvmAddress(trimmed)
-            ? { state:'good', title:'Valid EVM-style address', text:'The address format looks consistent with Ethereum / EVM wallets.' }
+            ? { state:'good', title:'Valid EVM-style address', text:'The address format looks consistent with Ethereum or EVM wallets.' }
             : { state:'danger', title:'Invalid EVM-style address', text:'The address does not match a standard 0x EVM wallet format.' };
         }
 
@@ -1221,7 +1234,7 @@
       els.scanBtn.addEventListener('click', renderResults);
       els.resetBtn.addEventListener('click', resetForm);
 
-      els.walletAddress.addEventListener('keydown', function (e) {
+      els.walletAddress.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
           renderResults();
