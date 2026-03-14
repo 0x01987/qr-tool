@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('[data-year]').forEach((el) => {
-    el.textContent = new Date().getFullYear();
-  });
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
 
 window.InstantQR = {
   copyText: async function (text) {
+    const value = String(text || '');
     if (!navigator.clipboard || !navigator.clipboard.writeText) {
-      throw new Error('Clipboard not supported');
+      throw new Error('Clipboard API not supported');
     }
-    await navigator.clipboard.writeText(String(text || ''));
+    await navigator.clipboard.writeText(value);
   },
 
   roundTo: function (value, decimals) {
