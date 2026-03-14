@@ -1,266 +1,885 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- =========================
+       Analytics / Monetization
+       ========================= -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <!-- AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
+  <!-- =========================
+       Core Meta
+       ========================= -->
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>Cups to Grams Converter (Water) | InstantQR</title>
-  <meta name="description" content="Convert US cups to grams instantly (water). Fast, mobile-friendly, privacy-first — runs locally in your browser." />
-  <meta name="robots" content="index,follow" />
+  <meta name="description" content="Convert US cups to grams instantly for water. Fast, mobile-friendly, privacy-first, and runs locally in your browser." />
+  <meta name="keywords" content="cups to grams, cups to grams converter, us cups to grams, water cups to grams, baking converter, kitchen measurement converter" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="application-name" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
+
   <link rel="canonical" href="https://instantqr.io/tools/cups-to-grams.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
 
-  <meta property="og:title" content="Cups to Grams Converter (Water) | InstantQR" />
-  <meta property="og:description" content="Convert US cups to grams instantly (water). Fast, mobile-friendly, privacy-first — runs locally in your browser." />
-  <meta property="og:url" content="https://instantqr.io/tools/cups-to-grams.html" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+
+  <!-- =========================
+       Open Graph / Twitter
+       ========================= -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="Cups to Grams Converter (Water) | InstantQR" />
+  <meta property="og:description" content="Convert US cups to grams instantly for water with a fast, privacy-first browser tool." />
+  <meta property="og:url" content="https://instantqr.io/tools/cups-to-grams.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR Cups to Grams Converter tool preview" />
 
-  <link rel="icon" href="/assets/instantqr-logo.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cups to Grams Converter (Water) | InstantQR" />
+  <meta name="twitter:description" content="Convert US cups to grams instantly for water. Fast, mobile-friendly, and privacy-first." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <style>
-:root{
-  --bg:#0b1220; --card:#0f1a30; --card2:#0c162a;
-  --text:#eaf0ff; --muted:#a9b6d6; --line:rgba(255,255,255,.10);
-  --brand:#69a6ff; --ok:#19c37d; --warn:#ffcc66;
-  --shadow:0 10px 30px rgba(0,0,0,.35);
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-}
-body{ margin:0; background:radial-gradient(1200px 600px at 20% 0%, rgba(105,166,255,.18), transparent 60%),
-                radial-gradient(900px 500px at 90% 10%, rgba(25,195,125,.12), transparent 55%),
-                var(--bg);
-      color:var(--text); }
-a{ color:inherit; text-decoration:none; }
-.wrap{ max-width:980px; margin:0 auto; padding:20px; }
-header{ display:flex; align-items:center; justify-content:space-between; gap:14px; padding:10px 0 18px; }
-.brand{ display:flex; gap:10px; align-items:center; }
-.logo{ width:34px; height:34px; border-radius:10px; background:rgba(105,166,255,.14); display:grid; place-items:center; border:1px solid var(--line); }
-.logo svg{ width:18px; height:18px; }
-.brand b{ font-size:16px; letter-spacing:.2px; }
-.nav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
-.pill{ padding:8px 10px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.04); font-size:13px; color:var(--muted); }
-.pill:hover{ border-color:rgba(105,166,255,.45); color:var(--text); }
+    :root{
+      --bg:#081120;
+      --bg2:#0f172a;
+      --panel:#111c34;
+      --panel2:#16233f;
+      --text:#e5eefc;
+      --muted:#94a3b8;
+      --line:rgba(255,255,255,.08);
+      --brand:#60a5fa;
+      --brand2:#22c55e;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --ok:#10b981;
+      --shadow:0 12px 35px rgba(0,0,0,.28);
+      --radius:20px;
+      --radius-sm:14px;
+      --max:1180px;
+      --focus:0 0 0 4px rgba(96,165,250,.16);
+    }
 
-.hero{ display:grid; gap:10px; margin:10px 0 14px; }
-h1{ margin:0; font-size:28px; letter-spacing:-.3px; }
-.sub{ color:var(--muted); line-height:1.55; max-width:75ch; }
-.note{ color:var(--muted); font-size:13px; background:rgba(255,255,255,.04); border:1px solid var(--line); padding:10px 12px; border-radius:12px; }
-.note b{ color:var(--warn); }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 28%),
+        linear-gradient(180deg, #07101d 0%, #0b1324 55%, #081120 100%);
+      min-height:100vh;
+      line-height:1.55;
+    }
 
-.card{ background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-       border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); overflow:hidden; }
-.cardInner{ padding:16px; }
-.grid{ display:grid; grid-template-columns: 1fr; gap:12px; }
-@media (min-width: 860px){ .grid{ grid-template-columns: 1fr 1fr; } }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
 
-label{ display:block; font-size:13px; color:var(--muted); margin:0 0 6px; }
-.input{ display:flex; gap:10px; align-items:center; background:rgba(0,0,0,.22);
-        border:1px solid var(--line); border-radius:14px; padding:10px 12px; }
-input[type="number"]{ width:100%; border:0; outline:0; background:transparent; color:var(--text); font-size:18px; }
-.unit{ font-size:13px; color:var(--muted); padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.04); white-space:nowrap; }
-.row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:10px; }
-select, button{
-  border:1px solid var(--line); background:rgba(255,255,255,.05);
-  color:var(--text); border-radius:12px; padding:10px 12px; font-size:14px;
-}
-button{ cursor:pointer; }
-button:hover{ border-color:rgba(105,166,255,.45); }
-.result{ margin-top:12px; padding:12px; border-radius:14px; border:1px solid rgba(25,195,125,.35);
-         background:rgba(25,195,125,.08); color:var(--ok); font-weight:600; }
-.muted{ color:var(--muted); font-size:13px; margin-top:8px; line-height:1.55; }
+    .skip{
+      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+    }
+    .skip:focus{
+      left:12px;top:12px;width:auto;height:auto;
+      padding:10px 12px;border-radius:12px;
+      background:#0b172d;color:#fff;border:1px solid var(--line);z-index:999;
+    }
 
-.sections{ display:grid; gap:12px; margin-top:14px; }
-.sec{ background:rgba(0,0,0,.18); border:1px solid var(--line); border-radius:16px; padding:14px; }
-.sec h2{ margin:0 0 8px; font-size:16px; }
-.sec p, .sec li{ margin:0; color:var(--muted); line-height:1.65; font-size:14px; }
-.sec ul{ margin:8px 0 0 18px; padding:0; }
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-footer{ margin:18px 0 10px; color:var(--muted); font-size:13px; }
-.footerLinks{ margin-top:10px; border-top:1px solid var(--line); padding-top:12px; }
-.footerLinks a{ color:var(--muted); }
-.footerLinks a:hover{ color:var(--text); text-decoration:underline; }
-.small{ font-size:12px; opacity:.9; }
-</style>
+    .topbar{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(14px);
+      background:rgba(8,17,32,.78);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width:var(--max);margin:0 auto;
+      padding:12px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;
+    }
+    .brand-logo{
+      width:38px;height:38px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.18));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .brand-logo img{width:24px;height:24px;display:block}
+    .top-links{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    }
+    .top-links a{
+      color:var(--text);
+      font-size:.95rem;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid transparent;
+    }
+    .top-links a:hover{
+      text-decoration:none;
+      background:rgba(255,255,255,.04);
+      border-color:var(--line);
+    }
+
+    .hero{padding:34px 0 20px}
+    .breadcrumbs{
+      color:var(--muted);
+      font-size:.92rem;
+      margin-bottom:14px;
+      overflow:auto;
+      white-space:nowrap;
+    }
+    .breadcrumbs a{color:var(--muted)}
+    .breadcrumbs span{margin:0 8px;color:#64748b}
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-main{padding:28px}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:.85rem;font-weight:700;
+      color:#bfdbfe;
+      background:rgba(96,165,250,.10);
+      border:1px solid rgba(96,165,250,.22);
+      padding:8px 12px;border-radius:999px;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(2rem,4vw,3rem);
+      line-height:1.06;
+      letter-spacing:-.03em;
+    }
+    .hero p{
+      margin:0;
+      color:#cbd5e1;
+      max-width:800px;
+      font-size:1.03rem;
+    }
+    .hero-actions{
+      margin-top:18px;
+      display:flex;gap:12px;flex-wrap:wrap;
+    }
+
+    .btn{
+      appearance:none;border:0;cursor:pointer;
+      font:inherit;font-weight:800;
+      border-radius:14px;padding:13px 16px;
+      transition:.18s ease;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg, var(--brand), #3b82f6);
+      color:#fff;
+      box-shadow:0 10px 26px rgba(59,130,246,.28);
+    }
+    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03);text-decoration:none}
+    .btn-secondary{
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+    }
+    .btn-secondary:hover{background:rgba(255,255,255,.06);text-decoration:none}
+
+    .hero-side{
+      padding:22px;
+      display:grid;
+      gap:12px;
+      align-content:start;
+    }
+    .mini-stat{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    .mini-stat .label{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-bottom:4px;
+    }
+    .mini-stat .value{
+      font-weight:800;
+      font-size:1.1rem;
+      color:#fff;
+    }
+
+    .section{padding:14px 0 10px}
+
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .tool-panel,.info-panel,.content-card{padding:22px}
+
+    .tool-panel h2,.info-panel h2,.content h2,.content h3{
+      margin:0 0 10px;
+      letter-spacing:-.02em;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:.96rem;
+      margin-bottom:18px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .full{grid-column:1/-1}
+
+    label{
+      display:block;
+      font-size:.94rem;
+      font-weight:700;
+      margin-bottom:8px;
+      color:#dbeafe;
+    }
+
+    input[type="number"], select{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0a1427;
+      color:#fff;
+      padding:14px 14px;
+      font:inherit;
+      outline:none;
+      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    input[type="number"]:focus, select:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 4px rgba(96,165,250,.14);
+      background:#0b172d;
+    }
+
+    .input-group{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:10px 12px;
+    }
+    .input-group input{
+      flex:1;
+      border:0;
+      outline:0;
+      background:transparent;
+      color:#fff;
+      font:inherit;
+      font-size:1.1rem;
+      min-width:0;
+    }
+    .input-group input:focus{box-shadow:none}
+    .unit-chip{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:64px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:.88rem;
+      font-weight:700;
+    }
+
+    .helper{
+      color:var(--muted);
+      font-size:.85rem;
+      margin-top:6px;
+      line-height:1.45;
+    }
+
+    .actions{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .info-panel{
+      position:sticky;
+      top:76px;
+    }
+
+    .result-box{
+      padding:18px;
+      border-radius:18px;
+      background:rgba(16,185,129,.08);
+      border:1px solid rgba(16,185,129,.24);
+      margin-bottom:14px;
+    }
+    .result-label{
+      color:#bdebd8;
+      font-size:.92rem;
+      margin-bottom:6px;
+      font-weight:700;
+    }
+    .result-value{
+      font-size:clamp(1.5rem,4vw,2.4rem);
+      font-weight:900;
+      letter-spacing:-.03em;
+      color:#d1fae5;
+      line-height:1.1;
+      word-break:break-word;
+    }
+
+    .detail-grid{
+      display:grid;
+      gap:10px;
+    }
+    .detail-item{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:12px 13px;
+    }
+    .detail-item strong{
+      display:block;
+      margin-bottom:5px;
+      color:#fff;
+      font-size:.95rem;
+    }
+    .detail-item span{
+      color:#cbd5e1;
+      font-size:.92rem;
+      line-height:1.45;
+    }
+
+    .note{
+      border-left:4px solid var(--warn);
+      padding:12px 14px;
+      background:rgba(245,158,11,.08);
+      border-radius:0 14px 14px 0;
+      color:#fde7bf;
+      margin-top:12px;
+      line-height:1.55;
+    }
+
+    .content{
+      margin-top:20px;
+      display:grid;
+      gap:18px;
+    }
+    .content p{
+      color:#cbd5e1;
+      margin:0 0 12px;
+      line-height:1.65;
+    }
+    .content ul{
+      margin:10px 0 0 18px;
+      color:#cbd5e1;
+    }
+    .content li{margin:8px 0}
+
+    .faq{
+      display:grid;
+      gap:12px;
+      margin-top:12px;
+    }
+    details{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      color:#fff;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin:10px 0 0;
+      color:#cbd5e1;
+      line-height:1.6;
+    }
+
+    .related-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .related-links a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+    .related-links a:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .footer{
+      padding:28px 0 42px;
+      color:var(--muted);
+    }
+    .footer-box{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 0 0;
+      border-top:1px solid var(--line);
+    }
+    .footer-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .footer-links a{color:var(--muted)}
+    .footer-links a:hover{color:var(--text);text-decoration:none}
+
+    @media (max-width: 980px){
+      .hero-grid,.tool-grid{grid-template-columns:1fr}
+      .info-panel{position:relative;top:auto}
+    }
+
+    @media (max-width: 700px){
+      .form-grid{grid-template-columns:1fr}
+      .hero-main,.hero-side,.tool-panel,.info-panel,.content-card{padding:18px}
+      .topbar-inner{padding:10px 14px}
+      .top-links{display:none}
+      h1{font-size:2rem}
+      .btn{width:100%}
+      .actions .btn{width:auto;flex:1 1 180px}
+    }
+  </style>
+
+  <!-- =========================
+       Structured Data
+       ========================= -->
   <script type="application/ld+json">
-  {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How many grams are in 1 US cup?", "acceptedAnswer": {"@type": "Answer", "text": "This converter uses water as the reference: 1 US cup ≈ 236.588 grams."}}, {"@type": "Question", "name": "Is this cups to grams conversion exact?", "acceptedAnswer": {"@type": "Answer", "text": "It is exact for water using the US cup volume. For other ingredients, grams per cup varies by density."}}, {"@type": "Question", "name": "Does this tool store my data?", "acceptedAnswer": {"@type": "Answer", "text": "No. The conversion runs locally in your browser."}}]}
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Cups to Grams Converter",
+        "item":"https://instantqr.io/tools/cups-to-grams.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Cups to Grams Converter (Water)",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/cups-to-grams.html",
+    "description":"Free browser-based cups to grams converter for water using US cups.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How many grams are in 1 US cup?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This converter uses water as the reference, so 1 US cup is approximately 236.588 grams."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Is this cups to grams conversion exact?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"It is accurate for water using the US cup volume. For other ingredients such as flour or sugar, grams per cup vary by density."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool store my data?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. The conversion runs locally in your browser."
+        }
+      }
+    ]
+  }
   </script>
 </head>
-
 <body>
-  <div class="wrap">
-    <header>
-      <a class="brand" href="/">
-        <div class="logo" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M6 7h12M6 12h10M6 17h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <b>InstantQR</b>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
       </a>
-      <nav class="nav">
-        <a class="pill" href="/tools/unit-converter.html">Unit Converter Hub</a>
-        <a class="pill" href="/tools/password.html">Password</a>
-        <a class="pill" href="/tools/ip-lookup.html">IP Lookup</a>
-        <a class="pill" href="/tools/internet-speed-test.html">Speed Test</a>
+
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
+        <a href="/guides/guides.html">Guides</a>
+        <a href="/about.html">About</a>
       </nav>
-    </header>
-
-    <div class="hero">
-      <h1>Cups to Grams Converter (Water)</h1>
-      <div class="sub">Convert US cups to grams instantly (water). Fast, mobile-friendly, privacy-first — runs locally in your browser.</div>
-      <div class="note"><b>Note:</b> This page assumes <b>water</b> density. For flour/sugar/etc, grams per cup differs.</div>
     </div>
+  </header>
 
-    <div class="card">
-      <div class="cardInner">
-        <div class="grid">
-          <div>
-            <label for="a">Cups (US)</label>
-            <div class="input">
-              <input id="a" type="number" inputmode="decimal" placeholder="e.g. 1" />
-              <span class="unit">cup</span>
-            </div>
-          </div>
-          <div>
-            <label for="b">Grams (water)</label>
-            <div class="input">
-              <input id="b" type="number" inputmode="decimal" placeholder="e.g. 1" />
-              <span class="unit">g</span>
-            </div>
+  <main id="main" class="wrap">
+    <section class="hero">
+      <div class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="/tools.html">Tools</a><span>›</span>
+        <span>Cups to Grams Converter</span>
+      </div>
+
+      <div class="hero-grid">
+        <div class="card hero-main">
+          <div class="eyebrow">Kitchen Converter • Fast • Browser-Based</div>
+          <h1>Cups to Grams Converter (Water)</h1>
+          <p>Convert US cups to grams instantly using water as the reference density. This tool is fast, mobile-friendly, and runs locally in your browser.</p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#converter">Use Converter</a>
+            <a class="btn btn-secondary" href="/tools/unit-converter.html">Browse Unit Tools</a>
           </div>
         </div>
 
-        <div class="row">
-          <label for="dec" style="margin:0;color:var(--muted);font-size:13px;">Decimals</label>
-          <select id="dec" aria-label="Decimals">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2" selected>2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-          <button id="copyBtn" type="button">Copy Result</button>
-          <button id="clearBtn" type="button">Clear</button>
-        </div>
-
-        <div id="out" class="result">Enter a value to convert.</div>
-        <div class="muted">Formula: grams = cups × 236.5882365 (US cup, water).</div>
+        <aside class="card hero-side" aria-label="Tool highlights">
+          <div class="mini-stat">
+            <div class="label">Reference</div>
+            <div class="value">Water density</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Volume standard</div>
+            <div class="value">US cups</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Runs locally</div>
+            <div class="value">No data upload required</div>
+          </div>
+          <div class="mini-stat">
+            <div class="label">Best for</div>
+            <div class="value">Quick kitchen conversions</div>
+          </div>
+        </aside>
       </div>
-    </div>
+    </section>
 
-    
-    <div class="sections">
-      <div class="sec">
-        <h2>How it works</h2>
-        <p>Type in either field to convert instantly. This tool runs locally in your browser.</p>
+    <section class="section" id="converter">
+      <div class="tool-grid">
+        <section class="card tool-panel" aria-labelledby="converter-title">
+          <h2 id="converter-title">Convert cups and grams</h2>
+          <div class="sub">Type in either field to convert instantly. This version uses water as the density reference, so values for ingredients like flour, sugar, butter, or oats will differ.</div>
+
+          <div class="form-grid">
+            <div>
+              <label for="a">Cups (US)</label>
+              <div class="input-group">
+                <input id="a" type="number" inputmode="decimal" placeholder="e.g. 1" />
+                <span class="unit-chip">cup</span>
+              </div>
+            </div>
+
+            <div>
+              <label for="b">Grams (water)</label>
+              <div class="input-group">
+                <input id="b" type="number" inputmode="decimal" placeholder="e.g. 236.59" />
+                <span class="unit-chip">g</span>
+              </div>
+            </div>
+
+            <div class="full">
+              <label for="dec">Display decimals</label>
+              <select id="dec" aria-label="Display decimals">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+              <div class="helper">Higher decimals are useful for smaller measurements and more precise kitchen math.</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="copyBtn" type="button">Copy Result</button>
+            <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
+          </div>
+
+          <div class="note">
+            This converter assumes <strong>water</strong>. For flour, sugar, rice, oats, cocoa, butter, and similar ingredients, grams per cup vary because density changes by ingredient.
+          </div>
+        </section>
+
+        <aside class="card info-panel" aria-labelledby="results-title">
+          <h2 id="results-title">Conversion result</h2>
+
+          <div class="result-box">
+            <div class="result-label">Current result</div>
+            <div class="result-value" id="out">Enter a value to convert.</div>
+          </div>
+
+          <div class="detail-grid">
+            <div class="detail-item">
+              <strong>Formula</strong>
+              <span>Grams = cups × 236.5882365</span>
+            </div>
+            <div class="detail-item">
+              <strong>Reverse formula</strong>
+              <span>Cups = grams ÷ 236.5882365</span>
+            </div>
+            <div class="detail-item">
+              <strong>Reference</strong>
+              <span>1 US cup of water ≈ 236.588 grams</span>
+            </div>
+            <div class="detail-item">
+              <strong>Common conversion</strong>
+              <span>1/2 cup ≈ 118.29 g</span>
+            </div>
+          </div>
+        </aside>
       </div>
-      <div class="sec">
-        <h2>Common conversions</h2>
+    </section>
+
+    <section class="content">
+      <article class="card content-card">
+        <h2>How this cups to grams converter works</h2>
+        <p>This converter uses the US cup measurement and assumes water as the reference ingredient. Since 1 US cup is approximately 236.588 milliliters and water has a near 1:1 milliliter-to-gram relationship, the conversion is straightforward.</p>
+        <p>That makes this tool reliable for water and useful as a quick baseline for general kitchen math. For dry ingredients and thicker liquids, actual grams per cup can vary significantly.</p>
+      </article>
+
+      <article class="card content-card">
+        <h2>Common cups to grams conversions for water</h2>
         <ul>
           <li>1 cup ≈ 236.59 g</li>
-<li>2 cups ≈ 473.18 g</li>
-<li>1/2 cup ≈ 118.29 g</li>
+          <li>2 cups ≈ 473.18 g</li>
+          <li>1/2 cup ≈ 118.29 g</li>
+          <li>1/4 cup ≈ 59.15 g</li>
+          <li>3 cups ≈ 709.76 g</li>
         </ul>
-      </div>
-    </div>
+      </article>
 
-    <footer>
-      <div class="small">© <span id="y"></span> InstantQR — fast, privacy-first web tools.</div>
-      <div class="footerLinks">
-        <div style="margin-bottom:8px;">
-          <a href="/tools/cups-to-grams.html">Cups to Grams</a> ·
-          <a href="/tools/grams-to-cups.html">Grams to Cups</a> ·
-          <a href="/tools/lbs-to-kg.html">lbs to kg</a> ·
-          <a href="/tools/kg-to-lbs.html">kg to lbs</a> ·
-          <a href="/tools/inches-to-cm.html">in to cm</a> ·
-          <a href="/tools/cm-to-inches.html">cm to in</a> ·
-          <a href="/tools/mph-to-kmh.html">mph to km/h</a> ·
-          <a href="/tools/kmh-to-mph.html">km/h to mph</a> ·
-          <a href="/tools/f-to-c.html">°F to °C</a> ·
-          <a href="/tools/c-to-f.html">°C to °F</a>
+      <article class="card content-card">
+        <h2>Related tools</h2>
+        <div class="related-links">
+          <a href="/tools/grams-to-cups.html">Grams to Cups</a>
+          <a href="/tools/unit-converter.html">Unit Converter</a>
+          <a href="/tools/ml-to-cups.html">mL to Cups</a>
+          <a href="/tools/cups-to-ml.html">Cups to mL</a>
         </div>
-        <div>
-          <a href="/about.html">About</a> ·
-          <a href="/privacy.html">Privacy</a> ·
-          <a href="/terms.html">Terms</a> ·
+      </article>
+
+      <article class="card content-card">
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+          <details open>
+            <summary>How many grams are in 1 US cup?</summary>
+            <p>This converter uses water as the reference, so 1 US cup is approximately 236.588 grams.</p>
+          </details>
+
+          <details>
+            <summary>Is this cups to grams conversion exact?</summary>
+            <p>It is accurate for water using the US cup volume. For other ingredients such as flour, sugar, butter, and oats, grams per cup depend on density.</p>
+          </details>
+
+          <details>
+            <summary>Why do ingredient conversions vary?</summary>
+            <p>Different ingredients pack differently and have different densities. A cup of flour does not weigh the same as a cup of sugar or a cup of butter.</p>
+          </details>
+
+          <details>
+            <summary>Does this tool store my data?</summary>
+            <p>No. The conversion runs locally in your browser.</p>
+          </details>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="y"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
+          <a href="/guides/guides.html">Guides</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
           <a href="/contact.html">Contact</a>
         </div>
       </div>
     </footer>
-  </div>
+  </main>
 
   <script>
-    const FACTOR = 236.5882365;
+    (() => {
+      const FACTOR = 236.5882365;
 
-    const a = document.getElementById('a');
-    const b = document.getElementById('b');
-    const dec = document.getElementById('dec');
-    const out = document.getElementById('out');
-    const copyBtn = document.getElementById('copyBtn');
-    const clearBtn = document.getElementById('clearBtn');
+      const a = document.getElementById('a');
+      const b = document.getElementById('b');
+      const dec = document.getElementById('dec');
+      const out = document.getElementById('out');
+      const copyBtn = document.getElementById('copyBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const yearEl = document.getElementById('y');
 
-    let lock = null; // 'a' or 'b'
+      let lock = null;
 
-    function fmt(n){
-      const d = parseInt(dec.value,10);
-      if (!isFinite(n)) return '';
-      return (Math.round(n * Math.pow(10,d)) / Math.pow(10,d)).toFixed(d);
-    }
-
-    function setOut(text){ out.textContent = text; }
-
-    function fromA(){
-      const v = parseFloat(a.value);
-      if (!isFinite(v)) { b.value=''; setOut('Enter a value to convert.'); return; }
-      const v2 = v * FACTOR;
-      b.value = fmt(v2);
-      setOut(`${fmt(v)} cup = ${fmt(v2)} g`);
-    }
-
-    function fromB(){
-      const v = parseFloat(b.value);
-      if (!isFinite(v)) { a.value=''; setOut('Enter a value to convert.'); return; }
-      const v2 = v / FACTOR;
-      a.value = fmt(v2);
-      setOut(`${fmt(v)} g = ${fmt(v2)} cup`);
-    }
-
-    a.addEventListener('input', () => { lock='a'; fromA(); });
-    b.addEventListener('input', () => { lock='b'; fromB(); });
-    dec.addEventListener('change', () => {
-      if (lock==='a') fromA();
-      else if (lock==='b') fromB();
-    });
-
-    copyBtn.addEventListener('click', async () => {
-      try{
-        await navigator.clipboard.writeText(out.textContent || '');
-        copyBtn.textContent = 'Copied!';
-        setTimeout(()=>copyBtn.textContent='Copy Result', 900);
-      }catch(e){
-        copyBtn.textContent = 'Copy failed';
-        setTimeout(()=>copyBtn.textContent='Copy Result', 900);
+      function fmt(n){
+        const d = parseInt(dec.value, 10);
+        if (!isFinite(n)) return '';
+        return (Math.round(n * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d);
       }
-    });
 
-    clearBtn.addEventListener('click', () => {
-      a.value=''; b.value=''; lock=null;
-      setOut('Enter a value to convert.');
-      a.focus();
-    });
+      function setOut(text){
+        out.textContent = text;
+      }
 
-    document.getElementById('y').textContent = new Date().getFullYear();
+      function fromA(){
+        const v = parseFloat(a.value);
+        if (!isFinite(v)) {
+          b.value = '';
+          setOut('Enter a value to convert.');
+          return;
+        }
+        const v2 = v * FACTOR;
+        b.value = fmt(v2);
+        setOut(`${fmt(v)} cup = ${fmt(v2)} g`);
+      }
+
+      function fromB(){
+        const v = parseFloat(b.value);
+        if (!isFinite(v)) {
+          a.value = '';
+          setOut('Enter a value to convert.');
+          return;
+        }
+        const v2 = v / FACTOR;
+        a.value = fmt(v2);
+        setOut(`${fmt(v)} g = ${fmt(v2)} cup`);
+      }
+
+      a.addEventListener('input', () => {
+        lock = 'a';
+        fromA();
+      });
+
+      b.addEventListener('input', () => {
+        lock = 'b';
+        fromB();
+      });
+
+      dec.addEventListener('change', () => {
+        if (lock === 'a') fromA();
+        else if (lock === 'b') fromB();
+      });
+
+      copyBtn.addEventListener('click', async () => {
+        try{
+          await navigator.clipboard.writeText(out.textContent || '');
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => copyBtn.textContent = 'Copy Result', 900);
+        }catch(e){
+          copyBtn.textContent = 'Copy failed';
+          setTimeout(() => copyBtn.textContent = 'Copy Result', 900);
+        }
+      });
+
+      clearBtn.addEventListener('click', () => {
+        a.value = '';
+        b.value = '';
+        lock = null;
+        setOut('Enter a value to convert.');
+        a.focus();
+      });
+
+      yearEl.textContent = new Date().getFullYear();
+    })();
   </script>
 </body>
 </html>
