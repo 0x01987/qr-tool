@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google Analytics -->
+  <!-- Analytics / Monetization -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,461 +10,82 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <!-- Google AdSense -->
   <script async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>Token Contract Analyzer | ERC-20 Contract Checker | InstantQR</title>
-  <meta name="description" content="Free token contract analyzer for Ethereum, Base, Arbitrum, Optimism, and BNB Chain. Check ERC-20 token name, symbol, decimals, total supply, owner status, liquidity pair hints, buy/sell fee functions, blacklist functions, mintability, pausability, proxy hints, and common risk signals." />
-  <meta name="keywords" content="token contract analyzer, token checker, ERC20 contract analyzer, smart contract checker, crypto token scanner, token security checker, ERC20 analyzer, honeypot risk checker, token owner checker, proxy contract checker, instantqr" />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="description" content="Analyze an ERC-20 token contract instantly. Check token name, symbol, decimals, total supply, bytecode presence, and common function support from your browser." />
+  <meta name="keywords" content="token contract analyzer, erc20 checker, contract analyzer, token metadata checker, smart contract checker, erc20 analyzer, contract inspection tool" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
-  <meta name="theme-color" content="#081120" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no" />
 
-  <link rel="canonical" href="https://instantqr.io/web3-tools/token-contract-analyzer.html" />
-  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="canonical" href="https://instantqr.io/tools/token-contract-analyzer.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="preconnect" href="https://ethereum-rpc.publicnode.com" crossorigin>
+  <link rel="preconnect" href="https://cloudflare-eth.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="//ethereum-rpc.publicnode.com">
+  <link rel="dns-prefetch" href="//cloudflare-eth.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Token Contract Analyzer | InstantQR" />
-  <meta property="og:description" content="Analyze ERC-20 token contracts with a fast, responsive, privacy-friendly tool. Check token metadata, ownership, risk hints, liquidity pair hints, and common contract patterns." />
-  <meta property="og:url" content="https://instantqr.io/web3-tools/token-contract-analyzer.html" />
   <meta property="og:site_name" content="InstantQR" />
-  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Token Contract Analyzer | InstantQR" />
+  <meta property="og:description" content="Analyze ERC-20 contract metadata, bytecode, and common function support instantly." />
+  <meta property="og:url" content="https://instantqr.io/tools/token-contract-analyzer.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR Token Contract Analyzer" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Token Contract Analyzer | InstantQR" />
-  <meta name="twitter:description" content="Fast ERC-20 token contract analyzer for major EVM chains. Check metadata, ownership, fee function hints, minting risk, proxy hints, and more." />
-  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.png" />
-
-  <style>
-    :root{
-      --bg:#081120;
-      --bg2:#0c1730;
-      --card:#0f172a;
-      --card2:#111c34;
-      --text:#e8f1ff;
-      --muted:#95a6c7;
-      --line:rgba(255,255,255,.10);
-      --brand:#38bdf8;
-      --brand2:#2563eb;
-      --success:#22c55e;
-      --warning:#f59e0b;
-      --danger:#ef4444;
-      --shadow:0 20px 60px rgba(0,0,0,.35);
-      --radius:22px;
-      --radius-sm:14px;
-      --max:1180px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(56,189,248,.14), transparent 30%),
-        radial-gradient(circle at top right, rgba(37,99,235,.14), transparent 28%),
-        linear-gradient(180deg,#07101d 0%,#0b1427 45%,#09111f 100%);
-      min-height:100vh;
-      line-height:1.55;
-    }
-
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
-    .topbar{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter:blur(10px);
-      background:rgba(8,17,32,.76);
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:14px; padding:14px 0;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      font-weight:800; color:#fff; letter-spacing:.2px;
-    }
-    .brand img{width:34px;height:34px;display:block}
-    .navlinks{display:flex;gap:12px;flex-wrap:wrap}
-    .navlinks a{
-      color:var(--muted);
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:.95rem;
-    }
-    .navlinks a:hover{
-      color:#fff;
-      text-decoration:none;
-      background:rgba(255,255,255,.06);
-    }
-
-    .hero{padding:38px 0 18px}
-    .heroCard{
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:22px;
-      padding:28px;
-      border-radius:28px;
-      border:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(17,28,52,.94),rgba(15,23,42,.96));
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .heroCard::after{
-      content:"";
-      position:absolute;
-      right:-70px;
-      bottom:-70px;
-      width:220px;
-      height:220px;
-      background:radial-gradient(circle, rgba(56,189,248,.18), transparent 66%);
-      pointer-events:none;
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(56,189,248,.10);
-      border:1px solid rgba(56,189,248,.22);
-      color:#c7f0ff;
-      font-weight:800;
-      font-size:.86rem;
-      margin-bottom:14px;
-    }
-    h1{
-      margin:0 0 10px;
-      font-size:clamp(2rem, 4vw, 3.2rem);
-      line-height:1.04;
-      letter-spacing:-.03em;
-    }
-    .sub{
-      margin:0;
-      color:var(--muted);
-      font-size:1.03rem;
-      max-width:780px;
-    }
-    .heroPoints{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
-      margin-top:18px;
-    }
-    .pill{
-      padding:12px 14px;
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      color:#dce7fb;
-      font-size:.95rem;
-    }
-    .miniCol{display:grid;gap:14px;align-content:start}
-    .miniStat{
-      padding:18px;
-      border-radius:18px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .miniStat strong{
-      display:block;
-      font-size:1.25rem;
-      margin-bottom:4px;
-    }
-    .miniStat span{color:var(--muted);font-size:.95rem}
-    .breadcrumbs{
-      margin-top:16px;
-      color:var(--muted);
-      font-size:.92rem;
-    }
-    .breadcrumbs a{color:var(--muted)}
-    .breadcrumbs a:hover{color:#fff}
-
-    main{padding:18px 0 42px}
-    .grid{
-      display:grid;
-      grid-template-columns:1.08fr .92fr;
-      gap:18px;
-      align-items:start;
-    }
-    .card{
-      background:linear-gradient(180deg,rgba(17,28,52,.94),rgba(15,23,42,.97));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:22px;
-    }
-    .card h2,.card h3{
-      margin:0 0 8px;
-      line-height:1.15;
-      letter-spacing:-.02em;
-    }
-    .card p{margin:0 0 14px;color:var(--muted)}
-
-    .toolGrid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
-    }
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-    .field.full{grid-column:1/-1}
-    label{
-      font-weight:800;
-      font-size:.94rem;
-      color:#e9f2ff;
-    }
-    input, select, button{
-      font:inherit;
-    }
-    input, select{
-      width:100%;
-      border:1px solid rgba(255,255,255,.12);
-      background:#0b1426;
-      color:#fff;
-      padding:14px 14px;
-      border-radius:14px;
-      outline:none;
-      transition:border-color .18s ease, box-shadow .18s ease;
-    }
-    input::placeholder{color:#7d8ba5}
-    input:focus, select:focus{
-      border-color:rgba(56,189,248,.62);
-      box-shadow:0 0 0 4px rgba(56,189,248,.14);
-    }
-
-    .actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:14px;
-    }
-    button{
-      border:0;
-      cursor:pointer;
-      border-radius:14px;
-      padding:13px 16px;
-      font-weight:800;
-      transition:transform .08s ease, filter .2s ease, opacity .2s ease;
-    }
-    button:hover{filter:brightness(1.05)}
-    button:active{transform:translateY(1px)}
-    button[disabled]{opacity:.55;cursor:not-allowed}
-    .btnPrimary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}
-    .btnSecondary{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.10)}
-
-    .inlineHint{
-      margin-top:10px;
-      color:var(--muted);
-      font-size:.92rem;
-    }
-
-    .result{
-      margin-top:16px;
-      border-radius:18px;
-      padding:16px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.03);
-      min-height:120px;
-    }
-    .resultStatus{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 11px;
-      border-radius:999px;
-      font-size:.83rem;
-      font-weight:900;
-      letter-spacing:.02em;
-      margin-bottom:12px;
-    }
-    .statusNeutral{
-      background:rgba(255,255,255,.06);
-      color:#dbe5f6;
-      border:1px solid rgba(255,255,255,.10);
-    }
-    .statusSafe{
-      background:rgba(34,197,94,.12);
-      color:#bdf6c9;
-      border:1px solid rgba(34,197,94,.22);
-    }
-    .statusWarn{
-      background:rgba(245,158,11,.12);
-      color:#ffe0a3;
-      border:1px solid rgba(245,158,11,.24);
-    }
-    .statusDanger{
-      background:rgba(239,68,68,.12);
-      color:#ffc4c4;
-      border:1px solid rgba(239,68,68,.25);
-    }
-    .resultMain{
-      font-size:1.65rem;
-      font-weight:900;
-      line-height:1.15;
-      margin-bottom:8px;
-      letter-spacing:-.02em;
-      word-break:break-word;
-    }
-    .resultMeta{
-      color:var(--muted);
-      font-size:.96rem;
-      margin-bottom:12px;
-    }
-
-    .kvGrid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
-    }
-    .kv{
-      padding:12px 14px;
-      border-radius:14px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .kv span{
-      display:block;
-      color:var(--muted);
-      font-size:.82rem;
-      margin-bottom:4px;
-    }
-    .kv strong{
-      display:block;
-      word-break:break-word;
-      font-size:.97rem;
-    }
-
-    .riskList{
-      display:grid;
-      gap:10px;
-      margin-top:14px;
-    }
-    .riskItem{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.04);
-    }
-    .riskDot{
-      width:12px;height:12px;border-radius:999px;flex:0 0 12px;margin-top:5px;
-    }
-    .dotSafe{background:var(--success)}
-    .dotWarn{background:var(--warning)}
-    .dotDanger{background:var(--danger)}
-    .riskText strong{display:block;margin-bottom:3px}
-    .riskText p{margin:0;color:var(--muted);font-size:.93rem}
-
-    .tips{
-      display:grid;
-      gap:12px;
-    }
-    .tip{
-      padding:14px;
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .tip strong{display:block;margin-bottom:6px}
-    .tip p{margin:0;color:var(--muted)}
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-      word-break:break-all;
-    }
-
-    .content p{color:var(--muted)}
-    .content strong{color:#fff}
-    .faq details{
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:16px;
-      padding:14px 16px;
-    }
-    .faq details + details{margin-top:12px}
-    .faq summary{
-      cursor:pointer;
-      font-weight:800;
-      list-style:none;
-      color:#fff;
-    }
-    .faq summary::-webkit-details-marker{display:none}
-    .faq .answer{
-      margin-top:10px;
-      color:var(--muted);
-    }
-
-    .footer{
-      border-top:1px solid rgba(255,255,255,.08);
-      padding:26px 0 40px;
-      color:var(--muted);
-    }
-    .footerCard{
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:22px;
-      padding:20px;
-    }
-    .footerLinks{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      margin-top:10px;
-      font-size:.95rem;
-    }
-    .footerLinks a{color:#c4d6ef}
-    .wideSection{
-      margin-top:18px;
-      display:grid;
-      gap:18px;
-    }
-
-    @media (max-width: 980px){
-      .heroCard,.grid{grid-template-columns:1fr}
-    }
-    @media (max-width: 720px){
-      .wrap{padding:0 14px}
-      .hero{padding:24px 0 12px}
-      .heroCard,.card,.footerCard{padding:18px}
-      .toolGrid,.kvGrid,.heroPoints{grid-template-columns:1fr}
-      .nav{align-items:flex-start;flex-direction:column}
-      .navlinks{width:100%}
-    }
-  </style>
+  <meta name="twitter:description" content="Analyze ERC-20 contract metadata, bytecode, and common function support instantly." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"WebApplication",
+    "@type":"WebPage",
+    "name":"Token Contract Analyzer",
+    "url":"https://instantqr.io/tools/token-contract-analyzer.html",
+    "description":"Analyze ERC-20 token metadata, bytecode, and common function support instantly.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
     "name":"Token Contract Analyzer",
     "applicationCategory":"FinanceApplication",
     "operatingSystem":"Any",
-    "url":"https://instantqr.io/web3-tools/token-contract-analyzer.html",
-    "description":"Free ERC-20 token contract analyzer for Ethereum, Base, Arbitrum, Optimism, and BNB Chain. Check token metadata, ownership, minting, pausability, proxy hints, fee function hints, and common risk indicators.",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/token-contract-analyzer.html",
+    "description":"Analyze ERC-20 token metadata, bytecode, and common function support from public RPC endpoints.",
     "publisher":{
       "@type":"Organization",
       "name":"InstantQR",
       "url":"https://instantqr.io/"
-    },
-    "offers":{
-      "@type":"Offer",
-      "price":"0",
-      "priceCurrency":"USD"
     }
   }
   </script>
@@ -484,13 +105,13 @@
         "@type":"ListItem",
         "position":2,
         "name":"Tools",
-        "item":"https://instantqr.io/tools.html"
+        "item":"https://instantqr.io/tools/tools.html"
       },
       {
         "@type":"ListItem",
         "position":3,
         "name":"Token Contract Analyzer",
-        "item":"https://instantqr.io/web3-tools/token-contract-analyzer.html"
+        "item":"https://instantqr.io/tools/token-contract-analyzer.html"
       }
     ]
   }
@@ -503,768 +124,368 @@
     "mainEntity":[
       {
         "@type":"Question",
-        "name":"What does a token contract analyzer do?",
+        "name":"What does this token contract analyzer show?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"A token contract analyzer checks common ERC-20 contract metadata and security-related patterns such as ownership, mintability, pausability, proxy hints, blacklist functions, fee function hints, and supply details."
+          "text":"This tool shows whether bytecode exists at an address, basic token metadata like name and symbol, decimals, total supply, and whether common ERC-20 functions respond."
         }
       },
       {
         "@type":"Question",
-        "name":"Can this tool tell if a token is safe?",
+        "name":"Does this tool audit contract safety?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"No tool can guarantee that a token is completely safe. This analyzer highlights common signals and risk hints, but users should still do additional research before trading or investing."
+          "text":"No. This tool is a lightweight on-chain contract inspector and does not replace a professional smart contract audit."
         }
       },
       {
         "@type":"Question",
-        "name":"Which chains are supported?",
+        "name":"Does this tool run in the browser?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"This tool supports Ethereum, Base, Arbitrum, Optimism, and BNB Chain."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"Does this tool store my inputs?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"No. The analyzer runs in your browser and reads public contract data from supported public RPC endpoints."
+          "text":"Yes. The analysis runs from your browser using public Ethereum RPC endpoints."
         }
       }
     ]
   }
   </script>
+
+  <style>
+    .controls.cols-2{grid-template-columns:1.6fr 1fr}
+    .metricGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .metricCard{
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .metricCard h3{
+      margin:0 0 6px;
+      font-size:15px;
+    }
+    .metricVal{
+      font-size:22px;
+      font-weight:900;
+      line-height:1.1;
+      word-break:break-word;
+      overflow-wrap:anywhere;
+    }
+    .goodVal{color:#c8ffe9}
+    .badVal{color:#ffd3d3}
+    .neutralVal{color:#f0f6ff}
+    .metricNote{
+      margin-top:6px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .miniGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .miniBox{
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .miniBox h3{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+    .claimRow{
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.10);
+      padding:12px;
+      margin-top:10px;
+    }
+    .claimRow:first-child{margin-top:0}
+    .claimKey{
+      font-weight:800;
+      color:#eaf2ff;
+      margin-bottom:6px;
+      font-size:13px;
+    }
+    .claimVal{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+      word-break:break-word;
+      overflow-wrap:anywhere;
+    }
+    .monoBlock{
+      white-space:pre-wrap;
+      word-break:break-word;
+      overflow-wrap:anywhere;
+      font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      color:#f0f6ff;
+      margin:0;
+    }
+    .hintBox{
+      margin-top:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.10);
+      padding:12px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+    }
+    @media (max-width:980px){
+      .controls.cols-2,
+      .metricGrid,
+      .miniGrid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <a class="skip" href="#main">Skip to content</a>
+
   <header class="topbar">
-    <div class="wrap nav">
-      <a class="brand" href="/" aria-label="InstantQR home">
-        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR Home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+        </span>
         <span>InstantQR</span>
       </a>
 
-      <nav class="navlinks" aria-label="Primary">
+      <nav class="top-links" aria-label="Primary">
         <a href="/">Home</a>
-        <a href="/tools.html">Tools</a>
-        <a href="/about.html">About</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/contact.html">Contact</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides/guides.html">Guides</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="wrap">
-      <div class="heroCard">
-        <div>
-          <div class="badge">Web3 Security Tool</div>
-          <h1>Token Contract Analyzer</h1>
-          <p class="sub">
-            Analyze ERC-20 token contracts across major EVM chains. Check metadata, total supply,
-            owner privileges, mintability, pausability, blacklist hints, proxy hints, fee-related functions,
-            and common risk signals in one fast responsive page.
-          </p>
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Token Contract Analyzer</span></li>
+      </ol>
+    </nav>
 
-          <div class="heroPoints">
-            <div class="pill">Ethereum, Base, Arbitrum, Optimism, BNB Chain</div>
-            <div class="pill">Metadata, owner, supply, proxy and risk checks</div>
-            <div class="pill">Client-side and privacy-friendly</div>
-            <div class="pill">Fast UI built for mobile and desktop</div>
+    <section class="hero" aria-label="Token Contract Analyzer">
+      <div class="pill">🧠 ERC-20 analysis • ⚡ Fast UI • 🔒 Browser-side check</div>
+      <h1>Token Contract Analyzer</h1>
+      <p class="sub">
+        Analyze an EVM token contract address on Ethereum mainnet. Check whether bytecode exists,
+        read common ERC-20 metadata, and test support for standard token functions.
+      </p>
+
+      <div class="summary" aria-label="Contract summary">
+        <div class="sumCard greenGlow">
+          <div class="sumLabel">Contract Status</div>
+          <div class="sumValue small mono" id="contractSummary">—</div>
+          <div class="sumNote">Shows whether the address has deployed bytecode.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Token Symbol</div>
+          <div class="sumValue small mono" id="symbolSummary">—</div>
+          <div class="sumNote">Symbol returned by the contract if supported.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Decimals</div>
+          <div class="sumValue small mono" id="decimalsSummary">—</div>
+          <div class="sumNote">Token decimals value if supported.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Mode</div>
+          <div class="sumValue small mono" id="modeLabel">Ready</div>
+          <div class="sumNote">Shows the latest analyzer state.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Token Contract Analyzer panel">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Contract Lookup</div>
+          <div class="panelSub">Paste an Ethereum contract address to inspect common ERC-20 metadata and function support.</div>
+        </div>
+
+        <div class="statusLine">
+          <span class="badge" id="statusBadge">Ready</span>
+          <button id="analyzeBtn" class="cta primary" type="button">Analyze Contract</button>
+          <button id="copyBtn" class="cta ghost" type="button">Copy Summary</button>
+          <button id="clearBtn" class="cta ghost" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div class="panelBody">
+        <div class="controls cols-2" aria-label="Analyzer inputs">
+          <div class="control">
+            <label for="contractAddress">Contract Address</label>
+            <input id="contractAddress" class="input" type="text" spellcheck="false" autocomplete="off" placeholder="0x..." />
           </div>
 
-          <div class="breadcrumbs" aria-label="Breadcrumb">
-            <a href="/">Home</a> / <a href="/tools.html">Tools</a> / <span>Token Contract Analyzer</span>
+          <div class="control">
+            <label for="networkLabel">Network</label>
+            <input id="networkLabel" class="input" type="text" value="Ethereum Mainnet" readonly />
           </div>
         </div>
 
-        <aside class="miniCol" aria-label="Highlights">
-          <div class="miniStat">
-            <strong>Contract metadata</strong>
-            <span>Check name, symbol, decimals, supply, owner, and bytecode size.</span>
+        <div class="resultBox ok" style="margin-top:12px;">
+          <div class="resultTop">
+            <div class="resultStatus ok">Live result</div>
+            <div class="small muted">Updates when you analyze a contract</div>
           </div>
-          <div class="miniStat">
-            <strong>Risk hints</strong>
-            <span>Find fee, blacklist, mint, pause, upgrade, and ownership signals.</span>
+          <div class="monoBlock" id="resultText">Enter a contract address and click Analyze Contract.</div>
+        </div>
+
+        <div class="formula" id="formulaText">Checks: bytecode present + ERC-20 metadata calls + common function support</div>
+
+        <div class="quick" aria-label="Quick actions">
+          <button type="button" id="trimBtn">Trim Input</button>
+          <button type="button" id="pasteBtn">Paste Address</button>
+        </div>
+
+        <div class="metricGrid">
+          <div class="metricCard">
+            <h3>Token Name</h3>
+            <div id="tokenName" class="metricVal neutralVal">—</div>
+            <div class="metricNote">Returned by the contract name() function if supported.</div>
           </div>
-          <div class="miniStat">
-            <strong>Secure design</strong>
-            <span>No wallet required, no dangerous transactions, read-only contract analysis.</span>
+
+          <div class="metricCard">
+            <h3>Token Symbol</h3>
+            <div id="tokenSymbol" class="metricVal neutralVal">—</div>
+            <div class="metricNote">Returned by the contract symbol() function if supported.</div>
           </div>
-        </aside>
+
+          <div class="metricCard">
+            <h3>Total Supply</h3>
+            <div id="totalSupply" class="metricVal neutralVal">—</div>
+            <div class="metricNote">Raw total supply formatted using decimals if available.</div>
+          </div>
+
+          <div class="metricCard">
+            <h3>Bytecode Size</h3>
+            <div id="bytecodeSize" class="metricVal neutralVal">—</div>
+            <div class="metricNote">Approximate deployed bytecode size in bytes.</div>
+          </div>
+        </div>
+
+        <div class="miniGrid">
+          <div class="miniBox">
+            <h3>Contract Details</h3>
+            <div class="claimRow">
+              <div class="claimKey">Address</div>
+              <div class="claimVal" id="addressOut">—</div>
+            </div>
+            <div class="claimRow">
+              <div class="claimKey">Decimals</div>
+              <div class="claimVal" id="decimalsOut">—</div>
+            </div>
+            <div class="claimRow">
+              <div class="claimKey">Last Updated</div>
+              <div class="claimVal" id="lastUpdated">—</div>
+            </div>
+          </div>
+
+          <div class="miniBox">
+            <h3>Function Support</h3>
+            <div class="claimRow">
+              <div class="claimKey">Common ERC-20 Methods</div>
+              <div class="claimVal" id="functionSupport">—</div>
+            </div>
+            <div class="claimRow">
+              <div class="claimKey">Transfer Event Topic</div>
+              <div class="claimVal" id="transferTopic">0xddf252ad...</div>
+            </div>
+            <div class="claimRow">
+              <div class="claimKey">Interpretation</div>
+              <div class="claimVal" id="analysisNote">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hintBox">
+          This tool is a quick on-chain metadata checker. It does not verify ownership controls, hidden logic, taxes,
+          upgradeability, blacklist behavior, or full audit safety.
+        </div>
+
+        <div class="helpBox">
+          <div class="helpCard">
+            <h3>Useful for quick screening</h3>
+            <p>
+              This is helpful when you want to confirm that an address is actually a deployed contract and whether it responds like a standard ERC-20 token.
+            </p>
+          </div>
+          <div class="helpCard">
+            <h3>Not a full security audit</h3>
+            <p>
+              A contract can return standard metadata and still include risky or malicious logic. Use this as a first-pass inspection tool, not a final trust decision.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <main>
-    <div class="wrap">
-      <section class="grid">
-        <article class="card">
-          <h2>Analyze Token Contract</h2>
-          <p>
-            Enter an ERC-20 token contract address and select a chain. This tool performs read-only checks and highlights common contract patterns and risk hints.
-          </p>
+    <section class="relatedTools" aria-label="Related crypto tools">
+      <h2>Related Crypto Tools</h2>
+      <div class="relatedLinks">
+        <a href="/tools/wallet-approval-checker.html">Wallet Approval Checker</a>
+        <a href="/tools/transaction-status-checker.html">Transaction Status Checker</a>
+        <a href="/tools/gas-tracker.html">Gas Tracker</a>
+        <a href="/tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+        <a href="/tools/dca-calculator.html">DCA Calculator</a>
+      </div>
+    </section>
 
-          <div class="toolGrid">
-            <div class="field">
-              <label for="chain">Chain</label>
-              <select id="chain">
-                <option value="ethereum">Ethereum</option>
-                <option value="base">Base</option>
-                <option value="arbitrum">Arbitrum</option>
-                <option value="optimism">Optimism</option>
-                <option value="bnb">BNB Chain</option>
-              </select>
-            </div>
+    <section class="faq" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
 
-            <div class="field">
-              <label for="mode">Analysis mode</label>
-              <select id="mode">
-                <option value="standard">Standard</option>
-                <option value="deep">Deep</option>
-              </select>
-            </div>
+      <details>
+        <summary>What does this token contract analyzer show?</summary>
+        <p>This tool shows whether bytecode exists at an address, basic token metadata like name and symbol, decimals, total supply, and whether common ERC-20 functions respond.</p>
+      </details>
 
-            <div class="field full">
-              <label for="contractAddress">Token contract address</label>
-              <input id="contractAddress" type="text" spellcheck="false" autocomplete="off" placeholder="0xTokenContractAddress" />
-            </div>
-          </div>
+      <details>
+        <summary>Does this tool audit contract safety?</summary>
+        <p>No. This tool is a lightweight on-chain contract inspector and does not replace a professional smart contract audit.</p>
+      </details>
 
-          <div class="actions">
-            <button type="button" class="btnPrimary" id="analyzeBtn">Analyze Contract</button>
-            <button type="button" class="btnSecondary" id="resetBtn">Reset</button>
-          </div>
+      <details>
+        <summary>Does this tool run in the browser?</summary>
+        <p>Yes. The analysis runs from your browser using public Ethereum RPC endpoints.</p>
+      </details>
+    </section>
 
-          <div class="inlineHint">
-            This is a read-only analyzer. It does not connect a wallet, sign transactions, or execute token trades.
-          </div>
-
-          <div class="result" id="resultBox" aria-live="polite">
-            <div class="resultStatus statusNeutral" id="statusPill">READY</div>
-            <div class="resultMain" id="resultMain">Enter a token contract address to begin analysis.</div>
-            <div class="resultMeta" id="resultMeta">This tool checks public on-chain contract data and common function patterns.</div>
-          </div>
-
-          <div class="kvGrid" style="margin-top:14px;">
-            <div class="kv">
-              <span>Token name</span>
-              <strong id="outName">—</strong>
-            </div>
-            <div class="kv">
-              <span>Symbol</span>
-              <strong id="outSymbol">—</strong>
-            </div>
-            <div class="kv">
-              <span>Decimals</span>
-              <strong id="outDecimals">—</strong>
-            </div>
-            <div class="kv">
-              <span>Total supply</span>
-              <strong id="outSupply">—</strong>
-            </div>
-            <div class="kv">
-              <span>Owner</span>
-              <strong class="mono" id="outOwner">—</strong>
-            </div>
-            <div class="kv">
-              <span>Contract address</span>
-              <strong class="mono" id="outAddress">—</strong>
-            </div>
-            <div class="kv">
-              <span>Chain</span>
-              <strong id="outChain">—</strong>
-            </div>
-            <div class="kv">
-              <span>Bytecode size</span>
-              <strong id="outCodeSize">—</strong>
-            </div>
-            <div class="kv">
-              <span>Proxy hint</span>
-              <strong id="outProxy">—</strong>
-            </div>
-            <div class="kv">
-              <span>Liquidity pair hint</span>
-              <strong class="mono" id="outPair">—</strong>
-            </div>
-          </div>
-
-          <div class="riskList" id="riskList">
-            <div class="riskItem">
-              <div class="riskDot dotSafe"></div>
-              <div class="riskText">
-                <strong>Awaiting analysis</strong>
-                <p>Risk and feature signals will appear here after analysis.</p>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <aside class="card">
-          <h2>What this tool checks</h2>
-          <p>Common ERC-20 contract signals and function patterns.</p>
-
-          <div class="tips">
-            <div class="tip">
-              <strong>Metadata</strong>
-              <p>Name, symbol, decimals, total supply, contract bytecode size, and basic token info.</p>
-            </div>
-            <div class="tip">
-              <strong>Owner privileges</strong>
-              <p>Owner and ownership-renounced hints, plus common admin function availability.</p>
-            </div>
-            <div class="tip">
-              <strong>Mint / pause / blacklist hints</strong>
-              <p>Checks for popular function names that may indicate supply control or transfer restrictions.</p>
-            </div>
-            <div class="tip">
-              <strong>Proxy and upgrade hints</strong>
-              <p>Looks for common EIP-1967 storage slots and upgrade-related functions.</p>
-            </div>
-            <div class="tip">
-              <strong>Fee function hints</strong>
-              <p>Looks for buy tax, sell tax, fee, max wallet, and max transaction style functions.</p>
-            </div>
-            <div class="tip">
-              <strong>Liquidity pair hint</strong>
-              <p>Attempts to read common DEX pair fields such as uniswapV2Pair, pair, or lpPair.</p>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <section class="wideSection">
-        <article class="card content">
-          <h2>How This Token Contract Analyzer Works</h2>
-          <p>
-            This tool reads public blockchain data from the selected chain and inspects the token contract using
-            common ERC-20 methods and a set of read-only pattern checks.
-          </p>
-          <p>
-            It can identify common signs such as <strong>mintability</strong>, <strong>owner control</strong>,
-            <strong>pausable transfer logic</strong>, <strong>blacklist-style methods</strong>,
-            <strong>fee or tax configuration methods</strong>, <strong>proxy hints</strong>, and
-            <strong>liquidity pair references</strong>.
-          </p>
-          <p>
-            These are helpful signals, but they are not a guarantee that a token is safe or unsafe.
-            Some legitimate tokens include admin controls, while some malicious tokens hide dangerous behavior in less obvious ways.
-          </p>
-        </article>
-
-        <article class="card content">
-          <h2>How to Use This ERC-20 Contract Checker</h2>
-          <p><strong>Step 1:</strong> Select the blockchain network.</p>
-          <p><strong>Step 2:</strong> Paste the token contract address.</p>
-          <p><strong>Step 3:</strong> Click <strong>Analyze Contract</strong>.</p>
-          <p><strong>Step 4:</strong> Review metadata, ownership, proxy hints, fee function hints, and risk signals.</p>
-          <p><strong>Step 5:</strong> Use the findings as one part of your broader due diligence before buying, trading, or holding a token.</p>
-        </article>
-
-        <article class="card faq">
-          <h2>Frequently Asked Questions</h2>
-
-          <details>
-            <summary>Can this tool detect every scam token?</summary>
-            <div class="answer">
-              No. This analyzer surfaces common patterns and warnings, but no automated checker can detect every scam or hidden exploit.
-            </div>
-          </details>
-
-          <details>
-            <summary>What does owner renounced mean?</summary>
-            <div class="answer">
-              It usually means the owner address is set to the zero address. That can reduce some admin risk, but it does not automatically make a token safe.
-            </div>
-          </details>
-
-          <details>
-            <summary>Why does proxy hint matter?</summary>
-            <div class="answer">
-              Proxy patterns can allow implementation upgrades. In some cases that is normal. In other cases it means token logic could potentially change later.
-            </div>
-          </details>
-
-          <details>
-            <summary>Does mintable always mean dangerous?</summary>
-            <div class="answer">
-              Not always. Some projects legitimately mint tokens over time. However, unlimited or owner-controlled minting can be a meaningful risk signal.
-            </div>
-          </details>
-
-          <details>
-            <summary>Does this analyzer store contract addresses?</summary>
-            <div class="answer">
-              No. It runs client-side and performs read-only checks against public RPC endpoints.
-            </div>
-          </details>
-        </article>
-      </section>
-    </div>
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/guides/guides.html">Guides</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
   </main>
 
-  <footer class="footer">
-    <div class="wrap">
-      <div class="footerCard">
-        <strong>InstantQR</strong>
-        <div class="footerLinks">
-          <div>
-            <a href="/tools.html">All Tools</a> ·
-            <a href="/wallet-approval-checker.html">Wallet Approval Checker</a> ·
-            <a href="/crypto-profit-calculator.html">Crypto Profit Calculator</a> ·
-            <a href="/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
-            <a href="/ip-lookup.html">IP Lookup</a> ·
-            <a href="/password.html">Password Generator</a>
-          </div>
-          <div>
-            <a href="/about.html">About</a> ·
-            <a href="/privacy.html">Privacy</a> ·
-            <a href="/terms.html">Terms</a> ·
-            <a href="/contact.html">Contact</a>
-          </div>
-          <div>© <span id="year"></span> InstantQR. Fast, clean, privacy-friendly tools.</div>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
-  <script>
-    (function(){
-      const $ = (id) => document.getElementById(id);
-
-      const ERC20_ABI = [
-        "function name() view returns (string)",
-        "function symbol() view returns (string)",
-        "function decimals() view returns (uint8)",
-        "function totalSupply() view returns (uint256)"
-      ];
-
-      const OPTIONAL_ABI = [
-        "function owner() view returns (address)",
-        "function getOwner() view returns (address)",
-        "function paused() view returns (bool)",
-        "function mint(address,uint256)",
-        "function _mint(address,uint256)",
-        "function mint(uint256)",
-        "function renounceOwnership()",
-        "function transferOwnership(address)",
-        "function blacklist(address) view returns (bool)",
-        "function isBlacklisted(address) view returns (bool)",
-        "function setBlacklist(address,bool)",
-        "function setBlacklisted(address,bool)",
-        "function whitelist(address) view returns (bool)",
-        "function setWhitelist(address,bool)",
-        "function buyTax() view returns (uint256)",
-        "function sellTax() view returns (uint256)",
-        "function totalFee() view returns (uint256)",
-        "function marketingFee() view returns (uint256)",
-        "function liquidityFee() view returns (uint256)",
-        "function maxTxAmount() view returns (uint256)",
-        "function maxWalletAmount() view returns (uint256)",
-        "function maxWallet() view returns (uint256)",
-        "function tradingOpen() view returns (bool)",
-        "function swapEnabled() view returns (bool)",
-        "function uniswapV2Pair() view returns (address)",
-        "function pair() view returns (address)",
-        "function lpPair() view returns (address)",
-        "function implementation() view returns (address)",
-        "function upgradeTo(address)",
-        "function proxyAdmin() view returns (address)"
-      ];
-
-      const CHAINS = {
-        ethereum: { label: "Ethereum", chainId: 1, rpc: "https://ethereum-rpc.publicnode.com" },
-        base: { label: "Base", chainId: 8453, rpc: "https://base-rpc.publicnode.com" },
-        arbitrum: { label: "Arbitrum", chainId: 42161, rpc: "https://arbitrum-one-rpc.publicnode.com" },
-        optimism: { label: "Optimism", chainId: 10, rpc: "https://optimism-rpc.publicnode.com" },
-        bnb: { label: "BNB Chain", chainId: 56, rpc: "https://bsc-rpc.publicnode.com" }
-      };
-
-      const FUNCTION_SPECS = [
-        { key:"owner", signature:"owner()", kind:"read" },
-        { key:"getOwner", signature:"getOwner()", kind:"read" },
-        { key:"paused", signature:"paused()", kind:"read" },
-        { key:"mint1", signature:"mint(address,uint256)", kind:"callable" },
-        { key:"mint2", signature:"mint(uint256)", kind:"callable" },
-        { key:"_mint", signature:"_mint(address,uint256)", kind:"callable" },
-        { key:"renounceOwnership", signature:"renounceOwnership()", kind:"callable" },
-        { key:"transferOwnership", signature:"transferOwnership(address)", kind:"callable" },
-        { key:"blacklist", signature:"blacklist(address)", kind:"read" },
-        { key:"isBlacklisted", signature:"isBlacklisted(address)", kind:"read" },
-        { key:"setBlacklist", signature:"setBlacklist(address,bool)", kind:"callable" },
-        { key:"setBlacklisted", signature:"setBlacklisted(address,bool)", kind:"callable" },
-        { key:"whitelist", signature:"whitelist(address)", kind:"read" },
-        { key:"setWhitelist", signature:"setWhitelist(address,bool)", kind:"callable" },
-        { key:"buyTax", signature:"buyTax()", kind:"read" },
-        { key:"sellTax", signature:"sellTax()", kind:"read" },
-        { key:"totalFee", signature:"totalFee()", kind:"read" },
-        { key:"marketingFee", signature:"marketingFee()", kind:"read" },
-        { key:"liquidityFee", signature:"liquidityFee()", kind:"read" },
-        { key:"maxTxAmount", signature:"maxTxAmount()", kind:"read" },
-        { key:"maxWalletAmount", signature:"maxWalletAmount()", kind:"read" },
-        { key:"maxWallet", signature:"maxWallet()", kind:"read" },
-        { key:"tradingOpen", signature:"tradingOpen()", kind:"read" },
-        { key:"swapEnabled", signature:"swapEnabled()", kind:"read" },
-        { key:"uniswapV2Pair", signature:"uniswapV2Pair()", kind:"read" },
-        { key:"pair", signature:"pair()", kind:"read" },
-        { key:"lpPair", signature:"lpPair()", kind:"read" },
-        { key:"implementation", signature:"implementation()", kind:"read" },
-        { key:"upgradeTo", signature:"upgradeTo(address)", kind:"callable" },
-        { key:"proxyAdmin", signature:"proxyAdmin()", kind:"read" }
-      ];
-
-      const EIP1967_IMPL_SLOT = "0x360894A13BA1A3210667C828492DB98DCA3E2076CC3735A920A3CA505D382BBC";
-      const EIP1967_ADMIN_SLOT = "0xB53127684A568B3173AE13B9F8A6016E243E63B6E8EE1178D6A717850B5D6103";
-
-      function setStatus(type, label){
-        const el = $("statusPill");
-        el.className = "resultStatus";
-        if (type === "safe") el.classList.add("statusSafe");
-        else if (type === "warn") el.classList.add("statusWarn");
-        else if (type === "danger") el.classList.add("statusDanger");
-        else el.classList.add("statusNeutral");
-        el.textContent = label;
-      }
-
-      function setSummary(main, meta){
-        $("resultMain").textContent = main;
-        $("resultMeta").textContent = meta;
-      }
-
-      function clearOutput(){
-        setStatus("neutral", "READY");
-        setSummary("Enter a token contract address to begin analysis.", "This tool checks public on-chain contract data and common function patterns.");
-        $("outName").textContent = "—";
-        $("outSymbol").textContent = "—";
-        $("outDecimals").textContent = "—";
-        $("outSupply").textContent = "—";
-        $("outOwner").textContent = "—";
-        $("outAddress").textContent = "—";
-        $("outChain").textContent = "—";
-        $("outCodeSize").textContent = "—";
-        $("outProxy").textContent = "—";
-        $("outPair").textContent = "—";
-        $("riskList").innerHTML = `
-          <div class="riskItem">
-            <div class="riskDot dotSafe"></div>
-            <div class="riskText">
-              <strong>Awaiting analysis</strong>
-              <p>Risk and feature signals will appear here after analysis.</p>
-            </div>
-          </div>
-        `;
-      }
-
-      function addRiskItem(type, title, text){
-        const dot = type === "danger" ? "dotDanger" : type === "warn" ? "dotWarn" : "dotSafe";
-        return `
-          <div class="riskItem">
-            <div class="riskDot ${dot}"></div>
-            <div class="riskText">
-              <strong>${escapeHtml(title)}</strong>
-              <p>${escapeHtml(text)}</p>
-            </div>
-          </div>
-        `;
-      }
-
-      function escapeHtml(s){
-        return String(s ?? "")
-          .replaceAll("&","&amp;")
-          .replaceAll("<","&lt;")
-          .replaceAll(">","&gt;")
-          .replaceAll('"',"&quot;")
-          .replaceAll("'","&#39;");
-      }
-
-      function isAddress(v){
-        try{ return ethers.isAddress(v); } catch { return false; }
-      }
-
-      function fmtBigintWithCommas(valueStr){
-        try{
-          const isNeg = valueStr.startsWith("-");
-          const s = isNeg ? valueStr.slice(1) : valueStr;
-          const out = s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          return isNeg ? "-" + out : out;
-        }catch{
-          return valueStr;
-        }
-      }
-
-      function formatUnitsHuman(value, decimals){
-        try{
-          const formatted = ethers.formatUnits(value, decimals);
-          const [whole, frac = ""] = formatted.split(".");
-          const wholeWithCommas = fmtBigintWithCommas(whole);
-          const trimmed = frac.replace(/0+$/, "").slice(0, 8);
-          return trimmed ? `${wholeWithCommas}.${trimmed}` : wholeWithCommas;
-        }catch{
-          return value.toString();
-        }
-      }
-
-      async function getProvider(){
-        const chain = CHAINS[$("chain").value];
-        return new ethers.JsonRpcProvider(chain.rpc, chain.chainId, { staticNetwork: true });
-      }
-
-      async function safeCall(contract, fn){
-        try{
-          const out = await contract[fn]();
-          return { ok:true, value:out };
-        }catch{
-          return { ok:false, value:null };
-        }
-      }
-
-      function selector(signature){
-        return ethers.id(signature).slice(0, 10).toLowerCase();
-      }
-
-      function hasSelector(bytecode, signature){
-        try{
-          return bytecode.toLowerCase().includes(selector(signature).slice(2));
-        }catch{
-          return false;
-        }
-      }
-
-      function parseAddressFromSlot(slotHex){
-        if (!slotHex || /^0x0*$/i.test(slotHex)) return null;
-        const clean = slotHex.toLowerCase().replace(/^0x/, "");
-        if (clean.length !== 64) return null;
-        const addr = "0x" + clean.slice(24);
-        try{
-          return ethers.isAddress(addr) ? ethers.getAddress(addr) : null;
-        }catch{
-          return null;
-        }
-      }
-
-      async function analyze(){
-        const address = $("contractAddress").value.trim();
-        const mode = $("mode").value;
-
-        if (!isAddress(address)) {
-          setStatus("danger", "INVALID INPUT");
-          setSummary("Invalid token contract address.", "Please enter a valid EVM contract address.");
-          return;
-        }
-
-        clearOutput();
-        setStatus("neutral", "ANALYZING");
-        setSummary("Running contract analysis...", "Reading token metadata, code size, optional fields, and function pattern hints.");
-
-        try{
-          const provider = await getProvider();
-          const chain = CHAINS[$("chain").value];
-
-          const code = await provider.getCode(address);
-          if (!code || code === "0x") {
-            setStatus("danger", "NO CONTRACT");
-            setSummary("No deployed contract found at this address.", "Verify the chain and contract address, then try again.");
-            return;
-          }
-
-          const base = new ethers.Contract(address, ERC20_ABI, provider);
-          const optional = new ethers.Contract(address, OPTIONAL_ABI, provider);
-
-          const [nameRes, symbolRes, decimalsRes, supplyRes] = await Promise.all([
-            safeCall(base, "name"),
-            safeCall(base, "symbol"),
-            safeCall(base, "decimals"),
-            safeCall(base, "totalSupply")
-          ]);
-
-          const name = nameRes.ok ? nameRes.value : "Unknown";
-          const symbol = symbolRes.ok ? symbolRes.value : "—";
-          const decimals = decimalsRes.ok ? Number(decimalsRes.value) : 18;
-          const totalSupply = supplyRes.ok ? supplyRes.value : null;
-
-          const ownerRes = await safeCall(optional, "owner");
-          const getOwnerRes = ownerRes.ok ? ownerRes : await safeCall(optional, "getOwner");
-          const owner = getOwnerRes.ok ? getOwnerRes.value : null;
-
-          const pairCandidates = [];
-          const uniPairRes = await safeCall(optional, "uniswapV2Pair");
-          if (uniPairRes.ok && isAddress(uniPairRes.value) && !/^0x0+$/.test(uniPairRes.value.toLowerCase())) pairCandidates.push(ethers.getAddress(uniPairRes.value));
-          const pairRes = await safeCall(optional, "pair");
-          if (pairRes.ok && isAddress(pairRes.value) && !/^0x0+$/.test(pairRes.value.toLowerCase())) pairCandidates.push(ethers.getAddress(pairRes.value));
-          const lpPairRes = await safeCall(optional, "lpPair");
-          if (lpPairRes.ok && isAddress(lpPairRes.value) && !/^0x0+$/.test(lpPairRes.value.toLowerCase())) pairCandidates.push(ethers.getAddress(lpPairRes.value));
-
-          const bytecodeBytes = (code.length - 2) / 2;
-          const hasProxySelector = hasSelector(code, "implementation()") || hasSelector(code, "upgradeTo(address)") || hasSelector(code, "proxyAdmin()");
-          const hasMintSelector = hasSelector(code, "mint(address,uint256)") || hasSelector(code, "mint(uint256)") || hasSelector(code, "_mint(address,uint256)");
-          const hasPauseSelector = hasSelector(code, "paused()");
-          const hasBlacklistSelector = hasSelector(code, "blacklist(address)") || hasSelector(code, "isBlacklisted(address)") || hasSelector(code, "setBlacklist(address,bool)") || hasSelector(code, "setBlacklisted(address,bool)");
-          const hasWhitelistSelector = hasSelector(code, "whitelist(address)") || hasSelector(code, "setWhitelist(address,bool)");
-          const hasOwnershipSelector = hasSelector(code, "owner()") || hasSelector(code, "getOwner()") || hasSelector(code, "renounceOwnership()") || hasSelector(code, "transferOwnership(address)");
-          const hasFeeSelectors =
-            hasSelector(code, "buyTax()") ||
-            hasSelector(code, "sellTax()") ||
-            hasSelector(code, "totalFee()") ||
-            hasSelector(code, "marketingFee()") ||
-            hasSelector(code, "liquidityFee()") ||
-            hasSelector(code, "maxTxAmount()") ||
-            hasSelector(code, "maxWalletAmount()") ||
-            hasSelector(code, "maxWallet()");
-          const hasTradingSelectors = hasSelector(code, "tradingOpen()") || hasSelector(code, "swapEnabled()");
-
-          const implSlotRaw = await provider.getStorage(address, EIP1967_IMPL_SLOT);
-          const adminSlotRaw = await provider.getStorage(address, EIP1967_ADMIN_SLOT);
-          const implAddr = parseAddressFromSlot(implSlotRaw);
-          const adminAddr = parseAddressFromSlot(adminSlotRaw);
-          const implementationRes = await safeCall(optional, "implementation");
-          const implDirect = implementationRes.ok && isAddress(implementationRes.value) ? ethers.getAddress(implementationRes.value) : null;
-          const proxyHint = implAddr || adminAddr || implDirect || hasProxySelector;
-
-          let warnings = [];
-          let score = 0;
-
-          if (owner && /^0x0{40}$/i.test(owner)) {
-            warnings.push({ type:"safe", title:"Ownership appears renounced", text:"Owner address is the zero address. This can reduce some admin control risk, but it does not guarantee safety." });
-          } else if (owner && isAddress(owner)) {
-            score += 2;
-            warnings.push({ type:"warn", title:"Owner/admin address detected", text:"The contract exposes an owner-style function. Admin control may still exist." });
-          } else if (hasOwnershipSelector) {
-            score += 1;
-            warnings.push({ type:"warn", title:"Ownership-related functions found", text:"Ownership-style selectors exist in bytecode, even if the owner value could not be read." });
-          } else {
-            warnings.push({ type:"safe", title:"No obvious owner method found", text:"The analyzer did not detect a readable owner function." });
-          }
-
-          if (hasMintSelector) {
-            score += 3;
-            warnings.push({ type:"danger", title:"Mint-related function hints found", text:"The contract bytecode includes mint-style selectors. Supply may be expandable or admin-controlled." });
-          } else {
-            warnings.push({ type:"safe", title:"No obvious mint selector found", text:"The analyzer did not detect common mint-style selectors in bytecode." });
-          }
-
-          if (hasPauseSelector) {
-            score += 2;
-            warnings.push({ type:"warn", title:"Pausable transfer hint detected", text:"The contract may support pausing or transfer control." });
-          } else {
-            warnings.push({ type:"safe", title:"No obvious pause selector found", text:"The analyzer did not detect a common paused() selector." });
-          }
-
-          if (hasBlacklistSelector) {
-            score += 3;
-            warnings.push({ type:"danger", title:"Blacklist-style function hints found", text:"The contract bytecode includes common blacklist-related selectors, which may allow transfer restrictions." });
-          } else {
-            warnings.push({ type:"safe", title:"No obvious blacklist selector found", text:"The analyzer did not detect common blacklist selectors." });
-          }
-
-          if (hasWhitelistSelector) {
-            score += 1;
-            warnings.push({ type:"warn", title:"Whitelist-style function hints found", text:"Whitelist-related selectors exist in bytecode. This may indicate transfer gating or privileged address logic." });
-          }
-
-          if (hasFeeSelectors) {
-            score += 2;
-            warnings.push({ type:"warn", title:"Fee/tax configuration hints found", text:"The contract includes one or more common fee or limits selectors such as buyTax, sellTax, maxTxAmount, or maxWallet." });
-          } else {
-            warnings.push({ type:"safe", title:"No obvious fee selector found", text:"The analyzer did not detect common fee/tax selectors in bytecode." });
-          }
-
-          if (hasTradingSelectors) {
-            score += 1;
-            warnings.push({ type:"warn", title:"Trading-control selector hints found", text:"The contract includes common selectors related to enabling trading or swaps." });
-          }
-
-          if (proxyHint) {
-            score += 3;
-            warnings.push({ type:"danger", title:"Proxy or upgrade hint detected", text:"The analyzer found a common proxy indicator, upgrade selector, or EIP-1967 storage value. Logic may be upgradeable." });
-          } else {
-            warnings.push({ type:"safe", title:"No obvious proxy hint found", text:"The analyzer did not detect a clear proxy storage value or common upgrade selector." });
-          }
-
-          if (pairCandidates.length > 0) {
-            warnings.push({ type:"safe", title:"Liquidity pair hint found", text:"The analyzer found a common pair field, which may indicate a DEX pair reference." });
-          }
-
-          if (bytecodeBytes < 2000) {
-            score += 1;
-            warnings.push({ type:"warn", title:"Relatively small bytecode size", text:"Smaller contracts are not necessarily risky, but compact bytecode can sometimes hide specialized or restrictive logic." });
-          } else {
-            warnings.push({ type:"safe", title:"Bytecode size looks typical", text:"The deployed bytecode size is within a common range for many ERC-20 tokens." });
-          }
-
-          let severity = "safe";
-          let summary = "Lower-risk pattern set detected";
-          let meta = "No major high-risk hints were found from these basic checks.";
-          if (score >= 8) {
-            severity = "danger";
-            summary = "Elevated-risk contract patterns detected";
-            meta = "One or more strong admin, mint, blacklist, fee, or proxy hints were found.";
-          } else if (score >= 4) {
-            severity = "warn";
-            summary = "Mixed contract signals detected";
-            meta = "Some admin or restrictive contract hints were found. Review carefully.";
-          }
-
-          $("outName").textContent = name || "Unknown";
-          $("outSymbol").textContent = symbol || "—";
-          $("outDecimals").textContent = Number.isFinite(decimals) ? String(decimals) : "—";
-          $("outSupply").textContent = totalSupply != null ? `${formatUnitsHuman(totalSupply, decimals)} ${symbol && symbol !== "—" ? symbol : ""}`.trim() : "—";
-          $("outOwner").textContent = owner ? owner : "Not found";
-          $("outAddress").textContent = ethers.getAddress(address);
-          $("outChain").textContent = chain.label;
-          $("outCodeSize").textContent = `${fmtBigintWithCommas(String(bytecodeBytes))} bytes`;
-          $("outProxy").textContent = implAddr || implDirect || adminAddr || (hasProxySelector ? "Proxy-related selectors found" : "No obvious proxy hint");
-          $("outPair").textContent = pairCandidates[0] || "Not found";
-
-          setStatus(severity, severity === "danger" ? "ELEVATED RISK" : severity === "warn" ? "MIXED SIGNALS" : "LOWER RISK");
-          setSummary(summary, meta);
-
-          const sorted = warnings.sort((a, b) => {
-            const rank = { danger:0, warn:1, safe:2 };
-            return rank[a.type] - rank[b.type];
-          });
-
-          $("riskList").innerHTML = sorted.map(item => addRiskItem(item.type, item.title, item.text)).join("");
-
-          if (mode === "deep") {
-            const deepLines = [];
-
-            for (const spec of FUNCTION_SPECS) {
-              if (hasSelector(code, spec.signature)) {
-                deepLines.push({
-                  type: spec.kind === "callable" ? "warn" : "safe",
-                  title: `Selector found: ${spec.signature}`,
-                  text: `The deployed bytecode includes the selector for ${spec.signature}.`
-                });
-              }
-            }
-
-            if (deepLines.length) {
-              $("riskList").innerHTML += deepLines.map(item => addRiskItem(item.type, item.title, item.text)).join("");
-            }
-          }
-        } catch (err) {
-          console.error(err);
-          setStatus("danger", "ANALYSIS FAILED");
-          setSummary("Unable to analyze this token contract.", "Check the chain and contract address, then try again.");
-        }
-      }
-
-      $("analyzeBtn").addEventListener("click", analyze);
-      $("resetBtn").addEventListener("click", () => {
-        $("chain").value = "ethereum";
-        $("mode").value = "standard";
-        $("contractAddress").value = "";
-        clearOutput();
-      });
-      $("contractAddress").addEventListener("keydown", (e) => {
-        if (e.key === "Enter") analyze();
-      });
-
-      $("year").textContent = new Date().getFullYear();
-      clearOutput();
-    })();
-  </script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/token-contract-analyzer.js" defer></script>
 </body>
 </html>
