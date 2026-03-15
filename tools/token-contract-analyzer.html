@@ -19,7 +19,7 @@
 
   <title>Token Contract Analyzer | Multi-Chain ERC-20 Contract Checker | InstantQR</title>
   <meta name="description" content="Analyze token contracts across Ethereum, Base, Arbitrum, Optimism, BNB Smart Chain, Polygon, and Avalanche. Check metadata, proxy signals, transfer behavior, logs, and suspicious contract patterns." />
-  <meta name="keywords" content="token contract analyzer, multi-chain contract checker, erc20 analyzer, smart contract checker, token metadata checker, proxy contract checker, suspicious token scanner" />
+  <meta name="keywords" content="token contract analyzer, multi-chain contract checker, erc20 analyzer, smart contract checker, proxy checker, token scanner" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
@@ -30,9 +30,6 @@
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
-
-  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css" />
 
@@ -57,11 +54,7 @@
     "name":"Token Contract Analyzer",
     "url":"https://instantqr.io/tools/token-contract-analyzer.html",
     "description":"Analyze token contracts across major EVM chains with metadata, proxy, behavior, and risk checks.",
-    "isPartOf":{
-      "@type":"WebSite",
-      "name":"InstantQR",
-      "url":"https://instantqr.io/"
-    }
+    "isPartOf":{"@type":"WebSite","name":"InstantQR","url":"https://instantqr.io/"}
   }
   </script>
 
@@ -76,11 +69,7 @@
     "browserRequirements":"Requires JavaScript. Works in modern browsers.",
     "url":"https://instantqr.io/tools/token-contract-analyzer.html",
     "description":"Analyze token contracts across major EVM chains with metadata, proxy, behavior, and risk checks.",
-    "publisher":{
-      "@type":"Organization",
-      "name":"InstantQR",
-      "url":"https://instantqr.io/"
-    }
+    "publisher":{"@type":"Organization","name":"InstantQR","url":"https://instantqr.io/"}
   }
   </script>
 
@@ -89,77 +78,30 @@
     "@context":"https://schema.org",
     "@type":"BreadcrumbList",
     "itemListElement":[
-      {
-        "@type":"ListItem",
-        "position":1,
-        "name":"Home",
-        "item":"https://instantqr.io/"
-      },
-      {
-        "@type":"ListItem",
-        "position":2,
-        "name":"Tools",
-        "item":"https://instantqr.io/tools/tools.html"
-      },
-      {
-        "@type":"ListItem",
-        "position":3,
-        "name":"Token Contract Analyzer",
-        "item":"https://instantqr.io/tools/token-contract-analyzer.html"
-      }
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What does this token contract analyzer show?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"This tool checks bytecode presence, token metadata, transfer behavior, proxy slots, recent logs, and basic suspicious signals across supported EVM chains."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"Does this tool perform a full smart contract audit?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"No. This tool is a fast first-pass analyzer and does not replace professional auditing or source code review."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"Which networks are supported?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"The analyzer supports Ethereum, Base, Arbitrum, Optimism, BNB Smart Chain, Polygon, and Avalanche C-Chain."
-        }
-      }
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+      {"@type":"ListItem","position":3,"name":"Token Contract Analyzer","item":"https://instantqr.io/tools/token-contract-analyzer.html"}
     ]
   }
   </script>
 
   <style>
-    .controls.cols-3{grid-template-columns:1.3fr 1fr 1fr}
-    .metricGrid{
+    .controls.cols-3{grid-template-columns:1.5fr 1fr 1fr}
+    .metricGrid,.detailGrid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
       margin-top:12px;
     }
-    .metricCard{
+    .detailGrid.detailGrid-1{grid-template-columns:1fr}
+    .metricCard,.detailCard{
       border-radius:16px;
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
       padding:14px;
     }
-    .metricCard h3{
-      margin:0 0 6px;
+    .metricCard h3,.detailCard h3{
+      margin:0 0 8px;
       font-size:15px;
     }
     .metricVal{
@@ -178,42 +120,29 @@
       color:var(--muted);
       line-height:1.5;
     }
-    .miniGrid{
+    .kv{
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:12px;
+      gap:10px;
     }
-    .miniBox{
-      border-radius:16px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:14px;
-    }
-    .miniBox h3{
-      margin:0 0 8px;
-      font-size:16px;
-    }
-    .claimRow{
+    .kvRow{
       border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(0,0,0,.10);
       padding:12px;
-      margin-top:10px;
     }
-    .claimRow:first-child{margin-top:0}
-    .claimKey{
+    .kvKey{
       font-weight:800;
       color:#eaf2ff;
       margin-bottom:6px;
       font-size:13px;
     }
-    .claimVal{
+    .kvVal{
       color:var(--muted);
       font-size:13px;
       line-height:1.6;
       word-break:break-word;
       overflow-wrap:anywhere;
+      white-space:pre-wrap;
     }
     .monoBlock{
       white-space:pre-wrap;
@@ -222,6 +151,11 @@
       font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
       color:#f0f6ff;
       margin:0;
+    }
+    .quick .warnBtn{
+      border-color:rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
     }
     .hintBox{
       margin-top:12px;
@@ -233,10 +167,12 @@
       font-size:13px;
       line-height:1.6;
     }
+    .pill code{
+      color:#eaf2ff;
+      font:12px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    }
     @media (max-width:980px){
-      .controls.cols-3,
-      .metricGrid,
-      .miniGrid{
+      .controls.cols-3,.metricGrid,.detailGrid{
         grid-template-columns:1fr;
       }
     }
@@ -278,7 +214,7 @@
       <div class="pill">🧠 Multi-chain • ⚡ Fast checks • 🔒 Browser-side analysis</div>
       <h1>Token Contract Analyzer</h1>
       <p class="sub">
-        Analyze token contracts across major EVM chains. Check token metadata, transfer behavior, proxy signals,
+        Analyze token contracts across major EVM chains. Check token metadata, behavior, proxy signals,
         recent logs, and suspicious control patterns in one fast first-pass scan.
       </p>
 
@@ -347,6 +283,12 @@
           </div>
         </div>
 
+        <div class="quick" aria-label="Quick actions">
+          <button type="button" id="trimBtn">Trim Input</button>
+          <button type="button" id="pasteBtn">Paste Address</button>
+          <button type="button" id="sampleBtn" class="warnBtn">Load Sample</button>
+        </div>
+
         <div class="resultBox ok" style="margin-top:12px;">
           <div class="resultTop">
             <div class="resultStatus ok">Live result</div>
@@ -356,11 +298,6 @@
         </div>
 
         <div class="formula" id="formulaText">Checks: bytecode + metadata + transfer behavior + proxy slots + selector scan + recent logs</div>
-
-        <div class="quick" aria-label="Quick actions">
-          <button type="button" id="trimBtn">Trim Input</button>
-          <button type="button" id="pasteBtn">Paste Address</button>
-        </div>
 
         <div class="metricGrid">
           <div class="metricCard">
@@ -388,59 +325,106 @@
           </div>
         </div>
 
-        <div class="miniGrid">
-          <div class="miniBox">
-            <h3>Contract Details</h3>
-            <div class="claimRow">
-              <div class="claimKey">Address</div>
-              <div class="claimVal" id="addressOut">—</div>
-            </div>
-            <div class="claimRow">
-              <div class="claimKey">Decimals</div>
-              <div class="claimVal" id="decimalsOut">—</div>
-            </div>
-            <div class="claimRow">
-              <div class="claimKey">Last Updated</div>
-              <div class="claimVal" id="lastUpdated">—</div>
+        <div class="detailGrid">
+          <div class="detailCard">
+            <h3>Behavior Checks</h3>
+            <div class="kv">
+              <div class="kvRow">
+                <div class="kvKey">Behavior Summary</div>
+                <div class="kvVal" id="behaviorSummary">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Behavior Details</div>
+                <div class="kvVal" id="behaviorDetails">—</div>
+              </div>
             </div>
           </div>
 
-          <div class="miniBox">
-            <h3>Function & Risk Summary</h3>
-            <div class="claimRow">
-              <div class="claimKey">Function Support</div>
-              <div class="claimVal" id="functionSupport">—</div>
+          <div class="detailCard">
+            <h3>Proxy Details</h3>
+            <div class="kv">
+              <div class="kvRow">
+                <div class="kvKey">Proxy Summary</div>
+                <div class="kvVal" id="proxySummary">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Proxy Details</div>
+                <div class="kvVal" id="proxyDetails">—</div>
+              </div>
             </div>
-            <div class="claimRow">
-              <div class="claimKey">Risk Notes</div>
-              <div class="claimVal" id="analysisNote">—</div>
+          </div>
+
+          <div class="detailCard">
+            <h3>Recent Log Activity</h3>
+            <div class="kv">
+              <div class="kvRow">
+                <div class="kvKey">Log Summary</div>
+                <div class="kvVal" id="logSummary">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Observed Holder Activity</div>
+                <div class="kvVal" id="holderSummary">—</div>
+              </div>
             </div>
-            <div class="claimRow">
-              <div class="claimKey">Transfer Event Topic</div>
-              <div class="claimVal">0xddf252ad...</div>
+          </div>
+
+          <div class="detailCard">
+            <h3>Danger Selector Matches</h3>
+            <div class="kv">
+              <div class="kvRow">
+                <div class="kvKey">Selector Summary</div>
+                <div class="kvVal" id="dangerSummary">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Matched Selectors</div>
+                <div class="kvVal" id="dangerDetails">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detailCard">
+            <h3>Implementation Deep-Read</h3>
+            <div class="kv">
+              <div class="kvRow">
+                <div class="kvKey">Implementation Summary</div>
+                <div class="kvVal" id="implementationSummary">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Implementation Details</div>
+                <div class="kvVal" id="implementationDetails">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detailCard">
+            <h3>Contract Details</h3>
+            <div class="kv">
+              <div class="kvRow">
+                <div class="kvKey">Address</div>
+                <div class="kvVal" id="addressOut">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Decimals</div>
+                <div class="kvVal" id="decimalsOut">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Last Updated</div>
+                <div class="kvVal" id="lastUpdated">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Function & Risk Summary</div>
+                <div class="kvVal" id="functionSupport">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Risk Notes</div>
+                <div class="kvVal" id="analysisNote">—</div>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="hintBox">
           This is a fast first-pass analyzer. It can flag suspicious signals, but it is not a full audit and cannot guarantee safety.
-        </div>
-
-        <div class="helpBox">
-          <div class="helpCard">
-            <h3>Useful for fast screening</h3>
-            <p>
-              This tool is designed to quickly tell you whether a contract looks token-like, whether it has proxy/admin signals,
-              and whether basic token operations respond normally.
-            </p>
-          </div>
-          <div class="helpCard">
-            <h3>Better than metadata-only checks</h3>
-            <p>
-              In addition to name, symbol, decimals, and supply, this analyzer checks transfer behavior, recent logs, proxy slots,
-              and dangerous selector patterns to surface more suspicious signals.
-            </p>
-          </div>
         </div>
       </div>
     </section>
