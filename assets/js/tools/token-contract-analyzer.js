@@ -1,8 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const RPC_ENDPOINTS = [
-    'https://ethereum-rpc.publicnode.com',
-    'https://cloudflare-eth.com/v1/mainnet'
-  ];
+  const CHAINS = {
+    ethereum: {
+      label: 'Ethereum',
+      chainId: 1,
+      nativeSymbol: 'ETH',
+      rpc: [
+        'https://ethereum-rpc.publicnode.com',
+        'https://cloudflare-eth.com/v1/mainnet'
+      ],
+      logScanBlocks: 5000,
+      explorerAddress: 'https://etherscan.io/address/'
+    },
+    base: {
+      label: 'Base',
+      chainId: 8453,
+      nativeSymbol: 'ETH',
+      rpc: ['https://base-rpc.publicnode.com'],
+      logScanBlocks: 8000,
+      explorerAddress: 'https://basescan.org/address/'
+    },
+    arbitrum: {
+      label: 'Arbitrum One',
+      chainId: 42161,
+      nativeSymbol: 'ETH',
+      rpc: ['https://arbitrum-one-rpc.publicnode.com'],
+      logScanBlocks: 12000,
+      explorerAddress: 'https://arbiscan.io/address/'
+    },
+    optimism: {
+      label: 'Optimism',
+      chainId: 10,
+      nativeSymbol: 'ETH',
+      rpc: ['https://optimism-rpc.publicnode.com'],
+      logScanBlocks: 12000,
+      explorerAddress: 'https://optimistic.etherscan.io/address/'
+    },
+    bsc: {
+      label: 'BNB Smart Chain',
+      chainId: 56,
+      nativeSymbol: 'BNB',
+      rpc: ['https://bsc-rpc.publicnode.com'],
+      logScanBlocks: 8000,
+      explorerAddress: 'https://bscscan.com/address/'
+    },
+    polygon: {
+      label: 'Polygon',
+      chainId: 137,
+      nativeSymbol: 'POL',
+      rpc: ['https://polygon-bor-rpc.publicnode.com'],
+      logScanBlocks: 12000,
+      explorerAddress: 'https://polygonscan.com/address/'
+    },
+    avalanche: {
+      label: 'Avalanche C-Chain',
+      chainId: 43114,
+      nativeSymbol: 'AVAX',
+      rpc: ['https://avalanche-c-chain-rpc.publicnode.com'],
+      logScanBlocks: 8000,
+      explorerAddress: 'https://snowtrace.io/address/'
+    }
+  };
 
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
   const DEAD_ADDRESS = '0x000000000000000000000000000000000000dEaD';
@@ -62,6 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const ui = {
     addressInput: document.getElementById('contractAddress'),
+    networkSelect: document.getElementById('networkSelect'),
+    networkLabel: document.getElementById('networkLabel'),
     analyzeBtn: document.getElementById('analyzeBtn'),
     copyBtn: document.getElementById('copyBtn'),
     clearBtn: document.getElementById('clearBtn'),
@@ -93,6 +152,16 @@ document.addEventListener('DOMContentLoaded', () => {
   let isLoading = false;
   let lastSummary = '';
   let lastMode = 'Ready';
+
+  function getActiveChain() {
+    const value = ui.networkSelect?.value || 'ethereum';
+    return CHAINS[value] || CHAINS.ethereum;
+  }
+
+  function syncNetworkLabel() {
+    const chain = getActiveChain();
+    if (ui.networkLabel) ui.networkLabel.value = chain.label;
+  }
 
   function setStatus(text, kind = '') {
     if (!ui.statusBadge) return;
@@ -243,7 +312,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return (
       code.includes('363d3d373d3d3d363d73') ||
       code.includes('5af43d82803e903d91602b57fd5bf3') ||
-      code.includes('f4') ||
       code.includes('delegatecall')
     );
   }
@@ -281,16 +349,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function rpcTryAll(method, params = []) {
+    const chain = getActiveChain();
     let lastError = null;
-    for (const endpoint of RPC_ENDPOINTS) {
+
+    for (const endpoint of chain.rpc) {
       try {
         const result = await rpcCall(endpoint, method, params);
-        return { ok: true, endpoint, result };
+        return { ok: true, endpoint, result, chain };
       } catch (err) {
         lastError = err;
       }
     }
-    return { ok: false, endpoint: '', result: null, error: lastError };
+
+    return { ok: false, endpoint: '', result: null, chain, error: lastError };
   }
 
   async function ethCall(address, data) {
@@ -397,24 +468,26 @@ document.addEventListener('DOMContentLoaded', () => {
     transferLogs.forEach((log) => {
       const parsed = parseTransferAddressesFromLog(log);
       if (!parsed) return;
-      if (parsed.to && parsed.to !== ZERO_ADDRESS) {
+      if (parsed.to && parsed.to.toLowerCase() !== ZERO_ADDRESS.toLowerCase()) {
         counts.set(parsed.to.toLowerCase(), (counts.get(parsed.to.toLowerCase()) || 0) + 1);
       }
     });
 
     const entries = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
+
     if (!entries.length) {
       return {
         unique: 0,
         top: [],
-        text: 'No recent holder activity observed from scanned logs.'
+        text: 'No recent holder activity observed from scanned logs'
       };
     }
 
     return {
       unique: counts.size,
       top: entries,
-      text: `Observed ${counts.size} recipient address(es) in recent Transfer logs. Top recent recipients: ` +
+      text:
+        `Observed ${counts.size} recipient address(es) in recent Transfer logs. Top recent recipients: ` +
         entries.map(([addr, n]) => `${addr.slice(0, 6)}…${addr.slice(-4)} (${n})`).join(', ')
     };
   }
@@ -572,11 +645,12 @@ document.addEventListener('DOMContentLoaded', () => {
     isLoading = true;
 
     const address = normalizeAddress(ui.addressInput?.value);
+    const chain = getActiveChain();
 
     if (!isValidAddress(address)) {
       clearOutputs();
       setStatus('Invalid address', 'bad');
-      setResult('Enter a valid Ethereum contract address.');
+      setResult('Enter a valid contract address.');
       setMode('Invalid input');
       lastSummary = '';
       isLoading = false;
@@ -601,10 +675,10 @@ document.addEventListener('DOMContentLoaded', () => {
         setMetricTone(ui.contractSummary, 'bad');
         if (ui.bytecodeSize) ui.bytecodeSize.textContent = '0 bytes';
         if (ui.addressOut) ui.addressOut.textContent = address;
-        if (ui.analysisNote) ui.analysisNote.textContent = 'This address does not appear to have deployed contract bytecode on Ethereum mainnet.';
+        if (ui.analysisNote) ui.analysisNote.textContent = `This address does not appear to have deployed contract bytecode on ${chain.label}.`;
         if (ui.lastUpdated) ui.lastUpdated.textContent = nowLabel();
         setStatus('No contract', 'bad');
-        setResult('No deployed contract bytecode was found at this address.');
+        setResult(`No deployed contract bytecode was found at this address on ${chain.label}.`);
         setMode('No contract');
         lastSummary = '';
         isLoading = false;
@@ -661,8 +735,8 @@ document.addEventListener('DOMContentLoaded', () => {
         simulationCall(address, transferData),
         simulationCall(address, approveData),
         simulationCall(address, transferFromData),
-        getLogs(address, 'latest-5000', 'latest', [TOPICS.transfer]),
-        getLogs(address, 'latest-5000', 'latest', [TOPICS.approval])
+        getLogs(address, `latest-${chain.logScanBlocks}`, 'latest', [TOPICS.transfer]),
+        getLogs(address, `latest-${chain.logScanBlocks}`, 'latest', [TOPICS.approval])
       ]);
 
       let proxyImplementation = implSlotRes.ok ? normalizeStorageAddress(implSlotRes.result) : '';
@@ -769,6 +843,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (ui.analysisNote) {
         const notes = [];
         notes.push(`${headline}.`);
+        notes.push(`Network: ${chain.label}.`);
         if (proxyImplementation) notes.push(`Implementation: ${proxyImplementation}.`);
         if (proxyAdmin) notes.push(`Admin slot: ${proxyAdmin}.`);
         if (proxyBeacon) notes.push(`Beacon slot: ${proxyBeacon}.`);
@@ -779,17 +854,15 @@ document.addEventListener('DOMContentLoaded', () => {
           notes.push(`Recent logs: ${recentTransferLogs.length} Transfer, ${recentApprovalLogs.length} Approval.`);
         }
         if (holderSummary.unique) notes.push(holderSummary.text + '.');
-        if (implAnalysis.ok) {
-          notes.push(`Deep-read implementation bytecode: ${implAnalysis.byteCount} bytes.`);
-        }
+        if (implAnalysis.ok) notes.push(`Deep-read implementation bytecode: ${implAnalysis.byteCount} bytes.`);
         ui.analysisNote.textContent = notes.join(' ');
       }
 
       const mainResult = [];
       mainResult.push(
         erc20Signals
-          ? 'Contract bytecode found and token-like behavior was detected.'
-          : 'Contract bytecode found, but standard ERC-20 signals are weak or incomplete.'
+          ? `Contract bytecode found and token-like behavior was detected on ${chain.label}.`
+          : `Contract bytecode found on ${chain.label}, but standard ERC-20 signals are weak or incomplete.`
       );
       mainResult.push(`Risk screen: ${headline}.`);
       setResult(mainResult.join(' '));
@@ -805,9 +878,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       lastSummary =
 `Token Contract Analyzer
-Network: Ethereum Mainnet
+Network: ${chain.label}
+Chain ID: ${chain.chainId}
 Endpoint: ${codeRes.endpoint}
 Address: ${address}
+Explorer: ${chain.explorerAddress}${address}
+
 Bytecode Present: Yes
 Bytecode Size: ${byteCount} bytes
 
@@ -853,12 +929,53 @@ Updated: ${nowLabel()}`;
       setMode('Error');
       if (ui.formulaText) {
         ui.formulaText.textContent =
-          'Checks: bytecode + ERC-20 methods + proxy slots + admin/pause controls + basic risk flags';
+          'Checks: bytecode + metadata + transfer simulation + proxy slots + selector scan + recent logs';
       }
       lastSummary = '';
     } finally {
       isLoading = false;
     }
+  }
+
+  async function analyzeImplementationContract(implementationAddress) {
+    if (!implementationAddress || !isValidAddress(implementationAddress)) {
+      return { ok: false };
+    }
+
+    const codeRes = await rpcTryAll('eth_getCode', [implementationAddress, 'latest']);
+    if (!codeRes.ok || !codeRes.result || codeRes.result === '0x') {
+      return { ok: false };
+    }
+
+    const [
+      nameRes,
+      symbolRes,
+      decimalsRes,
+      totalSupplyRes,
+      ownerRes,
+      pausedRes
+    ] = await Promise.all([
+      safeCallString(implementationAddress, SELECTORS.name),
+      safeCallString(implementationAddress, SELECTORS.symbol),
+      safeCallUint(implementationAddress, SELECTORS.decimals),
+      safeCallUint(implementationAddress, SELECTORS.totalSupply),
+      safeCallAddress(implementationAddress, SELECTORS.owner),
+      safeCallBool(implementationAddress, SELECTORS.paused)
+    ]);
+
+    return {
+      ok: true,
+      address: implementationAddress,
+      byteCount: countBytecodeBytes(codeRes.result),
+      name: nameRes.ok ? nameRes.value : '',
+      symbol: symbolRes.ok ? symbolRes.value : '',
+      decimals: decimalsRes.ok && decimalsRes.value !== null ? Number(decimalsRes.value) : null,
+      totalSupply: totalSupplyRes.ok ? totalSupplyRes.value : null,
+      owner: ownerRes.ok ? ownerRes.value : '',
+      pausedSupported: pausedRes.ok,
+      pausedValue: pausedRes.ok ? !!pausedRes.value : false,
+      dangerSelectors: scanKnownDangerSelectors(codeRes.result)
+    };
   }
 
   async function pasteAddress() {
@@ -878,15 +995,23 @@ Updated: ${nowLabel()}`;
   function resetAll() {
     if (ui.addressInput) ui.addressInput.value = '';
     clearOutputs();
+    syncNetworkLabel();
     setStatus('Ready');
     setResult('Enter a contract address and click Analyze Contract.');
     setMode('Ready');
     if (ui.formulaText) {
       ui.formulaText.textContent =
-        'Checks: bytecode present + ERC-20 metadata calls + common function support';
+        'Checks: bytecode + metadata + transfer behavior + proxy slots + selector scan + recent logs';
     }
     lastSummary = '';
   }
+
+  ui.networkSelect?.addEventListener('change', () => {
+    syncNetworkLabel();
+    setStatus('Network updated', 'ok');
+    setResult(`Active network set to ${getActiveChain().label}.`);
+    setMode('Network changed');
+  });
 
   ui.analyzeBtn?.addEventListener('click', analyzeContract);
 
@@ -930,5 +1055,6 @@ Updated: ${nowLabel()}`;
     }
   });
 
+  syncNetworkLabel();
   resetAll();
 });
