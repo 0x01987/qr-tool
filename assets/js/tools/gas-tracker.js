@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const RPC_ENDPOINTS = [
-    'https://ethereum-rpc.publicnode.com'
+    'https://ethereum-rpc.publicnode.com',
+    'https://cloudflare-eth.com/v1/mainnet'
   ];
 
   const gasLimitEl = document.getElementById('gasLimit');
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fastCostEl = document.getElementById('fastCost');
 
   let autoTimer = null;
+  let isLoading = false;
   let lastSummary = '';
   let lastMode = 'Ready';
 
@@ -58,245 +60,272 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function hexToBigIntSafe(hex) {
-    if (!hex) return 0n;
+    if (!hex || typeof hex !== 'string') return 0n;
     try {
       return BigInt(hex);
-    } catch (_) {
+    } catch {
       return 0n;
     }
   }
 
-  function weiToGwei(weiBigInt) {
-    return Number(weiBigInt) / 1e9;
+  function gweiFromWeiBigInt(wei) {
+    return Number(wei) / 1e9;
   }
 
-  function weiToEth(weiBigInt) {
-    return Number(weiBigInt) / 1e18;
+  function ethFromWeiBigInt(wei) {
+    return Number(wei) / 1e18;
   }
 
-  function formatGwei(v) {
-    if (!Number.isFinite(v)) return '—';
-    return `${v.toFixed(2)} gwei`;
+  function formatGwei(value) {
+    if (!Number.isFinite(value)) return '—';
+    return `${value.toFixed(2)} gwei`;
   }
 
-  function formatEth(v) {
-    if (!Number.isFinite(v)) return '—';
-    return `${v.toFixed(8)} ETH`;
+  function formatEth(value) {
+    if (!Number.isFinite(value)) return '—';
+    return `${value.toFixed(8)} ETH`;
   }
 
-  function formatBlock(hex) {
-    const n = Number(hexToBigIntSafe(hex));
-    return Number.isFinite(n) && n > 0 ? String(n) : '—';
+  function formatBlock(valueHex) {
+    const value = Number(hexToBigIntSafe(valueHex));
+    return Number.isFinite(value) && value > 0 ? String(value) : '—';
   }
 
-  async function rpcCall(url, method, params = []) {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        jsonrpc: '2.0',
-        id: Date.now(),
-        method,
-        params
-      }),
-      cache: 'no-store'
-    });
+  function nowLabel() {
+    return new Date().toLocaleTimeString();
+  }
 
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}`);
+  async function fetchWithTimeout(url, options, timeoutMs = 7000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+        cache: 'no-store'
+      });
+      return response;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  async function rpcCall(endpoint, method, params = []) {
+    const response = await fetchWithTimeout(
+      endpoint,
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          jsonrpc: '2.0',
+          id: Math.floor(Math.random() * 1e9),
+          method,
+          params
+        })
+      },
+      7000
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
     }
 
-    const json = await res.json();
+    const json = await response.json();
     if (json.error) {
       throw new Error(json.error.message || 'RPC error');
     }
     return json.result;
   }
 
-  async function rpcBundle(url) {
+  async function fetchBundle(endpoint) {
     const [gasPriceHex, priorityHex, blockHex, feeHistory] = await Promise.all([
-      rpcCall(url, 'eth_gasPrice'),
-      rpcCall(url, 'eth_maxPriorityFeePerGas'),
-      rpcCall(url, 'eth_blockNumber'),
-      rpcCall(url, 'eth_feeHistory', ['0x5', 'latest', [10, 25, 50]])
+      rpcCall(endpoint, 'eth_gasPrice'),
+      rpcCall(endpoint, 'eth_maxPriorityFeePerGas'),
+      rpcCall(endpoint, 'eth_blockNumber'),
+      rpcCall(endpoint, 'eth_feeHistory', ['0x6', 'latest', [10, 25, 50]])
     ]);
 
-    return { gasPriceHex, priorityHex, blockHex, feeHistory };
+    return { endpoint, gasPriceHex, priorityHex, blockHex, feeHistory };
   }
 
-  async function fetchWithFallback() {
+  async function fetchFirstWorkingBundle() {
     let lastError = null;
 
-    for (const url of RPC_ENDPOINTS) {
+    for (const endpoint of RPC_ENDPOINTS) {
       try {
-        const data = await rpcBundle(url);
-        return { url, data };
-      } catch (err) {
-        lastError = err;
+        return await fetchBundle(endpoint);
+      } catch (error) {
+        lastError = error;
       }
     }
 
-    throw lastError || new Error('Unable to load gas data');
+    throw lastError || new Error('All RPC endpoints failed');
   }
 
-  function getBaseFeeFromHistory(feeHistory) {
-    if (!feeHistory || !Array.isArray(feeHistory.baseFeePerGas) || !feeHistory.baseFeePerGas.length) {
-      return 0n;
-    }
-    const values = feeHistory.baseFeePerGas.map(hexToBigIntSafe).filter(v => v > 0n);
-    if (!values.length) return 0n;
-    return values[values.length - 1];
+  function getBaseFeeWei(feeHistory) {
+    if (!feeHistory || !Array.isArray(feeHistory.baseFeePerGas)) return 0n;
+    const items = feeHistory.baseFeePerGas.map(hexToBigIntSafe).filter(v => v > 0n);
+    if (!items.length) return 0n;
+    return items[items.length - 1];
   }
 
-  function estimatePriorityFromHistory(feeHistory, fallbackPriority) {
+  function getPriorityFeeWei(feeHistory, rpcPriorityWei) {
     if (!feeHistory || !Array.isArray(feeHistory.reward) || !feeHistory.reward.length) {
-      return fallbackPriority;
+      return rpcPriorityWei > 0n ? rpcPriorityWei : 1000000000n;
     }
 
-    const mids = [];
+    const values = [];
     feeHistory.reward.forEach((row) => {
       if (Array.isArray(row) && row.length >= 2) {
-        const mid = hexToBigIntSafe(row[1]);
-        if (mid > 0n) mids.push(mid);
+        const middle = hexToBigIntSafe(row[1]);
+        if (middle > 0n) values.push(middle);
       }
     });
 
-    if (!mids.length) return fallbackPriority;
+    if (!values.length) {
+      return rpcPriorityWei > 0n ? rpcPriorityWei : 1000000000n;
+    }
 
-    const total = mids.reduce((acc, v) => acc + v, 0n);
-    return total / BigInt(mids.length);
+    const total = values.reduce((sum, value) => sum + value, 0n);
+    return total / BigInt(values.length);
   }
 
-  function max(a, b) {
+  function maxBigInt(a, b) {
     return a > b ? a : b;
+  }
+
+  function buildTierFees(baseFeeWei, priorityFeeWei, gasLimit) {
+    const safePriority = priorityFeeWei > 0n ? priorityFeeWei : 1000000000n;
+
+    const slowPriority = maxBigInt(safePriority / 2n, 500000000n);
+    const normalPriority = safePriority;
+    const fastPriority = maxBigInt((safePriority * 3n) / 2n, safePriority + 500000000n);
+
+    const slowMaxFee = (baseFeeWei * 2n) + slowPriority;
+    const normalMaxFee = (baseFeeWei * 2n) + normalPriority;
+    const fastMaxFee = (baseFeeWei * 2n) + fastPriority;
+
+    const gas = BigInt(gasLimit);
+
+    return {
+      slow: {
+        maxFeeWei: slowMaxFee,
+        costWei: slowMaxFee * gas
+      },
+      normal: {
+        maxFeeWei: normalMaxFee,
+        costWei: normalMaxFee * gas
+      },
+      fast: {
+        maxFeeWei: fastMaxFee,
+        costWei: fastMaxFee * gas
+      }
+    };
   }
 
   function clearOutputs() {
     [
-      baseFeeSummaryEl, priorityFeeSummaryEl, fastFeeSummaryEl,
-      gasPriceEl, priorityFeeEl, latestBlockEl, lastUpdatedEl,
-      slowMaxFeeEl, normalMaxFeeEl, fastMaxFeeEl,
-      slowCostEl, normalCostEl, fastCostEl
+      baseFeeSummaryEl,
+      priorityFeeSummaryEl,
+      fastFeeSummaryEl,
+      gasPriceEl,
+      priorityFeeEl,
+      latestBlockEl,
+      lastUpdatedEl,
+      slowMaxFeeEl,
+      normalMaxFeeEl,
+      fastMaxFeeEl,
+      slowCostEl,
+      normalCostEl,
+      fastCostEl
     ].forEach((el) => {
       if (el) el.textContent = '—';
     });
   }
 
-  function nowTimeLabel() {
-    return new Date().toLocaleTimeString();
-  }
-
-  function buildFeeTiers(baseFeeWei, priorityWei, gasLimit) {
-    const safePriority = priorityWei > 0n ? priorityWei : 1000000000n;
-
-    const slowPriority = max(safePriority / 2n, 500000000n);
-    const normalPriority = safePriority;
-    const fastPriority = max((safePriority * 3n) / 2n, safePriority + 500000000n);
-
-    const slowMax = (baseFeeWei * 2n) + slowPriority;
-    const normalMax = (baseFeeWei * 2n) + normalPriority;
-    const fastMax = (baseFeeWei * 2n) + fastPriority;
-
-    const gasLimitBig = BigInt(gasLimit);
-
-    return {
-      slow: {
-        maxFeeWei: slowMax,
-        costWei: slowMax * gasLimitBig
-      },
-      normal: {
-        maxFeeWei: normalMax,
-        costWei: normalMax * gasLimitBig
-      },
-      fast: {
-        maxFeeWei: fastMax,
-        costWei: fastMax * gasLimitBig
-      }
-    };
-  }
-
   async function loadGas() {
-    const gasLimit = parseGasLimit();
+    if (isLoading) return;
+    isLoading = true;
 
+    const gasLimit = parseGasLimit();
     setStatus('Loading');
     setResult('Loading live gas data...');
     updateMode('Loading');
 
     try {
-      const { url, data } = await fetchWithFallback();
+      const data = await fetchFirstWorkingBundle();
 
       const gasPriceWei = hexToBigIntSafe(data.gasPriceHex);
-      const priorityWeiRpc = hexToBigIntSafe(data.priorityHex);
-      const baseFeeWei = getBaseFeeFromHistory(data.feeHistory);
-      const priorityWei = estimatePriorityFromHistory(data.feeHistory, priorityWeiRpc);
+      const baseFeeWei = getBaseFeeWei(data.feeHistory);
+      const priorityFeeWei = getPriorityFeeWei(data.feeHistory, hexToBigIntSafe(data.priorityHex));
+      const tiers = buildTierFees(baseFeeWei, priorityFeeWei, gasLimit);
 
-      const tiers = buildFeeTiers(baseFeeWei, priorityWei, gasLimit);
-
-      const baseFeeGwei = weiToGwei(baseFeeWei);
-      const priorityGwei = weiToGwei(priorityWei);
-      const gasPriceGwei = weiToGwei(gasPriceWei);
+      const gasPriceGwei = gweiFromWeiBigInt(gasPriceWei);
+      const baseFeeGwei = gweiFromWeiBigInt(baseFeeWei);
+      const priorityFeeGwei = gweiFromWeiBigInt(priorityFeeWei);
 
       if (baseFeeSummaryEl) baseFeeSummaryEl.textContent = formatGwei(baseFeeGwei);
-      if (priorityFeeSummaryEl) priorityFeeSummaryEl.textContent = formatGwei(priorityGwei);
-      if (fastFeeSummaryEl) fastFeeSummaryEl.textContent = formatGwei(weiToGwei(tiers.fast.maxFeeWei));
+      if (priorityFeeSummaryEl) priorityFeeSummaryEl.textContent = formatGwei(priorityFeeGwei);
+      if (fastFeeSummaryEl) fastFeeSummaryEl.textContent = formatGwei(gweiFromWeiBigInt(tiers.fast.maxFeeWei));
 
       if (gasPriceEl) gasPriceEl.textContent = formatGwei(gasPriceGwei);
-      if (priorityFeeEl) priorityFeeEl.textContent = formatGwei(priorityGwei);
+      if (priorityFeeEl) priorityFeeEl.textContent = formatGwei(priorityFeeGwei);
       if (latestBlockEl) latestBlockEl.textContent = formatBlock(data.blockHex);
-      if (lastUpdatedEl) lastUpdatedEl.textContent = nowTimeLabel();
+      if (lastUpdatedEl) lastUpdatedEl.textContent = nowLabel();
 
-      if (slowMaxFeeEl) slowMaxFeeEl.textContent = formatGwei(weiToGwei(tiers.slow.maxFeeWei));
-      if (normalMaxFeeEl) normalMaxFeeEl.textContent = formatGwei(weiToGwei(tiers.normal.maxFeeWei));
-      if (fastMaxFeeEl) fastMaxFeeEl.textContent = formatGwei(weiToGwei(tiers.fast.maxFeeWei));
+      if (slowMaxFeeEl) slowMaxFeeEl.textContent = formatGwei(gweiFromWeiBigInt(tiers.slow.maxFeeWei));
+      if (normalMaxFeeEl) normalMaxFeeEl.textContent = formatGwei(gweiFromWeiBigInt(tiers.normal.maxFeeWei));
+      if (fastMaxFeeEl) fastMaxFeeEl.textContent = formatGwei(gweiFromWeiBigInt(tiers.fast.maxFeeWei));
 
-      if (slowCostEl) slowCostEl.textContent = formatEth(weiToEth(tiers.slow.costWei));
-      if (normalCostEl) normalCostEl.textContent = formatEth(weiToEth(tiers.normal.costWei));
-      if (fastCostEl) fastCostEl.textContent = formatEth(weiToEth(tiers.fast.costWei));
+      if (slowCostEl) slowCostEl.textContent = formatEth(ethFromWeiBigInt(tiers.slow.costWei));
+      if (normalCostEl) normalCostEl.textContent = formatEth(ethFromWeiBigInt(tiers.normal.costWei));
+      if (fastCostEl) fastCostEl.textContent = formatEth(ethFromWeiBigInt(tiers.fast.costWei));
 
-      setResult(`Loaded live gas data successfully for a gas limit of ${gasLimit.toLocaleString()}.`);
       setStatus('Loaded', 'ok');
+      setResult(`Loaded live gas data successfully for gas limit ${gasLimit.toLocaleString()}.`);
       updateMode('Loaded');
-      if (formulaTextEl) formulaTextEl.textContent = 'Formula: estimated ETH cost = max fee per gas × gas limit';
+      if (formulaTextEl) {
+        formulaTextEl.textContent = 'Formula: estimated ETH cost = max fee per gas × gas limit';
+      }
 
       lastSummary =
 `Gas Tracker
 Network: Ethereum Mainnet
-RPC: ${url}
+Endpoint: ${data.endpoint}
 Gas Limit: ${gasLimit}
 Base Fee: ${formatGwei(baseFeeGwei)}
-Priority Fee: ${formatGwei(priorityGwei)}
+Priority Fee: ${formatGwei(priorityFeeGwei)}
 Gas Price: ${formatGwei(gasPriceGwei)}
 Latest Block: ${formatBlock(data.blockHex)}
 
-Slow Max Fee: ${formatGwei(weiToGwei(tiers.slow.maxFeeWei))}
-Slow Estimated Cost: ${formatEth(weiToEth(tiers.slow.costWei))}
+Slow Max Fee: ${formatGwei(gweiFromWeiBigInt(tiers.slow.maxFeeWei))}
+Slow Estimated Cost: ${formatEth(ethFromWeiBigInt(tiers.slow.costWei))}
 
-Normal Max Fee: ${formatGwei(weiToGwei(tiers.normal.maxFeeWei))}
-Normal Estimated Cost: ${formatEth(weiToEth(tiers.normal.costWei))}
+Normal Max Fee: ${formatGwei(gweiFromWeiBigInt(tiers.normal.maxFeeWei))}
+Normal Estimated Cost: ${formatEth(ethFromWeiBigInt(tiers.normal.costWei))}
 
-Fast Max Fee: ${formatGwei(weiToGwei(tiers.fast.maxFeeWei))}
-Fast Estimated Cost: ${formatEth(weiToEth(tiers.fast.costWei))}
+Fast Max Fee: ${formatGwei(gweiFromWeiBigInt(tiers.fast.maxFeeWei))}
+Fast Estimated Cost: ${formatEth(ethFromWeiBigInt(tiers.fast.costWei))}
 
-Updated: ${nowTimeLabel()}`;
-    } catch (err) {
+Updated: ${nowLabel()}`;
+    } catch (error) {
       clearOutputs();
-      setResult(`Unable to load live gas data right now. ${err && err.message ? err.message : 'Request failed.'}`);
       setStatus('Load failed', 'bad');
+      setResult(`Unable to load live gas data right now. ${error && error.message ? error.message : 'Request failed.'}`);
       updateMode('Error');
-      if (formulaTextEl) formulaTextEl.textContent = 'Formula: estimated ETH cost = max fee per gas × gas limit';
+      if (formulaTextEl) {
+        formulaTextEl.textContent = 'Formula: estimated ETH cost = max fee per gas × gas limit';
+      }
       lastSummary = '';
+    } finally {
+      isLoading = false;
     }
   }
 
-  function resetAll() {
-    gasLimitEl.value = '21000';
-    refreshModeEl.value = 'manual';
-    clearOutputs();
-    setResult('Click Refresh Gas to load live fee suggestions.');
-    setStatus('Ready');
-    updateMode('Ready');
-    if (formulaTextEl) formulaTextEl.textContent = 'Formula: estimated ETH cost = max fee per gas × gas limit';
-    lastSummary = '';
+  function stopAuto() {
     if (autoTimer) {
       clearInterval(autoTimer);
       autoTimer = null;
@@ -304,16 +333,27 @@ Updated: ${nowTimeLabel()}`;
   }
 
   function applyRefreshMode() {
-    if (autoTimer) {
-      clearInterval(autoTimer);
-      autoTimer = null;
-    }
+    stopAuto();
 
     if (refreshModeEl.value === 'auto') {
       autoTimer = setInterval(() => {
         loadGas();
       }, 15000);
     }
+  }
+
+  function resetAll() {
+    stopAuto();
+    gasLimitEl.value = '21000';
+    refreshModeEl.value = 'manual';
+    clearOutputs();
+    setStatus('Ready');
+    setResult('Click Refresh Gas to load live fee suggestions.');
+    updateMode('Ready');
+    if (formulaTextEl) {
+      formulaTextEl.textContent = 'Formula: estimated ETH cost = max fee per gas × gas limit';
+    }
+    lastSummary = '';
   }
 
   refreshBtn?.addEventListener('click', loadGas);
@@ -330,9 +370,12 @@ Updated: ${nowTimeLabel()}`;
       } else {
         await navigator.clipboard.writeText(lastSummary);
       }
+
       setStatus('Copied', 'ok');
-      setTimeout(() => setStatus(lastMode === 'Ready' ? 'Ready' : 'Loaded', lastMode === 'Ready' ? '' : 'ok'), 1200);
-    } catch (_) {
+      setTimeout(() => {
+        setStatus(lastMode === 'Loaded' ? 'Loaded' : 'Ready', lastMode === 'Loaded' ? 'ok' : '');
+      }, 1200);
+    } catch {
       setStatus('Copy failed', 'bad');
     }
   });
@@ -347,7 +390,9 @@ Updated: ${nowTimeLabel()}`;
   });
 
   gasLimitEl?.addEventListener('change', () => {
-    if (lastMode === 'Loaded') loadGas();
+    if (lastMode === 'Loaded') {
+      loadGas();
+    }
   });
 
   document.querySelectorAll('.quick button[data-gaslimit]').forEach((btn) => {
@@ -361,4 +406,3 @@ Updated: ${nowTimeLabel()}`;
 
   resetAll();
 });
-::contentReference[oaicite:1]{index=1}
