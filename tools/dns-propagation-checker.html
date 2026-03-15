@@ -1,9 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- =========================
-       Analytics / Monetization
-       ========================= -->
+  <!-- Analytics / Monetization -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,12 +10,8 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-    crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256" crossorigin="anonymous"></script>
 
-  <!-- =========================
-       Core Meta
-       ========================= -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
@@ -38,7 +32,6 @@
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
 
-  <!-- Performance -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="preconnect" href="https://dns.google" crossorigin>
@@ -52,10 +45,8 @@
   <link rel="dns-prefetch" href="//security.cloudflare-dns.com">
   <link rel="dns-prefetch" href="//family.cloudflare-dns.com">
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/site.css">
 
-  <!-- =========================
-       Open Graph / Twitter
-       ========================= -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
@@ -70,7 +61,6 @@
   <meta name="twitter:description" content="Fast DNS propagation checker across public DNS resolvers for common DNS record types." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <!-- WebPage -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -78,15 +68,10 @@
     "name":"DNS Propagation Checker",
     "url":"https://instantqr.io/tools/dns-propagation-checker.html",
     "description":"Fast DNS propagation checker for A, AAAA, CNAME, MX, TXT, NS, and SOA records across public resolvers.",
-    "isPartOf":{
-      "@type":"WebSite",
-      "name":"InstantQR",
-      "url":"https://instantqr.io/"
-    }
+    "isPartOf":{"@type":"WebSite","name":"InstantQR","url":"https://instantqr.io/"}
   }
   </script>
 
-  <!-- SoftwareApplication -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -98,43 +83,22 @@
     "browserRequirements":"Requires JavaScript. Works in modern browsers.",
     "url":"https://instantqr.io/tools/dns-propagation-checker.html",
     "description":"Check DNS propagation for A, AAAA, CNAME, MX, TXT, NS, and SOA records across public DNS resolvers.",
-    "publisher":{
-      "@type":"Organization",
-      "name":"InstantQR",
-      "url":"https://instantqr.io/"
-    }
+    "publisher":{"@type":"Organization","name":"InstantQR","url":"https://instantqr.io/"}
   }
   </script>
 
-  <!-- Breadcrumbs -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"BreadcrumbList",
     "itemListElement":[
-      {
-        "@type":"ListItem",
-        "position":1,
-        "name":"Home",
-        "item":"https://instantqr.io/"
-      },
-      {
-        "@type":"ListItem",
-        "position":2,
-        "name":"Tools",
-        "item":"https://instantqr.io/tools/tools.html"
-      },
-      {
-        "@type":"ListItem",
-        "position":3,
-        "name":"DNS Propagation Checker",
-        "item":"https://instantqr.io/tools/dns-propagation-checker.html"
-      }
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+      {"@type":"ListItem","position":3,"name":"DNS Propagation Checker","item":"https://instantqr.io/tools/dns-propagation-checker.html"}
     ]
   }
   </script>
 
-  <!-- FAQ -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -143,549 +107,26 @@
       {
         "@type":"Question",
         "name":"What is DNS propagation?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"DNS propagation is the time it takes for DNS record changes to become visible across different DNS resolvers around the internet."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"DNS propagation is the time it takes for DNS record changes to become visible across different DNS resolvers around the internet."}
       },
       {
         "@type":"Question",
         "name":"What record types can I check with this DNS propagation checker?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"You can check A, AAAA, CNAME, MX, TXT, NS, and SOA records."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"You can check A, AAAA, CNAME, MX, TXT, NS, and SOA records."}
       },
       {
         "@type":"Question",
         "name":"Why do some resolvers show different DNS results?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Resolvers may show different results because cached records expire at different times, propagation is still in progress, or your updated DNS changes have not reached every resolver yet."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"Resolvers may show different results because cached records expire at different times, propagation is still in progress, or your updated DNS changes have not reached every resolver yet."}
       },
       {
         "@type":"Question",
         "name":"How do I know if my DNS change has propagated?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"If multiple resolvers return the same expected value and the weighted propagation percentage is high, your DNS change is likely visible across most real-world public DNS paths."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"If multiple resolvers return the same expected value and the weighted propagation percentage is high, your DNS change is likely visible across most real-world public DNS paths."}
       }
     ]
   }
   </script>
-
-  <style>
-    :root{
-      --bg:#081120;
-      --bg2:#0f172a;
-      --panel:#111c34;
-      --panel2:#16233f;
-      --text:#e5eefc;
-      --muted:#94a3b8;
-      --line:rgba(255,255,255,.08);
-      --brand:#60a5fa;
-      --brand2:#22c55e;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --ok:#19c37d;
-      --okbg:rgba(25,195,125,.14);
-      --bad:#ff6b6b;
-      --badbg:rgba(255,107,107,.12);
-      --shadow:0 12px 35px rgba(0,0,0,.28);
-      --radius:18px;
-      --radius2:22px;
-      --max:1180px;
-      --focus:0 0 0 4px rgba(96,165,250,.16);
-      --border:rgba(255,255,255,.10);
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
-        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 28%),
-        linear-gradient(180deg, #07101d 0%, #0b1324 55%, #081120 100%);
-      min-height:100vh;
-      line-height:1.55;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
-    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
-    img{max-width:100%}
-
-    .skip{
-      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
-    }
-    .skip:focus{
-      left:12px;top:12px;width:auto;height:auto;
-      padding:10px 12px;border-radius:12px;
-      background:#0b172d;color:#fff;border:1px solid var(--line);z-index:999;
-    }
-
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px 24px}
-
-    .topbar{
-      position:sticky;top:0;z-index:40;
-      backdrop-filter:blur(14px);
-      background:rgba(8,17,32,.78);
-      border-bottom:1px solid var(--line);
-    }
-    .topbar-inner{
-      max-width:var(--max);margin:0 auto;
-      padding:12px 16px;
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:12px;
-      color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;
-    }
-    .brand-logo{
-      width:38px;height:38px;border-radius:12px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.18));
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      flex:0 0 auto;
-    }
-    .brand-logo img{width:24px;height:24px;display:block}
-
-    .top-links{
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-    }
-    .top-links a{
-      color:var(--text);
-      font-size:.95rem;
-      padding:10px 12px;border-radius:12px;
-      border:1px solid transparent;
-    }
-    .top-links a:hover{
-      text-decoration:none;
-      background:rgba(255,255,255,.04);
-      border-color:var(--line);
-    }
-
-    .breadcrumb{
-      margin:18px 0 10px;
-      font-size:12px;
-      color:rgba(233,238,252,.72);
-    }
-    .breadcrumb ol{
-      list-style:none;
-      margin:0;
-      padding:0;
-      display:flex;
-      gap:8px;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-    .breadcrumb li+li:before{
-      content:"/";
-      margin-right:8px;
-      color:rgba(233,238,252,.45);
-    }
-    .breadcrumb a{color:var(--muted)}
-    .breadcrumb a:hover{color:var(--text); text-decoration:none}
-
-    .hero{
-      margin-top:18px;
-      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
-      border:1px solid var(--line);
-      border-radius:var(--radius2);
-      box-shadow:var(--shadow);
-      padding:24px;
-      position:relative;
-      overflow:hidden;
-    }
-    .hero:before{
-      content:"";
-      position:absolute;inset:-2px;
-      background:
-        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
-        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
-      pointer-events:none;
-    }
-    .hero>*{position:relative}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 12px;border-radius:999px;
-      background:rgba(96,165,250,.10);
-      border:1px solid rgba(96,165,250,.22);
-      color:#bfdbfe;font-size:13px;font-weight:700;
-    }
-    h1{
-      margin:14px 0 10px;
-      font-size:clamp(28px, 4vw, 42px);
-      line-height:1.05;
-      letter-spacing:-.7px;
-    }
-    .sub{
-      margin:0;
-      color:#cbd5e1;
-      line-height:1.6;
-      max-width:70ch;
-      font-size:16px;
-    }
-
-    .controls{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:minmax(240px,1.3fr) 160px 160px auto;
-      gap:10px;
-      align-items:end;
-    }
-    .control label{
-      display:block;
-      margin:0 0 6px;
-      font-size:13px;
-      color:var(--muted);
-      font-weight:700;
-    }
-    .input,.select{
-      width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:#0a1427;
-      color:var(--text);
-      outline:none;
-      font-size:14px;
-    }
-    .input:focus,.select:focus{
-      border-color:rgba(96,165,250,.5);
-      box-shadow:0 0 0 4px rgba(96,165,250,.14);
-      background:#0b172d;
-    }
-    .input::placeholder{color:rgba(233,238,252,.55)}
-
-    .cta{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 14px;border-radius:14px;
-      font-weight:800;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      text-decoration:none;
-      gap:8px;white-space:nowrap;cursor:pointer;
-      transition:transform .12s ease, filter .12s ease, background .12s ease;
-      user-select:none;
-      font:inherit;
-    }
-    .cta:hover{transform:translateY(-1px);text-decoration:none}
-    .cta.primary{
-      border:0;
-      background:linear-gradient(135deg, var(--brand), #3b82f6);
-      box-shadow:0 10px 26px rgba(59,130,246,.28);
-      color:#fff;
-    }
-    .cta.primary:hover{filter:brightness(1.06)}
-    .cta.ghost:hover{background:rgba(255,255,255,.10)}
-
-    .quick{
-      display:flex;gap:8px;flex-wrap:wrap;margin-top:12px
-    }
-    .quick button{
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.05);
-      color:var(--muted);
-      border-radius:999px;
-      padding:8px 10px;
-      font-size:12px;
-      cursor:pointer;
-    }
-    .quick button:hover{color:var(--text);background:rgba(255,255,255,.08)}
-
-    .summary{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:12px;
-    }
-    .sumCard{
-      border-radius:var(--radius);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:14px;
-      min-height:96px;
-    }
-    .sumLabel{
-      font-size:12px;
-      color:var(--muted);
-      margin-bottom:6px;
-      text-transform:uppercase;
-      letter-spacing:.4px;
-    }
-    .sumValue{
-      font-weight:900;
-      font-size:24px;
-      line-height:1.1;
-    }
-    .sumNote{
-      margin-top:6px;
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.45;
-    }
-    .greenGlow{
-      background:linear-gradient(180deg, rgba(25,195,125,.16), rgba(25,195,125,.08));
-      border-color:rgba(25,195,125,.30);
-      box-shadow:0 0 0 1px rgba(25,195,125,.05), 0 14px 26px rgba(25,195,125,.10);
-    }
-
-    .panel{
-      margin-top:14px;
-      border-radius:var(--radius2);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.03);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .panelHead{
-      padding:14px 16px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
-    }
-    .panelTitle{
-      font-size:18px;
-      font-weight:900;
-      letter-spacing:-.2px;
-    }
-    .panelSub{font-size:13px;color:var(--muted)}
-    .panelBody{padding:16px}
-
-    .statusLine{
-      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
-    }
-    .badge{
-      font-size:12px;
-      color:var(--muted);
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.10);
-      padding:6px 10px;
-      border-radius:999px;
-      white-space:nowrap;
-    }
-    .badge.ok{
-      color:#d7fff0;
-      border-color:rgba(25,195,125,.35);
-      background:var(--okbg);
-      font-weight:800;
-    }
-    .badge.bad{
-      color:#ffdede;
-      border-color:rgba(255,107,107,.35);
-      background:var(--badbg);
-      font-weight:800;
-    }
-
-    .loader{
-      display:none;
-      margin-top:12px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.12);
-      padding:14px;
-      color:var(--muted);
-      font-size:14px;
-    }
-    .loader.show{display:block}
-    .dots::after{
-      content:"";
-      display:inline-block;
-      width:1em;
-      text-align:left;
-      animation:dots 1.1s steps(4,end) infinite;
-    }
-    @keyframes dots{
-      0%{content:""}
-      25%{content:"."}
-      50%{content:".."}
-      75%{content:"..."}
-      100%{content:""}
-    }
-
-    .tableWrap{overflow:auto;border-radius:16px}
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:860px;
-    }
-    th, td{
-      padding:12px 12px;
-      text-align:left;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      vertical-align:top;
-      font-size:13px;
-    }
-    th{
-      position:sticky;top:0;
-      background:rgba(7,11,20,.92);
-      color:#eaf2ff;
-      z-index:1;
-      font-size:12px;
-      letter-spacing:.3px;
-      text-transform:uppercase;
-    }
-    tbody tr:hover{background:rgba(255,255,255,.03)}
-    .resolver{
-      font-weight:800;
-      color:var(--text);
-      min-width:160px;
-    }
-    .resolver small{
-      display:block;
-      color:var(--muted);
-      font-weight:500;
-      margin-top:2px;
-      font-size:11px;
-    }
-    .resultCell{
-      max-width:420px;
-    }
-    .resultBox{
-      border-radius:14px;
-      padding:10px 12px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.14);
-    }
-    .resultBox.ok{
-      background:linear-gradient(180deg, rgba(25,195,125,.18), rgba(25,195,125,.10));
-      border-color:rgba(25,195,125,.35);
-      box-shadow: inset 0 0 0 1px rgba(25,195,125,.05), 0 10px 20px rgba(25,195,125,.08);
-    }
-    .resultBox.bad{
-      background:linear-gradient(180deg, rgba(255,107,107,.14), rgba(255,107,107,.07));
-      border-color:rgba(255,107,107,.30);
-    }
-    .resultBox.pending{
-      background:rgba(255,255,255,.03);
-      border-color:rgba(255,255,255,.10);
-    }
-    .resultTop{
-      display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;
-      margin-bottom:6px;
-    }
-    .resultStatus{
-      font-weight:900;
-      letter-spacing:.2px;
-    }
-    .resultStatus.ok{color:#c8ffe9}
-    .resultStatus.bad{color:#ffd3d3}
-    .resultStatus.pending{color:#bfdbfe}
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-      word-break:break-word;
-      line-height:1.55;
-      color:#f0f6ff;
-    }
-    .muted{color:var(--muted)}
-    .small{font-size:12px}
-    .ttl{
-      font-weight:800;
-      color:#dce9ff;
-      white-space:nowrap;
-    }
-
-    .helpBox{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
-    .helpCard{
-      border-radius:var(--radius);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:14px;
-    }
-    .helpCard h3{
-      margin:0 0 6px;
-      font-size:16px;
-    }
-    .helpCard p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:14px;
-    }
-
-    .faq{
-      margin-top:14px;
-      border-radius:var(--radius2);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.03);
-      box-shadow:var(--shadow);
-      padding:18px;
-    }
-    .faq h2{
-      margin:0 0 10px;
-      font-size:22px;
-      letter-spacing:-.25px;
-    }
-    details{
-      border-top:1px solid rgba(255,255,255,.10);
-      padding:12px 0;
-    }
-    details:first-child{border-top:0;padding-top:0}
-    summary{
-      cursor:pointer;
-      font-weight:800;
-      list-style:none;
-      color:#fff;
-    }
-    summary::-webkit-details-marker{display:none}
-    details p{
-      margin:8px 0 0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:14px;
-    }
-
-    .footer{
-      padding:28px 0 42px;
-      color:var(--muted);
-    }
-    .footer-box{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-      padding:18px 0 0;
-      border-top:1px solid var(--line);
-    }
-    .footer-links{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .footer-links a{color:var(--muted)}
-    .footer-links a:hover{color:var(--text);text-decoration:none}
-
-    @media (max-width: 980px){
-      .top-links{display:none}
-      .controls{grid-template-columns:1fr 1fr}
-      .summary{grid-template-columns:1fr 1fr}
-      .helpBox{grid-template-columns:1fr}
-    }
-    @media (max-width: 640px){
-      .controls{grid-template-columns:1fr}
-      .summary{grid-template-columns:1fr}
-      .cta{width:100%}
-      .topbar-inner{padding:10px 14px}
-      .wrap{padding:0 16px 24px}
-    }
-  </style>
 </head>
 
 <body>
@@ -853,6 +294,17 @@
       </div>
     </section>
 
+    <section class="relatedTools" aria-label="Related network tools">
+      <h2>Related Network Tools</h2>
+      <div class="relatedLinks">
+        <a href="/tools/dns-lookup.html">DNS Lookup</a>
+        <a href="/tools/whois-lookup.html">WHOIS Lookup</a>
+        <a href="/tools/ip-lookup.html">IP Lookup</a>
+        <a href="/tools/reverse-dns-lookup.html">Reverse DNS Lookup</a>
+        <a href="/tools/http-header-checker.html">HTTP Header Checker</a>
+      </div>
+    </section>
+
     <section class="faq" aria-label="Frequently asked questions">
       <h2>FAQ</h2>
 
@@ -895,478 +347,7 @@
     </footer>
   </main>
 
-  <script>
-    const RESOLVERS = [
-      {
-        id: "google",
-        name: "Google Public DNS",
-        provider: "dns.google",
-        url: "https://dns.google/resolve",
-        kind: "standard",
-        weight: 1.0
-      },
-      {
-        id: "cloudflare",
-        name: "Cloudflare 1.1.1.1",
-        provider: "cloudflare-dns.com",
-        url: "https://cloudflare-dns.com/dns-query",
-        kind: "standard",
-        weight: 1.0
-      },
-      {
-        id: "cfsecurity",
-        name: "Cloudflare Security",
-        provider: "security.cloudflare-dns.com",
-        url: "https://security.cloudflare-dns.com/dns-query",
-        kind: "security",
-        weight: 0.55
-      },
-      {
-        id: "cffamily",
-        name: "Cloudflare Family",
-        provider: "family.cloudflare-dns.com",
-        url: "https://family.cloudflare-dns.com/dns-query",
-        kind: "family",
-        weight: 0.45
-      }
-    ];
-
-    const domainEl = document.getElementById("domain");
-    const typeEl = document.getElementById("type");
-    const expectedEl = document.getElementById("expected");
-    const checkBtn = document.getElementById("checkBtn");
-    const copyBtn = document.getElementById("copyBtn");
-    const shareBtn = document.getElementById("shareBtn");
-    const loader = document.getElementById("loader");
-    const resultsBody = document.getElementById("resultsBody");
-    const matchedCountEl = document.getElementById("matchedCount");
-    const propPercentEl = document.getElementById("propPercent");
-    const consensusValueEl = document.getElementById("consensusValue");
-    const queryLabelEl = document.getElementById("queryLabel");
-    const statusBadge = document.getElementById("statusBadge");
-    const yearEl = document.getElementById("year");
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-    let lastSummary = "";
-    let activeRunId = 0;
-
-    function normalizeDomain(input){
-      let s = (input || "").trim();
-      if (!s) return "";
-      try {
-        if (s.includes("://")) s = new URL(s).hostname;
-      } catch(e){}
-      s = s.split("/")[0].replace(/\.+$/,"");
-      return s.toLowerCase();
-    }
-
-    function escapeHtml(str){
-      return String(str)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;");
-    }
-
-    function formatAnswer(ans){
-      if (!ans || !ans.length) return "";
-      return ans
-        .map(a => {
-          const val = (a.data || a.Data || "").toString();
-          return val.replace(/^"|"$/g, "");
-        })
-        .join(" | ");
-    }
-
-    function mostCommon(arr){
-      const map = new Map();
-      arr.forEach(v => map.set(v, (map.get(v) || 0) + 1));
-      let best = "";
-      let count = 0;
-      for (const [k,v] of map.entries()){
-        if (v > count){ best = k; count = v; }
-      }
-      return best;
-    }
-
-    function setStatus(text, kind=""){
-      statusBadge.textContent = text;
-      statusBadge.className = "badge" + (kind ? " " + kind : "");
-    }
-
-    async function copyText(text){
-      try{
-        await navigator.clipboard.writeText(text);
-        setStatus("Copied", "ok");
-        setTimeout(()=>setStatus("Ready"), 1200);
-      }catch(e){
-        setStatus("Copy failed", "bad");
-      }
-    }
-
-    function getHeadersForResolver(){
-      return { "accept":"application/dns-json" };
-    }
-
-    async function queryResolver(resolver, domain, type){
-      const base = resolver.url.includes("?") ? resolver.url + "&" : resolver.url + "?";
-      const url = `${base}name=${encodeURIComponent(domain)}&type=${encodeURIComponent(type)}`;
-      const started = performance.now();
-
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3000);
-
-      try {
-        const res = await fetch(url, {
-          headers: getHeadersForResolver(),
-          cache: "no-store",
-          signal: controller.signal
-        });
-
-        const ms = Math.round(performance.now() - started);
-        if (!res.ok) throw new Error("HTTP " + res.status);
-
-        const json = await res.json();
-        const answers = Array.isArray(json.Answer) ? json.Answer : [];
-        const text = formatAnswer(answers);
-        const ttl = answers.length ? (answers[0].TTL ?? "—") : "—";
-
-        return {
-          id: resolver.id,
-          resolver: resolver.name,
-          provider: resolver.provider,
-          kind: resolver.kind,
-          weight: resolver.weight,
-          ok: answers.length > 0,
-          answers,
-          text,
-          ttl,
-          ms,
-          raw: json
-        };
-      } finally {
-        clearTimeout(timeoutId);
-      }
-    }
-
-    function getConsensus(results){
-      const visibleRows = results.filter(r => r && r.ok && r.text);
-
-      const primaryPool = visibleRows
-        .filter(r => r.kind === "standard")
-        .map(r => r.text.trim())
-        .filter(Boolean);
-
-      const fallbackPool = visibleRows
-        .map(r => r.text.trim())
-        .filter(Boolean);
-
-      if (primaryPool.length) return mostCommon(primaryPool);
-      if (fallbackPool.length) return mostCommon(fallbackPool);
-      return "";
-    }
-
-    function isMatch(row, expected, consensus){
-      if (!row || !row.ok || !row.text) return false;
-      const value = row.text.toLowerCase();
-      if (expected) return value.includes(expected.toLowerCase());
-      if (consensus) return value === consensus.toLowerCase();
-      return false;
-    }
-
-    function computeWeightedStats(results, expected, consensus){
-      let totalWeight = 0;
-      let matchedWeight = 0;
-
-      results.forEach(row => {
-        if (!row) return;
-        totalWeight += row.weight;
-        if (isMatch(row, expected, consensus)) {
-          matchedWeight += row.weight;
-        }
-      });
-
-      const percent = totalWeight > 0
-        ? Math.round((matchedWeight / totalWeight) * 100)
-        : 0;
-
-      return { totalWeight, matchedWeight, percent };
-    }
-
-    function getWeightLabel(weight){
-      if (weight >= 1) return "Primary";
-      return "Secondary";
-    }
-
-    function makePendingRow(resolver){
-      return `
-        <tr id="row-${resolver.id}">
-          <td class="resolver">
-            ${escapeHtml(resolver.name)}
-            <small>${escapeHtml(resolver.provider)}</small>
-          </td>
-          <td class="resultCell">
-            <div class="resultBox pending">
-              <div class="resultTop">
-                <div class="resultStatus pending">Checking…</div>
-                <div class="small muted">Waiting for response</div>
-              </div>
-              <div class="mono muted">Query in progress.</div>
-            </div>
-          </td>
-          <td class="ttl">${escapeHtml(getWeightLabel(resolver.weight))}</td>
-          <td class="ttl">—</td>
-          <td class="ttl">—</td>
-        </tr>
-      `;
-    }
-
-    function makeRowHtml(row, expected, consensus){
-      const match = isMatch(row, expected, consensus);
-
-      const boxClass = row.ok
-        ? (match ? "resultBox ok" : "resultBox")
-        : "resultBox bad";
-
-      const statusClass = row.ok
-        ? (match ? "resultStatus ok" : "resultStatus")
-        : "resultStatus bad";
-
-      let statusText = row.ok
-        ? (match ? "Visible / Match" : "Visible")
-        : "No answer";
-
-      if (row.ok && row.kind === "security") {
-        statusText = match ? "Visible / Match (Security)" : "Visible (Security)";
-      }
-      if (row.ok && row.kind === "family") {
-        statusText = match ? "Visible / Match (Family)" : "Visible (Family)";
-      }
-
-      const detailText = row.ok
-        ? "Record returned"
-        : (row.error ? row.error : "Nothing returned");
-
-      return `
-        <tr id="row-${row.id}">
-          <td class="resolver">
-            ${escapeHtml(row.resolver)}
-            <small>${escapeHtml(row.provider)}</small>
-          </td>
-          <td class="resultCell">
-            <div class="${boxClass}">
-              <div class="resultTop">
-                <div class="${statusClass}">${escapeHtml(statusText)}</div>
-                <div class="small muted">${escapeHtml(detailText)}</div>
-              </div>
-              <div class="mono">${row.text ? escapeHtml(row.text) : '<span class="muted">No record found or not returned by resolver.</span>'}</div>
-            </div>
-          </td>
-          <td class="ttl">${escapeHtml(getWeightLabel(row.weight))}</td>
-          <td class="ttl">${escapeHtml(String(row.ttl))}</td>
-          <td class="ttl">${escapeHtml(String(row.ms))} ms</td>
-        </tr>
-      `;
-    }
-
-    function rerenderRows(results, expected, consensus){
-      RESOLVERS.forEach(resolver => {
-        const target = document.getElementById(`row-${resolver.id}`);
-        if (!target) return;
-
-        const row = results.find(r => r && r.id === resolver.id);
-        const html = row ? makeRowHtml(row, expected, consensus) : makePendingRow(resolver);
-
-        target.outerHTML = html;
-      });
-    }
-
-    function initPendingTable(){
-      resultsBody.innerHTML = RESOLVERS.map(makePendingRow).join("");
-    }
-
-    function updateSummary(results, domain, type, expected){
-      const consensus = getConsensus(results);
-      const stats = computeWeightedStats(results, expected, consensus);
-
-      consensusValueEl.textContent = consensus || "No consensus";
-      matchedCountEl.textContent = `${stats.matchedWeight.toFixed(2)}/${stats.totalWeight.toFixed(2)}`;
-      propPercentEl.textContent = `${stats.percent}%`;
-      queryLabelEl.textContent = `${domain} / ${type}`;
-
-      rerenderRows(results, expected, consensus);
-
-      const completed = results.filter(Boolean).length;
-      const standardOk = results.filter(r => r && r.kind === "standard" && r.ok).length;
-
-      if (completed < RESOLVERS.length) {
-        setStatus(`Checking… ${completed}/${RESOLVERS.length}`);
-      } else if (stats.matchedWeight > 0) {
-        if (standardOk >= 2 && stats.percent >= 75) {
-          setStatus("Strong propagation", "ok");
-        } else {
-          setStatus("Partial propagation", "ok");
-        }
-      } else {
-        setStatus("No clear propagation yet", "bad");
-      }
-
-      lastSummary =
-`DNS Propagation Checker
-Domain: ${domain}
-Type: ${type}
-Expected: ${expected || "(none)"}
-Consensus: ${consensus || "(none)"}
-Weighted Match: ${stats.matchedWeight.toFixed(2)}/${stats.totalWeight.toFixed(2)}
-Propagation: ${stats.percent}%
-
-${results.filter(Boolean).map(r => `- ${r.resolver}: ${r.text || "No answer"} | Weight: ${r.weight} | TTL: ${r.ttl} | Latency: ${r.ms}ms`).join("\n")}`;
-    }
-
-    async function runCheck(){
-      const domain = normalizeDomain(domainEl.value);
-      const type = typeEl.value;
-      const expected = (expectedEl.value || "").trim();
-
-      if (!domain){
-        setStatus("Enter a domain", "bad");
-        domainEl.focus();
-        return;
-      }
-
-      activeRunId += 1;
-      const runId = activeRunId;
-
-      queryLabelEl.textContent = `${domain} / ${type}`;
-      matchedCountEl.textContent = "…";
-      propPercentEl.textContent = "…";
-      consensusValueEl.textContent = "Checking…";
-      loader.classList.add("show");
-      setStatus("Checking…");
-
-      checkBtn.disabled = true;
-      checkBtn.textContent = "Checking…";
-
-      const results = [];
-      initPendingTable();
-
-      try{
-        const tasks = RESOLVERS.map(async (resolver, index) => {
-          let row;
-          try {
-            row = await queryResolver(resolver, domain, type);
-          } catch (err) {
-            row = {
-              id: resolver.id,
-              resolver: resolver.name,
-              provider: resolver.provider,
-              kind: resolver.kind,
-              weight: resolver.weight,
-              ok: false,
-              answers: [],
-              text: "",
-              ttl: "—",
-              ms: "—",
-              error: err && err.name === "AbortError" ? "Timed out" : String(err)
-            };
-          }
-
-          if (runId !== activeRunId) return;
-          results[index] = row;
-          updateSummary(results, domain, type, expected);
-        });
-
-        await Promise.all(tasks);
-
-        if (runId !== activeRunId) return;
-
-        loader.classList.remove("show");
-        checkBtn.disabled = false;
-        checkBtn.textContent = "Check Propagation";
-      } catch (err){
-        if (runId !== activeRunId) return;
-
-        resultsBody.innerHTML = `
-          <tr>
-            <td class="resolver">Error</td>
-            <td class="resultCell">
-              <div class="resultBox bad">
-                <div class="resultTop">
-                  <div class="resultStatus bad">Request failed</div>
-                </div>
-                <div class="mono">${escapeHtml(String(err))}</div>
-              </div>
-            </td>
-            <td class="ttl">—</td>
-            <td class="ttl">—</td>
-            <td class="ttl">—</td>
-          </tr>
-        `;
-        matchedCountEl.textContent = "0.00/0.00";
-        propPercentEl.textContent = "0%";
-        consensusValueEl.textContent = "—";
-        setStatus("Request failed", "bad");
-        loader.classList.remove("show");
-        checkBtn.disabled = false;
-        checkBtn.textContent = "Check Propagation";
-      }
-    }
-
-    checkBtn.addEventListener("click", runCheck);
-
-    domainEl.addEventListener("keydown", e => {
-      if (e.key === "Enter"){
-        e.preventDefault();
-        runCheck();
-      }
-    });
-
-    expectedEl.addEventListener("keydown", e => {
-      if (e.key === "Enter"){
-        e.preventDefault();
-        runCheck();
-      }
-    });
-
-    document.querySelectorAll(".quick button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const [d,t,e] = btn.dataset.fill.split("|");
-        domainEl.value = d || "";
-        typeEl.value = t || "A";
-        expectedEl.value = e || "";
-        runCheck();
-      });
-    });
-
-    copyBtn.addEventListener("click", () => {
-      if (!lastSummary) {
-        setStatus("Nothing to copy", "bad");
-        return;
-      }
-      copyText(lastSummary);
-    });
-
-    shareBtn.addEventListener("click", () => {
-      const domain = normalizeDomain(domainEl.value);
-      const type = typeEl.value;
-      const expected = (expectedEl.value || "").trim();
-      const u = new URL(location.href);
-      if (domain) u.searchParams.set("domain", domain);
-      if (type) u.searchParams.set("type", type);
-      if (expected) u.searchParams.set("expected", expected);
-      copyText(u.toString());
-    });
-
-    (function initFromQuery(){
-      const p = new URLSearchParams(location.search);
-      const d = p.get("domain");
-      const t = p.get("type");
-      const e = p.get("expected");
-      if (d) domainEl.value = d;
-      if (t && [...typeEl.options].some(o => o.value === t)) typeEl.value = t;
-      if (e) expectedEl.value = e;
-      if (d) runCheck();
-    })();
-  </script>
+  <script src="/site.js" defer></script>
+  <script src="/js/tools/dns-propagation-checker.js" defer></script>
 </body>
 </html>
