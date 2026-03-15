@@ -20,11 +20,11 @@
 /tools/dns-propagation-checker.html
 /tools/internet-speed-test.html
 
-/network-tool/ping-tool.html
-/network-tool/reverse-dns-lookup.html
-/network-tool/port-checker.html
-/network-tool/subnet-calculator.html
-/network-tool/traceroute-tool.html
+/tools/ping-tool.html
+/tools/reverse-dns-lookup.html
+/tools/port-checker.html
+/tools/subnet-calculator.html
+/tools/traceroute-tool.html
 
 /tools/world-clock.html
 /tools/time-zone-converter.html
