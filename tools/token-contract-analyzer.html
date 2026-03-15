@@ -17,9 +17,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>Token Contract Analyzer | ERC-20 Contract Checker | InstantQR</title>
-  <meta name="description" content="Analyze an ERC-20 token contract instantly. Check token name, symbol, decimals, total supply, bytecode presence, and common function support from your browser." />
-  <meta name="keywords" content="token contract analyzer, erc20 checker, contract analyzer, token metadata checker, smart contract checker, erc20 analyzer, contract inspection tool" />
+  <title>Token Contract Analyzer | Multi-Chain ERC-20 Contract Checker | InstantQR</title>
+  <meta name="description" content="Analyze token contracts across Ethereum, Base, Arbitrum, Optimism, BNB Smart Chain, Polygon, and Avalanche. Check metadata, proxy signals, transfer behavior, logs, and suspicious contract patterns." />
+  <meta name="keywords" content="token contract analyzer, multi-chain contract checker, erc20 analyzer, smart contract checker, token metadata checker, proxy contract checker, suspicious token scanner" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
@@ -33,12 +33,6 @@
 
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://ethereum-rpc.publicnode.com" crossorigin>
-  <link rel="preconnect" href="https://cloudflare-eth.com" crossorigin>
-  <link rel="dns-prefetch" href="//www.googletagmanager.com">
-  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="//ethereum-rpc.publicnode.com">
-  <link rel="dns-prefetch" href="//cloudflare-eth.com">
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css" />
 
@@ -46,14 +40,14 @@
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Token Contract Analyzer | InstantQR" />
-  <meta property="og:description" content="Analyze ERC-20 contract metadata, bytecode, and common function support instantly." />
+  <meta property="og:description" content="Analyze token contracts across major EVM chains with metadata, proxy, behavior, and risk checks." />
   <meta property="og:url" content="https://instantqr.io/tools/token-contract-analyzer.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="InstantQR Token Contract Analyzer" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Token Contract Analyzer | InstantQR" />
-  <meta name="twitter:description" content="Analyze ERC-20 contract metadata, bytecode, and common function support instantly." />
+  <meta name="twitter:description" content="Analyze token contracts across major EVM chains with metadata, proxy, behavior, and risk checks." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <script type="application/ld+json">
@@ -62,7 +56,7 @@
     "@type":"WebPage",
     "name":"Token Contract Analyzer",
     "url":"https://instantqr.io/tools/token-contract-analyzer.html",
-    "description":"Analyze ERC-20 token metadata, bytecode, and common function support instantly.",
+    "description":"Analyze token contracts across major EVM chains with metadata, proxy, behavior, and risk checks.",
     "isPartOf":{
       "@type":"WebSite",
       "name":"InstantQR",
@@ -81,7 +75,7 @@
     "isAccessibleForFree":true,
     "browserRequirements":"Requires JavaScript. Works in modern browsers.",
     "url":"https://instantqr.io/tools/token-contract-analyzer.html",
-    "description":"Analyze ERC-20 token metadata, bytecode, and common function support from public RPC endpoints.",
+    "description":"Analyze token contracts across major EVM chains with metadata, proxy, behavior, and risk checks.",
     "publisher":{
       "@type":"Organization",
       "name":"InstantQR",
@@ -127,23 +121,23 @@
         "name":"What does this token contract analyzer show?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"This tool shows whether bytecode exists at an address, basic token metadata like name and symbol, decimals, total supply, and whether common ERC-20 functions respond."
+          "text":"This tool checks bytecode presence, token metadata, transfer behavior, proxy slots, recent logs, and basic suspicious signals across supported EVM chains."
         }
       },
       {
         "@type":"Question",
-        "name":"Does this tool audit contract safety?",
+        "name":"Does this tool perform a full smart contract audit?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"No. This tool is a lightweight on-chain contract inspector and does not replace a professional smart contract audit."
+          "text":"No. This tool is a fast first-pass analyzer and does not replace professional auditing or source code review."
         }
       },
       {
         "@type":"Question",
-        "name":"Does this tool run in the browser?",
+        "name":"Which networks are supported?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Yes. The analysis runs from your browser using public Ethereum RPC endpoints."
+          "text":"The analyzer supports Ethereum, Base, Arbitrum, Optimism, BNB Smart Chain, Polygon, and Avalanche C-Chain."
         }
       }
     ]
@@ -151,7 +145,7 @@
   </script>
 
   <style>
-    .controls.cols-2{grid-template-columns:1.6fr 1fr}
+    .controls.cols-3{grid-template-columns:1.3fr 1fr 1fr}
     .metricGrid{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -240,7 +234,7 @@
       line-height:1.6;
     }
     @media (max-width:980px){
-      .controls.cols-2,
+      .controls.cols-3,
       .metricGrid,
       .miniGrid{
         grid-template-columns:1fr;
@@ -281,33 +275,33 @@
     </nav>
 
     <section class="hero" aria-label="Token Contract Analyzer">
-      <div class="pill">🧠 ERC-20 analysis • ⚡ Fast UI • 🔒 Browser-side check</div>
+      <div class="pill">🧠 Multi-chain • ⚡ Fast checks • 🔒 Browser-side analysis</div>
       <h1>Token Contract Analyzer</h1>
       <p class="sub">
-        Analyze an EVM token contract address on Ethereum mainnet. Check whether bytecode exists,
-        read common ERC-20 metadata, and test support for standard token functions.
+        Analyze token contracts across major EVM chains. Check token metadata, transfer behavior, proxy signals,
+        recent logs, and suspicious control patterns in one fast first-pass scan.
       </p>
 
       <div class="summary" aria-label="Contract summary">
         <div class="sumCard greenGlow">
           <div class="sumLabel">Contract Status</div>
           <div class="sumValue small mono" id="contractSummary">—</div>
-          <div class="sumNote">Shows whether the address has deployed bytecode.</div>
+          <div class="sumNote">Shows whether deployed bytecode exists.</div>
         </div>
         <div class="sumCard">
           <div class="sumLabel">Token Symbol</div>
           <div class="sumValue small mono" id="symbolSummary">—</div>
-          <div class="sumNote">Symbol returned by the contract if supported.</div>
+          <div class="sumNote">Returned by symbol() if supported.</div>
         </div>
         <div class="sumCard">
           <div class="sumLabel">Decimals</div>
           <div class="sumValue small mono" id="decimalsSummary">—</div>
-          <div class="sumNote">Token decimals value if supported.</div>
+          <div class="sumNote">Token decimals if supported.</div>
         </div>
         <div class="sumCard">
           <div class="sumLabel">Mode</div>
           <div class="sumValue small mono" id="modeLabel">Ready</div>
-          <div class="sumNote">Shows the latest analyzer state.</div>
+          <div class="sumNote">Latest analyzer state.</div>
         </div>
       </div>
     </section>
@@ -316,7 +310,7 @@
       <div class="panelHead">
         <div>
           <div class="panelTitle">Contract Lookup</div>
-          <div class="panelSub">Paste an Ethereum contract address to inspect common ERC-20 metadata and function support.</div>
+          <div class="panelSub">Choose a network, paste a contract address, and run a fast risk-screening analysis.</div>
         </div>
 
         <div class="statusLine">
@@ -328,15 +322,28 @@
       </div>
 
       <div class="panelBody">
-        <div class="controls cols-2" aria-label="Analyzer inputs">
+        <div class="controls cols-3" aria-label="Analyzer inputs">
           <div class="control">
             <label for="contractAddress">Contract Address</label>
             <input id="contractAddress" class="input" type="text" spellcheck="false" autocomplete="off" placeholder="0x..." />
           </div>
 
           <div class="control">
-            <label for="networkLabel">Network</label>
-            <input id="networkLabel" class="input" type="text" value="Ethereum Mainnet" readonly />
+            <label for="networkSelect">Network</label>
+            <select id="networkSelect" class="select">
+              <option value="ethereum" selected>Ethereum</option>
+              <option value="base">Base</option>
+              <option value="arbitrum">Arbitrum One</option>
+              <option value="optimism">Optimism</option>
+              <option value="bsc">BNB Smart Chain</option>
+              <option value="polygon">Polygon</option>
+              <option value="avalanche">Avalanche C-Chain</option>
+            </select>
+          </div>
+
+          <div class="control">
+            <label for="networkLabel">Active Network</label>
+            <input id="networkLabel" class="input" type="text" value="Ethereum" readonly />
           </div>
         </div>
 
@@ -348,7 +355,7 @@
           <div class="monoBlock" id="resultText">Enter a contract address and click Analyze Contract.</div>
         </div>
 
-        <div class="formula" id="formulaText">Checks: bytecode present + ERC-20 metadata calls + common function support</div>
+        <div class="formula" id="formulaText">Checks: bytecode + metadata + transfer behavior + proxy slots + selector scan + recent logs</div>
 
         <div class="quick" aria-label="Quick actions">
           <button type="button" id="trimBtn">Trim Input</button>
@@ -359,25 +366,25 @@
           <div class="metricCard">
             <h3>Token Name</h3>
             <div id="tokenName" class="metricVal neutralVal">—</div>
-            <div class="metricNote">Returned by the contract name() function if supported.</div>
+            <div class="metricNote">Returned by name() if supported.</div>
           </div>
 
           <div class="metricCard">
             <h3>Token Symbol</h3>
             <div id="tokenSymbol" class="metricVal neutralVal">—</div>
-            <div class="metricNote">Returned by the contract symbol() function if supported.</div>
+            <div class="metricNote">Returned by symbol() if supported.</div>
           </div>
 
           <div class="metricCard">
             <h3>Total Supply</h3>
             <div id="totalSupply" class="metricVal neutralVal">—</div>
-            <div class="metricNote">Raw total supply formatted using decimals if available.</div>
+            <div class="metricNote">Formatted using decimals if available.</div>
           </div>
 
           <div class="metricCard">
             <h3>Bytecode Size</h3>
             <div id="bytecodeSize" class="metricVal neutralVal">—</div>
-            <div class="metricNote">Approximate deployed bytecode size in bytes.</div>
+            <div class="metricNote">Approximate deployed bytecode size.</div>
           </div>
         </div>
 
@@ -399,38 +406,39 @@
           </div>
 
           <div class="miniBox">
-            <h3>Function Support</h3>
+            <h3>Function & Risk Summary</h3>
             <div class="claimRow">
-              <div class="claimKey">Common ERC-20 Methods</div>
+              <div class="claimKey">Function Support</div>
               <div class="claimVal" id="functionSupport">—</div>
             </div>
             <div class="claimRow">
-              <div class="claimKey">Transfer Event Topic</div>
-              <div class="claimVal" id="transferTopic">0xddf252ad...</div>
+              <div class="claimKey">Risk Notes</div>
+              <div class="claimVal" id="analysisNote">—</div>
             </div>
             <div class="claimRow">
-              <div class="claimKey">Interpretation</div>
-              <div class="claimVal" id="analysisNote">—</div>
+              <div class="claimKey">Transfer Event Topic</div>
+              <div class="claimVal">0xddf252ad...</div>
             </div>
           </div>
         </div>
 
         <div class="hintBox">
-          This tool is a quick on-chain metadata checker. It does not verify ownership controls, hidden logic, taxes,
-          upgradeability, blacklist behavior, or full audit safety.
+          This is a fast first-pass analyzer. It can flag suspicious signals, but it is not a full audit and cannot guarantee safety.
         </div>
 
         <div class="helpBox">
           <div class="helpCard">
-            <h3>Useful for quick screening</h3>
+            <h3>Useful for fast screening</h3>
             <p>
-              This is helpful when you want to confirm that an address is actually a deployed contract and whether it responds like a standard ERC-20 token.
+              This tool is designed to quickly tell you whether a contract looks token-like, whether it has proxy/admin signals,
+              and whether basic token operations respond normally.
             </p>
           </div>
           <div class="helpCard">
-            <h3>Not a full security audit</h3>
+            <h3>Better than metadata-only checks</h3>
             <p>
-              A contract can return standard metadata and still include risky or malicious logic. Use this as a first-pass inspection tool, not a final trust decision.
+              In addition to name, symbol, decimals, and supply, this analyzer checks transfer behavior, recent logs, proxy slots,
+              and dangerous selector patterns to surface more suspicious signals.
             </p>
           </div>
         </div>
@@ -453,17 +461,17 @@
 
       <details>
         <summary>What does this token contract analyzer show?</summary>
-        <p>This tool shows whether bytecode exists at an address, basic token metadata like name and symbol, decimals, total supply, and whether common ERC-20 functions respond.</p>
+        <p>This tool checks bytecode presence, token metadata, transfer behavior, proxy slots, recent logs, and basic suspicious signals across supported EVM chains.</p>
       </details>
 
       <details>
-        <summary>Does this tool audit contract safety?</summary>
-        <p>No. This tool is a lightweight on-chain contract inspector and does not replace a professional smart contract audit.</p>
+        <summary>Does this tool perform a full smart contract audit?</summary>
+        <p>No. This tool is a fast first-pass analyzer and does not replace professional auditing or source code review.</p>
       </details>
 
       <details>
-        <summary>Does this tool run in the browser?</summary>
-        <p>Yes. The analysis runs from your browser using public Ethereum RPC endpoints.</p>
+        <summary>Which networks are supported?</summary>
+        <p>The analyzer supports Ethereum, Base, Arbitrum, Optimism, BNB Smart Chain, Polygon, and Avalanche C-Chain.</p>
       </details>
     </section>
 
