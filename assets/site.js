@@ -17,5 +17,13 @@ window.InstantQR = {
     if (!Number.isFinite(value)) return '';
     const factor = Math.pow(10, d);
     return (Math.round(value * factor) / factor).toFixed(d);
+  },
+
+  escapeHtml: function (str) {
+    return String(str)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;');
   }
 };
