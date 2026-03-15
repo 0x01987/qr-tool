@@ -13,10 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroRoundedEl = document.getElementById('heroRounded');
   const queryLabelEl = document.getElementById('queryLabel');
 
-  if (!fahrenheitEl || !celsiusEl || !decimalsEl || !resultTextEl) {
-    console.error('f-to-c.js: required DOM elements not found');
-    return;
-  }
+  if (!fahrenheitEl || !celsiusEl || !decimalsEl || !resultTextEl) return;
 
   let lastEdited = 'fahrenheit';
 
@@ -34,9 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function formatNumber(value) {
     if (!Number.isFinite(value)) return '';
     const d = getDecimals();
-    if (window.InstantQR && typeof window.InstantQR.roundTo === 'function') {
-      return window.InstantQR.roundTo(value, d);
-    }
     const factor = Math.pow(10, d);
     return (Math.round(value * factor) / factor).toFixed(d);
   }
@@ -59,16 +53,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateSummary(fromUnit, inputValue, outputValue, outputUnit, formulaText) {
-    resultTextEl.textContent = `${formatNumber(inputValue)} ${fromUnit} = ${formatNumber(outputValue)} ${outputUnit}`;
+    const inputFormatted = formatNumber(inputValue);
+    const outputFormatted = formatNumber(outputValue);
+
+    resultTextEl.textContent = `${inputFormatted} ${fromUnit} = ${outputFormatted} ${outputUnit}`;
     if (formulaEl) formulaEl.textContent = formulaText;
-    if (heroValueEl) heroValueEl.textContent = `${formatNumber(outputValue)} ${outputUnit}`;
-    if (heroRoundedEl) heroRoundedEl.textContent = formatNumber(outputValue);
+    if (heroValueEl) heroValueEl.textContent = `${outputFormatted} ${outputUnit}`;
+    if (heroRoundedEl) heroRoundedEl.textContent = outputFormatted;
     if (queryLabelEl) queryLabelEl.textContent = `${fromUnit} → ${outputUnit}`;
     setStatus('Converted', 'ok');
   }
 
   function convertFromF() {
     const value = parseFloat(fahrenheitEl.value);
+
     if (!Number.isFinite(value)) {
       celsiusEl.value = '';
       resetOutput();
@@ -82,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function convertFromC() {
     const value = parseFloat(celsiusEl.value);
+
     if (!Number.isFinite(value)) {
       fahrenheitEl.value = '';
       resultTextEl.textContent = 'Enter a value to convert.';
@@ -99,8 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function runConversion() {
-    if (lastEdited === 'celsius') convertFromC();
-    else convertFromF();
+    if (lastEdited === 'celsius') {
+      convertFromC();
+    } else {
+      convertFromF();
+    }
   }
 
   fahrenheitEl.addEventListener('input', () => {
@@ -132,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (copyBtn) {
     copyBtn.addEventListener('click', async () => {
       const text = resultTextEl.textContent || '';
+
       if (!text || text === 'Enter a value to convert.') {
         setStatus('Nothing to copy', 'bad');
         return;
@@ -145,11 +148,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         setStatus('Copied', 'ok');
         setTimeout(() => setStatus('Ready'), 1200);
-      } catch (e) {
+      } catch (_) {
         setStatus('Copy failed', 'bad');
       }
     });
   }
+
+  [fahrenheitEl, celsiusEl].forEach((el) => {
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        runConversion();
+      }
+    });
+  });
 
   document.querySelectorAll('.quick button[data-fill]').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -158,15 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
       lastEdited = 'fahrenheit';
       convertFromF();
       fahrenheitEl.focus();
-    });
-  });
-
-  [fahrenheitEl, celsiusEl].forEach((el) => {
-    el.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        runConversion();
-      }
     });
   });
 
