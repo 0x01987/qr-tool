@@ -9,7 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
         'https://cloudflare-eth.com/v1/mainnet'
       ],
       logScanBlocks: 5000,
-      explorerAddress: 'https://etherscan.io/address/'
+      explorerAddress: 'https://etherscan.io/address/',
+      sample: {
+        address: '0xA0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+        label: 'USDC'
+      }
     },
     base: {
       label: 'Base',
@@ -17,7 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
       nativeSymbol: 'ETH',
       rpc: ['https://base-rpc.publicnode.com'],
       logScanBlocks: 8000,
-      explorerAddress: 'https://basescan.org/address/'
+      explorerAddress: 'https://basescan.org/address/',
+      sample: {
+        address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+        label: 'USDC'
+      }
     },
     arbitrum: {
       label: 'Arbitrum One',
@@ -25,7 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
       nativeSymbol: 'ETH',
       rpc: ['https://arbitrum-one-rpc.publicnode.com'],
       logScanBlocks: 12000,
-      explorerAddress: 'https://arbiscan.io/address/'
+      explorerAddress: 'https://arbiscan.io/address/',
+      sample: {
+        address: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+        label: 'USDC'
+      }
     },
     optimism: {
       label: 'Optimism',
@@ -33,7 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
       nativeSymbol: 'ETH',
       rpc: ['https://optimism-rpc.publicnode.com'],
       logScanBlocks: 12000,
-      explorerAddress: 'https://optimistic.etherscan.io/address/'
+      explorerAddress: 'https://optimistic.etherscan.io/address/',
+      sample: {
+        address: '0x0b2C639c533813f4Aa9D7837CaF62653d097Ff85',
+        label: 'USDC'
+      }
     },
     bsc: {
       label: 'BNB Smart Chain',
@@ -41,7 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
       nativeSymbol: 'BNB',
       rpc: ['https://bsc-rpc.publicnode.com'],
       logScanBlocks: 8000,
-      explorerAddress: 'https://bscscan.com/address/'
+      explorerAddress: 'https://bscscan.com/address/',
+      sample: {
+        address: '0x55d398326f99059fF775485246999027B3197955',
+        label: 'USDT'
+      }
     },
     polygon: {
       label: 'Polygon',
@@ -49,7 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
       nativeSymbol: 'POL',
       rpc: ['https://polygon-bor-rpc.publicnode.com'],
       logScanBlocks: 12000,
-      explorerAddress: 'https://polygonscan.com/address/'
+      explorerAddress: 'https://polygonscan.com/address/',
+      sample: {
+        address: '0x3c499c542cef5e3811e1192ce70d8cc03d5c3359',
+        label: 'USDC'
+      }
     },
     avalanche: {
       label: 'Avalanche C-Chain',
@@ -57,7 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
       nativeSymbol: 'AVAX',
       rpc: ['https://avalanche-c-chain-rpc.publicnode.com'],
       logScanBlocks: 8000,
-      explorerAddress: 'https://snowtrace.io/address/'
+      explorerAddress: 'https://snowtrace.io/address/',
+      sample: {
+        address: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
+        label: 'USDC'
+      }
     }
   };
 
@@ -126,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearBtn: document.getElementById('clearBtn'),
     trimBtn: document.getElementById('trimBtn'),
     pasteBtn: document.getElementById('pasteBtn'),
+    sampleBtn: document.getElementById('sampleBtn'),
 
     statusBadge: document.getElementById('statusBadge'),
     resultText: document.getElementById('resultText'),
@@ -146,7 +175,18 @@ document.addEventListener('DOMContentLoaded', () => {
     lastUpdated: document.getElementById('lastUpdated'),
 
     functionSupport: document.getElementById('functionSupport'),
-    analysisNote: document.getElementById('analysisNote')
+    analysisNote: document.getElementById('analysisNote'),
+
+    behaviorSummary: document.getElementById('behaviorSummary'),
+    behaviorDetails: document.getElementById('behaviorDetails'),
+    proxySummary: document.getElementById('proxySummary'),
+    proxyDetails: document.getElementById('proxyDetails'),
+    logSummary: document.getElementById('logSummary'),
+    holderSummary: document.getElementById('holderSummary'),
+    dangerSummary: document.getElementById('dangerSummary'),
+    dangerDetails: document.getElementById('dangerDetails'),
+    implementationSummary: document.getElementById('implementationSummary'),
+    implementationDetails: document.getElementById('implementationDetails')
   };
 
   let isLoading = false;
@@ -198,12 +238,21 @@ document.addEventListener('DOMContentLoaded', () => {
     else el.classList.add('neutralVal');
   }
 
+  function setText(el, text) {
+    if (el) el.textContent = text;
+  }
+
   function clearOutputs() {
     [
       ui.contractSummary, ui.symbolSummary, ui.decimalsSummary,
       ui.tokenName, ui.tokenSymbol, ui.totalSupply, ui.bytecodeSize,
       ui.addressOut, ui.decimalsOut, ui.lastUpdated,
-      ui.functionSupport, ui.analysisNote
+      ui.functionSupport, ui.analysisNote,
+      ui.behaviorSummary, ui.behaviorDetails,
+      ui.proxySummary, ui.proxyDetails,
+      ui.logSummary, ui.holderSummary,
+      ui.dangerSummary, ui.dangerDetails,
+      ui.implementationSummary, ui.implementationDetails
     ].forEach((el) => {
       if (!el) return;
       el.textContent = '—';
@@ -498,14 +547,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function analyzeImplementationContract(implementationAddress) {
-    if (!implementationAddress || !isValidAddress(implementationAddress)) {
-      return { ok: false };
-    }
+    if (!implementationAddress || !isValidAddress(implementationAddress)) return { ok: false };
 
     const codeRes = await rpcTryAll('eth_getCode', [implementationAddress, 'latest']);
-    if (!codeRes.ok || !codeRes.result || codeRes.result === '0x') {
-      return { ok: false };
-    }
+    if (!codeRes.ok || !codeRes.result || codeRes.result === '0x') return { ok: false };
 
     const [
       nameRes,
@@ -546,33 +591,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return flags;
     }
 
-    if (state.byteCount < 500) {
-      flags.push({ level: 'medium', text: 'Bytecode is unusually small.' });
-    }
-
-    if (!state.erc20Signals) {
-      flags.push({ level: 'medium', text: 'Weak or missing standard ERC-20 metadata support.' });
-    }
-
-    if (state.proxyImplementation) {
-      flags.push({ level: 'medium', text: `Proxy implementation slot detected: ${state.proxyImplementation}` });
-    }
-
-    if (state.proxyAdmin) {
-      flags.push({ level: 'medium', text: `Proxy admin slot detected: ${state.proxyAdmin}` });
-    }
-
-    if (state.proxyBeacon) {
-      flags.push({ level: 'medium', text: `Proxy beacon slot detected: ${state.proxyBeacon}` });
-    }
-
-    if (state.ownerAddress) {
-      flags.push({ level: 'medium', text: `Owner/admin function detected: ${state.ownerAddress}` });
-    }
-
-    if (state.ownerAddress && state.ownerAddress.toLowerCase() === ZERO_ADDRESS.toLowerCase()) {
-      flags.push({ level: 'low', text: 'owner() appears to return the zero address.' });
-    }
+    if (state.byteCount < 500) flags.push({ level: 'medium', text: 'Bytecode is unusually small.' });
+    if (!state.erc20Signals) flags.push({ level: 'medium', text: 'Weak or missing standard ERC-20 metadata support.' });
+    if (state.proxyImplementation) flags.push({ level: 'medium', text: `Proxy implementation slot detected: ${state.proxyImplementation}` });
+    if (state.proxyAdmin) flags.push({ level: 'medium', text: `Proxy admin slot detected: ${state.proxyAdmin}` });
+    if (state.proxyBeacon) flags.push({ level: 'medium', text: `Proxy beacon slot detected: ${state.proxyBeacon}` });
+    if (state.ownerAddress) flags.push({ level: 'medium', text: `Owner/admin function detected: ${state.ownerAddress}` });
 
     if (state.pausedSupported) {
       flags.push({
@@ -581,25 +605,14 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    if (state.transferSim.reverted) {
-      flags.push({ level: 'high', text: 'transfer(...) simulation reverted.' });
-    } else if (state.transferSim.empty) {
-      flags.push({ level: 'medium', text: 'transfer(...) returned no data.' });
-    }
+    if (state.transferSim.reverted) flags.push({ level: 'high', text: 'transfer(...) simulation reverted.' });
+    else if (state.transferSim.empty) flags.push({ level: 'medium', text: 'transfer(...) returned no data.' });
 
-    if (state.approveSim.reverted) {
-      flags.push({ level: 'high', text: 'approve(...) simulation reverted.' });
-    } else if (state.approveSim.empty) {
-      flags.push({ level: 'medium', text: 'approve(...) returned no data.' });
-    }
+    if (state.approveSim.reverted) flags.push({ level: 'high', text: 'approve(...) simulation reverted.' });
+    else if (state.approveSim.empty) flags.push({ level: 'medium', text: 'approve(...) returned no data.' });
 
-    if (state.transferFromSim.reverted) {
-      flags.push({ level: 'medium', text: 'transferFrom(...) simulation reverted.' });
-    }
-
-    if (!state.recentTransferCount) {
-      flags.push({ level: 'medium', text: 'No recent Transfer logs found in scanned range.' });
-    }
+    if (state.transferFromSim.reverted) flags.push({ level: 'medium', text: 'transferFrom(...) simulation reverted.' });
+    if (!state.recentTransferCount) flags.push({ level: 'medium', text: 'No recent Transfer logs found in scanned range.' });
 
     if (state.dangerMatches.length) {
       flags.push({
@@ -615,9 +628,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (state.implAnalysis.ok && state.implAnalysis.pausedSupported) {
       flags.push({
         level: state.implAnalysis.pausedValue ? 'high' : 'low',
-        text: state.implAnalysis.pausedValue
-          ? 'Implementation paused() reports true.'
-          : 'Implementation supports pause control.'
+        text: state.implAnalysis.pausedValue ? 'Implementation paused() reports true.' : 'Implementation supports pause control.'
       });
     }
 
@@ -671,35 +682,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!hasCode) {
         clearOutputs();
-        if (ui.contractSummary) ui.contractSummary.textContent = 'No bytecode';
+        setText(ui.contractSummary, 'No bytecode');
         setMetricTone(ui.contractSummary, 'bad');
-        if (ui.bytecodeSize) ui.bytecodeSize.textContent = '0 bytes';
-        if (ui.addressOut) ui.addressOut.textContent = address;
-        if (ui.analysisNote) ui.analysisNote.textContent = `This address does not appear to have deployed contract bytecode on ${chain.label}.`;
-        if (ui.lastUpdated) ui.lastUpdated.textContent = nowLabel();
+        setText(ui.bytecodeSize, '0 bytes');
+        setText(ui.addressOut, address);
+        setText(ui.analysisNote, `This address does not appear to have deployed contract bytecode on ${chain.label}.`);
+        setText(ui.lastUpdated, nowLabel());
         setStatus('No contract', 'bad');
         setResult(`No deployed contract bytecode was found at this address on ${chain.label}.`);
         setMode('No contract');
-        lastSummary = '';
         isLoading = false;
         return;
       }
 
-      const transferData =
-        SELECTORS.transfer +
-        padAddressParam(DEAD_ADDRESS) +
-        padUintParam(1n);
-
-      const approveData =
-        SELECTORS.approve +
-        padAddressParam(DEAD_ADDRESS) +
-        padUintParam(0n);
-
+      const transferData = SELECTORS.transfer + padAddressParam(DEAD_ADDRESS) + padUintParam(1n);
+      const approveData = SELECTORS.approve + padAddressParam(DEAD_ADDRESS) + padUintParam(0n);
       const transferFromData =
-        SELECTORS.transferFrom +
-        padAddressParam(ZERO_ADDRESS) +
-        padAddressParam(DEAD_ADDRESS) +
-        padUintParam(1n);
+        SELECTORS.transferFrom + padAddressParam(ZERO_ADDRESS) + padAddressParam(DEAD_ADDRESS) + padUintParam(1n);
 
       const [
         nameRes,
@@ -765,22 +764,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const pausedSupported = pausedRes.ok;
       const pausedValue = pausedRes.ok ? !!pausedRes.value : false;
 
-      const supportedFunctions = [];
-      if (nameRes.ok) supportedFunctions.push('name()');
-      if (symbolRes.ok) supportedFunctions.push('symbol()');
-      if (decimalsRes.ok) supportedFunctions.push('decimals()');
-      if (totalSupplyRes.ok) supportedFunctions.push('totalSupply()');
-      if (ownerRes.ok || getOwnerRes.ok) supportedFunctions.push('owner()/getOwner()');
-      if (pausedRes.ok) supportedFunctions.push('paused()');
-      if (balanceRes.ok) supportedFunctions.push('balanceOf()');
-      if (allowanceRes.ok) supportedFunctions.push('allowance()');
-
-      supportedFunctions.push(summarizeSimulation('transfer()', transferSim));
-      supportedFunctions.push(summarizeSimulation('approve()', approveSim));
-      supportedFunctions.push(summarizeSimulation('transferFrom()', transferFromSim));
-
       const erc20Signals = nameRes.ok || symbolRes.ok || decimalsRes.ok || totalSupplyRes.ok;
       const dangerMatches = scanKnownDangerSelectors(code);
+
       const recentTransferLogs = recentTransferLogsRes.ok && Array.isArray(recentTransferLogsRes.result)
         ? recentTransferLogsRes.result
         : [];
@@ -813,59 +799,123 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const headline = riskHeadline(flags);
 
-      if (ui.contractSummary) {
-        ui.contractSummary.textContent =
-          proxyImplementation || proxyBeacon || proxyByBytecode
-            ? 'Proxy / contract found'
-            : 'Contract detected';
-      }
+      setText(
+        ui.contractSummary,
+        proxyImplementation || proxyBeacon || proxyByBytecode ? 'Proxy / contract found' : 'Contract detected'
+      );
       setMetricTone(
         ui.contractSummary,
         proxyImplementation || proxyBeacon || proxyByBytecode ? 'bad' : (erc20Signals ? 'good' : 'neutral')
       );
 
-      if (ui.symbolSummary) ui.symbolSummary.textContent = symbolRes.ok ? symbolRes.value : 'Unknown';
-      if (ui.decimalsSummary) ui.decimalsSummary.textContent = Number.isInteger(decimals) ? String(decimals) : 'Unknown';
+      setText(ui.symbolSummary, symbolRes.ok ? symbolRes.value : 'Unknown');
+      setText(ui.decimalsSummary, Number.isInteger(decimals) ? String(decimals) : 'Unknown');
+      setText(ui.tokenName, nameRes.ok ? nameRes.value : 'Unsupported');
+      setText(ui.tokenSymbol, symbolRes.ok ? symbolRes.value : 'Unsupported');
+      setText(ui.totalSupply, totalSupplyFormatted);
+      setText(ui.bytecodeSize, `${byteCount.toLocaleString()} bytes`);
+      setText(ui.addressOut, address);
+      setText(ui.decimalsOut, Number.isInteger(decimals) ? String(decimals) : 'Unsupported');
+      setText(ui.lastUpdated, nowLabel());
 
-      if (ui.tokenName) ui.tokenName.textContent = nameRes.ok ? nameRes.value : 'Unsupported';
-      if (ui.tokenSymbol) ui.tokenSymbol.textContent = symbolRes.ok ? symbolRes.value : 'Unsupported';
-      if (ui.totalSupply) ui.totalSupply.textContent = totalSupplyFormatted;
-      if (ui.bytecodeSize) ui.bytecodeSize.textContent = `${byteCount.toLocaleString()} bytes`;
+      const supportList = [];
+      if (nameRes.ok) supportList.push('name()');
+      if (symbolRes.ok) supportList.push('symbol()');
+      if (decimalsRes.ok) supportList.push('decimals()');
+      if (totalSupplyRes.ok) supportList.push('totalSupply()');
+      if (ownerRes.ok || getOwnerRes.ok) supportList.push('owner()/getOwner()');
+      if (pausedRes.ok) supportList.push('paused()');
+      if (balanceRes.ok) supportList.push('balanceOf()');
+      if (allowanceRes.ok) supportList.push('allowance()');
+      supportList.push(summarizeSimulation('transfer()', transferSim));
+      supportList.push(summarizeSimulation('approve()', approveSim));
+      supportList.push(summarizeSimulation('transferFrom()', transferFromSim));
+      setText(ui.functionSupport, supportList.join(', '));
 
-      if (ui.addressOut) ui.addressOut.textContent = address;
-      if (ui.decimalsOut) ui.decimalsOut.textContent = Number.isInteger(decimals) ? String(decimals) : 'Unsupported';
-      if (ui.lastUpdated) ui.lastUpdated.textContent = nowLabel();
-
-      if (ui.functionSupport) {
-        ui.functionSupport.textContent = supportedFunctions.join(', ');
-      }
-
-      if (ui.analysisNote) {
-        const notes = [];
-        notes.push(`${headline}.`);
-        notes.push(`Network: ${chain.label}.`);
-        if (proxyImplementation) notes.push(`Implementation: ${proxyImplementation}.`);
-        if (proxyAdmin) notes.push(`Admin slot: ${proxyAdmin}.`);
-        if (proxyBeacon) notes.push(`Beacon slot: ${proxyBeacon}.`);
-        if (ownerAddress) notes.push(`Owner/admin function: ${ownerAddress}.`);
-        if (pausedSupported) notes.push(pausedValue ? 'paused() reports true.' : 'paused() supported.');
-        if (dangerMatches.length) notes.push(`Selector scan found: ${dangerMatches.map(x => x.label).join(', ')}.`);
-        if (recentTransferLogs.length || recentApprovalLogs.length) {
-          notes.push(`Recent logs: ${recentTransferLogs.length} Transfer, ${recentApprovalLogs.length} Approval.`);
-        }
-        if (holderSummary.unique) notes.push(holderSummary.text + '.');
-        if (implAnalysis.ok) notes.push(`Deep-read implementation bytecode: ${implAnalysis.byteCount} bytes.`);
-        ui.analysisNote.textContent = notes.join(' ');
-      }
-
-      const mainResult = [];
-      mainResult.push(
-        erc20Signals
-          ? `Contract bytecode found and token-like behavior was detected on ${chain.label}.`
-          : `Contract bytecode found on ${chain.label}, but standard ERC-20 signals are weak or incomplete.`
+      const behaviorSummary = [
+        summarizeSimulation('transfer()', transferSim),
+        summarizeSimulation('approve()', approveSim),
+        summarizeSimulation('transferFrom()', transferFromSim)
+      ].join(' | ');
+      setText(ui.behaviorSummary, behaviorSummary);
+      setText(
+        ui.behaviorDetails,
+        `transfer(): ${transferSim.reverted ? 'reverted' : transferSim.empty ? 'empty return' : 'returned data'}\n` +
+        `approve(): ${approveSim.reverted ? 'reverted' : approveSim.empty ? 'empty return' : 'returned data'}\n` +
+        `transferFrom(): ${transferFromSim.reverted ? 'reverted' : transferFromSim.empty ? 'empty return' : 'returned data'}`
       );
-      mainResult.push(`Risk screen: ${headline}.`);
-      setResult(mainResult.join(' '));
+
+      setText(
+        ui.proxySummary,
+        proxyImplementation || proxyAdmin || proxyBeacon || proxyByBytecode
+          ? 'Proxy-related signal detected'
+          : 'No obvious proxy signal'
+      );
+      setText(
+        ui.proxyDetails,
+        `Bytecode proxy pattern: ${proxyByBytecode ? 'yes' : 'no'}\n` +
+        `Implementation slot: ${proxyImplementation || 'none'}\n` +
+        `Admin slot: ${proxyAdmin || 'none'}\n` +
+        `Beacon slot: ${proxyBeacon || 'none'}`
+      );
+
+      setText(
+        ui.logSummary,
+        `Transfer logs scanned: ${recentTransferLogs.length}\nApproval logs scanned: ${recentApprovalLogs.length}\nRecent block window: ${chain.logScanBlocks}`
+      );
+      setText(ui.holderSummary, holderSummary.text);
+
+      setText(
+        ui.dangerSummary,
+        dangerMatches.length ? `${dangerMatches.length} selector match(es)` : 'No matched danger selectors'
+      );
+      setText(
+        ui.dangerDetails,
+        dangerMatches.length
+          ? dangerMatches.map(x => `${x.label} [${x.selector}]`).join('\n')
+          : 'None detected from selector scan'
+      );
+
+      setText(
+        ui.implementationSummary,
+        implAnalysis.ok ? 'Implementation found and inspected' : 'No deep-read implementation available'
+      );
+      setText(
+        ui.implementationDetails,
+        implAnalysis.ok
+          ? `Address: ${implAnalysis.address}
+Bytecode size: ${implAnalysis.byteCount} bytes
+Name: ${implAnalysis.name || 'unsupported'}
+Symbol: ${implAnalysis.symbol || 'unsupported'}
+Decimals: ${Number.isInteger(implAnalysis.decimals) ? implAnalysis.decimals : 'unsupported'}
+Owner/Admin: ${implAnalysis.owner || 'none detected'}
+Paused Support: ${implAnalysis.pausedSupported ? (implAnalysis.pausedValue ? 'true' : 'false') : 'unsupported'}
+Danger Selectors: ${implAnalysis.dangerSelectors.length ? implAnalysis.dangerSelectors.map(x => x.label).join(', ') : 'none'}`
+          : 'No implementation contract deep-read data'
+      );
+
+      const notes = [];
+      notes.push(`${headline}.`);
+      notes.push(`Network: ${chain.label}.`);
+      if (proxyImplementation) notes.push(`Implementation: ${proxyImplementation}.`);
+      if (proxyAdmin) notes.push(`Admin slot: ${proxyAdmin}.`);
+      if (proxyBeacon) notes.push(`Beacon slot: ${proxyBeacon}.`);
+      if (ownerAddress) notes.push(`Owner/admin function: ${ownerAddress}.`);
+      if (pausedSupported) notes.push(pausedValue ? 'paused() reports true.' : 'paused() supported.');
+      if (dangerMatches.length) notes.push(`Selector scan found: ${dangerMatches.map(x => x.label).join(', ')}.`);
+      if (recentTransferLogs.length || recentApprovalLogs.length) {
+        notes.push(`Recent logs: ${recentTransferLogs.length} Transfer, ${recentApprovalLogs.length} Approval.`);
+      }
+      if (holderSummary.unique) notes.push(holderSummary.text + '.');
+      if (implAnalysis.ok) notes.push(`Deep-read implementation bytecode: ${implAnalysis.byteCount} bytes.`);
+      setText(ui.analysisNote, notes.join(' '));
+
+      setResult(
+        (erc20Signals
+          ? `Contract bytecode found and token-like behavior was detected on ${chain.label}. `
+          : `Contract bytecode found on ${chain.label}, but standard ERC-20 signals are weak or incomplete. `) +
+        `Risk screen: ${headline}.`
+      );
 
       const hasHigh = flags.some(f => f.level === 'high');
       setStatus(hasHigh ? 'Risk flagged' : 'Analyzed', hasHigh ? 'bad' : 'ok');
@@ -900,10 +950,6 @@ Proxy Implementation Slot: ${proxyImplementation || 'None detected'}
 Proxy Admin Slot: ${proxyAdmin || 'None detected'}
 Proxy Beacon Slot: ${proxyBeacon || 'None detected'}
 
-Implementation Deep Read: ${implAnalysis.ok ? 'Yes' : 'No'}
-Implementation Owner/Admin: ${implAnalysis.ok ? (implAnalysis.owner || 'None detected') : 'N/A'}
-Implementation Paused: ${implAnalysis.ok ? (implAnalysis.pausedSupported ? String(implAnalysis.pausedValue) : 'Unsupported') : 'N/A'}
-
 Behavior Checks:
 - ${summarizeSimulation('transfer()', transferSim)}
 - ${summarizeSimulation('approve()', approveSim)}
@@ -916,6 +962,17 @@ Recent Logs:
 
 Danger Selector Matches:
 ${dangerMatches.length ? dangerMatches.map(x => `- ${x.label}`).join('\n') : '- None detected from selector scan'}
+
+Implementation Deep Read:
+${implAnalysis.ok
+  ? `- Address: ${implAnalysis.address}
+- Bytecode: ${implAnalysis.byteCount} bytes
+- Name: ${implAnalysis.name || 'unsupported'}
+- Symbol: ${implAnalysis.symbol || 'unsupported'}
+- Decimals: ${Number.isInteger(implAnalysis.decimals) ? implAnalysis.decimals : 'unsupported'}
+- Owner/Admin: ${implAnalysis.owner || 'none detected'}
+- Paused: ${implAnalysis.pausedSupported ? String(implAnalysis.pausedValue) : 'unsupported'}`
+  : '- No implementation deep-read data'}
 
 Risk Headline: ${headline}
 Flags:
@@ -938,14 +995,10 @@ Updated: ${nowLabel()}`;
   }
 
   async function analyzeImplementationContract(implementationAddress) {
-    if (!implementationAddress || !isValidAddress(implementationAddress)) {
-      return { ok: false };
-    }
+    if (!implementationAddress || !isValidAddress(implementationAddress)) return { ok: false };
 
     const codeRes = await rpcTryAll('eth_getCode', [implementationAddress, 'latest']);
-    if (!codeRes.ok || !codeRes.result || codeRes.result === '0x') {
-      return { ok: false };
-    }
+    if (!codeRes.ok || !codeRes.result || codeRes.result === '0x') return { ok: false };
 
     const [
       nameRes,
@@ -992,6 +1045,18 @@ Updated: ${nowLabel()}`;
     }
   }
 
+  function loadSample() {
+    const chain = getActiveChain();
+    if (chain.sample?.address) {
+      ui.addressInput.value = chain.sample.address;
+      setStatus('Sample loaded', 'ok');
+      setResult(`Loaded ${chain.label} sample: ${chain.sample.label}.`);
+      setMode('Sample loaded');
+    } else {
+      setStatus('No sample', 'bad');
+    }
+  }
+
   function resetAll() {
     if (ui.addressInput) ui.addressInput.value = '';
     clearOutputs();
@@ -1014,6 +1079,7 @@ Updated: ${nowLabel()}`;
   });
 
   ui.analyzeBtn?.addEventListener('click', analyzeContract);
+  ui.sampleBtn?.addEventListener('click', loadSample);
 
   ui.copyBtn?.addEventListener('click', async () => {
     if (!lastSummary) {
