@@ -1,364 +1,502 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const RPC_ENDPOINTS = [
-    'https://ethereum-rpc.publicnode.com'
-  ];
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Analytics / Monetization -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
 
-  const gasLimitEl = document.getElementById('gasLimit');
-  const refreshModeEl = document.getElementById('refreshMode');
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
-  const refreshBtn = document.getElementById('refreshBtn');
-  const copyBtn = document.getElementById('copyBtn');
-  const clearBtn = document.getElementById('clearBtn');
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  const statusBadge = document.getElementById('statusBadge');
-  const resultTextEl = document.getElementById('resultText');
-  const formulaTextEl = document.getElementById('formulaText');
+  <title>Gas Tracker | Ethereum Gas Fees, Base Fee & Priority Fee | InstantQR</title>
+  <meta name="description" content="Track Ethereum gas fees instantly. View base fee, priority fee, max fee suggestions, and estimated transaction costs with a fast privacy-first gas tracker." />
+  <meta name="keywords" content="gas tracker, ethereum gas tracker, gas fee tracker, eth gas fee, base fee, priority fee, max fee per gas, instantqr gas tracker" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no" />
 
-  const baseFeeSummaryEl = document.getElementById('baseFeeSummary');
-  const priorityFeeSummaryEl = document.getElementById('priorityFeeSummary');
-  const fastFeeSummaryEl = document.getElementById('fastFeeSummary');
-  const modeLabelEl = document.getElementById('modeLabel');
+  <link rel="canonical" href="https://instantqr.io/tools/gas-tracker.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
 
-  const gasPriceEl = document.getElementById('gasPrice');
-  const priorityFeeEl = document.getElementById('priorityFee');
-  const latestBlockEl = document.getElementById('latestBlock');
-  const lastUpdatedEl = document.getElementById('lastUpdated');
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="preconnect" href="https://ethereum-rpc.publicnode.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="//ethereum-rpc.publicnode.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css" />
 
-  const slowMaxFeeEl = document.getElementById('slowMaxFee');
-  const normalMaxFeeEl = document.getElementById('normalMaxFee');
-  const fastMaxFeeEl = document.getElementById('fastMaxFee');
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Gas Tracker | InstantQR" />
+  <meta property="og:description" content="Track Ethereum gas fees, base fee, priority fee, and estimated transaction costs instantly." />
+  <meta property="og:url" content="https://instantqr.io/tools/gas-tracker.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR Gas Tracker" />
 
-  const slowCostEl = document.getElementById('slowCost');
-  const normalCostEl = document.getElementById('normalCost');
-  const fastCostEl = document.getElementById('fastCost');
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Gas Tracker | InstantQR" />
+  <meta name="twitter:description" content="Track Ethereum gas fees, base fee, priority fee, and estimated transaction costs instantly." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  let autoTimer = null;
-  let lastSummary = '';
-  let lastMode = 'Ready';
-
-  function setStatus(text, kind = '') {
-    if (!statusBadge) return;
-    statusBadge.className = 'badge' + (kind ? ' ' + kind : '');
-    statusBadge.textContent = text;
-  }
-
-  function setResult(text) {
-    if (resultTextEl) resultTextEl.textContent = text;
-  }
-
-  function updateMode(mode) {
-    lastMode = mode;
-    if (modeLabelEl) modeLabelEl.textContent = mode;
-  }
-
-  function parseGasLimit() {
-    const value = parseInt(gasLimitEl.value, 10);
-    if (!Number.isFinite(value) || value <= 0) return 21000;
-    return value;
-  }
-
-  function hexToBigIntSafe(hex) {
-    if (!hex) return 0n;
-    try {
-      return BigInt(hex);
-    } catch (_) {
-      return 0n;
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Gas Tracker",
+    "url":"https://instantqr.io/tools/gas-tracker.html",
+    "description":"Track Ethereum gas fees, base fee, priority fee, and estimated transaction costs instantly.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
     }
   }
+  </script>
 
-  function weiToGwei(weiBigInt) {
-    return Number(weiBigInt) / 1e9;
-  }
-
-  function weiToEth(weiBigInt) {
-    return Number(weiBigInt) / 1e18;
-  }
-
-  function formatGwei(v) {
-    if (!Number.isFinite(v)) return '—';
-    return `${v.toFixed(2)} gwei`;
-  }
-
-  function formatEth(v) {
-    if (!Number.isFinite(v)) return '—';
-    return `${v.toFixed(8)} ETH`;
-  }
-
-  function formatBlock(hex) {
-    const n = Number(hexToBigIntSafe(hex));
-    return Number.isFinite(n) && n > 0 ? String(n) : '—';
-  }
-
-  async function rpcCall(url, method, params = []) {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        jsonrpc: '2.0',
-        id: Date.now(),
-        method,
-        params
-      }),
-      cache: 'no-store'
-    });
-
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}`);
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Gas Tracker",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/gas-tracker.html",
+    "description":"Track Ethereum gas fee suggestions and estimate transaction cost locally in your browser.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
     }
-
-    const json = await res.json();
-    if (json.error) {
-      throw new Error(json.error.message || 'RPC error');
-    }
-    return json.result;
   }
+  </script>
 
-  async function rpcBundle(url) {
-    const [gasPriceHex, priorityHex, blockHex, feeHistory] = await Promise.all([
-      rpcCall(url, 'eth_gasPrice'),
-      rpcCall(url, 'eth_maxPriorityFeePerGas'),
-      rpcCall(url, 'eth_blockNumber'),
-      rpcCall(url, 'eth_feeHistory', ['0x5', 'latest', [10, 25, 50]])
-    ]);
-
-    return { gasPriceHex, priorityHex, blockHex, feeHistory };
-  }
-
-  async function fetchWithFallback() {
-    let lastError = null;
-
-    for (const url of RPC_ENDPOINTS) {
-      try {
-        const data = await rpcBundle(url);
-        return { url, data };
-      } catch (err) {
-        lastError = err;
-      }
-    }
-
-    throw lastError || new Error('Unable to load gas data');
-  }
-
-  function getBaseFeeFromHistory(feeHistory) {
-    if (!feeHistory || !Array.isArray(feeHistory.baseFeePerGas) || !feeHistory.baseFeePerGas.length) {
-      return 0n;
-    }
-    const values = feeHistory.baseFeePerGas.map(hexToBigIntSafe).filter(v => v > 0n);
-    if (!values.length) return 0n;
-    return values[values.length - 1];
-  }
-
-  function estimatePriorityFromHistory(feeHistory, fallbackPriority) {
-    if (!feeHistory || !Array.isArray(feeHistory.reward) || !feeHistory.reward.length) {
-      return fallbackPriority;
-    }
-
-    const mids = [];
-    feeHistory.reward.forEach((row) => {
-      if (Array.isArray(row) && row.length >= 2) {
-        const mid = hexToBigIntSafe(row[1]);
-        if (mid > 0n) mids.push(mid);
-      }
-    });
-
-    if (!mids.length) return fallbackPriority;
-
-    const total = mids.reduce((acc, v) => acc + v, 0n);
-    return total / BigInt(mids.length);
-  }
-
-  function max(a, b) {
-    return a > b ? a : b;
-  }
-
-  function clearOutputs() {
-    [
-      baseFeeSummaryEl, priorityFeeSummaryEl, fastFeeSummaryEl,
-      gasPriceEl, priorityFeeEl, latestBlockEl, lastUpdatedEl,
-      slowMaxFeeEl, normalMaxFeeEl, fastMaxFeeEl,
-      slowCostEl, normalCostEl, fastCostEl
-    ].forEach((el) => {
-      if (el) el.textContent = '—';
-    });
-  }
-
-  function nowTimeLabel() {
-    return new Date().toLocaleTimeString();
-  }
-
-  function buildFeeTiers(baseFeeWei, priorityWei, gasLimit) {
-    const safePriority = priorityWei > 0n ? priorityWei : 1000000000n;
-
-    const slowPriority = max(safePriority / 2n, 500000000n);
-    const normalPriority = safePriority;
-    const fastPriority = max((safePriority * 3n) / 2n, safePriority + 500000000n);
-
-    const slowMax = (baseFeeWei * 2n) + slowPriority;
-    const normalMax = (baseFeeWei * 2n) + normalPriority;
-    const fastMax = (baseFeeWei * 2n) + fastPriority;
-
-    const gasLimitBig = BigInt(gasLimit);
-
-    return {
-      slow: {
-        maxFeeWei: slowMax,
-        costWei: slowMax * gasLimitBig
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
       },
-      normal: {
-        maxFeeWei: normalMax,
-        costWei: normalMax * gasLimitBig
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools/tools.html"
       },
-      fast: {
-        maxFeeWei: fastMax,
-        costWei: fastMax * gasLimitBig
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Gas Tracker",
+        "item":"https://instantqr.io/tools/gas-tracker.html"
       }
-    };
+    ]
   }
+  </script>
 
-  async function loadGas() {
-    const gasLimit = parseGasLimit();
-
-    setStatus('Loading');
-    setResult('Loading live gas data...');
-    updateMode('Loading');
-
-    try {
-      const { url, data } = await fetchWithFallback();
-
-      const gasPriceWei = hexToBigIntSafe(data.gasPriceHex);
-      const priorityWeiRpc = hexToBigIntSafe(data.priorityHex);
-      const baseFeeWei = getBaseFeeFromHistory(data.feeHistory);
-      const priorityWei = estimatePriorityFromHistory(data.feeHistory, priorityWeiRpc);
-
-      const tiers = buildFeeTiers(baseFeeWei, priorityWei, gasLimit);
-
-      const baseFeeGwei = weiToGwei(baseFeeWei);
-      const priorityGwei = weiToGwei(priorityWei);
-      const gasPriceGwei = weiToGwei(gasPriceWei);
-
-      if (baseFeeSummaryEl) baseFeeSummaryEl.textContent = formatGwei(baseFeeGwei);
-      if (priorityFeeSummaryEl) priorityFeeSummaryEl.textContent = formatGwei(priorityGwei);
-      if (fastFeeSummaryEl) fastFeeSummaryEl.textContent = formatGwei(weiToGwei(tiers.fast.maxFeeWei));
-
-      if (gasPriceEl) gasPriceEl.textContent = formatGwei(gasPriceGwei);
-      if (priorityFeeEl) priorityFeeEl.textContent = formatGwei(priorityGwei);
-      if (latestBlockEl) latestBlockEl.textContent = formatBlock(data.blockHex);
-      if (lastUpdatedEl) lastUpdatedEl.textContent = nowTimeLabel();
-
-      if (slowMaxFeeEl) slowMaxFeeEl.textContent = formatGwei(weiToGwei(tiers.slow.maxFeeWei));
-      if (normalMaxFeeEl) normalMaxFeeEl.textContent = formatGwei(weiToGwei(tiers.normal.maxFeeWei));
-      if (fastMaxFeeEl) fastMaxFeeEl.textContent = formatGwei(weiToGwei(tiers.fast.maxFeeWei));
-
-      if (slowCostEl) slowCostEl.textContent = formatEth(weiToEth(tiers.slow.costWei));
-      if (normalCostEl) normalCostEl.textContent = formatEth(weiToEth(tiers.normal.costWei));
-      if (fastCostEl) fastCostEl.textContent = formatEth(weiToEth(tiers.fast.costWei));
-
-      setResult(`Loaded live gas data successfully for a gas limit of ${gasLimit.toLocaleString()}.`);
-      setStatus('Loaded', 'ok');
-      updateMode('Loaded');
-      if (formulaTextEl) formulaTextEl.textContent = 'Formula: estimated ETH cost = max fee per gas × gas limit';
-
-      lastSummary =
-`Gas Tracker
-Network: Ethereum Mainnet
-RPC: ${url}
-Gas Limit: ${gasLimit}
-Base Fee: ${formatGwei(baseFeeGwei)}
-Priority Fee: ${formatGwei(priorityGwei)}
-Gas Price: ${formatGwei(gasPriceGwei)}
-Latest Block: ${formatBlock(data.blockHex)}
-
-Slow Max Fee: ${formatGwei(weiToGwei(tiers.slow.maxFeeWei))}
-Slow Estimated Cost: ${formatEth(weiToEth(tiers.slow.costWei))}
-
-Normal Max Fee: ${formatGwei(weiToGwei(tiers.normal.maxFeeWei))}
-Normal Estimated Cost: ${formatEth(weiToEth(tiers.normal.costWei))}
-
-Fast Max Fee: ${formatGwei(weiToGwei(tiers.fast.maxFeeWei))}
-Fast Estimated Cost: ${formatEth(weiToEth(tiers.fast.costWei))}
-
-Updated: ${nowTimeLabel()}`;
-    } catch (err) {
-      clearOutputs();
-      setResult(`Unable to load live gas data right now. ${err && err.message ? err.message : 'Request failed.'}`);
-      setStatus('Load failed', 'bad');
-      updateMode('Error');
-      if (formulaTextEl) formulaTextEl.textContent = 'Formula: estimated ETH cost = max fee per gas × gas limit';
-      lastSummary = '';
-    }
-  }
-
-  function resetAll() {
-    gasLimitEl.value = '21000';
-    refreshModeEl.value = 'manual';
-    clearOutputs();
-    setResult('Click Refresh Gas to load live fee suggestions.');
-    setStatus('Ready');
-    updateMode('Ready');
-    if (formulaTextEl) formulaTextEl.textContent = 'Formula: estimated ETH cost = max fee per gas × gas limit';
-    lastSummary = '';
-    if (autoTimer) {
-      clearInterval(autoTimer);
-      autoTimer = null;
-    }
-  }
-
-  function applyRefreshMode() {
-    if (autoTimer) {
-      clearInterval(autoTimer);
-      autoTimer = null;
-    }
-
-    if (refreshModeEl.value === 'auto') {
-      autoTimer = setInterval(() => {
-        loadGas();
-      }, 15000);
-    }
-  }
-
-  refreshBtn?.addEventListener('click', loadGas);
-
-  copyBtn?.addEventListener('click', async () => {
-    if (!lastSummary) {
-      setStatus('Nothing to copy', 'bad');
-      return;
-    }
-
-    try {
-      if (window.InstantQR && typeof window.InstantQR.copyText === 'function') {
-        await window.InstantQR.copyText(lastSummary);
-      } else {
-        await navigator.clipboard.writeText(lastSummary);
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What does this gas tracker show?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This tool shows the current base fee, a priority fee estimate, suggested max fees for slow, normal, and fast settings, and estimated total transaction cost."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool estimate total ETH cost?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can enter a gas limit and the tool estimates the ETH cost for each gas speed tier."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool run mostly in the browser?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The interface and calculations run in your browser while live gas data is requested from an Ethereum RPC endpoint."
+        }
       }
-      setStatus('Copied', 'ok');
-      setTimeout(() => setStatus(lastMode === 'Ready' ? 'Ready' : 'Loaded', lastMode === 'Ready' ? '' : 'ok'), 1200);
-    } catch (_) {
-      setStatus('Copy failed', 'bad');
+    ]
+  }
+  </script>
+
+  <style>
+    .controls.cols-3{grid-template-columns:1.1fr 1fr 1fr}
+    .controls.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .metricGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
     }
-  });
-
-  clearBtn?.addEventListener('click', resetAll);
-
-  refreshModeEl?.addEventListener('change', () => {
-    applyRefreshMode();
-    if (refreshModeEl.value === 'auto') {
-      loadGas();
+    .metricCard{
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
     }
-  });
+    .metricCard h3{
+      margin:0 0 6px;
+      font-size:15px;
+    }
+    .metricVal{
+      font-size:22px;
+      font-weight:900;
+      line-height:1.1;
+      word-break:break-word;
+    }
+    .metricNote{
+      margin-top:6px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .goodVal{color:#c8ffe9}
+    .badVal{color:#ffd3d3}
+    .neutralVal{color:#f0f6ff}
+    .miniGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .miniBox{
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .miniBox h3{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+    .claimRow{
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.10);
+      padding:12px;
+      margin-top:10px;
+    }
+    .claimRow:first-child{margin-top:0}
+    .claimKey{
+      font-weight:800;
+      color:#eaf2ff;
+      margin-bottom:6px;
+      font-size:13px;
+    }
+    .claimVal{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+      word-break:break-word;
+    }
+    .monoBlock{
+      white-space:pre-wrap;
+      word-break:break-word;
+      font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      color:#f0f6ff;
+      margin:0;
+    }
+    .hintBox{
+      margin-top:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.10);
+      padding:12px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+    }
+    @media (max-width:980px){
+      .controls.cols-3,
+      .controls.cols-4,
+      .metricGrid,
+      .miniGrid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
 
-  gasLimitEl?.addEventListener('change', () => {
-    if (lastMode === 'Loaded') loadGas();
-  });
+<body>
+  <a class="skip" href="#main">Skip to content</a>
 
-  document.querySelectorAll('.quick button[data-gaslimit]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      gasLimitEl.value = btn.dataset.gaslimit || '21000';
-      setStatus('Preset loaded', 'ok');
-      setResult('Gas limit preset loaded. Click Refresh Gas.');
-      updateMode('Preset');
-    });
-  });
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR Home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
 
-  resetAll();
-});
-::contentReference[oaicite:1]{index=1}
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides/guides.html">Guides</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Gas Tracker</span></li>
+      </ol>
+    </nav>
+
+    <section class="hero" aria-label="Gas Tracker">
+      <div class="pill">⛽ Live ETH gas • ⚡ Fast UI • 🔒 Browser-side calculations</div>
+      <h1>Gas Tracker</h1>
+      <p class="sub">
+        Track Ethereum gas fee suggestions using live RPC data. View base fee, priority fee, and estimated ETH cost
+        for common transaction speeds and gas limits.
+      </p>
+
+      <div class="summary" aria-label="Gas summary">
+        <div class="sumCard greenGlow">
+          <div class="sumLabel">Base Fee</div>
+          <div class="sumValue small mono" id="baseFeeSummary">—</div>
+          <div class="sumNote">Base fee from the latest block fee history.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Priority Fee</div>
+          <div class="sumValue small mono" id="priorityFeeSummary">—</div>
+          <div class="sumNote">Estimated validator tip suggestion.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Fast Max Fee</div>
+          <div class="sumValue small mono" id="fastFeeSummary">—</div>
+          <div class="sumNote">Suggested fast max fee per gas.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Mode</div>
+          <div class="sumValue small mono" id="modeLabel">Ready</div>
+          <div class="sumNote">Shows the latest fetch state.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Gas Tracker panel">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Gas Inputs</div>
+          <div class="panelSub">Choose a gas limit and refresh live gas fee suggestions.</div>
+        </div>
+
+        <div class="statusLine">
+          <span class="badge" id="statusBadge">Ready</span>
+          <button id="refreshBtn" class="cta primary" type="button">Refresh Gas</button>
+          <button id="copyBtn" class="cta ghost" type="button">Copy Summary</button>
+          <button id="clearBtn" class="cta ghost" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div class="panelBody">
+        <div class="controls cols-3" aria-label="Gas settings">
+          <div class="control">
+            <label for="gasLimit">Gas Limit</label>
+            <input id="gasLimit" class="input" type="number" inputmode="numeric" min="21000" step="1" value="21000" />
+          </div>
+
+          <div class="control">
+            <label for="networkLabel">Network</label>
+            <input id="networkLabel" class="input" type="text" value="Ethereum Mainnet" readonly />
+          </div>
+
+          <div class="control">
+            <label for="refreshMode">Refresh Mode</label>
+            <select id="refreshMode" class="select">
+              <option value="manual" selected>Manual</option>
+              <option value="auto">Auto every 15s</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="resultBox ok" style="margin-top:12px;">
+          <div class="resultTop">
+            <div class="resultStatus ok">Live result</div>
+            <div class="small muted">Updates when you refresh gas data</div>
+          </div>
+          <div class="monoBlock" id="resultText">Click Refresh Gas to load live fee suggestions.</div>
+        </div>
+
+        <div class="formula" id="formulaText">Formula: estimated ETH cost = max fee per gas × gas limit</div>
+
+        <div class="quick" aria-label="Quick gas limits">
+          <button type="button" data-gaslimit="21000">Transfer</button>
+          <button type="button" data-gaslimit="65000">Swap</button>
+          <button type="button" data-gaslimit="100000">Contract</button>
+          <button type="button" data-gaslimit="250000">Complex tx</button>
+        </div>
+
+        <div class="metricGrid">
+          <div class="metricCard">
+            <h3>Current Gas Price</h3>
+            <div id="gasPrice" class="metricVal neutralVal">—</div>
+            <div class="metricNote">Legacy gas price estimate from the RPC.</div>
+          </div>
+
+          <div class="metricCard">
+            <h3>Recommended Tip</h3>
+            <div id="priorityFee" class="metricVal neutralVal">—</div>
+            <div class="metricNote">Priority fee estimate used in suggestions.</div>
+          </div>
+
+          <div class="metricCard">
+            <h3>Latest Block</h3>
+            <div id="latestBlock" class="metricVal neutralVal">—</div>
+            <div class="metricNote">Most recent block used for gas estimation.</div>
+          </div>
+
+          <div class="metricCard">
+            <h3>Last Updated</h3>
+            <div id="lastUpdated" class="metricVal neutralVal">—</div>
+            <div class="metricNote">Time of the latest successful refresh.</div>
+          </div>
+        </div>
+
+        <div class="miniGrid">
+          <div class="miniBox">
+            <h3>Slow</h3>
+            <div class="claimRow">
+              <div class="claimKey">Max Fee</div>
+              <div class="claimVal" id="slowMaxFee">—</div>
+            </div>
+            <div class="claimRow">
+              <div class="claimKey">Estimated ETH Cost</div>
+              <div class="claimVal" id="slowCost">—</div>
+            </div>
+          </div>
+
+          <div class="miniBox">
+            <h3>Normal</h3>
+            <div class="claimRow">
+              <div class="claimKey">Max Fee</div>
+              <div class="claimVal" id="normalMaxFee">—</div>
+            </div>
+            <div class="claimRow">
+              <div class="claimKey">Estimated ETH Cost</div>
+              <div class="claimVal" id="normalCost">—</div>
+            </div>
+          </div>
+
+          <div class="miniBox">
+            <h3>Fast</h3>
+            <div class="claimRow">
+              <div class="claimKey">Max Fee</div>
+              <div class="claimVal" id="fastMaxFee">—</div>
+            </div>
+            <div class="claimRow">
+              <div class="claimKey">Estimated ETH Cost</div>
+              <div class="claimVal" id="fastCost">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hintBox">
+          If this tool still shows no live data on your domain, the usual cause is browser-side RPC blocking or rate limits on a public endpoint.
+          In production, using your own RPC or a small proxy endpoint is the most reliable fix.
+        </div>
+
+        <div class="helpBox">
+          <div class="helpCard">
+            <h3>Useful for fee planning</h3>
+            <p>
+              Use this tool before transfers, swaps, or contract calls to estimate whether current gas conditions fit your budget.
+            </p>
+          </div>
+          <div class="helpCard">
+            <h3>EIP-1559 aware</h3>
+            <p>
+              This tracker combines latest base fee data with a priority fee estimate to produce slow, normal, and fast max fee suggestions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relatedTools" aria-label="Related crypto tools">
+      <h2>Related Crypto Tools</h2>
+      <div class="relatedLinks">
+        <a href="/tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
+        <a href="/tools/dca-calculator.html">DCA Calculator</a>
+        <a href="/tools/token-contract-analyzer.html">Token Contract Analyzer</a>
+        <a href="/tools/wallet-approval-checker.html">Wallet Approval Checker</a>
+        <a href="/tools/transaction-status-checker.html">Transaction Status Checker</a>
+      </div>
+    </section>
+
+    <section class="faq" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>What does this gas tracker show?</summary>
+        <p>This tool shows the current base fee, a priority fee estimate, suggested max fees for slow, normal, and fast settings, and estimated total transaction cost.</p>
+      </details>
+
+      <details>
+        <summary>Does this tool estimate total ETH cost?</summary>
+        <p>Yes. You can enter a gas limit and the tool estimates the ETH cost for each gas speed tier.</p>
+      </details>
+
+      <details>
+        <summary>Does this tool run mostly in the browser?</summary>
+        <p>Yes. The interface and calculations run in your browser while live gas data is requested from an Ethereum RPC endpoint.</p>
+      </details>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/guides/guides.html">Guides</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/gas-tracker.js" defer></script>
+</body>
+</html>
