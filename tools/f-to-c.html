@@ -10,7 +10,8 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
   <!-- Core Meta -->
@@ -39,7 +40,7 @@
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/assets/site.css">
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
@@ -191,7 +192,7 @@
         Great for weather, cooking, science, and everyday temperature checks.
       </p>
 
-      <div class="controls controls-3" aria-label="Converter controls">
+      <div class="controls" aria-label="Converter controls">
         <div class="control">
           <label for="fahrenheit">Fahrenheit (°F)</label>
           <input id="fahrenheit" class="input" type="number" inputmode="decimal" placeholder="e.g. 72" />
@@ -212,6 +213,11 @@
             <option value="4">4</option>
           </select>
         </div>
+
+        <div class="control">
+          <label>&nbsp;</label>
+          <button id="convertBtn" class="cta primary" type="button">Convert</button>
+        </div>
       </div>
 
       <div class="quick" aria-label="Quick examples">
@@ -221,7 +227,7 @@
         <button type="button" data-fill="212">212°F</button>
       </div>
 
-      <div class="summary summary-3" aria-label="Conversion summary">
+      <div class="summary" aria-label="Conversion summary">
         <div class="sumCard greenGlow">
           <div class="sumLabel">Converted value</div>
           <div class="sumValue" id="heroValue">—</div>
@@ -237,6 +243,11 @@
           <div class="sumValue small mono" id="queryLabel">°F → °C</div>
           <div class="sumNote">The active conversion direction updates automatically.</div>
         </div>
+        <div class="sumCard">
+          <div class="sumLabel">Formula</div>
+          <div class="sumValue small mono">°C = (°F − 32) × 5/9</div>
+          <div class="sumNote">Standard Fahrenheit to Celsius conversion formula.</div>
+        </div>
       </div>
     </section>
 
@@ -249,7 +260,6 @@
 
         <div class="statusLine">
           <span class="badge" id="statusBadge">Ready</span>
-          <button id="convertBtn" class="cta primary" type="button">Convert</button>
           <button id="copyBtn" class="cta ghost" type="button">Copy Result</button>
           <button id="clearBtn" class="cta ghost" type="button">Clear</button>
         </div>
@@ -282,6 +292,17 @@
             </p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="relatedTools" aria-label="Related temperature tools">
+      <h2>Related Temperature Tools</h2>
+      <div class="relatedLinks">
+        <a href="/tools/c-to-f.html">Celsius to Fahrenheit</a>
+        <a href="/tools/celsius-to-kelvin.html">Celsius to Kelvin</a>
+        <a href="/tools/kelvin-to-celsius.html">Kelvin to Celsius</a>
+        <a href="/tools/fahrenheit-to-kelvin.html">Fahrenheit to Kelvin</a>
+        <a href="/tools/kelvin-to-fahrenheit.html">Kelvin to Fahrenheit</a>
       </div>
     </section>
 
@@ -327,7 +348,7 @@
     </footer>
   </main>
 
-  <script src="/site.js" defer></script>
-  <script src="/js/tools/f-to-c.js" defer></script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/f-to-c.js" defer></script>
 </body>
 </html>
