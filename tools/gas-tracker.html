@@ -34,9 +34,11 @@
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="preconnect" href="https://ethereum-rpc.publicnode.com" crossorigin>
+  <link rel="preconnect" href="https://cloudflare-eth.com" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
   <link rel="dns-prefetch" href="//ethereum-rpc.publicnode.com">
+  <link rel="dns-prefetch" href="//cloudflare-eth.com">
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css" />
 
@@ -150,7 +152,6 @@
 
   <style>
     .controls.cols-3{grid-template-columns:1.1fr 1fr 1fr}
-    .controls.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
     .metricGrid{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -179,8 +180,6 @@
       color:var(--muted);
       line-height:1.5;
     }
-    .goodVal{color:#c8ffe9}
-    .badVal{color:#ffd3d3}
     .neutralVal{color:#f0f6ff}
     .miniGrid{
       display:grid;
@@ -237,7 +236,6 @@
     }
     @media (max-width:980px){
       .controls.cols-3,
-      .controls.cols-4,
       .metricGrid,
       .miniGrid{
         grid-template-columns:1fr;
@@ -427,8 +425,7 @@
         </div>
 
         <div class="hintBox">
-          If this tool still shows no live data on your domain, the usual cause is browser-side RPC blocking or rate limits on a public endpoint.
-          In production, using your own RPC or a small proxy endpoint is the most reliable fix.
+          This version uses multiple public RPC fallbacks and request timeouts to reduce failed refreshes in the browser.
         </div>
 
         <div class="helpBox">
