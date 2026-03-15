@@ -10,7 +10,8 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256" crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
@@ -45,7 +46,7 @@
   <link rel="dns-prefetch" href="//security.cloudflare-dns.com">
   <link rel="dns-prefetch" href="//family.cloudflare-dns.com">
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/assets/site.css">
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
@@ -68,7 +69,11 @@
     "name":"DNS Propagation Checker",
     "url":"https://instantqr.io/tools/dns-propagation-checker.html",
     "description":"Fast DNS propagation checker for A, AAAA, CNAME, MX, TXT, NS, and SOA records across public resolvers.",
-    "isPartOf":{"@type":"WebSite","name":"InstantQR","url":"https://instantqr.io/"}
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
   }
   </script>
 
@@ -83,7 +88,11 @@
     "browserRequirements":"Requires JavaScript. Works in modern browsers.",
     "url":"https://instantqr.io/tools/dns-propagation-checker.html",
     "description":"Check DNS propagation for A, AAAA, CNAME, MX, TXT, NS, and SOA records across public DNS resolvers.",
-    "publisher":{"@type":"Organization","name":"InstantQR","url":"https://instantqr.io/"}
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
   }
   </script>
 
@@ -92,9 +101,24 @@
     "@context":"https://schema.org",
     "@type":"BreadcrumbList",
     "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
-      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
-      {"@type":"ListItem","position":3,"name":"DNS Propagation Checker","item":"https://instantqr.io/tools/dns-propagation-checker.html"}
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"DNS Propagation Checker",
+        "item":"https://instantqr.io/tools/dns-propagation-checker.html"
+      }
     ]
   }
   </script>
@@ -107,22 +131,34 @@
       {
         "@type":"Question",
         "name":"What is DNS propagation?",
-        "acceptedAnswer":{"@type":"Answer","text":"DNS propagation is the time it takes for DNS record changes to become visible across different DNS resolvers around the internet."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"DNS propagation is the time it takes for DNS record changes to become visible across different DNS resolvers around the internet."
+        }
       },
       {
         "@type":"Question",
         "name":"What record types can I check with this DNS propagation checker?",
-        "acceptedAnswer":{"@type":"Answer","text":"You can check A, AAAA, CNAME, MX, TXT, NS, and SOA records."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"You can check A, AAAA, CNAME, MX, TXT, NS, and SOA records."
+        }
       },
       {
         "@type":"Question",
         "name":"Why do some resolvers show different DNS results?",
-        "acceptedAnswer":{"@type":"Answer","text":"Resolvers may show different results because cached records expire at different times, propagation is still in progress, or your updated DNS changes have not reached every resolver yet."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Resolvers may show different results because cached records expire at different times, propagation is still in progress, or your updated DNS changes have not reached every resolver yet."
+        }
       },
       {
         "@type":"Question",
         "name":"How do I know if my DNS change has propagated?",
-        "acceptedAnswer":{"@type":"Answer","text":"If multiple resolvers return the same expected value and the weighted propagation percentage is high, your DNS change is likely visible across most real-world public DNS paths."}
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"If multiple resolvers return the same expected value and the weighted propagation percentage is high, your DNS change is likely visible across most real-world public DNS paths."
+        }
       }
     ]
   }
@@ -347,7 +383,7 @@
     </footer>
   </main>
 
-  <script src="/site.js" defer></script>
-  <script src="/js/tools/dns-propagation-checker.js" defer></script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/dns-propagation-checker.js" defer></script>
 </body>
 </html>
