@@ -1,9 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- =========================
-       Analytics / Monetization
-       ========================= -->
+  <!-- Analytics / Monetization -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -16,21 +14,16 @@
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
-  <!-- =========================
-       Core Meta
-       ========================= -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>Crypto Profit Calculator (ROI) | InstantQR</title>
-  <meta name="description" content="Free crypto profit and ROI calculator. Enter buy price, sell price, and quantity or investment to instantly see profit or loss, ROI, fees, break-even price, and optional tax estimate. Fast, private, and browser-based." />
-  <meta name="keywords" content="crypto profit calculator, crypto roi calculator, profit loss calculator crypto, crypto fees calculator, break even crypto calculator, bitcoin profit calculator, ethereum roi calculator" />
+  <title>Crypto Profit Calculator | Profit, ROI, Fees & Break-even | InstantQR</title>
+  <meta name="description" content="Calculate crypto profit, loss, ROI, fees, and break-even instantly. Fast, privacy-first crypto profit calculator that runs locally in your browser." />
+  <meta name="keywords" content="crypto profit calculator, crypto roi calculator, bitcoin profit calculator, ethereum profit calculator, trading profit calculator, break even crypto calculator" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
-  <meta name="application-name" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta name="color-scheme" content="dark" />
   <meta name="format-detection" content="telephone=no" />
 
   <link rel="canonical" href="https://instantqr.io/tools/crypto-profit-calculator.html" />
@@ -43,535 +36,56 @@
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css" />
 
-  <!-- =========================
-       Open Graph / Twitter
-       ========================= -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="Crypto Profit Calculator (ROI) | InstantQR" />
-  <meta property="og:description" content="Calculate crypto profit or loss, ROI, fees, break-even sell price, and optional tax estimate in seconds." />
+  <meta property="og:title" content="Crypto Profit Calculator | InstantQR" />
+  <meta property="og:description" content="Calculate crypto profit, loss, ROI, fees, and break-even instantly in your browser." />
   <meta property="og:url" content="https://instantqr.io/tools/crypto-profit-calculator.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
-  <meta property="og:image:alt" content="Crypto Profit Calculator tool preview on InstantQR" />
+  <meta property="og:image:alt" content="InstantQR Crypto Profit Calculator" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Crypto Profit Calculator (ROI) | InstantQR" />
-  <meta name="twitter:description" content="Instant crypto profit and ROI with fees, break-even, and optional tax estimate." />
+  <meta name="twitter:title" content="Crypto Profit Calculator | InstantQR" />
+  <meta name="twitter:description" content="Calculate crypto profit, loss, ROI, fees, and break-even instantly in your browser." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <style>
-    :root{
-      --bg:#081120;
-      --bg2:#0f172a;
-      --panel:#111c34;
-      --panel2:#16233f;
-      --text:#e5eefc;
-      --muted:#94a3b8;
-      --line:rgba(255,255,255,.08);
-      --brand:#60a5fa;
-      --brand2:#22c55e;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --ok:#10b981;
-      --shadow:0 12px 35px rgba(0,0,0,.28);
-      --radius:20px;
-      --radius-sm:14px;
-      --max:1180px;
-      --focus:0 0 0 4px rgba(96,165,250,.16);
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Crypto Profit Calculator",
+    "url":"https://instantqr.io/tools/crypto-profit-calculator.html",
+    "description":"Calculate crypto profit, loss, ROI, and break-even instantly in your browser.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
     }
+  }
+  </script>
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
-        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 28%),
-        linear-gradient(180deg, #07101d 0%, #0b1324 55%, #081120 100%);
-      min-height:100vh;
-      line-height:1.55;
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Crypto Profit Calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/crypto-profit-calculator.html",
+    "description":"Calculate crypto trade profit, loss, ROI, fees, and break-even locally in your browser.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
     }
+  }
+  </script>
 
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
-    img{max-width:100%}
-    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
-
-    .skip{
-      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
-    }
-    .skip:focus{
-      left:12px;top:12px;width:auto;height:auto;
-      padding:10px 12px;border-radius:12px;
-      background:#0b172d;color:#fff;border:1px solid var(--line);z-index:999;
-    }
-
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
-
-    .topbar{
-      position:sticky;top:0;z-index:40;
-      backdrop-filter:blur(14px);
-      background:rgba(8,17,32,.78);
-      border-bottom:1px solid var(--line);
-    }
-    .topbar-inner{
-      max-width:var(--max);margin:0 auto;
-      padding:12px 16px;
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:12px;
-      color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;
-    }
-    .brand-logo{
-      width:38px;height:38px;border-radius:12px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.18));
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      flex:0 0 auto;
-    }
-    .brand-logo img{width:24px;height:24px;display:block}
-
-    .top-links{
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-    }
-    .top-links a{
-      color:var(--text);
-      font-size:.95rem;
-      padding:10px 12px;border-radius:12px;
-      border:1px solid transparent;
-    }
-    .top-links a:hover{
-      text-decoration:none;
-      background:rgba(255,255,255,.04);
-      border-color:var(--line);
-    }
-
-    .hero{padding:34px 0 20px}
-    .breadcrumbs{
-      color:var(--muted);
-      font-size:.92rem;
-      margin-bottom:14px;
-      overflow:auto;
-      white-space:nowrap;
-    }
-    .breadcrumbs a{color:var(--muted)}
-    .breadcrumbs span{margin:0 8px;color:#64748b}
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:18px;
-      align-items:stretch;
-    }
-
-    .card{
-      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-
-    .hero-main{padding:28px}
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:8px;
-      font-size:.85rem;font-weight:700;
-      color:#bfdbfe;
-      background:rgba(96,165,250,.10);
-      border:1px solid rgba(96,165,250,.22);
-      padding:8px 12px;border-radius:999px;
-      margin-bottom:14px;
-    }
-    h1{
-      margin:0 0 12px;
-      font-size:clamp(2rem,4vw,3rem);
-      line-height:1.06;
-      letter-spacing:-.03em;
-    }
-    .hero p{
-      margin:0;
-      color:#cbd5e1;
-      max-width:800px;
-      font-size:1.03rem;
-    }
-    .hero-actions{
-      margin-top:18px;
-      display:flex;gap:12px;flex-wrap:wrap;
-    }
-
-    .btn{
-      appearance:none;border:0;cursor:pointer;
-      font:inherit;font-weight:800;
-      border-radius:14px;padding:13px 16px;
-      transition:.18s ease;
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    }
-    .btn-primary{
-      background:linear-gradient(135deg, var(--brand), #3b82f6);
-      color:#fff;
-      box-shadow:0 10px 26px rgba(59,130,246,.28);
-    }
-    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03);text-decoration:none}
-    .btn-secondary{
-      color:var(--text);
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-    }
-    .btn-secondary:hover{background:rgba(255,255,255,.06);text-decoration:none}
-    .btn-danger{
-      color:#fff;
-      background:rgba(239,68,68,.14);
-      border:1px solid rgba(239,68,68,.35);
-    }
-    .btn-danger:hover{background:rgba(239,68,68,.20);text-decoration:none}
-
-    .hero-side{
-      padding:22px;
-      display:grid;
-      gap:12px;
-      align-content:start;
-    }
-    .mini-stat{
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px 16px;
-    }
-    .mini-stat .label{
-      color:var(--muted);
-      font-size:.9rem;
-      margin-bottom:4px;
-    }
-    .mini-stat .value{
-      font-weight:800;
-      font-size:1.05rem;
-      color:#fff;
-    }
-
-    .section{padding:14px 0 10px}
-    .tool-grid{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:18px;
-      align-items:start;
-    }
-
-    .tool-panel,.info-panel,.content-card{padding:22px}
-
-    .tool-panel h2,.info-panel h2,.content h2,.content h3{
-      margin:0 0 10px;
-      letter-spacing:-.02em;
-    }
-
-    .subtle{
-      color:var(--muted);
-      font-size:.96rem;
-      margin-bottom:18px;
-    }
-
-    .seg-row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:18px;
-    }
-    .seg{
-      appearance:none;
-      border:1px solid var(--line);
-      background:#0a1427;
-      color:var(--muted);
-      padding:10px 12px;
-      border-radius:999px;
-      font-weight:800;
-      font-size:12px;
-      cursor:pointer;
-    }
-    .seg[aria-pressed="true"]{
-      color:#fff;
-      border-color:rgba(96,165,250,.55);
-      background:rgba(96,165,250,.12);
-    }
-
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-    .full{grid-column:1/-1}
-
-    label{
-      display:block;
-      font-size:.94rem;
-      font-weight:700;
-      margin-bottom:8px;
-      color:#dbeafe;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    input[type="url"],
-    select,
-    textarea{
-      width:100%;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:#0a1427;
-      color:#fff;
-      padding:14px 14px;
-      font:inherit;
-      outline:none;
-      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
-    }
-
-    input:focus,select:focus,textarea:focus{
-      border-color:rgba(96,165,250,.5);
-      box-shadow:0 0 0 4px rgba(96,165,250,.14);
-      background:#0b172d;
-    }
-
-    .helper{
-      color:var(--muted);
-      font-size:.85rem;
-      margin-top:6px;
-      line-height:1.45;
-    }
-
-    .actions{
-      margin-top:18px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .bar-wrap{
-      padding:14px;
-      border-radius:16px;
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--line);
-      margin-bottom:14px;
-    }
-    .bar-row{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      color:var(--muted);
-      font-size:12px;
-      margin-bottom:8px;
-    }
-    .bar{
-      height:12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.08);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .fill{
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg, rgba(16,185,129,.95), rgba(59,130,246,.85));
-      transition:width .18s ease;
-    }
-    .fill.neg{
-      background:linear-gradient(90deg, rgba(239,68,68,.95), rgba(245,158,11,.85));
-    }
-
-    .summary-box{
-      padding:14px;
-      border-radius:16px;
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--line);
-      margin-bottom:14px;
-    }
-    .summary-box p{
-      margin:0;
-      color:#dbeafe;
-    }
-
-    .results{
-      display:grid;
-      gap:10px;
-    }
-    .result-item{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:14px;
-      padding:12px 13px;
-    }
-    .result-item strong{
-      display:block;
-      margin-bottom:5px;
-      color:#fff;
-      font-size:.95rem;
-    }
-    .result-item span{
-      color:#cbd5e1;
-      font-size:.92rem;
-      line-height:1.45;
-    }
-
-    .stat-grid{
-      display:grid;
-      grid-template-columns:repeat(2, 1fr);
-      gap:10px;
-    }
-    .stat{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:14px;
-      padding:12px;
-    }
-    .stat .k{
-      color:var(--muted);
-      font-size:12px;
-      display:flex;
-      gap:8px;
-      justify-content:space-between;
-      align-items:center;
-    }
-    .stat .val{
-      margin-top:6px;
-      font-size:18px;
-      font-weight:900;
-      letter-spacing:.2px;
-      word-break:break-word;
-    }
-
-    .pill{
-      font-size:11px;
-      padding:4px 8px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.15);
-      background:rgba(255,255,255,.08);
-      color:var(--muted);
-      white-space:nowrap;
-    }
-    .pill.ok{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.12);color:#d1fae5}
-    .pill.bad{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.12);color:#fee2e2}
-    .pill.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.12);color:#fef3c7}
-
-    .content{
-      margin-top:20px;
-      display:grid;
-      gap:18px;
-    }
-    .content p{
-      color:#cbd5e1;
-      margin:0 0 12px;
-      line-height:1.65;
-    }
-    .content ul{
-      margin:10px 0 0 18px;
-      color:#cbd5e1;
-    }
-    .content li{margin:8px 0}
-
-    .faq{
-      display:grid;
-      gap:12px;
-      margin-top:12px;
-    }
-    details{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:16px;
-      padding:14px 16px;
-    }
-    summary{
-      cursor:pointer;
-      font-weight:800;
-      color:#fff;
-      list-style:none;
-    }
-    summary::-webkit-details-marker{display:none}
-    details p{
-      margin:10px 0 0;
-      color:#cbd5e1;
-      line-height:1.6;
-    }
-
-    .related-links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:10px;
-    }
-    .related-links a{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:12px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      color:var(--text);
-    }
-    .related-links a:hover{
-      background:rgba(255,255,255,.06);
-      text-decoration:none;
-    }
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:18px;
-      transform:translateX(-50%);
-      background:#0b1220;
-      border:1px solid var(--line);
-      color:var(--text);
-      padding:10px 12px;
-      border-radius:999px;
-      font-size:13px;
-      display:none;
-      z-index:50;
-      box-shadow:var(--shadow);
-    }
-
-    .footer{
-      padding:28px 0 42px;
-      color:var(--muted);
-    }
-    .footer-box{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-      padding:18px 0 0;
-      border-top:1px solid var(--line);
-    }
-    .footer-links{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .footer-links a{color:var(--muted)}
-    .footer-links a:hover{color:var(--text);text-decoration:none}
-
-    @media (max-width: 980px){
-      .hero-grid,.tool-grid{grid-template-columns:1fr}
-      .info-panel{position:relative;top:auto}
-    }
-
-    @media (max-width: 700px){
-      .form-grid,.stat-grid{grid-template-columns:1fr}
-      .hero-main,.hero-side,.tool-panel,.info-panel,.content-card{padding:18px}
-      .topbar-inner{padding:10px 14px}
-      .top-links{display:none}
-      h1{font-size:2rem}
-      .btn{width:100%}
-      .actions .btn{width:auto;flex:1 1 180px}
-    }
-  </style>
-
-  <!-- =========================
-       Structured Data
-       ========================= -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -602,63 +116,160 @@
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"Crypto Profit Calculator (ROI)",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
-    "url":"https://instantqr.io/tools/crypto-profit-calculator.html",
-    "description":"Free crypto profit and ROI calculator with fees, break-even sell price, and optional tax estimate.",
-    "publisher":{
-      "@type":"Organization",
-      "name":"InstantQR",
-      "url":"https://instantqr.io/"
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
     "@type":"FAQPage",
     "mainEntity":[
       {
         "@type":"Question",
-        "name":"How do I calculate crypto profit and ROI?",
+        "name":"What does this crypto calculator include?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Enter buy price and sell price, then choose Quantity mode or Investment mode. The calculator shows net profit or loss after optional fees, plus ROI and break-even sell price."
+          "text":"This calculator includes buy price, sell price, quantity, fees, total cost, total proceeds, net profit or loss, ROI, and break-even price."
         }
       },
       {
         "@type":"Question",
-        "name":"Does this calculator include fees?",
+        "name":"Can I include exchange fees?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Yes. You can add optional buy and sell fees as either a percentage or a flat amount."
+          "text":"Yes. You can include buy fees and sell fees to get a more accurate profit or loss result."
         }
       },
       {
         "@type":"Question",
-        "name":"Is my data sent to a server?",
+        "name":"Does this tool run locally?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"No. This tool runs locally in your browser and your inputs are not uploaded."
+          "text":"Yes. All calculations run locally in your browser."
         }
       }
     ]
   }
   </script>
+
+  <style>
+    .controls.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .controls.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .metricGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .metricCard{
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .metricCard h3{
+      margin:0 0 6px;
+      font-size:15px;
+    }
+    .metricVal{
+      font-size:22px;
+      font-weight:900;
+      line-height:1.1;
+      word-break:break-word;
+    }
+    .metricNote{
+      margin-top:6px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .goodVal{color:#c8ffe9}
+    .badVal{color:#ffd3d3}
+    .neutralVal{color:#f0f6ff}
+    .miniGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .miniBox{
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .miniBox h3{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+    .miniBox p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .claimRow{
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.10);
+      padding:12px;
+      margin-top:10px;
+    }
+    .claimRow:first-child{margin-top:0}
+    .claimKey{
+      font-weight:800;
+      color:#eaf2ff;
+      margin-bottom:6px;
+      font-size:13px;
+    }
+    .claimVal{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+      word-break:break-word;
+    }
+    .optionRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:12px;
+    }
+    .check{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--muted);
+      font-size:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      padding:8px 10px;
+      border-radius:999px;
+    }
+    .check input{
+      accent-color:#60a5fa;
+      margin:0;
+    }
+    .monoBlock{
+      white-space:pre-wrap;
+      word-break:break-word;
+      font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      color:#f0f6ff;
+      margin:0;
+    }
+    @media (max-width:980px){
+      .controls.cols-3,
+      .controls.cols-4,
+      .metricGrid,
+      .miniGrid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="/" aria-label="InstantQR home">
+      <a class="brand" href="/" aria-label="InstantQR Home">
         <span class="brand-logo">
-          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
         </span>
         <span>InstantQR</span>
       </a>
@@ -674,260 +285,238 @@
   </header>
 
   <main id="main" class="wrap">
-    <section class="hero">
-      <div class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a><span>›</span>
-        <a href="/tools/tools.html">Tools</a><span>›</span>
-        <span>Crypto Profit Calculator</span>
-      </div>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Crypto Profit Calculator</span></li>
+      </ol>
+    </nav>
 
-      <div class="hero-grid">
-        <div class="card hero-main">
-          <div class="eyebrow">Crypto Tools • ROI • Browser-Based</div>
-          <h1>Crypto Profit Calculator</h1>
-          <p>Calculate crypto profit or loss, ROI percentage, total fees, break-even sell price, and optional tax estimate in seconds. Use either quantity mode or investment mode with a fast, privacy-first calculator.</p>
+    <section class="hero" aria-label="Crypto Profit Calculator">
+      <div class="pill">💹 Profit & ROI • ⚡ Fast UI • 🔒 Runs locally in your browser</div>
+      <h1>Crypto Profit Calculator</h1>
+      <p class="sub">
+        Calculate profit, loss, ROI, fees, total proceeds, and break-even price for crypto trades.
+        Great for planning entries and exits for Bitcoin, Ethereum, and other assets.
+      </p>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#calculator">Use Calculator</a>
-            <a class="btn btn-secondary" href="/tools/tools.html">Browse All Tools</a>
-          </div>
+      <div class="summary" aria-label="Calculator summary">
+        <div class="sumCard greenGlow">
+          <div class="sumLabel">Net P/L</div>
+          <div class="sumValue small mono" id="netSummary">—</div>
+          <div class="sumNote">Net profit or loss after fees.</div>
         </div>
-
-        <aside class="card hero-side" aria-label="Tool highlights">
-          <div class="mini-stat">
-            <div class="label">Runs locally</div>
-            <div class="value">No signup or server processing</div>
-          </div>
-          <div class="mini-stat">
-            <div class="label">Built for speed</div>
-            <div class="value">Live updates while you type</div>
-          </div>
-          <div class="mini-stat">
-            <div class="label">Best for</div>
-            <div class="value">Profit, ROI, break-even, and fees</div>
-          </div>
-          <div class="mini-stat">
-            <div class="label">Modes</div>
-            <div class="value">Quantity or investment amount</div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section" id="calculator">
-      <div class="tool-grid">
-        <section class="card tool-panel" aria-labelledby="tool-title">
-          <h2 id="tool-title">Calculate crypto profit, ROI, fees, and break-even</h2>
-          <div class="subtle">Enter your buy and sell values, switch between quantity mode and investment mode, and optionally add buy fees, sell fees, and tax rate for a more realistic estimate.</div>
-
-          <div class="seg-row" role="group" aria-label="Input mode">
-            <button class="seg" id="modeQty" aria-pressed="true" type="button">Use Quantity</button>
-            <button class="seg" id="modeInv" aria-pressed="false" type="button">Use Investment</button>
-          </div>
-
-          <div class="form-grid">
-            <div>
-              <label for="asset">Asset / Symbol</label>
-              <input id="asset" type="text" inputmode="text" placeholder="BTC, ETH, SOL…" maxlength="10" />
-              <div class="helper">Optional. Used for labeling your results.</div>
-            </div>
-
-            <div>
-              <label for="currency">Display currency</label>
-              <select id="currency">
-                <option value="USD" selected>USD ($)</option>
-                <option value="EUR">EUR (€)</option>
-                <option value="GBP">GBP (£)</option>
-                <option value="CAD">CAD ($)</option>
-                <option value="AUD">AUD ($)</option>
-                <option value="JPY">JPY (¥)</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="buyPrice">Buy price (per coin)</label>
-              <input id="buyPrice" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 42000" />
-            </div>
-
-            <div>
-              <label for="sellPrice">Sell price (per coin)</label>
-              <input id="sellPrice" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 52000" />
-            </div>
-
-            <div id="qtyWrap">
-              <label for="quantity">Quantity</label>
-              <input id="quantity" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 0.25" />
-              <div class="helper">Use this when you know how many coins or tokens you bought.</div>
-            </div>
-
-            <div id="invWrap" style="display:none;">
-              <label for="investment">Investment amount</label>
-              <input id="investment" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 500" />
-              <div class="helper">Use this when you know how much money you spent but not the quantity.</div>
-            </div>
-
-            <div>
-              <label for="buyFeeType">Buy fee type</label>
-              <select id="buyFeeType">
-                <option value="none" selected>None</option>
-                <option value="pct">Percent (%)</option>
-                <option value="flat">Flat amount</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="buyFeeValue">Buy fee value</label>
-              <input id="buyFeeValue" type="number" inputmode="decimal" min="0" step="any" placeholder="0" />
-            </div>
-
-            <div>
-              <label for="sellFeeType">Sell fee type</label>
-              <select id="sellFeeType">
-                <option value="none" selected>None</option>
-                <option value="pct">Percent (%)</option>
-                <option value="flat">Flat amount</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="sellFeeValue">Sell fee value</label>
-              <input id="sellFeeValue" type="number" inputmode="decimal" min="0" step="any" placeholder="0" />
-            </div>
-
-            <div>
-              <label for="taxRate">Tax rate (optional)</label>
-              <input id="taxRate" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 20" />
-            </div>
-
-            <div>
-              <label for="decimals">Display decimals</label>
-              <select id="decimals">
-                <option value="2" selected>2</option>
-                <option value="4">4</option>
-                <option value="6">6</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="actions">
-            <button class="btn btn-primary" id="copyLinkBtn" type="button">Copy Share Link</button>
-            <button class="btn btn-secondary" id="copySummaryBtn" type="button">Copy Results</button>
-            <button class="btn btn-danger" id="resetBtn" type="button">Reset</button>
-          </div>
-
-          <div class="helper" id="statusMsg" style="margin-top:12px;" aria-live="polite">
-            Enter your values to calculate profit or loss.
-          </div>
-        </section>
-
-        <aside class="card info-panel" aria-labelledby="results-title">
-          <h2 id="results-title">Results</h2>
-
-          <div class="bar-wrap">
-            <div class="bar-row">
-              <div><span id="barLabel">Net performance</span></div>
-              <div><span id="barPct">0.00%</span></div>
-            </div>
-            <div class="bar"><div class="fill" id="barFill"></div></div>
-            <div class="helper" style="margin-top:8px;">Display bar is capped at ±200% for readability.</div>
-          </div>
-
-          <div class="summary-box">
-            <p id="summaryText">Ready. Enter buy price, sell price, and quantity or investment amount to see live profit and ROI.</p>
-          </div>
-
-          <div class="stat-grid">
-            <div class="stat">
-              <div class="k">Net Profit / Loss <span class="pill" id="plPill">—</span></div>
-              <div class="val" id="netPL">$0.00</div>
-            </div>
-
-            <div class="stat">
-              <div class="k">ROI <span class="pill" id="roiPill">—</span></div>
-              <div class="val" id="roi">0.00%</div>
-            </div>
-
-            <div class="stat">
-              <div class="k">Gross Profit / Loss <span class="pill">Before fees</span></div>
-              <div class="val" id="grossPL">$0.00</div>
-            </div>
-
-            <div class="stat">
-              <div class="k">Total Fees <span class="pill" id="feesPill">None</span></div>
-              <div class="val" id="fees">$0.00</div>
-            </div>
-
-            <div class="stat">
-              <div class="k">Break-even Price <span class="pill">Net = 0</span></div>
-              <div class="val" id="breakeven">$0.00</div>
-            </div>
-
-            <div class="stat">
-              <div class="k">Est. Tax <span class="pill warn" id="taxPill">Optional</span></div>
-              <div class="val" id="tax">$0.00</div>
-            </div>
-
-            <div class="stat">
-              <div class="k">Cost Basis <span class="pill">Buy + buy fee</span></div>
-              <div class="val" id="costBasis">$0.00</div>
-            </div>
-
-            <div class="stat">
-              <div class="k">Net Proceeds <span class="pill">Sell - sell fee</span></div>
-              <div class="val" id="netProceeds">$0.00</div>
-            </div>
-          </div>
-        </aside>
+        <div class="sumCard">
+          <div class="sumLabel">ROI</div>
+          <div class="sumValue small mono" id="roiSummary">—</div>
+          <div class="sumNote">Return on investment based on total cost.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Break-even</div>
+          <div class="sumValue small mono" id="breakEvenSummary">—</div>
+          <div class="sumNote">Estimated sell price needed to break even.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Mode</div>
+          <div class="sumValue small mono" id="modeLabel">Ready</div>
+          <div class="sumNote">Shows the latest calculation state.</div>
+        </div>
       </div>
     </section>
 
-    <section class="content">
-      <article class="card content-card">
-        <h2>How this calculator works</h2>
-        <p>This crypto profit calculator compares your buy price and sell price, then calculates gross profit or loss, total fees, cost basis, net proceeds, net profit or loss, ROI percentage, break-even sell price, and an optional tax estimate on positive gains.</p>
-        <p>You can use quantity mode if you know how many coins or tokens you bought, or investment mode if you only know how much money you originally invested.</p>
-      </article>
-
-      <article class="card content-card">
-        <h2>Why use this crypto ROI calculator?</h2>
-        <p>Manual profit math becomes harder once you include exchange fees, flat costs, and break-even targets. This page makes that much faster and gives you a cleaner view of what your trade actually returned.</p>
-        <ul>
-          <li>Estimate net crypto profit after buy and sell fees</li>
-          <li>Compare ROI quickly across different trades</li>
-          <li>See break-even sell price before exiting a position</li>
-          <li>Add optional tax estimate for planning</li>
-        </ul>
-      </article>
-
-      <article class="card content-card">
-        <h2>Related tools</h2>
-        <div class="related-links">
-          <a href="/tools/dca-calculator.html">DCA Calculator</a>
-          <a href="/tools/web3-gas-fee-estimator.html">Gas Fee Estimator</a>
-          <a href="/tools/gas-tracker.html">Gas Tracker</a>
-          <a href="/tools/tools.html">All Tools</a>
+    <section class="panel" aria-label="Crypto Profit Calculator panel">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Trade Inputs</div>
+          <div class="panelSub">Enter your trade details to calculate profit, loss, fees, and break-even levels.</div>
         </div>
-      </article>
 
-      <article class="card content-card">
-        <h2>Frequently asked questions</h2>
-        <div class="faq">
-          <details open>
-            <summary>How do I calculate crypto profit and ROI?</summary>
-            <p>Enter buy price and sell price, then choose quantity mode or investment mode. The calculator shows net profit or loss after optional fees, plus ROI and break-even sell price.</p>
-          </details>
-
-          <details>
-            <summary>Does this calculator include fees?</summary>
-            <p>Yes. You can add optional buy and sell fees as either a percentage or a flat amount.</p>
-          </details>
-
-          <details>
-            <summary>Is my data sent to a server?</summary>
-            <p>No. This tool runs locally in your browser and your inputs are not uploaded.</p>
-          </details>
+        <div class="statusLine">
+          <span class="badge" id="statusBadge">Ready</span>
+          <button id="calcBtn" class="cta primary" type="button">Calculate</button>
+          <button id="copyBtn" class="cta ghost" type="button">Copy Summary</button>
+          <button id="clearBtn" class="cta ghost" type="button">Clear</button>
         </div>
-      </article>
+      </div>
+
+      <div class="panelBody">
+        <div class="controls cols-4" aria-label="Trade inputs">
+          <div class="control">
+            <label for="symbol">Coin / Symbol</label>
+            <input id="symbol" class="input" type="text" placeholder="e.g. BTC" />
+          </div>
+
+          <div class="control">
+            <label for="buyPrice">Buy Price</label>
+            <input id="buyPrice" class="input" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 50000" />
+          </div>
+
+          <div class="control">
+            <label for="sellPrice">Sell Price</label>
+            <input id="sellPrice" class="input" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 62000" />
+          </div>
+
+          <div class="control">
+            <label for="quantity">Quantity</label>
+            <input id="quantity" class="input" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 0.25" />
+          </div>
+        </div>
+
+        <div class="controls cols-4" aria-label="Fee inputs">
+          <div class="control">
+            <label for="buyFee">Buy Fee</label>
+            <input id="buyFee" class="input" type="number" inputmode="decimal" min="0" step="any" value="0" />
+          </div>
+
+          <div class="control">
+            <label for="sellFee">Sell Fee</label>
+            <input id="sellFee" class="input" type="number" inputmode="decimal" min="0" step="any" value="0" />
+          </div>
+
+          <div class="control">
+            <label for="feeMode">Fee Type</label>
+            <select id="feeMode" class="select">
+              <option value="flat" selected>Flat amount</option>
+              <option value="percent">Percent (%)</option>
+            </select>
+          </div>
+
+          <div class="control">
+            <label for="currency">Currency</label>
+            <input id="currency" class="input" type="text" value="USD" maxlength="10" />
+          </div>
+        </div>
+
+        <div class="optionRow" aria-label="Options">
+          <label class="check" for="showDecimals">
+            <input id="showDecimals" type="checkbox" checked />
+            <span>Show 2 decimals</span>
+          </label>
+        </div>
+
+        <div class="resultBox ok" style="margin-top:12px;">
+          <div class="resultTop">
+            <div class="resultStatus ok">Live result</div>
+            <div class="small muted">Updates when you calculate</div>
+          </div>
+          <div class="monoBlock" id="resultText">Enter trade details and click Calculate.</div>
+        </div>
+
+        <div class="formula" id="formulaText">Formula: Net P/L = total proceeds − total cost</div>
+
+        <div class="quick" aria-label="Quick examples">
+          <button type="button" data-symbol="BTC" data-buy="50000" data-sell="62000" data-qty="0.25">BTC gain</button>
+          <button type="button" data-symbol="ETH" data-buy="3500" data-sell="2800" data-qty="2">ETH loss</button>
+          <button type="button" data-symbol="SOL" data-buy="120" data-sell="165" data-qty="10">SOL gain</button>
+          <button type="button" data-symbol="DOGE" data-buy="0.12" data-sell="0.18" data-qty="5000">DOGE gain</button>
+        </div>
+
+        <div class="metricGrid">
+          <div class="metricCard">
+            <h3>Total Cost</h3>
+            <div id="totalCost" class="metricVal neutralVal">—</div>
+            <div class="metricNote">Buy price × quantity plus buy fees.</div>
+          </div>
+
+          <div class="metricCard">
+            <h3>Total Proceeds</h3>
+            <div id="totalProceeds" class="metricVal neutralVal">—</div>
+            <div class="metricNote">Sell price × quantity minus sell fees.</div>
+          </div>
+
+          <div class="metricCard">
+            <h3>Net Profit / Loss</h3>
+            <div id="netProfit" class="metricVal neutralVal">—</div>
+            <div class="metricNote">Your final result after fees.</div>
+          </div>
+
+          <div class="metricCard">
+            <h3>ROI</h3>
+            <div id="roiValue" class="metricVal neutralVal">—</div>
+            <div class="metricNote">Net profit or loss relative to total cost.</div>
+          </div>
+        </div>
+
+        <div class="miniGrid">
+          <div class="miniBox">
+            <h3>Break-even Analysis</h3>
+            <div class="claimRow">
+              <div class="claimKey">Break-even Sell Price</div>
+              <div class="claimVal" id="breakEvenPrice">—</div>
+            </div>
+            <div class="claimRow">
+              <div class="claimKey">Gross Profit Before Fees</div>
+              <div class="claimVal" id="grossProfit">—</div>
+            </div>
+            <div class="claimRow">
+              <div class="claimKey">Total Fees</div>
+              <div class="claimVal" id="totalFees">—</div>
+            </div>
+          </div>
+
+          <div class="miniBox">
+            <h3>Trade Summary</h3>
+            <div class="claimRow">
+              <div class="claimKey">Asset</div>
+              <div class="claimVal" id="assetSummary">—</div>
+            </div>
+            <div class="claimRow">
+              <div class="claimKey">Average Entry Cost</div>
+              <div class="claimVal" id="avgEntry">—</div>
+            </div>
+            <div class="claimRow">
+              <div class="claimKey">Exit Value Per Unit</div>
+              <div class="claimVal" id="exitPerUnit">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="helpBox">
+          <div class="helpCard">
+            <h3>Useful for planning exits</h3>
+            <p>
+              Use this calculator to estimate what happens after fees before placing a trade, especially when setting sell targets.
+            </p>
+          </div>
+          <div class="helpCard">
+            <h3>Flat or percent fees</h3>
+            <p>
+              You can calculate using flat exchange fees or percentage-based fees for more realistic trade estimates.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relatedTools" aria-label="Related crypto tools">
+      <h2>Related Crypto Tools</h2>
+      <div class="relatedLinks">
+        <a href="/tools/token-contract-analyzer.html">Token Contract Analyzer</a>
+        <a href="/tools/wallet-approval-checker.html">Wallet Approval Checker</a>
+        <a href="/tools/gas-tracker.html">Gas Tracker</a>
+        <a href="/tools/transaction-status-checker.html">Transaction Status Checker</a>
+        <a href="/tools/dca-calculator.html">DCA Calculator</a>
+      </div>
+    </section>
+
+    <section class="faq" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>What does this crypto calculator include?</summary>
+        <p>This calculator includes buy price, sell price, quantity, fees, total cost, total proceeds, net profit or loss, ROI, and break-even price.</p>
+      </details>
+
+      <details>
+        <summary>Can I include exchange fees?</summary>
+        <p>Yes. You can include buy fees and sell fees to get a more accurate profit or loss result.</p>
+      </details>
+
+      <details>
+        <summary>Does this tool run locally?</summary>
+        <p>Yes. All calculations run locally in your browser.</p>
+      </details>
     </section>
 
     <footer class="footer">
@@ -948,367 +537,7 @@
     </footer>
   </main>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <script>
-    (() => {
-      const $ = (id) => document.getElementById(id);
-      const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
-      const safeNum = (v) => {
-        const n = Number(String(v ?? "").trim());
-        return Number.isFinite(n) ? n : 0;
-      };
-
-      $('year').textContent = new Date().getFullYear();
-
-      const modeQtyBtn = $('modeQty');
-      const modeInvBtn = $('modeInv');
-      const qtyWrap = $('qtyWrap');
-      const invWrap = $('invWrap');
-
-      const asset = $('asset');
-      const currency = $('currency');
-      const buyPrice = $('buyPrice');
-      const sellPrice = $('sellPrice');
-      const quantity = $('quantity');
-      const investment = $('investment');
-
-      const buyFeeType = $('buyFeeType');
-      const buyFeeValue = $('buyFeeValue');
-      const sellFeeType = $('sellFeeType');
-      const sellFeeValue = $('sellFeeValue');
-
-      const taxRate = $('taxRate');
-      const decimals = $('decimals');
-      const statusMsg = $('statusMsg');
-      const summaryText = $('summaryText');
-
-      const netPL = $('netPL');
-      const grossPL = $('grossPL');
-      const fees = $('fees');
-      const roi = $('roi');
-      const breakeven = $('breakeven');
-      const tax = $('tax');
-      const costBasis = $('costBasis');
-      const netProceeds = $('netProceeds');
-
-      const plPill = $('plPill');
-      const roiPill = $('roiPill');
-      const feesPill = $('feesPill');
-      const taxPill = $('taxPill');
-
-      const barFill = $('barFill');
-      const barPct = $('barPct');
-      const barLabel = $('barLabel');
-      const toastEl = $('toast');
-
-      let mode = 'qty';
-      let lastCalc = null;
-
-      const moneyFmtCache = new Map();
-      function moneyFmt(cur, dec) {
-        const key = cur + ':' + dec;
-        if (moneyFmtCache.has(key)) return moneyFmtCache.get(key);
-        let fmt;
-        try {
-          fmt = new Intl.NumberFormat(undefined, {
-            style: 'currency',
-            currency: cur,
-            minimumFractionDigits: dec,
-            maximumFractionDigits: dec
-          });
-        } catch {
-          fmt = null;
-        }
-        moneyFmtCache.set(key, fmt);
-        return fmt;
-      }
-
-      function formatMoney(amount, cur, dec) {
-        const fmt = moneyFmt(cur, dec);
-        if (fmt) return fmt.format(amount);
-        return (amount || 0).toFixed(dec);
-      }
-
-      function formatPct(p) {
-        if (!Number.isFinite(p)) return '—';
-        return `${p.toFixed(2)}%`;
-      }
-
-      function setPill(el, kind, text) {
-        el.classList.remove('ok', 'bad', 'warn');
-        if (kind) el.classList.add(kind);
-        el.textContent = text;
-      }
-
-      function toast(text) {
-        toastEl.textContent = text;
-        toastEl.style.display = 'block';
-        clearTimeout(toastEl._t);
-        toastEl._t = setTimeout(() => {
-          toastEl.style.display = 'none';
-        }, 1600);
-      }
-
-      function computeFee(total, type, value) {
-        const v = safeNum(value);
-        if (type === 'pct') return total * (v / 100);
-        if (type === 'flat') return v;
-        return 0;
-      }
-
-      function getQty(bp) {
-        if (mode === 'qty') return safeNum(quantity.value);
-        const inv = safeNum(investment.value);
-        return bp > 0 ? inv / bp : 0;
-      }
-
-      function buildParams() {
-        const p = new URLSearchParams();
-        p.set('mode', mode);
-        const sym = (asset.value || '').trim().toUpperCase();
-        if (sym) p.set('asset', sym);
-        p.set('cur', currency.value || 'USD');
-        p.set('bp', String(safeNum(buyPrice.value)));
-        p.set('sp', String(safeNum(sellPrice.value)));
-        if (mode === 'qty') p.set('qty', String(safeNum(quantity.value)));
-        else p.set('inv', String(safeNum(investment.value)));
-        p.set('bft', buyFeeType.value);
-        p.set('bfv', String(safeNum(buyFeeValue.value)));
-        p.set('sft', sellFeeType.value);
-        p.set('sfv', String(safeNum(sellFeeValue.value)));
-        p.set('tax', String(safeNum(taxRate.value)));
-        p.set('dec', String(safeNum(decimals.value) || 2));
-        return p;
-      }
-
-      let urlTimer = null;
-      function scheduleUrlReplace() {
-        if (urlTimer) clearTimeout(urlTimer);
-        urlTimer = setTimeout(() => {
-          try {
-            const p = buildParams();
-            history.replaceState(null, '', `${location.pathname}?${p.toString()}`);
-          } catch {}
-        }, 250);
-      }
-
-      function calculate() {
-        const cur = currency.value || 'USD';
-        const dec = Number(decimals.value || '2');
-
-        const bp = safeNum(buyPrice.value);
-        const sp = safeNum(sellPrice.value);
-        const qty = getQty(bp);
-
-        const buyTotal = bp * qty;
-        const sellTotal = sp * qty;
-
-        const buyFee = computeFee(buyTotal, buyFeeType.value, buyFeeValue.value);
-        const sellFee = computeFee(sellTotal, sellFeeType.value, sellFeeValue.value);
-        const totalFees = buyFee + sellFee;
-
-        const gross = (sp - bp) * qty;
-        const basis = buyTotal + buyFee;
-        const proceeds = sellTotal - sellFee;
-        const net = proceeds - basis;
-
-        const hasInputs = bp > 0 && sp > 0 && qty > 0;
-        const roiPct = basis > 0 ? (net / basis) * 100 : (hasInputs ? 0 : NaN);
-
-        const tr = safeNum(taxRate.value);
-        const taxEst = net > 0 && tr > 0 ? net * (tr / 100) : 0;
-
-        let be = 0;
-        if (qty > 0) {
-          let pct = 0, flat = 0;
-          if (sellFeeType.value === 'pct') pct = safeNum(sellFeeValue.value) / 100;
-          if (sellFeeType.value === 'flat') flat = safeNum(sellFeeValue.value);
-          const denom = qty * (1 - pct);
-          be = denom > 0 ? (basis + flat) / denom : 0;
-        }
-
-        netPL.textContent = formatMoney(net, cur, dec);
-        grossPL.textContent = formatMoney(gross, cur, dec);
-        fees.textContent = formatMoney(totalFees, cur, dec);
-        roi.textContent = formatPct(roiPct);
-        breakeven.textContent = formatMoney(be, cur, dec);
-        tax.textContent = formatMoney(taxEst, cur, dec);
-        costBasis.textContent = formatMoney(basis, cur, dec);
-        netProceeds.textContent = formatMoney(proceeds, cur, dec);
-
-        if (!hasInputs) {
-          setPill(plPill, 'warn', 'Need inputs');
-          setPill(roiPill, 'warn', 'Need inputs');
-          summaryText.textContent = 'Ready. Enter buy price, sell price, and quantity or investment amount to see live profit and ROI.';
-        } else if (net > 0) {
-          setPill(plPill, 'ok', 'Profit');
-          setPill(roiPill, 'ok', 'Positive');
-          summaryText.textContent = 'Your current sell price produces a positive net return after fees.';
-        } else if (net < 0) {
-          setPill(plPill, 'bad', 'Loss');
-          setPill(roiPill, 'bad', 'Negative');
-          summaryText.textContent = 'Your current sell price produces a net loss after fees.';
-        } else {
-          setPill(plPill, 'warn', 'Even');
-          setPill(roiPill, 'warn', '0%');
-          summaryText.textContent = 'Your current sell price is approximately break-even after fees.';
-        }
-
-        const feeHint = [];
-        if (buyFeeType.value !== 'none') feeHint.push('buy');
-        if (sellFeeType.value !== 'none') feeHint.push('sell');
-        feesPill.textContent = feeHint.length ? feeHint.join(' + ') : 'None';
-        taxPill.style.opacity = tr > 0 ? 1 : 0.65;
-
-        const capped = clamp(Number.isFinite(roiPct) ? roiPct : 0, -200, 200);
-        const width = Math.abs(capped) / 200 * 100;
-        barPct.textContent = formatPct(Number.isFinite(roiPct) ? roiPct : 0);
-
-        if (capped >= 0) {
-          barLabel.textContent = 'Net performance (profit)';
-          barFill.classList.remove('neg');
-        } else {
-          barLabel.textContent = 'Net performance (loss)';
-          barFill.classList.add('neg');
-        }
-        barFill.style.width = `${width}%`;
-
-        const sym = (asset.value || '').trim().toUpperCase();
-        if (hasInputs) {
-          const qtyText = mode === 'qty' ? `${qty}` : `${qty.toFixed(8)}`;
-          statusMsg.textContent = sym ? `Calculated for ${sym} • Qty: ${qtyText}` : `Calculated • Qty: ${qtyText}`;
-        } else {
-          statusMsg.textContent = 'Enter buy price, sell price, and quantity or investment amount to see results.';
-        }
-
-        lastCalc = { net, roiPct, qty, sym, cur, dec, bp, sp, totalFees, be, taxEst };
-        scheduleUrlReplace();
-      }
-
-      function setMode(next) {
-        mode = next;
-        const isQty = mode === 'qty';
-        modeQtyBtn.setAttribute('aria-pressed', String(isQty));
-        modeInvBtn.setAttribute('aria-pressed', String(!isQty));
-        qtyWrap.style.display = isQty ? '' : 'none';
-        invWrap.style.display = isQty ? 'none' : '';
-        calculate();
-      }
-
-      modeQtyBtn.addEventListener('click', () => setMode('qty'));
-      modeInvBtn.addEventListener('click', () => setMode('inv'));
-
-      function loadFromUrl() {
-        const p = new URLSearchParams(location.search);
-        const m = p.get('mode');
-        if (m === 'inv' || m === 'qty') mode = m;
-
-        asset.value = (p.get('asset') || '').toUpperCase().slice(0, 10);
-        if (p.get('cur')) currency.value = p.get('cur');
-
-        buyPrice.value = p.get('bp') || '';
-        sellPrice.value = p.get('sp') || '';
-        quantity.value = p.get('qty') || '';
-        investment.value = p.get('inv') || '';
-        buyFeeType.value = p.get('bft') || 'none';
-        buyFeeValue.value = p.get('bfv') || '';
-        sellFeeType.value = p.get('sft') || 'none';
-        sellFeeValue.value = p.get('sfv') || '';
-        taxRate.value = p.get('tax') || '';
-        if (p.get('dec')) decimals.value = p.get('dec');
-
-        setMode(mode);
-      }
-
-      async function copyText(txt) {
-        try {
-          await navigator.clipboard.writeText(txt);
-          return true;
-        } catch {
-          const ta = document.createElement('textarea');
-          ta.value = txt;
-          ta.style.position = 'fixed';
-          ta.style.left = '-9999px';
-          document.body.appendChild(ta);
-          ta.select();
-          try {
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-            return true;
-          } catch {
-            document.body.removeChild(ta);
-            return false;
-          }
-        }
-      }
-
-      $('copyLinkBtn').addEventListener('click', async () => {
-        try {
-          const p = buildParams();
-          const url = `${location.pathname}?${p.toString()}`;
-          history.pushState(null, '', url);
-        } catch {}
-
-        const ok = await copyText(location.href);
-        statusMsg.textContent = ok ? 'Share link copied.' : 'Could not copy link. You can manually copy the URL.';
-        toast(ok ? 'Link copied!' : 'Copy failed');
-      });
-
-      $('copySummaryBtn').addEventListener('click', async () => {
-        if (!lastCalc) {
-          statusMsg.textContent = 'Enter values first.';
-          return;
-        }
-        const s = lastCalc;
-        const summary =
-`${s.sym ? s.sym + ' ' : ''}Crypto Profit / ROI (InstantQR)
-Buy: ${s.bp}
-Sell: ${s.sp}
-Mode: ${mode === 'qty' ? 'Quantity' : 'Investment'}
-Qty: ${s.qty}
-Net P/L: ${netPL.textContent}
-ROI: ${roi.textContent}
-Fees: ${fees.textContent}
-Break-even: ${breakeven.textContent}
-Tax (est): ${tax.textContent}
-Link: ${location.href}`;
-
-        const ok = await copyText(summary);
-        statusMsg.textContent = ok ? 'Results copied.' : 'Could not copy results.';
-        toast(ok ? 'Results copied!' : 'Copy failed');
-      });
-
-      $('resetBtn').addEventListener('click', () => {
-        asset.value = '';
-        currency.value = 'USD';
-        buyPrice.value = '';
-        sellPrice.value = '';
-        quantity.value = '';
-        investment.value = '';
-        buyFeeType.value = 'none';
-        buyFeeValue.value = '';
-        sellFeeType.value = 'none';
-        sellFeeValue.value = '';
-        taxRate.value = '';
-        decimals.value = '2';
-        setMode('qty');
-        try { history.pushState(null, '', location.pathname); } catch {}
-        statusMsg.textContent = 'Reset complete.';
-        toast('Reset complete');
-      });
-
-      [
-        asset, currency, buyPrice, sellPrice, quantity, investment,
-        buyFeeType, buyFeeValue, sellFeeType, sellFeeValue, taxRate, decimals
-      ].forEach(el => {
-        el.addEventListener('input', calculate, { passive: true });
-        el.addEventListener('change', calculate, { passive: true });
-      });
-
-      loadFromUrl();
-      calculate();
-    })();
-  </script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/crypto-profit-calculator.js" defer></script>
 </body>
 </html>
