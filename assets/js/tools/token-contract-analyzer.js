@@ -1,11 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const CONFIG = {
+    explorerApiKeys: {
+      ethereum: '',
+      base: '',
+      arbitrum: '',
+      optimism: '',
+      bsc: '',
+      polygon: '',
+      avalanche: ''
+    },
+
+    explorerApi: {
+      ethereum: 'https://api.etherscan.io/api',
+      base: 'https://api.basescan.org/api',
+      arbitrum: 'https://api.arbiscan.io/api',
+      optimism: 'https://api-optimistic.etherscan.io/api',
+      bsc: 'https://api.bscscan.com/api',
+      polygon: 'https://api.polygonscan.com/api',
+      avalanche: 'https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan/api'
+    },
+
+    dexscreenerBase: 'https://api.dexscreener.com/latest/dex/tokens/',
+    honeypotBase: 'https://api.honeypot.is/v2/IsHoneypot',
+
+    enableExplorerFetch: true,
+    enableDexLiquidityFetch: true,
+    enableHoneypotFetch: true
+  };
+
   const CHAINS = {
     ethereum: {
       label: 'Ethereum',
       chainId: 1,
       rpc: ['https://ethereum-rpc.publicnode.com', 'https://cloudflare-eth.com/v1/mainnet'],
       explorerAddress: 'https://etherscan.io/address/',
+      explorerToken: 'https://etherscan.io/token/',
       logScanBlocks: 5000,
+      honeypotChain: 'ethereum',
       sample: { address: '0xA0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', label: 'USDC' },
       compareSample: { address: '0xdAC17F958D2ee523a2206206994597C13D831ec7', label: 'USDT' }
     },
@@ -14,7 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
       chainId: 8453,
       rpc: ['https://base-rpc.publicnode.com'],
       explorerAddress: 'https://basescan.org/address/',
+      explorerToken: 'https://basescan.org/token/',
       logScanBlocks: 8000,
+      honeypotChain: 'base',
       sample: { address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', label: 'USDC' },
       compareSample: { address: '0xd9AAEC86B65d86f6A7B5B1b0c42FFA531710B6CA', label: 'USDbC-like stable' }
     },
@@ -23,7 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
       chainId: 42161,
       rpc: ['https://arbitrum-one-rpc.publicnode.com'],
       explorerAddress: 'https://arbiscan.io/address/',
+      explorerToken: 'https://arbiscan.io/token/',
       logScanBlocks: 12000,
+      honeypotChain: 'arbitrum',
       sample: { address: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831', label: 'USDC' },
       compareSample: { address: '0xFd086bC7CD5C481DCC9C85ebe478A1C0b69FCbb9', label: 'USDT' }
     },
@@ -32,7 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
       chainId: 10,
       rpc: ['https://optimism-rpc.publicnode.com'],
       explorerAddress: 'https://optimistic.etherscan.io/address/',
+      explorerToken: 'https://optimistic.etherscan.io/token/',
       logScanBlocks: 12000,
+      honeypotChain: 'optimism',
       sample: { address: '0x0b2C639c533813f4Aa9D7837CaF62653d097Ff85', label: 'USDC' },
       compareSample: { address: '0x94b008aA00579c1307B0EF2c499aD98a8ce58e58', label: 'USDT' }
     },
@@ -41,7 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
       chainId: 56,
       rpc: ['https://bsc-rpc.publicnode.com'],
       explorerAddress: 'https://bscscan.com/address/',
+      explorerToken: 'https://bscscan.com/token/',
       logScanBlocks: 8000,
+      honeypotChain: 'bsc',
       sample: { address: '0x55d398326f99059fF775485246999027B3197955', label: 'USDT' },
       compareSample: { address: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d', label: 'USDC' }
     },
@@ -50,7 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
       chainId: 137,
       rpc: ['https://polygon-bor-rpc.publicnode.com'],
       explorerAddress: 'https://polygonscan.com/address/',
+      explorerToken: 'https://polygonscan.com/token/',
       logScanBlocks: 12000,
+      honeypotChain: 'polygon',
       sample: { address: '0x3c499c542cef5e3811e1192ce70d8cc03d5c3359', label: 'USDC' },
       compareSample: { address: '0xc2132D05D31c914a87C6611C10748AaCBFfE5b58', label: 'USDT' }
     },
@@ -59,7 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
       chainId: 43114,
       rpc: ['https://avalanche-c-chain-rpc.publicnode.com'],
       explorerAddress: 'https://snowtrace.io/address/',
+      explorerToken: 'https://snowtrace.io/token/',
       logScanBlocks: 8000,
+      honeypotChain: 'avalanche',
       sample: { address: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E', label: 'USDC' },
       compareSample: { address: '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7', label: 'USDT' }
     }
@@ -78,13 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     transfer: '0xa9059cbb',
     approve: '0x095ea7b3',
     transferFrom: '0x23b872dd',
-    implementation: '0x5c60da1b',
-    maxTxAmount: '0xec28438a',
-    maxWalletSize: '0x25b34b64',
-    tradingOpen: '0xc9567bf9',
-    blacklist: '0xf9f92be4',
-    isBlacklisted: '0xfe575a87',
-    taxFee: '0x95d89b41' // placeholder kept harmless; actual scan is bytecode-based
+    implementation: '0x5c60da1b'
   };
 
   const TOPICS = {
@@ -109,22 +146,18 @@ document.addEventListener('DOMContentLoaded', () => {
     { selector: 'f2fde38b', label: 'transferOwnership(address)' },
     { selector: '715018a6', label: 'renounceOwnership()' },
     { selector: '8da5cb5b', label: 'owner()' },
-    { selector: '4f1ef286', label: 'setFees(...)' },
-    { selector: 'c1fb8f73', label: 'setTaxFeePercent(...)' },
-    { selector: 'f887ea40', label: 'excludeFromFee(address)' },
-    { selector: '0e94a4f1', label: 'includeInFee(address)' },
+    { selector: '40c10f19', label: 'mint(address,uint256)' },
+    { selector: '42966c68', label: 'burn(uint256)' },
+    { selector: '89afcb44', label: 'upgradeTo(address)' },
+    { selector: '3659cfe6', label: 'upgradeToAndCall(address,bytes)' },
+    { selector: '79cc6790', label: 'setMaxTxAmount(...)' },
+    { selector: '677daa57', label: 'setMaxWalletSize(...)' },
     { selector: '6e553f65', label: 'setBlacklist(...)' },
     { selector: '4bb278f3', label: 'blacklist(address)' },
     { selector: 'ec70b0a3', label: 'setTradingEnabled(...)' },
     { selector: '8a8c523c', label: 'enableTrading()' },
-    { selector: '40c10f19', label: 'mint(address,uint256)' },
-    { selector: '42966c68', label: 'burn(uint256)' },
-    { selector: '79cc6790', label: 'setMaxTxAmount(...)' },
-    { selector: '677daa57', label: 'setMaxWalletSize(...)' },
-    { selector: '13af4035', label: 'setSwapEnabled(...)' },
-    { selector: '1f7b4f30', label: 'setRouterAddress(...)' },
-    { selector: '89afcb44', label: 'upgradeTo(address)' },
-    { selector: '3659cfe6', label: 'upgradeToAndCall(address,bytes)' }
+    { selector: '4f1ef286', label: 'setFees(...)' },
+    { selector: 'c1fb8f73', label: 'setTaxFeePercent(...)' }
   ];
 
   const ui = {
@@ -172,19 +205,29 @@ document.addEventListener('DOMContentLoaded', () => {
     implementationSummary: document.getElementById('implementationSummary'),
     implementationDetails: document.getElementById('implementationDetails'),
 
-    warningScoreValue: document.getElementById('warningScoreValue'),
-    warningScoreFill: document.getElementById('warningScoreFill'),
-    warningScoreLegend: document.getElementById('warningScoreLegend'),
-
     explorerContractLink: document.getElementById('explorerContractLink'),
     explorerImplLink: document.getElementById('explorerImplLink'),
     explorerAdminLink: document.getElementById('explorerAdminLink'),
 
+    warningScoreValue: document.getElementById('warningScoreValue'),
+    warningScoreFill: document.getElementById('warningScoreFill'),
+    warningScoreLegend: document.getElementById('warningScoreLegend'),
+
     rawRpcText: document.getElementById('rawRpcText'),
     logBundle: document.getElementById('logBundle'),
+
     compareSection: document.getElementById('compareSection'),
     compareBody: document.getElementById('compareBody'),
-    compareTableText: document.getElementById('compareTableText')
+    compareTableText: document.getElementById('compareTableText'),
+
+    lpSummary: document.getElementById('lpSummary'),
+    lpDetails: document.getElementById('lpDetails'),
+    verificationSummary: document.getElementById('verificationSummary'),
+    verificationDetails: document.getElementById('verificationDetails'),
+    holderConcentrationSummary: document.getElementById('holderConcentrationSummary'),
+    holderConcentrationDetails: document.getElementById('holderConcentrationDetails'),
+    honeypotSummary: document.getElementById('honeypotSummary'),
+    honeypotDetails: document.getElementById('honeypotDetails')
   };
 
   let isLoading = false;
@@ -196,12 +239,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setStatus(text, kind = '') {
+    if (!ui.statusBadge) return;
     ui.statusBadge.className = 'badge' + (kind ? ' ' + kind : '');
     ui.statusBadge.textContent = text;
   }
 
   function setMode(text) {
-    ui.modeLabel.textContent = text;
+    if (ui.modeLabel) ui.modeLabel.textContent = text;
   }
 
   function setText(el, text) {
@@ -246,7 +290,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function hexToBigIntSafe(hex) {
-    try { return BigInt(hex || '0x0'); } catch { return 0n; }
+    try {
+      return BigInt(hex || '0x0');
+    } catch {
+      return 0n;
+    }
   }
 
   function decodeAddress(hex) {
@@ -285,8 +333,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const len = parseInt(clean.slice(lenIndex, lenIndex + 64), 16);
         const dataStart = lenIndex + 64;
         const dataHex = clean.slice(dataStart, dataStart + len * 2);
-        const v = decodeUtf8Hex(dataHex);
-        if (v) return v;
+        const value = decodeUtf8Hex(dataHex);
+        if (value) return value;
       }
       return decodeUtf8Hex(clean);
     } catch {
@@ -319,6 +367,35 @@ document.addEventListener('DOMContentLoaded', () => {
     return code.includes('363d3d373d3d3d363d73') || code.includes('5af43d82803e903d91602b57fd5bf3');
   }
 
+  function scanDangerSelectors(codeHex) {
+    const code = strip0x(codeHex).toLowerCase();
+    return KNOWN_DANGER_SELECTORS.filter((item) => code.includes(item.selector.toLowerCase()));
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;');
+  }
+
+  function safeJsonStringify(value, spacing = 2) {
+    const seen = new WeakSet();
+    return JSON.stringify(
+      value,
+      (key, val) => {
+        if (typeof val === 'bigint') return val.toString();
+        if (typeof val === 'object' && val !== null) {
+          if (seen.has(val)) return '[Circular]';
+          seen.add(val);
+        }
+        return val;
+      },
+      spacing
+    );
+  }
+
   function dangerScore(flags) {
     let score = 0;
     flags.forEach((f) => {
@@ -330,19 +407,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateScore(score) {
-    setText(ui.warningScoreValue, `${score} / 100`);
-    ui.warningScoreFill.style.width = `${score}%`;
+    if (ui.warningScoreValue) ui.warningScoreValue.textContent = `${score} / 100`;
+    if (ui.warningScoreFill) ui.warningScoreFill.style.width = `${score}%`;
 
     let label = 'Lower is better. This is a quick screening score, not a final safety verdict.';
-    if (score >= 70) label = 'High warning score. Review carefully before trusting this contract.';
+    if (score >= 70) label = 'High warning score. Review very carefully before trusting this contract.';
     else if (score >= 40) label = 'Moderate warning score. Multiple caution signals were found.';
     else if (score > 0) label = 'Low-to-moderate warning score. Some caution signals were found.';
     else label = 'Very low warning score from basic checks. This is still not a guarantee of safety.';
 
-    setText(ui.warningScoreLegend, label);
+    if (ui.warningScoreLegend) ui.warningScoreLegend.textContent = label;
   }
 
-  async function fetchWithTimeout(url, options, timeoutMs = 7000) {
+  async function fetchWithTimeout(url, options, timeoutMs = 8000) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
@@ -363,6 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
         params
       })
     });
+
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
     if (json.error) throw new Error(json.error.message || 'RPC error');
@@ -389,7 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function callString(address, selector) {
     const res = await ethCall(address, selector);
-    if (!res.ok || !res.result || res.result === '0x') return { ok: false, value: '' };
+    if (!res.ok || !res.result || res.result === '0x') return { ok: false, value: '', raw: res.result || '' };
     const value = decodeStringHex(res.result);
     return { ok: !!value, value, raw: res.result };
   }
@@ -415,10 +493,21 @@ document.addEventListener('DOMContentLoaded', () => {
   async function simulate(address, data) {
     const res = await ethCall(address, data);
     if (!res.ok) {
-      return { ok: false, reverted: true, empty: false, bool: null, raw: '', error: String(res.error?.message || res.error || 'Call failed') };
+      return {
+        ok: false,
+        reverted: true,
+        empty: false,
+        bool: null,
+        raw: '',
+        error: String(res.error?.message || res.error || 'Call failed')
+      };
     }
+
     const raw = res.result || '0x';
-    if (raw === '0x') return { ok: true, reverted: false, empty: true, bool: null, raw };
+    if (raw === '0x') {
+      return { ok: true, reverted: false, empty: true, bool: null, raw };
+    }
+
     const v = hexToBigIntSafe(raw);
     const bool = (v === 0n || v === 1n) ? (v === 1n) : null;
     return { ok: true, reverted: false, empty: false, bool, raw };
@@ -454,16 +543,258 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const top = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
     if (!top.length) return 'No recent holder activity observed from scanned logs';
-    return `Observed ${counts.size} recipient address(es). Top recent recipients: ${top.map(([addr, n]) => `${addr.slice(0,6)}…${addr.slice(-4)} (${n})`).join(', ')}`;
+    return `Observed ${counts.size} recipient address(es). Top recent recipients: ${top.map(([addr, n]) => `${addr.slice(0, 6)}…${addr.slice(-4)} (${n})`).join(', ')}`;
   }
 
-  function scanDangerSelectors(codeHex) {
-    const code = strip0x(codeHex).toLowerCase();
-    return KNOWN_DANGER_SELECTORS.filter((item) => code.includes(item.selector.toLowerCase()));
+  async function fetchExplorerVerification(address) {
+    const chainKey = ui.networkSelect.value;
+    const apiUrl = CONFIG.explorerApi[chainKey];
+    const apiKey = CONFIG.explorerApiKeys[chainKey];
+
+    if (!CONFIG.enableExplorerFetch || !apiUrl) {
+      return { ok: false, supported: false, summary: 'Explorer API not configured', details: 'No explorer API configured for this chain.' };
+    }
+
+    try {
+      const url = new URL(apiUrl);
+      url.searchParams.set('module', 'contract');
+      url.searchParams.set('action', 'getsourcecode');
+      url.searchParams.set('address', address);
+      if (apiKey) url.searchParams.set('apikey', apiKey);
+
+      const res = await fetchWithTimeout(url.toString(), {}, 8000);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+
+      const item = Array.isArray(json.result) && json.result.length ? json.result[0] : null;
+      if (!item) {
+        return { ok: false, supported: true, summary: 'No explorer result', details: safeJsonStringify(json, 2) };
+      }
+
+      const sourceCode = item.SourceCode || '';
+      const abi = item.ABI || '';
+      const contractName = item.ContractName || '';
+      const compilerVersion = item.CompilerVersion || '';
+      const implementation = item.Implementation || '';
+      const proxy = item.Proxy || '';
+      const verified = !!sourceCode && sourceCode.trim() !== '';
+
+      return {
+        ok: true,
+        supported: true,
+        verified,
+        contractName,
+        compilerVersion,
+        implementation,
+        proxy,
+        abiAvailable: !!abi && abi !== 'Contract source code not verified',
+        sourceLength: sourceCode.length,
+        summary: verified ? 'Verified source detected' : 'Source not verified',
+        details:
+          `Contract Name: ${contractName || 'unknown'}\n` +
+          `Compiler: ${compilerVersion || 'unknown'}\n` +
+          `Proxy Flag: ${proxy || 'unknown'}\n` +
+          `Implementation: ${implementation || 'none'}\n` +
+          `ABI Available: ${abi && abi !== 'Contract source code not verified' ? 'yes' : 'no'}\n` +
+          `Source Size: ${sourceCode.length} chars`
+      };
+    } catch (err) {
+      return {
+        ok: false,
+        supported: true,
+        summary: 'Explorer fetch failed',
+        details: String(err && err.message ? err.message : err)
+      };
+    }
+  }
+
+  async function fetchDexLiquidity(address) {
+    if (!CONFIG.enableDexLiquidityFetch) {
+      return { ok: false, summary: 'LP detection disabled', details: 'Dex liquidity fetch disabled in config.' };
+    }
+
+    try {
+      const res = await fetchWithTimeout(CONFIG.dexscreenerBase + address, {}, 8000);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+
+      const pairs = Array.isArray(json.pairs) ? json.pairs : [];
+      if (!pairs.length) {
+        return { ok: true, found: false, summary: 'No LP pairs found', details: 'No DexScreener liquidity pairs detected for this token.' };
+      }
+
+      const sorted = pairs
+        .slice()
+        .sort((a, b) => (Number(b?.liquidity?.usd || 0) - Number(a?.liquidity?.usd || 0)));
+
+      const top = sorted.slice(0, 5);
+      const totalLiquidityUsd = top.reduce((sum, p) => sum + Number(p?.liquidity?.usd || 0), 0);
+
+      return {
+        ok: true,
+        found: true,
+        pairCount: pairs.length,
+        topPairs: top.map((p) => ({
+          chainId: p.chainId || '',
+          dexId: p.dexId || '',
+          pairAddress: p.pairAddress || '',
+          pairLabel: `${p.baseToken?.symbol || '?'} / ${p.quoteToken?.symbol || '?'}`,
+          liquidityUsd: Number(p?.liquidity?.usd || 0),
+          priceUsd: p.priceUsd || '',
+          url: p.url || ''
+        })),
+        summary: `${pairs.length} LP pair(s) found`,
+        details:
+          `Top liquidity pairs:\n` +
+          top.map((p) =>
+            `- ${p.baseToken?.symbol || '?'} / ${p.quoteToken?.symbol || '?'} on ${p.dexId || 'unknown'} | Liquidity: $${Number(p?.liquidity?.usd || 0).toLocaleString()}`
+          ).join('\n') +
+          `\n\nTop-pair liquidity total: $${totalLiquidityUsd.toLocaleString()}`
+      };
+    } catch (err) {
+      return {
+        ok: false,
+        summary: 'LP detection failed',
+        details: String(err && err.message ? err.message : err)
+      };
+    }
+  }
+
+  async function fetchHoneypotData(address) {
+    const chain = getChain();
+    if (!CONFIG.enableHoneypotFetch) {
+      return { ok: false, summary: 'Honeypot fetch disabled', details: 'Honeypot simulation disabled in config.' };
+    }
+
+    try {
+      const url = new URL(CONFIG.honeypotBase);
+      url.searchParams.set('address', address);
+      url.searchParams.set('chainID', String(chain.chainId));
+
+      const res = await fetchWithTimeout(url.toString(), {}, 8000);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+
+      const hp = json?.honeypotResult || null;
+      const sim = json?.simulationResult || null;
+      const token = json?.token || null;
+      const pair = json?.pair || null;
+
+      if (!hp && !sim) {
+        return {
+          ok: true,
+          summary: 'No honeypot simulation returned',
+          details: safeJsonStringify(json, 2)
+        };
+      }
+
+      const buyTax = sim?.buyTax ?? sim?.buyTaxPercent ?? null;
+      const sellTax = sim?.sellTax ?? sim?.sellTaxPercent ?? null;
+      const transferTax = sim?.transferTax ?? sim?.transferTaxPercent ?? null;
+      const honeypot = hp?.isHoneypot === true;
+
+      return {
+        ok: true,
+        honeypot,
+        buyTax,
+        sellTax,
+        transferTax,
+        pair,
+        token,
+        summary: honeypot ? 'Possible honeypot signal returned' : 'No honeypot signal returned',
+        details:
+          `Honeypot: ${honeypot ? 'yes' : 'no'}\n` +
+          `Buy Tax: ${buyTax ?? 'unknown'}\n` +
+          `Sell Tax: ${sellTax ?? 'unknown'}\n` +
+          `Transfer Tax: ${transferTax ?? 'unknown'}\n` +
+          `Pair: ${pair?.pair?.name || pair?.name || 'unknown'}`
+      };
+    } catch (err) {
+      return {
+        ok: false,
+        summary: 'Honeypot simulation failed',
+        details: String(err && err.message ? err.message : err)
+      };
+    }
+  }
+
+  function ownerRenouncedHeuristic(owner, verification, implementationOwner) {
+    const normalizedOwner = String(owner || '').toLowerCase();
+    const normalizedImplOwner = String(implementationOwner || '').toLowerCase();
+
+    if (!owner && !implementationOwner) {
+      return {
+        renouncedLikely: false,
+        summary: 'No owner function response',
+        details: 'No owner()/getOwner() response was returned. This does not prove ownership is renounced.'
+      };
+    }
+
+    if (normalizedOwner === ZERO_ADDRESS.toLowerCase() || normalizedOwner === DEAD_ADDRESS.toLowerCase()) {
+      return {
+        renouncedLikely: true,
+        summary: 'Owner appears renounced',
+        details: `Primary owner address is ${owner}.`
+      };
+    }
+
+    if (normalizedImplOwner === ZERO_ADDRESS.toLowerCase() || normalizedImplOwner === DEAD_ADDRESS.toLowerCase()) {
+      return {
+        renouncedLikely: true,
+        summary: 'Implementation owner appears renounced',
+        details: `Implementation owner address is ${implementationOwner}.`
+      };
+    }
+
+    if (verification?.implementation && verification.implementation.toLowerCase() === ZERO_ADDRESS.toLowerCase()) {
+      return {
+        renouncedLikely: false,
+        summary: 'Explorer implementation slot present',
+        details: 'Explorer reported an implementation address, which does not indicate renounced ownership.'
+      };
+    }
+
+    return {
+      renouncedLikely: false,
+      summary: 'Ownership still appears present',
+      details: `Owner/admin address detected: ${owner || implementationOwner}`
+    };
+  }
+
+  function estimateHolderConcentrationFromLogs(transferLogs) {
+    const counts = new Map();
+
+    transferLogs.forEach((log) => {
+      const row = parseTransferAddresses(log);
+      if (!row || !row.to) return;
+      const key = row.to.toLowerCase();
+      counts.set(key, (counts.get(key) || 0) + 1);
+    });
+
+    const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1]);
+    const total = sorted.reduce((sum, item) => sum + item[1], 0);
+
+    if (!sorted.length || !total) {
+      return {
+        summary: 'No concentration estimate available',
+        details: 'Not enough Transfer log activity to estimate address concentration.'
+      };
+    }
+
+    const top5 = sorted.slice(0, 5);
+    const share5 = top5.reduce((sum, item) => sum + item[1], 0) / total;
+
+    return {
+      summary: `Top 5 recent recipient share: ${(share5 * 100).toFixed(1)}%`,
+      details:
+        `This is only a recent log-based estimate, not a full holder registry.\n` +
+        top5.map(([addr, n]) => `- ${addr}: ${n} recent receipt(s)`).join('\n')
+    };
   }
 
   async function analyzeImplementation(address) {
     if (!address || !isValidAddress(address)) return { ok: false };
+
     const codeRes = await rpcTryAll('eth_getCode', [address, 'latest']);
     if (!codeRes.ok || !codeRes.result || codeRes.result === '0x') return { ok: false };
 
@@ -491,19 +822,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function analyzeSingle(address) {
     const chain = getChain();
+
     const codeRes = await rpcTryAll('eth_getCode', [address, 'latest']);
     if (!codeRes.ok) throw codeRes.error || new Error('Unable to load contract bytecode');
 
     const code = codeRes.result || '0x';
     const hasCode = code !== '0x';
+
     if (!hasCode) {
       return {
         address,
         chain: chain.label,
+        chainId: chain.chainId,
         endpoint: codeRes.endpoint,
         hasCode: false,
         bytecodeSize: 0,
-        flags: [{ level: 'high', text: 'No deployed bytecode found at this address.' }]
+        flags: [{ level: 'high', text: 'No deployed bytecode found at this address.' }],
+        warningScore: 100,
+        rawRpc: { code: codeRes }
       };
     }
 
@@ -532,7 +868,10 @@ document.addEventListener('DOMContentLoaded', () => {
       approveSim,
       transferFromSim,
       recentTransferLogsRes,
-      recentApprovalLogsRes
+      recentApprovalLogsRes,
+      explorerVerification,
+      lpInfo,
+      honeypotInfo
     ] = await Promise.all([
       callString(address, SELECTORS.name),
       callString(address, SELECTORS.symbol),
@@ -550,7 +889,10 @@ document.addEventListener('DOMContentLoaded', () => {
       simulate(address, approveData),
       simulate(address, transferFromData),
       getLogs(address, `latest-${chain.logScanBlocks}`, 'latest', [TOPICS.transfer]),
-      getLogs(address, `latest-${chain.logScanBlocks}`, 'latest', [TOPICS.approval])
+      getLogs(address, `latest-${chain.logScanBlocks}`, 'latest', [TOPICS.approval]),
+      fetchExplorerVerification(address),
+      fetchDexLiquidity(address),
+      fetchHoneypotData(address)
     ]);
 
     let proxyImplementation = implSlotRes.ok ? normalizeStorageAddress(implSlotRes.result) : '';
@@ -575,9 +917,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const pausedSupported = pausedRes.ok;
     const pausedValue = pausedRes.ok ? !!pausedRes.value : false;
 
-    const recentTransferLogs = recentTransferLogsRes.ok && Array.isArray(recentTransferLogsRes.result) ? recentTransferLogsRes.result : [];
-    const recentApprovalLogs = recentApprovalLogsRes.ok && Array.isArray(recentApprovalLogsRes.result) ? recentApprovalLogsRes.result : [];
+    const recentTransferLogs = recentTransferLogsRes.ok && Array.isArray(recentTransferLogsRes.result)
+      ? recentTransferLogsRes.result
+      : [];
+    const recentApprovalLogs = recentApprovalLogsRes.ok && Array.isArray(recentApprovalLogsRes.result)
+      ? recentApprovalLogsRes.result
+      : [];
+
     const holderSummary = buildHolderSummary(recentTransferLogs);
+    const holderConcentration = estimateHolderConcentrationFromLogs(recentTransferLogs);
+    const renounceInfo = ownerRenouncedHeuristic(owner, explorerVerification, implementationAnalysis.owner);
 
     const erc20Signals = nameRes.ok || symbolRes.ok || decimalsRes.ok || totalSupplyRes.ok;
 
@@ -610,6 +959,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (implementationAnalysis.ok && implementationAnalysis.owner) {
       flags.push({ level: 'medium', text: `Implementation owner/admin detected: ${implementationAnalysis.owner}` });
     }
+    if (explorerVerification.supported && explorerVerification.ok && !explorerVerification.verified) {
+      flags.push({ level: 'medium', text: 'Source code does not appear verified on the configured explorer.' });
+    }
+    if (lpInfo.ok && !lpInfo.found) {
+      flags.push({ level: 'medium', text: 'No liquidity pair was detected.' });
+    }
+    if (honeypotInfo.ok && honeypotInfo.honeypot === true) {
+      flags.push({ level: 'high', text: 'External honeypot simulation reported a honeypot signal.' });
+    }
+    if (honeypotInfo.ok && typeof honeypotInfo.sellTax === 'number' && honeypotInfo.sellTax > 20) {
+      flags.push({ level: 'high', text: `High sell tax reported: ${honeypotInfo.sellTax}` });
+    }
+    if (!renounceInfo.renouncedLikely && owner) {
+      flags.push({ level: 'low', text: 'Ownership still appears present.' });
+    }
 
     const warningScore = dangerScore(flags);
 
@@ -632,6 +996,7 @@ document.addEventListener('DOMContentLoaded', () => {
         totalSupply
       },
       owner,
+      renounceInfo,
       pausedSupported,
       pausedValue,
       functionCoverage,
@@ -643,6 +1008,10 @@ document.addEventListener('DOMContentLoaded', () => {
         approvalCount: recentApprovalLogs.length,
         holderSummary
       },
+      holderConcentration,
+      explorerVerification,
+      lpInfo,
+      honeypotInfo,
       dangerMatches,
       flags,
       warningScore,
@@ -664,7 +1033,10 @@ document.addEventListener('DOMContentLoaded', () => {
         approveSim,
         transferFromSim,
         recentTransferLogs: recentTransferLogsRes,
-        recentApprovalLogs: recentApprovalLogsRes
+        recentApprovalLogs: recentApprovalLogsRes,
+        explorerVerification,
+        lpInfo,
+        honeypotInfo
       }
     };
   }
@@ -672,7 +1044,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderPrimary(result) {
     const chain = getChain();
 
-    setText(ui.contractSummary, result.hasCode ? (result.proxyImplementation || result.proxyAdmin || result.proxyBeacon || result.proxyByBytecode ? 'Proxy / contract found' : 'Contract detected') : 'No bytecode');
+    setText(ui.contractSummary, result.hasCode
+      ? (result.proxyImplementation || result.proxyAdmin || result.proxyBeacon || result.proxyByBytecode ? 'Proxy / contract found' : 'Contract detected')
+      : 'No bytecode');
     setText(ui.symbolSummary, result.metadata?.symbol || 'Unknown');
     setText(ui.decimalsSummary, String(result.metadata?.decimals ?? 'Unknown'));
 
@@ -694,6 +1068,7 @@ document.addEventListener('DOMContentLoaded', () => {
         summarizeSim('transferFrom()', result.transferFromSim)
       ].join(' | ')
     );
+
     setText(
       ui.behaviorDetails,
       `transfer(): ${result.transferSim.reverted ? 'reverted' : result.transferSim.empty ? 'empty return' : 'returned data'}\n` +
@@ -707,6 +1082,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ? 'Proxy-related signal detected'
         : 'No obvious proxy signal'
     );
+
     setText(
       ui.proxyDetails,
       `Bytecode proxy pattern: ${result.proxyByBytecode ? 'yes' : 'no'}\n` +
@@ -719,6 +1095,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ui.logSummary,
       `Transfer logs scanned: ${result.logs.transferCount}\nApproval logs scanned: ${result.logs.approvalCount}\nRecent block window: ${chain.logScanBlocks}`
     );
+
     setText(ui.holderSummary, result.logs.holderSummary);
     setText(ui.logBundle, `${ui.logSummary.textContent}\n\n${ui.holderSummary.textContent}`);
 
@@ -726,6 +1103,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ui.dangerSummary,
       result.dangerMatches.length ? `${result.dangerMatches.length} selector match(es)` : 'No matched danger selectors'
     );
+
     setText(
       ui.dangerDetails,
       result.dangerMatches.length
@@ -737,6 +1115,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ui.implementationSummary,
       result.implementationAnalysis.ok ? 'Implementation found and inspected' : 'No deep-read implementation available'
     );
+
     setText(
       ui.implementationDetails,
       result.implementationAnalysis.ok
@@ -764,19 +1143,43 @@ Danger Selectors: ${result.implementationAnalysis.dangerSelectors.length ? resul
     );
 
     updateScore(result.warningScore);
-
-    setText(ui.rawRpcText, JSON.stringify(result.rawRpc, null, 2));
+    setText(ui.rawRpcText, safeJsonStringify(result.rawRpc, 2));
 
     setLink(ui.explorerContractLink, `${chain.explorerAddress}${result.address}`, 'Open Contract');
     setLink(ui.explorerImplLink, result.proxyImplementation ? `${chain.explorerAddress}${result.proxyImplementation}` : '', 'Open Implementation');
     setLink(ui.explorerAdminLink, result.proxyAdmin ? `${chain.explorerAddress}${result.proxyAdmin}` : '', 'Open Admin');
+
+    if (ui.lpSummary) setText(ui.lpSummary, result.lpInfo?.summary || 'Unavailable');
+    if (ui.lpDetails) setText(ui.lpDetails, result.lpInfo?.details || 'No liquidity details available.');
+
+    if (ui.verificationSummary) setText(ui.verificationSummary, result.explorerVerification?.summary || 'Unavailable');
+    if (ui.verificationDetails) {
+      setText(
+        ui.verificationDetails,
+        `${result.explorerVerification?.details || 'No verification details available.'}\n\n` +
+        `Owner Renounce Heuristic: ${result.renounceInfo?.summary || 'Unavailable'}\n` +
+        `${result.renounceInfo?.details || ''}`
+      );
+    }
+
+    if (ui.holderConcentrationSummary) {
+      setText(ui.holderConcentrationSummary, result.holderConcentration?.summary || 'Unavailable');
+    }
+    if (ui.holderConcentrationDetails) {
+      setText(ui.holderConcentrationDetails, result.holderConcentration?.details || 'No holder concentration details available.');
+    }
+
+    if (ui.honeypotSummary) setText(ui.honeypotSummary, result.honeypotInfo?.summary || 'Unavailable');
+    if (ui.honeypotDetails) setText(ui.honeypotDetails, result.honeypotInfo?.details || 'No honeypot details available.');
   }
 
   function renderCompare(primary, compare) {
+    if (!ui.compareSection || !ui.compareBody || !ui.compareTableText) return;
+
     if (!compare) {
       ui.compareSection.hidden = true;
-      setText(ui.compareBody, '');
-      setText(ui.compareTableText, '');
+      ui.compareBody.innerHTML = '<tr><td>Waiting</td><td>—</td><td>—</td></tr>';
+      ui.compareTableText.textContent = '';
       return;
     }
 
@@ -793,6 +1196,9 @@ Danger Selectors: ${result.implementationAnalysis.dangerSelectors.length ? resul
       ['Owner/Admin', primary.owner || 'none', compare.owner || 'none'],
       ['Proxy Impl', primary.proxyImplementation || 'none', compare.proxyImplementation || 'none'],
       ['Transfer Logs', String(primary.logs.transferCount), String(compare.logs.transferCount)],
+      ['LP Summary', primary.lpInfo?.summary || 'n/a', compare.lpInfo?.summary || 'n/a'],
+      ['Verification', primary.explorerVerification?.summary || 'n/a', compare.explorerVerification?.summary || 'n/a'],
+      ['Honeypot', primary.honeypotInfo?.summary || 'n/a', compare.honeypotInfo?.summary || 'n/a'],
       ['Danger Selectors', primary.dangerMatches.length ? primary.dangerMatches.map(x => x.label).join(', ') : 'none', compare.dangerMatches.length ? compare.dangerMatches.map(x => x.label).join(', ') : 'none']
     ];
 
@@ -804,18 +1210,9 @@ Danger Selectors: ${result.implementationAnalysis.dangerSelectors.length ? resul
       </tr>
     `).join('');
 
-    setText(
-      ui.compareTableText,
-      rows.map(([label, a, b]) => `${label}\nPrimary: ${a}\nCompare: ${b}`).join('\n\n')
-    );
-  }
-
-  function escapeHtml(str) {
-    return String(str)
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;');
+    ui.compareTableText.textContent = rows
+      .map(([label, a, b]) => `${label}\nPrimary: ${a}\nCompare: ${b}`)
+      .join('\n\n');
   }
 
   async function copyText(text) {
@@ -826,7 +1223,7 @@ Danger Selectors: ${result.implementationAnalysis.dangerSelectors.length ? resul
   }
 
   function downloadJson(data, filename) {
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const blob = new Blob([safeJsonStringify(data, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -835,12 +1232,52 @@ Danger Selectors: ${result.implementationAnalysis.dangerSelectors.length ? resul
     URL.revokeObjectURL(url);
   }
 
+  function clearOutputsVisual() {
+    [
+      ui.contractSummary, ui.symbolSummary, ui.decimalsSummary,
+      ui.tokenName, ui.tokenSymbol, ui.totalSupply, ui.bytecodeSize,
+      ui.addressOut, ui.decimalsOut, ui.lastUpdated, ui.functionSupport, ui.analysisNote,
+      ui.behaviorSummary, ui.behaviorDetails, ui.proxySummary, ui.proxyDetails,
+      ui.logSummary, ui.holderSummary, ui.dangerSummary, ui.dangerDetails,
+      ui.implementationSummary, ui.implementationDetails, ui.rawRpcText,
+      ui.logBundle, ui.compareTableText, ui.lpSummary, ui.lpDetails,
+      ui.verificationSummary, ui.verificationDetails, ui.holderConcentrationSummary,
+      ui.holderConcentrationDetails, ui.honeypotSummary, ui.honeypotDetails
+    ].forEach((el) => {
+      if (el) el.textContent = '—';
+    });
+
+    updateScore(0);
+
+    if (ui.compareBody) ui.compareBody.innerHTML = '<tr><td>Waiting</td><td>—</td><td>—</td></tr>';
+    if (ui.compareSection) ui.compareSection.hidden = true;
+  }
+
+  function resetAll() {
+    if (ui.contractAddress) ui.contractAddress.value = '';
+    if (ui.compareAddress) ui.compareAddress.value = '';
+    if (ui.networkLabel) ui.networkLabel.value = getChain().label;
+
+    clearLink(ui.explorerContractLink);
+    clearLink(ui.explorerImplLink);
+    clearLink(ui.explorerAdminLink);
+    clearOutputsVisual();
+
+    setStatus('Ready');
+    setMode('Ready');
+    setText(ui.resultText, 'Enter a contract address and click Analyze Contract.');
+    setText(ui.formulaText, 'Checks: bytecode + metadata + transfer behavior + proxy slots + selector scan + recent logs + compare mode + LP + verification + honeypot hooks');
+
+    lastSummary = '';
+    lastReport = null;
+  }
+
   async function runAnalysis() {
     if (isLoading) return;
     isLoading = true;
 
-    const address = normalizeAddress(ui.contractAddress.value);
-    const compareAddress = normalizeAddress(ui.compareAddress.value);
+    const address = normalizeAddress(ui.contractAddress?.value);
+    const compareAddress = normalizeAddress(ui.compareAddress?.value);
 
     if (!isValidAddress(address)) {
       setStatus('Invalid address', 'bad');
@@ -874,11 +1311,17 @@ Primary Address: ${primary.address}
 Primary Name: ${primary.metadata.name}
 Primary Symbol: ${primary.metadata.symbol}
 Primary Warning Score: ${primary.warningScore}/100
+Primary LP: ${primary.lpInfo?.summary || 'n/a'}
+Primary Verification: ${primary.explorerVerification?.summary || 'n/a'}
+Primary Honeypot: ${primary.honeypotInfo?.summary || 'n/a'}
 
 ${compare ? `Compare Address: ${compare.address}
 Compare Name: ${compare.metadata.name}
 Compare Symbol: ${compare.metadata.symbol}
-Compare Warning Score: ${compare.warningScore}/100` : 'No compare contract used.'}
+Compare Warning Score: ${compare.warningScore}/100
+Compare LP: ${compare.lpInfo?.summary || 'n/a'}
+Compare Verification: ${compare.explorerVerification?.summary || 'n/a'}
+Compare Honeypot: ${compare.honeypotInfo?.summary || 'n/a'}` : 'No compare contract used.'}
 
 Risk Notes:
 ${primary.flags.length ? primary.flags.map(f => `- [${f.level.toUpperCase()}] ${f.text}`).join('\n') : '- No obvious flags from basic checks.'}
@@ -932,78 +1375,56 @@ ${primary.flags.length ? primary.flags.map(f => `- [${f.level.toUpperCase()}] ${
     }
   }
 
-  function resetAll() {
-    ui.contractAddress.value = '';
-    ui.compareAddress.value = '';
-    ui.networkLabel.value = getChain().label;
-    clearLink(ui.explorerContractLink);
-    clearLink(ui.explorerImplLink);
-    clearLink(ui.explorerAdminLink);
-    ui.compareSection.hidden = true;
-    ui.compareBody.innerHTML = '<tr><td>Waiting</td><td>—</td><td>—</td></tr>';
-    clearOutputsVisual();
-    setStatus('Ready');
-    setMode('Ready');
-    setText(ui.resultText, 'Enter a contract address and click Analyze Contract.');
-    setText(ui.formulaText, 'Checks: bytecode + metadata + transfer behavior + proxy slots + selector scan + recent logs + compare mode');
-    lastSummary = '';
-    lastReport = null;
-  }
-
-  function clearOutputsVisual() {
-    [
-      ui.contractSummary, ui.symbolSummary, ui.decimalsSummary,
-      ui.tokenName, ui.tokenSymbol, ui.totalSupply, ui.bytecodeSize,
-      ui.addressOut, ui.decimalsOut, ui.lastUpdated, ui.functionSupport, ui.analysisNote,
-      ui.behaviorSummary, ui.behaviorDetails, ui.proxySummary, ui.proxyDetails,
-      ui.logSummary, ui.holderSummary, ui.dangerSummary, ui.dangerDetails,
-      ui.implementationSummary, ui.implementationDetails, ui.rawRpcText,
-      ui.logBundle, ui.compareTableText
-    ].forEach((el) => {
-      if (el) el.textContent = '—';
+  if (ui.networkSelect) {
+    ui.networkSelect.addEventListener('change', () => {
+      if (ui.networkLabel) ui.networkLabel.value = getChain().label;
+      setStatus('Network updated', 'ok');
+      setMode('Network changed');
     });
-    updateScore(0);
   }
 
-  ui.networkSelect.addEventListener('change', () => {
-    ui.networkLabel.value = getChain().label;
-    setStatus('Network updated', 'ok');
-    setMode('Network changed');
-  });
+  if (ui.analyzeBtn) ui.analyzeBtn.addEventListener('click', runAnalysis);
 
-  ui.analyzeBtn.addEventListener('click', runAnalysis);
-  ui.copyBtn.addEventListener('click', async () => {
-    if (!lastSummary) {
-      setStatus('Nothing to copy', 'bad');
-      return;
-    }
-    try {
-      await copyText(lastSummary);
-      setStatus('Copied', 'ok');
-    } catch {
-      setStatus('Copy failed', 'bad');
-    }
-  });
+  if (ui.copyBtn) {
+    ui.copyBtn.addEventListener('click', async () => {
+      if (!lastSummary) {
+        setStatus('Nothing to copy', 'bad');
+        return;
+      }
+      try {
+        await copyText(lastSummary);
+        setStatus('Copied', 'ok');
+      } catch {
+        setStatus('Copy failed', 'bad');
+      }
+    });
+  }
 
-  ui.exportBtn.addEventListener('click', () => {
-    if (!lastReport) {
-      setStatus('Nothing to export', 'bad');
-      return;
-    }
-    const name = `token-contract-report-${ui.networkSelect.value}-${normalizeAddress(ui.contractAddress.value).slice(0,10)}.json`;
-    downloadJson(lastReport, name);
-    setStatus('JSON exported', 'ok');
-  });
+  if (ui.exportBtn) {
+    ui.exportBtn.addEventListener('click', () => {
+      if (!lastReport) {
+        setStatus('Nothing to export', 'bad');
+        return;
+      }
+      const name = `token-contract-report-${ui.networkSelect.value}-${normalizeAddress(ui.contractAddress.value).slice(0, 10)}.json`;
+      downloadJson(lastReport, name);
+      setStatus('JSON exported', 'ok');
+    });
+  }
 
-  ui.clearBtn.addEventListener('click', resetAll);
-  ui.trimBtn.addEventListener('click', () => {
-    ui.contractAddress.value = normalizeAddress(ui.contractAddress.value);
-    ui.compareAddress.value = normalizeAddress(ui.compareAddress.value);
-    setStatus('Trimmed', 'ok');
-  });
-  ui.pasteBtn.addEventListener('click', pastePrimary);
-  ui.sampleBtn.addEventListener('click', loadSample);
-  ui.sampleCompareBtn.addEventListener('click', loadCompareSample);
+  if (ui.clearBtn) ui.clearBtn.addEventListener('click', resetAll);
+
+  if (ui.trimBtn) {
+    ui.trimBtn.addEventListener('click', () => {
+      if (ui.contractAddress) ui.contractAddress.value = normalizeAddress(ui.contractAddress.value);
+      if (ui.compareAddress) ui.compareAddress.value = normalizeAddress(ui.compareAddress.value);
+      setStatus('Trimmed', 'ok');
+    });
+  }
+
+  if (ui.pasteBtn) ui.pasteBtn.addEventListener('click', pastePrimary);
+  if (ui.sampleBtn) ui.sampleBtn.addEventListener('click', loadSample);
+  if (ui.sampleCompareBtn) ui.sampleCompareBtn.addEventListener('click', loadCompareSample);
 
   document.querySelectorAll('[data-copy-target]').forEach((btn) => {
     btn.addEventListener('click', async () => {
@@ -1022,19 +1443,23 @@ ${primary.flags.length ? primary.flags.map(f => `- [${f.level.toUpperCase()}] ${
     });
   });
 
-  ui.contractAddress.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      runAnalysis();
-    }
-  });
+  if (ui.contractAddress) {
+    ui.contractAddress.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        runAnalysis();
+      }
+    });
+  }
 
-  ui.compareAddress.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      runAnalysis();
-    }
-  });
+  if (ui.compareAddress) {
+    ui.compareAddress.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        runAnalysis();
+      }
+    });
+  }
 
   resetAll();
 });
