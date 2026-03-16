@@ -14,12 +14,13 @@
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
+  <!-- Core Meta -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>IP Lookup | What Is My IP Address (IPv4/IPv6) | InstantQR</title>
-  <meta name="description" content="Find your public IPv4 and IPv6 address instantly, plus approximate location, ISP, timezone, ASN, country flag, and reverse DNS. Privacy-first and fast." />
-  <meta name="keywords" content="ip lookup, what is my ip, ipv4 checker, ipv6 checker, public ip, reverse dns lookup, ptr lookup, ip address finder, asn lookup" />
+  <title>Free Internet Speed Test | Check Download Speed & Ping | InstantQR</title>
+  <meta name="description" content="Run a fast, privacy-first internet speed test in your browser. Measure download speed in Mbps and ping in ms instantly with a smooth speedometer UI and connection quality rating." />
+  <meta name="keywords" content="internet speed test, wifi speed test, broadband speed test, download speed test, ping test, latency test, Mbps checker, browser speed test" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
@@ -29,57 +30,48 @@
   <meta name="color-scheme" content="dark" />
   <meta name="format-detection" content="telephone=no" />
 
-  <link rel="canonical" href="https://instantqr.io/tools/ip-lookup.html" />
+  <link rel="canonical" href="https://instantqr.io/tools/internet-speed-test.html" />
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
 
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://api.ipify.org" crossorigin>
-  <link rel="preconnect" href="https://api64.ipify.org" crossorigin>
-  <link rel="preconnect" href="https://ipwho.is" crossorigin>
+  <link rel="preconnect" href="https://speed.cloudflare.com" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="//api.ipify.org">
-  <link rel="dns-prefetch" href="//api64.ipify.org">
-  <link rel="dns-prefetch" href="//ipwho.is">
+  <link rel="dns-prefetch" href="//speed.cloudflare.com">
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
 
   <link rel="stylesheet" href="/assets/site.css" />
 
+  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="IP Lookup | What Is My IP Address (IPv4/IPv6) | InstantQR" />
-  <meta property="og:description" content="Find your public IPv4 and IPv6 instantly plus approximate location, ISP, timezone, ASN, country flag, and reverse DNS." />
-  <meta property="og:url" content="https://instantqr.io/tools/ip-lookup.html" />
+  <meta property="og:title" content="Free Internet Speed Test | Check Download Speed & Ping | InstantQR" />
+  <meta property="og:description" content="Fast, privacy-first internet speed test with download speed, ping, sparkline history, and connection quality rating." />
+  <meta property="og:url" content="https://instantqr.io/tools/internet-speed-test.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
-  <meta property="og:image:alt" content="InstantQR IP Lookup tool page" />
+  <meta property="og:image:alt" content="InstantQR Internet Speed Test" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="IP Lookup | What Is My IP Address (IPv4/IPv6) | InstantQR" />
-  <meta name="twitter:description" content="Find your public IPv4/IPv6 instantly plus approximate location, ASN, and reverse DNS." />
+  <meta name="twitter:title" content="Free Internet Speed Test | Check Download Speed & Ping | InstantQR" />
+  <meta name="twitter:description" content="Fast, privacy-first internet speed test with speedometer, sparkline history, and connection quality rating." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"IP Lookup",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Web",
-    "url":"https://instantqr.io/tools/ip-lookup.html",
-    "publisher":{
-      "@type":"Organization",
+    "@type":"WebPage",
+    "name":"Internet Speed Test",
+    "url":"https://instantqr.io/tools/internet-speed-test.html",
+    "description":"Run a free internet speed test to measure download speed and ping in your browser.",
+    "isPartOf":{
+      "@type":"WebSite",
       "name":"InstantQR",
-      "url":"https://instantqr.io",
-      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
-    },
-    "offers":{
-      "@type":"Offer",
-      "price":"0",
-      "priceCurrency":"USD"
+      "url":"https://instantqr.io/"
     }
   }
   </script>
@@ -87,12 +79,16 @@
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"CollectionPage",
-    "name":"IP Lookup",
-    "url":"https://instantqr.io/tools/ip-lookup.html",
-    "description":"Find your public IPv4 and IPv6 address instantly, plus approximate location, ISP, timezone, ASN, and reverse DNS.",
-    "isPartOf":{
-      "@type":"WebSite",
+    "@type":"SoftwareApplication",
+    "name":"Internet Speed Test",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/internet-speed-test.html",
+    "description":"Free browser-based internet speed test for download speed and ping.",
+    "publisher":{
+      "@type":"Organization",
       "name":"InstantQR",
       "url":"https://instantqr.io/"
     }
@@ -119,8 +115,8 @@
       {
         "@type":"ListItem",
         "position":3,
-        "name":"IP Lookup",
-        "item":"https://instantqr.io/tools/ip-lookup.html"
+        "name":"Internet Speed Test",
+        "item":"https://instantqr.io/tools/internet-speed-test.html"
       }
     ]
   }
@@ -133,165 +129,304 @@
     "mainEntity":[
       {
         "@type":"Question",
-        "name":"What is a public IP address?",
-        "acceptedAnswer":{"@type":"Answer","text":"A public IP address is your network’s address on the internet. Websites and services use it to send data back to your device or router."}
+        "name":"Is this internet speed test free?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. InstantQR Internet Speed Test is free to use with no signup required."
+        }
       },
       {
         "@type":"Question",
-        "name":"Does this IP lookup show my exact address?",
-        "acceptedAnswer":{"@type":"Answer","text":"No. Location is approximate, typically city or region, and does not reveal your exact street address."}
+        "name":"Do you store my speed test results?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. This tool runs in your browser and does not intentionally store your results."
+        }
       },
       {
         "@type":"Question",
-        "name":"What is reverse DNS?",
-        "acceptedAnswer":{"@type":"Answer","text":"Reverse DNS maps an IP address back to a hostname using PTR records. Some IPs have a reverse DNS name and some do not."}
+        "name":"What does Mbps mean?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Mbps means megabits per second. It is a common unit used to measure internet download speed."
+        }
       },
       {
         "@type":"Question",
-        "name":"Do you store my IP address?",
-        "acceptedAnswer":{"@type":"Answer","text":"InstantQR does not intentionally store lookup results on a server. IP lookup requires contacting third-party providers to return IP and approximate network details."}
+        "name":"Why is my speed different each time I test?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Results vary based on Wi-Fi signal quality, network congestion, VPN use, background downloads, device performance, and distance to the test endpoint."
+        }
       }
     ]
   }
   </script>
 
   <style>
-    .ip-grid{
+    .speed-grid{
       display:grid;
       grid-template-columns:1.15fr .85fr;
-      gap:14px;
+      gap:18px;
       margin-top:14px;
-      align-items:start;
     }
-    .ip-box,.faqCard{
+    .speed-panel,
+    .speed-card,
+    .faqCard{
       border-radius:var(--radius2);
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
       box-shadow:var(--shadow);
     }
-    .ip-box{padding:16px}
-    .inputLabel{
-      display:block;
-      font-size:12px;
-      color:var(--muted);
-      margin-bottom:6px;
-      font-weight:700;
+    .speed-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
     }
-    .ip-field{
-      width:100%;
-      padding:12px 10px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:#0a1427;
-      color:var(--text);
-      outline:none;
-      font-size:14px;
-    }
-    .ip-field:focus{
-      border-color:rgba(96,165,250,.5);
-      box-shadow:0 0 0 4px rgba(96,165,250,.14);
-      background:#0b172d;
-    }
-    .actionsRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-    .resultsCard{
-      margin-top:12px;
-      padding:14px;
-      border-radius:16px;
+    .speed-card:before{
+      content:"";
+      position:absolute; inset:-2px;
       background:
-        linear-gradient(180deg, rgba(25,195,125,.08), rgba(25,195,125,.03)),
-        rgba(0,0,0,.12);
-      border:1px solid rgba(25,195,125,.30);
-      box-shadow:inset 0 0 0 1px rgba(25,195,125,.05);
+        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
+      pointer-events:none;
     }
-    .resultsTitle{
-      color:#19c37d;
-      font-size:13px;
-      font-weight:900;
-      letter-spacing:.2px;
-      text-transform:uppercase;
-      margin-bottom:12px;
-    }
-    .topMeta{
+    .speed-card > *{position:relative}
+    .speed-actions{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      align-items:center;
-      margin-bottom:12px;
+      margin-top:16px;
     }
-    .flagBadge,.versionBadge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      font-size:12px;
-      font-weight:800;
-    }
-    .flagEmoji{
-      font-size:16px;
-      line-height:1;
-    }
-    .badgeRow{
+    .speed-panel{
+      padding:18px;
       display:flex;
-      gap:8px;
+      flex-direction:column;
+      gap:14px;
+    }
+    .panel-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
       flex-wrap:wrap;
     }
-    .kv{
-      display:grid;
-      grid-template-columns:140px 1fr;
-      gap:8px;
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
     }
-    .k{
-      color:var(--muted);
+    .server-hint{
       font-size:12px;
-      align-self:center;
-      font-weight:700;
-    }
-    .v{
-      color:#d7fff0;
-      font-size:13px;
-      font-weight:800;
-      word-break:break-word;
-      overflow-wrap:anywhere;
-    }
-    .tinyNote{
-      margin-top:12px;
       color:var(--muted);
-      font-size:12px;
-      line-height:1.65;
     }
-    .warnBox{
-      margin-top:12px;
-      padding:12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.12);
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.65;
+    .gaugeWrap{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
     }
-    .sideSectionTitle{
+    .gHeader{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      margin-bottom:10px;
+      flex-wrap:wrap;
+    }
+    .gTitle{
       font-weight:900;
-      margin-bottom:8px;
       font-size:15px;
     }
-    .sideText{
+    .gSub{
       color:var(--muted);
-      font-size:13px;
-      line-height:1.65;
+      font-size:12px;
     }
-    .relatedLinks{
+    .liveSpeed{
+      font-weight:900;
+      font-size:15px;
+    }
+    .gauge{
+      width:100%;
+      max-width:460px;
+      margin:0 auto;
+      aspect-ratio:2 / 1;
+      position:relative;
+    }
+    .gauge svg{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+    .needle{
+      transform-origin:200px 170px;
+      transform:rotate(-108deg);
+      transition:transform 180ms cubic-bezier(.2,.9,.2,1);
+      filter:drop-shadow(0 8px 16px rgba(0,0,0,.45));
+    }
+    .centerDot{
+      filter:drop-shadow(0 6px 14px rgba(0,0,0,.45));
+    }
+    .ticks{
+      display:flex;
+      justify-content:space-between;
+      color:rgba(233,238,252,.55);
+      font-size:12px;
+      margin-top:-2px;
+      padding:0 10px;
+    }
+    .resultsGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .metric{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .metric .k{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .metric .v{
+      font-size:26px;
+      font-weight:900;
+      letter-spacing:-.4px;
+    }
+    .metric .u{
+      font-size:12px;
+      color:rgba(233,238,252,.55);
+    }
+    .qualityCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .qualityTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .qualityTitle{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .qualityValue{
+      font-size:24px;
+      font-weight:900;
+      letter-spacing:-.4px;
+    }
+    .qualityBar{
+      height:12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .qualityFill{
+      height:100%;
+      width:0%;
+      transition:width .25s ease;
+      background:linear-gradient(90deg,#ef4444,#facc15,#22c55e);
+    }
+    .qualityNote{
+      margin-top:8px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .sparkCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .sparkHead{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-end;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .sparkTitle{
+      font-weight:900;
+      font-size:15px;
+    }
+    .sparkSub{
+      color:var(--muted);
+      font-size:12px;
+    }
+    .sparkWrap{
+      width:100%;
+      height:96px;
+      border-radius:14px;
+      background:rgba(0,0,0,.12);
+      border:1px solid rgba(255,255,255,.08);
+      padding:8px;
+    }
+    .sparkWrap svg{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+    .sparkMeta{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:8px;
+      flex-wrap:wrap;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .speed-status{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.14);
+      padding:14px;
+      font-size:13px;
+      line-height:1.55;
+      color:var(--muted);
+    }
+    .speed-status strong{color:var(--text)}
+    .miniGrid2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
       margin-top:14px;
     }
-    .relatedLinks a{color:#dce9ff}
+    .miniBox{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+    .miniBox h2{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .miniBox p,
+    .miniBox li{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .miniBox ul{
+      margin:0;
+      padding-left:18px;
+    }
     .faqCard{
       margin-top:14px;
       padding:18px;
@@ -322,12 +457,23 @@
       line-height:1.6;
       font-size:14px;
     }
-    @media (max-width:860px){
-      .ip-grid{grid-template-columns:1fr}
+    .goodText{color:#22c55e}
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
     }
-    @media (max-width:520px){
-      .kv{grid-template-columns:1fr}
-      .actionsRow .cta{width:100%}
+    @media (max-width: 980px){
+      .speed-grid,
+      .miniGrid2{
+        grid-template-columns:1fr;
+      }
+    }
+    @media (max-width: 640px){
+      .resultsGrid{
+        grid-template-columns:1fr;
+      }
+      .speed-actions .cta{
+        width:100%;
+      }
     }
   </style>
 </head>
@@ -346,13 +492,10 @@
 
       <nav class="top-links" aria-label="Primary">
         <a href="/">Home</a>
-        <a href="/tools/tools.html">All Tools</a>
-        <a href="/tools/password.html">Password</a>
-        <a href="/tools/unit-converter.html">Unit Converter</a>
+        <a href="/tools/tools.html">Tools</a>
         <a href="/tools/ip-lookup.html">IP Lookup</a>
-        <a href="/tools/json-formatter.html">JSON</a>
-        <a href="/tools/time-zone-converter.html">Time Zone</a>
-        <a href="/tools/world-clock.html">World Clock</a>
+        <a href="/tools/unit-converter.html">Unit Converter</a>
+        <a href="/tools/password-leak-checker.html">Password Leak</a>
       </nav>
     </div>
   </header>
@@ -362,146 +505,227 @@
       <ol>
         <li><a href="/">Home</a></li>
         <li><a href="/tools/tools.html">Tools</a></li>
-        <li><span aria-current="page">IP Lookup</span></li>
+        <li><span aria-current="page">Internet Speed Test</span></li>
       </ol>
     </nav>
 
-    <section class="hero">
-      <div>
-        <h1>IP Lookup</h1>
+    <section class="speed-grid" aria-label="Internet Speed Test">
+      <section class="speed-card">
+        <div class="pill">⚡ Fast • 🔒 Privacy-First • 📱 Mobile-Friendly</div>
+
+        <h1>Free Internet Speed Test</h1>
         <p class="sub">
-          Find your public IPv4 and IPv6 address instantly, plus approximate location,
-          ISP or organization, timezone, ASN, country flag, and reverse DNS.
+          Check your <strong>download speed</strong> in Mbps and <strong>ping</strong> in ms instantly with a clean speedometer UI,
+          download history sparkline, and connection quality rating.
         </p>
-        <div class="badges" aria-label="Highlights">
-          <span class="badge">⚡ Fast</span>
-          <span class="badge">🧭 Approx location</span>
-          <span class="badge">🔁 Reverse DNS</span>
-          <span class="badge">🔒 Privacy-first</span>
-        </div>
-      </div>
-    </section>
 
-    <section class="ip-grid" aria-label="IP lookup">
-      <div class="ip-box">
-        <label class="inputLabel" for="ipInput">Lookup an IP address (optional)</label>
-        <input
-          id="ipInput"
-          class="ip-field"
-          inputmode="text"
-          autocomplete="off"
-          spellcheck="false"
-          placeholder="Leave blank to detect your IP automatically (IPv4/IPv6)" />
-
-        <div class="actionsRow">
-          <button class="cta primary" id="lookupBtn" type="button">Lookup</button>
-          <button class="cta ghost" id="copyIpBtn" type="button">Copy IPv4</button>
-          <button class="cta ghost" id="copyIp6Btn" type="button">Copy IPv6</button>
-          <button class="cta ghost" id="copyDetailsBtn" type="button">Copy Details</button>
-          <button class="cta ghost" id="refreshBtn" type="button">Refresh</button>
+        <div class="speed-actions" id="run">
+          <button class="cta primary" id="startBtn" type="button">Start Speed Test</button>
+          <button class="cta ghost" id="stopBtn" type="button" disabled>Stop</button>
+          <button class="cta ghost" id="resetBtn" type="button">Reset</button>
         </div>
 
-        <div class="resultsCard" aria-live="polite">
-          <div class="resultsTitle">Results</div>
+        <div class="hint">
+          Accuracy note: speed varies with Wi-Fi strength, VPN use, background downloads, and distance to the test endpoint.
+          For best results, pause large downloads and run the test twice.
+        </div>
+      </section>
 
-          <div class="topMeta">
-            <div class="flagBadge">
-              <span class="flagEmoji" id="flagEmoji">🌐</span>
-              <span id="countryText">Unknown region</span>
+      <aside class="speed-panel" aria-label="Speed test results">
+        <div class="panel-top">
+          <div>
+            <h2>Results</h2>
+            <div class="hint" style="margin:6px 0 0;">Powered by a public test endpoint. No account required.</div>
+          </div>
+          <div class="server-hint mono" id="serverHint">Server: Cloudflare</div>
+        </div>
+
+        <div class="gaugeWrap" aria-label="Speedometer">
+          <div class="gHeader">
+            <div>
+              <div class="gTitle">Download Speed</div>
+              <div class="gSub">Live estimate (Mbps)</div>
             </div>
-
-            <div class="badgeRow">
-              <span class="versionBadge" id="v4Badge">IPv4: —</span>
-              <span class="versionBadge" id="v6Badge">IPv6: —</span>
+            <div class="liveSpeed mono">
+              <span id="dlLive">—</span> Mbps
             </div>
           </div>
 
-          <div class="kv">
-            <div class="k">IPv4</div>
-            <div class="v" id="ip4Text">—</div>
+          <div class="gauge">
+            <svg viewBox="0 0 400 220" role="img" aria-label="Internet speed gauge">
+              <defs>
+                <linearGradient id="gaugeTrack" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="rgba(255,255,255,.08)" />
+                  <stop offset="100%" stop-color="rgba(255,255,255,.14)" />
+                </linearGradient>
+                <linearGradient id="gaugeProgress" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#22d3ee" />
+                  <stop offset="32%" stop-color="#3b82f6" />
+                  <stop offset="62%" stop-color="#8b5cf6" />
+                  <stop offset="82%" stop-color="#ec4899" />
+                  <stop offset="100%" stop-color="#22c55e" />
+                </linearGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="5" result="blur"/>
+                  <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
 
-            <div class="k">IPv6</div>
-            <div class="v" id="ip6Text">—</div>
+              <path d="M 50 170 A 150 150 0 0 1 350 170"
+                    fill="none"
+                    stroke="url(#gaugeTrack)"
+                    stroke-width="22"
+                    stroke-linecap="round"/>
 
-            <div class="k">Reverse DNS</div>
-            <div class="v" id="rdnsText">—</div>
+              <path id="gArc"
+                    d="M 50 170 A 150 150 0 0 1 350 170"
+                    fill="none"
+                    stroke="url(#gaugeProgress)"
+                    stroke-width="22"
+                    stroke-linecap="round"
+                    filter="url(#glow)"
+                    stroke-dasharray="471"
+                    stroke-dashoffset="471"/>
 
-            <div class="k">Location</div>
-            <div class="v" id="locText">—</div>
+              <g class="needle" id="needle">
+                <line x1="200" y1="170" x2="200" y2="38"
+                      stroke="url(#gaugeProgress)"
+                      stroke-width="6"
+                      stroke-linecap="round"/>
+              </g>
 
-            <div class="k">ISP / Org</div>
-            <div class="v" id="ispText">—</div>
+              <circle class="centerDot" cx="200" cy="170" r="13" fill="#f8fbff"/>
+              <circle cx="200" cy="170" r="6" fill="#3b82f6"/>
 
-            <div class="k">Timezone</div>
-            <div class="v" id="tzText">—</div>
-
-            <div class="k">ASN</div>
-            <div class="v" id="asnText">—</div>
+              <text x="54" y="194" fill="rgba(233,238,252,.55)" font-size="12">0</text>
+              <text x="116" y="46" fill="rgba(233,238,252,.55)" font-size="12">50</text>
+              <text x="194" y="24" fill="rgba(233,238,252,.55)" font-size="12">100</text>
+              <text x="272" y="46" fill="rgba(233,238,252,.55)" font-size="12">200</text>
+              <text x="332" y="194" fill="rgba(233,238,252,.55)" font-size="12">500+</text>
+            </svg>
           </div>
 
-          <div class="tinyNote" id="noteText"></div>
-        </div>
-
-        <div class="warnBox">
-          <strong>Privacy note:</strong> IP lookup requires calling third-party IP providers to return your IP and approximate
-          network details. InstantQR does not intentionally store results on a server.
-          If you see <em>“Failed to fetch”</em>, it is usually an adblocker, privacy extension, VPN, or network policy blocking requests.
-        </div>
-      </div>
-
-      <aside class="ip-box">
-        <div class="sideSectionTitle">What is a public IP?</div>
-        <div class="sideText">Your public IP is your network’s address on the internet.</div>
-
-        <div class="sideSectionTitle" style="margin-top:14px;">Accuracy</div>
-        <div class="sideText">Location is approximate, usually city or region, not exact street address.</div>
-
-        <div class="sideSectionTitle" style="margin-top:14px;">Reverse DNS</div>
-        <div class="sideText">Reverse DNS maps an IP address back to a hostname using PTR records. Some IPs return a hostname and some do not.</div>
-
-        <div class="relatedLinks">
-          <div class="sideSectionTitle">Related tools</div>
-          <div class="sideText">
-            <a href="/tools/dns-lookup.html">DNS Lookup</a> ·
-            <a href="/tools/json-formatter.html">JSON Formatter</a> ·
-            <a href="/tools/base64-encoder.html">Base64 Encoder</a>
+          <div class="ticks">
+            <span>Slow</span>
+            <span>Good</span>
+            <span>Fast</span>
+            <span>Very Fast</span>
           </div>
         </div>
 
-        <div class="sideText" style="margin-top:14px;">
-          This tool is designed for quick checks, troubleshooting, and basic IP information.
+        <div class="resultsGrid">
+          <div class="metric">
+            <div class="k">Download</div>
+            <div class="v goodText"><span id="dl">—</span></div>
+            <div class="u">Mbps</div>
+          </div>
+
+          <div class="metric">
+            <div class="k">Ping (Latency)</div>
+            <div class="v"><span id="ping">—</span></div>
+            <div class="u">ms</div>
+          </div>
+        </div>
+
+        <div class="qualityCard" aria-label="Connection quality">
+          <div class="qualityTop">
+            <div>
+              <div class="qualityTitle">Connection Quality</div>
+              <div class="hint" style="margin:4px 0 0;">Based on download speed and ping</div>
+            </div>
+            <div class="qualityValue" id="qualityLabel">—</div>
+          </div>
+          <div class="qualityBar" aria-hidden="true">
+            <div class="qualityFill" id="qualityFill"></div>
+          </div>
+          <div class="qualityNote" id="qualityNote">Run the test to rate your connection.</div>
+        </div>
+
+        <div class="sparkCard" aria-label="Download history">
+          <div class="sparkHead">
+            <div>
+              <div class="sparkTitle">Download History</div>
+              <div class="sparkSub">Live throughput samples during test</div>
+            </div>
+          </div>
+
+          <div class="sparkWrap">
+            <svg viewBox="0 0 320 80" role="img" aria-label="Download history sparkline">
+              <polyline id="sparkLine"
+                fill="none"
+                stroke="#60a5fa"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                points="0,70 320,70"></polyline>
+            </svg>
+          </div>
+
+          <div class="sparkMeta">
+            <span>Min: <strong id="sparkMin">—</strong></span>
+            <span>Avg: <strong id="sparkAvg">—</strong></span>
+            <span>Max: <strong id="sparkMax">—</strong></span>
+          </div>
+        </div>
+
+        <div class="speed-status" id="status">
+          <strong>Ready.</strong><br>Press <b>Start Speed Test</b>.
         </div>
       </aside>
+    </section>
+
+    <section class="miniGrid2" aria-label="Additional information">
+      <div class="miniBox">
+        <h2>How this speed test works</h2>
+        <ul>
+          <li><strong>Ping</strong> is measured by timing a small request.</li>
+          <li><strong>Download</strong> is measured by streaming test data and timing total bytes.</li>
+          <li>Results are approximate, but useful for quick checks.</li>
+        </ul>
+      </div>
+
+      <div class="miniBox">
+        <h2>Privacy-first</h2>
+        <p>
+          No signup and no personal data required. This tool does not intentionally store your results.
+          It only downloads test data to estimate speed and latency.
+        </p>
+      </div>
     </section>
 
     <section class="faqCard" aria-label="Frequently asked questions">
       <h2>FAQ</h2>
 
       <details>
-        <summary>What is a public IP address?</summary>
-        <p>A public IP address is your network’s address on the internet. Websites and services use it to send data back to your device or router.</p>
+        <summary>Is this internet speed test free?</summary>
+        <p>Yes. InstantQR Internet Speed Test is free to use with no signup required.</p>
       </details>
 
       <details>
-        <summary>Does this IP lookup show my exact address?</summary>
-        <p>No. Location is approximate and usually limited to city or region. It does not reveal your exact street address.</p>
+        <summary>Do you store my speed test results?</summary>
+        <p>No. This tool runs in your browser and does not intentionally store your results.</p>
       </details>
 
       <details>
-        <summary>What is reverse DNS?</summary>
-        <p>Reverse DNS maps an IP address back to a hostname using PTR records. Some IP addresses have reverse DNS names and some do not.</p>
+        <summary>What does Mbps mean?</summary>
+        <p>Mbps means megabits per second. It is a common unit used to measure internet download speed.</p>
       </details>
 
       <details>
-        <summary>Do you store my IP address?</summary>
-        <p>InstantQR does not intentionally store lookup results on a server. IP lookup requires contacting third-party providers to return IP and approximate network details.</p>
+        <summary>Why is my speed different each time I test?</summary>
+        <p>Results vary based on Wi-Fi signal quality, network congestion, VPN use, background downloads, device performance, and distance to the test endpoint.</p>
       </details>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" aria-label="Footer">
       <div class="footer-box">
         <div>© <span id="year"></span> InstantQR</div>
         <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
           <a href="/about.html">About</a>
           <a href="/privacy.html">Privacy</a>
           <a href="/terms.html">Terms</a>
@@ -513,6 +737,6 @@
   </main>
 
   <script src="/assets/site.js" defer></script>
-  <script src="/assets/js/tools/ip-lookup.js" defer></script>
+  <script src="/assets/js/tools/internet-speed-test.js" defer></script>
 </body>
 </html>
