@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>Token Contract Analyzer | Multi-Chain ERC-20 Contract Checker | InstantQR</title>
-  <meta name="description" content="Analyze token contracts across major EVM chains. Check metadata, transfer behavior, proxy signals, recent logs, danger selectors, and compare two contracts side by side." />
+  <meta name="description" content="Analyze token contracts across major EVM chains. Check metadata, transfer behavior, proxy signals, recent logs, danger selectors, liquidity signals, verification hints, holder concentration estimates, and compare two contracts side by side." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
@@ -35,14 +35,14 @@
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Token Contract Analyzer | InstantQR" />
-  <meta property="og:description" content="Analyze token contracts across major EVM chains with metadata, proxy, behavior, logs, and compare mode." />
+  <meta property="og:description" content="Analyze token contracts across major EVM chains with metadata, proxy, behavior, logs, liquidity signals, verification hints, and compare mode." />
   <meta property="og:url" content="https://instantqr.io/tools/token-contract-analyzer.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="InstantQR Token Contract Analyzer" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Token Contract Analyzer | InstantQR" />
-  <meta name="twitter:description" content="Analyze token contracts across major EVM chains with metadata, proxy, behavior, logs, and compare mode." />
+  <meta name="twitter:description" content="Analyze token contracts across major EVM chains with metadata, proxy, behavior, logs, liquidity signals, verification hints, and compare mode." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <script type="application/ld+json">
@@ -51,21 +51,84 @@
     "@type":"WebPage",
     "name":"Token Contract Analyzer",
     "url":"https://instantqr.io/tools/token-contract-analyzer.html",
-    "description":"Analyze token contracts across major EVM chains with metadata, proxy, behavior, logs, and compare mode.",
+    "description":"Analyze token contracts across major EVM chains with metadata, proxy, behavior, logs, liquidity signals, verification hints, and compare mode.",
     "isPartOf":{"@type":"WebSite","name":"InstantQR","url":"https://instantqr.io/"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Token Contract Analyzer",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/token-contract-analyzer.html",
+    "description":"Analyze token contracts across major EVM chains with metadata, transfer behavior, proxy signals, recent logs, liquidity signals, verification hints, holder concentration estimates, and compare mode.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+      {"@type":"ListItem","position":3,"name":"Token Contract Analyzer","item":"https://instantqr.io/tools/token-contract-analyzer.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What does this token contract analyzer check?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"It checks bytecode presence, standard token metadata, proxy signals, behavior simulations, recent logs, known danger selectors, liquidity signals, verification hints, holder concentration estimates, and compare mode results."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this guarantee a token is safe?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. This is a fast screening tool, not a full audit. It can highlight suspicious signals but cannot guarantee safety."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I compare two contracts side by side?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. Enter a compare address on the same network to see a side-by-side comparison of major signals and metadata."
+        }
+      }
+    ]
   }
   </script>
 
   <style>
     .controls.cols-4{grid-template-columns:1.35fr 1fr 1fr auto}
-    .compareGrid,
-    .metricGrid,
-    .detailGrid{
+    .metricGrid,.detailGrid,.compareGrid{
       display:grid;
-      grid-template-columns:1fr 1fr;
       gap:12px;
       margin-top:12px;
     }
+    .metricGrid{grid-template-columns:1fr 1fr}
+    .detailGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
     .detailGrid.oneCol{grid-template-columns:1fr}
     .metricCard,.detailCard,.compareCard{
       border-radius:16px;
@@ -256,14 +319,8 @@
       text-transform:uppercase;
       letter-spacing:.3px;
     }
-    .compareTag{
-      display:inline-block;
-      padding:5px 8px;
-      border-radius:999px;
-      font-size:12px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.05);
-      color:#dce9ff;
+    @media (max-width:1180px){
+      .detailGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
     @media (max-width:980px){
       .controls.cols-4,.metricGrid,.detailGrid,.compareGrid{grid-template-columns:1fr}
@@ -307,7 +364,8 @@
       <h1>Token Contract Analyzer</h1>
       <p class="sub">
         Analyze token contracts across major EVM chains. Check metadata, behavior, proxy signals,
-        recent logs, danger selectors, raw RPC results, and compare two contracts side by side.
+        recent logs, danger selectors, raw RPC results, liquidity signals, verification hints,
+        holder concentration estimates, honeypot simulation hooks, and compare two contracts side by side.
       </p>
 
       <div class="summary" aria-label="Contract summary">
@@ -338,7 +396,7 @@
       <div class="panelHead">
         <div>
           <div class="panelTitle">Contract Lookup</div>
-          <div class="panelSub">Choose a network, paste a contract address, and run a fast risk-screening analysis.</div>
+          <div class="panelSub">Fast multi-chain screening with metadata, behavior checks, proxy detection, liquidity signals, verification checks, holder concentration estimates, and honeypot simulation hooks.</div>
         </div>
 
         <div class="statusLine">
@@ -396,7 +454,7 @@
           <div class="monoBlock" id="resultText">Enter a contract address and click Analyze Contract.</div>
         </div>
 
-        <div class="formula" id="formulaText">Checks: bytecode + metadata + transfer behavior + proxy slots + selector scan + recent logs + compare mode</div>
+        <div class="formula" id="formulaText">Checks: bytecode + metadata + transfer behavior + proxy slots + selector scan + recent logs + compare mode + LP + verification + honeypot hooks</div>
 
         <div class="scoreWrap" aria-label="Warning score">
           <div class="scoreHead">
@@ -564,6 +622,82 @@
               <div class="kvRow">
                 <div class="kvKey">Risk Notes</div>
                 <div class="kvVal" id="analysisNote">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detailCard">
+            <div class="cardHead">
+              <h3>LP / Liquidity Detection</h3>
+              <div class="miniActions">
+                <button class="miniBtn" type="button" data-copy-target="lpDetails">Copy</button>
+              </div>
+            </div>
+            <div class="kv">
+              <div class="kvRow">
+                <div class="kvKey">Liquidity Summary</div>
+                <div class="kvVal" id="lpSummary">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Liquidity Details</div>
+                <div class="kvVal" id="lpDetails">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detailCard">
+            <div class="cardHead">
+              <h3>Verification / Ownership</h3>
+              <div class="miniActions">
+                <button class="miniBtn" type="button" data-copy-target="verificationDetails">Copy</button>
+              </div>
+            </div>
+            <div class="kv">
+              <div class="kvRow">
+                <div class="kvKey">Verification Summary</div>
+                <div class="kvVal" id="verificationSummary">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Verification Details</div>
+                <div class="kvVal" id="verificationDetails">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detailCard">
+            <div class="cardHead">
+              <h3>Holder Concentration</h3>
+              <div class="miniActions">
+                <button class="miniBtn" type="button" data-copy-target="holderConcentrationDetails">Copy</button>
+              </div>
+            </div>
+            <div class="kv">
+              <div class="kvRow">
+                <div class="kvKey">Concentration Summary</div>
+                <div class="kvVal" id="holderConcentrationSummary">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Concentration Details</div>
+                <div class="kvVal" id="holderConcentrationDetails">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detailCard">
+            <div class="cardHead">
+              <h3>Tax / Honeypot Simulation</h3>
+              <div class="miniActions">
+                <button class="miniBtn" type="button" data-copy-target="honeypotDetails">Copy</button>
+              </div>
+            </div>
+            <div class="kv">
+              <div class="kvRow">
+                <div class="kvKey">Simulation Summary</div>
+                <div class="kvVal" id="honeypotSummary">—</div>
+              </div>
+              <div class="kvRow">
+                <div class="kvKey">Simulation Details</div>
+                <div class="kvVal" id="honeypotDetails">—</div>
               </div>
             </div>
           </div>
