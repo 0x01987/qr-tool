@@ -14,13 +14,12 @@
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
-  <!-- Core Meta -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>IP Lookup | What Is My IP Address (IPv4/IPv6) | InstantQR</title>
-  <meta name="description" content="Find your public IPv4 and IPv6 address instantly, plus basic network details like approximate location, ISP, timezone, and ASN. Privacy-first and fast." />
-  <meta name="keywords" content="ip lookup, what is my ip, ipv4 checker, ipv6 checker, ip address finder, public ip, isp lookup, asn lookup, timezone lookup" />
+  <meta name="description" content="Find your public IPv4 and IPv6 address instantly, plus approximate location, ISP, timezone, ASN, country flag, and reverse DNS. Privacy-first and fast." />
+  <meta name="keywords" content="ip lookup, what is my ip, ipv4 checker, ipv6 checker, public ip, reverse dns lookup, ptr lookup, ip address finder, asn lookup" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
@@ -49,22 +48,20 @@
 
   <link rel="stylesheet" href="/assets/site.css" />
 
-  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="IP Lookup | What Is My IP Address (IPv4/IPv6) | InstantQR" />
-  <meta property="og:description" content="Find your public IPv4 and IPv6 instantly plus basic network details like approximate location, ISP, timezone, and ASN." />
+  <meta property="og:description" content="Find your public IPv4 and IPv6 instantly plus approximate location, ISP, timezone, ASN, country flag, and reverse DNS." />
   <meta property="og:url" content="https://instantqr.io/tools/ip-lookup.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="InstantQR IP Lookup tool page" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="IP Lookup | What Is My IP Address (IPv4/IPv6) | InstantQR" />
-  <meta name="twitter:description" content="Find your public IPv4/IPv6 instantly plus basic network details. Privacy-first and fast." />
+  <meta name="twitter:description" content="Find your public IPv4/IPv6 instantly plus approximate location, ASN, and reverse DNS." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -93,7 +90,7 @@
     "@type":"CollectionPage",
     "name":"IP Lookup",
     "url":"https://instantqr.io/tools/ip-lookup.html",
-    "description":"Find your public IPv4 and IPv6 address instantly, plus basic network details like approximate location, ISP, timezone, and ASN.",
+    "description":"Find your public IPv4 and IPv6 address instantly, plus approximate location, ISP, timezone, ASN, and reverse DNS.",
     "isPartOf":{
       "@type":"WebSite",
       "name":"InstantQR",
@@ -146,8 +143,8 @@
       },
       {
         "@type":"Question",
-        "name":"Why does my IP change when I use a VPN?",
-        "acceptedAnswer":{"@type":"Answer","text":"A VPN routes your traffic through its servers, so websites see the VPN server IP instead of your home or mobile network IP."}
+        "name":"What is reverse DNS?",
+        "acceptedAnswer":{"@type":"Answer","text":"Reverse DNS maps an IP address back to a hostname using PTR records. Some IPs have a reverse DNS name and some do not."}
       },
       {
         "@type":"Question",
@@ -161,21 +158,18 @@
   <style>
     .ip-grid{
       display:grid;
-      grid-template-columns:1.1fr .9fr;
+      grid-template-columns:1.15fr .85fr;
       gap:14px;
       margin-top:14px;
       align-items:start;
     }
-    .ip-box,
-    .faqCard{
+    .ip-box,.faqCard{
       border-radius:var(--radius2);
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
       box-shadow:var(--shadow);
     }
-    .ip-box{
-      padding:16px;
-    }
+    .ip-box{padding:16px}
     .inputLabel{
       display:block;
       font-size:12px;
@@ -221,6 +215,34 @@
       letter-spacing:.2px;
       text-transform:uppercase;
       margin-bottom:12px;
+    }
+    .topMeta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:12px;
+    }
+    .flagBadge,.versionBadge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      font-size:12px;
+      font-weight:800;
+    }
+    .flagEmoji{
+      font-size:16px;
+      line-height:1;
+    }
+    .badgeRow{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
     }
     .kv{
       display:grid;
@@ -269,9 +291,7 @@
     .relatedLinks{
       margin-top:14px;
     }
-    .relatedLinks a{
-      color:#dce9ff;
-    }
+    .relatedLinks a{color:#dce9ff}
     .faqCard{
       margin-top:14px;
       padding:18px;
@@ -302,18 +322,12 @@
       line-height:1.6;
       font-size:14px;
     }
-    @media (max-width: 860px){
-      .ip-grid{
-        grid-template-columns:1fr;
-      }
+    @media (max-width:860px){
+      .ip-grid{grid-template-columns:1fr}
     }
-    @media (max-width: 520px){
-      .kv{
-        grid-template-columns:1fr;
-      }
-      .actionsRow .cta{
-        width:100%;
-      }
+    @media (max-width:520px){
+      .kv{grid-template-columns:1fr}
+      .actionsRow .cta{width:100%}
     }
   </style>
 </head>
@@ -356,14 +370,14 @@
       <div>
         <h1>IP Lookup</h1>
         <p class="sub">
-          Find your public IPv4 and IPv6 address instantly, plus basic network details like approximate location,
-          ISP or organization, timezone, and ASN.
+          Find your public IPv4 and IPv6 address instantly, plus approximate location,
+          ISP or organization, timezone, ASN, country flag, and reverse DNS.
         </p>
         <div class="badges" aria-label="Highlights">
           <span class="badge">⚡ Fast</span>
           <span class="badge">🧭 Approx location</span>
+          <span class="badge">🔁 Reverse DNS</span>
           <span class="badge">🔒 Privacy-first</span>
-          <span class="badge">✅ Free</span>
         </div>
       </div>
     </section>
@@ -382,6 +396,7 @@
         <div class="actionsRow">
           <button class="cta primary" id="lookupBtn" type="button">Lookup</button>
           <button class="cta ghost" id="copyIpBtn" type="button">Copy IPv4</button>
+          <button class="cta ghost" id="copyIp6Btn" type="button">Copy IPv6</button>
           <button class="cta ghost" id="copyDetailsBtn" type="button">Copy Details</button>
           <button class="cta ghost" id="refreshBtn" type="button">Refresh</button>
         </div>
@@ -389,12 +404,27 @@
         <div class="resultsCard" aria-live="polite">
           <div class="resultsTitle">Results</div>
 
+          <div class="topMeta">
+            <div class="flagBadge">
+              <span class="flagEmoji" id="flagEmoji">🌐</span>
+              <span id="countryText">Unknown region</span>
+            </div>
+
+            <div class="badgeRow">
+              <span class="versionBadge" id="v4Badge">IPv4: —</span>
+              <span class="versionBadge" id="v6Badge">IPv6: —</span>
+            </div>
+          </div>
+
           <div class="kv">
             <div class="k">IPv4</div>
             <div class="v" id="ip4Text">—</div>
 
             <div class="k">IPv6</div>
             <div class="v" id="ip6Text">—</div>
+
+            <div class="k">Reverse DNS</div>
+            <div class="v" id="rdnsText">—</div>
 
             <div class="k">Location</div>
             <div class="v" id="locText">—</div>
@@ -426,8 +456,8 @@
         <div class="sideSectionTitle" style="margin-top:14px;">Accuracy</div>
         <div class="sideText">Location is approximate, usually city or region, not exact street address.</div>
 
-        <div class="sideSectionTitle" style="margin-top:14px;">VPN</div>
-        <div class="sideText">If you use a VPN, this tool will usually show the VPN server IP.</div>
+        <div class="sideSectionTitle" style="margin-top:14px;">Reverse DNS</div>
+        <div class="sideText">Reverse DNS maps an IP address back to a hostname using PTR records. Some IPs return a hostname and some do not.</div>
 
         <div class="relatedLinks">
           <div class="sideSectionTitle">Related tools</div>
@@ -458,8 +488,8 @@
       </details>
 
       <details>
-        <summary>Why does my IP change when I use a VPN?</summary>
-        <p>A VPN routes your traffic through its own servers, so websites usually see the VPN server IP instead of your home or mobile network IP.</p>
+        <summary>What is reverse DNS?</summary>
+        <p>Reverse DNS maps an IP address back to a hostname using PTR records. Some IP addresses have reverse DNS names and some do not.</p>
       </details>
 
       <details>
