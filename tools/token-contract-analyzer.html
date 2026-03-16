@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Analytics / Monetization -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -19,7 +18,6 @@
 
   <title>Token Contract Analyzer | Multi-Chain ERC-20 Contract Checker | InstantQR</title>
   <meta name="description" content="Analyze token contracts across Ethereum, Base, Arbitrum, Optimism, BNB Smart Chain, Polygon, and Avalanche. Check metadata, proxy signals, transfer behavior, logs, and suspicious contract patterns." />
-  <meta name="keywords" content="token contract analyzer, multi-chain contract checker, erc20 analyzer, smart contract checker, proxy checker, token scanner" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
@@ -33,58 +31,6 @@
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css" />
 
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="InstantQR" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="Token Contract Analyzer | InstantQR" />
-  <meta property="og:description" content="Analyze token contracts across major EVM chains with metadata, proxy, behavior, and risk checks." />
-  <meta property="og:url" content="https://instantqr.io/tools/token-contract-analyzer.html" />
-  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
-  <meta property="og:image:alt" content="InstantQR Token Contract Analyzer" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Token Contract Analyzer | InstantQR" />
-  <meta name="twitter:description" content="Analyze token contracts across major EVM chains with metadata, proxy, behavior, and risk checks." />
-  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"Token Contract Analyzer",
-    "url":"https://instantqr.io/tools/token-contract-analyzer.html",
-    "description":"Analyze token contracts across major EVM chains with metadata, proxy, behavior, and risk checks.",
-    "isPartOf":{"@type":"WebSite","name":"InstantQR","url":"https://instantqr.io/"}
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"Token Contract Analyzer",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
-    "url":"https://instantqr.io/tools/token-contract-analyzer.html",
-    "description":"Analyze token contracts across major EVM chains with metadata, proxy, behavior, and risk checks.",
-    "publisher":{"@type":"Organization","name":"InstantQR","url":"https://instantqr.io/"}
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"BreadcrumbList",
-    "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
-      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
-      {"@type":"ListItem","position":3,"name":"Token Contract Analyzer","item":"https://instantqr.io/tools/token-contract-analyzer.html"}
-    ]
-  }
-  </script>
-
   <style>
     .controls.cols-3{grid-template-columns:1.5fr 1fr 1fr}
     .metricGrid,.detailGrid{
@@ -93,7 +39,6 @@
       gap:12px;
       margin-top:12px;
     }
-    .detailGrid.detailGrid-1{grid-template-columns:1fr}
     .metricCard,.detailCard{
       border-radius:16px;
       border:1px solid var(--border);
@@ -104,6 +49,30 @@
       margin:0 0 8px;
       font-size:15px;
     }
+    .cardHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+      flex-wrap:wrap;
+    }
+    .miniActions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .miniBtn{
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      border-radius:10px;
+      padding:7px 10px;
+      font-size:12px;
+      cursor:pointer;
+      font:inherit;
+    }
+    .miniBtn:hover{background:rgba(255,255,255,.10)}
     .metricVal{
       font-size:22px;
       font-weight:900;
@@ -120,10 +89,7 @@
       color:var(--muted);
       line-height:1.5;
     }
-    .kv{
-      display:grid;
-      gap:10px;
-    }
+    .kv{display:grid;gap:10px}
     .kvRow{
       border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
@@ -144,6 +110,25 @@
       overflow-wrap:anywhere;
       white-space:pre-wrap;
     }
+    .linkRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .extLink{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:#dce9ff;
+      text-decoration:none;
+    }
+    .extLink:hover{text-decoration:none;background:rgba(255,255,255,.08)}
     .monoBlock{
       white-space:pre-wrap;
       word-break:break-word;
@@ -151,11 +136,6 @@
       font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
       color:#f0f6ff;
       margin:0;
-    }
-    .quick .warnBtn{
-      border-color:rgba(255,255,255,.12);
-      background:rgba(255,255,255,.05);
-      color:var(--muted);
     }
     .hintBox{
       margin-top:12px;
@@ -167,14 +147,8 @@
       font-size:13px;
       line-height:1.6;
     }
-    .pill code{
-      color:#eaf2ff;
-      font:12px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-    }
     @media (max-width:980px){
-      .controls.cols-3,.metricGrid,.detailGrid{
-        grid-template-columns:1fr;
-      }
+      .controls.cols-3,.metricGrid,.detailGrid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -253,6 +227,7 @@
           <span class="badge" id="statusBadge">Ready</span>
           <button id="analyzeBtn" class="cta primary" type="button">Analyze Contract</button>
           <button id="copyBtn" class="cta ghost" type="button">Copy Summary</button>
+          <button id="exportBtn" class="cta ghost" type="button">Export JSON</button>
           <button id="clearBtn" class="cta ghost" type="button">Clear</button>
         </div>
       </div>
@@ -286,7 +261,7 @@
         <div class="quick" aria-label="Quick actions">
           <button type="button" id="trimBtn">Trim Input</button>
           <button type="button" id="pasteBtn">Paste Address</button>
-          <button type="button" id="sampleBtn" class="warnBtn">Load Sample</button>
+          <button type="button" id="sampleBtn">Load Sample</button>
         </div>
 
         <div class="resultBox ok" style="margin-top:12px;">
@@ -327,7 +302,12 @@
 
         <div class="detailGrid">
           <div class="detailCard">
-            <h3>Behavior Checks</h3>
+            <div class="cardHead">
+              <h3>Behavior Checks</h3>
+              <div class="miniActions">
+                <button class="miniBtn" type="button" data-copy-target="behaviorDetails">Copy</button>
+              </div>
+            </div>
             <div class="kv">
               <div class="kvRow">
                 <div class="kvKey">Behavior Summary</div>
@@ -341,7 +321,12 @@
           </div>
 
           <div class="detailCard">
-            <h3>Proxy Details</h3>
+            <div class="cardHead">
+              <h3>Proxy Details</h3>
+              <div class="miniActions">
+                <button class="miniBtn" type="button" data-copy-target="proxyDetails">Copy</button>
+              </div>
+            </div>
             <div class="kv">
               <div class="kvRow">
                 <div class="kvKey">Proxy Summary</div>
@@ -350,12 +335,22 @@
               <div class="kvRow">
                 <div class="kvKey">Proxy Details</div>
                 <div class="kvVal" id="proxyDetails">—</div>
+                <div class="linkRow">
+                  <a id="explorerContractLink" class="extLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Open Contract</a>
+                  <a id="explorerImplLink" class="extLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Open Implementation</a>
+                  <a id="explorerAdminLink" class="extLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Open Admin</a>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="detailCard">
-            <h3>Recent Log Activity</h3>
+            <div class="cardHead">
+              <h3>Recent Log Activity</h3>
+              <div class="miniActions">
+                <button class="miniBtn" type="button" data-copy-target="logDetailsBundle">Copy</button>
+              </div>
+            </div>
             <div class="kv">
               <div class="kvRow">
                 <div class="kvKey">Log Summary</div>
@@ -365,11 +360,17 @@
                 <div class="kvKey">Observed Holder Activity</div>
                 <div class="kvVal" id="holderSummary">—</div>
               </div>
+              <div id="logDetailsBundle" hidden></div>
             </div>
           </div>
 
           <div class="detailCard">
-            <h3>Danger Selector Matches</h3>
+            <div class="cardHead">
+              <h3>Danger Selector Matches</h3>
+              <div class="miniActions">
+                <button class="miniBtn" type="button" data-copy-target="dangerDetails">Copy</button>
+              </div>
+            </div>
             <div class="kv">
               <div class="kvRow">
                 <div class="kvKey">Selector Summary</div>
@@ -383,7 +384,12 @@
           </div>
 
           <div class="detailCard">
-            <h3>Implementation Deep-Read</h3>
+            <div class="cardHead">
+              <h3>Implementation Deep-Read</h3>
+              <div class="miniActions">
+                <button class="miniBtn" type="button" data-copy-target="implementationDetails">Copy</button>
+              </div>
+            </div>
             <div class="kv">
               <div class="kvRow">
                 <div class="kvKey">Implementation Summary</div>
@@ -397,7 +403,12 @@
           </div>
 
           <div class="detailCard">
-            <h3>Contract Details</h3>
+            <div class="cardHead">
+              <h3>Contract Details</h3>
+              <div class="miniActions">
+                <button class="miniBtn" type="button" data-copy-target="analysisNote">Copy Risk</button>
+              </div>
+            </div>
             <div class="kv">
               <div class="kvRow">
                 <div class="kvKey">Address</div>
@@ -429,45 +440,13 @@
       </div>
     </section>
 
-    <section class="relatedTools" aria-label="Related crypto tools">
-      <h2>Related Crypto Tools</h2>
-      <div class="relatedLinks">
-        <a href="/tools/wallet-approval-checker.html">Wallet Approval Checker</a>
-        <a href="/tools/transaction-status-checker.html">Transaction Status Checker</a>
-        <a href="/tools/gas-tracker.html">Gas Tracker</a>
-        <a href="/tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
-        <a href="/tools/dca-calculator.html">DCA Calculator</a>
-      </div>
-    </section>
-
-    <section class="faq" aria-label="Frequently asked questions">
-      <h2>FAQ</h2>
-
-      <details>
-        <summary>What does this token contract analyzer show?</summary>
-        <p>This tool checks bytecode presence, token metadata, transfer behavior, proxy slots, recent logs, and basic suspicious signals across supported EVM chains.</p>
-      </details>
-
-      <details>
-        <summary>Does this tool perform a full smart contract audit?</summary>
-        <p>No. This tool is a fast first-pass analyzer and does not replace professional auditing or source code review.</p>
-      </details>
-
-      <details>
-        <summary>Which networks are supported?</summary>
-        <p>The analyzer supports Ethereum, Base, Arbitrum, Optimism, BNB Smart Chain, Polygon, and Avalanche C-Chain.</p>
-      </details>
-    </section>
-
     <footer class="footer">
       <div class="footer-box">
         <div>© <span id="year"></span> InstantQR</div>
         <div class="footer-links">
           <a href="/">Home</a>
           <a href="/tools/tools.html">Tools</a>
-          <a href="/tools/seo-tools.html">SEO Tools</a>
           <a href="/tools/web3-tools.html">Web3 Tools</a>
-          <a href="/guides/guides.html">Guides</a>
           <a href="/about.html">About</a>
           <a href="/privacy.html">Privacy</a>
           <a href="/terms.html">Terms</a>
