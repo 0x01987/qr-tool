@@ -1,223 +1,271 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
-</script>
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
-<!-- Google AdSense -->
-<script async
-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ping Tool | Test Website Latency Online | InstantQR</title>
+  <meta name="description" content="Free online ping-style latency tester for websites and servers. Measure HTTP response time, check availability, and estimate connection performance in your browser.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0b1220">
 
-<title>Ping Tool | Test Server Latency Online | InstantQR</title>
+  <link rel="canonical" href="https://instantqr.io/tools/ping-tool.html">
+  <link rel="icon" href="/favicon.ico">
 
-<meta name="description" content="Free online ping tool to test latency to a website or server. Check response times and connectivity instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ping Tool | Test Website Latency Online | InstantQR">
+  <meta property="og:description" content="Measure website response time and check connectivity with this fast browser-based ping-style tool.">
+  <meta property="og:url" content="https://instantqr.io/tools/ping-tool.html">
+  <meta property="og:site_name" content="InstantQR">
 
-<link rel="canonical" href="https://instantqr.io/tools/ping-tool.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ping Tool | Test Website Latency Online | InstantQR">
+  <meta name="twitter:description" content="Check website latency and availability in your browser with InstantQR's fast ping-style tool.">
 
-<meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="/assets/site.css">
 
-<style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"Ping Tool",
+    "url":"https://instantqr.io/tools/ping-tool.html",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "description":"Browser-based ping-style tool to test website response time and estimate latency.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
 
-body{
-font-family:system-ui,-apple-system,Segoe UI,Roboto;
-background:#0b1220;
-color:#fff;
-margin:0;
-}
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Ping Tool",
+        "item":"https://instantqr.io/tools/ping-tool.html"
+      }
+    ]
+  }
+  </script>
 
-.container{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
-
-h1{
-font-size:34px;
-margin-bottom:10px;
-}
-
-.card{
-background:#121b2f;
-padding:25px;
-border-radius:12px;
-margin-top:20px;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:6px;
-border:1px solid #333;
-background:#0b1220;
-color:white;
-}
-
-button{
-margin-top:15px;
-padding:12px 20px;
-border:none;
-background:#3b82f6;
-color:white;
-border-radius:6px;
-cursor:pointer;
-}
-
-button:hover{
-background:#2563eb;
-}
-
-.results{
-margin-top:20px;
-font-family:monospace;
-background:#0b1220;
-padding:15px;
-border-radius:8px;
-}
-
-.good{color:#22c55e}
-.bad{color:#ef4444}
-
-footer{
-margin-top:40px;
-font-size:14px;
-color:#aaa;
-}
-
-</style>
-
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Is this a real ICMP ping test?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. Browsers cannot perform true ICMP ping requests directly. This tool estimates latency by measuring website response time over HTTP or HTTPS."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why might some websites fail the test?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Some websites block browser-based requests, have strict CORS rules, or redirect traffic in ways that prevent reliable timing from a browser."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What is a good latency result?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Under 50 ms is generally very good, 50 to 100 ms is acceptable for many uses, and 100 ms or more may feel slower depending on the application."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
+<body class="theme-dark">
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-logo" href="/" aria-label="InstantQR home">InstantQR</a>
 
-<body>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="sr-only">Toggle navigation</span>
+      </button>
 
-<div class="container">
+      <nav id="site-nav" class="site-nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/guides/guides.html">Guides</a>
+      </nav>
+    </div>
+  </header>
 
-<nav>
-<a href="/">Home</a> /
-<a href="/tools.html">Tools</a> /
-Ping Tool
-</nav>
+  <main>
+    <section class="tool-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span>/</span>
+          <a href="/tools.html">Tools</a>
+          <span>/</span>
+          <span aria-current="page">Ping Tool</span>
+        </nav>
 
-<h1>Ping Tool</h1>
+        <div class="hero-card">
+          <p class="eyebrow">Network Tool</p>
+          <h1>Ping Tool</h1>
+          <p class="hero-lead">
+            Test website response time and estimate latency directly in your browser.
+            Fast, simple, and mobile-friendly.
+          </p>
+        </div>
+      </div>
+    </section>
 
-<p>Test latency and connectivity to a server or website.</p>
+    <section class="tool-section">
+      <div class="container">
+        <div class="tool-card">
+          <form id="ping-form" class="tool-form" novalidate>
+            <div class="field-group">
+              <label for="host">Domain or URL</label>
+              <input
+                id="host"
+                name="host"
+                type="text"
+                inputmode="url"
+                placeholder="example.com"
+                autocomplete="off"
+                spellcheck="false"
+                aria-describedby="host-help"
+              >
+              <p id="host-help" class="field-help">
+                Enter a domain like <strong>example.com</strong> or a full URL.
+              </p>
+            </div>
 
-<div class="card">
+            <div class="tool-actions">
+              <button id="ping-button" class="btn btn-primary" type="submit">Start Test</button>
+              <button id="clear-button" class="btn btn-secondary" type="button">Clear</button>
+            </div>
+          </form>
 
-<label>Domain or URL</label>
-<input id="host" placeholder="example.com">
+          <div class="notice notice-info" role="note">
+            This is a browser-based HTTP latency test, not a true ICMP ping.
+          </div>
 
-<button onclick="startPing()">Start Ping</button>
+          <section class="results-panel" aria-live="polite" aria-atomic="false">
+            <div class="results-header">
+              <h2>Results</h2>
+              <p id="status-text" class="status-text">Ready.</p>
+            </div>
 
-<div id="results" class="results"></div>
+            <div id="summary-cards" class="summary-grid" hidden>
+              <article class="summary-card">
+                <span class="summary-label">Average</span>
+                <strong id="avg-latency">—</strong>
+              </article>
+              <article class="summary-card">
+                <span class="summary-label">Best</span>
+                <strong id="best-latency">—</strong>
+              </article>
+              <article class="summary-card">
+                <span class="summary-label">Worst</span>
+                <strong id="worst-latency">—</strong>
+              </article>
+              <article class="summary-card">
+                <span class="summary-label">Success Rate</span>
+                <strong id="success-rate">—</strong>
+              </article>
+            </div>
 
-</div>
+            <div id="results" class="results-console">
+              <div class="results-empty">No test results yet.</div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
 
-<footer>
+    <section class="content-section">
+      <div class="container content-grid">
+        <article class="content-card">
+          <h2>What this tool measures</h2>
+          <p>
+            This tool sends repeated browser requests to a target website and measures
+            roughly how long each response takes. It is useful for checking website
+            responsiveness, rough latency, and basic reachability from your browser.
+          </p>
+        </article>
 
-<h2>What is a Ping Test?</h2>
+        <article class="content-card">
+          <h2>Latency guide</h2>
+          <ul class="clean-list">
+            <li><strong>Under 20 ms</strong> — Excellent</li>
+            <li><strong>20–50 ms</strong> — Very good</li>
+            <li><strong>50–100 ms</strong> — Acceptable</li>
+            <li><strong>100 ms+</strong> — Slower response</li>
+          </ul>
+        </article>
 
-<p>
-A ping test measures the time it takes for a request to travel from your device to a server and back. It helps diagnose connectivity problems, network latency, and server availability.
-</p>
+        <article class="content-card">
+          <h2>Why tests can fail</h2>
+          <p>
+            Some websites block browser requests, require stricter permissions, or
+            handle redirects differently. A failed test does not always mean the server
+            is down.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
 
-<h2>What Does Ping Time Mean?</h2>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>&copy; 2026 InstantQR. Fast, simple online tools.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/guides/guides.html">Guides</a>
+      </nav>
+    </div>
+  </footer>
 
-<ul>
-<li>Under 20ms – Excellent</li>
-<li>20–50ms – Very Good</li>
-<li>50–100ms – Acceptable</li>
-<li>100ms+ – Slow</li>
-</ul>
-
-</footer>
-
-</div>
-
-<script>
-
-async function pingOnce(url){
-
-let start = performance.now()
-
-try{
-
-await fetch("https://" + url + "/?cache=" + Math.random(),{
-mode:"no-cors"
-})
-
-let latency = Math.round(performance.now() - start)
-
-return latency
-
-}catch{
-
-return null
-
-}
-
-}
-
-async function startPing(){
-
-let host=document.getElementById("host").value
-let output=document.getElementById("results")
-
-if(!host){
-output.innerHTML="Enter a domain"
-return
-}
-
-output.innerHTML="Pinging " + host + "...<br><br>"
-
-let times=[]
-
-for(let i=1;i<=5;i++){
-
-let latency=await pingOnce(host)
-
-if(latency){
-
-times.push(latency)
-
-output.innerHTML +=
-`Reply ${i}: <span class="good">${latency} ms</span><br>`
-
-}else{
-
-output.innerHTML +=
-`Reply ${i}: <span class="bad">timeout</span><br>`
-
-}
-
-}
-
-if(times.length){
-
-let avg = Math.round(times.reduce((a,b)=>a+b)/times.length)
-
-output.innerHTML += `<br>Average latency: <span class="good">${avg} ms</span>`
-
-}else{
-
-output.innerHTML += "<br>Server did not respond."
-
-}
-
-}
-
-</script>
-
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/ping-tool.js" defer></script>
 </body>
 </html>
