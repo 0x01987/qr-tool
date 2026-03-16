@@ -13,7 +13,7 @@
   </script>
 
   <script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
   <!-- =========================
@@ -40,9 +40,15 @@
 
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="preconnect" href="https://cloudflare-dns.com" crossorigin>
+  <link rel="preconnect" href="https://dns.google" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="//cloudflare-dns.com">
+  <link rel="dns-prefetch" href="//dns.google">
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="/assets/site.css" />
 
   <!-- =========================
        Open Graph / Twitter
@@ -62,97 +68,6 @@
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <style>
-    :root{
-      --bg:#081120;
-      --bg2:#0f172a;
-      --panel:#111c34;
-      --panel2:#16233f;
-      --text:#e5eefc;
-      --muted:#94a3b8;
-      --line:rgba(255,255,255,.08);
-      --brand:#60a5fa;
-      --brand2:#22c55e;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --ok:#10b981;
-      --shadow:0 12px 35px rgba(0,0,0,.28);
-      --radius:20px;
-      --radius-sm:14px;
-      --max:1180px;
-      --focus:0 0 0 4px rgba(96,165,250,.16);
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
-        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 28%),
-        linear-gradient(180deg, #07101d 0%, #0b1324 55%, #081120 100%);
-      min-height:100vh;
-      line-height:1.55;
-    }
-
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
-    img{max-width:100%}
-    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
-
-    .skip{
-      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
-    }
-    .skip:focus{
-      left:12px;top:12px;width:auto;height:auto;
-      padding:10px 12px;border-radius:12px;
-      background:#0b172d;color:#fff;border:1px solid var(--line);z-index:999;
-    }
-
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
-
-    .topbar{
-      position:sticky;top:0;z-index:40;
-      backdrop-filter:blur(14px);
-      background:rgba(8,17,32,.78);
-      border-bottom:1px solid var(--line);
-    }
-    .topbar-inner{
-      max-width:var(--max);margin:0 auto;
-      padding:12px 16px;
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:12px;
-      color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;
-    }
-    .brand-logo{
-      width:38px;height:38px;border-radius:12px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.18));
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      flex:0 0 auto;
-    }
-    .brand-logo img{width:24px;height:24px;display:block}
-
-    .top-links{
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-    }
-    .top-links a{
-      color:var(--text);
-      font-size:.95rem;
-      padding:10px 12px;border-radius:12px;
-      border:1px solid transparent;
-    }
-    .top-links a:hover{
-      text-decoration:none;
-      background:rgba(255,255,255,.04);
-      border-color:var(--line);
-    }
-
     .hero{padding:34px 0 20px}
     .breadcrumbs{
       color:var(--muted);
@@ -174,7 +89,7 @@
     .card{
       background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
       border:1px solid var(--line);
-      border-radius:var(--radius);
+      border-radius:var(--radius2);
       box-shadow:var(--shadow);
     }
 
@@ -282,7 +197,7 @@
     }
     .full{grid-column:1/-1}
 
-    label{
+    .field-label{
       display:block;
       font-size:.94rem;
       font-weight:700;
@@ -290,15 +205,8 @@
       color:#dbeafe;
     }
 
-    input[type="text"],
-    input[type="number"],
-    input[type="date"],
-    input[type="time"],
-    input[type="datetime-local"],
-    input[type="url"],
-    input[type="search"],
-    select,
-    textarea{
+    .field,
+    .field-select{
       width:100%;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
@@ -310,7 +218,7 @@
       transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
     }
 
-    input:focus,select:focus,textarea:focus{
+    .field:focus,.field-select:focus{
       border-color:rgba(96,165,250,.5);
       box-shadow:0 0 0 4px rgba(96,165,250,.14);
       background:#0b172d;
@@ -483,6 +391,7 @@
       border-radius:16px;
       background:rgba(255,255,255,.02);
       margin-top:14px;
+      display:none;
     }
     table{
       width:100%;
@@ -536,27 +445,6 @@
       margin-top:14px;
     }
 
-    .footer{
-      padding:28px 0 42px;
-      color:var(--muted);
-    }
-    .footer-box{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-      padding:18px 0 0;
-      border-top:1px solid var(--line);
-    }
-    .footer-links{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .footer-links a{color:var(--muted)}
-    .footer-links a:hover{color:var(--text);text-decoration:none}
-
     .toast{
       position:fixed;
       left:50%;
@@ -576,15 +464,13 @@
     }
     .toast.show{opacity:1}
 
-    @media (max-width: 980px){
+    @media (max-width:980px){
       .hero-grid,.tool-grid{grid-template-columns:1fr}
     }
 
-    @media (max-width: 700px){
+    @media (max-width:700px){
       .form-grid,.tool-kpis{grid-template-columns:1fr}
       .hero-main,.hero-side,.tool-panel,.info-panel,.content-card{padding:18px}
-      .topbar-inner{padding:10px 14px}
-      .top-links{display:none}
       h1{font-size:2rem}
       .btn{width:100%}
       .actions .btn{width:auto;flex:1 1 180px}
@@ -759,22 +645,22 @@
 
           <div class="form-grid">
             <div class="full">
-              <label for="name">Domain / Hostname</label>
-              <input id="name" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="example.com or sub.example.com" />
+              <label class="field-label" for="name">Domain / Hostname</label>
+              <input class="field" id="name" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="example.com or sub.example.com" />
               <div class="helper">You can also paste a full URL. The tool will extract the hostname automatically.</div>
             </div>
 
             <div>
-              <label for="resolver">Resolver</label>
-              <select id="resolver">
+              <label class="field-label" for="resolver">Resolver</label>
+              <select class="field-select" id="resolver">
                 <option value="cloudflare" selected>Cloudflare DoH</option>
                 <option value="google">Google DoH</option>
               </select>
             </div>
 
             <div>
-              <label for="typePick">Record Type</label>
-              <select id="typePick">
+              <label class="field-label" for="typePick">Record Type</label>
+              <select class="field-select" id="typePick">
                 <option value="A" selected>A</option>
                 <option value="AAAA">AAAA</option>
                 <option value="CNAME">CNAME</option>
@@ -802,6 +688,7 @@
             <button class="btn btn-primary" id="lookupBtn" type="button">Lookup DNS</button>
             <button class="btn btn-secondary" id="shareBtn" type="button">Copy Link</button>
             <button class="btn btn-ghost" id="copyJsonBtn" type="button">Copy JSON</button>
+            <button class="btn btn-ghost" id="toggleRawBtn" type="button">Show Raw JSON</button>
             <button class="btn btn-ghost" id="clearBtn" type="button">Clear</button>
           </div>
 
@@ -809,7 +696,7 @@
             Tip: TXT records often include SPF, DKIM, or verification tokens. MX records help confirm mail routing. NS and SOA are useful when checking delegation and zone setup.
           </div>
 
-          <div class="answer-table-wrap" id="tableWrap" style="display:none;">
+          <div class="answer-table-wrap" id="tableWrap">
             <table id="table" aria-label="DNS answers table">
               <thead>
                 <tr>
@@ -940,377 +827,7 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script>
-  (function(){
-    const $ = (id) => document.getElementById(id);
-
-    const nameEl = $('name');
-    const resolverEl = $('resolver');
-    const typePickEl = $('typePick');
-    const lookupBtn = $('lookupBtn');
-    const shareBtn = $('shareBtn');
-    const clearBtn = $('clearBtn');
-    const copyJsonBtn = $('copyJsonBtn');
-
-    const qOut = $('qOut');
-    const msOut = $('msOut');
-    const answersCount = $('answersCount');
-
-    const headline = $('headline');
-    const subline = $('subline');
-    const statusText = $('statusText');
-    const statusDot = $('statusDot');
-    const resolverOut = $('resolverOut');
-    const typeOut = $('typeOut');
-
-    const tableWrap = $('tableWrap');
-    const tbody = $('tbody');
-    const raw = $('raw');
-    const emptyState = $('emptyState');
-    const toastEl = $('toast');
-
-    const typeChips = Array.from(document.querySelectorAll('.type-chip'));
-
-    $('year').textContent = new Date().getFullYear();
-
-    let lastJson = null;
-
-    function toast(msg){
-      toastEl.textContent = msg;
-      toastEl.classList.add('show');
-      clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(() => toastEl.classList.remove('show'), 1300);
-    }
-
-    async function copyText(text){
-      try {
-        await navigator.clipboard.writeText(text);
-        toast('Copied');
-      } catch(e){
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.left = '-9999px';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        toast('Copied');
-      }
-    }
-
-    function escapeHtml(s){
-      return String(s)
-        .replaceAll('&','&amp;')
-        .replaceAll('<','&lt;')
-        .replaceAll('>','&gt;')
-        .replaceAll('"','&quot;')
-        .replaceAll("'","&#039;");
-    }
-
-    function setStatus(kind, text){
-      statusText.textContent = text;
-      statusDot.style.background =
-        kind === 'ok' ? 'var(--ok)' :
-        kind === 'warn' ? 'var(--warn)' :
-        kind === 'bad' ? 'var(--danger)' :
-        'var(--muted)';
-    }
-
-    function normalizeName(s){
-      s = (s || '').trim();
-      if(!s) return '';
-      try{
-        if(s.includes('://')){
-          const u = new URL(s);
-          s = u.hostname;
-        } else if (s.includes('/')) {
-          s = s.split('/')[0];
-        }
-      }catch(_){}
-      s = s.replace(/\.+$/,'');
-      return s;
-    }
-
-    function dohUrl(resolver, name, type){
-      const encName = encodeURIComponent(name);
-      const encType = encodeURIComponent(type);
-      if(resolver === 'google'){
-        return 'https://dns.google/resolve?name=' + encName + '&type=' + encType;
-      }
-      return 'https://cloudflare-dns.com/dns-query?name=' + encName + '&type=' + encType;
-    }
-
-    async function fetchDoh(resolver, name, type){
-      const url = dohUrl(resolver, name, type);
-      const t0 = performance.now();
-      const res = await fetch(url, {
-        method: 'GET',
-        headers: { 'accept': 'application/dns-json' }
-      });
-      const ms = Math.round(performance.now() - t0);
-      if(!res.ok) throw new Error('HTTP ' + res.status);
-      const json = await res.json();
-      return { json, ms, url };
-    }
-
-    const TYPE_MAP = {
-      1: 'A',
-      28: 'AAAA',
-      5: 'CNAME',
-      15: 'MX',
-      16: 'TXT',
-      2: 'NS',
-      6: 'SOA'
-    };
-
-    function typeNameFromNum(n){
-      return TYPE_MAP[n] || String(n);
-    }
-
-    function selectType(type){
-      typePickEl.value = type;
-      typeOut.textContent = type;
-      typeChips.forEach(chip => {
-        const active = chip.dataset.type === type;
-        chip.classList.toggle('active', active);
-        chip.setAttribute('aria-selected', active ? 'true' : 'false');
-      });
-    }
-
-    function resetViews(){
-      tbody.innerHTML = '';
-      tableWrap.style.display = 'none';
-      raw.style.display = 'none';
-      emptyState.style.display = '';
-      answersCount.textContent = '—';
-    }
-
-    function renderAnswers(json){
-      tbody.innerHTML = '';
-      tableWrap.style.display = 'none';
-      raw.style.display = 'none';
-      emptyState.style.display = 'none';
-
-      const answers = (json && json.Answer) ? json.Answer : [];
-      answersCount.textContent = String(answers.length);
-
-      if(!answers.length){
-        headline.textContent = 'No answers found.';
-        subline.textContent = 'Try another record type or use ANY for a broader overview.';
-        emptyState.style.display = '';
-        return;
-      }
-
-      headline.textContent = 'Found ' + answers.length + ' answer(s).';
-      subline.textContent = 'Click any answer value to copy it.';
-
-      answers.forEach((a) => {
-        const tr = document.createElement('tr');
-        const t = typeNameFromNum(a.type || a.Type);
-        const data = (a.data || a.Data || '').toString();
-        const ttl = (a.TTL ?? a.ttl ?? '').toString();
-
-        tr.innerHTML = `
-          <td class="mono"><strong>${escapeHtml(t)}</strong></td>
-          <td class="mono"><span class="copy-link" data-copy="${escapeHtml(data)}">${escapeHtml(data)}</span></td>
-          <td class="mono">${escapeHtml(ttl || '—')}</td>
-        `;
-        tr.querySelector('[data-copy]').addEventListener('click', () => copyText(data));
-        tbody.appendChild(tr);
-      });
-
-      tableWrap.style.display = '';
-    }
-
-    async function runLookup(typeOverride){
-      const name = normalizeName(nameEl.value);
-      const resolver = resolverEl.value;
-      const type = (typeOverride || typePickEl.value || 'A').toUpperCase();
-
-      nameEl.value = name;
-      resolverOut.textContent = resolver === 'google' ? 'Google DoH' : 'Cloudflare DoH';
-      selectType(type);
-      qOut.textContent = name ? (name + ' · ' + type + ' · ' + resolver) : '—';
-      typeOut.textContent = type;
-
-      if(!name){
-        toast('Enter a domain');
-        setStatus('warn', 'Missing domain');
-        headline.textContent = 'Please enter a domain or hostname first.';
-        subline.textContent = 'Example: instantqr.io';
-        resetViews();
-        return;
-      }
-
-      setStatus('', 'Looking up…');
-      lookupBtn.disabled = true;
-      lookupBtn.textContent = 'Looking up…';
-      msOut.textContent = '…';
-      headline.textContent = 'Working…';
-      subline.textContent = 'Fetching DNS-over-HTTPS response.';
-      resetViews();
-
-      try{
-        let outJson = null;
-        let totalMs = 0;
-
-        if(type === 'ANY'){
-          const types = ['A','AAAA','CNAME','MX','TXT','NS','SOA'];
-          const t0 = performance.now();
-          const results = await Promise.all(
-            types.map(t => fetchDoh(resolver, name, t)
-              .then(r => ({ type:t, ...r }))
-              .catch(e => ({ type:t, error:String(e) })))
-          );
-          totalMs = Math.round(performance.now() - t0);
-
-          const merged = [];
-          results.forEach(r => {
-            if(r && r.json && Array.isArray(r.json.Answer)){
-              r.json.Answer.forEach(a => merged.push(a));
-            }
-          });
-
-          outJson = {
-            Status: 0,
-            Question: [{ name, type: 'ANY' }],
-            Answer: merged,
-            _meta: {
-              resolver,
-              bundle: results.map(r => ({
-                type: r.type,
-                ms: r.ms,
-                ok: !!(r.json && r.json.Answer),
-                error: r.error || null
-              }))
-            }
-          };
-
-          msOut.textContent = totalMs + ' ms';
-          lastJson = outJson;
-
-          if(merged.length){
-            setStatus('ok', 'Success');
-          } else {
-            setStatus('warn', 'No answers');
-          }
-
-          renderAnswers(outJson);
-          return;
-        }
-
-        const { json, ms } = await fetchDoh(resolver, name, type);
-        msOut.textContent = ms + ' ms';
-        lastJson = json;
-
-        const status = json && (json.Status ?? json.status);
-        const answers = (json && json.Answer) ? json.Answer : [];
-
-        if(status === 0 && answers.length){
-          setStatus('ok', 'Success');
-        } else if(status === 0 && !answers.length){
-          setStatus('warn', 'No answers');
-        } else {
-          setStatus('bad', 'Resolver error');
-        }
-
-        renderAnswers(json);
-      } catch(e){
-        msOut.textContent = '—';
-        lastJson = { error: String(e) };
-        setStatus('bad', 'Request failed');
-        headline.textContent = 'Request failed.';
-        subline.textContent = 'Try another resolver or double-check the hostname.';
-        answersCount.textContent = '0';
-        emptyState.style.display = 'none';
-        raw.style.display = 'block';
-        raw.textContent = JSON.stringify(lastJson, null, 2);
-      } finally {
-        lookupBtn.disabled = false;
-        lookupBtn.textContent = 'Lookup DNS';
-      }
-    }
-
-    lookupBtn.addEventListener('click', () => runLookup());
-    typePickEl.addEventListener('change', () => selectType(typePickEl.value));
-    resolverEl.addEventListener('change', () => {
-      resolverOut.textContent = resolverEl.value === 'google' ? 'Google DoH' : 'Cloudflare DoH';
-    });
-
-    typeChips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        const type = chip.dataset.type;
-        selectType(type);
-        runLookup(type);
-      });
-    });
-
-    nameEl.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter'){
-        e.preventDefault();
-        runLookup();
-      }
-    });
-
-    shareBtn.addEventListener('click', async () => {
-      const name = normalizeName(nameEl.value);
-      const type = (typePickEl.value || 'A').toUpperCase();
-      const resolver = resolverEl.value;
-      const url = new URL(window.location.href);
-      url.searchParams.set('name', name || '');
-      url.searchParams.set('type', type);
-      url.searchParams.set('resolver', resolver);
-      await copyText(url.toString());
-    });
-
-    clearBtn.addEventListener('click', () => {
-      nameEl.value = '';
-      msOut.textContent = '—';
-      qOut.textContent = '—';
-      lastJson = null;
-      setStatus('', 'Ready');
-      resolverOut.textContent = resolverEl.value === 'google' ? 'Google DoH' : 'Cloudflare DoH';
-      selectType('A');
-      headline.textContent = 'Ready to run a lookup.';
-      subline.textContent = 'Run a lookup to see DNS answers and metadata.';
-      resetViews();
-      raw.textContent = '';
-      toast('Cleared');
-      nameEl.focus();
-    });
-
-    copyJsonBtn.addEventListener('click', async () => {
-      if(!lastJson){
-        toast('Nothing to copy');
-        return;
-      }
-      await copyText(JSON.stringify(lastJson, null, 2));
-    });
-
-    (function init(){
-      const url = new URL(window.location.href);
-      const name = normalizeName(url.searchParams.get('name') || '');
-      const type = (url.searchParams.get('type') || 'A').toUpperCase();
-      const resolver = (url.searchParams.get('resolver') || 'cloudflare').toLowerCase();
-
-      if(resolver === 'google') resolverEl.value = 'google';
-      resolverOut.textContent = resolverEl.value === 'google' ? 'Google DoH' : 'Cloudflare DoH';
-
-      if(['A','AAAA','CNAME','MX','TXT','NS','SOA','ANY'].includes(type)){
-        selectType(type);
-      } else {
-        selectType('A');
-      }
-
-      if(name){
-        nameEl.value = name;
-        runLookup(typePickEl.value);
-      } else {
-        nameEl.value = 'instantqr.io';
-      }
-    })();
-  })();
-  </script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/dns-lookup.js" defer></script>
 </body>
 </html>
