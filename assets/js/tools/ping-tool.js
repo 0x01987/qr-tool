@@ -1,41 +1,37 @@
-(function () {
-  const form = document.getElementById("ping-form");
-  const hostInput = document.getElementById("host");
-  const pingButton = document.getElementById("ping-button");
-  const clearButton = document.getElementById("clear-button");
-  const resultsEl = document.getElementById("results");
-  const statusText = document.getElementById("status-text");
-  const summaryCards = document.getElementById("summary-cards");
+(() => {
+  const hostEl = document.getElementById("host");
+  const countEl = document.getElementById("count");
+  const timeoutEl = document.getElementById("timeout");
+  const pingBtn = document.getElementById("pingBtn");
+  const copyBtn = document.getElementById("copyBtn");
+  const shareBtn = document.getElementById("shareBtn");
+  const loader = document.getElementById("loader");
+  const resultsBody = document.getElementById("resultsBody");
+  const statusBadge = document.getElementById("statusBadge");
 
-  const avgLatencyEl = document.getElementById("avg-latency");
-  const bestLatencyEl = document.getElementById("best-latency");
-  const worstLatencyEl = document.getElementById("worst-latency");
-  const successRateEl = document.getElementById("success-rate");
+  const avgLatencyEl = document.getElementById("avgLatency");
+  const bestLatencyEl = document.getElementById("bestLatency");
+  const worstLatencyEl = document.getElementById("worstLatency");
+  const successRateEl = document.getElementById("successRate");
 
-  const TOTAL_ATTEMPTS = 5;
-  const PAUSE_MS = 400;
-  const REQUEST_TIMEOUT_MS = 8000;
+  const quickButtons = Array.from(document.querySelectorAll("[data-fill]"));
 
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  let lastSummaryText = "";
+  let isRunning = false;
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, ch => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[ch]));
   }
 
-  function escapeHtml(value) {
-    return String(value).replace(/[&<>"']/g, (char) => {
-      const map = {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        "\"": "&quot;",
-        "'": "&#39;"
-      };
-      return map[char];
-    });
-  }
-
-  function normalizeHost(input) {
+  function normalizeTarget(input) {
     let value = String(input || "").trim();
-    if (!value) return "";
+    if (!value) return null;
 
     if (!/^https?:\/\//i.test(value)) {
       value = "https://" + value;
@@ -44,163 +40,265 @@
     try {
       const url = new URL(value);
       return {
+        href: url.href,
         origin: url.origin,
-        hostname: url.hostname,
-        href: url.href
+        hostname: url.hostname
       };
     } catch {
       return null;
     }
   }
 
-  function clearResults() {
-    resultsEl.innerHTML = '<div class="results-empty">No test results yet.</div>';
-    statusText.textContent = "Ready.";
-    summaryCards.hidden = true;
+  function setStatus(text) {
+    statusBadge.textContent = text;
+  }
+
+  function setLoader(show) {
+    loader.hidden = !show;
+  }
+
+  function resetSummary() {
     avgLatencyEl.textContent = "—";
     bestLatencyEl.textContent = "—";
     worstLatencyEl.textContent = "—";
     successRateEl.textContent = "—";
   }
 
-  function appendLine(html) {
-    const line = document.createElement("div");
-    line.className = "result-line";
-    line.innerHTML = html;
-
-    if (resultsEl.querySelector(".results-empty")) {
-      resultsEl.innerHTML = "";
-    }
-
-    resultsEl.appendChild(line);
-    resultsEl.scrollTop = resultsEl.scrollHeight;
+  function renderEmptyRow(message) {
+    resultsBody.innerHTML = `
+      <tr>
+        <td class="resolver">Ready</td>
+        <td class="resultCell">
+          <div class="resultBox">
+            <div class="mono muted">${escapeHtml(message)}</div>
+          </div>
+        </td>
+        <td class="ttl">—</td>
+        <td class="ttl">—</td>
+      </tr>
+    `;
   }
 
-  async function pingOnce(origin) {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  function latencyTone(ms) {
+    if (ms < 20) return "ok";
+    if (ms < 50) return "ok";
+    if (ms < 100) return "warn";
+    return "bad";
+  }
 
-    const testUrl = origin + "/?instantqr_ping=" + Date.now() + "_" + Math.random().toString(36).slice(2);
+  function toneText(ms) {
+    if (ms < 20) return "Excellent";
+    if (ms < 50) return "Very Good";
+    if (ms < 100) return "Acceptable";
+    return "Slow";
+  }
+
+  function appendRow(attempt, resultText, statusText, latencyText, tone = "") {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td class="resolver">${escapeHtml(String(attempt))}</td>
+      <td class="resultCell">
+        <div class="resultBox">
+          <div class="mono ${tone ? tone : "muted"}">${resultText}</div>
+        </div>
+      </td>
+      <td class="ttl">${escapeHtml(statusText)}</td>
+      <td class="ttl">${escapeHtml(latencyText)}</td>
+    `;
+    resultsBody.appendChild(tr);
+  }
+
+  async function pingOnce(origin, timeoutMs) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+
     const start = performance.now();
+    const cacheBust = `instantqr_ping=${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    const target = `${origin.replace(/\/$/, "")}/?${cacheBust}`;
 
     try {
-      await fetch(testUrl, {
+      await fetch(target, {
         method: "GET",
         mode: "no-cors",
         cache: "no-store",
         signal: controller.signal
       });
 
+      clearTimeout(timer);
       const latency = Math.round(performance.now() - start);
-      clearTimeout(timeoutId);
 
-      return {
-        ok: true,
-        latency
-      };
-    } catch (error) {
-      clearTimeout(timeoutId);
-
-      const timedOut = error && error.name === "AbortError";
-
-      return {
-        ok: false,
-        error: timedOut ? "timeout" : "request failed"
-      };
+      return { ok: true, latency };
+    } catch (err) {
+      clearTimeout(timer);
+      if (err && err.name === "AbortError") {
+        return { ok: false, error: "Timeout" };
+      }
+      return { ok: false, error: "Blocked or failed" };
     }
   }
 
-  function renderSummary(times, totalAttempts) {
+  function updateSummary(times, totalCount) {
     if (!times.length) {
-      summaryCards.hidden = false;
       avgLatencyEl.textContent = "N/A";
       bestLatencyEl.textContent = "N/A";
       worstLatencyEl.textContent = "N/A";
-      successRateEl.textContent = "0%";
-      return;
+      successRateEl.textContent = `0/${totalCount}`;
+      return {
+        avg: null,
+        best: null,
+        worst: null,
+        success: 0
+      };
     }
 
-    const avg = Math.round(times.reduce((sum, value) => sum + value, 0) / times.length);
+    const avg = Math.round(times.reduce((a, b) => a + b, 0) / times.length);
     const best = Math.min(...times);
     const worst = Math.max(...times);
-    const successRate = Math.round((times.length / totalAttempts) * 100);
 
-    avgLatencyEl.textContent = avg + " ms";
-    bestLatencyEl.textContent = best + " ms";
-    worstLatencyEl.textContent = worst + " ms";
-    successRateEl.textContent = successRate + "%";
-    summaryCards.hidden = false;
+    avgLatencyEl.textContent = `${avg} ms`;
+    bestLatencyEl.textContent = `${best} ms`;
+    worstLatencyEl.textContent = `${worst} ms`;
+    successRateEl.textContent = `${times.length}/${totalCount}`;
+
+    return {
+      avg,
+      best,
+      worst,
+      success: times.length
+    };
   }
 
-  async function startPing(event) {
-    event.preventDefault();
+  function buildSummaryText(hostname, totalCount, timeoutMs, stats) {
+    return [
+      `Ping Tool Summary`,
+      `Target: ${hostname}`,
+      `Requests: ${totalCount}`,
+      `Timeout: ${timeoutMs} ms`,
+      `Average: ${stats.avg != null ? stats.avg + " ms" : "N/A"}`,
+      `Best: ${stats.best != null ? stats.best + " ms" : "N/A"}`,
+      `Worst: ${stats.worst != null ? stats.worst + " ms" : "N/A"}`,
+      `Success Rate: ${stats.success}/${totalCount}`,
+      `Note: Browser-based HTTP/HTTPS latency test, not true ICMP ping.`
+    ].join("\n");
+  }
 
-    const parsed = normalizeHost(hostInput.value);
+  async function runTest() {
+    if (isRunning) return;
+
+    const parsed = normalizeTarget(hostEl.value);
+    const totalCount = Math.max(1, Number(countEl.value || 5));
+    const timeoutMs = Math.max(1000, Number(timeoutEl.value || 6000));
 
     if (!parsed) {
-      clearResults();
-      statusText.textContent = "Please enter a valid domain or URL.";
-      appendLine('<span class="result-bad">Invalid input.</span> Enter a valid domain like example.com');
-      hostInput.focus();
+      resetSummary();
+      renderEmptyRow("Please enter a valid domain or URL.");
+      setStatus("Invalid input");
+      hostEl.focus();
       return;
     }
 
-    pingButton.disabled = true;
-    clearButton.disabled = true;
-    summaryCards.hidden = true;
-    resultsEl.innerHTML = "";
+    isRunning = true;
+    pingBtn.disabled = true;
+    setLoader(true);
+    setStatus("Running");
+    resetSummary();
+    lastSummaryText = "";
 
-    const safeHostname = escapeHtml(parsed.hostname);
+    resultsBody.innerHTML = "";
+
     const times = [];
 
-    statusText.textContent = "Running test...";
-    appendLine(`Target: <strong>${safeHostname}</strong>`);
-    appendLine(`Protocol: <span class="result-warn">HTTP latency test via browser fetch</span>`);
-    appendLine("Starting 5 requests...");
-
-    for (let i = 1; i <= TOTAL_ATTEMPTS; i++) {
-      const result = await pingOnce(parsed.origin);
+    for (let i = 1; i <= totalCount; i++) {
+      const result = await pingOnce(parsed.origin, timeoutMs);
 
       if (result.ok) {
         times.push(result.latency);
-        appendLine(`Reply ${i}: <span class="result-ok">${result.latency} ms</span>`);
+        const tone = latencyTone(result.latency);
+        appendRow(
+          i,
+          `${escapeHtml(parsed.hostname)} responded`,
+          toneText(result.latency),
+          `${result.latency} ms`,
+          tone
+        );
       } else {
-        appendLine(`Reply ${i}: <span class="result-bad">${escapeHtml(result.error)}</span>`);
-      }
-
-      if (i < TOTAL_ATTEMPTS) {
-        await sleep(PAUSE_MS);
+        appendRow(
+          i,
+          escapeHtml(parsed.hostname),
+          result.error,
+          "—",
+          "bad"
+        );
       }
     }
 
-    renderSummary(times, TOTAL_ATTEMPTS);
+    const stats = updateSummary(times, totalCount);
+    lastSummaryText = buildSummaryText(parsed.hostname, totalCount, timeoutMs, stats);
 
-    if (times.length) {
-      statusText.textContent = `Completed. ${times.length} of ${TOTAL_ATTEMPTS} requests succeeded.`;
-      appendLine("<strong>Test complete.</strong>");
-    } else {
-      statusText.textContent = "Completed. No successful responses measured.";
-      appendLine('<span class="result-bad">No successful responses measured.</span>');
-      appendLine('Tip: some websites block browser-based requests, even when they are online.');
-    }
-
-    pingButton.disabled = false;
-    clearButton.disabled = false;
+    setLoader(false);
+    setStatus(times.length ? "Complete" : "No response");
+    pingBtn.disabled = false;
+    isRunning = false;
   }
 
-  form.addEventListener("submit", startPing);
+  async function copySummary() {
+    if (!lastSummaryText) return;
 
-  clearButton.addEventListener("click", () => {
-    hostInput.value = "";
-    clearResults();
-    hostInput.focus();
-  });
+    try {
+      await navigator.clipboard.writeText(lastSummaryText);
+      const old = copyBtn.textContent;
+      copyBtn.textContent = "Copied";
+      setTimeout(() => { copyBtn.textContent = old; }, 1400);
+    } catch {}
+  }
 
-  hostInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      form.requestSubmit();
+  async function copyLink() {
+    const parsed = normalizeTarget(hostEl.value);
+    const url = new URL(window.location.href);
+
+    if (parsed) {
+      url.searchParams.set("host", parsed.href);
+    } else {
+      url.searchParams.delete("host");
     }
+
+    url.searchParams.set("count", countEl.value || "5");
+    url.searchParams.set("timeout", timeoutEl.value || "6000");
+
+    try {
+      await navigator.clipboard.writeText(url.toString());
+      const old = shareBtn.textContent;
+      shareBtn.textContent = "Copied";
+      setTimeout(() => { shareBtn.textContent = old; }, 1400);
+    } catch {}
+  }
+
+  function applyQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    const host = params.get("host");
+    const count = params.get("count");
+    const timeout = params.get("timeout");
+
+    if (host) hostEl.value = host;
+    if (count && [...countEl.options].some(o => o.value === count)) countEl.value = count;
+    if (timeout && [...timeoutEl.options].some(o => o.value === timeout)) timeoutEl.value = timeout;
+  }
+
+  pingBtn?.addEventListener("click", runTest);
+  copyBtn?.addEventListener("click", copySummary);
+  shareBtn?.addEventListener("click", copyLink);
+
+  hostEl?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") runTest();
   });
 
-  clearResults();
+  quickButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      hostEl.value = btn.getAttribute("data-fill") || "";
+      hostEl.focus();
+    });
+  });
+
+  applyQueryParams();
+  renderEmptyRow("Enter a domain or URL, choose options, and run the test.");
 })();
