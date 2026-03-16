@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>Token Contract Analyzer | Multi-Chain ERC-20 Contract Checker | InstantQR</title>
-  <meta name="description" content="Analyze token contracts across Ethereum, Base, Arbitrum, Optimism, BNB Smart Chain, Polygon, and Avalanche. Check metadata, proxy signals, transfer behavior, logs, and suspicious contract patterns." />
+  <meta name="description" content="Analyze token contracts across major EVM chains. Check metadata, transfer behavior, proxy signals, recent logs, danger selectors, and compare two contracts side by side." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
@@ -31,23 +31,47 @@
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css" />
 
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Token Contract Analyzer | InstantQR" />
+  <meta property="og:description" content="Analyze token contracts across major EVM chains with metadata, proxy, behavior, logs, and compare mode." />
+  <meta property="og:url" content="https://instantqr.io/tools/token-contract-analyzer.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR Token Contract Analyzer" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Token Contract Analyzer | InstantQR" />
+  <meta name="twitter:description" content="Analyze token contracts across major EVM chains with metadata, proxy, behavior, logs, and compare mode." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Token Contract Analyzer",
+    "url":"https://instantqr.io/tools/token-contract-analyzer.html",
+    "description":"Analyze token contracts across major EVM chains with metadata, proxy, behavior, logs, and compare mode.",
+    "isPartOf":{"@type":"WebSite","name":"InstantQR","url":"https://instantqr.io/"}
+  }
+  </script>
+
   <style>
-    .controls.cols-3{grid-template-columns:1.5fr 1fr 1fr}
-    .metricGrid,.detailGrid{
+    .controls.cols-4{grid-template-columns:1.35fr 1fr 1fr auto}
+    .compareGrid,
+    .metricGrid,
+    .detailGrid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
       margin-top:12px;
     }
-    .metricCard,.detailCard{
+    .detailGrid.oneCol{grid-template-columns:1fr}
+    .metricCard,.detailCard,.compareCard{
       border-radius:16px;
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
       padding:14px;
-    }
-    .metricCard h3,.detailCard h3{
-      margin:0 0 8px;
-      font-size:15px;
     }
     .cardHead{
       display:flex;
@@ -56,6 +80,10 @@
       gap:10px;
       margin-bottom:8px;
       flex-wrap:wrap;
+    }
+    .metricCard h3,.detailCard h3,.compareCard h3{
+      margin:0;
+      font-size:15px;
     }
     .miniActions{
       display:flex;
@@ -147,8 +175,98 @@
       font-size:13px;
       line-height:1.6;
     }
+    .scoreWrap{
+      margin-top:12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.12);
+      padding:14px;
+    }
+    .scoreHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:8px;
+    }
+    .scoreTitle{
+      font-weight:900;
+      font-size:15px;
+      color:#eaf2ff;
+    }
+    .scoreValue{
+      font-weight:900;
+      font-size:20px;
+    }
+    .scoreMeter{
+      height:12px;
+      border-radius:999px;
+      overflow:hidden;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .scoreFill{
+      height:100%;
+      width:0%;
+      transition:width .25s ease;
+      background:linear-gradient(90deg,#19c37d,#f59e0b,#ef4444);
+    }
+    .scoreLegend{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+    details.rawPanel{
+      margin-top:12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+    details.rawPanel summary{
+      list-style:none;
+      cursor:pointer;
+      padding:14px;
+      font-weight:800;
+      color:#eaf2ff;
+    }
+    details.rawPanel summary::-webkit-details-marker{display:none}
+    .rawBody{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:14px;
+    }
+    .compareTable{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:8px;
+      font-size:13px;
+    }
+    .compareTable th,.compareTable td{
+      text-align:left;
+      padding:10px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      vertical-align:top;
+    }
+    .compareTable th{
+      color:#eaf2ff;
+      font-weight:900;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.3px;
+    }
+    .compareTag{
+      display:inline-block;
+      padding:5px 8px;
+      border-radius:999px;
+      font-size:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:#dce9ff;
+    }
     @media (max-width:980px){
-      .controls.cols-3,.metricGrid,.detailGrid{grid-template-columns:1fr}
+      .controls.cols-4,.metricGrid,.detailGrid,.compareGrid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -185,11 +303,11 @@
     </nav>
 
     <section class="hero" aria-label="Token Contract Analyzer">
-      <div class="pill">🧠 Multi-chain • ⚡ Fast checks • 🔒 Browser-side analysis</div>
+      <div class="pill">🧠 Multi-chain • ⚡ Fast checks • 🔒 Browser-side analysis • ⚖️ Compare mode</div>
       <h1>Token Contract Analyzer</h1>
       <p class="sub">
-        Analyze token contracts across major EVM chains. Check token metadata, behavior, proxy signals,
-        recent logs, and suspicious control patterns in one fast first-pass scan.
+        Analyze token contracts across major EVM chains. Check metadata, behavior, proxy signals,
+        recent logs, danger selectors, raw RPC results, and compare two contracts side by side.
       </p>
 
       <div class="summary" aria-label="Contract summary">
@@ -233,9 +351,9 @@
       </div>
 
       <div class="panelBody">
-        <div class="controls cols-3" aria-label="Analyzer inputs">
+        <div class="controls cols-4" aria-label="Analyzer inputs">
           <div class="control">
-            <label for="contractAddress">Contract Address</label>
+            <label for="contractAddress">Primary Contract Address</label>
             <input id="contractAddress" class="input" type="text" spellcheck="false" autocomplete="off" placeholder="0x..." />
           </div>
 
@@ -256,12 +374,18 @@
             <label for="networkLabel">Active Network</label>
             <input id="networkLabel" class="input" type="text" value="Ethereum" readonly />
           </div>
+
+          <div class="control">
+            <label for="compareAddress">Compare Address (optional)</label>
+            <input id="compareAddress" class="input" type="text" spellcheck="false" autocomplete="off" placeholder="0x..." />
+          </div>
         </div>
 
         <div class="quick" aria-label="Quick actions">
           <button type="button" id="trimBtn">Trim Input</button>
           <button type="button" id="pasteBtn">Paste Address</button>
           <button type="button" id="sampleBtn">Load Sample</button>
+          <button type="button" id="sampleCompareBtn">Load Compare Sample</button>
         </div>
 
         <div class="resultBox ok" style="margin-top:12px;">
@@ -272,7 +396,18 @@
           <div class="monoBlock" id="resultText">Enter a contract address and click Analyze Contract.</div>
         </div>
 
-        <div class="formula" id="formulaText">Checks: bytecode + metadata + transfer behavior + proxy slots + selector scan + recent logs</div>
+        <div class="formula" id="formulaText">Checks: bytecode + metadata + transfer behavior + proxy slots + selector scan + recent logs + compare mode</div>
+
+        <div class="scoreWrap" aria-label="Warning score">
+          <div class="scoreHead">
+            <div class="scoreTitle">Warning Score Meter</div>
+            <div class="scoreValue" id="warningScoreValue">0 / 100</div>
+          </div>
+          <div class="scoreMeter" aria-hidden="true">
+            <div class="scoreFill" id="warningScoreFill"></div>
+          </div>
+          <div class="scoreLegend" id="warningScoreLegend">Lower is better. This is a quick screening score, not a final safety verdict.</div>
+        </div>
 
         <div class="metricGrid">
           <div class="metricCard">
@@ -348,7 +483,7 @@
             <div class="cardHead">
               <h3>Recent Log Activity</h3>
               <div class="miniActions">
-                <button class="miniBtn" type="button" data-copy-target="logDetailsBundle">Copy</button>
+                <button class="miniBtn" type="button" data-copy-target="logBundle">Copy</button>
               </div>
             </div>
             <div class="kv">
@@ -360,8 +495,8 @@
                 <div class="kvKey">Observed Holder Activity</div>
                 <div class="kvVal" id="holderSummary">—</div>
               </div>
-              <div id="logDetailsBundle" hidden></div>
             </div>
+            <div id="logBundle" hidden></div>
           </div>
 
           <div class="detailCard">
@@ -423,7 +558,7 @@
                 <div class="kvVal" id="lastUpdated">—</div>
               </div>
               <div class="kvRow">
-                <div class="kvKey">Function & Risk Summary</div>
+                <div class="kvKey">Function Coverage</div>
                 <div class="kvVal" id="functionSupport">—</div>
               </div>
               <div class="kvRow">
@@ -433,6 +568,55 @@
             </div>
           </div>
         </div>
+
+        <div class="compareCard" id="compareSection" hidden>
+          <div class="cardHead">
+            <h3>Compare Two Contracts</h3>
+            <div class="miniActions">
+              <button class="miniBtn" type="button" data-copy-target="compareTableText">Copy Compare</button>
+            </div>
+          </div>
+          <div class="metricNote">Primary contract is compared against the optional compare address on the same network.</div>
+          <table class="compareTable" aria-label="Compare contracts table">
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Primary</th>
+                <th>Compare</th>
+              </tr>
+            </thead>
+            <tbody id="compareBody">
+              <tr>
+                <td>Waiting</td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="compareTableText" hidden></div>
+        </div>
+
+        <details class="rawPanel">
+          <summary>Expand Raw RPC Section</summary>
+          <div class="rawBody">
+            <div class="detailGrid oneCol">
+              <div class="detailCard">
+                <div class="cardHead">
+                  <h3>Raw RPC Summary</h3>
+                  <div class="miniActions">
+                    <button class="miniBtn" type="button" data-copy-target="rawRpcText">Copy Raw RPC</button>
+                  </div>
+                </div>
+                <div class="kv">
+                  <div class="kvRow">
+                    <div class="kvKey">Raw RPC Data</div>
+                    <div class="kvVal monoBlock" id="rawRpcText">—</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
 
         <div class="hintBox">
           This is a fast first-pass analyzer. It can flag suspicious signals, but it is not a full audit and cannot guarantee safety.
