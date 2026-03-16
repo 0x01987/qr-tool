@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-<!-- Main Pages -->
 <url>
 <loc>https://instantqr.io/</loc>
 <changefreq>weekly</changefreq>
@@ -33,21 +32,15 @@
 </url>
 
 <url>
-<loc>https://instantqr.io/mini-games/games.html</loc>
-<changefreq>weekly</changefreq>
-<priority>0.7</priority>
-</url>
-
-<url>
 <loc>https://instantqr.io/about.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.6</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/contact.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.6</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
@@ -62,155 +55,195 @@
 <priority>0.4</priority>
 </url>
 
-<!-- QR Code Tools -->
 <url>
 <loc>https://instantqr.io/tools/wifi-qr-code-generator.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/url-qr-code-generator.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
-<!-- Security Tools -->
 <url>
 <loc>https://instantqr.io/tools/password.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/password-leak-checker.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/random-string-generator.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
-<!-- Network Tools (UNCHANGED) -->
 <url>
 <loc>https://instantqr.io/tools/ip-lookup.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/dns-lookup.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/dns-propagation-checker.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/internet-speed-test.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
-<!-- Network tools directory stays -->
 <url>
 <loc>https://instantqr.io/tools/ping-tool.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.75</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/reverse-dns-lookup.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.75</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/port-checker.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.75</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/subnet-calculator.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.75</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/traceroute-tool.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.75</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
-<!-- Time Tools -->
 <url>
 <loc>https://instantqr.io/tools/world-clock.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.75</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/time-zone-converter.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.75</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/countdown-timer.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
-<!-- Converter Tools -->
 <url>
 <loc>https://instantqr.io/tools/unit-converter.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/tools/cups-to-grams.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/tools/grams-to-cups.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/tools/lbs-to-kg.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/tools/kg-to-lbs.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/tools/inches-to-cm.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/tools/cm-to-inches.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/tools/mph-to-kmh.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/tools/kmh-to-mph.html</loc>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/f-to-c.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/c-to-f.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
-<!-- Crypto Tools -->
 <url>
 <loc>https://instantqr.io/tools/crypto-profit-calculator.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/web3-gas-fee-estimator.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.75</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
-<!-- Web3 tools moved under /tools -->
 <url>
 <loc>https://instantqr.io/tools/block-explorer-lite.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/dca-calculator.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
@@ -222,14 +255,14 @@
 
 <url>
 <loc>https://instantqr.io/tools/nft-rarity-checker.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.75</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/token-contract-analyzer.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.85</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
@@ -240,77 +273,188 @@
 
 <url>
 <loc>https://instantqr.io/tools/wallet-approval-checker.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.85</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
-<!-- Developer Tools -->
 <url>
 <loc>https://instantqr.io/tools/json-formatter.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/base64-encoder.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/uuid-generator.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/jwt-decoder.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/tools/timestamp-converter.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/tools/regex-tester.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/tools/hash-generator.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
-<!-- Mini Games -->
+<url>
+<loc>https://instantqr.io/tools/sitemap-generator.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/mini-games/games.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.6</priority>
+</url>
+
 <url>
 <loc>https://instantqr.io/mini-games/2048-mini.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/mini-games/tap-aim.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/mini-games/snake.html</loc>
-<changefreq>monthly</changefreq>
+<changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
-<!-- Guides -->
 <url>
 <loc>https://instantqr.io/guides/what-is-a-dns-lookup.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/guides/dns-propagation-explained.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://instantqr.io/guides/what-is-whois-lookup.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/how-to-create-wifi-qr-code.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/how-to-create-url-qr-code.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/qr-code-best-practices.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/how-to-generate-a-secure-password.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/what-is-a-password-leak.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/password-security-checklist.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/how-to-calculate-crypto-profit.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/what-is-a-gas-fee.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/crypto-fees-and-taxes-basics.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/meta-title-description-best-practices.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/robots-txt-basics.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/how-to-fix-canonical-issues.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/what-is-base64.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/what-is-json-formatting.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://instantqr.io/guides/unix-timestamp-explained.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 </urlset>
