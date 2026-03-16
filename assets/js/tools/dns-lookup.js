@@ -31,6 +31,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let lastJson = null;
   let rawVisible = false;
+  let activeRunId = 0;
+
+  const RESOLVER_LABELS = {
+    cloudflare: 'Cloudflare DoH',
+    google: 'Google DoH'
+  };
+
+  const TYPE_MAP = {
+    1: 'A',
+    2: 'NS',
+    5: 'CNAME',
+    6: 'SOA',
+    15: 'MX',
+    16: 'TXT',
+    28: 'AAAA'
+  };
 
   function toast(msg) {
     if (!toastEl) return;
@@ -43,16 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function copyText(text) {
+    const value = String(text || '');
+    if (!value) return;
+
     try {
       if (window.InstantQR && typeof window.InstantQR.copyText === 'function') {
-        await window.InstantQR.copyText(text);
+        await window.InstantQR.copyText(value);
+      } else if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
       } else {
-        await navigator.clipboard.writeText(text);
+        throw new Error('Clipboard unavailable');
       }
       toast('Copied');
     } catch {
       const ta = document.createElement('textarea');
-      ta.value = text;
+      ta.value = value;
       ta.style.position = 'fixed';
       ta.style.left = '-9999px';
       document.body.appendChild(ta);
@@ -94,47 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch {}
 
     s = s.replace(/\.+$/, '');
-    return s;
+    return s.toLowerCase();
   }
-
-  function dohUrl(resolver, name, type) {
-    const encName = encodeURIComponent(name);
-    const encType = encodeURIComponent(type);
-
-    if (resolver === 'google') {
-      return `https://dns.google/resolve?name=${encName}&type=${encType}`;
-    }
-
-    return `https://cloudflare-dns.com/dns-query?name=${encName}&type=${encType}`;
-  }
-
-  async function fetchDoh(resolver, name, type) {
-    const url = dohUrl(resolver, name, type);
-    const started = performance.now();
-
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: { accept: 'application/dns-json' },
-      cache: 'no-store'
-    });
-
-    const ms = Math.round(performance.now() - started);
-
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-    const json = await res.json();
-    return { json, ms, url };
-  }
-
-  const TYPE_MAP = {
-    1: 'A',
-    2: 'NS',
-    5: 'CNAME',
-    6: 'SOA',
-    15: 'MX',
-    16: 'TXT',
-    28: 'AAAA'
-  };
 
   function typeNameFromNum(n) {
     return TYPE_MAP[n] || String(n);
@@ -154,14 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function resetViews() {
     tbody.innerHTML = '';
     tableWrap.style.display = 'none';
-    raw.style.display = rawVisible ? 'block' : 'none';
     emptyState.style.display = '';
     answersCount.textContent = '—';
+    if (!rawVisible) raw.style.display = 'none';
   }
 
   function setRawJson(obj) {
     raw.textContent = obj ? JSON.stringify(obj, null, 2) : '';
-    raw.style.display = rawVisible ? 'block' : 'none';
+    raw.style.display = rawVisible && raw.textContent ? 'block' : 'none';
+  }
+
+  function setResolverLabel() {
+    resolverOut.textContent = RESOLVER_LABELS[resolverEl.value] || 'Cloudflare DoH';
   }
 
   function renderAnswers(json) {
@@ -169,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tableWrap.style.display = 'none';
     emptyState.style.display = 'none';
 
-    const answers = (json && Array.isArray(json.Answer)) ? json.Answer : [];
+    const answers = Array.isArray(json?.Answer) ? json.Answer : [];
     answersCount.textContent = String(answers.length);
 
     if (!answers.length) {
@@ -185,37 +171,97 @@ document.addEventListener('DOMContentLoaded', () => {
 
     answers.forEach((answer) => {
       const tr = document.createElement('tr');
-      const type = typeNameFromNum(answer.type || answer.Type);
+      const recordType = typeNameFromNum(answer.type || answer.Type);
       const data = (answer.data || answer.Data || '').toString();
       const ttl = (answer.TTL ?? answer.ttl ?? '').toString();
 
       tr.innerHTML = `
-        <td class="mono"><strong>${escapeHtml(type)}</strong></td>
-        <td class="mono"><span class="copy-link" data-copy="${escapeHtml(data)}">${escapeHtml(data)}</span></td>
+        <td class="mono"><strong>${escapeHtml(recordType)}</strong></td>
+        <td class="mono"><span class="copy-link">${escapeHtml(data)}</span></td>
         <td class="mono">${escapeHtml(ttl || '—')}</td>
       `;
 
-      const copyEl = tr.querySelector('[data-copy]');
-      if (copyEl) {
-        copyEl.addEventListener('click', () => copyText(data));
-      }
+      const copyEl = tr.querySelector('.copy-link');
+      copyEl?.addEventListener('click', () => copyText(data));
 
       tbody.appendChild(tr);
     });
 
-    tableWrap.style.display = '';
+    tableWrap.style.display = 'block';
     setRawJson(json);
   }
 
+  function buildResolverUrl(resolver, name, type) {
+    const encName = encodeURIComponent(name);
+    const encType = encodeURIComponent(type);
+
+    if (resolver === 'google') {
+      return `https://dns.google/resolve?name=${encName}&type=${encType}`;
+    }
+
+    return `https://cloudflare-dns.com/dns-query?name=${encName}&type=${encType}`;
+  }
+
+  async function fetchDoh(resolver, name, type, timeoutMs = 5000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+    const url = buildResolverUrl(resolver, name, type);
+    const started = performance.now();
+
+    try {
+      const res = await fetch(url, {
+        method: 'GET',
+        headers: { accept: 'application/dns-json' },
+        cache: 'no-store',
+        signal: controller.signal
+      });
+
+      const ms = Math.round(performance.now() - started);
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      const json = await res.json();
+      return { json, ms, url, resolver };
+    } catch (err) {
+      if (err?.name === 'AbortError') {
+        throw new Error('Request timed out');
+      }
+      throw err;
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }
+
+  async function fetchWithFallback(preferredResolver, name, type) {
+    const order = preferredResolver === 'google'
+      ? ['google', 'cloudflare']
+      : ['cloudflare', 'google'];
+
+    let lastError = null;
+
+    for (const resolver of order) {
+      try {
+        return await fetchDoh(resolver, name, type);
+      } catch (err) {
+        lastError = err;
+      }
+    }
+
+    throw lastError || new Error('Lookup failed');
+  }
+
   async function runLookup(typeOverride) {
+    const runId = ++activeRunId;
     const name = normalizeName(nameEl.value);
-    const resolver = resolverEl.value;
+    const preferredResolver = resolverEl.value;
     const type = (typeOverride || typePickEl.value || 'A').toUpperCase();
 
     nameEl.value = name;
-    resolverOut.textContent = resolver === 'google' ? 'Google DoH' : 'Cloudflare DoH';
     selectType(type);
-    qOut.textContent = name ? `${name} · ${type} · ${resolver}` : '—';
+    setResolverLabel();
+    qOut.textContent = name ? `${name} · ${type} · ${preferredResolver}` : '—';
     typeOut.textContent = type;
 
     if (!name) {
@@ -233,86 +279,110 @@ document.addEventListener('DOMContentLoaded', () => {
     lookupBtn.disabled = true;
     lookupBtn.textContent = 'Looking up…';
     msOut.textContent = '…';
+    answersCount.textContent = '…';
     headline.textContent = 'Working…';
     subline.textContent = 'Fetching DNS-over-HTTPS response.';
-    resetViews();
+    tbody.innerHTML = '';
+    tableWrap.style.display = 'none';
+    emptyState.style.display = 'none';
 
     try {
-      let outJson = null;
-
       if (type === 'ANY') {
-        const types = ['A', 'AAAA', 'CNAME', 'MX', 'TXT', 'NS', 'SOA'];
+        const recordTypes = ['A', 'AAAA', 'CNAME', 'MX', 'TXT', 'NS', 'SOA'];
         const started = performance.now();
 
         const results = await Promise.all(
-          types.map(async (t) => {
+          recordTypes.map(async (recordType) => {
             try {
-              const res = await fetchDoh(resolver, name, t);
-              return { type: t, ...res };
+              return await fetchWithFallback(preferredResolver, name, recordType);
             } catch (error) {
-              return { type: t, error: String(error) };
+              return { error: String(error), resolver: preferredResolver, json: { Answer: [] }, ms: null, type: recordType };
             }
           })
         );
 
-        const totalMs = Math.round(performance.now() - started);
-        const merged = [];
+        if (runId !== activeRunId) return;
 
-        results.forEach((res) => {
-          if (res && res.json && Array.isArray(res.json.Answer)) {
-            res.json.Answer.forEach((a) => merged.push(a));
-          }
+        const mergedAnswers = [];
+        const meta = [];
+
+        results.forEach((res, i) => {
+          const recordType = recordTypes[i];
+          const answers = Array.isArray(res?.json?.Answer) ? res.json.Answer : [];
+          answers.forEach((a) => mergedAnswers.push(a));
+          meta.push({
+            type: recordType,
+            resolver: res?.resolver || preferredResolver,
+            ms: res?.ms ?? null,
+            answers: answers.length,
+            error: res?.error || null
+          });
         });
 
-        outJson = {
+        const totalMs = Math.round(performance.now() - started);
+
+        const outJson = {
           Status: 0,
           Question: [{ name, type: 'ANY' }],
-          Answer: merged,
-          _meta: {
-            resolver,
-            bundle: results.map((res) => ({
-              type: res.type,
-              ms: res.ms,
-              ok: !!(res.json && res.json.Answer),
-              error: res.error || null
-            }))
-          }
+          Answer: mergedAnswers,
+          _meta: meta
         };
 
-        msOut.textContent = `${totalMs} ms`;
         lastJson = outJson;
+        msOut.textContent = `${totalMs} ms`;
+        answersCount.textContent = String(mergedAnswers.length);
 
-        if (merged.length) setStatus('ok', 'Success');
-        else setStatus('warn', 'No answers');
+        if (mergedAnswers.length) {
+          setStatus('ok', 'Success');
+          headline.textContent = `Found ${mergedAnswers.length} answer(s).`;
+          subline.textContent = 'Combined view from multiple record types.';
+        } else {
+          setStatus('warn', 'No answers');
+          headline.textContent = 'No answers found.';
+          subline.textContent = 'No supported records were returned for this hostname.';
+        }
 
         renderAnswers(outJson);
         return;
       }
 
-      const { json, ms } = await fetchDoh(resolver, name, type);
-      msOut.textContent = `${ms} ms`;
+      const { json, ms, resolver } = await fetchWithFallback(preferredResolver, name, type);
+      if (runId !== activeRunId) return;
+
       lastJson = json;
+      msOut.textContent = `${ms} ms`;
+      resolverOut.textContent = RESOLVER_LABELS[resolver] || resolver;
+      qOut.textContent = `${name} · ${type} · ${resolver}`;
 
-      const status = json && (json.Status ?? json.status);
-      const answers = (json && Array.isArray(json.Answer)) ? json.Answer : [];
+      const status = json?.Status ?? json?.status;
+      const answers = Array.isArray(json?.Answer) ? json.Answer : [];
 
-      if (status === 0 && answers.length) setStatus('ok', 'Success');
-      else if (status === 0 && !answers.length) setStatus('warn', 'No answers');
-      else setStatus('bad', 'Resolver error');
+      if (status === 0 && answers.length) {
+        setStatus('ok', 'Success');
+      } else if (status === 0 && !answers.length) {
+        setStatus('warn', 'No answers');
+      } else {
+        setStatus('bad', 'Resolver error');
+      }
 
       renderAnswers(json);
     } catch (error) {
+      if (runId !== activeRunId) return;
+
       msOut.textContent = '—';
+      answersCount.textContent = '0';
       lastJson = { error: String(error) };
       setStatus('bad', 'Request failed');
       headline.textContent = 'Request failed.';
       subline.textContent = 'Try another resolver or double-check the hostname.';
-      answersCount.textContent = '0';
       emptyState.style.display = 'none';
       setRawJson(lastJson);
+      if (rawVisible) raw.style.display = 'block';
     } finally {
-      lookupBtn.disabled = false;
-      lookupBtn.textContent = 'Lookup DNS';
+      if (runId === activeRunId) {
+        lookupBtn.disabled = false;
+        lookupBtn.textContent = 'Lookup DNS';
+      }
     }
   }
 
@@ -323,7 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   resolverEl.addEventListener('change', () => {
-    resolverOut.textContent = resolverEl.value === 'google' ? 'Google DoH' : 'Cloudflare DoH';
+    setResolverLabel();
   });
 
   typeChips.forEach((chip) => {
@@ -355,6 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   clearBtn.addEventListener('click', () => {
+    activeRunId++;
     nameEl.value = '';
     msOut.textContent = '—';
     qOut.textContent = '—';
@@ -362,7 +433,8 @@ document.addEventListener('DOMContentLoaded', () => {
     rawVisible = false;
     toggleRawBtn.textContent = 'Show Raw JSON';
     setStatus('', 'Ready');
-    resolverOut.textContent = resolverEl.value === 'google' ? 'Google DoH' : 'Cloudflare DoH';
+    resolverEl.value = 'cloudflare';
+    setResolverLabel();
     selectType('A');
     headline.textContent = 'Ready to run a lookup.';
     subline.textContent = 'Run a lookup to see DNS answers and metadata.';
@@ -392,8 +464,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const type = (url.searchParams.get('type') || 'A').toUpperCase();
     const resolver = (url.searchParams.get('resolver') || 'cloudflare').toLowerCase();
 
-    if (resolver === 'google') resolverEl.value = 'google';
-    resolverOut.textContent = resolverEl.value === 'google' ? 'Google DoH' : 'Cloudflare DoH';
+    resolverEl.value = resolver === 'google' ? 'google' : 'cloudflare';
+    setResolverLabel();
 
     if (['A', 'AAAA', 'CNAME', 'MX', 'TXT', 'NS', 'SOA', 'ANY'].includes(type)) {
       selectType(type);
