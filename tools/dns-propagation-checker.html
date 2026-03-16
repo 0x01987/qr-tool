@@ -16,9 +16,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>DNS Propagation Checker | Check A, AAAA, CNAME, MX, TXT, NS & SOA | InstantQR</title>
-  <meta name="description" content="Fast DNS propagation checker to compare A, AAAA, CNAME, MX, TXT, NS, and SOA records across public DNS resolvers. Clean responsive UI for quick DNS troubleshooting." />
-  <meta name="keywords" content="dns propagation checker, dns checker, dns propagation, dns lookup, a record checker, aaaa checker, cname checker, mx checker, txt checker, ns checker, soa checker, domain dns test" />
+  <title>Ping Tool | Test Website Latency Online | InstantQR</title>
+  <meta name="description" content="Fast browser-based ping tool to test website latency, estimate response time, and check basic reachability online. Clean responsive UI for quick network checks." />
+  <meta name="keywords" content="ping tool, website ping test, latency checker, server latency test, website response time, ping checker, online ping tool, network latency test" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
@@ -28,47 +28,39 @@
   <meta name="color-scheme" content="dark" />
   <meta name="format-detection" content="telephone=no" />
 
-  <link rel="canonical" href="https://instantqr.io/tools/dns-propagation-checker.html" />
+  <link rel="canonical" href="https://instantqr.io/tools/ping-tool.html" />
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
 
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://dns.google" crossorigin>
-  <link rel="preconnect" href="https://cloudflare-dns.com" crossorigin>
-  <link rel="preconnect" href="https://security.cloudflare-dns.com" crossorigin>
-  <link rel="preconnect" href="https://family.cloudflare-dns.com" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="//dns.google">
-  <link rel="dns-prefetch" href="//cloudflare-dns.com">
-  <link rel="dns-prefetch" href="//security.cloudflare-dns.com">
-  <link rel="dns-prefetch" href="//family.cloudflare-dns.com">
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css">
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="DNS Propagation Checker | InstantQR" />
-  <meta property="og:description" content="Check DNS propagation fast across public DNS resolvers for A, AAAA, CNAME, MX, TXT, NS, and SOA records." />
-  <meta property="og:url" content="https://instantqr.io/tools/dns-propagation-checker.html" />
+  <meta property="og:title" content="Ping Tool | InstantQR" />
+  <meta property="og:description" content="Test website latency and estimate response time with a fast browser-based ping tool." />
+  <meta property="og:url" content="https://instantqr.io/tools/ping-tool.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
-  <meta property="og:image:alt" content="InstantQR DNS Propagation Checker" />
+  <meta property="og:image:alt" content="InstantQR Ping Tool" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="DNS Propagation Checker | InstantQR" />
-  <meta name="twitter:description" content="Fast DNS propagation checker across public DNS resolvers for common DNS record types." />
+  <meta name="twitter:title" content="Ping Tool | InstantQR" />
+  <meta name="twitter:description" content="Check website latency and basic reachability with a fast browser-based ping-style test." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"WebPage",
-    "name":"DNS Propagation Checker",
-    "url":"https://instantqr.io/tools/dns-propagation-checker.html",
-    "description":"Fast DNS propagation checker for A, AAAA, CNAME, MX, TXT, NS, and SOA records across public resolvers.",
+    "name":"Ping Tool",
+    "url":"https://instantqr.io/tools/ping-tool.html",
+    "description":"Fast browser-based ping tool to estimate website response time and check reachability.",
     "isPartOf":{
       "@type":"WebSite",
       "name":"InstantQR",
@@ -81,13 +73,13 @@
   {
     "@context":"https://schema.org",
     "@type":"SoftwareApplication",
-    "name":"DNS Propagation Checker",
+    "name":"Ping Tool",
     "applicationCategory":"UtilitiesApplication",
     "operatingSystem":"Any",
     "isAccessibleForFree":true,
     "browserRequirements":"Requires JavaScript. Works in modern browsers.",
-    "url":"https://instantqr.io/tools/dns-propagation-checker.html",
-    "description":"Check DNS propagation for A, AAAA, CNAME, MX, TXT, NS, and SOA records across public DNS resolvers.",
+    "url":"https://instantqr.io/tools/ping-tool.html",
+    "description":"Browser-based ping-style latency checker for websites and servers.",
     "publisher":{
       "@type":"Organization",
       "name":"InstantQR",
@@ -116,8 +108,8 @@
       {
         "@type":"ListItem",
         "position":3,
-        "name":"DNS Propagation Checker",
-        "item":"https://instantqr.io/tools/dns-propagation-checker.html"
+        "name":"Ping Tool",
+        "item":"https://instantqr.io/tools/ping-tool.html"
       }
     ]
   }
@@ -130,34 +122,34 @@
     "mainEntity":[
       {
         "@type":"Question",
-        "name":"What is DNS propagation?",
+        "name":"Is this a real ICMP ping tool?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"DNS propagation is the time it takes for DNS record changes to become visible across different DNS resolvers around the internet."
+          "text":"No. Browsers cannot perform true ICMP ping directly. This tool measures HTTP or HTTPS response timing to estimate latency and basic reachability."
         }
       },
       {
         "@type":"Question",
-        "name":"What record types can I check with this DNS propagation checker?",
+        "name":"Why might a site show timeout or no response?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"You can check A, AAAA, CNAME, MX, TXT, NS, and SOA records."
+          "text":"Some websites block browser-based requests, use strict security settings, redirect differently, or do not allow reliable timing from client-side requests."
         }
       },
       {
         "@type":"Question",
-        "name":"Why do some resolvers show different DNS results?",
+        "name":"What is a good latency result?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Resolvers may show different results because cached records expire at different times, propagation is still in progress, or your updated DNS changes have not reached every resolver yet."
+          "text":"Under 20 milliseconds is excellent, 20 to 50 milliseconds is very good, 50 to 100 milliseconds is acceptable, and above 100 milliseconds may feel slower depending on the use case."
         }
       },
       {
         "@type":"Question",
-        "name":"How do I know if my DNS change has propagated?",
+        "name":"Does this test work from my location?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"If multiple resolvers return the same expected value and the weighted propagation percentage is high, your DNS change is likely visible across most real-world public DNS paths."
+          "text":"Yes. Results are measured from your own browser and network connection, so they reflect your current location, device, and connectivity."
         }
       }
     ]
@@ -192,75 +184,76 @@
       <ol>
         <li><a href="/">Home</a></li>
         <li><a href="/tools/tools.html">Tools</a></li>
-        <li><span aria-current="page">DNS Propagation Checker</span></li>
+        <li><span aria-current="page">Ping Tool</span></li>
       </ol>
     </nav>
 
-    <section class="hero" aria-label="DNS Propagation Checker">
-      <div class="pill">⚡ Faster results • 🌍 Weighted propagation • ✅ Cleaner real-world resolver mix</div>
-      <h1>DNS Propagation Checker</h1>
+    <section class="hero" aria-label="Ping Tool">
+      <div class="pill">⚡ Fast browser-based latency test • 🌐 Check reachability • 📍 Measured from your current network</div>
+      <h1>Ping Tool</h1>
       <p class="sub">
-        Check whether your DNS changes are visible across multiple major public resolvers.
-        Great for A, AAAA, CNAME, MX, TXT, NS, and SOA records.
+        Test website response time and basic reachability from your browser.
+        Great for quick latency checks, rough performance testing, and simple troubleshooting.
       </p>
 
-      <div class="controls" aria-label="Checker controls">
+      <div class="controls" aria-label="Ping tool controls">
         <div class="control">
-          <label for="domain">Domain / Hostname</label>
-          <input id="domain" class="input" placeholder="example.com or sub.example.com" autocomplete="off" spellcheck="false" />
+          <label for="host">Domain or URL</label>
+          <input id="host" class="input" placeholder="example.com or https://example.com" autocomplete="off" spellcheck="false" />
         </div>
 
         <div class="control">
-          <label for="type">Record Type</label>
-          <select id="type" class="select">
-            <option value="A" selected>A</option>
-            <option value="AAAA">AAAA</option>
-            <option value="CNAME">CNAME</option>
-            <option value="MX">MX</option>
-            <option value="TXT">TXT</option>
-            <option value="NS">NS</option>
-            <option value="SOA">SOA</option>
+          <label for="count">Requests</label>
+          <select id="count" class="select">
+            <option value="3">3</option>
+            <option value="5" selected>5</option>
+            <option value="8">8</option>
           </select>
         </div>
 
         <div class="control">
-          <label for="expected">Expected Value (optional)</label>
-          <input id="expected" class="input" placeholder="IP, host, MX, TXT snippet..." autocomplete="off" spellcheck="false" />
+          <label for="timeout">Timeout</label>
+          <select id="timeout" class="select">
+            <option value="4000">4s</option>
+            <option value="6000" selected>6s</option>
+            <option value="8000">8s</option>
+            <option value="10000">10s</option>
+          </select>
         </div>
 
         <div class="control">
           <label>&nbsp;</label>
-          <button id="checkBtn" class="cta primary" type="button">Check Propagation</button>
+          <button id="pingBtn" class="cta primary" type="button">Start Test</button>
         </div>
       </div>
 
       <div class="quick" aria-label="Quick examples">
-        <button type="button" data-fill="instantqr.io|A|">A record</button>
-        <button type="button" data-fill="instantqr.io|NS|">NS record</button>
-        <button type="button" data-fill="instantqr.io|TXT|">TXT record</button>
-        <button type="button" data-fill="instantqr.io|MX|">MX record</button>
+        <button type="button" data-fill="https://instantqr.io">instantqr.io</button>
+        <button type="button" data-fill="https://google.com">google.com</button>
+        <button type="button" data-fill="https://cloudflare.com">cloudflare.com</button>
+        <button type="button" data-fill="https://github.com">github.com</button>
       </div>
 
-      <div class="summary" aria-label="Propagation summary">
+      <div class="summary" aria-label="Latency summary">
         <div class="sumCard greenGlow">
-          <div class="sumLabel">Weighted score</div>
-          <div class="sumValue" id="matchedCount">—</div>
-          <div class="sumNote">Primary public resolvers count more than filtered variants.</div>
+          <div class="sumLabel">Average</div>
+          <div class="sumValue" id="avgLatency">—</div>
+          <div class="sumNote">Average successful response time.</div>
         </div>
         <div class="sumCard">
-          <div class="sumLabel">Propagation %</div>
-          <div class="sumValue" id="propPercent">—</div>
-          <div class="sumNote">Weighted real-world propagation signal.</div>
+          <div class="sumLabel">Best</div>
+          <div class="sumValue" id="bestLatency">—</div>
+          <div class="sumNote">Fastest successful response measured.</div>
         </div>
         <div class="sumCard">
-          <div class="sumLabel">Consensus Value</div>
-          <div class="sumValue small mono" id="consensusValue">—</div>
-          <div class="sumNote">Most common answer from primary resolvers first.</div>
+          <div class="sumLabel">Worst</div>
+          <div class="sumValue" id="worstLatency">—</div>
+          <div class="sumNote">Slowest successful response measured.</div>
         </div>
         <div class="sumCard">
-          <div class="sumLabel">Query</div>
-          <div class="sumValue small mono" id="queryLabel">—</div>
-          <div class="sumNote">Current domain + record type checked.</div>
+          <div class="sumLabel">Success Rate</div>
+          <div class="sumValue" id="successRate">—</div>
+          <div class="sumNote">Successful responses out of total attempts.</div>
         </div>
       </div>
     </section>
@@ -268,8 +261,8 @@
     <section class="panel" aria-label="Results panel">
       <div class="panelHead">
         <div>
-          <div class="panelTitle">Resolver Results</div>
-          <div class="panelSub">Results appear as each resolver finishes. DNS64 was removed from live checks to avoid slow or misleading browser behavior.</div>
+          <div class="panelTitle">Latency Results</div>
+          <div class="panelSub">This is a browser-based fetch timing test, not a true ICMP ping. Some websites may block or limit browser requests.</div>
         </div>
 
         <div class="statusLine">
@@ -280,18 +273,17 @@
       </div>
 
       <div class="panelBody">
-        <div class="loader" id="loader">
-          Checking major public resolvers<span class="dots"></span>
+        <div class="loader" id="loader" hidden>
+          Running latency test<span class="dots"></span>
         </div>
 
         <div class="tableWrap">
           <table>
             <thead>
               <tr>
-                <th>Resolver</th>
+                <th>Attempt</th>
                 <th>Result</th>
-                <th>Weight</th>
-                <th>TTL</th>
+                <th>Status</th>
                 <th>Latency</th>
               </tr>
             </thead>
@@ -300,10 +292,9 @@
                 <td class="resolver">Ready</td>
                 <td class="resultCell">
                   <div class="resultBox">
-                    <div class="mono muted">Enter a domain, choose a record type, and run the check.</div>
+                    <div class="mono muted">Enter a domain or URL, choose options, and run the test.</div>
                   </div>
                 </td>
-                <td class="ttl">—</td>
                 <td class="ttl">—</td>
                 <td class="ttl">—</td>
               </tr>
@@ -313,17 +304,17 @@
 
         <div class="helpBox">
           <div class="helpCard">
-            <h3>How scoring works</h3>
+            <h3>What this measures</h3>
             <p>
-              Standard public resolvers are weighted highest. Security and Family resolvers still count,
-              but they count less because they may intentionally filter or alter some domains.
+              This tool measures browser request timing to a website. It helps estimate
+              response time and reachability from your current connection.
             </p>
           </div>
           <div class="helpCard">
-            <h3>Why DNS64 was removed</h3>
+            <h3>Why results can vary</h3>
             <p>
-              DNS64 is meant for IPv6-only and NAT64 scenarios, not as a normal public browser check path.
-              Removing it avoids pointless timeouts and makes the tool feel faster and more realistic.
+              Latency depends on your network, device, browser, routing, CDN location,
+              and whether the target site blocks or alters browser-based requests.
             </p>
           </div>
         </div>
@@ -334,10 +325,10 @@
       <h2>Related Network Tools</h2>
       <div class="relatedLinks">
         <a href="/tools/dns-lookup.html">DNS Lookup</a>
-        <a href="/tools/whois-lookup.html">WHOIS Lookup</a>
+        <a href="/tools/dns-propagation-checker.html">DNS Propagation Checker</a>
+        <a href="/tools/http-header-checker.html">HTTP Header Checker</a>
         <a href="/tools/ip-lookup.html">IP Lookup</a>
         <a href="/tools/reverse-dns-lookup.html">Reverse DNS Lookup</a>
-        <a href="/tools/http-header-checker.html">HTTP Header Checker</a>
       </div>
     </section>
 
@@ -345,23 +336,23 @@
       <h2>FAQ</h2>
 
       <details>
-        <summary>What is DNS propagation?</summary>
-        <p>DNS propagation is the time it takes for updated DNS records to become visible across different DNS resolvers around the internet.</p>
+        <summary>Is this a real ICMP ping tool?</summary>
+        <p>No. Browsers cannot perform true ICMP ping directly. This tool measures HTTP or HTTPS response timing to estimate latency and basic reachability.</p>
       </details>
 
       <details>
-        <summary>What record types can I check here?</summary>
-        <p>You can check A, AAAA, CNAME, MX, TXT, NS, and SOA records with this DNS propagation checker.</p>
+        <summary>Why might some websites show timeout?</summary>
+        <p>Some websites block browser-based requests, use strict security settings, or route requests in ways that make client-side timing unreliable.</p>
       </details>
 
       <details>
-        <summary>Why do some resolvers show different results?</summary>
-        <p>Resolvers may return different answers because cached DNS records expire at different times, propagation is still in progress, or your DNS update has not reached every resolver yet.</p>
+        <summary>What is a good ping or latency result?</summary>
+        <p>Under 20ms is excellent, 20–50ms is very good, 50–100ms is acceptable, and above 100ms may feel slower depending on the application.</p>
       </details>
 
       <details>
-        <summary>Why are some resolvers weighted differently?</summary>
-        <p>Standard public resolvers better represent common DNS resolution paths. Security and family-safe resolvers can apply additional filtering, so they are useful secondary signals but should not dominate the score.</p>
+        <summary>Are results measured from my current location?</summary>
+        <p>Yes. The timing is measured from your current browser and internet connection, so results reflect your own network path.</p>
       </details>
     </section>
 
@@ -384,6 +375,6 @@
   </main>
 
   <script src="/assets/site.js" defer></script>
-  <script src="/assets/js/tools/dns-propagation-checker.js" defer></script>
+  <script src="/assets/js/tools/ping-tool.js" defer></script>
 </body>
 </html>
