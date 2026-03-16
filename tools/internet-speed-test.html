@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>Free Internet Speed Test | Check Download Speed & Ping | InstantQR</title>
-  <meta name="description" content="Run a fast, privacy-first internet speed test in your browser. Measure download speed in Mbps and ping in ms instantly with a smooth speedometer UI. No signup required." />
+  <meta name="description" content="Run a fast, privacy-first internet speed test in your browser. Measure download speed in Mbps and ping in ms instantly with a smooth speedometer UI and connection quality rating." />
   <meta name="keywords" content="internet speed test, wifi speed test, broadband speed test, download speed test, ping test, latency test, Mbps checker, browser speed test" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -50,14 +50,14 @@
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Free Internet Speed Test | Check Download Speed & Ping | InstantQR" />
-  <meta property="og:description" content="Fast, privacy-first internet speed test. Measure download speed and ping instantly with a clean speedometer UI." />
+  <meta property="og:description" content="Fast, privacy-first internet speed test with download speed, ping, sparkline history, and connection quality rating." />
   <meta property="og:url" content="https://instantqr.io/tools/internet-speed-test.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="InstantQR Internet Speed Test" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Internet Speed Test | Check Download Speed & Ping | InstantQR" />
-  <meta name="twitter:description" content="Fast, privacy-first internet speed test with download speed and ping." />
+  <meta name="twitter:description" content="Fast, privacy-first internet speed test with speedometer, sparkline history, and connection quality rating." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <!-- Structured Data -->
@@ -148,7 +148,7 @@
         "name":"What does Mbps mean?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Mbps means megabits per second. It is a standard unit used to measure internet download speed."
+          "text":"Mbps means megabits per second. It is a common unit used to measure internet download speed."
         }
       },
       {
@@ -156,7 +156,7 @@
         "name":"Why is my speed different each time I test?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Results vary based on Wi-Fi signal quality, network congestion, VPN use, background downloads, device performance, and distance to the test server."
+          "text":"Results vary based on Wi-Fi signal quality, network congestion, VPN use, background downloads, device performance, and distance to the test endpoint."
         }
       }
     ]
@@ -304,6 +304,92 @@
       font-size:12px;
       color:rgba(233,238,252,.55);
     }
+    .qualityCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .qualityTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .qualityTitle{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .qualityValue{
+      font-size:24px;
+      font-weight:900;
+      letter-spacing:-.4px;
+    }
+    .qualityBar{
+      height:12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .qualityFill{
+      height:100%;
+      width:0%;
+      transition:width .25s ease;
+      background:linear-gradient(90deg,#ef4444,#facc15,#22c55e);
+    }
+    .qualityNote{
+      margin-top:8px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .sparkCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .sparkHead{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-end;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .sparkTitle{
+      font-weight:900;
+      font-size:15px;
+    }
+    .sparkSub{
+      color:var(--muted);
+      font-size:12px;
+    }
+    .sparkWrap{
+      width:100%;
+      height:96px;
+      border-radius:14px;
+      background:rgba(0,0,0,.12);
+      border:1px solid rgba(255,255,255,.08);
+      padding:8px;
+    }
+    .sparkWrap svg{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+    .sparkMeta{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:8px;
+      flex-wrap:wrap;
+      font-size:12px;
+      color:var(--muted);
+    }
     .speed-status{
       border-radius:16px;
       border:1px solid rgba(255,255,255,.12);
@@ -429,8 +515,8 @@
 
         <h1>Free Internet Speed Test</h1>
         <p class="sub">
-          Check your <strong>download speed</strong> in Mbps and <strong>ping</strong> in ms instantly with a clean speedometer UI.
-          No signup required. Results are estimated directly in your browser.
+          Check your <strong>download speed</strong> in Mbps and <strong>ping</strong> in ms instantly with a clean speedometer UI,
+          download history sparkline, and connection quality rating.
         </p>
 
         <div class="speed-actions" id="run">
@@ -541,6 +627,47 @@
             <div class="k">Ping (Latency)</div>
             <div class="v"><span id="ping">—</span></div>
             <div class="u">ms</div>
+          </div>
+        </div>
+
+        <div class="qualityCard" aria-label="Connection quality">
+          <div class="qualityTop">
+            <div>
+              <div class="qualityTitle">Connection Quality</div>
+              <div class="hint" style="margin:4px 0 0;">Based on download speed and ping</div>
+            </div>
+            <div class="qualityValue" id="qualityLabel">—</div>
+          </div>
+          <div class="qualityBar" aria-hidden="true">
+            <div class="qualityFill" id="qualityFill"></div>
+          </div>
+          <div class="qualityNote" id="qualityNote">Run the test to rate your connection.</div>
+        </div>
+
+        <div class="sparkCard" aria-label="Download history">
+          <div class="sparkHead">
+            <div>
+              <div class="sparkTitle">Download History</div>
+              <div class="sparkSub">Live throughput samples during test</div>
+            </div>
+          </div>
+
+          <div class="sparkWrap">
+            <svg viewBox="0 0 320 80" role="img" aria-label="Download history sparkline">
+              <polyline id="sparkLine"
+                fill="none"
+                stroke="#60a5fa"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                points="0,70 320,70"></polyline>
+            </svg>
+          </div>
+
+          <div class="sparkMeta">
+            <span>Min: <strong id="sparkMin">—</strong></span>
+            <span>Avg: <strong id="sparkAvg">—</strong></span>
+            <span>Max: <strong id="sparkMax">—</strong></span>
           </div>
         </div>
 
