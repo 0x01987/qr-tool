@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Crypto News Aggregator | Fast Bitcoin, Ethereum & Web3 News | InstantQR.io</title>
+  <meta name="description" content="Clean and fast crypto news aggregator for Bitcoin, Ethereum, Solana, DeFi, NFTs, regulation and Web3 headlines. Search, filter, sort, and save crypto news from top sources in one place." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="canonical" href="https://instantqr.io/tools/crypto-news-aggregator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Crypto News Aggregator | Fast Bitcoin, Ethereum & Web3 News" />
+  <meta property="og:description" content="Track crypto headlines from top sources in one clean dashboard. Search, filter, sort, and save Bitcoin, Ethereum, DeFi and Web3 news." />
+  <meta property="og:url" content="https://instantqr.io/tools/crypto-news-aggregator.html" />
+  <meta property="og:site_name" content="InstantQR.io" />
+  <meta property="og:image" content="https://instantqr.io/assets/og/default-og.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Crypto News Aggregator | Fast Bitcoin, Ethereum & Web3 News" />
+  <meta name="twitter:description" content="Clean crypto headlines dashboard with filters, search, and saved stories." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og/default-og.png" />
+
+  <link rel="stylesheet" href="/site.css" />
+  <script defer src="/site.js"></script>
+  <script defer src="/tools/crypto-news-aggregator.js"></script>
+
+  <style>
+    :root{
+      --cna-bg: linear-gradient(180deg, rgba(17,24,39,.96), rgba(6,11,22,.98));
+      --cna-panel: rgba(255,255,255,.05);
+      --cna-panel-border: rgba(255,255,255,.10);
+      --cna-text-soft: rgba(255,255,255,.72);
+      --cna-chip-bg: rgba(255,255,255,.08);
+      --cna-chip-hover: rgba(255,255,255,.14);
+      --cna-good: #14b8a6;
+      --cna-warn: #f59e0b;
+      --cna-danger: #ef4444;
+      --cna-shadow: 0 10px 30px rgba(0,0,0,.22);
+      --cna-radius: 20px;
+      --cna-radius-sm: 14px;
+      --cna-max: 1240px;
+    }
+
+    body{
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(168,85,247,.14), transparent 28%),
+        radial-gradient(circle at bottom center, rgba(16,185,129,.10), transparent 26%),
+        #09111f;
+    }
+
+    .tool-shell{
+      width:min(var(--cna-max), calc(100% - 24px));
+      margin:0 auto;
+      padding:28px 0 72px;
+    }
+
+    .breadcrumbs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      font-size:.92rem;
+      color:var(--cna-text-soft);
+      margin:6px 0 18px;
+    }
+
+    .breadcrumbs a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .breadcrumbs a:hover{
+      text-decoration:underline;
+    }
+
+    .hero-card,
+    .panel,
+    .faq-card,
+    .disclaimer-card{
+      background:var(--cna-panel);
+      border:1px solid var(--cna-panel-border);
+      box-shadow:var(--cna-shadow);
+      border-radius:var(--cna-radius);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .hero-card{
+      padding:26px;
+      margin-bottom:18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.035)),
+        var(--cna-bg);
+    }
+
+    .hero-title{
+      margin:0 0 10px;
+      font-size:clamp(1.9rem, 4vw, 3rem);
+      line-height:1.08;
+      letter-spacing:-0.02em;
+    }
+
+    .hero-subtitle{
+      margin:0;
+      color:var(--cna-text-soft);
+      max-width:900px;
+      font-size:1.02rem;
+      line-height:1.7;
+    }
+
+    .hero-pills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .hero-pill{
+      padding:10px 14px;
+      border-radius:999px;
+      background:var(--cna-chip-bg);
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
+      font-size:.92rem;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: 330px minmax(0,1fr);
+      gap:18px;
+      align-items:start;
+    }
+
+    .panel{
+      padding:18px;
+    }
+
+    .sidebar-sticky{
+      position:sticky;
+      top:18px;
+    }
+
+    .panel h2,
+    .panel h3,
+    .faq-card h2,
+    .disclaimer-card h2{
+      margin:0 0 12px;
+      line-height:1.15;
+      letter-spacing:-0.02em;
+    }
+
+    .muted{
+      color:var(--cna-text-soft);
+    }
+
+    .controls-grid{
+      display:grid;
+      gap:14px;
+    }
+
+    .field{
+      display:grid;
+      gap:8px;
+    }
+
+    .field label{
+      font-weight:700;
+      font-size:.96rem;
+    }
+
+    .input,
+    .select{
+      width:100%;
+      min-height:48px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      padding:12px 14px;
+      outline:none;
+    }
+
+    .input::placeholder{
+      color:rgba(255,255,255,.48);
+    }
+
+    .input:focus,
+    .select:focus{
+      border-color:rgba(56,189,248,.7);
+      box-shadow:0 0 0 3px rgba(56,189,248,.12);
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .chip{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.12);
+      background:var(--cna-chip-bg);
+      color:#fff;
+      border-radius:999px;
+      padding:10px 14px;
+      line-height:1;
+      cursor:pointer;
+      transition:.18s ease;
+      font-weight:600;
+      font-size:.93rem;
+    }
+
+    .chip:hover{
+      background:var(--cna-chip-hover);
+      transform:translateY(-1px);
+    }
+
+    .chip.active{
+      background:linear-gradient(180deg, rgba(56,189,248,.28), rgba(56,189,248,.18));
+      border-color:rgba(56,189,248,.55);
+    }
+
+    .actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.06));
+      color:#fff;
+      min-height:48px;
+      border-radius:14px;
+      padding:12px 16px;
+      cursor:pointer;
+      font-weight:700;
+      transition:.18s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,255,255,.18);
+    }
+
+    .btn-primary{
+      background:linear-gradient(180deg, rgba(56,189,248,.35), rgba(56,189,248,.16));
+      border-color:rgba(56,189,248,.55);
+    }
+
+    .results-top{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+    }
+
+    .stats{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .stat{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:.92rem;
+      color:var(--cna-text-soft);
+    }
+
+    .status-bar{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+      color:var(--cna-text-soft);
+      font-size:.95rem;
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--cna-good);
+      box-shadow:0 0 0 4px rgba(20,184,166,.12);
+      flex:0 0 auto;
+    }
+
+    .dot.loading{
+      background:var(--cna-warn);
+      box-shadow:0 0 0 4px rgba(245,158,11,.12);
+      animation:pulse 1s infinite;
+    }
+
+    .dot.error{
+      background:var(--cna-danger);
+      box-shadow:0 0 0 4px rgba(239,68,68,.12);
+    }
+
+    @keyframes pulse{
+      0%,100%{ transform:scale(1); opacity:1; }
+      50%{ transform:scale(1.18); opacity:.75; }
+    }
+
+    .news-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:14px;
+    }
+
+    .news-card{
+      display:grid;
+      gap:14px;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:20px;
+      padding:16px;
+      box-shadow:var(--cna-shadow);
+      transition:.18s ease;
+    }
+
+    .news-card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,.18);
+    }
+
+    .news-head{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+    }
+
+    .source-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:.82rem;
+      font-weight:700;
+    }
+
+    .time-badge{
+      color:var(--cna-text-soft);
+      font-size:.88rem;
+      white-space:nowrap;
+    }
+
+    .news-title{
+      margin:0;
+      font-size:1.08rem;
+      line-height:1.35;
+      letter-spacing:-0.01em;
+    }
+
+    .news-title a{
+      color:#fff;
+      text-decoration:none;
+    }
+
+    .news-title a:hover{
+      text-decoration:underline;
+    }
+
+    .news-desc{
+      margin:0;
+      color:var(--cna-text-soft);
+      line-height:1.65;
+      font-size:.96rem;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .tag{
+      border-radius:999px;
+      padding:7px 10px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      font-size:.8rem;
+      color:var(--cna-text-soft);
+    }
+
+    .card-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+
+    .card-link,
+    .save-btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      border-radius:12px;
+      padding:10px 12px;
+      text-decoration:none;
+      font-weight:700;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .card-link:hover,
+    .save-btn:hover{
+      background:rgba(255,255,255,.12);
+      transform:translateY(-1px);
+    }
+
+    .save-btn.saved{
+      border-color:rgba(16,185,129,.45);
+      background:rgba(16,185,129,.13);
+    }
+
+    .empty-state,
+    .loading-state{
+      border:1px dashed rgba(255,255,255,.14);
+      border-radius:20px;
+      padding:22px;
+      color:var(--cna-text-soft);
+      background:rgba(255,255,255,.03);
+    }
+
+    .faq-wrap,
+    .disclaimer-wrap{
+      margin-top:18px;
+    }
+
+    .faq-card,
+    .disclaimer-card{
+      padding:22px;
+    }
+
+    .faq-list{
+      display:grid;
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .faq-item{
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+
+    .faq-item summary{
+      cursor:pointer;
+      padding:16px;
+      font-weight:700;
+      list-style:none;
+    }
+
+    .faq-item summary::-webkit-details-marker{
+      display:none;
+    }
+
+    .faq-item p{
+      margin:0;
+      padding:0 16px 16px;
+      color:var(--cna-text-soft);
+      line-height:1.7;
+    }
+
+    .source-list{
+      display:grid;
+      gap:8px;
+      margin-top:10px;
+      color:var(--cna-text-soft);
+      font-size:.95rem;
+    }
+
+    .source-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 12px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+    }
+
+    .footer-note{
+      margin-top:14px;
+      color:var(--cna-text-soft);
+      font-size:.9rem;
+      line-height:1.7;
+    }
+
+    @media (max-width: 1080px){
+      .layout{
+        grid-template-columns:1fr;
+      }
+      .sidebar-sticky{
+        position:static;
+      }
+    }
+
+    @media (max-width: 760px){
+      .news-grid{
+        grid-template-columns:1fr;
+      }
+      .actions{
+        grid-template-columns:1fr;
+      }
+      .results-top{
+        align-items:flex-start;
+      }
+      .hero-card,
+      .panel,
+      .faq-card,
+      .disclaimer-card{
+        border-radius:18px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"Crypto News Aggregator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "url":"https://instantqr.io/tools/crypto-news-aggregator.html",
+    "description":"Fast crypto news aggregator for Bitcoin, Ethereum, Solana, DeFi, NFTs, regulation and Web3 headlines.",
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR.io",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Crypto News Aggregator",
+        "item":"https://instantqr.io/tools/crypto-news-aggregator.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How does this crypto news aggregator work?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This tool collects and normalizes headlines from multiple crypto RSS feeds, then lets you search, filter, sort and save stories in one clean view."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool provide live crypto news?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"It refreshes the latest available headlines from supported RSS sources when you load the page or tap refresh. Exact timing depends on when each publisher updates its feed."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I filter crypto news by topic?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can filter by categories such as Bitcoin, Ethereum, Solana, DeFi, NFTs, Regulation, Security and Exchanges, plus search by keyword."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Are my saved stories private?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Saved stories are stored locally in your browser using localStorage. They are not tied to an account in this version."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="tool-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>›</span>
+      <a href="/tools.html">Tools</a>
+      <span>›</span>
+      <span aria-current="page">Crypto News Aggregator</span>
+    </nav>
+
+    <section class="hero-card">
+      <h1 class="hero-title">Crypto News Aggregator</h1>
+      <p class="hero-subtitle">
+        Track the latest crypto headlines from multiple sources in one clean dashboard.
+        Search, filter, sort, and save stories for Bitcoin, Ethereum, Solana, DeFi, NFTs,
+        regulation, exchanges, security, and broader Web3 news.
+      </p>
+
+      <div class="hero-pills" aria-label="Highlights">
+        <span class="hero-pill">Fast multi-source headlines</span>
+        <span class="hero-pill">Search + category filters</span>
+        <span class="hero-pill">Saved stories in browser</span>
+        <span class="hero-pill">Static-site friendly</span>
+      </div>
+    </section>
+
+    <div class="layout">
+      <aside class="sidebar-sticky">
+        <section class="panel" aria-labelledby="controls-heading">
+          <h2 id="controls-heading">Controls</h2>
+          <p class="muted">Filter fast and keep only the crypto news you care about.</p>
+
+          <div class="controls-grid">
+            <div class="field">
+              <label for="searchInput">Search headlines</label>
+              <input
+                id="searchInput"
+                class="input"
+                type="search"
+                placeholder="Search Bitcoin, Ethereum, ETF, DeFi, exchange..."
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="field">
+              <label for="sortSelect">Sort</label>
+              <select id="sortSelect" class="select">
+                <option value="latest">Latest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="source">Source A–Z</option>
+                <option value="title">Title A–Z</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Categories</label>
+              <div class="chips" id="categoryChips" aria-label="Category filters">
+                <button class="chip active" type="button" data-category="all">All</button>
+                <button class="chip" type="button" data-category="bitcoin">Bitcoin</button>
+                <button class="chip" type="button" data-category="ethereum">Ethereum</button>
+                <button class="chip" type="button" data-category="solana">Solana</button>
+                <button class="chip" type="button" data-category="defi">DeFi</button>
+                <button class="chip" type="button" data-category="nft">NFT</button>
+                <button class="chip" type="button" data-category="regulation">Regulation</button>
+                <button class="chip" type="button" data-category="security">Security</button>
+                <button class="chip" type="button" data-category="exchange">Exchange</button>
+                <button class="chip" type="button" data-category="stablecoin">Stablecoin</button>
+                <button class="chip" type="button" data-category="layer2">Layer 2</button>
+                <button class="chip" type="button" data-category="ai">AI</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Sources</label>
+              <div class="chips" id="sourceChips" aria-label="Source filters">
+                <button class="chip active" type="button" data-source="all">All sources</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>View</label>
+              <div class="chips" id="viewChips" aria-label="View filters">
+                <button class="chip active" type="button" data-view="all">All stories</button>
+                <button class="chip" type="button" data-view="saved">Saved only</button>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn btn-primary" id="refreshBtn" type="button">Refresh news</button>
+              <button class="btn" id="clearBtn" type="button">Clear filters</button>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <section class="panel" aria-labelledby="results-heading">
+        <div class="results-top">
+          <div>
+            <h2 id="results-heading">Latest headlines</h2>
+            <div class="status-bar" id="statusBar" aria-live="polite">
+              <span class="dot loading" id="statusDot"></span>
+              <span id="statusText">Loading crypto news…</span>
+            </div>
+          </div>
+
+          <div class="stats" aria-label="News stats">
+            <span class="stat"><strong id="countVisible">0</strong> shown</span>
+            <span class="stat"><strong id="countTotal">0</strong> total</span>
+            <span class="stat"><strong id="countSaved">0</strong> saved</span>
+          </div>
+        </div>
+
+        <div class="loading-state" id="loadingState">
+          Pulling the latest headlines from multiple crypto news feeds. This usually takes a few seconds.
+        </div>
+
+        <div class="empty-state" id="emptyState" hidden>
+          No stories matched your current filters. Try a different keyword, source, or category.
+        </div>
+
+        <div class="news-grid" id="newsGrid" hidden></div>
+      </section>
+    </div>
+
+    <section class="disclaimer-wrap">
+      <div class="disclaimer-card">
+        <h2>Supported sources</h2>
+        <p class="muted">
+          This tool aggregates publicly available feed content from crypto publishers. Headlines and excerpts belong to their respective publishers.
+        </p>
+        <div class="source-list" id="sourceListStatic">
+          <div class="source-row"><span>CoinDesk</span><span>RSS feed</span></div>
+          <div class="source-row"><span>Cointelegraph</span><span>RSS feed</span></div>
+          <div class="source-row"><span>Decrypt</span><span>RSS feed</span></div>
+          <div class="source-row"><span>Bitcoin Magazine</span><span>RSS feed</span></div>
+          <div class="source-row"><span>The Block</span><span>RSS feed</span></div>
+        </div>
+        <p class="footer-note">
+          For best long-term reliability, you can later replace public feed proxies with your own serverless proxy endpoint and keep this same front-end UI.
+        </p>
+      </div>
+    </section>
+
+    <section class="faq-wrap">
+      <div class="faq-card">
+        <h2>Frequently asked questions</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>How does this crypto news aggregator work?</summary>
+            <p>
+              It fetches headlines from multiple crypto RSS feeds, normalizes the data, removes duplicates,
+              and displays everything in a filterable dashboard.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I search for specific crypto topics?</summary>
+            <p>
+              Yes. Use the search box for keywords like Bitcoin, Ethereum, Solana, SEC, ETF, DeFi, staking,
+              exchange, wallet, exploit, or any token or market topic.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Are saved stories stored in an account?</summary>
+            <p>
+              No. Saved stories are stored only in your browser using localStorage in this version.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Why might a source fail temporarily?</summary>
+            <p>
+              Some publishers or feed proxies may rate-limit requests, update their feed structure, or return errors.
+              The page includes fallbacks and partial results will still load when possible.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
