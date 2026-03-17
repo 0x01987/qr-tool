@@ -1,248 +1,366 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+  </script>
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-<script>
-window.dataLayer=window.dataLayer||[];
-function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());
-gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
-</script>
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
-<!-- AdSense -->
-<script async
-src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Port Checker | Test Web Ports | InstantQR</title>
+  <meta name="description" content="Free browser-based port checker to test whether a web service is reachable on a specific HTTP or HTTPS port. Fast, clean, and responsive tool for troubleshooting websites and APIs.">
+  <meta name="keywords" content="port checker, web port checker, http port checker, https port checker, test port online, browser port checker, website port tester">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="author" content="InstantQR">
+  <meta name="application-name" content="InstantQR">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="color-scheme" content="dark">
+  <meta name="format-detection" content="telephone=no">
 
-<title>Port Checker | Test Web Ports | InstantQR</title>
+  <link rel="canonical" href="https://instantqr.io/tools/port-checker.html">
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg">
 
-<meta name="description" content="Check whether a web port is reachable using HTTP or HTTPS. Fast browser-based port checker for troubleshooting websites and APIs.">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
 
-<meta name="robots" content="index,follow">
-<meta name="author" content="InstantQR">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="InstantQR">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Port Checker | InstantQR">
+  <meta property="og:description" content="Check whether a browser can reach a web service on a specific host and port using HTTP or HTTPS.">
+  <meta property="og:url" content="https://instantqr.io/tools/port-checker.html">
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png">
+  <meta property="og:image:alt" content="InstantQR Port Checker">
 
-<link rel="canonical" href="https://instantqr.io/tools/port-checker.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Port Checker | InstantQR">
+  <meta name="twitter:description" content="Test web port reachability for websites and APIs with a fast browser-based port checker.">
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png">
 
-<link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg">
-<link rel="stylesheet" href="/assets/site.css">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Port Checker",
+    "url":"https://instantqr.io/tools/port-checker.html",
+    "description":"Browser-based port checker for HTTP and HTTPS web services.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
 
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Port Checker",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/port-checker.html",
+    "description":"Check whether a browser can reach a web service on a specific host and port using HTTP or HTTPS.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Port Checker",
+        "item":"https://instantqr.io/tools/port-checker.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Can this tool scan any TCP port?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. Browsers cannot perform raw TCP socket scans. This tool checks whether a browser can reach a web service on a host and port using HTTP or HTTPS."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What ports work best with this tool?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Ports commonly used by web services work best, such as 80, 443, 8080, and 8443."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why might a port appear unreachable?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A site may block browser requests, require authentication, redirect in unexpected ways, or use a non-browser protocol even if the port itself is open."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What does reachable mean in this tool?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Reachable means the browser received some response signal from the target host and port over the selected HTTP or HTTPS protocol."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
+  <a class="skip" href="#main">Skip to content</a>
 
-<a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+        </span>
+        <span>InstantQR</span>
+      </a>
 
-<header class="topbar">
-<div class="topbar-inner">
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides/guides.html">Guides</a>
+      </nav>
+    </div>
+  </header>
 
-<a class="brand" href="/">
-<span class="brand-logo">
-<img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
-</span>
-<span>InstantQR</span>
-</a>
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Port Checker</span></li>
+      </ol>
+    </nav>
 
-<nav class="top-links">
-<a href="/">Home</a>
-<a href="/tools/tools.html">Tools</a>
-<a href="/tools/seo-tools.html">SEO Tools</a>
-<a href="/tools/web3-tools.html">Web3 Tools</a>
-<a href="/guides/guides.html">Guides</a>
-</nav>
+    <section class="hero" aria-label="Port Checker">
+      <div class="pill">⚡ Fast browser-based check • 🌐 HTTP / HTTPS • 🔎 Useful for website troubleshooting</div>
+      <h1>Port Checker</h1>
+      <p class="sub">
+        Test whether a browser can reach a web service on a specific host and port.
+        Useful for websites, APIs, dashboards, and common HTTP or HTTPS endpoints.
+      </p>
 
-</div>
-</header>
+      <div class="controls" aria-label="Port checker controls">
+        <div class="control">
+          <label for="host">Host</label>
+          <input id="host" class="input" placeholder="example.com" autocomplete="off" spellcheck="false">
+        </div>
 
-<main id="main" class="wrap">
+        <div class="control">
+          <label for="port">Port</label>
+          <input id="port" class="input" inputmode="numeric" placeholder="443" autocomplete="off" spellcheck="false">
+        </div>
 
-<nav class="breadcrumb">
-<ol>
-<li><a href="/">Home</a></li>
-<li><a href="/tools/tools.html">Tools</a></li>
-<li><span aria-current="page">Port Checker</span></li>
-</ol>
-</nav>
+        <div class="control">
+          <label for="protocol">Protocol</label>
+          <select id="protocol" class="select">
+            <option value="https" selected>HTTPS</option>
+            <option value="http">HTTP</option>
+          </select>
+        </div>
 
-<section class="hero">
+        <div class="control">
+          <label>&nbsp;</label>
+          <button id="checkBtn" class="cta primary" type="button">Check Port</button>
+        </div>
+      </div>
 
-<div class="pill">
-⚡ Fast • 🌐 HTTP/HTTPS • 🔍 Browser-based check
-</div>
+      <div class="quick" aria-label="Quick examples">
+        <button type="button" data-host="google.com" data-port="443" data-protocol="https">google.com:443</button>
+        <button type="button" data-host="cloudflare.com" data-port="443" data-protocol="https">cloudflare.com:443</button>
+        <button type="button" data-host="instantqr.io" data-port="443" data-protocol="https">instantqr.io:443</button>
+      </div>
 
-<h1>Port Checker</h1>
+      <div class="summary" aria-label="Port checker summary">
+        <div class="sumCard greenGlow">
+          <div class="sumLabel">Target</div>
+          <div class="sumValue small mono" id="targetLabel">—</div>
+          <div class="sumNote">Current host and port being checked.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Status</div>
+          <div class="sumValue" id="statusLabel">—</div>
+          <div class="sumNote">Browser-observed reachability result.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Latency</div>
+          <div class="sumValue" id="latencyLabel">—</div>
+          <div class="sumNote">Approximate timing from your browser.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Protocol</div>
+          <div class="sumValue" id="protocolLabel">—</div>
+          <div class="sumNote">Selected protocol for the test.</div>
+        </div>
+      </div>
+    </section>
 
-<p class="sub">
-Test if a web service is reachable on a specific port.
-Useful for troubleshooting APIs, websites, and servers.
-</p>
+    <section class="panel" aria-label="Results panel">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Results</div>
+          <div class="panelSub">This is a browser-based HTTP or HTTPS reachability check, not a raw TCP port scan.</div>
+        </div>
 
-<div class="controls">
+        <div class="statusLine">
+          <span class="badge" id="statusBadge">Ready</span>
+        </div>
+      </div>
 
-<div class="control">
-<label for="host">Host</label>
-<input id="host" class="input" placeholder="example.com">
-</div>
+      <div class="panelBody">
+        <div class="loader" id="loader" hidden>
+          Checking connection<span class="dots"></span>
+        </div>
 
-<div class="control">
-<label for="port">Port</label>
-<input id="port" class="input" placeholder="443">
-</div>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Target</th>
+                <th>Status</th>
+                <th>Latency</th>
+                <th>Protocol</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody">
+              <tr>
+                <td colspan="4" class="mono muted">Enter a host and port to test connectivity.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-<div class="control">
-<label for="protocol">Protocol</label>
-<select id="protocol" class="select">
-<option value="https">HTTPS</option>
-<option value="http">HTTP</option>
-</select>
-</div>
+        <div class="helpBox">
+          <div class="helpCard">
+            <h3>How this tool works</h3>
+            <p>
+              The tool tries to reach a web resource on the target host and port using your browser.
+              If the browser receives a response signal, the target is treated as reachable.
+            </p>
+          </div>
+          <div class="helpCard">
+            <h3>Why some results can vary</h3>
+            <p>
+              Some sites block browser requests, redirect heavily, or require authentication.
+              That can affect the result even when the host is online.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<div class="control">
-<label>&nbsp;</label>
-<button id="checkBtn" class="cta primary">
-Check Port
-</button>
-</div>
+    <section class="relatedTools" aria-label="Related network tools">
+      <h2>Related Network Tools</h2>
+      <div class="relatedLinks">
+        <a href="/tools/ping-tool.html">Ping Tool</a>
+        <a href="/tools/http-header-checker.html">HTTP Header Checker</a>
+        <a href="/tools/dns-lookup.html">DNS Lookup</a>
+        <a href="/tools/reverse-dns-lookup.html">Reverse DNS Lookup</a>
+        <a href="/tools/ip-lookup.html">IP Lookup</a>
+      </div>
+    </section>
 
-</div>
+    <section class="faq" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
 
-<div class="quick">
+      <details>
+        <summary>Can browsers scan any TCP port?</summary>
+        <p>No. Browsers cannot perform raw TCP scans. This tool checks whether a browser can reach a web service on a specific port.</p>
+      </details>
 
-<button data-host="google.com" data-port="443">google.com:443</button>
-<button data-host="cloudflare.com" data-port="443">cloudflare.com:443</button>
-<button data-host="instantqr.io" data-port="443">instantqr.io:443</button>
+      <details>
+        <summary>What ports work best?</summary>
+        <p>Ports used by web services such as 80, 443, 8080, and 8443 usually work best here.</p>
+      </details>
 
-</div>
+      <details>
+        <summary>Why might a port appear unreachable?</summary>
+        <p>The server may block browser requests, require authentication, redirect unusually, or use a non-browser protocol on that port.</p>
+      </details>
 
-<div class="summary">
+      <details>
+        <summary>What does reachable mean in this checker?</summary>
+        <p>It means the browser got some kind of response signal from the target host and port over HTTP or HTTPS.</p>
+      </details>
+    </section>
 
-<div class="sumCard">
-<div class="sumLabel">Target</div>
-<div class="sumValue mono" id="targetLabel">—</div>
-</div>
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/guides/guides.html">Guides</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </main>
 
-<div class="sumCard">
-<div class="sumLabel">Status</div>
-<div class="sumValue" id="statusLabel">—</div>
-</div>
-
-<div class="sumCard">
-<div class="sumLabel">Latency</div>
-<div class="sumValue" id="latencyLabel">—</div>
-</div>
-
-<div class="sumCard">
-<div class="sumLabel">Protocol</div>
-<div class="sumValue" id="protocolLabel">—</div>
-</div>
-
-</div>
-
-</section>
-
-<section class="panel">
-
-<div class="panelHead">
-
-<div>
-<div class="panelTitle">Results</div>
-<div class="panelSub">
-Browser-based connectivity check
-</div>
-</div>
-
-<div class="statusLine">
-<span class="badge" id="statusBadge">Ready</span>
-</div>
-
-</div>
-
-<div class="panelBody">
-
-<div class="loader" id="loader" hidden>
-Checking connection<span class="dots"></span>
-</div>
-
-<div class="tableWrap">
-
-<table>
-
-<thead>
-<tr>
-<th>Target</th>
-<th>Status</th>
-<th>Latency</th>
-<th>Protocol</th>
-</tr>
-</thead>
-
-<tbody id="resultsBody">
-
-<tr>
-<td colspan="4" class="mono muted">
-Enter a host and port to test connectivity.
-</td>
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="faq">
-
-<h2>FAQ</h2>
-
-<details>
-<summary>Can browsers scan any TCP port?</summary>
-<p>No. Browsers cannot perform raw TCP scans. This tool checks if a browser can reach a web service on a specific port.</p>
-</details>
-
-<details>
-<summary>What ports work best?</summary>
-<p>Ports used by web services such as 80, 443, 8080, and 8443.</p>
-</details>
-
-<details>
-<summary>Why might a port appear closed?</summary>
-<p>The server may block browser requests, require authentication, or use a protocol not supported by browsers.</p>
-</details>
-
-</section>
-
-<footer class="footer">
-
-<div class="footer-box">
-
-<div>
-© <span id="year"></span> InstantQR
-</div>
-
-<div class="footer-links">
-<a href="/">Home</a>
-<a href="/tools/tools.html">Tools</a>
-<a href="/about.html">About</a>
-<a href="/privacy.html">Privacy</a>
-<a href="/terms.html">Terms</a>
-</div>
-
-</div>
-
-</footer>
-
-</main>
-
-<script src="/assets/site.js" defer></script>
-<script src="/assets/js/tools/port-checker.js" defer></script>
-
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/port-checker.js" defer></script>
 </body>
 </html>
