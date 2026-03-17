@@ -42,7 +42,8 @@
       return {
         href: url.href,
         origin: url.origin,
-        hostname: url.hostname
+        hostname: url.hostname,
+        protocol: url.protocol
       };
     } catch {
       return null;
@@ -50,21 +51,22 @@
   }
 
   function setStatus(text) {
-    statusBadge.textContent = text;
+    if (statusBadge) statusBadge.textContent = text;
   }
 
   function setLoader(show) {
-    loader.hidden = !show;
+    if (loader) loader.hidden = !show;
   }
 
   function resetSummary() {
-    avgLatencyEl.textContent = "—";
-    bestLatencyEl.textContent = "—";
-    worstLatencyEl.textContent = "—";
-    successRateEl.textContent = "—";
+    if (avgLatencyEl) avgLatencyEl.textContent = "—";
+    if (bestLatencyEl) bestLatencyEl.textContent = "—";
+    if (worstLatencyEl) worstLatencyEl.textContent = "—";
+    if (successRateEl) successRateEl.textContent = "—";
   }
 
   function renderEmptyRow(message) {
+    if (!resultsBody) return;
     resultsBody.innerHTML = `
       <tr>
         <td class="resolver">Ready</td>
@@ -80,7 +82,6 @@
   }
 
   function latencyTone(ms) {
-    if (ms < 20) return "ok";
     if (ms < 50) return "ok";
     if (ms < 100) return "warn";
     return "bad";
@@ -94,12 +95,14 @@
   }
 
   function appendRow(attempt, resultText, statusText, latencyText, tone = "") {
+    if (!resultsBody) return;
+
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td class="resolver">${escapeHtml(String(attempt))}</td>
       <td class="resultCell">
         <div class="resultBox">
-          <div class="mono ${tone ? tone : "muted"}">${resultText}</div>
+          <div class="mono ${tone || "muted"}">${escapeHtml(resultText)}</div>
         </div>
       </td>
       <td class="ttl">${escapeHtml(statusText)}</td>
@@ -108,41 +111,12 @@
     resultsBody.appendChild(tr);
   }
 
-  async function pingOnce(origin, timeoutMs) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeoutMs);
-
-    const start = performance.now();
-    const cacheBust = `instantqr_ping=${Date.now()}_${Math.random().toString(36).slice(2)}`;
-    const target = `${origin.replace(/\/$/, "")}/?${cacheBust}`;
-
-    try {
-      await fetch(target, {
-        method: "GET",
-        mode: "no-cors",
-        cache: "no-store",
-        signal: controller.signal
-      });
-
-      clearTimeout(timer);
-      const latency = Math.round(performance.now() - start);
-
-      return { ok: true, latency };
-    } catch (err) {
-      clearTimeout(timer);
-      if (err && err.name === "AbortError") {
-        return { ok: false, error: "Timeout" };
-      }
-      return { ok: false, error: "Blocked or failed" };
-    }
-  }
-
   function updateSummary(times, totalCount) {
     if (!times.length) {
-      avgLatencyEl.textContent = "N/A";
-      bestLatencyEl.textContent = "N/A";
-      worstLatencyEl.textContent = "N/A";
-      successRateEl.textContent = `0/${totalCount}`;
+      if (avgLatencyEl) avgLatencyEl.textContent = "N/A";
+      if (bestLatencyEl) bestLatencyEl.textContent = "N/A";
+      if (worstLatencyEl) worstLatencyEl.textContent = "N/A";
+      if (successRateEl) successRateEl.textContent = `0/${totalCount}`;
       return {
         avg: null,
         best: null,
@@ -155,10 +129,10 @@
     const best = Math.min(...times);
     const worst = Math.max(...times);
 
-    avgLatencyEl.textContent = `${avg} ms`;
-    bestLatencyEl.textContent = `${best} ms`;
-    worstLatencyEl.textContent = `${worst} ms`;
-    successRateEl.textContent = `${times.length}/${totalCount}`;
+    if (avgLatencyEl) avgLatencyEl.textContent = `${avg} ms`;
+    if (bestLatencyEl) bestLatencyEl.textContent = `${best} ms`;
+    if (worstLatencyEl) worstLatencyEl.textContent = `${worst} ms`;
+    if (successRateEl) successRateEl.textContent = `${times.length}/${totalCount}`;
 
     return {
       avg,
@@ -178,35 +152,74 @@
       `Best: ${stats.best != null ? stats.best + " ms" : "N/A"}`,
       `Worst: ${stats.worst != null ? stats.worst + " ms" : "N/A"}`,
       `Success Rate: ${stats.success}/${totalCount}`,
-      `Note: Browser-based HTTP/HTTPS latency test, not true ICMP ping.`
+      `Note: Browser-based latency test, not true ICMP ping.`
     ].join("\n");
+  }
+
+  function pingOnce(origin, timeoutMs) {
+    return new Promise((resolve) => {
+      const start = performance.now();
+      const img = new Image();
+
+      let done = false;
+      const finalize = (ok, errorText = "") => {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+
+        const latency = Math.round(performance.now() - start);
+
+        img.onload = null;
+        img.onerror = null;
+
+        if (ok) {
+          resolve({ ok: true, latency });
+        } else {
+          resolve({ ok: false, error: errorText || "No response" });
+        }
+      };
+
+      const timer = setTimeout(() => finalize(false, "Timeout"), timeoutMs);
+
+      img.onload = () => finalize(true);
+      img.onerror = () => {
+        // Even an image error proves the host responded.
+        // For browser-based reachability timing, treat this as success.
+        finalize(true);
+      };
+
+      const sep = origin.includes("?") ? "&" : "?";
+      img.src = `${origin}/favicon.ico${sep}instantqr_ping=${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    });
   }
 
   async function runTest() {
     if (isRunning) return;
 
-    const parsed = normalizeTarget(hostEl.value);
-    const totalCount = Math.max(1, Number(countEl.value || 5));
-    const timeoutMs = Math.max(1000, Number(timeoutEl.value || 6000));
+    const parsed = normalizeTarget(hostEl?.value || "");
+    const totalCount = Math.max(1, Number(countEl?.value || 5));
+    const timeoutMs = Math.max(1000, Number(timeoutEl?.value || 6000));
 
     if (!parsed) {
       resetSummary();
       renderEmptyRow("Please enter a valid domain or URL.");
       setStatus("Invalid input");
-      hostEl.focus();
+      if (hostEl) hostEl.focus();
       return;
     }
 
     isRunning = true;
-    pingBtn.disabled = true;
+    if (pingBtn) pingBtn.disabled = true;
     setLoader(true);
     setStatus("Running");
     resetSummary();
     lastSummaryText = "";
 
-    resultsBody.innerHTML = "";
+    if (resultsBody) resultsBody.innerHTML = "";
 
     const times = [];
+
+    appendRow("—", `Target: ${parsed.hostname}`, "Starting", "—");
 
     for (let i = 1; i <= totalCount; i++) {
       const result = await pingOnce(parsed.origin, timeoutMs);
@@ -216,7 +229,7 @@
         const tone = latencyTone(result.latency);
         appendRow(
           i,
-          `${escapeHtml(parsed.hostname)} responded`,
+          `${parsed.hostname} responded`,
           toneText(result.latency),
           `${result.latency} ms`,
           tone
@@ -224,7 +237,7 @@
       } else {
         appendRow(
           i,
-          escapeHtml(parsed.hostname),
+          `${parsed.hostname} did not respond in time`,
           result.error,
           "—",
           "bad"
@@ -237,7 +250,8 @@
 
     setLoader(false);
     setStatus(times.length ? "Complete" : "No response");
-    pingBtn.disabled = false;
+
+    if (pingBtn) pingBtn.disabled = false;
     isRunning = false;
   }
 
@@ -246,6 +260,7 @@
 
     try {
       await navigator.clipboard.writeText(lastSummaryText);
+      if (!copyBtn) return;
       const old = copyBtn.textContent;
       copyBtn.textContent = "Copied";
       setTimeout(() => { copyBtn.textContent = old; }, 1400);
@@ -253,7 +268,7 @@
   }
 
   async function copyLink() {
-    const parsed = normalizeTarget(hostEl.value);
+    const parsed = normalizeTarget(hostEl?.value || "");
     const url = new URL(window.location.href);
 
     if (parsed) {
@@ -262,11 +277,12 @@
       url.searchParams.delete("host");
     }
 
-    url.searchParams.set("count", countEl.value || "5");
-    url.searchParams.set("timeout", timeoutEl.value || "6000");
+    url.searchParams.set("count", countEl?.value || "5");
+    url.searchParams.set("timeout", timeoutEl?.value || "6000");
 
     try {
       await navigator.clipboard.writeText(url.toString());
+      if (!shareBtn) return;
       const old = shareBtn.textContent;
       shareBtn.textContent = "Copied";
       setTimeout(() => { shareBtn.textContent = old; }, 1400);
@@ -279,23 +295,31 @@
     const count = params.get("count");
     const timeout = params.get("timeout");
 
-    if (host) hostEl.value = host;
-    if (count && [...countEl.options].some(o => o.value === count)) countEl.value = count;
-    if (timeout && [...timeoutEl.options].some(o => o.value === timeout)) timeoutEl.value = timeout;
+    if (hostEl && host) hostEl.value = host;
+    if (countEl && count && [...countEl.options].some(o => o.value === count)) {
+      countEl.value = count;
+    }
+    if (timeoutEl && timeout && [...timeoutEl.options].some(o => o.value === timeout)) {
+      timeoutEl.value = timeout;
+    }
   }
 
-  pingBtn?.addEventListener("click", runTest);
-  copyBtn?.addEventListener("click", copySummary);
-  shareBtn?.addEventListener("click", copyLink);
+  if (pingBtn) pingBtn.addEventListener("click", runTest);
+  if (copyBtn) copyBtn.addEventListener("click", copySummary);
+  if (shareBtn) shareBtn.addEventListener("click", copyLink);
 
-  hostEl?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") runTest();
-  });
+  if (hostEl) {
+    hostEl.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") runTest();
+    });
+  }
 
   quickButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-      hostEl.value = btn.getAttribute("data-fill") || "";
-      hostEl.focus();
+      if (hostEl) {
+        hostEl.value = btn.getAttribute("data-fill") || "";
+        hostEl.focus();
+      }
     });
   });
 
