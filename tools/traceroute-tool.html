@@ -1,217 +1,383 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+  </script>
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
-</script>
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
-<!-- Google AdSense -->
-<script async
-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Traceroute Tool | Route Reachability & Latency Probe | InstantQR</title>
+  <meta name="description" content="Free browser-based traceroute-style tool to test repeated route reachability and latency to a website or server. Useful for quick network troubleshooting.">
+  <meta name="keywords" content="traceroute tool, traceroute online, route checker, network path tool, latency probe, browser traceroute, trace route tool">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="author" content="InstantQR">
+  <meta name="application-name" content="InstantQR">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="color-scheme" content="dark">
+  <meta name="format-detection" content="telephone=no">
 
-<title>Traceroute Tool | Trace Network Path Online | InstantQR</title>
+  <link rel="canonical" href="https://instantqr.io/tools/traceroute-tool.html">
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg">
 
-<meta name="description" content="Free traceroute tool to trace the network path to a server. Identify hops, latency, and routing issues instantly.">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
 
-<link rel="canonical" href="https://instantqr.io/tools/traceroute-tool.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="InstantQR">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Traceroute Tool | InstantQR">
+  <meta property="og:description" content="Browser-based traceroute-style repeated reachability and latency probe for quick network diagnostics.">
+  <meta property="og:url" content="https://instantqr.io/tools/traceroute-tool.html">
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png">
+  <meta property="og:image:alt" content="InstantQR Traceroute Tool">
 
-<meta name="robots" content="index,follow">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Traceroute Tool | InstantQR">
+  <meta name="twitter:description" content="Test repeated reachability and latency to a target from your browser with a traceroute-style tool.">
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png">
 
-<style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Traceroute Tool",
+    "url":"https://instantqr.io/tools/traceroute-tool.html",
+    "description":"Browser-based traceroute-style tool for repeated reachability and latency probing.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
 
-body{
-font-family:system-ui,-apple-system,Segoe UI,Roboto;
-background:#0b1220;
-color:#fff;
-margin:0;
-}
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Traceroute Tool",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/traceroute-tool.html",
+    "description":"Browser-based repeated route reachability and latency probe for websites and servers.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
 
-.container{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Traceroute Tool",
+        "item":"https://instantqr.io/tools/traceroute-tool.html"
+      }
+    ]
+  }
+  </script>
 
-h1{
-font-size:34px;
-margin-bottom:10px;
-}
-
-.card{
-background:#121b2f;
-padding:25px;
-border-radius:12px;
-margin-top:20px;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:6px;
-border:1px solid #333;
-background:#0b1220;
-color:white;
-}
-
-button{
-margin-top:15px;
-padding:12px 20px;
-border:none;
-background:#3b82f6;
-color:white;
-border-radius:6px;
-cursor:pointer;
-}
-
-button:hover{
-background:#2563eb;
-}
-
-.results{
-margin-top:20px;
-font-family:monospace;
-background:#0b1220;
-padding:15px;
-border-radius:8px;
-line-height:1.6;
-}
-
-.hop{
-color:#22c55e;
-}
-
-.timeout{
-color:#ef4444;
-}
-
-footer{
-margin-top:40px;
-font-size:14px;
-color:#aaa;
-}
-
-</style>
-
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Is this a real traceroute?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. Browsers cannot perform true hop-by-hop traceroute. This tool performs repeated reachability and latency probes to help estimate target responsiveness from your browser."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why are router hops not shown?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"True traceroute requires low-level packet TTL control and access to intermediate router responses, which browsers do not provide."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What is this tool useful for?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"It is useful for checking target reachability, latency consistency, and repeated response timing from your current browser connection."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why can a site fail the trace?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Some sites block browser-based requests, redirect aggressively, require authentication, or do not expose a resource that can be probed reliably."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
+  <a class="skip" href="#main">Skip to content</a>
 
-<div class="container">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+        </span>
+        <span>InstantQR</span>
+      </a>
 
-<nav>
-<a href="/">Home</a> /
-<a href="/tools.html">Tools</a> /
-Traceroute Tool
-</nav>
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides/guides.html">Guides</a>
+      </nav>
+    </div>
+  </header>
 
-<h1>Traceroute Tool</h1>
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Traceroute Tool</span></li>
+      </ol>
+    </nav>
 
-<p>Trace the network path packets take to reach a server.</p>
+    <section class="hero" aria-label="Traceroute Tool">
+      <div class="pill">🛰️ Repeated route probes • 🌐 Browser-safe • ⚡ Useful latency signal</div>
+      <h1>Traceroute Tool</h1>
+      <p class="sub">
+        Run repeated browser-based reachability and latency probes to a website or server.
+        Useful for quick network diagnostics when you want a route signal from your current browser connection.
+      </p>
 
-<div class="card">
+      <div class="controls" aria-label="Traceroute controls">
+        <div class="control">
+          <label for="host">Domain or URL</label>
+          <input id="host" class="input" placeholder="example.com or https://example.com" autocomplete="off" spellcheck="false">
+        </div>
 
-<label>Domain or IP Address</label>
-<input id="host" placeholder="example.com">
+        <div class="control">
+          <label for="probes">Probes</label>
+          <select id="probes" class="select">
+            <option value="5">5</option>
+            <option value="8" selected>8</option>
+            <option value="10">10</option>
+            <option value="12">12</option>
+          </select>
+        </div>
 
-<button onclick="startTrace()">Start Trace</button>
+        <div class="control">
+          <label for="timeout">Timeout</label>
+          <select id="timeout" class="select">
+            <option value="3000">3s</option>
+            <option value="5000" selected>5s</option>
+            <option value="8000">8s</option>
+            <option value="10000">10s</option>
+          </select>
+        </div>
 
-<div id="results" class="results"></div>
+        <div class="control">
+          <label>&nbsp;</label>
+          <button id="traceBtn" class="cta primary" type="button">Start Trace</button>
+        </div>
+      </div>
 
-</div>
+      <div class="quick" aria-label="Quick examples">
+        <button type="button" data-fill="instantqr.io">instantqr.io</button>
+        <button type="button" data-fill="google.com">google.com</button>
+        <button type="button" data-fill="cloudflare.com">cloudflare.com</button>
+        <button type="button" data-fill="github.com">github.com</button>
+      </div>
 
-<footer>
+      <div class="summary" aria-label="Trace summary">
+        <div class="sumCard greenGlow">
+          <div class="sumLabel">Target</div>
+          <div class="sumValue small mono" id="summaryTarget">—</div>
+          <div class="sumNote">Current domain or URL being tested.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Best</div>
+          <div class="sumValue" id="summaryBest">—</div>
+          <div class="sumNote">Fastest successful probe.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Average</div>
+          <div class="sumValue" id="summaryAvg">—</div>
+          <div class="sumNote">Average successful latency.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Success Rate</div>
+          <div class="sumValue" id="summarySuccess">—</div>
+          <div class="sumNote">Successful probes out of total attempts.</div>
+        </div>
+      </div>
+    </section>
 
-<h2>What is Traceroute?</h2>
+    <section class="panel" aria-label="Results panel">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Trace Results</div>
+          <div class="panelSub">This is a browser-based repeated probe tool, not a true router-by-router traceroute.</div>
+        </div>
 
-<p>
-Traceroute is a network diagnostic tool used to track the path that packets take from your computer to a destination server.
-</p>
+        <div class="statusLine">
+          <span class="badge" id="statusBadge">Ready</span>
+          <button id="copyBtn" class="cta ghost" type="button">Copy Result</button>
+          <button id="shareBtn" class="cta ghost" type="button">Copy Link</button>
+        </div>
+      </div>
 
-<h2>Why Use Traceroute?</h2>
+      <div class="panelBody">
+        <div class="loader" id="loader" hidden>
+          Running trace probes<span class="dots"></span>
+        </div>
 
-<ul>
-<li>Identify network bottlenecks</li>
-<li>Locate routing problems</li>
-<li>Diagnose slow connections</li>
-<li>Analyze internet routing paths</li>
-</ul>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Probe</th>
+                <th>Result</th>
+                <th>Status</th>
+                <th>Latency</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody">
+              <tr>
+                <td class="resolver">Ready</td>
+                <td class="resultCell">
+                  <div class="resultBox">
+                    <div class="mono muted">Enter a domain or URL and run the trace.</div>
+                  </div>
+                </td>
+                <td class="ttl">—</td>
+                <td class="ttl">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-</footer>
+        <div class="helpBox">
+          <div class="helpCard">
+            <h3>What this tool does</h3>
+            <p>
+              This tool runs repeated browser-safe reachability probes and measures response timing.
+              It helps you see consistency, latency swings, and basic target reachability from your browser.
+            </p>
+          </div>
+          <div class="helpCard">
+            <h3>Why it is not a real traceroute</h3>
+            <p>
+              Browsers cannot control packet TTL or inspect intermediate routers.
+              True hop-by-hop traceroute requires system-level or server-side network access.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <section class="relatedTools" aria-label="Related network tools">
+      <h2>Related Network Tools</h2>
+      <div class="relatedLinks">
+        <a href="/tools/ping-tool.html">Ping Tool</a>
+        <a href="/tools/port-checker.html">Port Checker</a>
+        <a href="/tools/dns-lookup.html">DNS Lookup</a>
+        <a href="/tools/reverse-dns-lookup.html">Reverse DNS Lookup</a>
+        <a href="/tools/http-header-checker.html">HTTP Header Checker</a>
+      </div>
+    </section>
 
-<script>
+    <section class="faq" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
 
-async function traceHop(host,hop){
+      <details>
+        <summary>Is this a real traceroute?</summary>
+        <p>No. Browsers cannot perform true hop-by-hop traceroute. This tool runs repeated reachability and latency probes instead.</p>
+      </details>
 
-let start = performance.now()
+      <details>
+        <summary>Why are there no router hops listed?</summary>
+        <p>Real traceroute requires TTL control and low-level network access, which browsers do not allow.</p>
+      </details>
 
-try{
+      <details>
+        <summary>What can this tool still tell me?</summary>
+        <p>It can tell you whether the target appears reachable from your browser and whether repeated latency is stable or inconsistent.</p>
+      </details>
 
-await fetch("https://" + host + "/?hop=" + hop + "&cache=" + Math.random(),{
-mode:"no-cors"
-})
+      <details>
+        <summary>Why might probes fail even if a site is online?</summary>
+        <p>The site may block browser-based requests, redirect heavily, or not expose a resource that can be probed reliably.</p>
+      </details>
+    </section>
 
-let latency = Math.round(performance.now() - start)
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/guides/guides.html">Guides</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </main>
 
-return latency
-
-}catch{
-
-return null
-
-}
-
-}
-
-async function startTrace(){
-
-let host=document.getElementById("host").value
-let output=document.getElementById("results")
-
-if(!host){
-output.innerHTML="Enter a domain"
-return
-}
-
-output.innerHTML="Tracing route to " + host + "...<br><br>"
-
-let maxHops=10
-
-for(let hop=1; hop<=maxHops; hop++){
-
-let latency=await traceHop(host,hop)
-
-if(latency){
-
-output.innerHTML +=
-`Hop ${hop} → <span class="hop">${latency} ms</span><br>`
-
-}else{
-
-output.innerHTML +=
-`Hop ${hop} → <span class="timeout">timeout</span><br>`
-
-}
-
-}
-
-output.innerHTML += "<br>Trace complete."
-
-}
-
-</script>
-
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/traceroute-tool.js" defer></script>
 </body>
 </html>
