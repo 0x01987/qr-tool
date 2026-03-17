@@ -1,195 +1,363 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Analytics / Monetization -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
-</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
-<!-- Google AdSense -->
-<script async
-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Reverse DNS Lookup | PTR Record Checker | InstantQR</title>
+  <meta name="description" content="Free reverse DNS lookup tool to find the hostname associated with an IP address. Check PTR records for IPv4 and IPv6 instantly with a fast clean interface." />
+  <meta name="keywords" content="reverse dns lookup, ptr record checker, rdns lookup, ip to hostname, ptr lookup, reverse ip lookup, ipv4 ptr, ipv6 ptr" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="application-name" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
 
-<title>Reverse DNS Lookup | PTR Record Checker | InstantQR</title>
+  <link rel="canonical" href="https://instantqr.io/tools/reverse-dns-lookup.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
 
-<meta name="description" content="Perform reverse DNS lookup to find the hostname associated with an IP address. Check PTR records instantly.">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="preconnect" href="https://dns.google" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="//dns.google">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
 
-<link rel="canonical" href="https://instantqr.io/tools/reverse-dns-lookup.html">
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Reverse DNS Lookup | InstantQR" />
+  <meta property="og:description" content="Check PTR records and find the hostname associated with an IPv4 or IPv6 address." />
+  <meta property="og:url" content="https://instantqr.io/tools/reverse-dns-lookup.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR Reverse DNS Lookup tool" />
 
-<meta name="robots" content="index,follow">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Reverse DNS Lookup | InstantQR" />
+  <meta name="twitter:description" content="Find PTR records and hostnames for IPv4 and IPv6 addresses with a fast reverse DNS lookup tool." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-<style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Reverse DNS Lookup",
+    "url":"https://instantqr.io/tools/reverse-dns-lookup.html",
+    "description":"Reverse DNS lookup tool to find PTR records and hostnames for IPv4 and IPv6 addresses.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
 
-body{
-font-family:system-ui,-apple-system,Segoe UI,Roboto;
-background:#0b1220;
-color:#fff;
-margin:0;
-}
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Reverse DNS Lookup",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/reverse-dns-lookup.html",
+    "description":"Check PTR records and find the hostname associated with an IP address using reverse DNS lookup.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
 
-.container{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Reverse DNS Lookup",
+        "item":"https://instantqr.io/tools/reverse-dns-lookup.html"
+      }
+    ]
+  }
+  </script>
 
-h1{
-font-size:34px;
-margin-bottom:10px;
-}
-
-.card{
-background:#121b2f;
-padding:25px;
-border-radius:12px;
-margin-top:20px;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:6px;
-border:1px solid #333;
-background:#0b1220;
-color:white;
-}
-
-button{
-margin-top:15px;
-padding:12px 20px;
-border:none;
-background:#3b82f6;
-color:white;
-border-radius:6px;
-cursor:pointer;
-}
-
-button:hover{
-background:#2563eb;
-}
-
-.results{
-margin-top:20px;
-font-family:monospace;
-background:#0b1220;
-padding:15px;
-border-radius:8px;
-line-height:1.6;
-}
-
-.good{color:#22c55e}
-.bad{color:#ef4444}
-
-footer{
-margin-top:40px;
-font-size:14px;
-color:#aaa;
-}
-
-</style>
-
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is reverse DNS lookup?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Reverse DNS lookup resolves an IP address to a hostname using a PTR record. It is the opposite of a standard DNS lookup."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What is a PTR record?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A PTR record is a DNS record type used for reverse lookups. It maps an IP address back to a hostname."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why does an IP address have no PTR record?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Not all IP addresses have reverse DNS configured. If the IP owner or provider has not set up a PTR record, no hostname will be returned."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool support IPv6 reverse DNS?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. This tool supports reverse DNS lookups for both IPv4 and IPv6 addresses."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
+  <a class="skip" href="#main">Skip to content</a>
 
-<div class="container">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
 
-<nav>
-<a href="/">Home</a> /
-<a href="/tools.html">Tools</a> /
-Reverse DNS Lookup
-</nav>
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides/guides.html">Guides</a>
+      </nav>
+    </div>
+  </header>
 
-<h1>Reverse DNS Lookup</h1>
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Reverse DNS Lookup</span></li>
+      </ol>
+    </nav>
 
-<p>Find the hostname associated with an IP address.</p>
+    <section class="hero" aria-label="Reverse DNS Lookup">
+      <div class="pill">🔎 PTR record lookup • 🌐 IPv4 + IPv6 support • ⚡ Fast public DNS resolver</div>
+      <h1>Reverse DNS Lookup</h1>
+      <p class="sub">
+        Find the hostname associated with an IP address using reverse DNS.
+        Great for mail server checks, network troubleshooting, and IP verification.
+      </p>
 
-<div class="card">
+      <div class="controls" aria-label="Reverse DNS controls">
+        <div class="control">
+          <label for="ip">IP Address</label>
+          <input id="ip" class="input" placeholder="8.8.8.8 or 2001:4860:4860::8888" autocomplete="off" spellcheck="false" />
+        </div>
 
-<label>IP Address</label>
-<input id="ip" placeholder="8.8.8.8">
+        <div class="control">
+          <label>&nbsp;</label>
+          <button id="lookupBtn" class="cta primary" type="button">Lookup PTR Record</button>
+        </div>
+      </div>
 
-<button onclick="lookup()">Lookup PTR Record</button>
+      <div class="quick" aria-label="Quick examples">
+        <button type="button" data-fill="8.8.8.8">8.8.8.8</button>
+        <button type="button" data-fill="1.1.1.1">1.1.1.1</button>
+        <button type="button" data-fill="2001:4860:4860::8888">2001:4860:4860::8888</button>
+        <button type="button" data-fill="2606:4700:4700::1111">2606:4700:4700::1111</button>
+      </div>
 
-<div id="results" class="results"></div>
+      <div class="summary" aria-label="Lookup summary">
+        <div class="sumCard greenGlow">
+          <div class="sumLabel">IP Address</div>
+          <div class="sumValue small mono" id="summaryIp">—</div>
+          <div class="sumNote">The IP address you are checking.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">PTR Hostname</div>
+          <div class="sumValue small mono" id="summaryPtr">—</div>
+          <div class="sumNote">Primary hostname returned from reverse DNS.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Lookup Type</div>
+          <div class="sumValue" id="summaryType">—</div>
+          <div class="sumNote">IPv4 or IPv6 reverse query path.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Status</div>
+          <div class="sumValue" id="summaryStatus">—</div>
+          <div class="sumNote">Lookup result status for this query.</div>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <section class="panel" aria-label="Results panel">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">PTR Results</div>
+          <div class="panelSub">Checks reverse DNS using a public DNS-over-HTTPS resolver and returns PTR records when available.</div>
+        </div>
 
-<footer>
+        <div class="statusLine">
+          <span class="badge" id="statusBadge">Ready</span>
+          <button id="copyBtn" class="cta ghost" type="button">Copy Result</button>
+          <button id="shareBtn" class="cta ghost" type="button">Copy Link</button>
+        </div>
+      </div>
 
-<h2>What is Reverse DNS?</h2>
+      <div class="panelBody">
+        <div class="loader" id="loader" hidden>
+          Looking up PTR record<span class="dots"></span>
+        </div>
 
-<p>
-Reverse DNS (rDNS) resolves an IP address back to a domain name using a PTR record.
-</p>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Result</th>
+                <th>TTL</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody">
+              <tr>
+                <td class="resolver">Ready</td>
+                <td class="resultCell">
+                  <div class="resultBox">
+                    <div class="mono muted">Enter an IPv4 or IPv6 address and run the lookup.</div>
+                  </div>
+                </td>
+                <td class="ttl">—</td>
+                <td class="ttl">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-<h2>Why Reverse DNS Matters</h2>
+        <div class="helpBox">
+          <div class="helpCard">
+            <h3>What reverse DNS does</h3>
+            <p>
+              Reverse DNS resolves an IP address back to a hostname using a PTR record.
+              It is commonly used for email server validation, logging, and network analysis.
+            </p>
+          </div>
+          <div class="helpCard">
+            <h3>Why no PTR record may appear</h3>
+            <p>
+              Many IP addresses do not have reverse DNS configured. If no PTR record is set by the IP owner
+              or provider, the lookup will return no result.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<ul>
-<li>Email server validation</li>
-<li>Security analysis</li>
-<li>Network troubleshooting</li>
-<li>Server identification</li>
-</ul>
+    <section class="relatedTools" aria-label="Related network tools">
+      <h2>Related Network Tools</h2>
+      <div class="relatedLinks">
+        <a href="/tools/ip-lookup.html">IP Lookup</a>
+        <a href="/tools/dns-lookup.html">DNS Lookup</a>
+        <a href="/tools/dns-propagation-checker.html">DNS Propagation Checker</a>
+        <a href="/tools/http-header-checker.html">HTTP Header Checker</a>
+        <a href="/tools/whois-lookup.html">WHOIS Lookup</a>
+      </div>
+    </section>
 
-</footer>
+    <section class="faq" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
 
-</div>
+      <details>
+        <summary>What is reverse DNS lookup?</summary>
+        <p>Reverse DNS lookup resolves an IP address to a hostname using a PTR record. It is the opposite of a normal DNS lookup.</p>
+      </details>
 
-<script>
+      <details>
+        <summary>What is a PTR record?</summary>
+        <p>A PTR record is a DNS record that maps an IP address back to a hostname.</p>
+      </details>
 
-async function lookup(){
+      <details>
+        <summary>Why does an IP have no PTR record?</summary>
+        <p>Not every IP address has reverse DNS configured. The network owner or hosting provider must create the PTR record.</p>
+      </details>
 
-let ip=document.getElementById("ip").value
-let output=document.getElementById("results")
+      <details>
+        <summary>Does this tool support IPv6 reverse DNS?</summary>
+        <p>Yes. This reverse DNS lookup tool supports both IPv4 and IPv6 addresses.</p>
+      </details>
+    </section>
 
-if(!ip){
-output.innerHTML="Enter an IP address"
-return
-}
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/guides/guides.html">Guides</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </main>
 
-output.innerHTML="Looking up PTR record..."
-
-try{
-
-let response=await fetch(`https://dns.google/resolve?name=${ip}.in-addr.arpa&type=PTR`)
-let data=await response.json()
-
-if(data.Answer){
-
-let result=""
-
-data.Answer.forEach(r=>{
-result += r.data + "\n"
-})
-
-output.innerHTML="<span class='good'>" + result + "</span>"
-
-}else{
-
-output.innerHTML="<span class='bad'>No PTR record found.</span>"
-
-}
-
-}catch(e){
-
-output.innerHTML="Lookup failed."
-
-}
-
-}
-
-</script>
-
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/reverse-dns-lookup.js" defer></script>
 </body>
 </html>
