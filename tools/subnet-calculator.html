@@ -1,210 +1,362 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+  </script>
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
-</script>
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
-<!-- Google AdSense -->
-<script async
-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Subnet Calculator | CIDR Network Calculator | InstantQR</title>
+  <meta name="description" content="Free subnet calculator to compute network address, broadcast address, subnet mask, wildcard mask, host range, and usable hosts for IPv4 CIDR blocks.">
+  <meta name="keywords" content="subnet calculator, cidr calculator, ipv4 subnet calculator, network calculator, subnet mask calculator, broadcast address calculator">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="author" content="InstantQR">
+  <meta name="application-name" content="InstantQR">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="color-scheme" content="dark">
+  <meta name="format-detection" content="telephone=no">
 
-<title>Subnet Calculator | CIDR Network Calculator | InstantQR</title>
+  <link rel="canonical" href="https://instantqr.io/tools/subnet-calculator.html">
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg">
 
-<meta name="description" content="Free subnet calculator to compute network address, broadcast address, CIDR blocks, and usable host ranges instantly.">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
 
-<link rel="canonical" href="https://instantqr.io/tools/subnet-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="InstantQR">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Subnet Calculator | InstantQR">
+  <meta property="og:description" content="Calculate IPv4 subnet details including network address, broadcast address, usable host range, subnet mask, and CIDR information.">
+  <meta property="og:url" content="https://instantqr.io/tools/subnet-calculator.html">
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png">
+  <meta property="og:image:alt" content="InstantQR Subnet Calculator">
 
-<meta name="robots" content="index,follow">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Subnet Calculator | InstantQR">
+  <meta name="twitter:description" content="Fast IPv4 subnet and CIDR calculator for network address, broadcast, host range, and masks.">
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png">
 
-<style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Subnet Calculator",
+    "url":"https://instantqr.io/tools/subnet-calculator.html",
+    "description":"IPv4 subnet calculator for CIDR blocks, network address, broadcast address, subnet mask, wildcard mask, and host ranges.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
 
-body{
-font-family:system-ui,-apple-system,Segoe UI,Roboto;
-background:#0b1220;
-color:#fff;
-margin:0;
-}
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Subnet Calculator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/subnet-calculator.html",
+    "description":"Calculate IPv4 subnet details such as network, broadcast, host range, subnet mask, and CIDR size.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
 
-.container{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Subnet Calculator",
+        "item":"https://instantqr.io/tools/subnet-calculator.html"
+      }
+    ]
+  }
+  </script>
 
-h1{
-font-size:34px;
-margin-bottom:10px;
-}
-
-.card{
-background:#121b2f;
-padding:25px;
-border-radius:12px;
-margin-top:20px;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:6px;
-border:1px solid #333;
-background:#0b1220;
-color:white;
-}
-
-button{
-margin-top:15px;
-padding:12px 20px;
-border:none;
-background:#3b82f6;
-color:white;
-border-radius:6px;
-cursor:pointer;
-}
-
-button:hover{
-background:#2563eb;
-}
-
-.result{
-margin-top:20px;
-font-family:monospace;
-background:#0b1220;
-padding:15px;
-border-radius:8px;
-line-height:1.6;
-}
-
-.label{
-color:#9ca3af;
-}
-
-.value{
-color:#22c55e;
-}
-
-footer{
-margin-top:40px;
-font-size:14px;
-color:#aaa;
-}
-
-</style>
-
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is subnetting?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Subnetting divides a larger IP network into smaller subnetworks. It helps with routing efficiency, network organization, and access control."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What is CIDR?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"CIDR stands for Classless Inter-Domain Routing. It uses a prefix length such as /24 to indicate how many bits belong to the network portion of an IP address."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What is the difference between total addresses and usable hosts?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Total addresses includes every address in the subnet. Usable hosts excludes reserved network and broadcast addresses in most IPv4 subnets, except special cases like /31 and /32."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this calculator support IPv6?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This version is focused on IPv4 subnet calculations only."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
+  <a class="skip" href="#main">Skip to content</a>
 
-<div class="container">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+        </span>
+        <span>InstantQR</span>
+      </a>
 
-<nav>
-<a href="/">Home</a> /
-<a href="/tools.html">Tools</a> /
-Subnet Calculator
-</nav>
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/seo-tools.html">SEO Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides/guides.html">Guides</a>
+      </nav>
+    </div>
+  </header>
 
-<h1>Subnet Calculator</h1>
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Subnet Calculator</span></li>
+      </ol>
+    </nav>
 
-<p>Calculate network details for an IPv4 address and CIDR block.</p>
+    <section class="hero" aria-label="Subnet Calculator">
+      <div class="pill">🧮 IPv4 subnet math • 📡 CIDR ranges • ⚡ Fast network details</div>
+      <h1>Subnet Calculator</h1>
+      <p class="sub">
+        Calculate IPv4 subnet details for an IP address and CIDR prefix.
+        Great for network planning, routing, firewall rules, and quick troubleshooting.
+      </p>
 
-<div class="card">
+      <div class="controls" aria-label="Subnet calculator controls">
+        <div class="control">
+          <label for="ip">IP Address</label>
+          <input id="ip" class="input" placeholder="192.168.1.1" autocomplete="off" spellcheck="false">
+        </div>
 
-<label>IP Address</label>
-<input id="ip" placeholder="192.168.1.1">
+        <div class="control">
+          <label for="cidr">CIDR Prefix</label>
+          <input id="cidr" class="input" inputmode="numeric" placeholder="24" autocomplete="off" spellcheck="false">
+        </div>
 
-<label>CIDR Prefix</label>
-<input id="cidr" placeholder="24">
+        <div class="control">
+          <label>&nbsp;</label>
+          <button id="calcBtn" class="cta primary" type="button">Calculate</button>
+        </div>
+      </div>
 
-<button onclick="calculate()">Calculate</button>
+      <div class="quick" aria-label="Quick examples">
+        <button type="button" data-ip="192.168.1.10" data-cidr="24">192.168.1.10 /24</button>
+        <button type="button" data-ip="10.0.0.1" data-cidr="8">10.0.0.1 /8</button>
+        <button type="button" data-ip="172.16.5.20" data-cidr="20">172.16.5.20 /20</button>
+        <button type="button" data-ip="203.0.113.14" data-cidr="29">203.0.113.14 /29</button>
+      </div>
 
-<div id="result" class="result"></div>
+      <div class="summary" aria-label="Subnet summary">
+        <div class="sumCard greenGlow">
+          <div class="sumLabel">CIDR</div>
+          <div class="sumValue small mono" id="summaryCidr">—</div>
+          <div class="sumNote">Current IPv4 address and prefix.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Network</div>
+          <div class="sumValue small mono" id="summaryNetwork">—</div>
+          <div class="sumNote">Calculated network address.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Broadcast</div>
+          <div class="sumValue small mono" id="summaryBroadcast">—</div>
+          <div class="sumNote">Calculated broadcast address.</div>
+        </div>
+        <div class="sumCard">
+          <div class="sumLabel">Usable Hosts</div>
+          <div class="sumValue" id="summaryHosts">—</div>
+          <div class="sumNote">Usable IPv4 host count for the subnet.</div>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <section class="panel" aria-label="Results panel">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Subnet Results</div>
+          <div class="panelSub">IPv4-only subnet calculation using CIDR notation and standard host range rules.</div>
+        </div>
 
-<footer>
+        <div class="statusLine">
+          <span class="badge" id="statusBadge">Ready</span>
+          <button id="copyBtn" class="cta ghost" type="button">Copy Result</button>
+          <button id="shareBtn" class="cta ghost" type="button">Copy Link</button>
+        </div>
+      </div>
 
-<h2>What is Subnetting?</h2>
+      <div class="panelBody">
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Value</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody">
+              <tr>
+                <td class="resolver">Ready</td>
+                <td class="resultCell">
+                  <div class="resultBox">
+                    <div class="mono muted">Enter an IPv4 address and CIDR prefix, then calculate.</div>
+                  </div>
+                </td>
+                <td class="ttl">IPv4 only</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-<p>
-Subnetting divides a large IP network into smaller subnetworks to improve routing efficiency and security.
-</p>
+        <div class="helpBox">
+          <div class="helpCard">
+            <h3>What is subnetting?</h3>
+            <p>
+              Subnetting divides a larger IP network into smaller subnetworks.
+              This improves routing efficiency, network organization, and access control.
+            </p>
+          </div>
+          <div class="helpCard">
+            <h3>What is CIDR?</h3>
+            <p>
+              CIDR stands for Classless Inter-Domain Routing. A prefix like /24 means
+              24 bits are used for the network portion and the rest for hosts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<h2>What is CIDR?</h2>
+    <section class="relatedTools" aria-label="Related network tools">
+      <h2>Related Network Tools</h2>
+      <div class="relatedLinks">
+        <a href="/tools/ip-lookup.html">IP Lookup</a>
+        <a href="/tools/dns-lookup.html">DNS Lookup</a>
+        <a href="/tools/reverse-dns-lookup.html">Reverse DNS Lookup</a>
+        <a href="/tools/ping-tool.html">Ping Tool</a>
+        <a href="/tools/http-header-checker.html">HTTP Header Checker</a>
+      </div>
+    </section>
 
-<p>
-CIDR (Classless Inter-Domain Routing) defines how many bits of the IP address represent the network portion.
-</p>
+    <section class="faq" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
 
-</footer>
+      <details>
+        <summary>What is subnetting?</summary>
+        <p>Subnetting divides a large IP network into smaller subnetworks to improve routing efficiency, organization, and security.</p>
+      </details>
 
-</div>
+      <details>
+        <summary>What is CIDR?</summary>
+        <p>CIDR stands for Classless Inter-Domain Routing. It defines how many bits of the IP address belong to the network portion.</p>
+      </details>
 
-<script>
+      <details>
+        <summary>Why are usable hosts fewer than total addresses?</summary>
+        <p>In most IPv4 subnets, one address is reserved for the network and one for broadcast, so usable hosts are usually total addresses minus two.</p>
+      </details>
 
-function ipToInt(ip){
+      <details>
+        <summary>Does this support IPv6?</summary>
+        <p>This version is focused on IPv4 subnet calculations only.</p>
+      </details>
+    </section>
 
-return ip.split('.').reduce((acc,oct)=> (acc<<8)+parseInt(oct),0)
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/guides/guides.html">Guides</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </main>
 
-}
-
-function intToIp(int){
-
-return [
-(int>>>24)&255,
-(int>>>16)&255,
-(int>>>8)&255,
-int&255
-].join('.')
-
-}
-
-function calculate(){
-
-let ip=document.getElementById("ip").value
-let cidr=parseInt(document.getElementById("cidr").value)
-let result=document.getElementById("result")
-
-if(!ip || isNaN(cidr)){
-result.innerHTML="Enter valid IP and CIDR"
-return
-}
-
-let ipInt=ipToInt(ip)
-
-let mask = cidr === 0 ? 0 : (~0 << (32-cidr)) >>> 0
-
-let network = ipInt & mask
-let broadcast = network | (~mask >>>0)
-
-let firstHost = network + 1
-let lastHost = broadcast - 1
-
-let hosts = Math.pow(2,32-cidr) - 2
-
-result.innerHTML = `
-<div><span class="label">Network Address:</span> <span class="value">${intToIp(network)}</span></div>
-<div><span class="label">Broadcast Address:</span> <span class="value">${intToIp(broadcast)}</span></div>
-<div><span class="label">First Host:</span> <span class="value">${intToIp(firstHost)}</span></div>
-<div><span class="label">Last Host:</span> <span class="value">${intToIp(lastHost)}</span></div>
-<div><span class="label">Usable Hosts:</span> <span class="value">${hosts}</span></div>
-<div><span class="label">Subnet Mask:</span> <span class="value">${intToIp(mask)}</span></div>
-`
-
-}
-
-</script>
-
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/subnet-calculator.js" defer></script>
 </body>
 </html>
