@@ -5,212 +5,244 @@
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
 <script>
-window.dataLayer = window.dataLayer || [];
+window.dataLayer=window.dataLayer||[];
 function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
+gtag('js',new Date());
 gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
 </script>
 
-<!-- Google AdSense -->
+<!-- AdSense -->
 <script async
-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
 crossorigin="anonymous"></script>
 
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
-<title>Port Checker | Test Open Ports Online | InstantQR</title>
+<title>Port Checker | Test Web Ports | InstantQR</title>
 
-<meta name="description" content="Check if a port is open on your server or IP address. Free online port checker tool for developers, network engineers, and system administrators.">
+<meta name="description" content="Check whether a web port is reachable using HTTP or HTTPS. Fast browser-based port checker for troubleshooting websites and APIs.">
+
+<meta name="robots" content="index,follow">
+<meta name="author" content="InstantQR">
 
 <link rel="canonical" href="https://instantqr.io/tools/port-checker.html">
 
-<meta name="robots" content="index,follow">
-
-<style>
-
-body{
-font-family:system-ui,-apple-system,Segoe UI,Roboto;
-background:#0b1220;
-color:#fff;
-margin:0;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
-
-h1{
-font-size:34px;
-margin-bottom:10px;
-}
-
-.card{
-background:#121b2f;
-padding:25px;
-border-radius:12px;
-margin-top:20px;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:6px;
-border:1px solid #333;
-background:#0b1220;
-color:white;
-}
-
-button{
-margin-top:15px;
-padding:12px 20px;
-border:none;
-background:#3b82f6;
-color:white;
-border-radius:6px;
-cursor:pointer;
-}
-
-button:hover{
-background:#2563eb;
-}
-
-.result{
-margin-top:20px;
-font-size:18px;
-}
-
-.good{color:#22c55e}
-.bad{color:#ef4444}
-
-.quickPorts{
-margin-top:20px;
-}
-
-.quickPorts button{
-margin:5px;
-background:#1e293b;
-}
-
-footer{
-margin-top:40px;
-font-size:14px;
-color:#aaa;
-}
-
-</style>
+<link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg">
+<link rel="stylesheet" href="/assets/site.css">
 
 </head>
 
 <body>
 
-<div class="container">
+<a class="skip" href="#main">Skip to content</a>
 
-<nav>
-<a href="/">Home</a> /
-<a href="/tools.html">Tools</a> /
-Port Checker
+<header class="topbar">
+<div class="topbar-inner">
+
+<a class="brand" href="/">
+<span class="brand-logo">
+<img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+</span>
+<span>InstantQR</span>
+</a>
+
+<nav class="top-links">
+<a href="/">Home</a>
+<a href="/tools/tools.html">Tools</a>
+<a href="/tools/seo-tools.html">SEO Tools</a>
+<a href="/tools/web3-tools.html">Web3 Tools</a>
+<a href="/guides/guides.html">Guides</a>
 </nav>
+
+</div>
+</header>
+
+<main id="main" class="wrap">
+
+<nav class="breadcrumb">
+<ol>
+<li><a href="/">Home</a></li>
+<li><a href="/tools/tools.html">Tools</a></li>
+<li><span aria-current="page">Port Checker</span></li>
+</ol>
+</nav>
+
+<section class="hero">
+
+<div class="pill">
+⚡ Fast • 🌐 HTTP/HTTPS • 🔍 Browser-based check
+</div>
 
 <h1>Port Checker</h1>
 
-<p>Test whether a port is open on a server or domain.</p>
-
-<div class="card">
-
-<label>Domain or IP Address</label>
-<input id="host" placeholder="example.com">
-
-<label>Port</label>
-<input id="port" placeholder="80">
-
-<button onclick="checkPort()">Check Port</button>
-
-<div class="quickPorts">
-
-<strong>Common Ports:</strong><br>
-
-<button onclick="setPort(80)">HTTP 80</button>
-<button onclick="setPort(443)">HTTPS 443</button>
-<button onclick="setPort(22)">SSH 22</button>
-<button onclick="setPort(21)">FTP 21</button>
-<button onclick="setPort(25)">SMTP 25</button>
-<button onclick="setPort(3306)">MySQL</button>
-
-</div>
-
-<div id="result" class="result"></div>
-
-</div>
-
-<footer>
-
-<h2>What is a Port Checker?</h2>
-
-<p>
-A port checker allows you to test whether a specific port on a server is reachable from the internet. This is useful for troubleshooting firewalls, server configurations, and network connectivity.
+<p class="sub">
+Test if a web service is reachable on a specific port.
+Useful for troubleshooting APIs, websites, and servers.
 </p>
 
-<h2>Common Ports</h2>
+<div class="controls">
 
-<ul>
-<li>80 – HTTP</li>
-<li>443 – HTTPS</li>
-<li>22 – SSH</li>
-<li>21 – FTP</li>
-<li>25 – SMTP</li>
-<li>3306 – MySQL</li>
-</ul>
+<div class="control">
+<label for="host">Host</label>
+<input id="host" class="input" placeholder="example.com">
+</div>
+
+<div class="control">
+<label for="port">Port</label>
+<input id="port" class="input" placeholder="443">
+</div>
+
+<div class="control">
+<label for="protocol">Protocol</label>
+<select id="protocol" class="select">
+<option value="https">HTTPS</option>
+<option value="http">HTTP</option>
+</select>
+</div>
+
+<div class="control">
+<label>&nbsp;</label>
+<button id="checkBtn" class="cta primary">
+Check Port
+</button>
+</div>
+
+</div>
+
+<div class="quick">
+
+<button data-host="google.com" data-port="443">google.com:443</button>
+<button data-host="cloudflare.com" data-port="443">cloudflare.com:443</button>
+<button data-host="instantqr.io" data-port="443">instantqr.io:443</button>
+
+</div>
+
+<div class="summary">
+
+<div class="sumCard">
+<div class="sumLabel">Target</div>
+<div class="sumValue mono" id="targetLabel">—</div>
+</div>
+
+<div class="sumCard">
+<div class="sumLabel">Status</div>
+<div class="sumValue" id="statusLabel">—</div>
+</div>
+
+<div class="sumCard">
+<div class="sumLabel">Latency</div>
+<div class="sumValue" id="latencyLabel">—</div>
+</div>
+
+<div class="sumCard">
+<div class="sumLabel">Protocol</div>
+<div class="sumValue" id="protocolLabel">—</div>
+</div>
+
+</div>
+
+</section>
+
+<section class="panel">
+
+<div class="panelHead">
+
+<div>
+<div class="panelTitle">Results</div>
+<div class="panelSub">
+Browser-based connectivity check
+</div>
+</div>
+
+<div class="statusLine">
+<span class="badge" id="statusBadge">Ready</span>
+</div>
+
+</div>
+
+<div class="panelBody">
+
+<div class="loader" id="loader" hidden>
+Checking connection<span class="dots"></span>
+</div>
+
+<div class="tableWrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Target</th>
+<th>Status</th>
+<th>Latency</th>
+<th>Protocol</th>
+</tr>
+</thead>
+
+<tbody id="resultsBody">
+
+<tr>
+<td colspan="4" class="mono muted">
+Enter a host and port to test connectivity.
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="faq">
+
+<h2>FAQ</h2>
+
+<details>
+<summary>Can browsers scan any TCP port?</summary>
+<p>No. Browsers cannot perform raw TCP scans. This tool checks if a browser can reach a web service on a specific port.</p>
+</details>
+
+<details>
+<summary>What ports work best?</summary>
+<p>Ports used by web services such as 80, 443, 8080, and 8443.</p>
+</details>
+
+<details>
+<summary>Why might a port appear closed?</summary>
+<p>The server may block browser requests, require authentication, or use a protocol not supported by browsers.</p>
+</details>
+
+</section>
+
+<footer class="footer">
+
+<div class="footer-box">
+
+<div>
+© <span id="year"></span> InstantQR
+</div>
+
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/tools/tools.html">Tools</a>
+<a href="/about.html">About</a>
+<a href="/privacy.html">Privacy</a>
+<a href="/terms.html">Terms</a>
+</div>
+
+</div>
 
 </footer>
 
-</div>
+</main>
 
-<script>
-
-function setPort(p){
-document.getElementById("port").value=p
-}
-
-async function checkPort(){
-
-const host=document.getElementById("host").value
-const port=document.getElementById("port").value
-const result=document.getElementById("result")
-
-if(!host || !port){
-result.innerHTML="Enter host and port"
-return
-}
-
-result.innerHTML="Checking..."
-
-try{
-
-const controller=new AbortController()
-const timeout=setTimeout(()=>controller.abort(),4000)
-
-await fetch(`https://${host}:${port}`,{
-mode:"no-cors",
-signal:controller.signal
-})
-
-clearTimeout(timeout)
-
-result.innerHTML="<span class='good'>Port appears reachable.</span>"
-
-}catch(e){
-
-result.innerHTML="<span class='bad'>Port may be closed or blocked.</span>"
-
-}
-
-}
-
-</script>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/js/tools/port-checker.js" defer></script>
 
 </body>
 </html>
