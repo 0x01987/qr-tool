@@ -10,20 +10,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const elNoSimilar = document.getElementById('noSimilar');
 
   const elResult = document.getElementById('result');
-  const elStrength = document.getElementById('strengthText');
-  const elMeter = document.getElementById('meterFill');
 
-  const copyBtn = document.getElementById('copyBtn');
   const genBtn = document.getElementById('genBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const genBtnHero = document.getElementById('genBtnHero');
+  const copyBtnHero = document.getElementById('copyBtnHero');
+  const resetBtn = document.getElementById('resetBtn');
 
-  const headline = document.getElementById('headline');
-  const statusText = document.getElementById('statusText');
-  const statusDot = document.getElementById('statusDot');
-  const presetOut = document.getElementById('presetOut');
-  const lengthOut = document.getElementById('lengthOut');
-  const summaryOut = document.getElementById('summaryOut');
+  const meterFill = document.getElementById('meterFill');
+  const strengthLabel = document.getElementById('strengthLabel');
+  const poolSizeEl = document.getElementById('poolSize');
 
-  const toastEl = document.getElementById('toast');
+  const lengthMetric = document.getElementById('lengthMetric');
+  const entropyMetric = document.getElementById('entropyMetric');
+  const qualityLabel = document.getElementById('qualityLabel');
+  const qualityFill = document.getElementById('qualityFill');
+  const qualityNote = document.getElementById('qualityNote');
+  const status = document.getElementById('status');
+  const presetHint = document.getElementById('presetHint');
 
   const LOWER = 'abcdefghijklmnopqrstuvwxyz';
   const UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -33,23 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const AMBIGUOUS = new Set(['O', '0', 'o', 'I', 'l', '1']);
   const SIMILAR = new Set(['v', 'w', 'm', 'n', 'r']);
 
-  function toast(msg) {
-    if (!toastEl) return;
-    toastEl.textContent = msg;
-    toastEl.classList.add('show');
-    clearTimeout(window.__instantqrPasswordToastTimer);
-    window.__instantqrPasswordToastTimer = setTimeout(() => {
-      toastEl.classList.remove('show');
-    }, 1300);
-  }
-
-  function setStatus(kind, text) {
-    statusText.textContent = text;
-    statusDot.style.background =
-      kind === 'ok' ? 'var(--ok)' :
-      kind === 'warn' ? 'var(--warn)' :
-      kind === 'bad' ? 'var(--danger)' :
-      'var(--muted)';
+  function setStatus(html) {
+    status.innerHTML = html;
   }
 
   function randInt(max) {
@@ -76,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (elNoAmbiguous.checked) {
       filtered = filtered.filter((c) => !AMBIGUOUS.has(c));
     }
-
     if (elNoSimilar.checked) {
       filtered = filtered.filter((c) => !SIMILAR.has(c.toLowerCase()));
     }
@@ -84,39 +72,38 @@ document.addEventListener('DOMContentLoaded', () => {
     return Array.from(new Set(filtered)).join('');
   }
 
-  function updateSummary(label, lengthValue, strengthLabel, entropyBits) {
-    presetOut.textContent = label;
-    lengthOut.textContent = `${lengthValue} characters`;
-    summaryOut.textContent = `${strengthLabel} • ~${Math.round(entropyBits)} bits entropy`;
-  }
-
-  function estimateStrength(length, poolSize) {
-    if (poolSize <= 1) {
-      return { entropy: 0, label: 'Weak', pct: 0 };
-    }
-
-    const entropy = Math.log2(Math.pow(poolSize, length));
-
-    let label = 'Weak';
-    if (entropy >= 80) label = 'Very strong';
-    else if (entropy >= 60) label = 'Strong';
-    else if (entropy >= 40) label = 'Good';
-    else if (entropy >= 28) label = 'Okay';
-
-    const pct = Math.min(100, Math.max(0, Math.round((entropy / 80) * 100)));
-    return { entropy, label, pct };
-  }
-
   function buildCharset() {
     let chars = '';
-
     if (elLower.checked) chars += LOWER;
     if (elUpper.checked) chars += UPPER;
     if (elNumbers.checked) chars += NUMS;
     if (elSymbols.checked) chars += SYMS;
+    return chars ? filterSet(chars) : '';
+  }
 
-    if (!chars) return '';
-    return filterSet(chars);
+  function estimateStrength(length, poolSize) {
+    if (poolSize <= 1) return { entropy: 0, label: 'Weak', pct: 0, note: 'Not enough character variety.' };
+
+    const entropy = Math.log2(Math.pow(poolSize, length));
+
+    let label = 'Weak';
+    let note = 'Too easy to guess for important accounts.';
+    if (entropy >= 80) {
+      label = 'Excellent';
+      note = 'Very strong for most high-value accounts.';
+    } else if (entropy >= 60) {
+      label = 'Strong';
+      note = 'Strong for most accounts.';
+    } else if (entropy >= 40) {
+      label = 'Good';
+      note = 'Good, but longer is better.';
+    } else if (entropy >= 28) {
+      label = 'Okay';
+      note = 'Usable, but increase length for better security.';
+    }
+
+    const pct = Math.min(100, Math.max(0, Math.round((entropy / 80) * 100)));
+    return { entropy, label, pct, note };
   }
 
   function applyPreset(updateOnly = false) {
@@ -156,9 +143,21 @@ document.addEventListener('DOMContentLoaded', () => {
       elNoSimilar.checked = false;
     }
 
-    if (!updateOnly) {
-      generate();
-    }
+    presetHint.textContent = `Preset: ${elMode.options[elMode.selectedIndex].text}`;
+
+    if (!updateOnly) generate();
+  }
+
+  function updateStrengthUI(length, poolSize, strength) {
+    lengthMetric.textContent = String(length);
+    entropyMetric.textContent = Math.round(strength.entropy);
+    strengthLabel.textContent = strength.label;
+    poolSizeEl.textContent = poolSize ? `${poolSize} chars` : '—';
+
+    meterFill.style.width = `${strength.pct}%`;
+    qualityFill.style.width = `${strength.pct}%`;
+    qualityLabel.textContent = strength.label;
+    qualityNote.textContent = strength.note;
   }
 
   function generate() {
@@ -169,16 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!charset) {
       elResult.value = '';
-      elStrength.textContent = 'Select at least one character set.';
-      elMeter.style.width = '0%';
-      headline.textContent = 'Select at least one character set to generate a password.';
-      setStatus('warn', 'Missing options');
-      updateSummary(elMode.options[elMode.selectedIndex].text, length, 'Weak', 0);
+      updateStrengthUI(length, 0, { entropy: 0, label: 'Weak', pct: 0, note: 'Select at least one character set.' });
+      setStatus('<strong>Missing options.</strong><br>Select at least one character set.');
       return;
     }
 
     const required = [];
-
     if (elLower.checked) {
       const set = filterSet(LOWER);
       if (set) required.push(pick(set));
@@ -208,59 +203,53 @@ document.addEventListener('DOMContentLoaded', () => {
     shuffle(out);
     elResult.value = out.join('');
 
-    const s = estimateStrength(length, charset.length);
-    elStrength.textContent = `Strength: ${s.label} • ~${Math.round(s.entropy)} bits entropy`;
-    elMeter.style.width = `${s.pct}%`;
-
-    headline.textContent = 'Generated a new password locally in your browser.';
-    setStatus('ok', 'Generated');
-    updateSummary(elMode.options[elMode.selectedIndex].text, length, s.label, s.entropy);
+    const strength = estimateStrength(length, charset.length);
+    updateStrengthUI(length, charset.length, strength);
+    setStatus('<strong>Done.</strong><br>Password generated locally in your browser.');
   }
 
-  async function copyToClipboard() {
+  async function copyPassword(sourceBtn) {
     const value = elResult.value;
-    if (!value) {
-      toast('Nothing to copy');
-      return;
-    }
+    if (!value) return;
 
     try {
       if (window.InstantQR && typeof window.InstantQR.copyText === 'function') {
         await window.InstantQR.copyText(value);
-      } else if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(value);
       } else {
-        throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(value);
       }
-      copyBtn.textContent = 'Copied!';
-      setStatus('ok', 'Copied');
-      toast('Copied');
     } catch {
       elResult.select();
       document.execCommand('copy');
-      copyBtn.textContent = 'Copied!';
-      setStatus('ok', 'Copied');
-      toast('Copied');
     }
 
+    const original = sourceBtn.textContent;
+    sourceBtn.textContent = 'Copied!';
+    setStatus('<strong>Copied.</strong><br>Your password has been copied to the clipboard.');
     setTimeout(() => {
-      copyBtn.textContent = 'Copy';
-      setStatus('ok', 'Generated');
+      sourceBtn.textContent = original;
     }, 1200);
   }
 
+  function resetAll() {
+    elMode.value = 'default';
+    applyPreset(true);
+    generate();
+    setStatus('<strong>Ready.</strong><br>Settings reset and a fresh password was generated.');
+  }
+
   genBtn.addEventListener('click', generate);
-  copyBtn.addEventListener('click', copyToClipboard);
+  genBtnHero.addEventListener('click', generate);
+
+  copyBtn.addEventListener('click', () => copyPassword(copyBtn));
+  copyBtnHero.addEventListener('click', () => copyPassword(copyBtnHero));
+
+  resetBtn.addEventListener('click', resetAll);
+  elMode.addEventListener('change', () => applyPreset(false));
 
   [elLength, elLower, elUpper, elNumbers, elSymbols, elNoAmbiguous, elNoSimilar].forEach((el) => {
     el.addEventListener('change', generate);
     el.addEventListener('input', generate);
-  });
-
-  elMode.addEventListener('change', () => applyPreset(false));
-
-  elResult.addEventListener('focus', () => {
-    if (elResult.value) elResult.select();
   });
 
   applyPreset(true);
