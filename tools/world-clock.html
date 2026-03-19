@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Analytics / Monetization -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,39 +10,57 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
+  <!-- Core Meta -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>World Clock – Live Time in Any City | InstantQR.io</title>
-  <meta name="description" content="Free world clock with live local time for cities and time zones worldwide. Add and remove clocks, switch 12/24-hour format, change color theme, maximize clocks, check business hours, and copy time instantly." />
-  <meta name="keywords" content="world clock, live world clock, city time, current time by city, time zones, local time, international clock, UTC clock, business hours clock" />
+  <title>World Clock | Live Time in Any City | InstantQR</title>
+  <meta name="description" content="Free world clock with live local time for cities and time zones worldwide. Add clocks, switch 12 or 24 hour format, change themes, maximize clocks, and copy time instantly." />
+  <meta name="keywords" content="world clock, live world clock, city time, current time by city, local time, international clock, time zones, utc clock, business hours clock" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
-  <meta name="theme-color" content="#0b0f19" />
+  <meta name="application-name" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
   <meta name="format-detection" content="telephone=no" />
 
   <link rel="canonical" href="https://instantqr.io/tools/world-clock.html" />
-  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
   <link rel="alternate" hreflang="en" href="https://instantqr.io/tools/world-clock.html" />
 
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="/assets/site.css" />
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="InstantQR.io" />
-  <meta property="og:title" content="World Clock – Live Time in Any City | InstantQR.io" />
-  <meta property="og:description" content="Live local time for cities and time zones worldwide. Add clocks, switch 12/24-hour format, change color theme, maximize clocks, and copy time instantly." />
-  <meta property="og:url" content="https://instantqr.io/tools/world-clock.html" />
-  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
-  <meta property="og:image:alt" content="InstantQR World Clock tool" />
+  <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="World Clock | Live Time in Any City | InstantQR" />
+  <meta property="og:description" content="Live local time for cities and time zones worldwide. Add clocks, switch 12 or 24 hour format, change themes, maximize clocks, and copy time instantly." />
+  <meta property="og:url" content="https://instantqr.io/tools/world-clock.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR World Clock tool" />
 
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="World Clock – Live Time in Any City | InstantQR.io" />
-  <meta name="twitter:description" content="Free online world clock with live time zones, themes, maximize mode, business-hours status, and quick sharing." />
-  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
+  <meta name="twitter:title" content="World Clock | Live Time in Any City | InstantQR" />
+  <meta name="twitter:description" content="Free online world clock with live city time, 12 or 24 hour format, themes, maximize mode, and quick sharing." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -76,7 +94,7 @@
         "name":"Does this world clock run locally?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Yes. The world clock runs entirely in your browser using built-in time zone support. No login is required."
+          "text":"Yes. The world clock runs in your browser using built-in time zone support. No login is required."
         }
       },
       {
@@ -111,7 +129,6 @@
   {
     "@context":"https://schema.org",
     "@type":"BreadcrumbList",
-    "@id":"https://instantqr.io/tools/world-clock.html#breadcrumb",
     "itemListElement":[
       {
         "@type":"ListItem",
@@ -123,7 +140,7 @@
         "@type":"ListItem",
         "position":2,
         "name":"Tools",
-        "item":"https://instantqr.io/tools.html"
+        "item":"https://instantqr.io/tools/tools.html"
       },
       {
         "@type":"ListItem",
@@ -136,314 +153,106 @@
   </script>
 
   <style>
-    :root{
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      --bg:#0b0f19;
-      --card:#121a2a;
-      --panel:#0e1525;
-      --border:#22304e;
-      --border2:#2a3a5f;
-      --text:#e7eaf2;
-      --muted:#b8c0d6;
-      --muted2:#8ea0c8;
-      --link:#cfe0ff;
-      --brand:#3b82f6;
-      --brand-soft:rgba(59,130,246,.18);
-      --good:#34d399;
-      --warn:#fbbf24;
-      --bad:#fb7185;
-      --shadow:0 12px 40px rgba(0,0,0,.35);
-      --radius:18px;
-      --radius2:16px;
-      --max:1080px;
-      color-scheme:dark;
-    }
-
-    body.theme-blue{
-      --brand:#3b82f6;
-      --brand-soft:rgba(59,130,246,.18);
-      --link:#cfe0ff;
-    }
-    body.theme-green{
-      --brand:#22c55e;
-      --brand-soft:rgba(34,197,94,.18);
-      --link:#d7ffe5;
-    }
-    body.theme-red{
-      --brand:#ef4444;
-      --brand-soft:rgba(239,68,68,.18);
-      --link:#ffe1e1;
-    }
-    body.theme-white{
-      --brand:#e5e7eb;
-      --brand-soft:rgba(229,231,235,.18);
-      --link:#ffffff;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-
-    body{
-      margin:0;
-      background:
-        radial-gradient(900px 540px at 12% 8%, var(--brand-soft), transparent 55%),
-        radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
-        var(--bg);
-      color:var(--text);
-      line-height:1.5;
-    }
-
-    body.theme-white{
-      background:
-        radial-gradient(900px 540px at 12% 8%, rgba(229,231,235,.12), transparent 55%),
-        radial-gradient(900px 540px at 88% 12%, rgba(255,255,255,.06), transparent 55%),
-        var(--bg);
-    }
-
-    body.grid-maximized .wrap{
-      max-width:100%;
-      padding:12px;
-    }
-
-    body.grid-maximized .card{
-      padding:14px;
-    }
-
-    a{color:var(--link);text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .wrap{max-width:var(--max);margin:0 auto;padding:22px;transition:max-width .2s ease}
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:var(--shadow);
-    }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      padding:2px 2px 10px;
-      border-bottom:1px solid rgba(34,48,78,.55);
-      margin-bottom:12px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      text-decoration:none;
-      color:var(--text);
-      font-weight:900;
-      letter-spacing:-.2px;
-      min-width:0;
-    }
-
-    .brand img{height:30px;width:auto;display:block}
-    .brand span{font-size:16px}
-
-    .nav{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
-    .nav a{
-      display:inline-block;
-      padding:10px 12px;
-      border-radius:12px;
-      background:#0b1222;
-      border:1px solid var(--border2);
-      color:var(--text);
-      text-decoration:none;
-      font-weight:800;
-      font-size:12px;
-      user-select:none;
-      -webkit-tap-highlight-color:transparent;
-    }
-
-    .nav a:hover{border-color:var(--brand)}
-    .nav a.active{border-color:var(--brand)}
-
-    .breadcrumbs{
-      display:flex;
-      flex-wrap:wrap;
-      gap:6px;
-      margin:4px 0 14px;
-      font-size:12px;
-      color:var(--muted2);
-    }
-
-    .hero{
+    .world-grid{
       display:grid;
       grid-template-columns:1.1fr .9fr;
-      gap:14px;
-      align-items:start;
-      margin-top:10px;
-    }
-
-    @media (max-width:920px){
-      .hero{grid-template-columns:1fr}
-    }
-
-    h1{
-      margin:0;
-      font-size:28px;
-      letter-spacing:-.3px;
-    }
-
-    .sub{
-      margin:8px 0 0;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.65;
-      max-width:76ch;
-    }
-
-    .kpis{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:10px;
+      gap:18px;
       margin-top:14px;
     }
-
-    @media (max-width:920px){
-      .kpis{grid-template-columns:1fr}
-    }
-
-    .kpi{
-      border:1px solid var(--border2);
-      background:#0b1222;
-      border-radius:14px;
-      padding:12px;
-    }
-
-    .kpi .t{color:var(--muted2);font-size:12px}
-    .kpi .v{font-size:16px;font-weight:900;margin-top:4px}
-
-    .panel{
-      background:var(--panel);
-      border:1px solid var(--border2);
+    .world-card,
+    .world-panel,
+    .faqCard{
       border-radius:var(--radius2);
-      padding:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
     }
-
-    .panelHeader{
+    .world-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+    }
+    .world-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
+      pointer-events:none;
+    }
+    .world-card > *{position:relative}
+    .world-actions{
       display:flex;
-      align-items:center;
-      justify-content:space-between;
       gap:10px;
-      margin-bottom:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .world-panel{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .panel-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
       flex-wrap:wrap;
     }
-
-    .panelHeader .title{
-      font-weight:900;
-      letter-spacing:-.1px;
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
     }
-
-    .badge{
-      font-size:12px;
-      color:var(--muted);
-      border:1px solid var(--border2);
-      background:#0b1222;
+    .badge-soft{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
       padding:6px 10px;
       border-radius:999px;
-      user-select:none;
-      white-space:nowrap;
-    }
-
-    .row{
-      display:grid;
-      grid-template-columns:1.3fr .8fr 1fr;
-      gap:12px;
-      align-items:start;
-    }
-
-    @media (max-width:920px){
-      .row{grid-template-columns:1fr}
-    }
-
-    label{
-      font-size:12px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
       color:var(--muted);
-      display:flex;
-      justify-content:space-between;
-      align-items:baseline;
-      gap:8px;
-      margin-bottom:6px;
+      font-size:12px;
     }
-
-    .hint{color:var(--muted2);font-size:12px}
-    .note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.65}
-
-    input, select, button{
+    .controlsGrid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr 1fr;
+      gap:12px;
+    }
+    .field-label{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:6px;
+      font-weight:700;
+    }
+    .field,
+    .field-select{
       width:100%;
-      padding:12px 10px;
+      padding:12px 12px;
       border-radius:14px;
-      border:1px solid var(--border2);
-      background:#0b1222;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0a1427;
       color:var(--text);
       outline:none;
       font-size:14px;
-      -webkit-tap-highlight-color:transparent;
     }
-
-    input:focus, select:focus{
-      border-color:var(--brand);
-      box-shadow:0 0 0 3px color-mix(in srgb, var(--brand) 22%, transparent);
+    .field:focus,
+    .field-select:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 4px rgba(96,165,250,.14);
+      background:#0b172d;
     }
-
-    input::placeholder{color:#64748b}
-
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
-    .actions button{width:auto}
-
-    .btn{
-      cursor:pointer;
-      border:1px solid var(--border2);
-      background:#0b1222;
-      color:var(--text);
-      padding:11px 12px;
-      border-radius:14px;
-      font-weight:900;
-    }
-
-    .btn:hover{border-color:var(--brand)}
-
-    .btn.primary{
-      background:var(--brand);
-      border-color:transparent;
-      color:#fff;
-    }
-
-    body.theme-white .btn.primary{
-      color:#111827;
-    }
-
-    .btn.danger{
-      border-color:rgba(251,113,133,.55);
-      background:rgba(251,113,133,.12);
-    }
-
     .themeRow{
       display:flex;
       gap:8px;
       flex-wrap:wrap;
       margin-top:10px;
     }
-
     .themeBtn{
       width:auto;
       min-width:74px;
@@ -451,23 +260,21 @@
       border-radius:999px;
       font-weight:800;
       cursor:pointer;
-      border:1px solid var(--border2);
-      background:#0b1222;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
       color:var(--text);
     }
-
     .themeBtn.active{
       border-color:var(--brand);
-      box-shadow:0 0 0 2px color-mix(in srgb, var(--brand) 22%, transparent);
+      box-shadow:0 0 0 2px rgba(96,165,250,.15);
     }
-
     .themeBtn[data-theme="blue"]{background:rgba(59,130,246,.12)}
     .themeBtn[data-theme="green"]{background:rgba(34,197,94,.12)}
     .themeBtn[data-theme="red"]{background:rgba(239,68,68,.12)}
     .themeBtn[data-theme="white"]{background:rgba(255,255,255,.10)}
-
-    .suggest{position:relative}
-
+    .suggest{
+      position:relative;
+    }
     .suggestList{
       position:absolute;
       left:0;
@@ -481,11 +288,9 @@
       display:none;
       max-height:280px;
       overflow-y:auto;
-      z-index:20;
+      z-index:30;
       box-shadow:var(--shadow);
-      contain:content;
     }
-
     .suggestItem{
       padding:10px 12px;
       cursor:pointer;
@@ -494,96 +299,114 @@
       gap:12px;
       border-top:1px solid rgba(42,58,95,.55);
     }
-
     .suggestItem:first-child{border-top:none}
     .suggestItem:hover{background:#0f1a2e}
     .suggestItem b{font-size:13px}
     .suggestItem span{font-size:12px;color:var(--muted2)}
-
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    .statsGrid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:12px;
     }
-
+    .metric{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .metric .k{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .metric .v{
+      font-size:20px;
+      font-weight:900;
+      letter-spacing:-.3px;
+      word-break:break-word;
+    }
+    .metric .u{
+      font-size:12px;
+      color:rgba(233,238,252,.55);
+    }
+    .note-box{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.14);
+      padding:14px;
+      font-size:13px;
+      line-height:1.55;
+      color:var(--muted);
+    }
+    .clockSection{
+      margin-top:14px;
+    }
     .cards{
       display:grid;
       grid-template-columns:repeat(3, 1fr);
       gap:12px;
       transition:all .2s ease;
     }
-
+    body.grid-maximized .wrap{
+      max-width:100%;
+      padding:12px;
+    }
     body.grid-maximized .cards{
       grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
     }
-
-    @media (max-width:980px){
-      .cards{grid-template-columns:repeat(2, 1fr)}
-    }
-
-    @media (max-width:640px){
-      .cards{grid-template-columns:1fr}
-    }
-
     .clockCard{
       border:1px solid var(--border2);
       border-radius:16px;
       padding:12px;
       background:#0b1222;
-      contain:content;
       transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
-
     .clockCard:hover{
-      border-color:color-mix(in srgb, var(--brand) 70%, var(--border2));
+      border-color:rgba(96,165,250,.5);
       transform:translateY(-1px);
     }
-
     .clockCard.maximized{
       grid-column:1 / -1;
       min-height:380px;
       padding:18px;
       border-color:var(--brand);
-      box-shadow:0 0 0 1px color-mix(in srgb, var(--brand) 25%, transparent), var(--shadow);
+      box-shadow:0 0 0 1px rgba(96,165,250,.18), var(--shadow);
     }
-
     .clockCard.maximized .time{
       font-size:64px;
       margin-top:20px;
     }
-
     .clockCard.maximized .date{
       font-size:16px;
       margin-top:10px;
     }
-
     .clockCard.maximized .city b{
       font-size:24px;
     }
-
     .clockCard.maximized .city small{
       font-size:14px;
     }
-
     .topline{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
       gap:10px;
     }
-
     .city{
       display:flex;
       flex-direction:column;
       gap:2px;
       min-width:0;
     }
-
     .city b{
       font-size:14px;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
-
     .city small{
       color:var(--muted2);
       font-size:12px;
@@ -591,14 +414,12 @@
       overflow:hidden;
       text-overflow:ellipsis;
     }
-
     .chipRow{
       display:flex;
       gap:8px;
       flex-wrap:wrap;
       margin-top:8px;
     }
-
     .chip{
       display:inline-flex;
       align-items:center;
@@ -610,17 +431,14 @@
       color:var(--muted);
       background:rgba(14,21,37,.55);
     }
-
     .dot{
       width:8px;
       height:8px;
       border-radius:50%;
     }
-
-    .dot.good{background:var(--good)}
-    .dot.warn{background:var(--warn)}
-    .dot.bad{background:var(--bad)}
-
+    .dot.good{background:#22c55e}
+    .dot.warn{background:#facc15}
+    .dot.bad{background:#ef4444}
     .time{
       font-size:30px;
       font-weight:950;
@@ -628,199 +446,176 @@
       line-height:1.05;
       margin-top:10px;
       color:var(--brand);
-      text-shadow:0 0 18px color-mix(in srgb, var(--brand) 18%, transparent);
+      text-shadow:0 0 18px rgba(96,165,250,.15);
     }
-
-    body.theme-white .time{
-      color:#f9fafb;
-    }
-
     .date{
       color:var(--muted);
       font-size:12px;
       margin-top:6px;
     }
-
     .btnRow{
       display:flex;
       gap:8px;
       flex-wrap:wrap;
       margin-top:12px;
     }
-
-    .btnRow button{flex:1}
-
-    .btnMini{
-      padding:10px 10px;
-      border-radius:14px;
-      border:1px solid var(--border2);
-      background:#0b1222;
-      color:var(--text);
-      font-weight:800;
-      cursor:pointer;
+    .btnRow .cta{
+      flex:1;
+      justify-content:center;
     }
-
-    .btnMini:hover{border-color:var(--brand)}
-
-    .faqWrap{
-      margin-top:14px;
+    .miniGrid2{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-
-    @media (max-width:920px){
-      .faqWrap{grid-template-columns:1fr}
-    }
-
-    .sectionTitle{
-      margin:0 0 10px;
-      font-size:15px;
-      font-weight:900;
-      letter-spacing:-.2px;
-    }
-
-    .faqItem{
-      margin-top:10px;
-      padding-top:10px;
-      border-top:1px solid rgba(42,58,95,.55);
-    }
-
-    .faqItem:first-of-type{
-      margin-top:0;
-      padding-top:0;
-      border-top:0;
-    }
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:18px;
-      transform:translateX(-50%);
-      background:#0b1222;
-      border:1px solid var(--border2);
-      color:var(--text);
-      padding:10px 12px;
-      border-radius:999px;
-      font-size:13px;
-      display:none;
-      z-index:50;
-      box-shadow:var(--shadow);
-    }
-
-    .footerLinks{
+      gap:12px;
       margin-top:14px;
-      text-align:center;
-      color:var(--muted2);
-      font-size:12px;
-      line-height:1.8;
     }
-
-    .footerLinks a{color:var(--link)}
+    .miniBox{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+    .miniBox h2{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .miniBox p,
+    .miniBox li{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .miniBox ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .faqCard{
+      margin-top:14px;
+      padding:18px;
+    }
+    .faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+    .faqCard summary::-webkit-details-marker{display:none}
+    .faqCard p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    }
+    @media (max-width: 980px){
+      .world-grid,
+      .miniGrid2{
+        grid-template-columns:1fr;
+      }
+      .controlsGrid,
+      .statsGrid{
+        grid-template-columns:1fr;
+      }
+      .cards{
+        grid-template-columns:repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 640px){
+      .cards{
+        grid-template-columns:1fr;
+      }
+      .world-actions .cta,
+      .btnRow .cta{
+        width:100%;
+      }
+    }
   </style>
 </head>
 
 <body class="theme-blue">
-  <div class="wrap">
-    <div class="card">
+  <a class="skip" href="#main">Skip to content</a>
 
-      <div class="topbar">
-        <a class="brand" href="/" aria-label="InstantQR Home">
-          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
-          <span>InstantQR</span>
-        </a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
 
-        <nav class="nav" aria-label="Tools">
-          <a href="/">HOME</a>
-          <a href="/tools/password.html">Password</a>
-          <a href="/tools/unit-converter.html">Unit Converter</a>
-          <a href="/tools/ip-lookup.html">IP Lookup</a>
-          <a href="/tools/web3-gas-fee-estimator.html">Gas Fees</a>
-          <a class="active" href="/tools/world-clock.html" aria-current="page">World Clock</a>
-        </nav>
-      </div>
-
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <nav class="top-links" aria-label="Primary">
         <a href="/">Home</a>
-        <span>/</span>
-        <a href="/tools.html">Tools</a>
-        <span>/</span>
-        <span>World Clock</span>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/time-zone-converter.html">Time Zone Converter</a>
+        <a href="/tools/countdown-timer.html">Countdown Timer</a>
+        <a href="/tools/unit-converter.html">Unit Converter</a>
       </nav>
+    </div>
+  </header>
 
-      <section class="hero">
-        <div>
-          <h1>World Clock</h1>
-          <p class="sub">
-            Live local time for any city or IANA time zone. Add or remove clocks, switch between 12-hour and 24-hour format,
-            change theme colors, maximize one clock or the full grid, and share selected clocks instantly.
-          </p>
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">World Clock</span></li>
+      </ol>
+    </nav>
 
-          <div class="kpis" aria-label="Quick stats">
-            <div class="kpi">
-              <div class="t">Format</div>
-              <div class="v" id="kpiFmt">12-hour</div>
-            </div>
-            <div class="kpi">
-              <div class="t">Clocks</div>
-              <div class="v" id="kpiCount">0</div>
-            </div>
-            <div class="kpi">
-              <div class="t">Theme</div>
-              <div class="v" id="kpiTheme">Blue</div>
-            </div>
-          </div>
-        </div>
+    <section class="world-grid" aria-label="World Clock">
+      <section class="world-card">
+        <div class="pill">🌍 Live city time • 🕒 12/24-hour • 🔒 Saved locally</div>
 
-        <aside class="panel" role="region" aria-label="Tips">
-          <div class="panelHeader">
-            <div class="title">Fast tips</div>
-            <div class="badge">Runs locally</div>
-          </div>
-          <div class="note" style="margin:0;">
-            • Search cities or type an IANA zone like <b class="mono">America/Phoenix</b>.<br>
-            • Use the theme buttons to switch colors.<br>
-            • Maximize one clock or expand the entire grid.
-          </div>
-        </aside>
-      </section>
+        <h1>World Clock</h1>
+        <p class="sub">
+          Live local time for any city or IANA time zone. Add or remove clocks, switch between 12-hour and 24-hour format,
+          change theme colors, maximize one clock or the full grid, and share selected clocks instantly.
+        </p>
 
-      <section class="panel" style="margin-top:14px;" aria-label="World clock controls">
-        <div class="panelHeader">
-          <div class="title">Controls</div>
-          <div class="badge" id="runBadge">Live</div>
-        </div>
-
-        <div class="row">
+        <div class="controlsGrid" aria-label="World clock controls">
           <div class="suggest">
-            <label for="citySearch">Add a city / time zone <span class="hint">saved locally</span></label>
-            <input id="citySearch" type="text" placeholder="Search: Phnom Penh, Tokyo, London, New York, America/Phoenix…" autocomplete="off" />
+            <label class="field-label" for="citySearch">Add a city or time zone</label>
+            <input id="citySearch" class="field" type="text" placeholder="Search: Phnom Penh, Tokyo, London, America/Phoenix…" autocomplete="off" />
             <div class="suggestList" id="suggestList" role="listbox" aria-label="Time zone suggestions"></div>
-            <div class="note" style="margin-top:8px;">Tip: Type a time zone then press <b>Enter</b>.</div>
           </div>
 
           <div>
-            <label for="timeFormat">Time format <span class="hint">all clocks</span></label>
-            <select id="timeFormat">
+            <label class="field-label" for="timeFormat">Time format</label>
+            <select id="timeFormat" class="field-select">
               <option value="12">12-hour (AM/PM)</option>
               <option value="24">24-hour</option>
             </select>
-            <div class="note" style="margin-top:8px;">Only affects display formatting.</div>
           </div>
 
           <div>
-            <label>Actions <span class="hint">share / reset / expand</span></label>
-            <div class="actions">
-              <button class="btn primary" id="shareBtn" type="button">Share</button>
-              <button class="btn" id="toggleGridBtn" type="button">Maximize All</button>
-              <button class="btn danger" id="resetBtn" type="button">Reset</button>
+            <label class="field-label">Actions</label>
+            <div class="world-actions" style="margin-top:0;">
+              <button class="cta primary" id="shareBtn" type="button">Share</button>
+              <button class="cta ghost" id="toggleGridBtn" type="button">Maximize All</button>
+              <button class="cta ghost" id="resetBtn" type="button">Reset</button>
             </div>
-            <div class="note" id="shareHint" style="margin-top:8px;">Share creates a link with your selected time zones.</div>
           </div>
         </div>
 
         <div style="margin-top:14px;">
-          <label>Color theme <span class="hint">saved locally</span></label>
+          <label class="field-label">Color theme</label>
           <div class="themeRow" id="themeRow">
             <button class="themeBtn active" data-theme="blue" type="button">Blue</button>
             <button class="themeBtn" data-theme="green" type="button">Green</button>
@@ -828,618 +623,123 @@
             <button class="themeBtn" data-theme="white" type="button">White</button>
           </div>
         </div>
-      </section>
 
-      <section class="panel" style="margin-top:14px;" aria-label="World clock grid">
-        <div class="panelHeader">
-          <div class="title">Clocks</div>
-          <div class="badge" id="clockBadge">Updating</div>
-        </div>
-        <div class="cards" id="clockGrid"></div>
-      </section>
-
-      <section class="faqWrap" aria-label="Additional information">
-        <div class="panel">
-          <h2 class="sectionTitle">Frequently asked questions</h2>
-
-          <div class="faqItem">
-            <div class="note"><strong>Can I change the color theme?</strong><br>Yes. You can switch between blue, green, red, and white themes.</div>
-          </div>
-
-          <div class="faqItem">
-            <div class="note"><strong>Can I maximize one clock?</strong><br>Yes. Each clock card has a maximize button to expand it.</div>
-          </div>
-
-          <div class="faqItem">
-            <div class="note"><strong>Can I maximize all clocks?</strong><br>Yes. Use the Maximize All button to expand the whole grid area.</div>
-          </div>
-
-          <div class="faqItem">
-            <div class="note"><strong>Does this save my preferences?</strong><br>Yes. Selected clocks, time format, and theme are stored locally in your browser.</div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h2 class="sectionTitle">Related tools</h2>
-          <p class="note" style="margin-top:0;">
-            <a href="/tools/time-zone-converter.html">Time Zone Converter</a> ·
-            <a href="/tools/countdown-timer.html">Countdown Timer</a> ·
-            <a href="/tools/unit-converter.html">Unit Converter</a>
-          </p>
+        <div class="hint" style="margin-top:12px;">
+          Tip: you can type a city name or a full IANA time zone like <code>America/Phoenix</code> or <code>Asia/Phnom_Penh</code>.
         </div>
       </section>
 
-      <div class="footerLinks">
-        <div style="margin-bottom:8px;">
-          <a href="/tools/wifi-qr-code-generator.html">WiFi QR Code Generator</a> ·
-          <a href="/tools/url-qr-code-generator.html">QR Code Generator</a> ·
-          <a href="/tools/web3-gas-fee-estimator.html">Gas Fee Estimator</a> ·
-          <a href="/tools/world-clock.html">World Clock</a> ·
-          <a href="/tools/time-zone-converter.html">Time Zone Converter</a>
+      <aside class="world-panel" aria-label="World clock summary">
+        <div class="panel-top">
+          <div>
+            <h2>Overview</h2>
+            <div class="hint" style="margin-top:6px;">Runs locally in your browser using built-in time zone support.</div>
+          </div>
+          <div class="badge-soft" id="runBadge">Live</div>
         </div>
+
+        <div class="statsGrid" aria-label="Quick stats">
+          <div class="metric">
+            <div class="k">Format</div>
+            <div class="v" id="kpiFmt">12-hour</div>
+            <div class="u">Display mode</div>
+          </div>
+
+          <div class="metric">
+            <div class="k">Clocks</div>
+            <div class="v mono" id="kpiCount">0</div>
+            <div class="u">Selected cities</div>
+          </div>
+
+          <div class="metric">
+            <div class="k">Theme</div>
+            <div class="v" id="kpiTheme">Blue</div>
+            <div class="u">Saved locally</div>
+          </div>
+        </div>
+
+        <div class="note-box" id="statusText">
+          Ready. Search for a city or time zone above to add clocks. Your selected clocks, time format, and theme are saved locally in your browser.
+        </div>
+      </aside>
+    </section>
+
+    <section class="world-panel clockSection" aria-label="World clock grid">
+      <div class="panel-top">
         <div>
-          <a href="/about.html">About</a> ·
-          <a href="/privacy.html">Privacy</a> ·
-          <a href="/terms.html">Terms</a> ·
-          <a href="/contact.html">Contact</a> ·
+          <h2>Clocks</h2>
+          <div class="hint" style="margin-top:6px;">Business-hours indicator uses local time from 9:00 to 17:00.</div>
+        </div>
+        <div class="badge-soft" id="clockBadge">Updating</div>
+      </div>
+
+      <div class="cards" id="clockGrid"></div>
+    </section>
+
+    <section class="miniGrid2" aria-label="Additional information">
+      <div class="miniBox">
+        <h2>How this world clock works</h2>
+        <ul>
+          <li>Uses built-in browser time zone support</li>
+          <li>Updates live every second</li>
+          <li>Saves your selected clocks locally</li>
+          <li>Lets you copy or share selected times quickly</li>
+        </ul>
+      </div>
+
+      <div class="miniBox">
+        <h2>Related tools</h2>
+        <p>
+          <a href="/tools/time-zone-converter.html">Time Zone Converter</a> ·
+          <a href="/tools/countdown-timer.html">Countdown Timer</a> ·
+          <a href="/tools/unit-converter.html">Unit Converter</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="faqCard" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>Does this world clock run locally?</summary>
+        <p>Yes. The world clock runs in your browser using built-in time zone support. No login is required.</p>
+      </details>
+
+      <details>
+        <summary>Can I add or remove cities?</summary>
+        <p>Yes. Add cities or time zones from the search box and remove any clock. Your selected clocks are saved locally in your browser.</p>
+      </details>
+
+      <details>
+        <summary>Can I change the color theme?</summary>
+        <p>Yes. You can switch between blue, green, red, and white themes.</p>
+      </details>
+
+      <details>
+        <summary>Can I maximize one clock or all clocks?</summary>
+        <p>Yes. You can maximize an individual clock card or expand the whole clock grid.</p>
+      </details>
+    </section>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
           <a href="/sitemap.xml">Sitemap</a>
         </div>
       </div>
-
-    </div>
-  </div>
+    </footer>
+  </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script>
-  (() => {
-    const $ = (id) => document.getElementById(id);
-    const LS_KEY = "instantqr_world_clock_v3";
-    const LS_FMT = "instantqr_world_clock_fmt_v2";
-    const LS_THEME = "instantqr_world_clock_theme_v1";
-
-    const toastEl = $("toast");
-    let toastTimer = null;
-    let maximizedCardId = null;
-    let gridMaximized = false;
-
-    function toast(msg){
-      toastEl.textContent = msg;
-      toastEl.style.display = "block";
-      if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toastEl.style.display = "none", 1600);
-    }
-
-    async function copyText(text){
-      try{
-        await navigator.clipboard.writeText(text);
-        toast("Copied!");
-        return true;
-      }catch{
-        try{
-          const ta = document.createElement("textarea");
-          ta.value = text;
-          ta.style.position = "fixed";
-          ta.style.left = "-9999px";
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand("copy");
-          document.body.removeChild(ta);
-          toast("Copied!");
-          return true;
-        }catch{
-          toast("Copy failed");
-          return false;
-        }
-      }
-    }
-
-    function safeJSONParse(s, fallback){
-      try { return JSON.parse(s); } catch { return fallback; }
-    }
-
-    function uniq(arr){
-      return Array.from(new Set(arr));
-    }
-
-    function escapeHTML(s){
-      return String(s).replace(/[&<>"']/g, (m) => ({
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#39;"
-      }[m]));
-    }
-
-    function normalize(s){
-      return (s || "").toLowerCase()
-        .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
-        .replace(/[^a-z0-9\s\-\/_]/g,"")
-        .trim();
-    }
-
-    function getAllTimeZones(){
-      if (Intl && typeof Intl.supportedValuesOf === "function"){
-        const zones = Intl.supportedValuesOf("timeZone");
-        if (!zones.includes("UTC")) zones.unshift("UTC");
-        return zones;
-      }
-      return [
-        "UTC","America/Phoenix","America/Los_Angeles","America/Denver","America/Chicago",
-        "America/New_York","America/Toronto","Europe/London","Europe/Paris","Europe/Berlin",
-        "Asia/Tokyo","Asia/Seoul","Asia/Singapore","Asia/Bangkok","Asia/Phnom_Penh","Australia/Sydney"
-      ];
-    }
-
-    const TIMEZONES = getAllTimeZones();
-    const TZ_SET = new Set(TIMEZONES);
-
-    function tzToEntry(tz){
-      if (tz === "UTC") return { id:"UTC", name:"UTC", region:"Coordinated Universal Time", tz:"UTC" };
-      const parts = tz.split("/");
-      const region = parts[0] || "Other";
-      const cityRaw = parts[parts.length - 1] || tz;
-      const city = cityRaw.replace(/_/g, " ");
-      return { id: tz, name: city, region, tz };
-    }
-
-    function getEntryById(id){
-      if (!id || !TZ_SET.has(id)) return null;
-      return tzToEntry(id);
-    }
-
-    const searchEl = $("citySearch");
-    const listEl = $("suggestList");
-    const gridEl = $("clockGrid");
-    const kpiFmt = $("kpiFmt");
-    const kpiCount = $("kpiCount");
-    const kpiTheme = $("kpiTheme");
-    const runBadge = $("runBadge");
-    const clockBadge = $("clockBadge");
-    const timeFormatSel = $("timeFormat");
-    const themeRow = $("themeRow");
-    const toggleGridBtn = $("toggleGridBtn");
-
-    const localTZ = (() => {
-      try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; }
-      catch { return "UTC"; }
-    })();
-
-    const defaultSelected = uniq([
-      localTZ,
-      "UTC",
-      "America/New_York",
-      "Europe/London",
-      "Asia/Tokyo",
-      "Asia/Phnom_Penh"
-    ].filter(tz => TZ_SET.has(tz)));
-
-    let timeFormat = localStorage.getItem(LS_FMT) || "12";
-    let currentTheme = localStorage.getItem(LS_THEME) || "blue";
-    timeFormatSel.value = (timeFormat === "24") ? "24" : "12";
-
-    function sanitizeSelected(ids){
-      const cleaned = [];
-      for (const id of (ids || [])){
-        if (typeof id !== "string") continue;
-        if (TZ_SET.has(id)) cleaned.push(id);
-      }
-      return uniq(cleaned).slice(0, 24);
-    }
-
-    function loadSelectedFromLS(){
-      const raw = localStorage.getItem(LS_KEY);
-      if (!raw) return null;
-      const arr = safeJSONParse(raw, null);
-      return Array.isArray(arr) ? arr : null;
-    }
-
-    function loadSelectedFromURL(){
-      const u = new URL(location.href);
-      const cities = u.searchParams.get("cities");
-      const fmt = u.searchParams.get("fmt");
-
-      if (fmt === "24" || fmt === "12"){
-        timeFormat = fmt;
-        localStorage.setItem(LS_FMT, timeFormat);
-        timeFormatSel.value = fmt;
-      }
-
-      if (!cities) return null;
-      const ids = cities.split(",").map(s => decodeURIComponent(s.trim())).filter(Boolean);
-      return ids.length ? ids : null;
-    }
-
-    let selectedIds = sanitizeSelected(loadSelectedFromURL() || loadSelectedFromLS() || defaultSelected);
-
-    function saveSelected(){
-      localStorage.setItem(LS_KEY, JSON.stringify(selectedIds));
-    }
-
-    function applyTheme(theme){
-      const valid = ["blue","green","red","white"];
-      currentTheme = valid.includes(theme) ? theme : "blue";
-      document.body.classList.remove("theme-blue","theme-green","theme-red","theme-white");
-      document.body.classList.add(`theme-${currentTheme}`);
-      localStorage.setItem(LS_THEME, currentTheme);
-      kpiTheme.textContent = currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1);
-      themeRow.querySelectorAll(".themeBtn").forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.theme === currentTheme);
-      });
-    }
-
-    function applyGridState(){
-      document.body.classList.toggle("grid-maximized", gridMaximized);
-      toggleGridBtn.textContent = gridMaximized ? "Restore All" : "Maximize All";
-    }
-
-    const INDEX = TIMEZONES.map(tz => {
-      const entry = tzToEntry(tz);
-      const hay = normalize(`${entry.name} ${entry.region} ${entry.tz}`);
-      return { id: entry.id, entry, hay };
-    });
-
-    function getSuggestions(q){
-      const nq = normalize(q);
-      if (!nq) return [];
-      const parts = nq.split(/\s+/).filter(Boolean);
-
-      const scored = [];
-      for (const it of INDEX){
-        let score = 0;
-        if (normalize(it.entry.tz) === nq) score += 20;
-        for (const p of parts){
-          if (it.hay.startsWith(p)) score += 6;
-          else if (it.hay.includes(p)) score += 3;
-        }
-        if (score > 0){
-          if (selectedIds.includes(it.id)) score -= 2;
-          scored.push({ entry: it.entry, score });
-        }
-      }
-
-      scored.sort((a,b) => b.score - a.score);
-      return scored.slice(0, 12).map(x => x.entry);
-    }
-
-    function renderSuggestions(items){
-      if (!items.length){
-        listEl.style.display = "none";
-        listEl.innerHTML = "";
-        return;
-      }
-
-      listEl.innerHTML = items.map(e => `
-        <div class="suggestItem" role="option" data-id="${escapeHTML(e.id)}">
-          <div style="min-width:0">
-            <b>${escapeHTML(e.name)}</b>
-            <div><span>${escapeHTML(e.region)}</span></div>
-          </div>
-          <span class="mono">${escapeHTML(e.tz)}</span>
-        </div>
-      `).join("");
-
-      listEl.style.display = "block";
-    }
-
-    function hideSuggestions(){
-      listEl.style.display = "none";
-    }
-
-    let sugTimer = null;
-    function scheduleSuggestions(){
-      if (sugTimer) clearTimeout(sugTimer);
-      sugTimer = setTimeout(() => renderSuggestions(getSuggestions(searchEl.value)), 60);
-    }
-
-    searchEl.addEventListener("input", scheduleSuggestions, { passive:true });
-    searchEl.addEventListener("focus", scheduleSuggestions, { passive:true });
-
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest(".suggest")) hideSuggestions();
-    }, { passive:true });
-
-    listEl.addEventListener("click", (e) => {
-      const item = e.target.closest(".suggestItem");
-      if (!item) return;
-      const id = item.getAttribute("data-id");
-      addTZ(id);
-    });
-
-    searchEl.addEventListener("keydown", (e) => {
-      if (e.key === "Enter"){
-        e.preventDefault();
-        const items = getSuggestions(searchEl.value);
-        if (items.length) addTZ(items[0].id);
-        else toast("No match");
-      }
-      if (e.key === "Escape") hideSuggestions();
-    });
-
-    themeRow.addEventListener("click", (e) => {
-      const btn = e.target.closest(".themeBtn");
-      if (!btn) return;
-      applyTheme(btn.dataset.theme);
-      renderGrid();
-      toast("Theme updated");
-    });
-
-    toggleGridBtn.addEventListener("click", () => {
-      gridMaximized = !gridMaximized;
-      applyGridState();
-      toast(gridMaximized ? "All clocks maximized" : "Grid restored");
-    });
-
-    const formatCache = new Map();
-
-    function getFormatters(tz){
-      const key = `${tz}|${timeFormat}`;
-      if (formatCache.has(key)) return formatCache.get(key);
-
-      const hour12 = (timeFormat !== "24");
-      const f = {
-        time: new Intl.DateTimeFormat(undefined, {
-          timeZone: tz,
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12
-        }),
-        date: new Intl.DateTimeFormat(undefined, {
-          timeZone: tz,
-          weekday: "short",
-          year: "numeric",
-          month: "short",
-          day: "2-digit"
-        }),
-        hourOnly: new Intl.DateTimeFormat("en-US", {
-          timeZone: tz,
-          hour: "2-digit",
-          hour12: false
-        })
-      };
-
-      formatCache.set(key, f);
-      return f;
-    }
-
-    function updateKpis(){
-      kpiFmt.textContent = (timeFormat === "24") ? "24-hour" : "12-hour";
-      kpiCount.textContent = String(selectedIds.length);
-      kpiTheme.textContent = currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1);
-      runBadge.textContent = "Live";
-    }
-
-    timeFormatSel.addEventListener("change", () => {
-      timeFormat = (timeFormatSel.value === "24") ? "24" : "12";
-      localStorage.setItem(LS_FMT, timeFormat);
-      formatCache.clear();
-      updateKpis();
-      renderGrid();
-      toast("Updated");
-    });
-
-    function getBusinessStatus(now, tz){
-      const f = getFormatters(tz);
-      const h = parseInt(f.hourOnly.format(now), 10);
-
-      if (!Number.isFinite(h)) return { cls:"warn", label:"Time unavailable" };
-      if (h >= 9 && h < 17) return { cls:"good", label:"Business hours" };
-      if ((h >= 7 && h < 9) || (h >= 17 && h < 19)) return { cls:"warn", label:"Edge hours" };
-      return { cls:"bad", label:"Off hours" };
-    }
-
-    function renderGrid(){
-      const now = new Date();
-
-      const cards = selectedIds.map(id => {
-        const entry = getEntryById(id);
-        if (!entry) return "";
-
-        const f = getFormatters(entry.tz);
-        const timeStr = f.time.format(now);
-        const dateStr = f.date.format(now);
-        const bs = getBusinessStatus(now, entry.tz);
-        const isMax = maximizedCardId === entry.id;
-
-        return `
-          <article class="clockCard ${isMax ? "maximized" : ""}" data-id="${escapeHTML(entry.id)}">
-            <div class="topline">
-              <div class="city">
-                <b title="${escapeHTML(entry.name)}">${escapeHTML(entry.name)}</b>
-                <small title="${escapeHTML(entry.region)}">${escapeHTML(entry.region)} · <span class="mono">${escapeHTML(entry.tz)}</span></small>
-              </div>
-              <div style="display:flex;gap:8px;">
-                <button class="btnMini" data-action="maximize" title="${isMax ? "Restore" : "Maximize"}" aria-label="${isMax ? "Restore" : "Maximize"} ${escapeHTML(entry.name)}">${isMax ? "🗕" : "⛶"}</button>
-                <button class="btnMini" data-action="remove" title="Remove" aria-label="Remove ${escapeHTML(entry.name)}">✕</button>
-              </div>
-            </div>
-
-            <div class="chipRow">
-              <span class="chip" title="Business-hours indicator (9:00–17:00 local time)">
-                <span class="dot ${bs.cls}"></span>
-                ${escapeHTML(bs.label)}
-              </span>
-            </div>
-
-            <div class="time mono" data-field="time">${escapeHTML(timeStr)}</div>
-            <div class="date" data-field="date">${escapeHTML(dateStr)}</div>
-
-            <div class="btnRow">
-              <button class="btnMini" data-action="copy">Copy</button>
-              <button class="btnMini" data-action="open">Open</button>
-            </div>
-          </article>
-        `;
-      }).join("");
-
-      gridEl.innerHTML = cards || `<div class="note">No clocks selected. Add a time zone above.</div>`;
-      clockBadge.textContent = `Updated: ${new Date().toLocaleTimeString()}`;
-      updateKpis();
-    }
-
-    function tick(){
-      const now = new Date();
-
-      for (const id of selectedIds){
-        const entry = getEntryById(id);
-        if (!entry) continue;
-
-        const card = gridEl.querySelector(`.clockCard[data-id="${CSS.escape(entry.id)}"]`);
-        if (!card) continue;
-
-        const f = getFormatters(entry.tz);
-        const tEl = card.querySelector('[data-field="time"]');
-        const dEl = card.querySelector('[data-field="date"]');
-
-        if (tEl) tEl.textContent = f.time.format(now);
-        if (dEl) dEl.textContent = f.date.format(now);
-
-        const bs = getBusinessStatus(now, entry.tz);
-        const chipDot = card.querySelector(".chip .dot");
-        const chip = card.querySelector(".chip");
-
-        if (chipDot){
-          chipDot.classList.remove("good","warn","bad");
-          chipDot.classList.add(bs.cls);
-        }
-
-        if (chip){
-          chip.innerHTML = `<span class="dot ${bs.cls}"></span> ${escapeHTML(bs.label)}`;
-        }
-      }
-    }
-
-    gridEl.addEventListener("click", (e) => {
-      const btn = e.target.closest("button[data-action]");
-      if (!btn) return;
-
-      const action = btn.getAttribute("data-action");
-      const card = e.target.closest(".clockCard");
-      if (!card) return;
-
-      const id = card.getAttribute("data-id");
-      const entry = getEntryById(id);
-      if (!entry) return;
-
-      if (action === "maximize"){
-        maximizedCardId = maximizedCardId === id ? null : id;
-        renderGrid();
-        toast(maximizedCardId ? "Clock maximized" : "Clock restored");
-        return;
-      }
-
-      if (action === "remove"){
-        selectedIds = selectedIds.filter(x => x !== id);
-        if (maximizedCardId === id) maximizedCardId = null;
-        saveSelected();
-        renderGrid();
-        toast("Removed");
-        return;
-      }
-
-      if (action === "copy"){
-        const now = new Date();
-        const f = getFormatters(entry.tz);
-        const timeStr = f.time.format(now);
-        const dateStr = f.date.format(now);
-        copyText(`${entry.name} — ${timeStr} (${dateStr}) · ${entry.tz}`);
-        return;
-      }
-
-      if (action === "open"){
-        window.open("/tools/time-zone-converter.html", "_blank", "noopener");
-      }
-    }, { passive:true });
-
-    function addTZ(id){
-      if (!TZ_SET.has(id)){
-        toast("Unknown time zone");
-        return;
-      }
-      if (selectedIds.includes(id)){
-        toast("Already added");
-        return;
-      }
-
-      selectedIds.push(id);
-      selectedIds = sanitizeSelected(selectedIds);
-      saveSelected();
-      renderGrid();
-
-      toast("Added");
-      searchEl.value = "";
-      hideSuggestions();
-      searchEl.focus();
-    }
-
-    function buildShareURL(){
-      const base = `${location.origin}${location.pathname}`;
-      const ids = sanitizeSelected(selectedIds);
-      const fmt = (timeFormat === "24") ? "24" : "12";
-      const q = new URLSearchParams();
-      q.set("cities", ids.map(encodeURIComponent).join(","));
-      q.set("fmt", fmt);
-      return `${base}?${q.toString()}`;
-    }
-
-    $("shareBtn").addEventListener("click", async () => {
-      const url = buildShareURL();
-      const ok = await copyText(url);
-      $("shareHint").textContent = ok ? "Copied share link to clipboard." : "Could not copy link.";
-    });
-
-    $("resetBtn").addEventListener("click", () => {
-      selectedIds = [...defaultSelected];
-      timeFormat = "12";
-      maximizedCardId = null;
-      gridMaximized = false;
-      localStorage.setItem(LS_FMT, timeFormat);
-      timeFormatSel.value = "12";
-      formatCache.clear();
-      saveSelected();
-      applyGridState();
-      try { history.replaceState({}, "", location.pathname); } catch {}
-      renderGrid();
-      toast("Reset");
-    });
-
-    try{
-      new Intl.DateTimeFormat(undefined, { timeZone: "UTC" }).format(new Date());
-    }catch{
-      runBadge.textContent = "Limited";
-      toast("Timezone support missing");
-    }
-
-    saveSelected();
-    applyTheme(currentTheme);
-    applyGridState();
-    renderGrid();
-
-    let timer = null;
-
-    function start(){
-      if (timer) clearInterval(timer);
-      timer = setInterval(tick, 1000);
-    }
-
-    function stop(){
-      if (timer) clearInterval(timer);
-      timer = null;
-    }
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) stop();
-      else {
-        tick();
-        start();
-      }
-    }, { passive:true });
-
-    tick();
-    start();
-  })();
-  </script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/world-clock.js" defer></script>
 </body>
 </html>
