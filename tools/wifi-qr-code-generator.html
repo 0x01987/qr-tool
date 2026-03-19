@@ -14,7 +14,6 @@
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
-  <!-- Core Meta -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
@@ -43,7 +42,6 @@
 
   <link rel="stylesheet" href="/assets/site.css" />
 
-  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
@@ -58,7 +56,6 @@
   <meta name="twitter:description" content="Create a WiFi QR code for guests to scan and join instantly. Download as PNG." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -303,13 +300,13 @@
       overflow:hidden;
       box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);
     }
-    .qr-canvas-shell canvas{
+    #qrCanvas{
       display:block;
       width:100%;
       max-width:320px;
       height:auto;
-      image-rendering:pixelated;
       background:#ffffff;
+      image-rendering:pixelated;
     }
     .statsGrid{
       display:grid;
@@ -667,6 +664,7 @@
     </footer>
   </main>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="/assets/site.js" defer></script>
   <script src="/assets/js/tools/wifi-qr-code-generator.js" defer></script>
 </body>
