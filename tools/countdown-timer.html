@@ -1,9 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- =========================
-       Analytics / Monetization
-       ========================= -->
+  <!-- Analytics / Monetization -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -16,9 +14,7 @@
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
-  <!-- =========================
-       Core Meta
-       ========================= -->
+  <!-- Core Meta -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
@@ -26,6 +22,7 @@
   <meta name="description" content="Free online countdown timer and time calculator. Count down to any date and time, run a duration timer, add or subtract time, and calculate time between two dates. Fast, private, and runs locally in your browser." />
   <meta name="keywords" content="countdown timer, time calculator, date difference calculator, duration timer, time between dates, add time calculator, subtract time calculator, online timer, countdown clock" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
   <meta name="application-name" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
@@ -37,6 +34,7 @@
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate" hreflang="en" href="https://instantqr.io/tools/countdown-timer.html" />
 
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
@@ -44,9 +42,9 @@
   <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
   <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
 
-  <!-- =========================
-       Open Graph / Twitter
-       ========================= -->
+  <link rel="stylesheet" href="/assets/site.css" />
+
+  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
@@ -61,492 +59,7 @@
   <meta name="twitter:description" content="Free online countdown timer, duration timer, date difference calculator, and time calculator." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <style>
-    :root{
-      --bg:#081120;
-      --bg2:#0f172a;
-      --panel:#111c34;
-      --panel2:#16233f;
-      --text:#e5eefc;
-      --muted:#94a3b8;
-      --line:rgba(255,255,255,.08);
-      --brand:#60a5fa;
-      --brand2:#22c55e;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --ok:#10b981;
-      --shadow:0 12px 35px rgba(0,0,0,.28);
-      --radius:20px;
-      --radius-sm:14px;
-      --max:1180px;
-      --focus:0 0 0 4px rgba(96,165,250,.16);
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
-        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 28%),
-        linear-gradient(180deg, #07101d 0%, #0b1324 55%, #081120 100%);
-      min-height:100vh;
-      line-height:1.55;
-    }
-
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
-    img{max-width:100%}
-    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
-
-    .skip{
-      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
-    }
-    .skip:focus{
-      left:12px;top:12px;width:auto;height:auto;
-      padding:10px 12px;border-radius:12px;
-      background:#0b172d;color:#fff;border:1px solid var(--line);z-index:999;
-    }
-
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
-
-    .topbar{
-      position:sticky;top:0;z-index:40;
-      backdrop-filter:blur(14px);
-      background:rgba(8,17,32,.78);
-      border-bottom:1px solid var(--line);
-    }
-    .topbar-inner{
-      max-width:var(--max);margin:0 auto;
-      padding:12px 16px;
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:12px;
-      color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;
-    }
-    .brand-logo{
-      width:38px;height:38px;border-radius:12px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.18));
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      flex:0 0 auto;
-    }
-    .brand-logo img{width:24px;height:24px;display:block}
-
-    .top-links{
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-    }
-    .top-links a{
-      color:var(--text);
-      font-size:.95rem;
-      padding:10px 12px;border-radius:12px;
-      border:1px solid transparent;
-    }
-    .top-links a:hover{
-      text-decoration:none;
-      background:rgba(255,255,255,.04);
-      border-color:var(--line);
-    }
-
-    .hero{padding:34px 0 20px}
-    .breadcrumbs{
-      color:var(--muted);
-      font-size:.92rem;
-      margin-bottom:14px;
-      overflow:auto;
-      white-space:nowrap;
-    }
-    .breadcrumbs a{color:var(--muted)}
-    .breadcrumbs span{margin:0 8px;color:#64748b}
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:18px;
-      align-items:stretch;
-    }
-
-    .card{
-      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-
-    .hero-main{padding:28px}
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:8px;
-      font-size:.85rem;font-weight:700;
-      color:#bfdbfe;
-      background:rgba(96,165,250,.10);
-      border:1px solid rgba(96,165,250,.22);
-      padding:8px 12px;border-radius:999px;
-      margin-bottom:14px;
-    }
-    h1{
-      margin:0 0 12px;
-      font-size:clamp(2rem,4vw,3rem);
-      line-height:1.06;
-      letter-spacing:-.03em;
-    }
-    .hero p{
-      margin:0;
-      color:#cbd5e1;
-      max-width:800px;
-      font-size:1.03rem;
-    }
-    .hero-actions{
-      margin-top:18px;
-      display:flex;gap:12px;flex-wrap:wrap;
-    }
-
-    .btn{
-      appearance:none;border:0;cursor:pointer;
-      font:inherit;font-weight:800;
-      border-radius:14px;padding:13px 16px;
-      transition:.18s ease;
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    }
-    .btn-primary{
-      background:linear-gradient(135deg, var(--brand), #3b82f6);
-      color:#fff;
-      box-shadow:0 10px 26px rgba(59,130,246,.28);
-    }
-    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03);text-decoration:none}
-    .btn-secondary{
-      color:var(--text);
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-    }
-    .btn-secondary:hover{background:rgba(255,255,255,.06);text-decoration:none}
-
-    .hero-side{
-      padding:22px;
-      display:grid;
-      gap:12px;
-      align-content:start;
-    }
-    .mini-stat{
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px 16px;
-    }
-    .mini-stat .label{
-      color:var(--muted);
-      font-size:.9rem;
-      margin-bottom:4px;
-    }
-    .mini-stat .value{
-      font-weight:800;
-      font-size:1.05rem;
-      color:#fff;
-    }
-
-    .section{padding:14px 0 10px}
-    .tool-grid{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:18px;
-      align-items:start;
-    }
-
-    .tool-panel,.info-panel,.content-card{padding:22px}
-
-    .tool-panel h2,.info-panel h2,.content h2,.content h3{
-      margin:0 0 10px;
-      letter-spacing:-.02em;
-    }
-
-    .subtle{
-      color:var(--muted);
-      font-size:.96rem;
-      margin-bottom:18px;
-    }
-
-    .tabs{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-bottom:16px;
-    }
-    .tab{
-      border:1px solid var(--line);
-      background:#0a1427;
-      color:var(--muted);
-      padding:10px 12px;
-      border-radius:999px;
-      font-size:12px;
-      cursor:pointer;
-      font-weight:700;
-      user-select:none;
-    }
-    .tab.active{
-      color:#fff;
-      border-color:rgba(96,165,250,.55);
-      background:rgba(96,165,250,.12);
-    }
-
-    .tab-panel{display:none}
-    .tab-panel.active{display:block}
-
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-    .full{grid-column:1/-1}
-
-    label{
-      display:block;
-      font-size:.94rem;
-      font-weight:700;
-      margin-bottom:8px;
-      color:#dbeafe;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    input[type="date"],
-    input[type="time"],
-    input[type="datetime-local"],
-    input[type="url"],
-    select,
-    textarea{
-      width:100%;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:#0a1427;
-      color:#fff;
-      padding:14px 14px;
-      font:inherit;
-      outline:none;
-      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
-    }
-
-    input:focus,select:focus,textarea:focus{
-      border-color:rgba(96,165,250,.5);
-      box-shadow:0 0 0 4px rgba(96,165,250,.14);
-      background:#0b172d;
-    }
-
-    .helper{
-      color:var(--muted);
-      font-size:.85rem;
-      margin-top:6px;
-      line-height:1.45;
-    }
-
-    .actions{
-      margin-top:18px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .result-box{
-      padding:14px;
-      border-radius:16px;
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--line);
-      margin-bottom:14px;
-    }
-    .result-box p{margin:0;color:#dbeafe}
-
-    .results{
-      display:grid;
-      gap:10px;
-    }
-    .result-item{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:14px;
-      padding:12px 13px;
-    }
-    .result-item strong{
-      display:block;
-      margin-bottom:5px;
-      color:#fff;
-      font-size:.95rem;
-    }
-    .result-item span{
-      color:#cbd5e1;
-      font-size:.92rem;
-      line-height:1.45;
-    }
-
-    .display-box{
-      border:1px solid var(--line);
-      background:#0a1427;
-      border-radius:16px;
-      padding:16px;
-      display:grid;
-      gap:10px;
-      margin-top:16px;
-    }
-
-    .display-meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-    .display-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .big-display{
-      font-size:clamp(2rem,5vw,3rem);
-      font-weight:900;
-      line-height:1.05;
-      letter-spacing:-.03em;
-      word-break:break-word;
-      color:var(--ok);
-    }
-    .big-display.warn{color:var(--warn)}
-    .big-display.bad{color:var(--danger)}
-
-    .kv{
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:8px;
-      font-size:13px;
-    }
-    .kv span{color:var(--muted)}
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-      word-break:break-word;
-    }
-
-    .content{
-      margin-top:20px;
-      display:grid;
-      gap:18px;
-    }
-    .content p{
-      color:#cbd5e1;
-      margin:0 0 12px;
-      line-height:1.65;
-    }
-    .content ul{
-      margin:10px 0 0 18px;
-      color:#cbd5e1;
-    }
-    .content li{margin:8px 0}
-
-    .faq{
-      display:grid;
-      gap:12px;
-      margin-top:12px;
-    }
-    details{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:16px;
-      padding:14px 16px;
-    }
-    summary{
-      cursor:pointer;
-      font-weight:800;
-      color:#fff;
-      list-style:none;
-    }
-    summary::-webkit-details-marker{display:none}
-    details p{
-      margin:10px 0 0;
-      color:#cbd5e1;
-      line-height:1.6;
-    }
-
-    .related-links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:10px;
-    }
-    .related-links a{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:12px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      color:var(--text);
-    }
-    .related-links a:hover{
-      background:rgba(255,255,255,.06);
-      text-decoration:none;
-    }
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:18px;
-      transform:translateX(-50%);
-      background:#0b1220;
-      border:1px solid var(--line);
-      color:var(--text);
-      padding:10px 12px;
-      border-radius:999px;
-      font-size:13px;
-      display:none;
-      z-index:50;
-      box-shadow:var(--shadow);
-    }
-
-    .footer{
-      padding:28px 0 42px;
-      color:var(--muted);
-    }
-    .footer-box{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-      padding:18px 0 0;
-      border-top:1px solid var(--line);
-    }
-    .footer-links{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .footer-links a{color:var(--muted)}
-    .footer-links a:hover{color:var(--text);text-decoration:none}
-
-    @media (max-width: 980px){
-      .hero-grid,.tool-grid{grid-template-columns:1fr}
-      .info-panel{position:relative;top:auto}
-    }
-
-    @media (max-width: 700px){
-      .form-grid{grid-template-columns:1fr}
-      .hero-main,.hero-side,.tool-panel,.info-panel,.content-card{padding:18px}
-      .topbar-inner{padding:10px 14px}
-      .top-links{display:none}
-      h1{font-size:2rem}
-      .btn{width:100%}
-      .actions .btn{width:auto;flex:1 1 180px}
-    }
-  </style>
-
-  <!-- =========================
-       Structured Data
-       ========================= -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -625,6 +138,248 @@
     ]
   }
   </script>
+
+  <style>
+    .timer-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:18px;
+      margin-top:14px;
+    }
+    .timer-card,
+    .timer-panel,
+    .faqCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
+    }
+    .timer-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+    }
+    .timer-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
+      pointer-events:none;
+    }
+    .timer-card > *{position:relative}
+    .timer-panel{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .panel-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+    .tabs{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:16px;
+      margin-bottom:14px;
+    }
+    .tab{
+      border:1px solid var(--border);
+      background:#0a1427;
+      color:var(--muted);
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:12px;
+      cursor:pointer;
+      font-weight:700;
+      user-select:none;
+    }
+    .tab.active{
+      color:#fff;
+      border-color:rgba(96,165,250,.55);
+      background:rgba(96,165,250,.12);
+    }
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .full{grid-column:1/-1}
+    .field-label{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:6px;
+      font-weight:700;
+    }
+    .field,
+    .field-select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0a1427;
+      color:var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    .field:focus,
+    .field-select:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 4px rgba(96,165,250,.14);
+      background:#0b172d;
+    }
+    .tool-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .display-box{
+      border:1px solid var(--border);
+      background:#0a1427;
+      border-radius:16px;
+      padding:16px;
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+    }
+    .display-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .display-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .big-display{
+      font-size:clamp(2rem,5vw,3rem);
+      font-weight:900;
+      line-height:1.05;
+      letter-spacing:-.03em;
+      word-break:break-word;
+      color:var(--ok);
+    }
+    .big-display.warn{color:var(--warn)}
+    .big-display.bad{color:var(--danger)}
+    .kv{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:8px;
+      font-size:13px;
+    }
+    .kv span{color:var(--muted)}
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      word-break:break-word;
+    }
+    .miniGrid2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .miniBox{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+    .miniBox h2{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .miniBox p,
+    .miniBox li{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .miniBox ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .faqCard{
+      margin-top:14px;
+      padding:18px;
+    }
+    .faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+    .faqCard summary::-webkit-details-marker{display:none}
+    .faqCard p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      background:#0b1220;
+      border:1px solid var(--border);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:13px;
+      display:none;
+      z-index:50;
+      box-shadow:var(--shadow);
+    }
+    @media (max-width: 980px){
+      .timer-grid,
+      .miniGrid2,
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+    }
+    @media (max-width: 640px){
+      .tool-actions .cta{
+        width:100%;
+      }
+    }
+  </style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -641,355 +396,327 @@
       <nav class="top-links" aria-label="Primary">
         <a href="/">Home</a>
         <a href="/tools/tools.html">Tools</a>
-        <a href="/tools/seo-tools.html">SEO Tools</a>
-        <a href="/tools/web3-tools.html">Web3 Tools</a>
-        <a href="/guides/guides.html">Guides</a>
+        <a href="/tools/time-zone-converter.html">Time Zone Converter</a>
+        <a href="/tools/world-clock.html">World Clock</a>
+        <a href="/tools/unit-converter.html">Unit Converter</a>
       </nav>
     </div>
   </header>
 
   <main id="main" class="wrap">
-    <section class="hero">
-      <div class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a><span>›</span>
-        <a href="/tools/tools.html">Tools</a><span>›</span>
-        <span>Countdown Timer &amp; Time Calculator</span>
-      </div>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Countdown Timer &amp; Time Calculator</span></li>
+      </ol>
+    </nav>
 
-      <div class="hero-grid">
-        <div class="card hero-main">
-          <div class="eyebrow">Time Tools • Productivity • Browser-Based</div>
-          <h1>Countdown Timer &amp; Time Calculator</h1>
-          <p>Count down to any date and time, run a duration timer, add or subtract time, or calculate the time between two dates. Fast, private, and designed to run locally in your browser.</p>
+    <section class="timer-grid" aria-label="Countdown Timer & Time Calculator">
+      <section class="timer-card">
+        <div class="pill">⏳ Countdowns • ⌛ Duration timers • 🧮 Date math</div>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#tool">Use Tool</a>
-            <a class="btn btn-secondary" href="/tools/tools.html">Browse All Tools</a>
+        <h1>Countdown Timer &amp; Time Calculator</h1>
+        <p class="sub">
+          Count down to any date and time, run a duration timer, add or subtract time,
+          or calculate the time between two dates. Fast, private, and designed to run locally in your browser.
+        </p>
+
+        <div class="tabs" role="tablist" aria-label="Timer tabs">
+          <button class="tab active" type="button" data-tab="countdown" role="tab" aria-selected="true">Countdown</button>
+          <button class="tab" type="button" data-tab="duration" role="tab" aria-selected="false">Duration</button>
+          <button class="tab" type="button" data-tab="calc" role="tab" aria-selected="false">Time Calculator</button>
+          <button class="tab" type="button" data-tab="between" role="tab" aria-selected="false">Time Between</button>
+        </div>
+
+        <!-- COUNTDOWN -->
+        <div class="tab-panel active" id="panel-countdown">
+          <div class="form-grid">
+            <div class="full">
+              <label class="field-label" for="cdTitle">Label (optional)</label>
+              <input id="cdTitle" class="field" type="text" placeholder="e.g. Project launch, meeting, flight..." maxlength="60" />
+            </div>
+
+            <div>
+              <label class="field-label" for="cdDate">Target date</label>
+              <input id="cdDate" class="field" type="date" />
+            </div>
+
+            <div>
+              <label class="field-label" for="cdTime">Target time</label>
+              <input id="cdTime" class="field" type="time" step="1" />
+            </div>
+
+            <div>
+              <label class="field-label" for="cdTimezone">Timezone</label>
+              <select id="cdTimezone" class="field-select">
+                <option value="local">Local (your device)</option>
+                <option value="utc">UTC</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="tool-actions">
+            <button class="cta primary" id="cdStart" type="button">Start</button>
+            <button class="cta ghost" id="cdPause" type="button" disabled>Pause</button>
+            <button class="cta ghost" id="cdReset" type="button">Reset</button>
+            <button class="cta ghost" id="cdCopy" type="button">Copy Result</button>
+          </div>
+
+          <div class="display-box">
+            <div class="display-meta">
+              <span class="display-pill mono" id="cdLiveLabel">Countdown</span>
+              <span class="display-pill mono" id="cdTargetText">Target: —</span>
+            </div>
+            <div class="big-display mono" id="cdDisplay">—</div>
+            <div class="kv"><span>Total seconds</span><b class="mono" id="cdTotalSec">—</b></div>
+            <div class="kv"><span>Total minutes</span><b class="mono" id="cdTotalMin">—</b></div>
+            <div class="kv"><span>Total hours</span><b class="mono" id="cdTotalHr">—</b></div>
+            <div class="kv"><span>Total days</span><b class="mono" id="cdTotalDays">—</b></div>
           </div>
         </div>
 
-        <aside class="card hero-side" aria-label="Tool highlights">
-          <div class="mini-stat">
-            <div class="label">Runs locally</div>
-            <div class="value">Browser-based workflow</div>
+        <!-- DURATION -->
+        <div class="tab-panel" id="panel-duration">
+          <div class="form-grid">
+            <div>
+              <label class="field-label" for="duHours">Hours</label>
+              <input id="duHours" class="field" type="number" min="0" step="1" value="0" />
+            </div>
+
+            <div>
+              <label class="field-label" for="duMinutes">Minutes</label>
+              <input id="duMinutes" class="field" type="number" min="0" step="1" value="5" />
+            </div>
+
+            <div>
+              <label class="field-label" for="duSeconds">Seconds</label>
+              <input id="duSeconds" class="field" type="number" min="0" step="1" value="0" />
+            </div>
+
+            <div>
+              <label class="field-label" for="duEndSound">End alert</label>
+              <select id="duEndSound" class="field-select">
+                <option value="on">On</option>
+                <option value="off">Off</option>
+              </select>
+            </div>
           </div>
-          <div class="mini-stat">
-            <div class="label">Built for speed</div>
-            <div class="value">Fast + responsive UI</div>
+
+          <div class="tool-actions">
+            <button class="cta primary" id="duStart" type="button">Start</button>
+            <button class="cta ghost" id="duPause" type="button" disabled>Pause</button>
+            <button class="cta ghost" id="duReset" type="button">Reset</button>
+            <button class="cta ghost" id="duCopy" type="button">Copy Result</button>
           </div>
-          <div class="mini-stat">
-            <div class="label">Privacy-first</div>
-            <div class="value">No signup required</div>
+
+          <div class="display-box">
+            <div class="display-meta">
+              <span class="display-pill mono">Duration</span>
+              <span class="display-pill mono" id="duOriginal">Original: —</span>
+            </div>
+            <div class="big-display mono" id="duDisplay">—</div>
+            <div class="kv"><span>Seconds remaining</span><b class="mono" id="duRemainSec">—</b></div>
+            <div class="kv"><span>Status</span><b class="mono" id="duStatus">Ready</b></div>
           </div>
-          <div class="mini-stat">
-            <div class="label">Best for</div>
-            <div class="value">Countdowns, timers, date math, and scheduling</div>
+        </div>
+
+        <!-- CALC -->
+        <div class="tab-panel" id="panel-calc">
+          <div class="form-grid">
+            <div>
+              <label class="field-label" for="tcBaseDate">Base date</label>
+              <input id="tcBaseDate" class="field" type="date" />
+            </div>
+
+            <div>
+              <label class="field-label" for="tcBaseTime">Base time</label>
+              <input id="tcBaseTime" class="field" type="time" step="1" />
+            </div>
+
+            <div>
+              <label class="field-label" for="tcMode">Operation</label>
+              <select id="tcMode" class="field-select">
+                <option value="add">Add time</option>
+                <option value="sub">Subtract time</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="field-label" for="tcTimezone">Timezone</label>
+              <select id="tcTimezone" class="field-select">
+                <option value="local">Local (your device)</option>
+                <option value="utc">UTC</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="field-label" for="tcDays">Days</label>
+              <input id="tcDays" class="field" type="number" step="1" value="0" />
+            </div>
+
+            <div>
+              <label class="field-label" for="tcHours">Hours</label>
+              <input id="tcHours" class="field" type="number" step="1" value="1" />
+            </div>
+
+            <div>
+              <label class="field-label" for="tcMinutes">Minutes</label>
+              <input id="tcMinutes" class="field" type="number" step="1" value="0" />
+            </div>
+
+            <div>
+              <label class="field-label" for="tcSeconds">Seconds</label>
+              <input id="tcSeconds" class="field" type="number" step="1" value="0" />
+            </div>
           </div>
-        </aside>
-      </div>
+
+          <div class="tool-actions">
+            <button class="cta primary" id="tcCompute" type="button">Compute</button>
+            <button class="cta ghost" id="tcNow" type="button">Use Now</button>
+            <button class="cta ghost" id="tcCopy" type="button">Copy Result</button>
+          </div>
+
+          <div class="display-box">
+            <div class="display-meta">
+              <span class="display-pill mono">Calculator</span>
+              <span class="display-pill mono" id="tcBaseText">Base: —</span>
+            </div>
+            <div class="big-display mono" id="tcResult">—</div>
+            <div class="kv"><span>Result timestamp</span><b class="mono" id="tcUnix">—</b></div>
+            <div class="kv"><span>ISO</span><b class="mono" id="tcISO">—</b></div>
+          </div>
+        </div>
+
+        <!-- BETWEEN -->
+        <div class="tab-panel" id="panel-between">
+          <div class="form-grid">
+            <div>
+              <label class="field-label" for="tbStartDate">Start date</label>
+              <input id="tbStartDate" class="field" type="date" />
+            </div>
+
+            <div>
+              <label class="field-label" for="tbStartTime">Start time</label>
+              <input id="tbStartTime" class="field" type="time" step="1" />
+            </div>
+
+            <div>
+              <label class="field-label" for="tbEndDate">End date</label>
+              <input id="tbEndDate" class="field" type="date" />
+            </div>
+
+            <div>
+              <label class="field-label" for="tbEndTime">End time</label>
+              <input id="tbEndTime" class="field" type="time" step="1" />
+            </div>
+
+            <div>
+              <label class="field-label" for="tbTimezone">Timezone</label>
+              <select id="tbTimezone" class="field-select">
+                <option value="local">Local (your device)</option>
+                <option value="utc">UTC</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="tool-actions">
+            <button class="cta primary" id="tbCompute" type="button">Compute Difference</button>
+            <button class="cta ghost" id="tbNowStart" type="button">Start = Now</button>
+            <button class="cta ghost" id="tbNowEnd" type="button">End = Now</button>
+            <button class="cta ghost" id="tbCopy" type="button">Copy Result</button>
+          </div>
+
+          <div class="display-box">
+            <div class="display-meta">
+              <span class="display-pill mono">Between</span>
+              <span class="display-pill mono" id="tbMeta">—</span>
+            </div>
+            <div class="big-display mono" id="tbResult">—</div>
+            <div class="kv"><span>Total seconds</span><b class="mono" id="tbSec">—</b></div>
+            <div class="kv"><span>Total minutes</span><b class="mono" id="tbMin">—</b></div>
+            <div class="kv"><span>Total hours</span><b class="mono" id="tbHr">—</b></div>
+            <div class="kv"><span>Total days</span><b class="mono" id="tbDays">—</b></div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="timer-panel" aria-label="Tool status">
+        <div class="panel-top">
+          <div>
+            <h2>Tool status</h2>
+            <div class="hint" style="margin-top:6px;">Live countdowns, timers, and date math in one place.</div>
+          </div>
+          <div class="badge">Runs locally</div>
+        </div>
+
+        <div class="result-box">
+          <p id="summaryText">Ready. Choose a mode and enter your date, time, or duration values to begin.</p>
+        </div>
+
+        <div class="results">
+          <div class="result-item">
+            <strong>Current mode</strong>
+            <span id="currentModeText">Countdown</span>
+          </div>
+
+          <div class="result-item">
+            <strong>Status</strong>
+            <span id="statusText">Ready</span>
+          </div>
+
+          <div class="result-item">
+            <strong>Privacy</strong>
+            <span>All calculations run locally in your browser.</span>
+          </div>
+        </div>
+
+        <div class="helper" style="margin-top:14px;">
+          Privacy note: this tool runs locally and does not require an account. It is useful for deadlines,
+          study timers, work sessions, schedules, and date math.
+        </div>
+      </aside>
     </section>
 
-    <section class="section" id="tool">
-      <div class="tool-grid">
-        <section class="card tool-panel" aria-labelledby="tool-title">
-          <h2 id="tool-title">Countdown, duration, date difference, and time math</h2>
-          <div class="subtle">Choose a mode below to count down to a target date, run a duration timer, add or subtract time, or calculate the time between two dates.</div>
-
-          <div class="tabs" role="tablist" aria-label="Timer tabs">
-            <button class="tab active" type="button" data-tab="countdown" role="tab" aria-selected="true">Countdown</button>
-            <button class="tab" type="button" data-tab="duration" role="tab" aria-selected="false">Duration</button>
-            <button class="tab" type="button" data-tab="calc" role="tab" aria-selected="false">Time Calculator</button>
-            <button class="tab" type="button" data-tab="between" role="tab" aria-selected="false">Time Between</button>
-          </div>
-
-          <!-- COUNTDOWN -->
-          <div class="tab-panel active" id="panel-countdown">
-            <div class="form-grid">
-              <div class="full">
-                <label for="cdTitle">Label (optional)</label>
-                <input id="cdTitle" type="text" placeholder="e.g. Project launch, flight, meeting…" maxlength="60" />
-                <div class="helper">Optional label for your countdown.</div>
-              </div>
-
-              <div>
-                <label for="cdDate">Target date</label>
-                <input id="cdDate" type="date" />
-              </div>
-
-              <div>
-                <label for="cdTime">Target time</label>
-                <input id="cdTime" type="time" step="1" />
-              </div>
-
-              <div>
-                <label for="cdTimezone">Timezone</label>
-                <select id="cdTimezone">
-                  <option value="local">Local (your device)</option>
-                  <option value="utc">UTC</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="actions">
-              <button class="btn btn-primary" id="cdStart" type="button">Start</button>
-              <button class="btn btn-secondary" id="cdPause" type="button" disabled>Pause</button>
-              <button class="btn btn-secondary" id="cdReset" type="button">Reset</button>
-              <button class="btn btn-secondary" id="cdCopy" type="button">Copy Result</button>
-            </div>
-
-            <div class="display-box">
-              <div class="display-meta">
-                <span class="display-pill mono" id="cdLiveLabel">Countdown</span>
-                <span class="display-pill mono" id="cdTargetText">Target: —</span>
-              </div>
-              <div class="big-display mono" id="cdDisplay">—</div>
-              <div class="kv"><span>Total seconds</span><b class="mono" id="cdTotalSec">—</b></div>
-              <div class="kv"><span>Total minutes</span><b class="mono" id="cdTotalMin">—</b></div>
-              <div class="kv"><span>Total hours</span><b class="mono" id="cdTotalHr">—</b></div>
-              <div class="kv"><span>Total days</span><b class="mono" id="cdTotalDays">—</b></div>
-            </div>
-          </div>
-
-          <!-- DURATION -->
-          <div class="tab-panel" id="panel-duration">
-            <div class="form-grid">
-              <div>
-                <label for="duHours">Hours</label>
-                <input id="duHours" type="number" min="0" step="1" value="0" />
-              </div>
-
-              <div>
-                <label for="duMinutes">Minutes</label>
-                <input id="duMinutes" type="number" min="0" step="1" value="5" />
-              </div>
-
-              <div>
-                <label for="duSeconds">Seconds</label>
-                <input id="duSeconds" type="number" min="0" step="1" value="0" />
-              </div>
-
-              <div>
-                <label for="duEndSound">End alert</label>
-                <select id="duEndSound">
-                  <option value="on">On</option>
-                  <option value="off">Off</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="actions">
-              <button class="btn btn-primary" id="duStart" type="button">Start</button>
-              <button class="btn btn-secondary" id="duPause" type="button" disabled>Pause</button>
-              <button class="btn btn-secondary" id="duReset" type="button">Reset</button>
-              <button class="btn btn-secondary" id="duCopy" type="button">Copy Result</button>
-            </div>
-
-            <div class="display-box">
-              <div class="display-meta">
-                <span class="display-pill mono">Duration</span>
-                <span class="display-pill mono" id="duOriginal">Original: —</span>
-              </div>
-              <div class="big-display mono" id="duDisplay">—</div>
-              <div class="kv"><span>Seconds remaining</span><b class="mono" id="duRemainSec">—</b></div>
-              <div class="kv"><span>Status</span><b class="mono" id="duStatus">Ready</b></div>
-            </div>
-          </div>
-
-          <!-- CALC -->
-          <div class="tab-panel" id="panel-calc">
-            <div class="form-grid">
-              <div>
-                <label for="tcBaseDate">Base date</label>
-                <input id="tcBaseDate" type="date" />
-              </div>
-
-              <div>
-                <label for="tcBaseTime">Base time</label>
-                <input id="tcBaseTime" type="time" step="1" />
-              </div>
-
-              <div>
-                <label for="tcMode">Operation</label>
-                <select id="tcMode">
-                  <option value="add">Add time</option>
-                  <option value="sub">Subtract time</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="tcTimezone">Timezone</label>
-                <select id="tcTimezone">
-                  <option value="local">Local (your device)</option>
-                  <option value="utc">UTC</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="tcDays">Days</label>
-                <input id="tcDays" type="number" step="1" value="0" />
-              </div>
-
-              <div>
-                <label for="tcHours">Hours</label>
-                <input id="tcHours" type="number" step="1" value="1" />
-              </div>
-
-              <div>
-                <label for="tcMinutes">Minutes</label>
-                <input id="tcMinutes" type="number" step="1" value="0" />
-              </div>
-
-              <div>
-                <label for="tcSeconds">Seconds</label>
-                <input id="tcSeconds" type="number" step="1" value="0" />
-              </div>
-            </div>
-
-            <div class="actions">
-              <button class="btn btn-primary" id="tcCompute" type="button">Compute</button>
-              <button class="btn btn-secondary" id="tcNow" type="button">Use Now</button>
-              <button class="btn btn-secondary" id="tcCopy" type="button">Copy Result</button>
-            </div>
-
-            <div class="display-box">
-              <div class="display-meta">
-                <span class="display-pill mono">Calculator</span>
-                <span class="display-pill mono" id="tcBaseText">Base: —</span>
-              </div>
-              <div class="big-display mono" id="tcResult">—</div>
-              <div class="kv"><span>Result timestamp</span><b class="mono" id="tcUnix">—</b></div>
-              <div class="kv"><span>ISO</span><b class="mono" id="tcISO">—</b></div>
-            </div>
-          </div>
-
-          <!-- BETWEEN -->
-          <div class="tab-panel" id="panel-between">
-            <div class="form-grid">
-              <div>
-                <label for="tbStartDate">Start date</label>
-                <input id="tbStartDate" type="date" />
-              </div>
-
-              <div>
-                <label for="tbStartTime">Start time</label>
-                <input id="tbStartTime" type="time" step="1" />
-              </div>
-
-              <div>
-                <label for="tbEndDate">End date</label>
-                <input id="tbEndDate" type="date" />
-              </div>
-
-              <div>
-                <label for="tbEndTime">End time</label>
-                <input id="tbEndTime" type="time" step="1" />
-              </div>
-
-              <div>
-                <label for="tbTimezone">Timezone</label>
-                <select id="tbTimezone">
-                  <option value="local">Local (your device)</option>
-                  <option value="utc">UTC</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="actions">
-              <button class="btn btn-primary" id="tbCompute" type="button">Compute Difference</button>
-              <button class="btn btn-secondary" id="tbNowStart" type="button">Start = Now</button>
-              <button class="btn btn-secondary" id="tbNowEnd" type="button">End = Now</button>
-              <button class="btn btn-secondary" id="tbCopy" type="button">Copy Result</button>
-            </div>
-
-            <div class="display-box">
-              <div class="display-meta">
-                <span class="display-pill mono">Between</span>
-                <span class="display-pill mono" id="tbMeta">—</span>
-              </div>
-              <div class="big-display mono" id="tbResult">—</div>
-              <div class="kv"><span>Total seconds</span><b class="mono" id="tbSec">—</b></div>
-              <div class="kv"><span>Total minutes</span><b class="mono" id="tbMin">—</b></div>
-              <div class="kv"><span>Total hours</span><b class="mono" id="tbHr">—</b></div>
-              <div class="kv"><span>Total days</span><b class="mono" id="tbDays">—</b></div>
-            </div>
-          </div>
-        </section>
-
-        <aside class="card info-panel" aria-labelledby="results-title">
-          <h2 id="results-title">Tool status</h2>
-
-          <div class="result-box">
-            <p id="summaryText">Ready. Choose a mode and enter your date, time, or duration values to begin.</p>
-          </div>
-
-          <div class="results" id="resultsList">
-            <div class="result-item">
-              <strong>Current mode</strong>
-              <span id="currentModeText">Countdown</span>
-            </div>
-            <div class="result-item">
-              <strong>Status</strong>
-              <span id="statusText">Ready</span>
-            </div>
-            <div class="result-item">
-              <strong>Privacy</strong>
-              <span>All calculations run locally in your browser.</span>
-            </div>
-          </div>
-
-          <div class="helper" style="margin-top:14px;">
-            Privacy note: this tool runs locally and does not require an account. It is useful for deadlines, study timers, work sessions, schedules, and date math.
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="content">
-      <article class="card content-card">
+    <section class="miniGrid2" aria-label="Additional information">
+      <div class="miniBox">
         <h2>How this tool works</h2>
-        <p>This page combines four time tools in one place: a countdown timer for future events, a duration timer for timed sessions, a time calculator for adding or subtracting time, and a date difference calculator for measuring the gap between two points in time.</p>
-        <p>You can switch between tabs without leaving the page. Each mode updates instantly in your browser, making it useful for productivity workflows, scheduling, travel planning, study sessions, workouts, and event countdowns.</p>
-      </article>
-
-      <article class="card content-card">
-        <h2>Why use this tool?</h2>
-        <p>A single reliable time page is easier than switching between multiple tools. This tool helps you track deadlines, run practical timers, and calculate time accurately with a clean interface.</p>
         <ul>
-          <li>Count down to meetings, launches, flights, or deadlines</li>
-          <li>Run a duration timer for study sessions, workouts, or breaks</li>
-          <li>Add or subtract time for ETAs, schedules, and planning</li>
+          <li>Count down to a future date and time</li>
+          <li>Run a duration timer for sessions or breaks</li>
+          <li>Add or subtract time from a base date</li>
+          <li>Measure time between two dates</li>
         </ul>
-      </article>
+      </div>
 
-      <article class="card content-card">
+      <div class="miniBox">
         <h2>Related tools</h2>
-        <div class="related-links">
-          <a href="/tools/time-zone-converter.html">Time Zone Converter</a>
-          <a href="/tools/world-clock.html">World Clock</a>
-          <a href="/tools/unit-converter.html">Unit Converter</a>
+        <p>
+          <a href="/tools/time-zone-converter.html">Time Zone Converter</a> ·
+          <a href="/tools/world-clock.html">World Clock</a> ·
+          <a href="/tools/unit-converter.html">Unit Converter</a> ·
           <a href="/tools/tools.html">All Tools</a>
-        </div>
-      </article>
+        </p>
+      </div>
+    </section>
 
-      <article class="card content-card">
-        <h2>Frequently asked questions</h2>
-        <div class="faq">
-          <details open>
-            <summary>Does this countdown timer run locally?</summary>
-            <p>Yes. The countdown timer and time calculations run in your browser. No login is required.</p>
-          </details>
+    <section class="faqCard" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
 
-          <details>
-            <summary>Can I count down to a specific date and time?</summary>
-            <p>Yes. You can set a target date and time, start the countdown, and copy the result to share.</p>
-          </details>
+      <details open>
+        <summary>Does this countdown timer run locally?</summary>
+        <p>Yes. The countdown timer and time calculations run in your browser. No login is required.</p>
+      </details>
 
-          <details>
-            <summary>Can I calculate time between two dates?</summary>
-            <p>Yes. The Time Between tab calculates the total time difference in seconds, minutes, hours, and days.</p>
-          </details>
-        </div>
-      </article>
+      <details>
+        <summary>Can I count down to a specific date and time?</summary>
+        <p>Yes. You can set a target date and time, start the countdown, and copy the result to share.</p>
+      </details>
+
+      <details>
+        <summary>Can I calculate time between two dates?</summary>
+        <p>Yes. The Time Between tab calculates the total time difference in seconds, minutes, hours, and days.</p>
+      </details>
     </section>
 
     <footer class="footer">
@@ -998,13 +725,11 @@
         <div class="footer-links">
           <a href="/">Home</a>
           <a href="/tools/tools.html">Tools</a>
-          <a href="/tools/seo-tools.html">SEO Tools</a>
-          <a href="/tools/web3-tools.html">Web3 Tools</a>
-          <a href="/guides/guides.html">Guides</a>
           <a href="/about.html">About</a>
           <a href="/privacy.html">Privacy</a>
           <a href="/terms.html">Terms</a>
           <a href="/contact.html">Contact</a>
+          <a href="/sitemap.xml">Sitemap</a>
         </div>
       </div>
     </footer>
@@ -1012,486 +737,7 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script>
-    (function () {
-      const $ = (id) => document.getElementById(id);
-
-      const yearEl = $('year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-      const statusTextEl = $('statusText');
-      const summaryTextEl = $('summaryText');
-      const currentModeTextEl = $('currentModeText');
-      const toastEl = $('toast');
-
-      function setStatus(text) {
-        if (statusTextEl) statusTextEl.textContent = text;
-      }
-
-      function setSummary(text) {
-        if (summaryTextEl) summaryTextEl.textContent = text;
-      }
-
-      function toast(text) {
-        if (!toastEl) return;
-        toastEl.textContent = text;
-        toastEl.style.display = 'block';
-        clearTimeout(toastEl._timer);
-        toastEl._timer = setTimeout(() => {
-          toastEl.style.display = 'none';
-        }, 1600);
-      }
-
-      async function copyText(text) {
-        try {
-          await navigator.clipboard.writeText(text);
-          toast('Copied!');
-        } catch (e) {
-          toast('Copy failed');
-        }
-      }
-
-      function pad(n) {
-        return String(n).padStart(2, '0');
-      }
-
-      function formatDHMS(ms) {
-        ms = Math.max(0, ms);
-        const totalSec = Math.floor(ms / 1000);
-        const days = Math.floor(totalSec / 86400);
-        const hours = Math.floor((totalSec % 86400) / 3600);
-        const mins = Math.floor((totalSec % 3600) / 60);
-        const secs = totalSec % 60;
-        return { days, hours, mins, secs, totalSec };
-      }
-
-      function fmtDisplay(obj) {
-        return `${obj.days}d ${pad(obj.hours)}h ${pad(obj.mins)}m ${pad(obj.secs)}s`;
-      }
-
-      function parseDateTime(dateStr, timeStr, tzMode) {
-        if (!dateStr) return null;
-        const t = timeStr || '00:00:00';
-        const parts = t.split(':').map(Number);
-        const hh = parts[0] || 0;
-        const mm = parts[1] || 0;
-        const ss = parts[2] || 0;
-        const [Y, M, D] = dateStr.split('-').map(Number);
-
-        if (tzMode === 'utc') {
-          return new Date(Date.UTC(Y, M - 1, D, hh, mm, ss));
-        }
-        return new Date(Y, M - 1, D, hh, mm, ss);
-      }
-
-      function nowInMode(tzMode) {
-        const n = new Date();
-        if (tzMode === 'utc') {
-          return new Date(Date.UTC(
-            n.getUTCFullYear(),
-            n.getUTCMonth(),
-            n.getUTCDate(),
-            n.getUTCHours(),
-            n.getUTCMinutes(),
-            n.getUTCSeconds()
-          ));
-        }
-        return n;
-      }
-
-      function setInputsToNow(dateId, timeId) {
-        const n = new Date();
-        $(dateId).value = `${n.getFullYear()}-${pad(n.getMonth() + 1)}-${pad(n.getDate())}`;
-        $(timeId).value = `${pad(n.getHours())}:${pad(n.getMinutes())}:${pad(n.getSeconds())}`;
-      }
-
-      // Tabs
-      const tabs = Array.from(document.querySelectorAll('.tab'));
-      const panels = {
-        countdown: $('panel-countdown'),
-        duration: $('panel-duration'),
-        calc: $('panel-calc'),
-        between: $('panel-between')
-      };
-
-      function showTab(name) {
-        tabs.forEach(tab => {
-          const active = tab.dataset.tab === name;
-          tab.classList.toggle('active', active);
-          tab.setAttribute('aria-selected', active ? 'true' : 'false');
-        });
-
-        Object.entries(panels).forEach(([key, panel]) => {
-          if (!panel) return;
-          panel.classList.toggle('active', key === name);
-        });
-
-        const labels = {
-          countdown: 'Countdown',
-          duration: 'Duration',
-          calc: 'Time Calculator',
-          between: 'Time Between'
-        };
-
-        if (currentModeTextEl) currentModeTextEl.textContent = labels[name] || 'Countdown';
-        setStatus('Ready');
-      }
-
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => showTab(tab.dataset.tab));
-      });
-
-      // Defaults
-      setInputsToNow('tcBaseDate', 'tcBaseTime');
-      setInputsToNow('tbStartDate', 'tbStartTime');
-      setInputsToNow('tbEndDate', 'tbEndTime');
-
-      // COUNTDOWN
-      let cdTimer = null;
-      let cdPaused = false;
-      let cdRemaining = 0;
-
-      function cdUpdate() {
-        const tzMode = $('cdTimezone').value === 'utc' ? 'utc' : 'local';
-        const dateStr = $('cdDate').value;
-        const timeStr = $('cdTime').value;
-        const target = parseDateTime(dateStr, timeStr, tzMode);
-
-        if (!target) {
-          $('cdDisplay').textContent = '—';
-          return;
-        }
-
-        const title = ($('cdTitle').value || 'Countdown').trim();
-        $('cdLiveLabel').textContent = title;
-
-        const targetTxt = (tzMode === 'utc')
-          ? `${target.toISOString().replace('T', ' ').replace('Z', '')} UTC`
-          : target.toLocaleString();
-
-        $('cdTargetText').textContent = `Target: ${targetTxt}`;
-
-        const now = nowInMode(tzMode);
-        const diff = target.getTime() - now.getTime();
-        const ms = cdPaused ? cdRemaining : diff;
-        const f = formatDHMS(ms);
-
-        $('cdDisplay').textContent = fmtDisplay(f);
-        $('cdTotalSec').textContent = f.totalSec.toLocaleString();
-        $('cdTotalMin').textContent = (f.totalSec / 60).toFixed(2);
-        $('cdTotalHr').textContent = (f.totalSec / 3600).toFixed(2);
-        $('cdTotalDays').textContent = (f.totalSec / 86400).toFixed(4);
-
-        const display = $('cdDisplay');
-        display.classList.remove('warn', 'bad');
-
-        if (ms <= 0) {
-          display.classList.add('bad');
-          setStatus('Done');
-          setSummary('Countdown complete.');
-          $('cdPause').disabled = true;
-          clearInterval(cdTimer);
-          cdTimer = null;
-          return;
-        }
-
-        setSummary(`Counting down to ${targetTxt}.`);
-      }
-
-      function cdStart() {
-        const dateStr = $('cdDate').value;
-        if (!dateStr) {
-          toast('Pick a date');
-          return;
-        }
-
-        if (cdTimer) clearInterval(cdTimer);
-        cdPaused = false;
-        $('cdPause').disabled = false;
-        $('cdPause').textContent = 'Pause';
-        setStatus('Running');
-        cdUpdate();
-        cdTimer = setInterval(cdUpdate, 250);
-      }
-
-      function cdPause() {
-        if (!cdTimer && !cdPaused) return;
-
-        const tzMode = $('cdTimezone').value === 'utc' ? 'utc' : 'local';
-        const target = parseDateTime($('cdDate').value, $('cdTime').value, tzMode);
-        if (!target) return;
-
-        if (!cdPaused) {
-          const now = nowInMode(tzMode);
-          cdRemaining = Math.max(0, target.getTime() - now.getTime());
-          cdPaused = true;
-          clearInterval(cdTimer);
-          cdTimer = null;
-          $('cdPause').textContent = 'Resume';
-          setStatus('Paused');
-          setSummary('Countdown paused.');
-          cdUpdate();
-        } else {
-          cdPaused = false;
-          $('cdPause').textContent = 'Pause';
-          const startNow = nowInMode(tzMode).getTime();
-          const newTarget = new Date(startNow + cdRemaining);
-
-          if (tzMode === 'utc') {
-            const iso = newTarget.toISOString();
-            $('cdDate').value = iso.slice(0, 10);
-            $('cdTime').value = iso.slice(11, 19);
-          } else {
-            $('cdDate').value = `${newTarget.getFullYear()}-${pad(newTarget.getMonth() + 1)}-${pad(newTarget.getDate())}`;
-            $('cdTime').value = `${pad(newTarget.getHours())}:${pad(newTarget.getMinutes())}:${pad(newTarget.getSeconds())}`;
-          }
-
-          cdStart();
-        }
-      }
-
-      function cdReset() {
-        if (cdTimer) clearInterval(cdTimer);
-        cdTimer = null;
-        cdPaused = false;
-        cdRemaining = 0;
-        $('cdPause').disabled = true;
-        $('cdPause').textContent = 'Pause';
-        $('cdTitle').value = '';
-        $('cdDate').value = '';
-        $('cdTime').value = '';
-        $('cdLiveLabel').textContent = 'Countdown';
-        $('cdTargetText').textContent = 'Target: —';
-        $('cdDisplay').textContent = '—';
-        $('cdTotalSec').textContent = '—';
-        $('cdTotalMin').textContent = '—';
-        $('cdTotalHr').textContent = '—';
-        $('cdTotalDays').textContent = '—';
-        setStatus('Ready');
-        setSummary('Ready. Set a target date and time, then start the countdown.');
-      }
-
-      $('cdStart').addEventListener('click', cdStart);
-      $('cdPause').addEventListener('click', cdPause);
-      $('cdReset').addEventListener('click', cdReset);
-      $('cdCopy').addEventListener('click', () => {
-        const label = $('cdLiveLabel').textContent;
-        const target = $('cdTargetText').textContent.replace('Target: ', '');
-        const left = $('cdDisplay').textContent;
-        copyText(`${label} — ${left} remaining. (${target})`);
-      });
-
-      // DURATION
-      let duTimer = null;
-      let duPaused = false;
-      let duRemainMs = 0;
-      let duEndAt = 0;
-
-      function duTick() {
-        const now = Date.now();
-        const ms = duPaused ? duRemainMs : Math.max(0, duEndAt - now);
-        const f = formatDHMS(ms);
-
-        $('duDisplay').textContent = fmtDisplay(f);
-        $('duRemainSec').textContent = f.totalSec.toLocaleString();
-
-        const display = $('duDisplay');
-        display.classList.remove('bad');
-
-        if (ms === 0) {
-          display.classList.add('bad');
-          $('duStatus').textContent = 'Done';
-          setStatus('Done');
-          setSummary('Duration timer complete.');
-          $('duPause').disabled = true;
-          clearInterval(duTimer);
-          duTimer = null;
-
-          if ($('duEndSound').value === 'on') {
-            try {
-              const ctx = new (window.AudioContext || window.webkitAudioContext)();
-              const osc = ctx.createOscillator();
-              const gain = ctx.createGain();
-              osc.type = 'sine';
-              osc.frequency.value = 880;
-              gain.gain.value = 0.08;
-              osc.connect(gain);
-              gain.connect(ctx.destination);
-              osc.start();
-              setTimeout(() => {
-                osc.stop();
-                ctx.close();
-              }, 220);
-            } catch (e) {}
-          }
-          return;
-        }
-
-        setSummary('Duration timer is running.');
-      }
-
-      function duStart() {
-        const h = Math.max(0, parseInt($('duHours').value || '0', 10));
-        const m = Math.max(0, parseInt($('duMinutes').value || '0', 10));
-        const s = Math.max(0, parseInt($('duSeconds').value || '0', 10));
-        const total = ((h * 3600) + (m * 60) + s) * 1000;
-
-        if (total <= 0) {
-          toast('Set a duration');
-          return;
-        }
-
-        if (duTimer) clearInterval(duTimer);
-        duPaused = false;
-        duRemainMs = total;
-        duEndAt = Date.now() + total;
-
-        $('duOriginal').textContent = `Original: ${h}h ${m}m ${s}s`;
-        $('duPause').disabled = false;
-        $('duPause').textContent = 'Pause';
-        $('duStatus').textContent = 'Running';
-        setStatus('Running');
-        duTick();
-        duTimer = setInterval(duTick, 250);
-      }
-
-      function duPause() {
-        if (!duPaused) {
-          duRemainMs = Math.max(0, duEndAt - Date.now());
-          duPaused = true;
-          clearInterval(duTimer);
-          duTimer = null;
-          $('duPause').textContent = 'Resume';
-          $('duStatus').textContent = 'Paused';
-          setStatus('Paused');
-          setSummary('Duration timer paused.');
-          duTick();
-        } else {
-          duPaused = false;
-          duEndAt = Date.now() + duRemainMs;
-          $('duPause').textContent = 'Pause';
-          $('duStatus').textContent = 'Running';
-          setStatus('Running');
-          duTick();
-          duTimer = setInterval(duTick, 250);
-        }
-      }
-
-      function duReset() {
-        if (duTimer) clearInterval(duTimer);
-        duTimer = null;
-        duPaused = false;
-        duRemainMs = 0;
-        duEndAt = 0;
-        $('duPause').disabled = true;
-        $('duPause').textContent = 'Pause';
-        $('duOriginal').textContent = 'Original: —';
-        $('duDisplay').textContent = '—';
-        $('duRemainSec').textContent = '—';
-        $('duStatus').textContent = 'Ready';
-        setStatus('Ready');
-        setSummary('Ready. Enter a duration and start the timer.');
-      }
-
-      $('duStart').addEventListener('click', duStart);
-      $('duPause').addEventListener('click', duPause);
-      $('duReset').addEventListener('click', duReset);
-      $('duCopy').addEventListener('click', () => {
-        copyText(`Duration timer — remaining: ${$('duDisplay').textContent}`);
-      });
-
-      // CALC
-      function tcCompute() {
-        const tzMode = $('tcTimezone').value === 'utc' ? 'utc' : 'local';
-        const base = parseDateTime($('tcBaseDate').value, $('tcBaseTime').value, tzMode);
-        if (!base) {
-          toast('Set base date/time');
-          return;
-        }
-
-        const mode = $('tcMode').value;
-        const days = parseInt($('tcDays').value || '0', 10) || 0;
-        const hrs = parseInt($('tcHours').value || '0', 10) || 0;
-        const mins = parseInt($('tcMinutes').value || '0', 10) || 0;
-        const secs = parseInt($('tcSeconds').value || '0', 10) || 0;
-
-        const deltaMs = (((days * 24 + hrs) * 60 + mins) * 60 + secs) * 1000;
-        const outMs = mode === 'sub' ? base.getTime() - deltaMs : base.getTime() + deltaMs;
-        const out = new Date(outMs);
-
-        const baseTxt = tzMode === 'utc'
-          ? base.toISOString().replace('T', ' ').replace('Z', '') + ' UTC'
-          : base.toLocaleString();
-
-        const outTxt = tzMode === 'utc'
-          ? out.toISOString().replace('T', ' ').replace('Z', '') + ' UTC'
-          : out.toLocaleString();
-
-        $('tcBaseText').textContent = `Base: ${baseTxt}`;
-        $('tcResult').textContent = outTxt;
-        $('tcUnix').textContent = Math.floor(outMs / 1000).toString();
-        $('tcISO').textContent = out.toISOString();
-
-        setStatus('Computed');
-        setSummary('Time calculation complete.');
-      }
-
-      $('tcCompute').addEventListener('click', tcCompute);
-      $('tcNow').addEventListener('click', () => {
-        setInputsToNow('tcBaseDate', 'tcBaseTime');
-        toast('Base set to now');
-      });
-      $('tcCopy').addEventListener('click', () => copyText($('tcResult').textContent));
-
-      // BETWEEN
-      function tbCompute() {
-        const tzMode = $('tbTimezone').value === 'utc' ? 'utc' : 'local';
-        const start = parseDateTime($('tbStartDate').value, $('tbStartTime').value, tzMode);
-        const end = parseDateTime($('tbEndDate').value, $('tbEndTime').value, tzMode);
-
-        if (!start || !end) {
-          toast('Set start and end');
-          return;
-        }
-
-        const diffMs = Math.abs(end.getTime() - start.getTime());
-        const f = formatDHMS(diffMs);
-
-        $('tbResult').textContent = fmtDisplay(f);
-        $('tbSec').textContent = f.totalSec.toLocaleString();
-        $('tbMin').textContent = (f.totalSec / 60).toFixed(2);
-        $('tbHr').textContent = (f.totalSec / 3600).toFixed(2);
-        $('tbDays').textContent = (f.totalSec / 86400).toFixed(4);
-
-        const sTxt = tzMode === 'utc'
-          ? start.toISOString().replace('T', ' ').replace('Z', '') + ' UTC'
-          : start.toLocaleString();
-        const eTxt = tzMode === 'utc'
-          ? end.toISOString().replace('T', ' ').replace('Z', '') + ' UTC'
-          : end.toLocaleString();
-
-        $('tbMeta').textContent = `${sTxt} → ${eTxt}`;
-
-        setStatus('Computed');
-        setSummary('Time difference calculated.');
-      }
-
-      $('tbCompute').addEventListener('click', tbCompute);
-      $('tbNowStart').addEventListener('click', () => {
-        setInputsToNow('tbStartDate', 'tbStartTime');
-        toast('Start set to now');
-      });
-      $('tbNowEnd').addEventListener('click', () => {
-        setInputsToNow('tbEndDate', 'tbEndTime');
-        toast('End set to now');
-      });
-      $('tbCopy').addEventListener('click', () => copyText(`Time between: ${$('tbResult').textContent}`));
-
-      // initialize
-      showTab('countdown');
-      setSummary('Ready. Choose a mode and enter your date, time, or duration values to begin.');
-      setStatus('Ready');
-    })();
-  </script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/countdown-timer.js" defer></script>
 </body>
 </html>
