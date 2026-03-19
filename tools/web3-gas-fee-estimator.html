@@ -1,34 +1,91 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Analytics / Monetization -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
-  
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>EVM Gas Fee Estimator | EVM Gas Tracker for Ethereum, BNB, Base, Arbitrum & More | InstantQR.io</title>
-  <meta name="description" content="Estimate live gas fees for major EVM networks including Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Avalanche, Gnosis, Celo, Linea, Scroll, zkSync Era, KCC, and more. Free, fast, and privacy-first." />
-  <meta name="robots" content="index,follow" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>EVM Gas Fee Estimator | Ethereum, Base, Arbitrum, BNB, Polygon & More | InstantQR</title>
+  <meta name="description" content="Estimate live gas fees for major EVM networks including Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Avalanche, Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC. Free, fast, and privacy-first." />
+  <meta name="keywords" content="evm gas fee estimator, gas tracker, ethereum gas fee, base gas fee, arbitrum gas, bnb smart chain gas, polygon gas estimator, optimism gas, avalanche gas, evm transaction fee calculator" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="application-name" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
+
   <link rel="canonical" href="https://instantqr.io/tools/web3-gas-fee-estimator.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate" hreflang="en" href="https://instantqr.io/tools/web3-gas-fee-estimator.html" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="/assets/site.css" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="EVM Gas Fee Estimator | InstantQR.io" />
-  <meta property="og:description" content="Live gas fee estimates for major EVM chains including Ethereum, BNB, Base, Arbitrum, Polygon, Avalanche, Gnosis, KCC, Linea, Scroll, and more." />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="EVM Gas Fee Estimator | InstantQR" />
+  <meta property="og:description" content="Live gas fee estimates for Ethereum, Base, Arbitrum, Optimism, Polygon, BNB Smart Chain, Avalanche, Gnosis, Celo, Linea, Scroll, zkSync Era, and more." />
   <meta property="og:url" content="https://instantqr.io/tools/web3-gas-fee-estimator.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="EVM Gas Fee Estimator tool preview on InstantQR" />
 
-  <link rel="icon" href="/favicon.ico" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EVM Gas Fee Estimator | InstantQR" />
+  <meta name="twitter:description" content="Estimate live gas fees for major EVM networks with EIP-1559 and legacy fallback support." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools/tools.html"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"EVM Gas Fee Estimator",
+        "item":"https://instantqr.io/tools/web3-gas-fee-estimator.html"
+      }
+    ]
+  }
+  </script>
 
   <script type="application/ld+json">
   {
@@ -38,7 +95,7 @@
     "applicationCategory":"UtilitiesApplication",
     "operatingSystem":"Web",
     "url":"https://instantqr.io/tools/web3-gas-fee-estimator.html",
-    "description":"Estimate live gas fees for major EVM networks including Ethereum, BNB Smart Chain, Base, Arbitrum, Polygon, Avalanche, Gnosis, Celo, KCC, Linea, Scroll, zkSync Era, and more.",
+    "description":"Estimate live gas fees for major EVM networks including Ethereum, BNB Smart Chain, Base, Arbitrum, Polygon, Avalanche, Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC.",
     "publisher":{
       "@type":"Organization",
       "name":"InstantQR",
@@ -103,701 +160,434 @@
   </script>
 
   <style>
-    :root{
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-
-      --bg:#0b0f19;
-      --card:#121a2a;
-      --panel:#0e1525;
-      --border:#22304e;
-      --border2:#2a3a5f;
-
-      --text:#e7eaf2;
-      --muted:#b8c0d6;
-      --muted2:#8ea0c8;
-      --link:#cfe0ff;
-
-      --brand:#3b82f6;
-      --good:#34d399;
-      --warn:#fbbf24;
-      --bad:#fb7185;
-
-      --shadow: 0 12px 40px rgba(0,0,0,.35);
-      --radius:18px;
-      --radius2:16px;
-      --max:980px;
+    .gas-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:18px;
+      margin-top:14px;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:
-        radial-gradient(900px 540px at 12% 8%, rgba(59,130,246,.18), transparent 55%),
-        radial-gradient(900px 540px at 88% 12%, rgba(34,197,94,.10), transparent 55%),
-        var(--bg);
-      color:var(--text);
-    }
-    a{ color:var(--link); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
-    .wrap{ max-width:var(--max); margin:0 auto; padding:22px; }
-    .card{
-      background:var(--card);
+    .gas-card,
+    .gas-panel,
+    .faqCard{
+      border-radius:var(--radius2);
       border:1px solid var(--border);
-      border-radius:var(--radius);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
+    }
+    .gas-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+    }
+    .gas-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
+      pointer-events:none;
+    }
+    .gas-card > *{position:relative}
+    .gas-panel{
       padding:18px;
-      box-shadow: var(--shadow);
-    }
-
-    .topbar{
       display:flex;
-      align-items:center;
+      flex-direction:column;
+      gap:14px;
+    }
+    .panel-top{
+      display:flex;
       justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      padding:2px 2px 10px;
-      border-bottom:1px solid rgba(34,48,78,.55);
-      margin-bottom:12px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
+      align-items:flex-end;
       gap:10px;
-      text-decoration:none;
-      color:var(--text);
-      font-weight:900;
+      flex-wrap:wrap;
+    }
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
       letter-spacing:-.2px;
     }
-    .brand img{ height:30px; width:auto; display:block; }
-    .brand span{ font-size:16px; }
-
-    .nav{
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .full{grid-column:1/-1}
+    .field-label{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:6px;
+      font-weight:700;
+    }
+    .field,
+    .field-select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0a1427;
+      color:var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    .field:focus,
+    .field-select:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 4px rgba(96,165,250,.14);
+      background:#0b172d;
+    }
+    .tool-actions{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      align-items:center;
+      margin-top:16px;
     }
-    .nav a{
-      display:inline-block;
-      padding:10px 12px;
-      border-radius:12px;
-      background:#0b1222;
-      border:1px solid var(--border2);
-      color:var(--text);
-      text-decoration:none;
-      font-weight:800;
-      font-size:12px;
-      user-select:none;
-    }
-    .nav a:hover{ border-color: rgba(59,130,246,.85); }
-    .nav a.active{ border-color: rgba(59,130,246,.95); }
-
-    .hero{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
-      margin-top:8px;
-    }
-    h1{ margin:0; font-size:26px; letter-spacing:-.3px; }
-    h2{ margin:0 0 10px; font-size:20px; letter-spacing:-.2px; }
-    h3{ margin:0 0 8px; font-size:16px; letter-spacing:-.1px; }
-    .sub{ margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.6; max-width:78ch; }
-
-    .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
-    .badge{
-      padding:7px 10px;
-      border-radius:999px;
-      background:#0b1222;
-      border:1px solid var(--border2);
-      color:var(--muted);
-      font-size:12px;
-      user-select:none;
-    }
-
-    .grid{ display:grid; gap:12px; margin-top:14px; }
-    .panel{
-      background:var(--panel);
-      border:1px solid var(--border2);
-      border-radius:var(--radius2);
-      padding:14px;
-    }
-
-    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-    @media (max-width:820px){ .row{ grid-template-columns:1fr; } }
-
-    label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
-    select,input,button{
-      width:100%;
-      padding:12px 10px;
-      border-radius:14px;
-      border:1px solid var(--border2);
-      background:#0b1222;
-      color:var(--text);
-      outline:none;
-    }
-    input:focus, select:focus{
-      border-color: rgba(59,130,246,.85);
-      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
-    }
-    input::placeholder{ color:#64748b; }
-
-    .actions{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-    .actions button{ width:auto; cursor:pointer; }
-
-    .btn{
-      background:var(--brand);
-      border:none;
-      color:white;
-      font-weight:900;
-    }
-    .btn:hover{ filter:brightness(1.05); }
-    .btn2{
-      background:#0b1222;
-      border:1px solid var(--border2);
-      color:var(--text);
-      font-weight:800;
-    }
-    .btn2:hover{ border-color: rgba(59,130,246,.7); }
-
-    .pill{
+    .status-pill{
       display:inline-flex;
       gap:8px;
       align-items:center;
-      padding:7px 10px;
-      border:1px solid var(--border2);
+      padding:8px 12px;
+      border:1px solid var(--border);
       border-radius:999px;
       color:var(--muted);
       font-size:12px;
       background:#0b1222;
       user-select:none;
     }
-    .statusDot{ width:8px; height:8px; border-radius:50%; background:var(--warn); }
-
-    .cards{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
-    @media (max-width:820px){ .cards{ grid-template-columns:1fr; } }
-
+    .status-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--warn);
+    }
+    .gas-cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:12px;
+    }
     .tierCard{
-      border:1px solid var(--border2);
+      border:1px solid var(--border);
       border-radius:14px;
       padding:12px;
       background:#0b1222;
     }
-    .tierHead{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
-    .tierHead b{ font-size:14px; }
-    .tag{ font-size:11px; padding:4px 8px; border-radius:999px; border:1px solid var(--border2); color:var(--muted); }
-
-    .kv{ display:grid; grid-template-columns: 1fr auto; gap:8px; margin:6px 0; font-size:13px; }
-    .kv span{ color:var(--muted); }
-
+    .tierHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:10px;
+    }
+    .tierHead b{
+      font-size:14px;
+    }
+    .tag{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+    }
+    .kv{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:8px;
+      margin:6px 0;
+      font-size:13px;
+    }
+    .kv span{
+      color:var(--muted);
+    }
     .big{
       font-size:18px;
       font-weight:900;
       margin-top:6px;
-      color: var(--good);
-      text-shadow: 0 0 8px rgba(52,211,153,0.35);
+      color:var(--ok);
+      text-shadow:0 0 8px rgba(52,211,153,.35);
     }
-
-    .faqGrid{
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      word-break:break-word;
+    }
+    .miniGrid2{
       display:grid;
-      gap:10px;
-      margin-top:10px;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
     }
-    .faqItem{
-      background:#0b1222;
-      border:1px solid var(--border2);
-      border-radius:14px;
-      padding:14px;
+    .miniBox{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:16px;
     }
-    .faqItem p{
+    .miniBox h2{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .miniBox p,
+    .miniBox li{
       margin:0;
       color:var(--muted);
-      font-size:13px;
-      line-height:1.7;
+      line-height:1.6;
+      font-size:14px;
     }
-
-    .foot{ color:var(--muted); font-size:12px; line-height:1.6; margin-top:10px; }
-    .mono{ font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; }
-    code{ color:var(--link); }
-
-    .footerLinks{
+    .miniBox ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .faqCard{
       margin-top:14px;
-      text-align:center;
+      padding:18px;
+    }
+    .faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+    .faqCard summary::-webkit-details-marker{display:none}
+    .faqCard p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .subnote{
       color:var(--muted2);
       font-size:12px;
+      line-height:1.6;
+      margin-top:8px;
     }
-    .footerLinks a{ color:var(--link); }
+    @media (max-width: 980px){
+      .gas-grid,
+      .miniGrid2,
+      .form-grid,
+      .gas-cards{
+        grid-template-columns:1fr;
+      }
+    }
+    @media (max-width: 640px){
+      .tool-actions .cta{
+        width:100%;
+      }
+    }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <div class="card">
+  <a class="skip" href="#main">Skip to content</a>
 
-      <div class="topbar">
-        <a class="brand" href="/" aria-label="InstantQR Home">
-          <img src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
-          <span>InstantQR</span>
-        </a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
 
-        <nav class="nav" aria-label="Tools">
-          <a href="/">HOME</a>
-          <a href="/tools/password.html">Password</a>
-          <a href="/tools/unit-converter.html">Unit Converter</a>
-          <a href="/tools/ip-lookup.html">IP Lookup</a>
-          <a href="/tools/time-zone-converter.html">Time Zone</a>
-          <a href="/tools/countdown-timer.html">Countdown</a>
-          <a href="/tools/world-clock.html">World Clock</a>
-          <a class="active" href="/tools/multi-chain-network-fee-estimator.html">Multi Chain Fees</a>
-        </nav>
-      </div>
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/crypto-profit-calculator.html">Crypto Profit</a>
+        <a href="/tools/transaction-status-checker.html">Tx Status</a>
+        <a href="/tools/token-contract-analyzer.html">Contract Analyzer</a>
+      </nav>
+    </div>
+  </header>
 
-      <section class="hero">
-        <div>
-          <h1>EVM Gas Fee Estimator</h1>
-          <p class="sub">
-            Live gas fee estimates for major EVM networks including Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Avalanche, Gnosis, Celo, Scroll, Linea, zkSync Era, and KCC. Runs locally in your browser.
-          </p>
-          <div class="badges" aria-label="Highlights">
-            <span class="badge">⚡ Live estimates</span>
-            <span class="badge">⛽ EIP-1559 + legacy fallback</span>
-            <span class="badge">🔒 Privacy-first</span>
-            <span class="badge">✅ Free</span>
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">EVM Gas Fee Estimator</span></li>
+      </ol>
+    </nav>
+
+    <section class="gas-grid" aria-label="EVM Gas Fee Estimator">
+      <section class="gas-card">
+        <div class="pill">⛽ Live estimates • 🔗 EVM chains • 🔒 Privacy-first</div>
+
+        <h1>EVM Gas Fee Estimator</h1>
+        <p class="sub">
+          Estimate live gas fees for major EVM networks including Ethereum, BNB Smart Chain, Base,
+          Arbitrum, Optimism, Polygon, Avalanche, Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC.
+          Runs locally in your browser using direct RPC calls.
+        </p>
+
+        <div class="form-grid" style="margin-top:16px;">
+          <div>
+            <label class="field-label" for="network">Network</label>
+            <select id="network" class="field-select"></select>
+          </div>
+
+          <div>
+            <label class="field-label" for="gasUnits">Gas units</label>
+            <input id="gasUnits" class="field" type="number" min="1" step="1" value="21000" />
+          </div>
+
+          <div class="full">
+            <label class="field-label" for="rpcUrl">RPC URL (editable)</label>
+            <input id="rpcUrl" class="field" type="url" placeholder="https://..." />
+            <div class="subnote">
+              Tip: public RPCs can be rate-limited. If you get errors, try your own Alchemy, Infura,
+              QuickNode, or another provider endpoint.
+            </div>
           </div>
         </div>
 
-        <div class="pill" id="statusPill" aria-live="polite">
-          <span class="statusDot" id="statusDot"></span>
-          <span id="statusText">Ready</span>
+        <div class="tool-actions">
+          <button class="cta primary" id="refreshBtn" type="button">Refresh</button>
+          <button class="cta ghost" id="testBtn" type="button">Test RPC</button>
+          <label class="status-pill" style="cursor:pointer;">
+            <input id="autoRefresh" type="checkbox" style="width:auto;margin:0 6px 0 0;">
+            Auto refresh (15s)
+          </label>
         </div>
+
+        <div class="subnote" id="lastUpdated">Last updated: —</div>
       </section>
 
-      <div class="grid">
-        <div class="panel">
-          <div class="row">
-            <div>
-              <label for="network">Network</label>
-              <select id="network"></select>
-            </div>
-            <div>
-              <label for="gasUnits">Gas units (est. transaction cost)</label>
-              <input id="gasUnits" type="number" min="1" step="1" value="21000" />
-              <div class="foot">Common: 21,000 (simple transfer), 80,000–200,000 (swaps), 200,000+ (complex).</div>
-            </div>
-          </div>
-
-          <div class="row" style="margin-top:12px;">
-            <div>
-              <label for="rpcUrl">RPC URL (editable)</label>
-              <input id="rpcUrl" type="url" placeholder="https://…" />
-              <div class="foot">
-                Tip: public RPCs can be rate-limited. If you get errors, paste an Alchemy, Infura, QuickNode, or another provider endpoint.
-              </div>
-            </div>
-            <div>
-              <label>Actions</label>
-              <div class="actions">
-                <button class="btn" id="refreshBtn" type="button">Refresh</button>
-                <button class="btn2" id="testBtn" type="button">Test RPC</button>
-
-                <label class="pill" style="cursor:pointer;">
-                  <input id="autoRefresh" type="checkbox" style="width:auto;margin:0 6px 0 0;">
-                  Auto refresh (15s)
-                </label>
-              </div>
-              <div class="foot" id="lastUpdated">Last updated: —</div>
-            </div>
-          </div>
-
-          <div class="foot">
-            Note: BTC, LTC, and Monero do not use EVM gas estimation APIs, so they are not part of this page. They need a separate non-EVM network fee estimator.
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="cards">
-            <div class="tierCard" id="slowCard">
-              <div class="tierHead">
-                <b>Slow</b>
-                <span class="tag">Budget</span>
-              </div>
-              <div class="kv"><span>Max fee</span><b class="mono" id="slowMax">—</b></div>
-              <div class="kv"><span>Priority fee</span><b class="mono" id="slowTip">—</b></div>
-              <div class="kv"><span>Estimated total</span><b class="mono" id="slowTotal">—</b></div>
-              <div class="big mono" id="slowNative">—</div>
-              <div class="foot">Lower-percentile tip from recent blocks.</div>
-            </div>
-
-            <div class="tierCard" id="stdCard">
-              <div class="tierHead">
-                <b>Standard</b>
-                <span class="tag">Recommended</span>
-              </div>
-              <div class="kv"><span>Max fee</span><b class="mono" id="stdMax">—</b></div>
-              <div class="kv"><span>Priority fee</span><b class="mono" id="stdTip">—</b></div>
-              <div class="kv"><span>Estimated total</span><b class="mono" id="stdTotal">—</b></div>
-              <div class="big mono" id="stdNative">—</div>
-              <div class="foot">Median tip from recent blocks.</div>
-            </div>
-
-            <div class="tierCard" id="fastCard">
-              <div class="tierHead">
-                <b>Fast</b>
-                <span class="tag">High priority</span>
-              </div>
-              <div class="kv"><span>Max fee</span><b class="mono" id="fastMax">—</b></div>
-              <div class="kv"><span>Priority fee</span><b class="mono" id="fastTip">—</b></div>
-              <div class="kv"><span>Estimated total</span><b class="mono" id="fastTotal">—</b></div>
-              <div class="big mono" id="fastNative">—</div>
-              <div class="foot">Higher-percentile tip from recent blocks.</div>
-            </div>
-          </div>
-
-          <div class="foot" style="margin-top:12px;">
-            <b>How it works:</b> This tool queries <code>eth_feeHistory</code> when available to estimate priority fees and reads the latest base fee.
-            If a chain or RPC does not support fee history, it falls back to <code>eth_gasPrice</code>.
-          </div>
-        </div>
-
-        <div class="panel">
-          <h2>EVM Gas Fee Estimator FAQ</h2>
-          <div class="faqGrid">
-            <div class="faqItem">
-              <h3>How do gas fees work on EVM networks?</h3>
-              <p>
-                EVM chains use gas to price network computation and transaction inclusion. Many modern networks support EIP-1559, where a base fee changes with demand and a priority fee helps transactions confirm faster.
-              </p>
-            </div>
-
-            <div class="faqItem">
-              <h3>Which networks are supported?</h3>
-              <p>
-                This page supports Ethereum, Arbitrum, Optimism, Base, Polygon, BNB Smart Chain, Avalanche C-Chain, Gnosis, Celo, Scroll, Linea, zkSync Era, and KCC.
-              </p>
-            </div>
-
-            <div class="faqItem">
-              <h3>Why are BTC, LTC, and Monero not included?</h3>
-              <p>
-                Bitcoin, Litecoin, and Monero do not use the EVM gas model or JSON-RPC methods used here. They require their own network-specific fee estimator logic.
-              </p>
-            </div>
-
-            <div class="faqItem">
-              <h3>Do you store my RPC URL or transaction data?</h3>
-              <p>
-                No. This tool runs in your browser and sends requests directly to the RPC endpoint you choose. InstantQR does not intentionally store your RPC input on a server.
-              </p>
-            </div>
-
-            <div class="faqItem">
-              <h3>Why can a public RPC fail?</h3>
-              <p>
-                Public endpoints may be overloaded, rate-limited, blocked, or temporarily unavailable. If that happens, try a different RPC or use your own provider endpoint.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="footerLinks">
-          <div style="margin-bottom:8px;">
-            <a href="/tools/wifi-qr-code-generator.html">WiFi QR Generator</a> ·
-            <a href="/tools/url-qr-code-generator.html">URL QR Generator</a> ·
-            <a href="/tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
-          </div>
+      <aside class="gas-panel" aria-label="Estimator status and results">
+        <div class="panel-top">
           <div>
-            <a href="/about.html">About</a> ·
-            <a href="/privacy.html">Privacy</a> ·
-            <a href="/terms.html">Terms</a> ·
-            <a href="/contact.html">Contact</a>
+            <h2>Results</h2>
+            <div class="hint" style="margin-top:6px;">EIP-1559 first, legacy fallback when needed.</div>
+          </div>
+
+          <div class="status-pill" id="statusPill" aria-live="polite">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">Ready</span>
           </div>
         </div>
+
+        <div class="gas-cards">
+          <div class="tierCard">
+            <div class="tierHead">
+              <b>Slow</b>
+              <span class="tag">Budget</span>
+            </div>
+            <div class="kv"><span>Max fee</span><b class="mono" id="slowMax">—</b></div>
+            <div class="kv"><span>Priority fee</span><b class="mono" id="slowTip">—</b></div>
+            <div class="kv"><span>Estimated total</span><b class="mono" id="slowTotal">—</b></div>
+            <div class="big mono" id="slowNative">—</div>
+            <div class="subnote">Lower percentile tip from recent blocks.</div>
+          </div>
+
+          <div class="tierCard">
+            <div class="tierHead">
+              <b>Standard</b>
+              <span class="tag">Recommended</span>
+            </div>
+            <div class="kv"><span>Max fee</span><b class="mono" id="stdMax">—</b></div>
+            <div class="kv"><span>Priority fee</span><b class="mono" id="stdTip">—</b></div>
+            <div class="kv"><span>Estimated total</span><b class="mono" id="stdTotal">—</b></div>
+            <div class="big mono" id="stdNative">—</div>
+            <div class="subnote">Median tip from recent blocks.</div>
+          </div>
+
+          <div class="tierCard">
+            <div class="tierHead">
+              <b>Fast</b>
+              <span class="tag">High priority</span>
+            </div>
+            <div class="kv"><span>Max fee</span><b class="mono" id="fastMax">—</b></div>
+            <div class="kv"><span>Priority fee</span><b class="mono" id="fastTip">—</b></div>
+            <div class="kv"><span>Estimated total</span><b class="mono" id="fastTotal">—</b></div>
+            <div class="big mono" id="fastNative">—</div>
+            <div class="subnote">Higher percentile tip from recent blocks.</div>
+          </div>
+        </div>
+
+        <div class="subnote">
+          This tool queries <code>eth_feeHistory</code> when available to estimate priority fees and read the latest base fee.
+          If that is unavailable, it falls back to <code>eth_gasPrice</code>.
+        </div>
+      </aside>
+    </section>
+
+    <section class="miniGrid2" aria-label="Additional information">
+      <div class="miniBox">
+        <h2>How it works</h2>
+        <ul>
+          <li>Uses direct RPC calls from your browser</li>
+          <li>Prefers EIP-1559 fee history when available</li>
+          <li>Falls back to legacy gas price on older or limited RPCs</li>
+          <li>Calculates estimated total fee from gas units × fee per gas</li>
+        </ul>
       </div>
 
-    </div>
-  </div>
+      <div class="miniBox">
+        <h2>Supported chains</h2>
+        <p>
+          Ethereum, BNB Smart Chain, Base, Arbitrum One, Optimism, Polygon, Avalanche C-Chain,
+          Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC.
+        </p>
+      </div>
+    </section>
 
-<script>
-(() => {
-  const NETWORKS = [
-    { key:"eth",    name:"Ethereum",              chainId:1,      symbol:"ETH",   rpc:"https://ethereum.publicnode.com" },
-    { key:"bsc",    name:"BNB Smart Chain",       chainId:56,     symbol:"BNB",   rpc:"https://bsc-dataseed.binance.org" },
-    { key:"arb",    name:"Arbitrum One",          chainId:42161,  symbol:"ETH",   rpc:"https://arb1.arbitrum.io/rpc" },
-    { key:"op",     name:"Optimism",              chainId:10,     symbol:"ETH",   rpc:"https://mainnet.optimism.io" },
-    { key:"base",   name:"Base",                  chainId:8453,   symbol:"ETH",   rpc:"https://mainnet.base.org" },
-    { key:"poly",   name:"Polygon PoS",           chainId:137,    symbol:"POL",   rpc:"https://polygon-bor.publicnode.com" },
-    { key:"avax",   name:"Avalanche C-Chain",     chainId:43114,  symbol:"AVAX",  rpc:"https://api.avax.network/ext/bc/C/rpc" },
-    { key:"gnosis", name:"Gnosis",                chainId:100,    symbol:"xDAI",  rpc:"https://rpc.gnosischain.com" },
-    { key:"celo",   name:"Celo",                  chainId:42220,  symbol:"CELO",  rpc:"https://forno.celo.org" },
-    { key:"zksync", name:"zkSync Era",            chainId:324,    symbol:"ETH",   rpc:"https://mainnet.era.zksync.io" },
-    { key:"linea",  name:"Linea",                 chainId:59144,  symbol:"ETH",   rpc:"https://rpc.linea.build" },
-    { key:"scroll", name:"Scroll",                chainId:534352, symbol:"ETH",   rpc:"https://rpc.scroll.io" },
-    { key:"kcc",    name:"KCC (KuCoin Community Chain)", chainId:321, symbol:"KCS", rpc:"https://rpc-mainnet.kcc.network" }
-  ];
+    <section class="faqCard" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
 
-  const els = {
-    network: document.getElementById("network"),
-    gasUnits: document.getElementById("gasUnits"),
-    rpcUrl: document.getElementById("rpcUrl"),
-    refreshBtn: document.getElementById("refreshBtn"),
-    testBtn: document.getElementById("testBtn"),
-    autoRefresh: document.getElementById("autoRefresh"),
-    statusDot: document.getElementById("statusDot"),
-    statusText: document.getElementById("statusText"),
-    lastUpdated: document.getElementById("lastUpdated"),
+      <details open>
+        <summary>How do gas fees work on EVM networks?</summary>
+        <p>Most EVM networks use a gas model where a base fee or network gas price changes with demand. Many chains support EIP-1559 fee estimation, while others rely on legacy gasPrice methods.</p>
+      </details>
 
-    slowMax: document.getElementById("slowMax"),
-    slowTip: document.getElementById("slowTip"),
-    slowTotal: document.getElementById("slowTotal"),
-    slowNative: document.getElementById("slowNative"),
+      <details>
+        <summary>Which networks does this EVM gas fee estimator support?</summary>
+        <p>This tool supports major EVM-compatible networks including Ethereum, Arbitrum, Optimism, Base, Polygon, BNB Smart Chain, Avalanche C-Chain, Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC.</p>
+      </details>
 
-    stdMax: document.getElementById("stdMax"),
-    stdTip: document.getElementById("stdTip"),
-    stdTotal: document.getElementById("stdTotal"),
-    stdNative: document.getElementById("stdNative"),
+      <details>
+        <summary>Does this tool support Bitcoin, Litecoin, or Monero fees?</summary>
+        <p>No. Bitcoin, Litecoin, and Monero do not use EVM gas estimation APIs like eth_feeHistory. They require separate fee estimation logic specific to each network.</p>
+      </details>
 
-    fastMax: document.getElementById("fastMax"),
-    fastTip: document.getElementById("fastTip"),
-    fastTotal: document.getElementById("fastTotal"),
-    fastNative: document.getElementById("fastNative")
-  };
+      <details>
+        <summary>Do you store my RPC URL or data?</summary>
+        <p>No. This tool runs in your browser and calls the RPC endpoint directly from your device. InstantQR does not intentionally store your RPC URL or transaction inputs on a server.</p>
+      </details>
 
-  const RPC_TIMEOUT_MS = 4500;
-  const AUTO_REFRESH_MS = 15000;
-  const CACHE_TTL_MS = 15000;
+      <details>
+        <summary>Why do public RPC endpoints sometimes fail?</summary>
+        <p>Public RPC endpoints can be rate-limited, overloaded, or blocked by VPNs, browser extensions, or network rules. If a public RPC fails, try your own provider endpoint such as Alchemy, Infura, QuickNode, or another reliable RPC.</p>
+      </details>
+    </section>
 
-  let timer = null;
-  let rpcId = 1;
-  let inflight = null;
+    <footer class="footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/sitemap.xml">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+  </main>
 
-  function setStatus(kind, text){
-    const colors = { ok:"var(--good)", warn:"var(--warn)", bad:"var(--bad)", idle:"var(--warn)" };
-    els.statusDot.style.background = colors[kind] || colors.idle;
-    els.statusText.textContent = text;
-  }
-
-  function gweiFromWei(weiBigInt){
-    const gwei = Number(weiBigInt) / 1e9;
-    if (!Number.isFinite(gwei)) return "—";
-    return gwei.toFixed(2) + " gwei";
-  }
-
-  function formatNative(weiBigInt, symbol){
-    const val = Number(weiBigInt) / 1e18;
-    if (!Number.isFinite(val)) return "—";
-    const out = val >= 1 ? val.toFixed(6) : val.toPrecision(6);
-    return `${out} ${symbol}`;
-  }
-
-  function abortableFetch(url, opts, timeoutMs){
-    const controller = new AbortController();
-    const t = setTimeout(() => controller.abort(), timeoutMs);
-    return fetch(url, { ...opts, signal: controller.signal })
-      .finally(() => clearTimeout(t));
-  }
-
-  async function rpcCall(url, method, params){
-    const body = { jsonrpc: "2.0", id: rpcId++, method, params };
-
-    const res = await abortableFetch(url, {
-      method: "POST",
-      headers: { "content-type":"application/json" },
-      body: JSON.stringify(body)
-    }, RPC_TIMEOUT_MS);
-
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    if (data.error) throw new Error(data.error.message || "RPC error");
-    return data.result;
-  }
-
-  function median(arr){
-    const a = [...arr].sort((x,y)=> (x<y?-1:x>y?1:0));
-    const mid = Math.floor(a.length/2);
-    return a.length % 2 ? a[mid] : (a[mid-1] + a[mid]) / 2n;
-  }
-
-  async function estimateFees(rpcUrl){
-    const blockCount = "0x14";
-    const newest = "latest";
-    const percentiles = [10, 50, 90];
-
-    try{
-      const fh = await rpcCall(rpcUrl, "eth_feeHistory", [blockCount, newest, percentiles]);
-
-      const baseFees = fh.baseFeePerGas.map(x => BigInt(x));
-      const nextBaseFee = baseFees[baseFees.length - 1];
-
-      const rewards = (fh.reward || []).map(row => row.map(x => BigInt(x)));
-      if (!rewards.length) throw new Error("feeHistory missing reward data");
-
-      const p10 = rewards.map(r => r[0]);
-      const p50 = rewards.map(r => r[1]);
-      const p90 = rewards.map(r => r[2]);
-
-      const tipSlow = median(p10);
-      const tipStd  = median(p50);
-      const tipFast = median(p90);
-
-      const maxSlow = nextBaseFee * 2n + tipSlow;
-      const maxStd  = nextBaseFee * 2n + tipStd;
-      const maxFast = nextBaseFee * 2n + tipFast;
-
-      return {
-        mode: "eip1559",
-        tiers: {
-          slow: { maxFee: maxSlow, tip: tipSlow },
-          std:  { maxFee: maxStd,  tip: tipStd  },
-          fast: { maxFee: maxFast, tip: tipFast }
-        }
-      };
-    }catch(_e){
-      const gp = await rpcCall(rpcUrl, "eth_gasPrice", []);
-      const gasPrice = BigInt(gp);
-      const slow = gasPrice;
-      const std  = (gasPrice * 12n) / 10n;
-      const fast = (gasPrice * 15n) / 10n;
-      return {
-        mode: "legacy",
-        tiers: {
-          slow: { maxFee: slow, tip: 0n },
-          std:  { maxFee: std,  tip: 0n },
-          fast: { maxFee: fast, tip: 0n }
-        }
-      };
-    }
-  }
-
-  function updateUI(fees){
-    const gasUnits = Math.max(1, parseInt(els.gasUnits.value || "21000", 10));
-    const gas = BigInt(gasUnits);
-    const net = NETWORKS.find(n => n.key === els.network.value) || NETWORKS[0];
-    const sym = net.symbol;
-
-    function setTier(prefix, tier){
-      const totalWei = gas * tier.maxFee;
-
-      const maxEl   = els[prefix + "Max"];
-      const tipEl   = els[prefix + "Tip"];
-      const totalEl = els[prefix + "Total"];
-      const natEl   = els[prefix + "Native"];
-
-      if (maxEl)   maxEl.textContent = gweiFromWei(tier.maxFee);
-      if (tipEl)   tipEl.textContent = tier.tip ? gweiFromWei(tier.tip) : "—";
-      if (totalEl) totalEl.textContent = gweiFromWei(tier.maxFee);
-      if (natEl)   natEl.textContent = formatNative(totalWei, sym);
-    }
-
-    setTier("slow", fees.tiers.slow);
-    setTier("std",  fees.tiers.std);
-    setTier("fast", fees.tiers.fast);
-
-    els.lastUpdated.textContent = `Last updated: ${new Date().toLocaleString()}`;
-  }
-
-  async function testRpc(){
-    setStatus("warn","Testing RPC…");
-    try{
-      const url = els.rpcUrl.value.trim();
-      if(!url) throw new Error("Enter an RPC URL");
-      const chainIdHex = await rpcCall(url, "eth_chainId", []);
-      const chainId = parseInt(chainIdHex, 16);
-      setStatus("ok", `RPC OK (chainId ${chainId})`);
-    }catch(e){
-      setStatus("bad", `RPC error: ${e.message}`);
-    }
-  }
-
-  function cacheKey(){
-    const url = (els.rpcUrl.value || "").trim();
-    const gas = (els.gasUnits.value || "").trim();
-    return `gasfee:${els.network.value}:${gas}:${url}`;
-  }
-
-  function cacheGet(){
-    try{
-      const raw = sessionStorage.getItem(cacheKey());
-      if(!raw) return null;
-      const obj = JSON.parse(raw);
-      if(!obj || !obj.t || !obj.v) return null;
-      if(Date.now() - obj.t > CACHE_TTL_MS) return null;
-      return obj.v;
-    }catch{ return null; }
-  }
-
-  function cacheSet(v){
-    try{
-      sessionStorage.setItem(cacheKey(), JSON.stringify({ t: Date.now(), v }));
-    }catch{}
-  }
-
-  async function refresh(){
-    const url = els.rpcUrl.value.trim();
-    if(!url){
-      setStatus("bad","Enter an RPC URL");
-      return;
-    }
-
-    if (inflight) return inflight;
-
-    const cached = cacheGet();
-    if (cached){
-      updateUI(cached);
-      const net = NETWORKS.find(n => n.key === els.network.value) || NETWORKS[0];
-      setStatus("ok", `${net.name}: cached`);
-      return;
-    }
-
-    setStatus("warn","Fetching gas data…");
-    inflight = (async () => {
-      try{
-        const fees = await estimateFees(url);
-        updateUI(fees);
-        cacheSet(fees);
-        const net = NETWORKS.find(n => n.key === els.network.value) || NETWORKS[0];
-        setStatus("ok", `${net.name}: updated`);
-      }catch(e){
-        setStatus("bad", `Failed: ${e.message}`);
-      } finally {
-        inflight = null;
-      }
-    })();
-
-    return inflight;
-  }
-
-  function populateNetworks(){
-    els.network.innerHTML = NETWORKS.map(n => `<option value="${n.key}">${n.name}</option>`).join("");
-    els.network.value = "eth";
-    const net = NETWORKS.find(n => n.key === els.network.value);
-    els.rpcUrl.value = net ? net.rpc : "";
-  }
-
-  function setAutoRefresh(on){
-    if (timer) { clearInterval(timer); timer = null; }
-    if (on) timer = setInterval(refresh, AUTO_REFRESH_MS);
-  }
-
-  els.network.addEventListener("change", () => {
-    const net = NETWORKS.find(n => n.key === els.network.value);
-    els.rpcUrl.value = net ? net.rpc : "";
-    refresh();
-  });
-
-  let gasDebounce = null;
-  els.gasUnits.addEventListener("input", () => {
-    if (gasDebounce) clearTimeout(gasDebounce);
-    gasDebounce = setTimeout(() => refresh(), 350);
-  });
-
-  els.refreshBtn.addEventListener("click", refresh);
-  els.testBtn.addEventListener("click", testRpc);
-  els.autoRefresh.addEventListener("change", (e) => setAutoRefresh(e.target.checked));
-
-  populateNetworks();
-  setStatus("idle","Ready");
-  refresh();
-})();
-</script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/web3-gas-fee-estimator.js" defer></script>
 </body>
 </html>
