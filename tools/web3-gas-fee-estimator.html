@@ -139,18 +139,40 @@
     .form-grid input,
     .form-grid select{
       width:100%;
-      padding:12px 10px;
+      padding:12px 12px;
       border-radius:14px;
       border:1px solid var(--border);
-      background:rgba(0,0,0,.18);
+      background:rgba(10,20,39,.96);
       color:var(--text);
       outline:none;
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+    }
+
+    .form-grid select{
+      background-image:
+        linear-gradient(45deg, transparent 50%, rgba(255,255,255,.7) 50%),
+        linear-gradient(135deg, rgba(255,255,255,.7) 50%, transparent 50%),
+        linear-gradient(to right, rgba(255,255,255,.06), rgba(255,255,255,.06));
+      background-position:
+        calc(100% - 18px) calc(50% - 3px),
+        calc(100% - 12px) calc(50% - 3px),
+        calc(100% - 40px) 50%;
+      background-size:6px 6px, 6px 6px, 1px 22px;
+      background-repeat:no-repeat;
+      padding-right:48px;
     }
 
     .form-grid input:focus,
     .form-grid select:focus{
       border-color:rgba(96,165,250,.65);
       box-shadow:0 0 0 3px rgba(96,165,250,.14);
+    }
+
+    .form-grid select option{
+      background:#0b1222;
+      color:#e7eefc;
     }
 
     .helper{
@@ -232,6 +254,13 @@
       font-weight:900;
       letter-spacing:-.4px;
       color:#22c55e;
+      margin-bottom:4px;
+      word-break:break-word;
+    }
+
+    .usdCost{
+      font-size:13px;
+      color:var(--muted);
       margin-bottom:8px;
       word-break:break-word;
     }
@@ -328,8 +357,6 @@
     }
 
     .goodText{ color:#22c55e; }
-    .warnText{ color:#facc15; }
-    .badText{ color:#ef4444; }
 
     @media (max-width: 980px){
       .tool-grid,
@@ -559,6 +586,7 @@
               <span class="tag">Budget</span>
             </div>
             <div class="nativeCost mono goodText" id="slowNative">—</div>
+            <div class="usdCost mono" id="slowUsd">—</div>
             <div class="gasLine mono">
               <span id="slowMax">Max: —</span>
               <span>•</span>
@@ -575,6 +603,7 @@
               <span class="tag">Recommended</span>
             </div>
             <div class="nativeCost mono goodText" id="stdNative">—</div>
+            <div class="usdCost mono" id="stdUsd">—</div>
             <div class="gasLine mono">
               <span id="stdMax">Max: —</span>
               <span>•</span>
@@ -591,6 +620,7 @@
               <span class="tag">High priority</span>
             </div>
             <div class="nativeCost mono goodText" id="fastNative">—</div>
+            <div class="usdCost mono" id="fastUsd">—</div>
             <div class="gasLine mono">
               <span id="fastMax">Max: —</span>
               <span>•</span>
@@ -624,6 +654,10 @@
             <div class="metaRow">
               <span>Native asset</span>
               <b class="mono" id="symbolText">—</b>
+            </div>
+            <div class="metaRow">
+              <span>USD source</span>
+              <b class="mono" id="priceSourceText">—</b>
             </div>
           </div>
         </div>
