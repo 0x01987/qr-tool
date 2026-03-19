@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Analytics / Monetization -->
+  <!-- Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,6 +10,7 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
+  <!-- AdSense -->
   <script async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
@@ -17,14 +18,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>EVM Gas Fee Estimator | Ethereum, Base, Arbitrum, BNB, Polygon & More | InstantQR</title>
+  <title>EVM Gas Fee Estimator | Ethereum, BNB, Base, Arbitrum, Polygon & More | InstantQR.io</title>
   <meta name="description" content="Estimate live gas fees for major EVM networks including Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Avalanche, Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC. Free, fast, and privacy-first." />
-  <meta name="keywords" content="evm gas fee estimator, gas tracker, ethereum gas fee, base gas fee, arbitrum gas, bnb smart chain gas, polygon gas estimator, optimism gas, avalanche gas, evm transaction fee calculator" />
+  <meta name="keywords" content="evm gas fee estimator, gas tracker, ethereum gas fee, base gas fee, arbitrum gas fee, optimism gas fee, polygon gas fee, bnb gas fee, avalanche gas fee, web3 gas calculator" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
-  <meta name="application-name" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
+  <meta name="application-name" content="InstantQR" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="color-scheme" content="dark" />
   <meta name="format-detection" content="telephone=no" />
@@ -33,33 +33,360 @@
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
-  <link rel="alternate" hreflang="en" href="https://instantqr.io/tools/web3-gas-fee-estimator.html" />
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
 
-  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="dns-prefetch" href="//www.googletagmanager.com">
-  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
-  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
-
-  <link rel="stylesheet" href="/assets/site.css" />
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="EVM Gas Fee Estimator | InstantQR" />
-  <meta property="og:description" content="Live gas fee estimates for Ethereum, Base, Arbitrum, Optimism, Polygon, BNB Smart Chain, Avalanche, Gnosis, Celo, Linea, Scroll, zkSync Era, and more." />
+  <meta property="og:title" content="EVM Gas Fee Estimator | InstantQR.io" />
+  <meta property="og:description" content="Live gas fee estimates for Ethereum, BNB, Base, Arbitrum, Optimism, Polygon, Avalanche, Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC." />
   <meta property="og:url" content="https://instantqr.io/tools/web3-gas-fee-estimator.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
-  <meta property="og:image:alt" content="EVM Gas Fee Estimator tool preview on InstantQR" />
+  <meta property="og:image:alt" content="InstantQR EVM Gas Fee Estimator" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="EVM Gas Fee Estimator | InstantQR" />
-  <meta name="twitter:description" content="Estimate live gas fees for major EVM networks with EIP-1559 and legacy fallback support." />
+  <meta name="twitter:title" content="EVM Gas Fee Estimator | InstantQR.io" />
+  <meta name="twitter:description" content="Estimate live gas fees for major EVM-compatible chains. Fast, free, and privacy-first." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <!-- Structured Data -->
+  <link rel="stylesheet" href="/assets/site.css" />
+
+  <style>
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      margin-top:14px;
+      align-items:start;
+    }
+
+    .tool-card,
+    .tool-panel,
+    .faqCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
+    }
+
+    .tool-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+    }
+
+    .tool-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
+      pointer-events:none;
+    }
+
+    .tool-card > *{ position:relative; }
+
+    .tool-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .tool-panel{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .panel-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+
+    .networkHint{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .full{ grid-column:1 / -1; }
+
+    .form-grid label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+
+    .form-grid input,
+    .form-grid select{
+      width:100%;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+      outline:none;
+    }
+
+    .form-grid input:focus,
+    .form-grid select:focus{
+      border-color:rgba(96,165,250,.65);
+      box-shadow:0 0 0 3px rgba(96,165,250,.14);
+    }
+
+    .helper{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .statusBox{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.14);
+      padding:14px;
+      font-size:13px;
+      line-height:1.55;
+      color:var(--muted);
+    }
+
+    .statusBox strong{ color:var(--text); }
+
+    .statusPill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border);
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .statusDot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--muted);
+      flex:0 0 auto;
+    }
+
+    .gas-cards{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+
+    .tierCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+
+    .tierHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:8px;
+    }
+
+    .tierHead b{
+      font-size:15px;
+      letter-spacing:-.15px;
+    }
+
+    .tag{
+      font-size:11px;
+      padding:5px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:rgba(255,255,255,.04);
+    }
+
+    .nativeCost{
+      font-size:24px;
+      font-weight:900;
+      letter-spacing:-.4px;
+      color:#22c55e;
+      margin-bottom:8px;
+      word-break:break-word;
+    }
+
+    .gasLine{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      font-size:13px;
+      color:var(--text);
+      line-height:1.5;
+      word-break:break-word;
+    }
+
+    .gasLine span{
+      white-space:nowrap;
+    }
+
+    .subnote{
+      margin-top:8px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    .metaGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .metaCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+
+    .metaCard h3{
+      margin:0 0 8px;
+      font-size:15px;
+    }
+
+    .metaRow{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:8px;
+      margin-top:6px;
+      font-size:13px;
+    }
+
+    .metaRow span{ color:var(--muted); }
+
+    .faqCard{
+      margin-top:14px;
+      padding:18px;
+    }
+
+    .faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+
+    .faqCard summary::-webkit-details-marker{ display:none; }
+
+    .faqCard p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    }
+
+    .goodText{ color:#22c55e; }
+    .warnText{ color:#facc15; }
+    .badText{ color:#ef4444; }
+
+    @media (max-width: 980px){
+      .tool-grid,
+      .metaGrid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 640px){
+      .tool-actions .cta{
+        width:100%;
+      }
+
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .gasLine{
+        gap:6px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"EVM Gas Fee Estimator",
+    "url":"https://instantqr.io/tools/web3-gas-fee-estimator.html",
+    "description":"Estimate live gas fees for major EVM-compatible networks.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"EVM Gas Fee Estimator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/web3-gas-fee-estimator.html",
+    "description":"Estimate live gas fees for major EVM-compatible networks using EIP-1559 first with legacy fallback when needed.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -84,29 +411,6 @@
         "item":"https://instantqr.io/tools/web3-gas-fee-estimator.html"
       }
     ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"EVM Gas Fee Estimator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Web",
-    "url":"https://instantqr.io/tools/web3-gas-fee-estimator.html",
-    "description":"Estimate live gas fees for major EVM networks including Ethereum, BNB Smart Chain, Base, Arbitrum, Polygon, Avalanche, Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC.",
-    "publisher":{
-      "@type":"Organization",
-      "name":"InstantQR",
-      "url":"https://instantqr.io",
-      "logo":"https://instantqr.io/assets/instantqr-logo.svg"
-    },
-    "offers":{
-      "@type":"Offer",
-      "price":"0",
-      "priceCurrency":"USD"
-    }
   }
   </script>
 
@@ -158,237 +462,8 @@
     ]
   }
   </script>
-
-  <style>
-    .gas-grid{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:18px;
-      margin-top:14px;
-    }
-    .gas-card,
-    .gas-panel,
-    .faqCard{
-      border-radius:var(--radius2);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      box-shadow:var(--shadow);
-    }
-    .gas-card{
-      padding:24px;
-      position:relative;
-      overflow:hidden;
-      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
-    }
-    .gas-card:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
-        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
-      pointer-events:none;
-    }
-    .gas-card > *{position:relative}
-    .gas-panel{
-      padding:18px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-    .panel-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .panel-top h2{
-      margin:0;
-      font-size:18px;
-      letter-spacing:-.2px;
-    }
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-    .full{grid-column:1/-1}
-    .field-label{
-      display:block;
-      font-size:13px;
-      color:var(--muted);
-      margin-bottom:6px;
-      font-weight:700;
-    }
-    .field,
-    .field-select{
-      width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:#0a1427;
-      color:var(--text);
-      outline:none;
-      font-size:14px;
-    }
-    .field:focus,
-    .field-select:focus{
-      border-color:rgba(96,165,250,.5);
-      box-shadow:0 0 0 4px rgba(96,165,250,.14);
-      background:#0b172d;
-    }
-    .tool-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:16px;
-    }
-    .status-pill{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding:8px 12px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      color:var(--muted);
-      font-size:12px;
-      background:#0b1222;
-      user-select:none;
-    }
-    .status-dot{
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:var(--warn);
-    }
-    .gas-cards{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-top:12px;
-    }
-    .tierCard{
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:12px;
-      background:#0b1222;
-    }
-    .tierHead{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:10px;
-    }
-    .tierHead b{
-      font-size:14px;
-    }
-    .tag{
-      font-size:11px;
-      padding:4px 8px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      color:var(--muted);
-    }
-    .kv{
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:8px;
-      margin:6px 0;
-      font-size:13px;
-    }
-    .kv span{
-      color:var(--muted);
-    }
-    .big{
-      font-size:18px;
-      font-weight:900;
-      margin-top:6px;
-      color:var(--ok);
-      text-shadow:0 0 8px rgba(52,211,153,.35);
-    }
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-      word-break:break-word;
-    }
-    .miniGrid2{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:14px;
-    }
-    .miniBox{
-      border-radius:var(--radius);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:16px;
-    }
-    .miniBox h2{
-      margin:0 0 6px;
-      font-size:16px;
-    }
-    .miniBox p,
-    .miniBox li{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:14px;
-    }
-    .miniBox ul{
-      margin:0;
-      padding-left:18px;
-    }
-    .faqCard{
-      margin-top:14px;
-      padding:18px;
-    }
-    .faqCard h2{
-      margin:0 0 10px;
-      font-size:22px;
-      letter-spacing:-.25px;
-    }
-    .faqCard details{
-      border-top:1px solid rgba(255,255,255,.10);
-      padding:12px 0;
-    }
-    .faqCard details:first-of-type{
-      border-top:0;
-      padding-top:0;
-    }
-    .faqCard summary{
-      cursor:pointer;
-      font-weight:800;
-      list-style:none;
-      color:#fff;
-    }
-    .faqCard summary::-webkit-details-marker{display:none}
-    .faqCard p{
-      margin:8px 0 0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:14px;
-    }
-    .subnote{
-      color:var(--muted2);
-      font-size:12px;
-      line-height:1.6;
-      margin-top:8px;
-    }
-    @media (max-width: 980px){
-      .gas-grid,
-      .miniGrid2,
-      .form-grid,
-      .gas-cards{
-        grid-template-columns:1fr;
-      }
-    }
-    @media (max-width: 640px){
-      .tool-actions .cta{
-        width:100%;
-      }
-    }
-  </style>
 </head>
+
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
@@ -404,9 +479,8 @@
       <nav class="top-links" aria-label="Primary">
         <a href="/">Home</a>
         <a href="/tools/tools.html">Tools</a>
-        <a href="/tools/crypto-profit-calculator.html">Crypto Profit</a>
-        <a href="/tools/transaction-status-checker.html">Tx Status</a>
-        <a href="/tools/token-contract-analyzer.html">Contract Analyzer</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides/guides.html">Guides</a>
       </nav>
     </div>
   </header>
@@ -420,59 +494,60 @@
       </ol>
     </nav>
 
-    <section class="gas-grid" aria-label="EVM Gas Fee Estimator">
-      <section class="gas-card">
-        <div class="pill">⛽ Live estimates • 🔗 EVM chains • 🔒 Privacy-first</div>
+    <section class="tool-grid" aria-label="EVM Gas Fee Estimator">
+      <section class="tool-card">
+        <div class="pill">⛽ EVM Gas • ⚡ Live Estimates • 🔒 Privacy-First</div>
 
         <h1>EVM Gas Fee Estimator</h1>
         <p class="sub">
-          Estimate live gas fees for major EVM networks including Ethereum, BNB Smart Chain, Base,
-          Arbitrum, Optimism, Polygon, Avalanche, Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC.
-          Runs locally in your browser using direct RPC calls.
+          Estimate live gas fees for Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Avalanche, Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC.
+          This tool uses <strong>EIP-1559 first</strong> and falls back to <strong>legacy gasPrice</strong> when needed.
         </p>
+
+        <div class="tool-actions">
+          <button class="cta primary" id="refreshBtn" type="button">Refresh Gas Data</button>
+          <button class="cta ghost" id="testBtn" type="button">Test RPC</button>
+          <button class="cta ghost" id="copyBtn" type="button">Copy Summary</button>
+        </div>
+
+        <div class="hint">
+          Tip: public RPC endpoints can be rate-limited or temporarily unavailable. If results fail, try your own Alchemy, Infura, QuickNode, or another provider endpoint.
+        </div>
 
         <div class="form-grid" style="margin-top:16px;">
           <div>
-            <label class="field-label" for="network">Network</label>
-            <select id="network" class="field-select"></select>
+            <label for="network">Network</label>
+            <select id="network"></select>
           </div>
 
           <div>
-            <label class="field-label" for="gasUnits">Gas units</label>
-            <input id="gasUnits" class="field" type="number" min="1" step="1" value="21000" />
+            <label for="gasUnits">Gas Units</label>
+            <input id="gasUnits" type="number" min="1" step="1" value="21000" inputmode="numeric" />
+            <div class="helper">Common values: 21,000 transfer, 80,000–200,000 swaps, 200,000+ complex transactions.</div>
           </div>
 
           <div class="full">
-            <label class="field-label" for="rpcUrl">RPC URL (editable)</label>
-            <input id="rpcUrl" class="field" type="url" placeholder="https://..." />
-            <div class="subnote">
-              Tip: public RPCs can be rate-limited. If you get errors, try your own Alchemy, Infura,
-              QuickNode, or another provider endpoint.
-            </div>
+            <label for="rpcUrl">RPC URL</label>
+            <input id="rpcUrl" type="url" placeholder="https://your-rpc-endpoint.example" inputmode="url" />
+            <div class="helper">This tool sends requests directly from your browser to the RPC endpoint you choose.</div>
           </div>
         </div>
 
-        <div class="tool-actions">
-          <button class="cta primary" id="refreshBtn" type="button">Refresh</button>
-          <button class="cta ghost" id="testBtn" type="button">Test RPC</button>
-          <label class="status-pill" style="cursor:pointer;">
-            <input id="autoRefresh" type="checkbox" style="width:auto;margin:0 6px 0 0;">
-            Auto refresh (15s)
-          </label>
+        <div class="statusBox" id="statusBox" style="margin-top:16px;">
+          <strong>Status:</strong> <span id="statusMessage">Ready to fetch gas data.</span><br>
+          <span id="lastUpdated">Last updated: —</span>
         </div>
-
-        <div class="subnote" id="lastUpdated">Last updated: —</div>
       </section>
 
-      <aside class="gas-panel" aria-label="Estimator status and results">
+      <aside class="tool-panel" aria-label="Gas results">
         <div class="panel-top">
           <div>
             <h2>Results</h2>
-            <div class="hint" style="margin-top:6px;">EIP-1559 first, legacy fallback when needed.</div>
+            <div class="networkHint">EIP-1559 first, legacy fallback when needed.</div>
           </div>
 
-          <div class="status-pill" id="statusPill" aria-live="polite">
-            <span class="status-dot" id="statusDot"></span>
+          <div class="statusPill">
+            <span class="statusDot" id="statusDot"></span>
             <span id="statusText">Ready</span>
           </div>
         </div>
@@ -483,11 +558,15 @@
               <b>Slow</b>
               <span class="tag">Budget</span>
             </div>
-            <div class="kv"><span>Max fee</span><b class="mono" id="slowMax">—</b></div>
-            <div class="kv"><span>Priority fee</span><b class="mono" id="slowTip">—</b></div>
-            <div class="kv"><span>Estimated total</span><b class="mono" id="slowTotal">—</b></div>
-            <div class="big mono" id="slowNative">—</div>
-            <div class="subnote">Lower percentile tip from recent blocks.</div>
+            <div class="nativeCost mono goodText" id="slowNative">—</div>
+            <div class="gasLine mono">
+              <span id="slowMax">Max: —</span>
+              <span>•</span>
+              <span id="slowTip">Tip: —</span>
+              <span>•</span>
+              <span id="slowTotal">Gas: —</span>
+            </div>
+            <div class="subnote">Lower-priority estimate for less urgent transactions.</div>
           </div>
 
           <div class="tierCard">
@@ -495,11 +574,15 @@
               <b>Standard</b>
               <span class="tag">Recommended</span>
             </div>
-            <div class="kv"><span>Max fee</span><b class="mono" id="stdMax">—</b></div>
-            <div class="kv"><span>Priority fee</span><b class="mono" id="stdTip">—</b></div>
-            <div class="kv"><span>Estimated total</span><b class="mono" id="stdTotal">—</b></div>
-            <div class="big mono" id="stdNative">—</div>
-            <div class="subnote">Median tip from recent blocks.</div>
+            <div class="nativeCost mono goodText" id="stdNative">—</div>
+            <div class="gasLine mono">
+              <span id="stdMax">Max: —</span>
+              <span>•</span>
+              <span id="stdTip">Tip: —</span>
+              <span>•</span>
+              <span id="stdTotal">Gas: —</span>
+            </div>
+            <div class="subnote">Balanced estimate for typical confirmation speed.</div>
           </div>
 
           <div class="tierCard">
@@ -507,76 +590,82 @@
               <b>Fast</b>
               <span class="tag">High priority</span>
             </div>
-            <div class="kv"><span>Max fee</span><b class="mono" id="fastMax">—</b></div>
-            <div class="kv"><span>Priority fee</span><b class="mono" id="fastTip">—</b></div>
-            <div class="kv"><span>Estimated total</span><b class="mono" id="fastTotal">—</b></div>
-            <div class="big mono" id="fastNative">—</div>
-            <div class="subnote">Higher percentile tip from recent blocks.</div>
+            <div class="nativeCost mono goodText" id="fastNative">—</div>
+            <div class="gasLine mono">
+              <span id="fastMax">Max: —</span>
+              <span>•</span>
+              <span id="fastTip">Tip: —</span>
+              <span>•</span>
+              <span id="fastTotal">Gas: —</span>
+            </div>
+            <div class="subnote">Higher-priority estimate for faster inclusion.</div>
           </div>
         </div>
 
-        <div class="subnote">
-          This tool queries <code>eth_feeHistory</code> when available to estimate priority fees and read the latest base fee.
-          If that is unavailable, it falls back to <code>eth_gasPrice</code>.
+        <div class="metaGrid">
+          <div class="metaCard">
+            <h3>Estimator Mode</h3>
+            <div class="metaRow">
+              <span>Mode</span>
+              <b class="mono" id="modeText">—</b>
+            </div>
+            <div class="metaRow">
+              <span>Chain</span>
+              <b class="mono" id="chainText">—</b>
+            </div>
+          </div>
+
+          <div class="metaCard">
+            <h3>Current Settings</h3>
+            <div class="metaRow">
+              <span>Gas units</span>
+              <b class="mono" id="gasUnitsText">21,000</b>
+            </div>
+            <div class="metaRow">
+              <span>Native asset</span>
+              <b class="mono" id="symbolText">—</b>
+            </div>
+          </div>
         </div>
       </aside>
-    </section>
-
-    <section class="miniGrid2" aria-label="Additional information">
-      <div class="miniBox">
-        <h2>How it works</h2>
-        <ul>
-          <li>Uses direct RPC calls from your browser</li>
-          <li>Prefers EIP-1559 fee history when available</li>
-          <li>Falls back to legacy gas price on older or limited RPCs</li>
-          <li>Calculates estimated total fee from gas units × fee per gas</li>
-        </ul>
-      </div>
-
-      <div class="miniBox">
-        <h2>Supported chains</h2>
-        <p>
-          Ethereum, BNB Smart Chain, Base, Arbitrum One, Optimism, Polygon, Avalanche C-Chain,
-          Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC.
-        </p>
-      </div>
     </section>
 
     <section class="faqCard" aria-label="Frequently asked questions">
       <h2>FAQ</h2>
 
-      <details open>
+      <details>
         <summary>How do gas fees work on EVM networks?</summary>
         <p>Most EVM networks use a gas model where a base fee or network gas price changes with demand. Many chains support EIP-1559 fee estimation, while others rely on legacy gasPrice methods.</p>
       </details>
 
       <details>
-        <summary>Which networks does this EVM gas fee estimator support?</summary>
-        <p>This tool supports major EVM-compatible networks including Ethereum, Arbitrum, Optimism, Base, Polygon, BNB Smart Chain, Avalanche C-Chain, Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC.</p>
+        <summary>Which networks does this tool support?</summary>
+        <p>This estimator supports major EVM-compatible networks including Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Avalanche C-Chain, Gnosis, Celo, Linea, Scroll, zkSync Era, and KCC.</p>
       </details>
 
       <details>
-        <summary>Does this tool support Bitcoin, Litecoin, or Monero fees?</summary>
-        <p>No. Bitcoin, Litecoin, and Monero do not use EVM gas estimation APIs like eth_feeHistory. They require separate fee estimation logic specific to each network.</p>
+        <summary>Does it support Bitcoin, Litecoin, or Monero?</summary>
+        <p>No. Bitcoin, Litecoin, and Monero do not use the EVM gas model or EVM JSON-RPC methods such as eth_feeHistory. They require their own fee estimation logic.</p>
       </details>
 
       <details>
-        <summary>Do you store my RPC URL or data?</summary>
-        <p>No. This tool runs in your browser and calls the RPC endpoint directly from your device. InstantQR does not intentionally store your RPC URL or transaction inputs on a server.</p>
+        <summary>Do you store my RPC URL or input?</summary>
+        <p>No. This page runs in your browser and sends requests directly to the RPC endpoint you select or paste. InstantQR does not intentionally store your RPC input on a server.</p>
       </details>
 
       <details>
-        <summary>Why do public RPC endpoints sometimes fail?</summary>
-        <p>Public RPC endpoints can be rate-limited, overloaded, or blocked by VPNs, browser extensions, or network rules. If a public RPC fails, try your own provider endpoint such as Alchemy, Infura, QuickNode, or another reliable RPC.</p>
+        <summary>Why can a public RPC fail?</summary>
+        <p>Public endpoints may be overloaded, rate-limited, blocked by browser extensions, VPNs, or temporary provider issues. If that happens, try your own provider endpoint.</p>
       </details>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" aria-label="Footer">
       <div class="footer-box">
         <div>© <span id="year"></span> InstantQR</div>
         <div class="footer-links">
           <a href="/">Home</a>
           <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
           <a href="/about.html">About</a>
           <a href="/privacy.html">Privacy</a>
           <a href="/terms.html">Terms</a>
