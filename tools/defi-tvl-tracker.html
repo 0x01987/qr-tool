@@ -63,8 +63,7 @@
     .tool-card,
     .tool-panel,
     .faqCard,
-    .contentCard,
-    .modalCard{
+    .contentCard{
       border-radius:var(--radius2);
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
@@ -74,7 +73,7 @@
     .tool-card{
       padding:24px;
       position:relative;
-      overflow:hidden;
+      overflow:visible;
       background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
     }
 
@@ -369,7 +368,7 @@
     .trendingOpen:hover{text-decoration:underline}
 
     .tableWrap{
-      overflow:auto;
+      overflow:visible;
       border-radius:16px;
       border:1px solid var(--border);
       background:rgba(255,255,255,.02);
@@ -379,26 +378,27 @@
     table{
       width:100%;
       border-collapse:collapse;
-      min-width:940px;
+      min-width:0;
+      table-layout:auto;
     }
 
     thead th{
-      position:sticky;
-      top:0;
-      z-index:1;
       text-align:left;
       padding:14px;
       background:#0e1a31;
       color:#d9e5ff;
       font-size:.84rem;
       border-bottom:1px solid var(--border);
-      white-space:nowrap;
+      white-space:normal;
+      vertical-align:top;
     }
 
     tbody td{
       padding:14px;
       border-bottom:1px solid var(--border);
-      vertical-align:middle;
+      vertical-align:top;
+      white-space:normal;
+      word-break:break-word;
     }
 
     tbody tr:hover{ background:rgba(255,255,255,.03); }
@@ -416,9 +416,9 @@
 
     .proto{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       gap:12px;
-      min-width:220px;
+      min-width:0;
     }
 
     .protoIcon{
@@ -443,7 +443,7 @@
       color:#dce7ff;
       font-size:.8rem;
       font-weight:700;
-      white-space:nowrap;
+      white-space:normal;
     }
 
     .row-btn{
@@ -576,28 +576,27 @@
       background:rgba(3,7,16,.72);
       backdrop-filter:blur(8px);
       display:none;
-      align-items:flex-end;
+      align-items:flex-start;
       justify-content:center;
       padding:18px;
       z-index:70;
+      overflow-y:auto;
     }
 
     .modal.open{ display:flex; }
 
     .sheet{
       width:min(100%,980px);
-      max-height:min(92vh,900px);
-      overflow:auto;
+      max-height:none;
+      overflow:visible;
       border-radius:24px;
       background:linear-gradient(180deg,#0e1a31,#0b162c);
       border:1px solid var(--border);
       box-shadow:var(--shadow);
+      margin:12px 0 24px;
     }
 
     .sheetHead{
-      position:sticky;
-      top:0;
-      z-index:2;
       display:flex;
       justify-content:space-between;
       gap:14px;
@@ -605,7 +604,6 @@
       padding:18px 18px 14px;
       background:rgba(10,18,37,.92);
       border-bottom:1px solid var(--border);
-      backdrop-filter:blur(8px);
     }
 
     .sheetBody{ padding:18px; }
@@ -650,10 +648,6 @@
       margin-top:8px;
     }
 
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-    }
-
     @media (max-width:1080px){
       .overview-grid{grid-template-columns:repeat(2,1fr)}
       .trendingGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -664,10 +658,43 @@
       .tool-grid{grid-template-columns:1fr}
     }
 
+    @media (max-width:760px){
+      table thead{
+        display:none;
+      }
+
+      table, tbody, tr, td{
+        display:block;
+        width:100%;
+      }
+
+      tbody tr{
+        border-bottom:1px solid var(--border);
+        padding:12px;
+      }
+
+      tbody td{
+        padding:8px 0;
+        border-bottom:none;
+      }
+
+      tbody td::before{
+        content:attr(data-label);
+        display:block;
+        font-size:.78rem;
+        color:var(--muted);
+        margin-bottom:4px;
+        font-weight:700;
+      }
+
+      .proto{
+        min-width:0;
+      }
+    }
+
     @media (max-width:700px){
       .form-grid,.overview-grid,.trendingGrid,.detailStats{grid-template-columns:1fr}
       .tool-card,.tool-panel,.contentCard,.faqCard,.trendingCard{padding:18px}
-      .tool-actions .cta{width:100%}
       .trendingHead{flex-direction:column}
     }
   </style>
