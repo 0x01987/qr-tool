@@ -1,9 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- =========================
-       Analytics / Monetization
-       ========================= -->
+  <!-- Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,19 +10,17 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
+  <!-- AdSense -->
   <script async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
-  <!-- =========================
-       Core Meta
-       ========================= -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>DeFi TVL Tracker | InstantQR</title>
-  <meta name="description" content="Fast DeFi TVL tracker for protocols and chains. Search, filter, sort, compare live TVL, view 24h and 7d changes, inspect protocol details, and monitor trending DeFi gainers in a clean responsive dashboard." />
-  <meta name="keywords" content="defi tvl tracker, total value locked tracker, defi protocols tvl, chain tvl tracker, defi analytics dashboard, live tvl tracker, trending defi protocols, top gainers defi, protocol tvl chart" />
+  <title>DeFi TVL Tracker | Protocol & Chain TVL Dashboard | InstantQR</title>
+  <meta name="description" content="Track DeFi TVL across protocols and chains with live filters, sorting, top gainers, protocol details, and historical TVL charts in a fast responsive dashboard." />
+  <meta name="keywords" content="defi tvl tracker, total value locked tracker, protocol tvl, chain tvl, live defi dashboard, tvl chart, defi analytics" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
   <meta name="application-name" content="InstantQR" />
@@ -37,409 +33,165 @@
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
 
-  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="dns-prefetch" href="//www.googletagmanager.com">
-  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
-  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
-
-  <!-- =========================
-       Open Graph / Twitter
-       ========================= -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="DeFi TVL Tracker | InstantQR" />
-  <meta property="og:description" content="Track DeFi TVL across protocols and chains with fast filters, trending gainers, protocol details, and historical TVL charts." />
+  <meta property="og:description" content="Track DeFi TVL across protocols and chains with fast filters, top gainers, and protocol detail charts." />
   <meta property="og:url" content="https://instantqr.io/tools/defi-tvl-tracker.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
-  <meta property="og:image:alt" content="DeFi TVL Tracker tool page preview on InstantQR" />
+  <meta property="og:image:alt" content="DeFi TVL Tracker on InstantQR" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="DeFi TVL Tracker | InstantQR" />
-  <meta name="twitter:description" content="Track DeFi TVL, top gainers, protocol changes, and chain TVL in a fast responsive dashboard." />
+  <meta name="twitter:description" content="Track DeFi TVL, top gainers, protocol changes, and chain TVL in a responsive dashboard." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
+  <link rel="stylesheet" href="/assets/site.css" />
+
   <style>
-    :root{
-      --bg:#081120;
-      --bg2:#0f172a;
-      --panel:#111c34;
-      --panel2:#16233f;
-      --text:#e5eefc;
-      --muted:#94a3b8;
-      --line:rgba(255,255,255,.08);
-      --brand:#60a5fa;
-      --brand2:#22c55e;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --ok:#10b981;
-      --shadow:0 12px 35px rgba(0,0,0,.28);
-      --radius:20px;
-      --radius-sm:14px;
-      --max:1180px;
-      --focus:0 0 0 4px rgba(96,165,250,.16);
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
-        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 28%),
-        linear-gradient(180deg, #07101d 0%, #0b1324 55%, #081120 100%);
-      min-height:100vh;
-      line-height:1.55;
-    }
-
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
-    img{max-width:100%}
-    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
-
-    .skip{
-      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
-    }
-    .skip:focus{
-      left:12px;top:12px;width:auto;height:auto;
-      padding:10px 12px;border-radius:12px;
-      background:#0b172d;color:#fff;border:1px solid var(--line);z-index:999;
-    }
-
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
-
-    .topbar{
-      position:sticky;top:0;z-index:40;
-      backdrop-filter:blur(14px);
-      background:rgba(8,17,32,.78);
-      border-bottom:1px solid var(--line);
-    }
-    .topbar-inner{
-      max-width:var(--max);margin:0 auto;
-      padding:12px 16px;
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:12px;
-      color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;
-    }
-    .brand-logo{
-      width:38px;height:38px;border-radius:12px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.18));
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      flex:0 0 auto;
-    }
-    .brand-logo img{width:24px;height:24px;display:block}
-
-    .top-links{
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-    }
-    .top-links a{
-      color:var(--text);
-      font-size:.95rem;
-      padding:10px 12px;border-radius:12px;
-      border:1px solid transparent;
-    }
-    .top-links a:hover{
-      text-decoration:none;
-      background:rgba(255,255,255,.04);
-      border-color:var(--line);
-    }
-
-    .hero{padding:34px 0 20px}
-    .breadcrumbs{
-      color:var(--muted);
-      font-size:.92rem;
-      margin-bottom:14px;
-      overflow:auto;
-      white-space:nowrap;
-    }
-    .breadcrumbs a{color:var(--muted)}
-    .breadcrumbs span{margin:0 8px;color:#64748b}
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:18px;
-      align-items:stretch;
-    }
-
-    .card{
-      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-
-    .hero-main{padding:28px}
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:8px;
-      font-size:.85rem;font-weight:700;
-      color:#bfdbfe;
-      background:rgba(96,165,250,.10);
-      border:1px solid rgba(96,165,250,.22);
-      padding:8px 12px;border-radius:999px;
-      margin-bottom:14px;
-    }
-    h1{
-      margin:0 0 12px;
-      font-size:clamp(2rem,4vw,3rem);
-      line-height:1.06;
-      letter-spacing:-.03em;
-    }
-    .hero p{
-      margin:0;
-      color:#cbd5e1;
-      max-width:800px;
-      font-size:1.03rem;
-    }
-    .hero-actions{
-      margin-top:18px;
-      display:flex;gap:12px;flex-wrap:wrap;
-    }
-
-    .btn{
-      appearance:none;border:0;cursor:pointer;
-      font:inherit;font-weight:800;
-      border-radius:14px;padding:13px 16px;
-      transition:.18s ease;
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    }
-    .btn-primary{
-      background:linear-gradient(135deg, var(--brand), #3b82f6);
-      color:#fff;
-      box-shadow:0 10px 26px rgba(59,130,246,.28);
-    }
-    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03);text-decoration:none}
-    .btn-secondary{
-      color:var(--text);
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-    }
-    .btn-secondary:hover{background:rgba(255,255,255,.06);text-decoration:none}
-    .btn-ghost{
-      color:var(--text);
-      background:transparent;
-      border:1px solid var(--line);
-    }
-    .btn-ghost:hover{background:rgba(255,255,255,.04);text-decoration:none}
-
-    .hero-side{
-      padding:22px;
-      display:grid;
-      gap:12px;
-      align-content:start;
-    }
-    .mini-stat{
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px 16px;
-    }
-    .mini-stat .label{
-      color:var(--muted);
-      font-size:.9rem;
-      margin-bottom:4px;
-    }
-    .mini-stat .value{
-      font-weight:800;
-      font-size:1.05rem;
-      color:#fff;
-    }
-
-    .section{padding:14px 0 10px}
     .tool-grid{
       display:grid;
       grid-template-columns:1.15fr .85fr;
       gap:18px;
+      margin-top:14px;
       align-items:start;
     }
 
-    .tool-panel,.info-panel,.content-card{padding:22px}
-
-    .tool-panel h2,.info-panel h2,.content h2,.content h3{
-      margin:0 0 10px;
-      letter-spacing:-.02em;
+    .tool-card,
+    .tool-panel,
+    .faqCard,
+    .contentCard,
+    .modalCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
     }
 
-    .subtle{
+    .tool-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+    }
+
+    .tool-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
+      pointer-events:none;
+    }
+
+    .tool-card > *{ position:relative; }
+
+    .tool-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .tool-panel,
+    .contentCard,
+    .faqCard{
+      padding:18px;
+    }
+
+    .panel-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+
+    .networkHint{
+      font-size:12px;
       color:var(--muted);
-      font-size:.96rem;
-      margin-bottom:18px;
     }
 
     .form-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:14px;
+      gap:12px;
+      margin-top:14px;
     }
-    .full{grid-column:1/-1}
 
-    label{
+    .full{ grid-column:1 / -1; }
+
+    .form-grid label{
       display:block;
-      font-size:.94rem;
-      font-weight:700;
-      margin-bottom:8px;
-      color:#dbeafe;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
     }
 
-    input[type="text"],
-    input[type="number"],
-    input[type="date"],
-    input[type="time"],
-    input[type="datetime-local"],
-    input[type="url"],
-    input[type="search"],
-    select,
-    textarea{
+    .form-grid input,
+    .form-grid select{
       width:100%;
+      padding:12px 12px;
       border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:#0a1427;
-      color:#fff;
-      padding:14px 14px;
-      font:inherit;
+      border:1px solid var(--border);
+      background:rgba(10,20,39,.96);
+      color:var(--text);
       outline:none;
-      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
     }
 
-    input:focus,select:focus,textarea:focus{
-      border-color:rgba(96,165,250,.5);
-      box-shadow:0 0 0 4px rgba(96,165,250,.14);
-      background:#0b172d;
+    .form-grid select{
+      background-image:
+        linear-gradient(45deg, transparent 50%, rgba(255,255,255,.7) 50%),
+        linear-gradient(135deg, rgba(255,255,255,.7) 50%, transparent 50%),
+        linear-gradient(to right, rgba(255,255,255,.06), rgba(255,255,255,.06));
+      background-position:
+        calc(100% - 18px) calc(50% - 3px),
+        calc(100% - 12px) calc(50% - 3px),
+        calc(100% - 40px) 50%;
+      background-size:6px 6px, 6px 6px, 1px 22px;
+      background-repeat:no-repeat;
+      padding-right:48px;
+    }
+
+    .form-grid input:focus,
+    .form-grid select:focus{
+      border-color:rgba(96,165,250,.65);
+      box-shadow:0 0 0 3px rgba(96,165,250,.14);
+    }
+
+    .form-grid select option{
+      background:#0b1222;
+      color:#e7eefc;
     }
 
     .helper{
-      color:var(--muted);
-      font-size:.85rem;
       margin-top:6px;
-      line-height:1.45;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.55;
     }
-
-    .actions{
-      margin-top:18px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .result-box{
-      padding:14px;
-      border-radius:16px;
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--line);
-      margin-bottom:14px;
-    }
-    .result-box p{margin:0;color:#dbeafe}
-
-    .results{
-      display:grid;
-      gap:10px;
-    }
-    .result-item{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:14px;
-      padding:12px 13px;
-    }
-    .result-item strong{
-      display:block;
-      margin-bottom:5px;
-      color:#fff;
-      font-size:.95rem;
-    }
-    .result-item span{
-      color:#cbd5e1;
-      font-size:.92rem;
-      line-height:1.45;
-    }
-
-    .content{
-      margin-top:20px;
-      display:grid;
-      gap:18px;
-    }
-    .content p{
-      color:#cbd5e1;
-      margin:0 0 12px;
-      line-height:1.65;
-    }
-    .content ul{
-      margin:10px 0 0 18px;
-      color:#cbd5e1;
-    }
-    .content li{margin:8px 0}
-
-    .faq{
-      display:grid;
-      gap:12px;
-      margin-top:12px;
-    }
-    details{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:16px;
-      padding:14px 16px;
-    }
-    summary{
-      cursor:pointer;
-      font-weight:800;
-      color:#fff;
-      list-style:none;
-    }
-    summary::-webkit-details-marker{display:none}
-    details p{
-      margin:10px 0 0;
-      color:#cbd5e1;
-      line-height:1.6;
-    }
-
-    .related-links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:10px;
-    }
-    .related-links a{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:12px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      color:var(--text);
-    }
-    .related-links a:hover{
-      background:rgba(255,255,255,.06);
-      text-decoration:none;
-    }
-
-    .hidden{display:none !important}
 
     .notice{
-      margin:0 0 18px;
+      margin:0 0 16px;
       padding:12px 14px;
       border-radius:16px;
       background:rgba(96,165,250,.08);
       color:#dce8ff;
       border:1px solid rgba(96,165,250,.18);
       font-size:.95rem;
-    }
-    .notice strong{color:#ffffff}
-
-    .toolbar-grid{
-      display:grid;
-      grid-template-columns:2fr 1fr 1fr 1fr 1fr;
-      gap:14px;
-      margin-top:12px;
     }
 
     .switcher{
@@ -448,8 +200,9 @@
       gap:10px;
       margin:14px 0 8px;
     }
+
     .pill-btn{
-      border:1px solid var(--line);
+      border:1px solid var(--border);
       background:rgba(255,255,255,.04);
       color:var(--muted);
       border-radius:999px;
@@ -458,44 +211,64 @@
       cursor:pointer;
       transition:background .15s ease,border-color .15s ease,color .15s ease,transform .15s ease;
     }
-    .pill-btn:hover{transform:translateY(-1px)}
+
+    .pill-btn:hover{ transform:translateY(-1px); }
+
     .pill-btn.active{
       color:#fff;
       background:rgba(96,165,250,.16);
       border-color:rgba(96,165,250,.28);
     }
 
+    .statusBox{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.14);
+      padding:14px;
+      font-size:13px;
+      line-height:1.55;
+      color:var(--muted);
+      margin-top:16px;
+    }
+
     .overview-grid{
       display:grid;
       grid-template-columns:repeat(4,1fr);
       gap:12px;
-      margin-top:4px;
+      margin-top:16px;
     }
+
     .overview-item{
-      border:1px solid var(--line);
+      border:1px solid var(--border);
       background:rgba(255,255,255,.03);
       border-radius:16px;
       padding:14px;
     }
+
     .overview-item .k{
       color:var(--muted);
       font-size:.86rem;
       margin-bottom:6px;
     }
+
     .overview-item .v{
       font-size:1.3rem;
       font-weight:800;
       letter-spacing:-.02em;
     }
 
-    .trend-pos{color:#4ade80}
-    .trend-neg{color:#f87171}
-    .trend-neutral{color:#e5eefc}
+    .trend-pos{ color:#4ade80; }
+    .trend-neg{ color:#f87171; }
+    .trend-neutral{ color:#e5eefc; }
 
     .trendingCard{
+      margin-top:18px;
       padding:18px;
-      margin:0 0 16px;
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
     }
+
     .trendingHead{
       display:flex;
       justify-content:space-between;
@@ -503,18 +276,26 @@
       gap:12px;
       margin-bottom:14px;
     }
+
     .trendingHead h2{
       margin:4px 0 0;
-      font-size:1.2rem;
+      font-size:1.15rem;
       letter-spacing:-.02em;
     }
+
+    .tiny{
+      font-size:.84rem;
+      color:var(--muted);
+    }
+
     .trendingGrid{
       display:grid;
       grid-template-columns:repeat(4,minmax(0,1fr));
       gap:12px;
     }
+
     .trendingItem{
-      border:1px solid var(--line);
+      border:1px solid var(--border);
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border-radius:18px;
       padding:14px;
@@ -523,12 +304,14 @@
       flex-direction:column;
       gap:8px;
     }
+
     .trendingTop{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
     }
+
     .trendingRank{
       display:inline-grid;
       place-items:center;
@@ -537,25 +320,29 @@
       padding:0 10px;
       border-radius:999px;
       background:rgba(255,255,255,.05);
-      border:1px solid var(--line);
+      border:1px solid var(--border);
       font-size:.82rem;
       font-weight:800;
       color:#fff;
     }
+
     .trendingChange{
       font-size:.92rem;
       font-weight:800;
     }
+
     .trendingName{
       font-size:1rem;
       font-weight:800;
       line-height:1.25;
       word-break:break-word;
     }
+
     .trendingMetaRow{
       font-size:.86rem;
       color:var(--muted);
     }
+
     .trendingActions{
       margin-top:auto;
       display:flex;
@@ -563,11 +350,13 @@
       align-items:center;
       gap:10px;
     }
+
     .trendingTvl{
       font-size:.92rem;
       font-weight:700;
       color:#dce8ff;
     }
+
     .trendingOpen{
       border:none;
       background:transparent;
@@ -576,20 +365,23 @@
       cursor:pointer;
       padding:0;
     }
+
     .trendingOpen:hover{text-decoration:underline}
 
     .tableWrap{
       overflow:auto;
       border-radius:16px;
-      border:1px solid var(--line);
+      border:1px solid var(--border);
       background:rgba(255,255,255,.02);
       margin-top:16px;
     }
+
     table{
       width:100%;
       border-collapse:collapse;
       min-width:940px;
     }
+
     thead th{
       position:sticky;
       top:0;
@@ -599,15 +391,17 @@
       background:#0e1a31;
       color:#d9e5ff;
       font-size:.84rem;
-      border-bottom:1px solid var(--line);
+      border-bottom:1px solid var(--border);
       white-space:nowrap;
     }
+
     tbody td{
       padding:14px;
-      border-bottom:1px solid var(--line);
+      border-bottom:1px solid var(--border);
       vertical-align:middle;
     }
-    tbody tr:hover{background:rgba(255,255,255,.03)}
+
+    tbody tr:hover{ background:rgba(255,255,255,.03); }
 
     .rank-badge{
       display:inline-grid;
@@ -615,7 +409,7 @@
       width:30px;height:30px;
       border-radius:999px;
       background:rgba(255,255,255,.05);
-      border:1px solid var(--line);
+      border:1px solid var(--border);
       font-weight:800;
       font-size:.86rem;
     }
@@ -626,16 +420,18 @@
       gap:12px;
       min-width:220px;
     }
+
     .protoIcon{
       width:34px;height:34px;
       border-radius:10px;
       object-fit:cover;
       background:#15274b;
-      border:1px solid var(--line);
+      border:1px solid var(--border);
       flex:0 0 auto;
     }
-    .protoName{font-weight:800}
-    .protoMeta{font-size:.84rem;color:var(--muted)}
+
+    .protoName{ font-weight:800; }
+    .protoMeta{ font-size:.84rem;color:var(--muted); }
 
     .tag{
       display:inline-flex;
@@ -643,7 +439,7 @@
       padding:7px 10px;
       border-radius:999px;
       background:rgba(255,255,255,.045);
-      border:1px solid var(--line);
+      border:1px solid var(--border);
       color:#dce7ff;
       font-size:.8rem;
       font-weight:700;
@@ -658,6 +454,7 @@
       cursor:pointer;
       padding:0;
     }
+
     .row-btn:hover{text-decoration:underline}
 
     .loading,.empty,.error{
@@ -665,7 +462,113 @@
       text-align:center;
       color:var(--muted);
     }
-    .error{color:#ffd0d7}
+
+    .error{ color:#ffd0d7; }
+
+    .results{
+      display:grid;
+      gap:10px;
+    }
+
+    .result-item{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:12px 13px;
+    }
+
+    .result-item strong{
+      display:block;
+      margin-bottom:5px;
+      color:#fff;
+      font-size:.95rem;
+    }
+
+    .result-item span{
+      color:#cbd5e1;
+      font-size:.92rem;
+      line-height:1.45;
+    }
+
+    .result-box{
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      margin-bottom:14px;
+    }
+
+    .result-box p{ margin:0;color:#dbeafe; }
+
+    .content{
+      margin-top:20px;
+      display:grid;
+      gap:18px;
+    }
+
+    .content p{
+      color:#cbd5e1;
+      margin:0 0 12px;
+      line-height:1.65;
+    }
+
+    .content ul{
+      margin:10px 0 0 18px;
+      color:#cbd5e1;
+    }
+
+    .content li{ margin:8px 0; }
+
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+
+    .faqCard summary::-webkit-details-marker{ display:none; }
+
+    .faqCard p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .related-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .related-links a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border);
+      color:var(--text);
+    }
+
+    .related-links a:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .hidden{ display:none !important; }
 
     .modal{
       position:fixed;
@@ -678,16 +581,19 @@
       padding:18px;
       z-index:70;
     }
-    .modal.open{display:flex}
+
+    .modal.open{ display:flex; }
+
     .sheet{
       width:min(100%,980px);
       max-height:min(92vh,900px);
       overflow:auto;
       border-radius:24px;
       background:linear-gradient(180deg,#0e1a31,#0b162c);
-      border:1px solid var(--line);
+      border:1px solid var(--border);
       box-shadow:var(--shadow);
     }
+
     .sheetHead{
       position:sticky;
       top:0;
@@ -698,115 +604,82 @@
       align-items:flex-start;
       padding:18px 18px 14px;
       background:rgba(10,18,37,.92);
-      border-bottom:1px solid var(--line);
+      border-bottom:1px solid var(--border);
       backdrop-filter:blur(8px);
     }
-    .sheetBody{padding:18px}
+
+    .sheetBody{ padding:18px; }
+
     .sheetGrid{
       display:grid;
       grid-template-columns:1.1fr .9fr;
       gap:16px;
     }
+
     .detailStats{
       display:grid;
       grid-template-columns:repeat(2,1fr);
       gap:12px;
       margin-bottom:14px;
     }
+
     .detailCard{
       padding:14px;
-      border:1px solid var(--line);
+      border:1px solid var(--border);
       border-radius:18px;
       background:rgba(255,255,255,.03);
     }
+
     .canvasWrap{
-      border:1px solid var(--line);
+      border:1px solid var(--border);
       border-radius:18px;
       background:rgba(255,255,255,.02);
       padding:10px;
     }
-    canvas{width:100%;height:320px;display:block}
+
+    canvas{
+      width:100%;
+      height:320px;
+      display:block;
+    }
+
     .chip-list{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
       margin-top:8px;
     }
-    .tiny{
-      font-size:.84rem;
-      color:var(--muted);
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
     }
 
-    .footer{
-      padding:28px 0 42px;
-      color:var(--muted);
-    }
-    .footer-box{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-      padding:18px 0 0;
-      border-top:1px solid var(--line);
-    }
-    .footer-links{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .footer-links a{color:var(--muted)}
-    .footer-links a:hover{color:var(--text);text-decoration:none}
-
-    @media (max-width: 1080px){
-      .toolbar-grid{grid-template-columns:1fr 1fr 1fr}
+    @media (max-width:1080px){
       .overview-grid{grid-template-columns:repeat(2,1fr)}
       .trendingGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .sheetGrid{grid-template-columns:1fr}
     }
 
-    @media (max-width: 980px){
-      .hero-grid,.tool-grid{grid-template-columns:1fr}
+    @media (max-width:980px){
+      .tool-grid{grid-template-columns:1fr}
     }
 
-    @media (max-width: 700px){
-      .form-grid,.toolbar-grid,.overview-grid,.trendingGrid,.detailStats{grid-template-columns:1fr}
-      .hero-main,.hero-side,.tool-panel,.info-panel,.content-card,.trendingCard{padding:18px}
-      .topbar-inner{padding:10px 14px}
-      .top-links{display:none}
-      h1{font-size:2rem}
-      .btn{width:100%}
-      .actions .btn{width:auto;flex:1 1 180px}
+    @media (max-width:700px){
+      .form-grid,.overview-grid,.trendingGrid,.detailStats{grid-template-columns:1fr}
+      .tool-card,.tool-panel,.contentCard,.faqCard,.trendingCard{padding:18px}
+      .tool-actions .cta{width:100%}
       .trendingHead{flex-direction:column}
     }
   </style>
 
-  <!-- =========================
-       Structured Data
-       ========================= -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"BreadcrumbList",
     "itemListElement":[
-      {
-        "@type":"ListItem",
-        "position":1,
-        "name":"Home",
-        "item":"https://instantqr.io/"
-      },
-      {
-        "@type":"ListItem",
-        "position":2,
-        "name":"Tools",
-        "item":"https://instantqr.io/tools/tools.html"
-      },
-      {
-        "@type":"ListItem",
-        "position":3,
-        "name":"DeFi TVL Tracker",
-        "item":"https://instantqr.io/tools/defi-tvl-tracker.html"
-      }
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+      {"@type":"ListItem","position":3,"name":"DeFi TVL Tracker","item":"https://instantqr.io/tools/defi-tvl-tracker.html"}
     ]
   }
   </script>
@@ -822,11 +695,7 @@
     "browserRequirements":"Requires JavaScript. Works in modern browsers.",
     "url":"https://instantqr.io/tools/defi-tvl-tracker.html",
     "description":"Fast DeFi TVL tracker for protocols and chains with search, filters, sorting, trending gainers, and protocol detail views.",
-    "publisher":{
-      "@type":"Organization",
-      "name":"InstantQR",
-      "url":"https://instantqr.io/"
-    }
+    "publisher":{"@type":"Organization","name":"InstantQR","url":"https://instantqr.io/"}
   }
   </script>
 
@@ -838,26 +707,17 @@
       {
         "@type":"Question",
         "name":"What is TVL in DeFi?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"TVL stands for Total Value Locked. It represents the total value of assets deposited into a DeFi protocol or aggregated across a blockchain ecosystem."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"TVL stands for Total Value Locked. It represents the total value of assets deposited into a DeFi protocol or aggregated across a blockchain ecosystem."}
       },
       {
         "@type":"Question",
         "name":"Can I track protocols and chains in this TVL tracker?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes. This tool lets you switch between protocol TVL and chain TVL views, then search, filter, sort, and inspect the current data."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. This tool lets you switch between protocol TVL and chain TVL views, then search, filter, sort, and inspect the current data."}
       },
       {
         "@type":"Question",
         "name":"Does this DeFi TVL tracker support trending protocols and historical charts?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes. The page includes a trending top gainers widget and a protocol detail view with historical TVL chart support when the data source provides it."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. The page includes a trending top gainers widget and a protocol detail view with historical TVL chart support when the data source provides it."}
       }
     ]
   }
@@ -886,192 +746,162 @@
   </header>
 
   <main id="main" class="wrap">
-    <section class="hero">
-      <div class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a><span>›</span>
-        <a href="/tools/tools.html">Tools</a><span>›</span>
-        <span>DeFi TVL Tracker</span>
-      </div>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">DeFi TVL Tracker</span></li>
+      </ol>
+    </nav>
 
-      <div class="hero-grid">
-        <div class="card hero-main">
-          <div class="eyebrow">Live DeFi Analytics • Protocol + Chain TVL • Responsive Dashboard</div>
-          <h1>DeFi TVL Tracker</h1>
-          <p>
-            Track DeFi TVL across protocols and chains with fast search, sorting, filters, trending gainers, and protocol detail views with historical chart support.
-          </p>
+    <section class="tool-grid" aria-label="DeFi TVL Tracker">
+      <section class="tool-card" id="tool">
+        <div class="pill">📊 DeFi TVL • ⚡ Live Filters • 🔒 Browser-Based</div>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#tool">Use Tool</a>
-            <a class="btn btn-secondary" href="/tools/tools.html">Browse All Tools</a>
+        <h1>DeFi TVL Tracker</h1>
+        <p class="sub">
+          Track DeFi TVL across protocols and chains with fast search, sorting, top gainers, and protocol detail views with historical chart support.
+        </p>
+
+        <div class="tool-actions">
+          <button class="cta primary" id="refreshBtn" type="button">Refresh Data</button>
+          <button class="cta ghost" id="resetBtn" type="button">Reset Filters</button>
+          <button class="cta ghost" id="jumpTableBtn" type="button">Jump to Tracker</button>
+        </div>
+
+        <div class="notice" id="proxyNotice">
+          <strong>Reliable data loading:</strong> this tool uses browser cache first when possible and falls back to public endpoints automatically.
+        </div>
+
+        <div class="switcher" role="tablist" aria-label="View selector">
+          <button class="pill-btn active" id="tabProtocols" role="tab" aria-selected="true" type="button">Protocols</button>
+          <button class="pill-btn" id="tabChains" role="tab" aria-selected="false" type="button">Chains</button>
+        </div>
+
+        <div class="form-grid">
+          <div class="full">
+            <label for="searchInput">Search</label>
+            <input id="searchInput" type="search" placeholder="Search protocol, chain, category, symbol..." autocomplete="off" />
+            <div class="helper">Search by protocol name, chain, token symbol, or category.</div>
+          </div>
+
+          <div>
+            <label for="categoryFilter">Category</label>
+            <select id="categoryFilter">
+              <option value="">All</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="chainFilter">Chain</label>
+            <select id="chainFilter">
+              <option value="">All</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="sortBy">Sort by</label>
+            <select id="sortBy">
+              <option value="tvl-desc">TVL: High to Low</option>
+              <option value="tvl-asc">TVL: Low to High</option>
+              <option value="change1d-desc">24h: Best</option>
+              <option value="change1d-asc">24h: Worst</option>
+              <option value="change7d-desc">7d: Best</option>
+              <option value="change7d-asc">7d: Worst</option>
+              <option value="name-asc">Name: A to Z</option>
+              <option value="name-desc">Name: Z to A</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="limitSelect">Rows</label>
+            <select id="limitSelect">
+              <option>25</option>
+              <option selected>50</option>
+              <option>100</option>
+              <option>250</option>
+            </select>
           </div>
         </div>
 
-        <aside class="card hero-side" aria-label="Tool highlights">
-          <div class="mini-stat">
-            <div class="label">Live view</div>
-            <div class="value">Protocols + chains</div>
-          </div>
-          <div class="mini-stat">
-            <div class="label">Built for speed</div>
-            <div class="value">Fast filtering + sorting</div>
-          </div>
-          <div class="mini-stat">
-            <div class="label">Trending widget</div>
-            <div class="value">Top 24h gainers</div>
-          </div>
-          <div class="mini-stat">
-            <div class="label">Best for</div>
-            <div class="value">Monitoring DeFi capital flows</div>
-          </div>
-        </aside>
-      </div>
-    </section>
+        <div class="statusBox">
+          <strong>Status:</strong> <span id="summaryText">Live DeFi TVL dashboard ready. Load protocols and chains, then search, sort, and inspect the current data.</span><br>
+          <span id="lastUpdated">Last updated: —</span>
+        </div>
 
-    <section class="section" id="tool">
-      <div class="tool-grid">
-        <section class="card tool-panel" aria-labelledby="tool-title">
-          <h2 id="tool-title">Track DeFi TVL live</h2>
-          <div class="subtle">Search, filter, sort, compare protocols and chains, then open protocol details with a historical TVL chart when available.</div>
-
-          <div class="notice" id="proxyNotice">
-            <strong>Reliable data loading:</strong> this tool is built to use a fast cached source when available, with automatic fallback to public endpoints.
-          </div>
-
-          <div class="switcher" role="tablist" aria-label="View selector">
-            <button class="pill-btn active" id="tabProtocols" role="tab" aria-selected="true" type="button">Protocols</button>
-            <button class="pill-btn" id="tabChains" role="tab" aria-selected="false" type="button">Chains</button>
-          </div>
-
-          <div class="form-grid">
-            <div class="full">
-              <label for="searchInput">Search</label>
-              <input id="searchInput" type="search" placeholder="Search protocol, chain, category, symbol..." autocomplete="off" />
-              <div class="helper">Search by protocol name, chain, token symbol, or category.</div>
-            </div>
-
+        <section class="trendingCard" aria-labelledby="trendingTitle">
+          <div class="trendingHead">
             <div>
-              <label for="categoryFilter">Category</label>
-              <select id="categoryFilter">
-                <option value="">All</option>
-              </select>
+              <div class="tiny">Live momentum snapshot</div>
+              <h2 id="trendingTitle">Trending Protocols / Top Gainers</h2>
             </div>
-
-            <div>
-              <label for="chainFilter">Chain</label>
-              <select id="chainFilter">
-                <option value="">All</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="sortBy">Sort by</label>
-              <select id="sortBy">
-                <option value="tvl-desc">TVL: High to Low</option>
-                <option value="tvl-asc">TVL: Low to High</option>
-                <option value="change1d-desc">24h: Best</option>
-                <option value="change1d-asc">24h: Worst</option>
-                <option value="change7d-desc">7d: Best</option>
-                <option value="change7d-asc">7d: Worst</option>
-                <option value="name-asc">Name: A to Z</option>
-                <option value="name-desc">Name: Z to A</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="limitSelect">Rows</label>
-              <select id="limitSelect">
-                <option>25</option>
-                <option selected>50</option>
-                <option>100</option>
-                <option>250</option>
-              </select>
-            </div>
+            <div class="tiny" id="trendingMeta">Updates with current filtered data</div>
           </div>
 
-          <div class="actions">
-            <button class="btn btn-primary" id="refreshBtn" type="button">Refresh Data</button>
-            <button class="btn btn-secondary" id="resetBtn" type="button">Reset Filters</button>
-            <button class="btn btn-ghost" id="jumpTableBtn" type="button">Jump to Tracker</button>
-          </div>
-
-          <section class="card trendingCard" aria-labelledby="trendingTitle" style="margin-top:18px;">
-            <div class="trendingHead">
-              <div>
-                <div class="tiny">Live momentum snapshot</div>
-                <h2 id="trendingTitle">Trending Protocols / Top Gainers</h2>
-              </div>
-              <div class="tiny" id="trendingMeta">Updates with current filtered data</div>
-            </div>
-
-            <div class="trendingGrid" id="trendingGrid">
-              <div class="loading">Loading top movers…</div>
-            </div>
-          </section>
-
-          <div class="overview-grid" aria-label="Overview stats">
-            <div class="overview-item">
-              <div class="k">Tracked items</div>
-              <div class="v" id="statTracked">—</div>
-            </div>
-            <div class="overview-item">
-              <div class="k">Aggregate TVL</div>
-              <div class="v" id="statTvl">—</div>
-            </div>
-            <div class="overview-item">
-              <div class="k">Median TVL</div>
-              <div class="v" id="statMedian">—</div>
-            </div>
-            <div class="overview-item">
-              <div class="k">24h trend</div>
-              <div class="v" id="statChange">—</div>
-            </div>
-          </div>
-
-          <div class="tableWrap" id="tracker" aria-live="polite">
-            <div class="loading" id="loadingState">Loading DeFi TVL data…</div>
+          <div class="trendingGrid" id="trendingGrid">
+            <div class="loading">Loading top movers…</div>
           </div>
         </section>
 
-        <aside class="card info-panel" aria-labelledby="results-title">
-          <h2 id="results-title">Tracker summary</h2>
-
-          <div class="result-box">
-            <p id="summaryText">Live DeFi TVL dashboard ready. Load protocols and chains, then search, sort, and inspect the current data.</p>
+        <div class="overview-grid" aria-label="Overview stats">
+          <div class="overview-item">
+            <div class="k">Tracked items</div>
+            <div class="v" id="statTracked">—</div>
           </div>
-
-          <div class="results" id="resultsList">
-            <div class="result-item">
-              <strong>Mode</strong>
-              <span id="modeLabel">Protocols</span>
-            </div>
-            <div class="result-item">
-              <strong>Cache</strong>
-              <span id="cacheState">Ready</span>
-            </div>
-            <div class="result-item">
-              <strong>Cache details</strong>
-              <span id="cacheSub">Smart local cache enabled</span>
-            </div>
-            <div class="result-item">
-              <strong>Last updated</strong>
-              <span id="lastUpdated">—</span>
-            </div>
-            <div class="result-item">
-              <strong>Status</strong>
-              <span id="apiStatus">Idle</span>
-            </div>
+          <div class="overview-item">
+            <div class="k">Aggregate TVL</div>
+            <div class="v" id="statTvl">—</div>
           </div>
-
-          <div class="helper" style="margin-top:14px;">
-            Privacy note: this tool stores short-lived cached responses in your browser for speed and resilience. It does not require an account.
+          <div class="overview-item">
+            <div class="k">Median TVL</div>
+            <div class="v" id="statMedian">—</div>
           </div>
-        </aside>
-      </div>
+          <div class="overview-item">
+            <div class="k">24h trend</div>
+            <div class="v" id="statChange">—</div>
+          </div>
+        </div>
+
+        <div class="tableWrap" id="tracker" aria-live="polite">
+          <div class="loading">Loading DeFi TVL data…</div>
+        </div>
+      </section>
+
+      <aside class="tool-panel" aria-labelledby="results-title">
+        <div class="panel-top">
+          <div>
+            <h2 id="results-title">Tracker Summary</h2>
+            <div class="networkHint">Protocol and chain TVL with caching and detail views.</div>
+          </div>
+        </div>
+
+        <div class="results" id="resultsList">
+          <div class="result-item">
+            <strong>Mode</strong>
+            <span id="modeLabel">Protocols</span>
+          </div>
+          <div class="result-item">
+            <strong>Cache</strong>
+            <span id="cacheState">Ready</span>
+          </div>
+          <div class="result-item">
+            <strong>Cache details</strong>
+            <span id="cacheSub">Smart local cache enabled</span>
+          </div>
+          <div class="result-item">
+            <strong>Status</strong>
+            <span id="apiStatus">Idle</span>
+          </div>
+        </div>
+
+        <div class="helper" style="margin-top:14px;">
+          Privacy note: this tool stores short-lived cached responses in your browser for speed and resilience. It does not require an account.
+        </div>
+      </aside>
     </section>
 
     <section class="content">
-      <article class="card content-card">
+      <article class="contentCard">
         <h2>How this DeFi TVL tracker works</h2>
         <p>
           This tool loads DeFi TVL data for protocols and chains, then lets you search, filter, and sort the results in a fast browser-based dashboard. It also highlights trending top gainers based on 24-hour changes and can open a protocol detail view when additional metadata and historical TVL are available from the source.
@@ -1081,7 +911,7 @@
         </p>
       </article>
 
-      <article class="card content-card">
+      <article class="contentCard">
         <h2>Why use this tool?</h2>
         <p>
           A live TVL dashboard helps you quickly understand where capital is flowing in DeFi. It is useful for spotting protocol momentum, identifying ecosystem concentration, comparing chains, and checking whether a recent move is broad or isolated.
@@ -1093,7 +923,7 @@
         </ul>
       </article>
 
-      <article class="card content-card">
+      <article class="contentCard">
         <h2>Related tools</h2>
         <div class="related-links">
           <a href="/tools/dca-calculator.html">DCA Calculator</a>
@@ -1103,28 +933,27 @@
         </div>
       </article>
 
-      <article class="card content-card">
-        <h2>Frequently asked questions</h2>
-        <div class="faq">
-          <details open>
-            <summary>What is TVL in DeFi?</summary>
-            <p>TVL stands for Total Value Locked. It represents the total value of assets deposited into a DeFi protocol or aggregated across a blockchain ecosystem.</p>
-          </details>
+      <article class="faqCard">
+        <h2>FAQ</h2>
 
-          <details>
-            <summary>Can I track protocols and chains in this TVL tracker?</summary>
-            <p>Yes. This tool lets you switch between protocol TVL and chain TVL views, then search, filter, sort, and inspect the current data.</p>
-          </details>
+        <details open>
+          <summary>What is TVL in DeFi?</summary>
+          <p>TVL stands for Total Value Locked. It represents the total value of assets deposited into a DeFi protocol or aggregated across a blockchain ecosystem.</p>
+        </details>
 
-          <details>
-            <summary>Does this DeFi TVL tracker support trending protocols and historical charts?</summary>
-            <p>Yes. The page includes a trending top gainers widget and a protocol detail view with historical TVL chart support when the data source provides it.</p>
-          </details>
-        </div>
+        <details>
+          <summary>Can I track protocols and chains in this TVL tracker?</summary>
+          <p>Yes. This tool lets you switch between protocol TVL and chain TVL views, then search, filter, sort, and inspect the current data.</p>
+        </details>
+
+        <details>
+          <summary>Does this DeFi TVL tracker support trending protocols and historical charts?</summary>
+          <p>Yes. The page includes a trending top gainers widget and a protocol detail view with historical TVL chart support when the data source provides it.</p>
+        </details>
       </article>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" aria-label="Footer">
       <div class="footer-box">
         <div>© <span id="year"></span> InstantQR</div>
         <div class="footer-links">
@@ -1149,7 +978,7 @@
           <div class="tiny">Protocol details</div>
           <h2 id="detailTitle" style="margin:4px 0 0;font-size:1.6rem">Loading…</h2>
         </div>
-        <button class="btn btn-secondary" id="closeModalBtn" type="button" aria-label="Close detail view">Close</button>
+        <button class="cta ghost" id="closeModalBtn" type="button" aria-label="Close detail view">Close</button>
       </div>
       <div class="sheetBody">
         <div id="detailLoading" class="loading">Loading protocol detail…</div>
@@ -1206,6 +1035,7 @@
     </div>
   </div>
 
+  <script src="/assets/site.js" defer></script>
   <script src="/assets/js/tools/defi-tvl-tracker.js" defer></script>
 </body>
 </html>
