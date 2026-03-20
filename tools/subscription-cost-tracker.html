@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Subscription Cost Tracker | Track Netflix, HBO Max, Spotify & Monthly Bills | InstantQR</title>
+  <meta name="description" content="Free subscription cost tracker by InstantQR. Track Netflix, HBO Max, Disney+, Spotify, Prime and more. Calculate monthly and yearly subscription spending fast with local storage and no sign-in required." />
+  <meta name="keywords" content="subscription tracker, subscription cost tracker, monthly bills tracker, Netflix cost tracker, HBO Max subscription tracker, streaming subscription calculator, recurring expenses tracker, subscription expense calculator, yearly subscription cost" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0b1020" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/subscription-cost-tracker.html" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Subscription Cost Tracker | Track Streaming & Recurring Bills" />
+  <meta property="og:description" content="Track Netflix, HBO Max, Spotify and other recurring subscriptions. See your monthly and yearly totals instantly." />
+  <meta property="og:url" content="https://instantqr.io/tools/subscription-cost-tracker.html" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-default.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Subscription Cost Tracker | InstantQR" />
+  <meta name="twitter:description" content="Calculate your total monthly and yearly subscription costs in seconds." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-default.png" />
+
+  <link rel="stylesheet" href="/site.css" />
+
+  <style>
+    :root{
+      --card-bg: rgba(255,255,255,.04);
+      --card-border: rgba(255,255,255,.10);
+      --muted: #aab3c5;
+      --text: #ecf2ff;
+      --soft: #c9d5ea;
+      --danger: #ff7b7b;
+      --success: #83e6b4;
+      --warning: #ffd280;
+      --shadow: 0 20px 60px rgba(0,0,0,.28);
+      --radius: 20px;
+      --radius-sm: 14px;
+      --max: 1180px;
+      --bg-grad-1: radial-gradient(circle at top left, rgba(72,98,255,.20), transparent 28%);
+      --bg-grad-2: radial-gradient(circle at top right, rgba(0,210,255,.14), transparent 24%);
+      --bg-grad-3: radial-gradient(circle at bottom center, rgba(154,86,255,.14), transparent 30%);
+    }
+
+    html { scroll-behavior: smooth; }
+    body{
+      color: var(--text);
+      background:
+        var(--bg-grad-1),
+        var(--bg-grad-2),
+        var(--bg-grad-3),
+        linear-gradient(180deg, #07111f 0%, #0a1324 52%, #08101d 100%);
+    }
+
+    .page-shell{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+
+    .breadcrumbs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      font-size:.95rem;
+      color:var(--muted);
+      margin: 10px 0 18px;
+    }
+
+    .breadcrumbs a{
+      color:var(--soft);
+      text-decoration:none;
+    }
+
+    .breadcrumbs a:hover{ text-decoration:underline; }
+
+    .hero{
+      display:grid;
+      gap:22px;
+      grid-template-columns: 1.15fr .85fr;
+      align-items:stretch;
+      margin-bottom: 22px;
+    }
+
+    .hero-card,
+    .glass-card{
+      background: var(--card-bg);
+      border:1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .hero-main{
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::after{
+      content:"";
+      position:absolute;
+      inset:auto -60px -60px auto;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background: radial-gradient(circle, rgba(255,255,255,.16), transparent 65%);
+      pointer-events:none;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:.86rem;
+      font-weight:700;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:#b8c8ff;
+      background: rgba(121,142,255,.14);
+      border:1px solid rgba(121,142,255,.24);
+      padding:8px 12px;
+      border-radius:999px;
+      margin-bottom:16px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      line-height:1.05;
+      letter-spacing:-0.03em;
+    }
+
+    .hero p{
+      margin:0;
+      color:var(--soft);
+      line-height:1.7;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .mini-stats{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:14px;
+      padding:20px;
+    }
+
+    .mini-stat{
+      background: rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      padding:18px;
+    }
+
+    .mini-stat .label{
+      font-size:.88rem;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+
+    .mini-stat .value{
+      font-size:1.5rem;
+      font-weight:800;
+      letter-spacing:-0.02em;
+    }
+
+    .mini-stat .note{
+      margin-top:8px;
+      font-size:.9rem;
+      color:var(--soft);
+    }
+
+    .tool-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:22px;
+      margin-top: 22px;
+      align-items:start;
+    }
+
+    .panel{
+      padding:22px;
+    }
+
+    .panel h2{
+      margin:0 0 8px;
+      font-size:1.35rem;
+      letter-spacing:-0.02em;
+    }
+
+    .panel p.lead{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    form{
+      display:grid;
+      gap:16px;
+    }
+
+    .field-row{
+      display:grid;
+      gap:14px;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+
+    .field{
+      display:grid;
+      gap:8px;
+    }
+
+    .field label{
+      font-size:.95rem;
+      font-weight:700;
+      color: var(--soft);
+    }
+
+    .field input,
+    .field select{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(7,12,24,.78);
+      color: var(--text);
+      padding:14px 14px;
+      font: inherit;
+      outline:none;
+      transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+      box-sizing: border-box;
+    }
+
+    .field input::placeholder{
+      color:#8ea1c4;
+    }
+
+    .field input:focus,
+    .field select:focus{
+      border-color: rgba(119,162,255,.7);
+      box-shadow: 0 0 0 4px rgba(119,162,255,.16);
+    }
+
+    .button-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .btn{
+      appearance:none;
+      border:none;
+      border-radius:14px;
+      padding:13px 16px;
+      font:inherit;
+      font-weight:800;
+      cursor:pointer;
+      transition: transform .16s ease, opacity .16s ease, filter .16s ease;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:48px;
+    }
+
+    .btn:hover{ transform: translateY(-1px); }
+    .btn:active{ transform: translateY(0); }
+
+    .btn-primary{
+      color:#07111f;
+      background: linear-gradient(135deg, #8ec5ff, #7fffd7);
+    }
+
+    .btn-secondary{
+      color: var(--text);
+      background: rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .btn-danger{
+      color:#fff;
+      background: rgba(255,108,108,.16);
+      border:1px solid rgba(255,123,123,.32);
+    }
+
+    .chip-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .chip{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      border-radius:999px;
+      padding:10px 14px;
+      font:inherit;
+      font-size:.93rem;
+      cursor:pointer;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .chip:hover{
+      transform: translateY(-1px);
+      border-color: rgba(149,187,255,.42);
+      background: rgba(149,187,255,.10);
+    }
+
+    .helper{
+      font-size:.92rem;
+      color: var(--muted);
+      line-height:1.6;
+    }
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:14px;
+      margin-bottom:16px;
+    }
+
+    .summary-box{
+      background: rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .summary-box .k{
+      color: var(--muted);
+      font-size:.9rem;
+      margin-bottom:7px;
+    }
+
+    .summary-box .v{
+      font-size:1.7rem;
+      font-weight:800;
+      letter-spacing:-0.03em;
+    }
+
+    .summary-box .sub{
+      margin-top:6px;
+      color: var(--soft);
+      font-size:.92rem;
+    }
+
+    .insight-list{
+      display:grid;
+      gap:10px;
+      margin-top:6px;
+    }
+
+    .insight{
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:14px;
+      padding:13px 14px;
+      color: var(--soft);
+      line-height:1.55;
+      font-size:.96rem;
+    }
+
+    .insight strong{ color: var(--text); }
+
+    .subs-toolbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:space-between;
+      align-items:center;
+      margin: 18px 0 12px;
+    }
+
+    .count-badge{
+      font-size:.92rem;
+      color: var(--soft);
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      padding:8px 12px;
+      border-radius:999px;
+    }
+
+    .subs-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .empty-state{
+      border:1px dashed rgba(255,255,255,.16);
+      border-radius:18px;
+      padding:22px;
+      color: var(--soft);
+      background: rgba(255,255,255,.025);
+      line-height:1.7;
+    }
+
+    .sub-item{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:12px;
+      padding:16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+    }
+
+    .sub-top{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    .sub-name{
+      margin:0;
+      font-size:1.03rem;
+      font-weight:800;
+      letter-spacing:-0.015em;
+      word-break:break-word;
+    }
+
+    .sub-meta{
+      margin-top:7px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:.84rem;
+      color: var(--soft);
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.09);
+    }
+
+    .sub-prices{
+      text-align:right;
+      min-width: 175px;
+    }
+
+    .sub-prices .main{
+      font-size:1.1rem;
+      font-weight:800;
+    }
+
+    .sub-prices .minor{
+      margin-top:6px;
+      font-size:.9rem;
+      color: var(--muted);
+    }
+
+    .sub-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      margin-top:14px;
+    }
+
+    .icon-btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      border-radius:12px;
+      padding:10px 12px;
+      font:inherit;
+      cursor:pointer;
+    }
+
+    .section{
+      margin-top: 34px;
+    }
+
+    .content-card{
+      padding:22px;
+    }
+
+    .section h2{
+      margin:0 0 10px;
+      font-size:1.5rem;
+      letter-spacing:-0.02em;
+    }
+
+    .section p{
+      color: var(--soft);
+      line-height:1.75;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .feature{
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .feature h3{
+      margin:0 0 8px;
+      font-size:1.02rem;
+    }
+
+    .feature p{
+      margin:0;
+      color: var(--muted);
+      line-height:1.65;
+      font-size:.96rem;
+    }
+
+    .faq{
+      display:grid;
+      gap:12px;
+      margin-top:12px;
+    }
+
+    details{
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+
+    summary::-webkit-details-marker{ display:none; }
+
+    details p{
+      margin:10px 0 0;
+      color: var(--soft);
+    }
+
+    @media (max-width: 980px){
+      .hero,
+      .tool-grid{
+        grid-template-columns: 1fr;
+      }
+
+      .feature-grid{
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px){
+      .field-row,
+      .summary-grid{
+        grid-template-columns: 1fr;
+      }
+
+      .sub-item{
+        grid-template-columns: 1fr;
+      }
+
+      .sub-prices{
+        text-align:left;
+        min-width:0;
+      }
+
+      .sub-actions{
+        justify-content:flex-start;
+      }
+
+      .hero-main,
+      .panel,
+      .content-card{
+        padding:18px;
+      }
+
+      .mini-stats{
+        grid-template-columns: 1fr;
+      }
+
+      h1{
+        font-size: clamp(1.85rem, 7vw, 2.65rem);
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools/"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Subscription Cost Tracker",
+        "item":"https://instantqr.io/tools/subscription-cost-tracker.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is a subscription cost tracker?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A subscription cost tracker is a tool that helps you list recurring services like Netflix, HBO Max, Spotify, Prime, YouTube Premium, software plans and other bills so you can see your combined monthly and yearly cost."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I track yearly and monthly subscriptions together?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. This tracker supports monthly, yearly, weekly and quarterly billing cycles. It converts everything into comparable monthly and yearly totals automatically."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this subscription tracker save my data?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes, locally in your browser using local storage. No sign-in is required, and your subscription entries stay on your device unless you clear browser storage."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I use this for streaming services and app subscriptions?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can use it for streaming services like Netflix, HBO Max, Disney+, Hulu and Spotify, as well as software subscriptions, phone plans, gym memberships and other recurring bills."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Subscription Cost Tracker",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    },
+    "url":"https://instantqr.io/tools/subscription-cost-tracker.html",
+    "description":"Free subscription cost tracker to calculate total monthly and yearly recurring subscription expenses.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <main class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/tools/">Tools</a>
+      <span>/</span>
+      <span aria-current="page">Subscription Cost Tracker</span>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-card hero-main">
+        <div class="eyebrow">Recurring expense planner</div>
+        <h1>Subscription Cost Tracker</h1>
+        <p>
+          Track Netflix, HBO Max, Disney+, Spotify, Prime, software plans, gym memberships, phone plans and other recurring bills in one place.
+          See your real monthly and yearly subscription cost instantly with fast local storage and no login required.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#tracker">Start Tracking</a>
+          <a class="btn btn-secondary" href="#faq">View FAQs</a>
+        </div>
+      </div>
+
+      <aside class="hero-card mini-stats" aria-label="Quick benefits">
+        <div class="mini-stat">
+          <div class="label">Privacy-first</div>
+          <div class="value">Local only</div>
+          <div class="note">Saved in your browser. No account needed.</div>
+        </div>
+        <div class="mini-stat">
+          <div class="label">Billing support</div>
+          <div class="value">4 cycles</div>
+          <div class="note">Monthly, yearly, weekly and quarterly.</div>
+        </div>
+        <div class="mini-stat">
+          <div class="label">Best for</div>
+          <div class="value">Streaming + apps</div>
+          <div class="note">Netflix, HBO Max, Spotify, Prime and more.</div>
+        </div>
+        <div class="mini-stat">
+          <div class="label">Fast insight</div>
+          <div class="value">Monthly + yearly</div>
+          <div class="note">Understand your real recurring spend quickly.</div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="tracker" class="tool-grid">
+      <div class="glass-card panel">
+        <h2>Add or edit a subscription</h2>
+        <p class="lead">
+          Enter a service name, amount and billing cycle. This tool automatically converts your subscription into comparable monthly and yearly totals.
+        </p>
+
+        <form id="subscriptionForm" novalidate>
+          <input type="hidden" id="editId" value="" />
+
+          <div class="field-row">
+            <div class="field">
+              <label for="serviceName">Subscription name</label>
+              <input id="serviceName" name="serviceName" type="text" maxlength="60" placeholder="Netflix, HBO Max, Spotify, Adobe..." autocomplete="off" required />
+            </div>
+
+            <div class="field">
+              <label for="price">Price</label>
+              <input id="price" name="price" type="number" inputmode="decimal" min="0" step="0.01" placeholder="15.99" required />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="billingCycle">Billing cycle</label>
+              <select id="billingCycle" name="billingCycle" required>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="weekly">Weekly</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="category">Category</label>
+              <select id="category" name="category">
+                <option value="Streaming">Streaming</option>
+                <option value="Music">Music</option>
+                <option value="Software">Software</option>
+                <option value="Gaming">Gaming</option>
+                <option value="Cloud">Cloud</option>
+                <option value="Fitness">Fitness</option>
+                <option value="Phone/Internet">Phone/Internet</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button class="btn btn-primary" type="submit" id="saveBtn">Add subscription</button>
+            <button class="btn btn-secondary" type="button" id="resetBtn">Reset form</button>
+          </div>
+        </form>
+
+        <div class="chip-row" aria-label="Popular subscriptions">
+          <button class="chip" type="button" data-preset='{"name":"Netflix","price":"15.49","cycle":"monthly","category":"Streaming"}'>+ Netflix</button>
+          <button class="chip" type="button" data-preset='{"name":"HBO Max","price":"16.99","cycle":"monthly","category":"Streaming"}'>+ HBO Max</button>
+          <button class="chip" type="button" data-preset='{"name":"Disney+","price":"13.99","cycle":"monthly","category":"Streaming"}'>+ Disney+</button>
+          <button class="chip" type="button" data-preset='{"name":"Spotify","price":"11.99","cycle":"monthly","category":"Music"}'>+ Spotify</button>
+          <button class="chip" type="button" data-preset='{"name":"Amazon Prime","price":"14.99","cycle":"monthly","category":"Streaming"}'>+ Prime</button>
+          <button class="chip" type="button" data-preset='{"name":"YouTube Premium","price":"13.99","cycle":"monthly","category":"Streaming"}'>+ YouTube Premium</button>
+          <button class="chip" type="button" data-preset='{"name":"Adobe Creative Cloud","price":"59.99","cycle":"monthly","category":"Software"}'>+ Adobe CC</button>
+          <button class="chip" type="button" data-preset='{"name":"Apple One","price":"19.95","cycle":"monthly","category":"Streaming"}'>+ Apple One</button>
+        </div>
+
+        <p class="helper" style="margin-top:16px;">
+          Tip: use this for streaming services, app subscriptions, software plans, cloud storage, gym memberships and other recurring expenses.
+        </p>
+      </div>
+
+      <aside class="glass-card panel" aria-label="Subscription summary">
+        <h2>Your totals</h2>
+        <p class="lead">Get a clearer view of subscription creep and recurring monthly spending.</p>
+
+        <div class="summary-grid">
+          <div class="summary-box">
+            <div class="k">Monthly total</div>
+            <div class="v" id="monthlyTotal">$0.00</div>
+            <div class="sub" id="monthlyAverage">Across 0 subscriptions</div>
+          </div>
+
+          <div class="summary-box">
+            <div class="k">Yearly total</div>
+            <div class="v" id="yearlyTotal">$0.00</div>
+            <div class="sub" id="yearlyEstimate">Equivalent annual spend</div>
+          </div>
+        </div>
+
+        <div class="insight-list" id="insights">
+          <div class="insight"><strong>No subscriptions yet.</strong> Add your first service to see totals, highest cost items and budget insights.</div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="glass-card panel section">
+      <div class="subs-toolbar">
+        <h2 style="margin:0;">Tracked subscriptions</h2>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <span class="count-badge" id="subscriptionCount">0 items</span>
+          <button class="btn btn-secondary" type="button" id="exportBtn">Export JSON</button>
+          <button class="btn btn-danger" type="button" id="clearAllBtn">Clear all</button>
+        </div>
+      </div>
+
+      <div id="subscriptionsList" class="subs-list" aria-live="polite"></div>
+    </section>
+
+    <section class="section">
+      <div class="glass-card content-card">
+        <h2>Why use a subscription tracker?</h2>
+        <p>
+          Subscription fatigue adds up fast. It is easy to forget how many services renew automatically every month. A subscription cost tracker helps you measure
+          recurring expenses across streaming, music, software, cloud tools, mobile plans and memberships, so you can decide what to keep, downgrade or cancel.
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature">
+            <h3>See the real total</h3>
+            <p>Convert yearly, quarterly and weekly plans into one comparable monthly number so hidden spend becomes obvious.</p>
+          </div>
+          <div class="feature">
+            <h3>Find high-cost services</h3>
+            <p>Quickly identify the subscriptions that have the biggest impact on your budget and yearly spending.</p>
+          </div>
+          <div class="feature">
+            <h3>Stay organized</h3>
+            <p>Track streaming services, productivity software, cloud storage, gaming passes and other recurring bills in one simple view.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="glass-card content-card">
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+          <details>
+            <summary>What is a subscription cost tracker?</summary>
+            <p>
+              A subscription cost tracker is a tool that helps you list recurring services like Netflix, HBO Max, Spotify, software plans and memberships so you can see your total monthly and yearly cost in one place.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I track yearly and monthly subscriptions together?</summary>
+            <p>
+              Yes. This tool supports monthly, yearly, quarterly and weekly billing cycles. It automatically converts them into monthly and yearly equivalents for a cleaner comparison.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does this subscription tracker store my data online?</summary>
+            <p>
+              No. Your data is stored locally in your browser using local storage. No sign-in is required, and nothing needs to be sent to a server for the tracker to work.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I use this for more than streaming subscriptions?</summary>
+            <p>
+              Yes. You can track streaming services, software plans, cloud storage, gym memberships, internet plans, gaming subscriptions and almost any recurring expense.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/site.js"></script>
+  <script src="/tools/subscription-cost-tracker.js"></script>
+</body>
+</html>
