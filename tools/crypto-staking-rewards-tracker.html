@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Analytics / Monetization -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <!-- Core Meta -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Crypto Staking Rewards Tracker | APR, APY, Compounding & Portfolio Calculator | InstantQR</title>
+  <meta name="description" content="Track crypto staking rewards across major assets with live token prices, editable APR or APY, compounding settings, portfolio totals, and CSV export. Fast, private, and browser-based." />
+  <meta name="keywords" content="crypto staking rewards tracker, staking calculator, APR calculator, APY calculator, crypto compounding calculator, staking portfolio tracker, crypto rewards estimator" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="application-name" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/crypto-staking-rewards-tracker.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Crypto Staking Rewards Tracker | InstantQR" />
+  <meta property="og:description" content="Track staking rewards with live token prices, APR/APY, compounding, portfolio totals, and CSV export." />
+  <meta property="og:url" content="https://instantqr.io/tools/crypto-staking-rewards-tracker.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="Crypto Staking Rewards Tracker on InstantQR" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Crypto Staking Rewards Tracker | InstantQR" />
+  <meta name="twitter:description" content="Track staking rewards with live token prices, APR/APY, compounding, and portfolio totals." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Crypto Staking Rewards Tracker",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/crypto-staking-rewards-tracker.html",
+    "description":"Track crypto staking rewards with live prices, APR/APY, compounding, and portfolio totals.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+      {"@type":"ListItem","position":3,"name":"Crypto Staking Rewards Tracker","item":"https://instantqr.io/tools/crypto-staking-rewards-tracker.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Does this staking rewards tracker use live prices?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. The tool can pull live token prices for supported assets and combine them with your staking inputs."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does InstantQR store my staking portfolio?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. This tracker runs in your browser. Portfolio rows are kept locally on your device unless you export them yourself."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I enter my own APR or APY?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. Each staking row lets you edit the reward rate manually so you can match your validator, exchange, or protocol."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this replace chain-specific validator analytics?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. This is a broad portfolio tracker. Some networks have more detailed validator-specific APIs and dashboards for exact reward accounting."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .tracker-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:18px;
+      margin-top:14px;
+    }
+    .tracker-card,
+    .tracker-panel,
+    .faqCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
+    }
+    .tracker-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+    }
+    .tracker-card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
+      pointer-events:none;
+    }
+    .tracker-card > *{position:relative}
+    .tracker-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .tracker-panel{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .panel-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+    .status-note{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .summaryGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .metric{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .metric .k{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .metric .v{
+      font-size:24px;
+      font-weight:900;
+      letter-spacing:-.4px;
+      word-break:break-word;
+    }
+    .metric .u{
+      font-size:12px;
+      color:rgba(233,238,252,.55);
+    }
+
+    .tableCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+    .tableWrap{
+      overflow:auto;
+      width:100%;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:1120px;
+    }
+    thead th{
+      text-align:left;
+      padding:12px 12px;
+      font-size:12px;
+      color:#dbeafe;
+      background:rgba(255,255,255,.04);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      white-space:nowrap;
+    }
+    tbody td{
+      padding:10px 12px;
+      border-top:1px solid rgba(255,255,255,.08);
+      vertical-align:middle;
+    }
+    tbody tr:hover{
+      background:rgba(255,255,255,.03);
+    }
+
+    .cell-input,
+    .cell-select{
+      width:100%;
+      min-width:100px;
+      padding:10px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0a1427;
+      color:#fff;
+      font:inherit;
+      outline:none;
+    }
+    .cell-input:focus,
+    .cell-select:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 3px rgba(96,165,250,.14);
+      background:#0b172d;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    }
+
+    .row-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .miniBtn{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:12px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:12px;
+    }
+    .miniBtn:hover{
+      background:rgba(255,255,255,.08);
+    }
+
+    .hintBox{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+    .hintBox h3{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+    .hintBox p,
+    .hintBox li{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+    .hintBox ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .faqCard{
+      margin-top:14px;
+      padding:18px;
+    }
+    .faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+    .faqCard summary::-webkit-details-marker{display:none}
+    .faqCard p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .goodText{color:#22c55e}
+    .warnText{color:#facc15}
+    .badText{color:#fb7185}
+
+    @media (max-width: 980px){
+      .tracker-grid{
+        grid-template-columns:1fr;
+      }
+    }
+    @media (max-width: 640px){
+      .summaryGrid{
+        grid-template-columns:1fr;
+      }
+      .tracker-actions .cta{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
+
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/tools/crypto-profit-calculator.html">Crypto Profit</a>
+        <a href="/tools/web3-gas-fee-estimator.html">Gas Fees</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Crypto Staking Rewards Tracker</span></li>
+      </ol>
+    </nav>
+
+    <section class="tracker-grid" aria-label="Crypto staking rewards tracker">
+      <section class="tracker-card">
+        <div class="pill">📈 Live Prices • 🔒 Local Portfolio • 🪙 APR / APY • ♻️ Compounding</div>
+
+        <h1>Crypto Staking Rewards Tracker</h1>
+        <p class="sub">
+          Track staking positions across major crypto assets with live price lookup, editable APR or APY,
+          compounding frequency, and projected rewards for daily, monthly, and yearly periods.
+        </p>
+
+        <div class="tracker-actions">
+          <button class="cta primary" id="addRowBtn" type="button">Add Position</button>
+          <button class="cta ghost" id="refreshPricesBtn" type="button">Refresh Prices</button>
+          <button class="cta ghost" id="exportCsvBtn" type="button">Export CSV</button>
+          <button class="cta ghost" id="resetTrackerBtn" type="button">Reset</button>
+        </div>
+
+        <div class="hint" style="margin-top:10px;">
+          Built for broad portfolio tracking. Enter your own staking rate for each asset if your validator,
+          exchange, or protocol uses a different APR or APY.
+        </div>
+
+        <div class="tableCard" style="margin-top:16px;">
+          <div class="tableWrap">
+            <table aria-label="Staking positions table">
+              <thead>
+                <tr>
+                  <th>Asset</th>
+                  <th>Amount</th>
+                  <th>Price</th>
+                  <th>Value</th>
+                  <th>Rate Type</th>
+                  <th>Rate %</th>
+                  <th>Compound</th>
+                  <th>Daily</th>
+                  <th>Monthly</th>
+                  <th>Yearly</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="positionsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <aside class="tracker-panel" aria-label="Tracker summary">
+        <div class="panel-top">
+          <div>
+            <h2>Portfolio Summary</h2>
+            <div class="status-note" id="statusNote">Ready. Add a position or refresh prices.</div>
+          </div>
+          <div class="status-note mono" id="priceSourceNote">Price source: CoinGecko</div>
+        </div>
+
+        <div class="summaryGrid">
+          <div class="metric">
+            <div class="k">Positions</div>
+            <div class="v" id="positionsCount">0</div>
+            <div class="u">tracked rows</div>
+          </div>
+
+          <div class="metric">
+            <div class="k">Portfolio Value</div>
+            <div class="v goodText" id="portfolioValue">$0.00</div>
+            <div class="u">USD estimate</div>
+          </div>
+
+          <div class="metric">
+            <div class="k">Daily Rewards</div>
+            <div class="v" id="dailyRewards">$0.00</div>
+            <div class="u">estimated</div>
+          </div>
+
+          <div class="metric">
+            <div class="k">Monthly Rewards</div>
+            <div class="v" id="monthlyRewards">$0.00</div>
+            <div class="u">estimated</div>
+          </div>
+
+          <div class="metric">
+            <div class="k">Yearly Rewards</div>
+            <div class="v" id="yearlyRewards">$0.00</div>
+            <div class="u">estimated</div>
+          </div>
+
+          <div class="metric">
+            <div class="k">Best Yield Row</div>
+            <div class="v" id="bestYield">—</div>
+            <div class="u">highest yearly USD</div>
+          </div>
+        </div>
+
+        <div class="hintBox">
+          <h3>What this tool does well</h3>
+          <ul>
+            <li>Tracks many major staking assets in one place</li>
+            <li>Uses live token prices for quick portfolio valuation</li>
+            <li>Lets you enter your own APR or APY per position</li>
+            <li>Supports compounding assumptions for reward projections</li>
+          </ul>
+        </div>
+
+        <div class="hintBox">
+          <h3>Best use cases</h3>
+          <p>
+            Validator dashboards, exchange staking positions, liquid staking holdings,
+            DeFi staking snapshots, and personal crypto reward planning.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="tracker-grid" style="margin-top:14px;" aria-label="Extra information">
+      <div class="hintBox">
+        <h3>How to use it</h3>
+        <ul>
+          <li>Add a position and pick an asset preset</li>
+          <li>Enter your staked amount</li>
+          <li>Use APR or APY based on your staking provider</li>
+          <li>Choose compound frequency if you restake rewards</li>
+          <li>Refresh prices to update USD values</li>
+        </ul>
+      </div>
+
+      <div class="hintBox">
+        <h3>Important note</h3>
+        <p>
+          This tool is a portfolio estimator. Exact staking outcomes vary by validator uptime, slashing risk,
+          lock rules, reward schedules, fees, protocol mechanics, and claim or restake timing.
+        </p>
+      </div>
+    </section>
+
+    <section class="faqCard" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>Does this staking rewards tracker use live prices?</summary>
+        <p>Yes. It can fetch live prices for supported assets and combine them with your staking inputs.</p>
+      </details>
+
+      <details>
+        <summary>Does InstantQR store my staking portfolio?</summary>
+        <p>No. Portfolio data stays in your browser and is saved locally on your device unless you export it yourself.</p>
+      </details>
+
+      <details>
+        <summary>Can I enter my own APR or APY?</summary>
+        <p>Yes. Each row supports editable APR or APY so you can match your provider’s current reward rate.</p>
+      </details>
+
+      <details>
+        <summary>Does this replace chain-specific validator analytics?</summary>
+        <p>No. This is a broad rewards tracker. Some networks have validator-specific APIs and dashboards for exact on-chain reward accounting.</p>
+      </details>
+    </section>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/sitemap.xml">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/crypto-staking-rewards-tracker.js" defer></script>
+</body>
+</html>
