@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google Analytics -->
+  <!-- Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,7 +10,7 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <!-- Google AdSense -->
+  <!-- AdSense -->
   <script async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
@@ -18,29 +18,402 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>Multi-Chain Network Fee Estimator | BTC, LTC, DOGE, DASH, TRON Fees | InstantQR.io</title>
-  <meta name="description" content="Free multi-chain network fee estimator for Bitcoin, Litecoin, Dogecoin, Dash, and TRON. Estimate BTC sat/vB fees, per-kB UTXO network fees, and TRON bandwidth and energy costs in a fast browser-based tool." />
-  <meta name="keywords" content="multi chain fee estimator, bitcoin fee estimator, litecoin fee estimator, dogecoin fee estimator, dash fee estimator, tron fee estimator, crypto network fees, transaction fee calculator, BTC fee calculator, TRON bandwidth energy calculator" />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
-  <meta name="theme-color" content="#0b0f19" />
+  <title>Multi-Chain Network Fee Estimator | Bitcoin, Litecoin, Dogecoin, Dash, TRON | InstantQR.io</title>
+  <meta name="description" content="Estimate network fees for Bitcoin, Litecoin, Dogecoin, Dash, and TRON. Free multi-chain fee estimator with live lookups, fast browser-based calculations, breadcrumbs, FAQ schema, and privacy-first design." />
+  <meta name="keywords" content="multi chain fee estimator, bitcoin fee estimator, litecoin fee estimator, dogecoin fee estimator, dash fee estimator, tron fee estimator, crypto network fee calculator, btc fee calculator, trx fee calculator" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="application-name" content="InstantQR" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
+
   <link rel="canonical" href="https://instantqr.io/tools/multi-chain-network-fee-estimator.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="InstantQR.io" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Multi-Chain Network Fee Estimator | InstantQR.io" />
-  <meta property="og:description" content="Estimate BTC, LTC, DOGE, DASH, and TRON network fees with a fast privacy-first browser-based calculator." />
+  <meta property="og:description" content="Estimate Bitcoin, Litecoin, Dogecoin, Dash, and TRON network fees with live lookups and browser-based fee calculation." />
   <meta property="og:url" content="https://instantqr.io/tools/multi-chain-network-fee-estimator.html" />
-  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="InstantQR Multi-Chain Network Fee Estimator" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Multi-Chain Network Fee Estimator | InstantQR.io" />
-  <meta name="twitter:description" content="Estimate Bitcoin, Litecoin, Dogecoin, Dash, and TRON network fees in one clean browser-based tool." />
-  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.png" />
+  <meta name="twitter:description" content="Estimate Bitcoin, Litecoin, Dogecoin, Dash, and TRON network fees. Fast, free, and privacy-first." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/site.css" />
-  <script defer src="/site.js"></script>
-  <script defer src="/tools/multi-chain-network-fee-estimator.js"></script>
+  <link rel="stylesheet" href="/assets/site.css" />
+
+  <style>
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      margin-top:14px;
+      align-items:start;
+    }
+
+    .tool-card,
+    .tool-panel,
+    .faqCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
+    }
+
+    .tool-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+    }
+
+    .tool-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
+      pointer-events:none;
+    }
+
+    .tool-card > *{ position:relative; }
+
+    .tool-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .tool-panel{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .panel-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+
+    .networkHint{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .full{ grid-column:1 / -1; }
+
+    .form-grid label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+
+    .form-grid input,
+    .form-grid select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(10,20,39,.96);
+      color:var(--text);
+      outline:none;
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+    }
+
+    .form-grid select{
+      background-image:
+        linear-gradient(45deg, transparent 50%, rgba(255,255,255,.7) 50%),
+        linear-gradient(135deg, rgba(255,255,255,.7) 50%, transparent 50%),
+        linear-gradient(to right, rgba(255,255,255,.06), rgba(255,255,255,.06));
+      background-position:
+        calc(100% - 18px) calc(50% - 3px),
+        calc(100% - 12px) calc(50% - 3px),
+        calc(100% - 40px) 50%;
+      background-size:6px 6px, 6px 6px, 1px 22px;
+      background-repeat:no-repeat;
+      padding-right:48px;
+    }
+
+    .form-grid input:focus,
+    .form-grid select:focus{
+      border-color:rgba(96,165,250,.65);
+      box-shadow:0 0 0 3px rgba(96,165,250,.14);
+    }
+
+    .form-grid select option{
+      background:#0b1222;
+      color:#e7eefc;
+    }
+
+    .helper{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .statusBox{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.14);
+      padding:14px;
+      font-size:13px;
+      line-height:1.55;
+      color:var(--muted);
+    }
+
+    .statusBox strong{ color:var(--text); }
+
+    .statusPill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border);
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .statusDot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--muted);
+      flex:0 0 auto;
+    }
+
+    .gas-cards{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+
+    .tierCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+
+    .tierHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:8px;
+    }
+
+    .tierHead b{
+      font-size:15px;
+      letter-spacing:-.15px;
+    }
+
+    .tag{
+      font-size:11px;
+      padding:5px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background:rgba(255,255,255,.04);
+    }
+
+    .nativeCost{
+      font-size:24px;
+      font-weight:900;
+      letter-spacing:-.4px;
+      color:#22c55e;
+      margin-bottom:4px;
+      word-break:break-word;
+    }
+
+    .usdCost{
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:8px;
+      word-break:break-word;
+    }
+
+    .gasLine{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      font-size:13px;
+      color:var(--text);
+      line-height:1.5;
+      word-break:break-word;
+    }
+
+    .gasLine span{
+      white-space:nowrap;
+    }
+
+    .subnote{
+      margin-top:8px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    .metaGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .metaCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+
+    .metaCard h3{
+      margin:0 0 8px;
+      font-size:15px;
+    }
+
+    .metaRow{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:8px;
+      margin-top:6px;
+      font-size:13px;
+    }
+
+    .metaRow span{ color:var(--muted); }
+
+    .faqCard{
+      margin-top:14px;
+      padding:18px;
+    }
+
+    .faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+
+    .faqCard summary::-webkit-details-marker{ display:none; }
+
+    .faqCard p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    }
+
+    .goodText{ color:#22c55e; }
+    .warnText{ color:#f59e0b; }
+
+    @media (max-width: 980px){
+      .tool-grid,
+      .metaGrid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 640px){
+      .tool-actions .cta{
+        width:100%;
+      }
+
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .gasLine{
+        gap:6px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Multi-Chain Network Fee Estimator",
+    "url":"https://instantqr.io/tools/multi-chain-network-fee-estimator.html",
+    "description":"Estimate live network fees for Bitcoin, Litecoin, Dogecoin, Dash, and TRON.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Multi-Chain Network Fee Estimator",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+    "url":"https://instantqr.io/tools/multi-chain-network-fee-estimator.html",
+    "description":"Estimate network fees for Bitcoin, Litecoin, Dogecoin, Dash, and TRON using browser-based calculations and live fee lookups.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
 
   <script type="application/ld+json">
   {
@@ -57,7 +430,7 @@
         "@type":"ListItem",
         "position":2,
         "name":"Tools",
-        "item":"https://instantqr.io/tools.html"
+        "item":"https://instantqr.io/tools/tools.html"
       },
       {
         "@type":"ListItem",
@@ -72,28 +445,6 @@
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"Multi-Chain Network Fee Estimator",
-    "applicationCategory":"FinanceApplication",
-    "operatingSystem":"Web",
-    "url":"https://instantqr.io/tools/multi-chain-network-fee-estimator.html",
-    "description":"Free browser-based multi-chain fee estimator for Bitcoin, Litecoin, Dogecoin, Dash, and TRON.",
-    "offers":{
-      "@type":"Offer",
-      "price":"0",
-      "priceCurrency":"USD"
-    },
-    "publisher":{
-      "@type":"Organization",
-      "name":"InstantQR.io",
-      "url":"https://instantqr.io/"
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
     "@type":"FAQPage",
     "mainEntity":[
       {
@@ -101,720 +452,277 @@
         "name":"Which networks does this fee estimator support?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"This tool supports Bitcoin, Litecoin, Dogecoin, Dash, and TRON. Each network uses its own fee model, so the calculator adapts to that chain."
+          "text":"This tool supports Bitcoin, Litecoin, Dogecoin, Dash, and TRON. Each network uses a different fee model, so the estimator adapts to that chain."
         }
       },
       {
         "@type":"Question",
-        "name":"Why are Bitcoin and TRON fee estimates different?",
+        "name":"Why are these fee estimates calculated differently?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Bitcoin-style networks usually estimate fees from transaction size and fee rate, such as satoshis per virtual byte or per kilobyte. TRON estimates cost through bandwidth and energy consumption."
+          "text":"Bitcoin uses satoshis per virtual byte, Litecoin, Dogecoin, and Dash typically use per-kilobyte fee estimates, while TRON uses bandwidth and energy pricing."
         }
       },
       {
         "@type":"Question",
-        "name":"Is the estimate the exact final network fee?",
+        "name":"Is this the exact final network fee?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"No. It is a practical estimate based on live fee data and your selected transaction size or resource values. Actual wallet fees may vary depending on wallet logic, priority settings, and current network conditions."
+          "text":"No. This is an estimate based on current fee data and your selected transaction size or resource inputs. Actual wallet fees can vary."
         }
       },
       {
         "@type":"Question",
-        "name":"Do you store my endpoint URLs or inputs?",
+        "name":"Do you store my endpoint URL or inputs?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"No. The tool runs in your browser. Requests are made directly from your device to the endpoint you use."
+          "text":"No. This tool runs in your browser and calls the selected endpoint directly from your device."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why can public endpoints fail?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Public endpoints can be rate-limited, blocked by CORS, temporarily unavailable, or overloaded. If one fails, try another endpoint or refresh later."
         }
       }
     ]
   }
   </script>
-
-  <style>
-    .iqr-page{
-      max-width:1180px;
-      margin:0 auto;
-      padding:24px 16px 48px;
-    }
-
-    .iqr-breadcrumbs{
-      margin:0 0 18px;
-      font-size:.95rem;
-      opacity:.85;
-    }
-
-    .iqr-breadcrumbs a{
-      text-decoration:none;
-    }
-
-    .iqr-breadcrumbs span{
-      margin:0 6px;
-      opacity:.7;
-    }
-
-    .iqr-hero,
-    .iqr-panel,
-    .iqr-faq,
-    .iqr-related{
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:18px;
-      padding:20px;
-      margin-bottom:18px;
-      background:rgba(255,255,255,.03);
-      backdrop-filter:blur(8px);
-    }
-
-    .iqr-hero h1{
-      margin:0 0 10px;
-      font-size:clamp(1.9rem,4vw,2.8rem);
-      line-height:1.15;
-    }
-
-    .iqr-hero p{
-      margin:0;
-      opacity:.9;
-      line-height:1.7;
-      max-width:850px;
-    }
-
-    .iqr-badges{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:16px;
-    }
-
-    .iqr-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:.92rem;
-      border:1px solid rgba(255,255,255,.1);
-      background:rgba(255,255,255,.04);
-    }
-
-    .iqr-grid{
-      display:grid;
-      gap:18px;
-    }
-
-    .iqr-chain-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:18px;
-    }
-
-    .iqr-chain{
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:18px;
-      padding:18px;
-      background:rgba(255,255,255,.025);
-    }
-
-    .iqr-chain-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:14px;
-    }
-
-    .iqr-chain-head h2{
-      margin:0;
-      font-size:1.18rem;
-    }
-
-    .iqr-status{
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:.85rem;
-      border:1px solid rgba(255,255,255,.1);
-      background:rgba(255,255,255,.04);
-      white-space:nowrap;
-    }
-
-    .iqr-form-grid-2,
-    .iqr-form-grid-3{
-      display:grid;
-      gap:12px;
-      margin-bottom:14px;
-    }
-
-    .iqr-form-grid-2{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .iqr-form-grid-3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
-
-    .iqr-field label{
-      display:block;
-      font-size:.92rem;
-      margin-bottom:6px;
-      opacity:.88;
-    }
-
-    .iqr-field input,
-    .iqr-field select,
-    .iqr-btn{
-      width:100%;
-      min-height:46px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      padding:12px 14px;
-      font:inherit;
-      color:inherit;
-      background:rgba(0,0,0,.18);
-    }
-
-    .iqr-field input::placeholder{
-      opacity:.65;
-    }
-
-    .iqr-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-bottom:14px;
-    }
-
-    .iqr-btn{
-      cursor:pointer;
-      font-weight:700;
-      transition:transform .15s ease,opacity .15s ease,border-color .15s ease;
-    }
-
-    .iqr-btn:hover{
-      transform:translateY(-1px);
-    }
-
-    .iqr-btn-primary{
-      background:linear-gradient(135deg, rgba(59,130,246,.95), rgba(37,99,235,.92));
-      color:#fff;
-      border-color:transparent;
-      width:auto;
-      min-width:150px;
-    }
-
-    .iqr-btn-secondary{
-      width:auto;
-      min-width:150px;
-    }
-
-    .iqr-cards{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
-    }
-
-    .iqr-card{
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:16px;
-      padding:14px;
-      background:rgba(255,255,255,.03);
-    }
-
-    .iqr-card-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:8px;
-      margin-bottom:10px;
-    }
-
-    .iqr-card-top strong{
-      font-size:1rem;
-    }
-
-    .iqr-tag{
-      font-size:.76rem;
-      padding:4px 8px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.1);
-      background:rgba(255,255,255,.04);
-      opacity:.88;
-    }
-
-    .iqr-kv{
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:8px;
-      font-size:.95rem;
-      margin:8px 0;
-    }
-
-    .iqr-kv span{
-      opacity:.82;
-    }
-
-    .iqr-big{
-      margin-top:10px;
-      font-size:1.12rem;
-      font-weight:800;
-      word-break:break-word;
-    }
-
-    .iqr-note{
-      margin-top:12px;
-      font-size:.95rem;
-      opacity:.82;
-      line-height:1.65;
-    }
-
-    .iqr-inline-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-    }
-
-    .iqr-faq-items{
-      display:grid;
-      gap:12px;
-    }
-
-    .iqr-faq-item{
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:16px;
-      padding:16px;
-      background:rgba(255,255,255,.03);
-    }
-
-    .iqr-faq-item h3{
-      margin:0 0 8px;
-      font-size:1rem;
-    }
-
-    .iqr-faq-item p{
-      margin:0;
-      line-height:1.7;
-      opacity:.9;
-    }
-
-    .iqr-related-links,
-    .iqr-footer-links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px 16px;
-      margin-top:10px;
-    }
-
-    .iqr-footer-links{
-      justify-content:center;
-    }
-
-    .iqr-muted{
-      opacity:.8;
-    }
-
-    .mono{
-      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    }
-
-    @media (max-width:980px){
-      .iqr-chain-grid,
-      .iqr-cards,
-      .iqr-form-grid-2,
-      .iqr-form-grid-3{
-        grid-template-columns:1fr;
-      }
-    }
-  </style>
 </head>
 
 <body>
-  <main class="iqr-page">
-    <nav class="iqr-breadcrumbs" aria-label="Breadcrumb">
-      <a href="/">Home</a>
-      <span>/</span>
-      <a href="/tools.html">Tools</a>
-      <span>/</span>
-      <span>Multi-Chain Network Fee Estimator</span>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
+
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/guides/guides.html">Guides</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Multi-Chain Network Fee Estimator</span></li>
+      </ol>
     </nav>
 
-    <section class="iqr-hero">
-      <h1>Multi-Chain Network Fee Estimator</h1>
-      <p>
-        Estimate transaction fees for Bitcoin, Litecoin, Dogecoin, Dash, and TRON using network-specific fee logic.
-        This browser-based calculator helps you compare fee tiers, approximate transaction cost, and quickly check
-        network fee conditions across major non-EVM chains.
-      </p>
+    <section class="tool-grid" aria-label="Multi-Chain Network Fee Estimator">
+      <section class="tool-card">
+        <div class="pill">⛓️ Multi-Chain Fees • ⚡ Live Estimates • 🔒 Privacy-First</div>
 
-      <div class="iqr-badges" aria-label="Tool highlights">
-        <span class="iqr-badge">BTC</span>
-        <span class="iqr-badge">LTC</span>
-        <span class="iqr-badge">DOGE</span>
-        <span class="iqr-badge">DASH</span>
-        <span class="iqr-badge">TRON</span>
-        <span class="iqr-badge">Fast browser-based tool</span>
-        <span class="iqr-badge">Privacy-focused</span>
-      </div>
-    </section>
-
-    <section class="iqr-panel">
-      <h2 style="margin-top:0;">About this fee tool</h2>
-      <p class="iqr-muted" style="margin:0; line-height:1.75;">
-        Bitcoin uses sat/vB-style fee rates, Litecoin, Dogecoin, and Dash usually expose per-kilobyte fee estimates,
-        and TRON uses resource pricing based on bandwidth and energy. This tool adapts to each fee model so you can
-        estimate cost more accurately without switching between multiple pages.
-      </p>
-    </section>
-
-    <div class="iqr-grid">
-      <section class="iqr-chain-grid" aria-label="Supported network estimators">
-
-        <!-- BTC -->
-        <section class="iqr-chain" id="btcPanel">
-          <div class="iqr-chain-head">
-            <h2>Bitcoin (BTC)</h2>
-            <div class="iqr-status" id="btcStatus" aria-live="polite">Ready</div>
-          </div>
-
-          <div class="iqr-form-grid-2">
-            <div class="iqr-field">
-              <label for="btcUrl">API URL</label>
-              <input id="btcUrl" type="url" value="https://mempool.space/api/v1/fees/recommended" />
-            </div>
-            <div class="iqr-field">
-              <label for="btcSize">Transaction size (vBytes)</label>
-              <input id="btcSize" type="number" min="1" step="1" value="140" />
-            </div>
-          </div>
-
-          <div class="iqr-actions">
-            <button class="iqr-btn iqr-btn-primary" type="button" id="btcRefresh">Refresh BTC</button>
-          </div>
-
-          <div class="iqr-cards">
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Low</strong>
-                <span class="iqr-tag">Economy</span>
-              </div>
-              <div class="iqr-kv"><span>Fee rate</span><b class="mono" id="btcLowRate">—</b></div>
-              <div class="iqr-kv"><span>Total sats</span><b class="mono" id="btcLowSats">—</b></div>
-              <div class="iqr-big mono" id="btcLowBtc">—</div>
-            </div>
-
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Standard</strong>
-                <span class="iqr-tag">Balanced</span>
-              </div>
-              <div class="iqr-kv"><span>Fee rate</span><b class="mono" id="btcStdRate">—</b></div>
-              <div class="iqr-kv"><span>Total sats</span><b class="mono" id="btcStdSats">—</b></div>
-              <div class="iqr-big mono" id="btcStdBtc">—</div>
-            </div>
-
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Fast</strong>
-                <span class="iqr-tag">Priority</span>
-              </div>
-              <div class="iqr-kv"><span>Fee rate</span><b class="mono" id="btcFastRate">—</b></div>
-              <div class="iqr-kv"><span>Total sats</span><b class="mono" id="btcFastSats">—</b></div>
-              <div class="iqr-big mono" id="btcFastBtc">—</div>
-            </div>
-          </div>
-
-          <p class="iqr-note">Bitcoin fees are estimated from sat/vB rates multiplied by transaction size in virtual bytes.</p>
-        </section>
-
-        <!-- LTC -->
-        <section class="iqr-chain" id="ltcPanel">
-          <div class="iqr-chain-head">
-            <h2>Litecoin (LTC)</h2>
-            <div class="iqr-status" id="ltcStatus" aria-live="polite">Ready</div>
-          </div>
-
-          <div class="iqr-form-grid-2">
-            <div class="iqr-field">
-              <label for="ltcUrl">API URL</label>
-              <input id="ltcUrl" type="url" value="https://api.blockcypher.com/v1/ltc/main" />
-            </div>
-            <div class="iqr-field">
-              <label for="ltcSize">Transaction size (bytes)</label>
-              <input id="ltcSize" type="number" min="1" step="1" value="250" />
-            </div>
-          </div>
-
-          <div class="iqr-actions">
-            <button class="iqr-btn iqr-btn-primary" type="button" id="ltcRefresh">Refresh LTC</button>
-          </div>
-
-          <div class="iqr-cards">
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Low</strong>
-                <span class="iqr-tag">Economy</span>
-              </div>
-              <div class="iqr-kv"><span>Fee / KB</span><b class="mono" id="ltcLowRate">—</b></div>
-              <div class="iqr-kv"><span>Total litoshi</span><b class="mono" id="ltcLowLitoshi">—</b></div>
-              <div class="iqr-big mono" id="ltcLowLtc">—</div>
-            </div>
-
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Standard</strong>
-                <span class="iqr-tag">Balanced</span>
-              </div>
-              <div class="iqr-kv"><span>Fee / KB</span><b class="mono" id="ltcStdRate">—</b></div>
-              <div class="iqr-kv"><span>Total litoshi</span><b class="mono" id="ltcStdLitoshi">—</b></div>
-              <div class="iqr-big mono" id="ltcStdLtc">—</div>
-            </div>
-
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Fast</strong>
-                <span class="iqr-tag">Priority</span>
-              </div>
-              <div class="iqr-kv"><span>Fee / KB</span><b class="mono" id="ltcFastRate">—</b></div>
-              <div class="iqr-kv"><span>Total litoshi</span><b class="mono" id="ltcFastLitoshi">—</b></div>
-              <div class="iqr-big mono" id="ltcFastLtc">—</div>
-            </div>
-          </div>
-
-          <p class="iqr-note">Litecoin fees are estimated using per-kilobyte fee data and your chosen transaction size.</p>
-        </section>
-
-        <!-- DOGE -->
-        <section class="iqr-chain" id="dogePanel">
-          <div class="iqr-chain-head">
-            <h2>Dogecoin (DOGE)</h2>
-            <div class="iqr-status" id="dogeStatus" aria-live="polite">Ready</div>
-          </div>
-
-          <div class="iqr-form-grid-2">
-            <div class="iqr-field">
-              <label for="dogeUrl">API URL</label>
-              <input id="dogeUrl" type="url" value="https://api.blockcypher.com/v1/doge/main" />
-            </div>
-            <div class="iqr-field">
-              <label for="dogeSize">Transaction size (bytes)</label>
-              <input id="dogeSize" type="number" min="1" step="1" value="250" />
-            </div>
-          </div>
-
-          <div class="iqr-actions">
-            <button class="iqr-btn iqr-btn-primary" type="button" id="dogeRefresh">Refresh DOGE</button>
-          </div>
-
-          <div class="iqr-cards">
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Low</strong>
-                <span class="iqr-tag">Economy</span>
-              </div>
-              <div class="iqr-kv"><span>Fee / KB</span><b class="mono" id="dogeLowRate">—</b></div>
-              <div class="iqr-kv"><span>Total koinu</span><b class="mono" id="dogeLowKoinu">—</b></div>
-              <div class="iqr-big mono" id="dogeLowDoge">—</div>
-            </div>
-
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Standard</strong>
-                <span class="iqr-tag">Balanced</span>
-              </div>
-              <div class="iqr-kv"><span>Fee / KB</span><b class="mono" id="dogeStdRate">—</b></div>
-              <div class="iqr-kv"><span>Total koinu</span><b class="mono" id="dogeStdKoinu">—</b></div>
-              <div class="iqr-big mono" id="dogeStdDoge">—</div>
-            </div>
-
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Fast</strong>
-                <span class="iqr-tag">Priority</span>
-              </div>
-              <div class="iqr-kv"><span>Fee / KB</span><b class="mono" id="dogeFastRate">—</b></div>
-              <div class="iqr-kv"><span>Total koinu</span><b class="mono" id="dogeFastKoinu">—</b></div>
-              <div class="iqr-big mono" id="dogeFastDoge">—</div>
-            </div>
-          </div>
-
-          <p class="iqr-note">Dogecoin estimates are shown in both koinu and DOGE for easier comparison.</p>
-        </section>
-
-        <!-- DASH -->
-        <section class="iqr-chain" id="dashPanel">
-          <div class="iqr-chain-head">
-            <h2>Dash (DASH)</h2>
-            <div class="iqr-status" id="dashStatus" aria-live="polite">Ready</div>
-          </div>
-
-          <div class="iqr-form-grid-2">
-            <div class="iqr-field">
-              <label for="dashUrl">API URL</label>
-              <input id="dashUrl" type="url" value="https://api.blockcypher.com/v1/dash/main" />
-            </div>
-            <div class="iqr-field">
-              <label for="dashSize">Transaction size (bytes)</label>
-              <input id="dashSize" type="number" min="1" step="1" value="250" />
-            </div>
-          </div>
-
-          <div class="iqr-actions">
-            <button class="iqr-btn iqr-btn-primary" type="button" id="dashRefresh">Refresh DASH</button>
-          </div>
-
-          <div class="iqr-cards">
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Low</strong>
-                <span class="iqr-tag">Economy</span>
-              </div>
-              <div class="iqr-kv"><span>Fee / KB</span><b class="mono" id="dashLowRate">—</b></div>
-              <div class="iqr-kv"><span>Total duffs</span><b class="mono" id="dashLowDuffs">—</b></div>
-              <div class="iqr-big mono" id="dashLowDash">—</div>
-            </div>
-
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Standard</strong>
-                <span class="iqr-tag">Balanced</span>
-              </div>
-              <div class="iqr-kv"><span>Fee / KB</span><b class="mono" id="dashStdRate">—</b></div>
-              <div class="iqr-kv"><span>Total duffs</span><b class="mono" id="dashStdDuffs">—</b></div>
-              <div class="iqr-big mono" id="dashStdDash">—</div>
-            </div>
-
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Fast</strong>
-                <span class="iqr-tag">Priority</span>
-              </div>
-              <div class="iqr-kv"><span>Fee / KB</span><b class="mono" id="dashFastRate">—</b></div>
-              <div class="iqr-kv"><span>Total duffs</span><b class="mono" id="dashFastDuffs">—</b></div>
-              <div class="iqr-big mono" id="dashFastDash">—</div>
-            </div>
-          </div>
-
-          <p class="iqr-note">Dash values are shown in duffs and DASH using per-kilobyte fee estimates.</p>
-        </section>
-
-        <!-- TRON -->
-        <section class="iqr-chain" id="trxPanel">
-          <div class="iqr-chain-head">
-            <h2>TRON (TRX)</h2>
-            <div class="iqr-status" id="trxStatus" aria-live="polite">Ready</div>
-          </div>
-
-          <div class="iqr-form-grid-3">
-            <div class="iqr-field">
-              <label for="trxUrl">Endpoint URL</label>
-              <input id="trxUrl" type="url" value="https://api.trongrid.io/wallet/getchainparameters" />
-            </div>
-            <div class="iqr-field">
-              <label for="trxBytes">Bandwidth bytes</label>
-              <input id="trxBytes" type="number" min="0" step="1" value="300" />
-            </div>
-            <div class="iqr-field">
-              <label for="trxEnergy">Energy units</label>
-              <input id="trxEnergy" type="number" min="0" step="1" value="0" />
-            </div>
-          </div>
-
-          <div class="iqr-actions">
-            <button class="iqr-btn iqr-btn-primary" type="button" id="trxRefresh">Refresh TRON</button>
-          </div>
-
-          <div class="iqr-cards">
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Bandwidth</strong>
-                <span class="iqr-tag">Bytes</span>
-              </div>
-              <div class="iqr-kv"><span>Unit price</span><b class="mono" id="trxBwRate">—</b></div>
-              <div class="iqr-kv"><span>Estimated burn</span><b class="mono" id="trxBwSun">—</b></div>
-              <div class="iqr-big mono" id="trxBwTrx">—</div>
-            </div>
-
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Energy</strong>
-                <span class="iqr-tag">TVM</span>
-              </div>
-              <div class="iqr-kv"><span>Unit price</span><b class="mono" id="trxEnergyRate">—</b></div>
-              <div class="iqr-kv"><span>Estimated burn</span><b class="mono" id="trxEnergySun">—</b></div>
-              <div class="iqr-big mono" id="trxEnergyTrx">—</div>
-            </div>
-
-            <div class="iqr-card">
-              <div class="iqr-card-top">
-                <strong>Total</strong>
-                <span class="iqr-tag">TRX</span>
-              </div>
-              <div class="iqr-kv"><span>Total sun</span><b class="mono" id="trxTotalSun">—</b></div>
-              <div class="iqr-kv"><span>Free BW/day</span><b class="mono">600</b></div>
-              <div class="iqr-big mono" id="trxTotalTrx">—</div>
-            </div>
-          </div>
-
-          <p class="iqr-note">TRON estimates use bandwidth and energy pricing. Free daily bandwidth is not auto-subtracted from the estimate.</p>
-        </section>
-      </section>
-
-      <section class="iqr-panel">
-        <div class="iqr-inline-actions">
-          <button class="iqr-btn iqr-btn-primary" type="button" id="refreshAll">Refresh All</button>
-          <button class="iqr-btn iqr-btn-secondary" type="button" id="fillDefaults">Reset Defaults</button>
-        </div>
-        <p class="iqr-note" style="margin-bottom:0;">
-          This tool supports multiple fee models in one page: sat/vB for Bitcoin, per-kB estimation for Litecoin,
-          Dogecoin, and Dash, plus TRON bandwidth and energy estimation.
+        <h1>Multi-Chain Network Fee Estimator</h1>
+        <p class="sub">
+          Estimate network fees for <strong>Bitcoin</strong>, <strong>Litecoin</strong>, <strong>Dogecoin</strong>, <strong>Dash</strong>, and <strong>TRON</strong>.
+          This tool uses chain-specific fee logic including <strong>sat/vB</strong>, <strong>per-kB fee models</strong>, and <strong>TRON bandwidth and energy</strong>.
         </p>
-      </section>
 
-      <section class="iqr-faq" aria-labelledby="faq-title">
-        <h2 id="faq-title" style="margin-top:0;">Frequently Asked Questions</h2>
-        <div class="iqr-faq-items">
-          <article class="iqr-faq-item">
-            <h3>Which networks does this fee estimator support?</h3>
-            <p>
-              It supports Bitcoin, Litecoin, Dogecoin, Dash, and TRON. The calculator uses the fee model that best fits each supported network.
-            </p>
-          </article>
+        <div class="tool-actions">
+          <button class="cta primary" id="refreshBtn" type="button">Refresh Fee Data</button>
+          <button class="cta ghost" id="testBtn" type="button">Test Endpoint</button>
+          <button class="cta ghost" id="copyBtn" type="button">Copy Summary</button>
+        </div>
 
-          <article class="iqr-faq-item">
-            <h3>Why are these networks estimated differently?</h3>
-            <p>
-              Bitcoin-style chains often price transactions by size, while TRON uses resource-based pricing through bandwidth and energy. That is why the inputs and results differ across networks.
-            </p>
-          </article>
+        <div class="hint">
+          Tip: public endpoints can sometimes fail because of rate limits or CORS restrictions. If one provider fails, try again later or paste a different endpoint.
+        </div>
 
-          <article class="iqr-faq-item">
-            <h3>Is this the exact final fee?</h3>
-            <p>
-              No. It is an estimate based on live network data and your selected values. Final wallet fees can vary due to wallet behavior, transaction complexity, and network congestion.
-            </p>
-          </article>
+        <div class="form-grid" style="margin-top:16px;">
+          <div>
+            <label for="network">Network</label>
+            <select id="network"></select>
+          </div>
 
-          <article class="iqr-faq-item">
-            <h3>Do you store my endpoint URLs or inputs?</h3>
-            <p>
-              No. The tool runs in your browser. Requests go directly from your device to the selected endpoint.
-            </p>
-          </article>
+          <div>
+            <label for="feePreset">Preset</label>
+            <select id="feePreset"></select>
+          </div>
+
+          <div>
+            <label for="txSize">Transaction Size / Bytes</label>
+            <input id="txSize" type="number" min="0" step="1" value="140" inputmode="numeric" />
+            <div class="helper" id="sizeHelp">For Bitcoin this is virtual bytes. Other UTXO chains usually use bytes.</div>
+          </div>
+
+          <div>
+            <label for="energyUnits">Energy Units</label>
+            <input id="energyUnits" type="number" min="0" step="1" value="0" inputmode="numeric" />
+            <div class="helper" id="energyHelp">Used only for TRON. Leave 0 for simple transfers if you only want bandwidth cost.</div>
+          </div>
+
+          <div class="full">
+            <label for="endpointUrl">Endpoint URL</label>
+            <input id="endpointUrl" type="url" placeholder="https://your-endpoint.example" inputmode="url" />
+            <div class="helper">Requests are sent directly from your browser to the endpoint you select.</div>
+          </div>
+        </div>
+
+        <div class="statusBox" id="statusBox" style="margin-top:16px;">
+          <strong>Status:</strong> <span id="statusMessage">Ready to fetch fee data.</span><br>
+          <span id="lastUpdated">Last updated: —</span>
         </div>
       </section>
 
-      <section class="iqr-related" aria-labelledby="related-tools-title">
-        <h2 id="related-tools-title" style="margin-top:0;">Related Tools</h2>
-        <div class="iqr-related-links">
-          <a href="/tools/web3-gas-fee-estimator.html">Web3 Gas Fee Estimator</a>
-          <a href="/tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
-          <a href="/web3-tools/gas-tracker.html">Gas Tracker</a>
-          <a href="/tools.html">All Tools</a>
-        </div>
-      </section>
+      <aside class="tool-panel" aria-label="Fee results">
+        <div class="panel-top">
+          <div>
+            <h2>Results</h2>
+            <div class="networkHint">Chain-specific fee estimation with live lookup when available.</div>
+          </div>
 
-      <div class="iqr-footer-links">
-        <a href="/about.html">About</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/contact.html">Contact</a>
+          <div class="statusPill">
+            <span class="statusDot" id="statusDot"></span>
+            <span id="statusText">Ready</span>
+          </div>
+        </div>
+
+        <div class="gas-cards">
+          <div class="tierCard">
+            <div class="tierHead">
+              <b>Low</b>
+              <span class="tag">Budget</span>
+            </div>
+            <div class="nativeCost mono goodText" id="slowNative">—</div>
+            <div class="usdCost mono" id="slowUsd">—</div>
+            <div class="gasLine mono">
+              <span id="slowMax">Rate: —</span>
+              <span>•</span>
+              <span id="slowTip">Units: —</span>
+              <span>•</span>
+              <span id="slowTotal">Total: —</span>
+            </div>
+            <div class="subnote">Lower-cost estimate based on the selected network and current fee data.</div>
+          </div>
+
+          <div class="tierCard">
+            <div class="tierHead">
+              <b>Standard</b>
+              <span class="tag">Recommended</span>
+            </div>
+            <div class="nativeCost mono goodText" id="stdNative">—</div>
+            <div class="usdCost mono" id="stdUsd">—</div>
+            <div class="gasLine mono">
+              <span id="stdMax">Rate: —</span>
+              <span>•</span>
+              <span id="stdTip">Units: —</span>
+              <span>•</span>
+              <span id="stdTotal">Total: —</span>
+            </div>
+            <div class="subnote">Balanced estimate for typical confirmation conditions.</div>
+          </div>
+
+          <div class="tierCard">
+            <div class="tierHead">
+              <b>Fast</b>
+              <span class="tag">Priority</span>
+            </div>
+            <div class="nativeCost mono goodText" id="fastNative">—</div>
+            <div class="usdCost mono" id="fastUsd">—</div>
+            <div class="gasLine mono">
+              <span id="fastMax">Rate: —</span>
+              <span>•</span>
+              <span id="fastTip">Units: —</span>
+              <span>•</span>
+              <span id="fastTotal">Total: —</span>
+            </div>
+            <div class="subnote">Higher-fee estimate for quicker confirmation priority.</div>
+          </div>
+        </div>
+
+        <div class="metaGrid">
+          <div class="metaCard">
+            <h3>Estimator Mode</h3>
+            <div class="metaRow">
+              <span>Mode</span>
+              <b class="mono" id="modeText">—</b>
+            </div>
+            <div class="metaRow">
+              <span>Chain</span>
+              <b class="mono" id="chainText">—</b>
+            </div>
+          </div>
+
+          <div class="metaCard">
+            <h3>Current Settings</h3>
+            <div class="metaRow">
+              <span>Units</span>
+              <b class="mono" id="gasUnitsText">—</b>
+            </div>
+            <div class="metaRow">
+              <span>Native asset</span>
+              <b class="mono" id="symbolText">—</b>
+            </div>
+            <div class="metaRow">
+              <span>Lookup source</span>
+              <b class="mono" id="priceSourceText">—</b>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="faqCard" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>Which networks does this fee estimator support?</summary>
+        <p>This tool supports Bitcoin, Litecoin, Dogecoin, Dash, and TRON. Each network uses a different fee model, so the estimator adapts to that chain.</p>
+      </details>
+
+      <details>
+        <summary>Why are these network fees estimated differently?</summary>
+        <p>Bitcoin usually uses sat/vB. Litecoin, Dogecoin, and Dash typically use per-kilobyte fee estimates. TRON uses bandwidth and energy instead of the same UTXO fee model.</p>
+      </details>
+
+      <details>
+        <summary>Is this the exact final fee?</summary>
+        <p>No. It is a practical estimate based on current data and your chosen inputs. Final wallet fees can vary depending on the wallet, transaction type, and network conditions.</p>
+      </details>
+
+      <details>
+        <summary>Do you store my endpoint URL or input?</summary>
+        <p>No. This page runs in your browser and sends requests directly to the endpoint you choose.</p>
+      </details>
+
+      <details>
+        <summary>Why can a public endpoint fail?</summary>
+        <p>Public endpoints may be rate-limited, blocked by CORS, overloaded, or temporarily unavailable. If that happens, try again later or switch to another endpoint.</p>
+      </details>
+    </section>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/sitemap.xml">Sitemap</a>
+        </div>
       </div>
-    </div>
+    </footer>
   </main>
+
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/multi-chain-network-fee-estimator.js" defer></script>
 </body>
 </html>
