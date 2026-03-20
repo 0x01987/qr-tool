@@ -1,0 +1,25 @@
+# =====================================
+# InstantQR Redirects (Production Ready)
+# =====================================
+
+# ===== TOOL RENAME =====
+/tools/create-qr-code-for-wifi.html  /tools/wifi-qr-code-generator.html  301
+
+
+# ===== ROOT → /GUIDES/ MIGRATION =====
+/crypto-fees-and-taxes-basics.html        /guides/crypto-fees-and-taxes-basics.html        301
+/how-to-fix-canonical-issues.html         /guides/how-to-fix-canonical-issues.html         301
+/meta-title-description-best-practices.html /guides/meta-title-description-best-practices.html 301
+/what-is-a-gas-fee.html                   /guides/what-is-a-gas-fee.html                   301
+/how-to-calculate-crypto-profit.html      /guides/how-to-calculate-crypto-profit.html      301
+/what-is-a-password-leak.html             /guides/what-is-a-password-leak.html             301
+/how-to-create-wifi-qr-code.html          /guides/how-to-create-wifi-qr-code.html          301
+/dns-propagation-explained.html           /guides/dns-propagation-explained.html           301
+/what-is-json-formatting.html             /guides/what-is-json-formatting.html             301
+/how-to-create-url-qr-code.html           /guides/how-to-create-url-qr-code.html           301
+/qr-code-best-practices.html              /guides/qr-code-best-practices.html              301
+/what-is-base64.html                      /guides/what-is-base64.html                      301
+/password-security-checklist.html         /guides/password-security-checklist.html         301
+/how-to-generate-a-secure-password.html   /guides/how-to-generate-a-secure-password.html   301
+/robots-txt-basics.html                   /guides/robots-txt-basics.html                   301
+/unix-timestamp-explained.html            /guides/unix-timestamp-explained.html            301
