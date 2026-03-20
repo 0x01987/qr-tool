@@ -1,536 +1,648 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const NETWORKS = [
-    { key: 'eth', name: 'Ethereum', chainId: 1, symbol: 'ETH', rpc: 'https://ethereum.publicnode.com', priceKey: 'ethereum' },
-    { key: 'bsc', name: 'BNB Smart Chain', chainId: 56, symbol: 'BNB', rpc: 'https://bsc-dataseed.binance.org', priceKey: 'binancecoin' },
-    { key: 'arb', name: 'Arbitrum One', chainId: 42161, symbol: 'ETH', rpc: 'https://arb1.arbitrum.io/rpc', priceKey: 'ethereum' },
-    { key: 'op', name: 'Optimism', chainId: 10, symbol: 'ETH', rpc: 'https://mainnet.optimism.io', priceKey: 'ethereum' },
-    { key: 'base', name: 'Base', chainId: 8453, symbol: 'ETH', rpc: 'https://mainnet.base.org', priceKey: 'ethereum' },
-    { key: 'poly', name: 'Polygon PoS', chainId: 137, symbol: 'POL', rpc: 'https://polygon-bor.publicnode.com', priceKey: 'matic-network' },
-    { key: 'avax', name: 'Avalanche C-Chain', chainId: 43114, symbol: 'AVAX', rpc: 'https://api.avax.network/ext/bc/C/rpc', priceKey: 'avalanche-2' },
-    { key: 'gnosis', name: 'Gnosis', chainId: 100, symbol: 'xDAI', rpc: 'https://rpc.gnosischain.com', priceKey: 'xdai' },
-    { key: 'celo', name: 'Celo', chainId: 42220, symbol: 'CELO', rpc: 'https://forno.celo.org', priceKey: 'celo' },
-    { key: 'zksync', name: 'zkSync Era', chainId: 324, symbol: 'ETH', rpc: 'https://mainnet.era.zksync.io', priceKey: 'ethereum' },
-    { key: 'linea', name: 'Linea', chainId: 59144, symbol: 'ETH', rpc: 'https://rpc.linea.build', priceKey: 'ethereum' },
-    { key: 'scroll', name: 'Scroll', chainId: 534352, symbol: 'ETH', rpc: 'https://rpc.scroll.io', priceKey: 'ethereum' },
-    { key: 'kcc', name: 'KCC', chainId: 321, symbol: 'KCS', rpc: 'https://rpc-mainnet.kcc.network', priceKey: 'kucoin-shares' }
-  ];
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Analytics / Monetization -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
 
-  const RPC_TIMEOUT_MS = 5000;
-  const PRICE_TIMEOUT_MS = 4000;
-  const AUTO_REFRESH_MS = 15000;
-  const CACHE_TTL_MS = 15000;
-  const PRICE_CACHE_TTL_MS = 60000;
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
 
-  const els = {
-    year: document.getElementById('year'),
-    network: document.getElementById('network'),
-    gasUnits: document.getElementById('gasUnits'),
-    rpcUrl: document.getElementById('rpcUrl'),
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-    refreshBtn: document.getElementById('refreshBtn'),
-    testBtn: document.getElementById('testBtn'),
-    copyBtn: document.getElementById('copyBtn'),
+  <title>EVM Gas Fee Estimator | Ethereum, BNB, Base, Arbitrum, Polygon & More | InstantQR</title>
+  <meta name="description" content="Estimate live EVM gas fees for Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Avalanche, Gnosis, Celo, Scroll, Linea, zkSync Era, and KCC. Includes transaction presets, native token cost, and USD estimates." />
+  <meta name="keywords" content="gas fee estimator, ethereum gas, evm gas tracker, base gas, arbitrum gas, polygon gas, bnb gas, web3 gas estimator, crypto gas fees, transaction cost estimator" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="application-name" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
 
-    statusDot: document.getElementById('statusDot'),
-    statusText: document.getElementById('statusText'),
-    statusMessage: document.getElementById('statusMessage'),
-    lastUpdated: document.getElementById('lastUpdated'),
+  <link rel="canonical" href="https://instantqr.io/tools/web3-gas-fee-estimator.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
 
-    slowMax: document.getElementById('slowMax'),
-    slowTip: document.getElementById('slowTip'),
-    slowTotal: document.getElementById('slowTotal'),
-    slowNative: document.getElementById('slowNative'),
-    slowUsd: document.getElementById('slowUsd'),
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="EVM Gas Fee Estimator | InstantQR" />
+  <meta property="og:description" content="Live gas fee estimates for major EVM networks with transaction presets, native token cost, and USD estimates." />
+  <meta property="og:url" content="https://instantqr.io/tools/web3-gas-fee-estimator.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="EVM Gas Fee Estimator by InstantQR" />
 
-    stdMax: document.getElementById('stdMax'),
-    stdTip: document.getElementById('stdTip'),
-    stdTotal: document.getElementById('stdTotal'),
-    stdNative: document.getElementById('stdNative'),
-    stdUsd: document.getElementById('stdUsd'),
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EVM Gas Fee Estimator | InstantQR" />
+  <meta name="twitter:description" content="Estimate live gas fees across major EVM networks with transaction presets and USD cost estimates." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-    fastMax: document.getElementById('fastMax'),
-    fastTip: document.getElementById('fastTip'),
-    fastTotal: document.getElementById('fastTotal'),
-    fastNative: document.getElementById('fastNative'),
-    fastUsd: document.getElementById('fastUsd'),
-
-    modeText: document.getElementById('modeText'),
-    chainText: document.getElementById('chainText'),
-    gasUnitsText: document.getElementById('gasUnitsText'),
-    symbolText: document.getElementById('symbolText'),
-    priceSourceText: document.getElementById('priceSourceText')
-  };
-
-  if (els.year) {
-    els.year.textContent = new Date().getFullYear();
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"EVM Gas Fee Estimator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Web",
+    "isAccessibleForFree":true,
+    "url":"https://instantqr.io/tools/web3-gas-fee-estimator.html",
+    "description":"Estimate live gas fees for major EVM networks including Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Avalanche, Gnosis, Celo, Scroll, Linea, zkSync Era, and KCC.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    },
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    }
   }
+  </script>
 
-  let rpcId = 1;
-  let refreshTimer = null;
-  let inflight = false;
-
-  function getSelectedNetwork() {
-    return NETWORKS.find((n) => n.key === els.network.value) || NETWORKS[0];
-  }
-
-  function setStatus(kind, shortText, longText) {
-    const colorMap = {
-      ok: '#22c55e',
-      warn: '#facc15',
-      bad: '#ef4444',
-      idle: '#94a3b8'
-    };
-
-    if (els.statusDot) els.statusDot.style.background = colorMap[kind] || colorMap.idle;
-    if (els.statusText) els.statusText.textContent = shortText || 'Ready';
-    if (els.statusMessage) els.statusMessage.textContent = longText || 'Ready to fetch gas data.';
-  }
-
-  function pad2(n) {
-    return String(n).padStart(2, '0');
-  }
-
-  function formatDateTime(date) {
-    return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())} ${pad2(date.getHours())}:${pad2(date.getMinutes())}:${pad2(date.getSeconds())}`;
-  }
-
-  function abortableFetch(url, options = {}, timeoutMs = RPC_TIMEOUT_MS) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeoutMs);
-
-    return fetch(url, {
-      ...options,
-      signal: controller.signal
-    }).finally(() => clearTimeout(timer));
-  }
-
-  async function rpcCall(url, method, params) {
-    const body = {
-      jsonrpc: '2.0',
-      id: rpcId++,
-      method,
-      params
-    };
-
-    const res = await abortableFetch(url, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://instantqr.io/"
       },
-      body: JSON.stringify(body)
-    }, RPC_TIMEOUT_MS);
-
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}`);
-    }
-
-    const json = await res.json();
-    if (json.error) {
-      throw new Error(json.error.message || 'RPC error');
-    }
-
-    return json.result;
-  }
-
-  function hexToBigInt(hexValue) {
-    if (typeof hexValue !== 'string' || !hexValue.startsWith('0x')) {
-      throw new Error('Invalid hex value');
-    }
-    return BigInt(hexValue);
-  }
-
-  function medianBigInt(values) {
-    if (!Array.isArray(values) || values.length === 0) return 0n;
-    const sorted = [...values].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
-    const mid = Math.floor(sorted.length / 2);
-    if (sorted.length % 2 === 1) return sorted[mid];
-    return (sorted[mid - 1] + sorted[mid]) / 2n;
-  }
-
-  function formatGwei(valueWei) {
-    const num = Number(valueWei) / 1e9;
-    if (!Number.isFinite(num)) return '—';
-    return `${num.toFixed(2)} gwei`;
-  }
-
-  function weiToNativeNumber(weiBigInt) {
-    const num = Number(weiBigInt) / 1e18;
-    return Number.isFinite(num) ? num : null;
-  }
-
-  function formatNative(weiBigInt, symbol) {
-    const num = weiToNativeNumber(weiBigInt);
-    if (num === null) return `— ${symbol}`;
-    const formatted = num >= 1 ? num.toFixed(6) : num.toPrecision(6);
-    return `${formatted} ${symbol}`;
-  }
-
-  function formatUsd(value) {
-    if (!Number.isFinite(value)) return '—';
-    if (value >= 1000) return `$${value.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
-    if (value >= 1) return `$${value.toFixed(2)}`;
-    if (value >= 0.01) return `$${value.toFixed(4)}`;
-    return `$${value.toFixed(6)}`;
-  }
-
-  function formatPerGasLine(valueWei) {
-    return formatGwei(valueWei);
-  }
-
-  function getGasUnits() {
-    const n = parseInt(els.gasUnits.value || '21000', 10);
-    if (!Number.isFinite(n) || n < 1) return 21000;
-    return n;
-  }
-
-  function updateSettingsMeta() {
-    const net = getSelectedNetwork();
-    if (els.gasUnitsText) els.gasUnitsText.textContent = getGasUnits().toLocaleString();
-    if (els.symbolText) els.symbolText.textContent = net.symbol;
-    if (els.chainText) els.chainText.textContent = `${net.name} (${net.chainId})`;
-  }
-
-  function cacheKey() {
-    const net = getSelectedNetwork();
-    const rpc = (els.rpcUrl.value || '').trim();
-    const gasUnits = getGasUnits();
-    return `instantqr:gas:${net.key}:${gasUnits}:${rpc}`;
-  }
-
-  function cacheGet() {
-    try {
-      const raw = sessionStorage.getItem(cacheKey());
-      if (!raw) return null;
-      const obj = JSON.parse(raw);
-      if (!obj || typeof obj.t !== 'number' || !obj.v) return null;
-      if ((Date.now() - obj.t) > CACHE_TTL_MS) return null;
-      return obj.v;
-    } catch {
-      return null;
-    }
-  }
-
-  function cacheSet(value) {
-    try {
-      sessionStorage.setItem(cacheKey(), JSON.stringify({
-        t: Date.now(),
-        v: value
-      }));
-    } catch {}
-  }
-
-  function priceCacheKey(networkKey) {
-    return `instantqr:gas-price:${networkKey}`;
-  }
-
-  function priceCacheGet(networkKey) {
-    try {
-      const raw = sessionStorage.getItem(priceCacheKey(networkKey));
-      if (!raw) return null;
-      const obj = JSON.parse(raw);
-      if (!obj || typeof obj.t !== 'number' || !obj.v) return null;
-      if ((Date.now() - obj.t) > PRICE_CACHE_TTL_MS) return null;
-      return obj.v;
-    } catch {
-      return null;
-    }
-  }
-
-  function priceCacheSet(networkKey, value) {
-    try {
-      sessionStorage.setItem(priceCacheKey(networkKey), JSON.stringify({
-        t: Date.now(),
-        v: value
-      }));
-    } catch {}
-  }
-
-  async function fetchJsonWithTimeout(url, timeoutMs = PRICE_TIMEOUT_MS) {
-    const res = await abortableFetch(url, { method: 'GET' }, timeoutMs);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return res.json();
-  }
-
-  async function getUsdPriceForNetwork(network) {
-    const cached = priceCacheGet(network.key);
-    if (cached) return cached;
-
-    const fallbacks = [
-      async () => {
-        const url = `https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(network.priceKey)}&vs_currencies=usd`;
-        const json = await fetchJsonWithTimeout(url);
-        const price = json?.[network.priceKey]?.usd;
-        if (!Number.isFinite(price)) throw new Error('CoinGecko price unavailable');
-        return { usd: price, source: 'CoinGecko' };
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Tools",
+        "item":"https://instantqr.io/tools/tools.html"
       },
-      async () => {
-        const symbolMap = {
-          ETH: 'ETHUSDT',
-          BNB: 'BNBUSDT',
-          POL: 'POLUSDT',
-          AVAX: 'AVAXUSDT',
-          xDAI: 'DAIUSDT',
-          CELO: 'CELOUSDT',
-          KCS: 'KCSUSDT'
-        };
-        const pair = symbolMap[network.symbol];
-        if (!pair) throw new Error('No Binance symbol mapping');
-        const url = `https://api.binance.com/api/v3/ticker/price?symbol=${encodeURIComponent(pair)}`;
-        const json = await fetchJsonWithTimeout(url);
-        const price = Number(json?.price);
-        if (!Number.isFinite(price)) throw new Error('Binance price unavailable');
-        return { usd: price, source: 'Binance' };
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"EVM Gas Fee Estimator",
+        "item":"https://instantqr.io/tools/web3-gas-fee-estimator.html"
       }
-    ];
+    ]
+  }
+  </script>
 
-    let lastErr = null;
-    for (const fn of fallbacks) {
-      try {
-        const out = await fn();
-        priceCacheSet(network.key, out);
-        return out;
-      } catch (err) {
-        lastErr = err;
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How do gas fees work on EVM networks?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Most EVM networks use a gas model where a base fee or network gas price changes with demand. Many chains support EIP-1559 fee estimation, while others use legacy gasPrice methods."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Which networks does this gas fee estimator support?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This tool supports Ethereum, BNB Smart Chain, Arbitrum, Optimism, Base, Polygon, Avalanche, Gnosis, Celo, zkSync Era, Linea, Scroll, and KCC."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What transaction presets are included?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"You can choose Transfer, ERC-20 Transfer, Swap, NFT Mint, Contract Call, Bridge, or Custom gas units."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does InstantQR store my RPC URL or transaction data?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. This tool runs in your browser and sends requests directly to the RPC endpoint you choose."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .gas-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:18px;
+      margin-top:14px;
+      align-items:start;
+    }
+    .gas-card,
+    .gas-panel,
+    .faqCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
+    }
+    .gas-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+    }
+    .gas-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
+      pointer-events:none;
+    }
+    .gas-card > *{position:relative}
+    .gas-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .gas-panel{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .panel-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+    .statusPill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border);
+      color:var(--muted);
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .statusDot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--muted);
+      flex:0 0 auto;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .form-grid .full{grid-column:1 / -1}
+
+    .fieldCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+
+    .tierGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .tierCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .tierHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:8px;
+      margin-bottom:10px;
+    }
+    .tierTitle{
+      font-weight:900;
+      font-size:15px;
+    }
+    .tierTag{
+      font-size:11px;
+      color:var(--muted);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      border-radius:999px;
+      padding:4px 8px;
+    }
+    .tierRows{
+      display:grid;
+      gap:8px;
+    }
+    .tierRow{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+      font-size:13px;
+    }
+    .tierRow span{color:var(--muted)}
+    .tierRow b{
+      text-align:right;
+      font-weight:800;
+    }
+    .tierCost{
+      margin-top:10px;
+      font-size:19px;
+      font-weight:900;
+      line-height:1.25;
+      color:#22c55e;
+      word-break:break-word;
+    }
+    .tierUsd{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .metaCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .metaCard h3{
+      margin:0 0 10px;
+      font-size:16px;
+    }
+    .metaRow{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:8px 0;
+      border-top:1px solid rgba(255,255,255,.08);
+      font-size:13px;
+    }
+    .metaRow:first-of-type{border-top:0;padding-top:0}
+    .metaRow span{color:var(--muted)}
+    .metaRow b{text-align:right;word-break:break-word}
+
+    .infoCard{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .infoCard h3{
+      margin:0 0 10px;
+      font-size:16px;
+    }
+    .infoCard p,
+    .infoCard li{
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+    .infoCard ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .faqCard{
+      margin-top:14px;
+      padding:18px;
+    }
+    .faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+    .faqCard summary::-webkit-details-marker{display:none}
+    .faqCard p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    }
+
+    .resultLine{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    @media (max-width: 980px){
+      .gas-grid,
+      .tierGrid{
+        grid-template-columns:1fr;
       }
     }
-
-    return {
-      usd: null,
-      source: lastErr ? 'Unavailable' : 'Unknown'
-    };
-  }
-
-  async function estimateFeesEip1559(rpcUrl) {
-    const feeHistory = await rpcCall(rpcUrl, 'eth_feeHistory', ['0x14', 'latest', [10, 50, 90]]);
-
-    if (!feeHistory || !Array.isArray(feeHistory.baseFeePerGas) || !Array.isArray(feeHistory.reward)) {
-      throw new Error('feeHistory not supported');
-    }
-
-    const baseFees = feeHistory.baseFeePerGas.map(hexToBigInt);
-    const rewards = feeHistory.reward.map((row) => row.map(hexToBigInt));
-
-    if (!baseFees.length || !rewards.length) {
-      throw new Error('feeHistory returned no data');
-    }
-
-    const nextBaseFee = baseFees[baseFees.length - 1];
-    const p10 = rewards.map((r) => r[0] || 0n);
-    const p50 = rewards.map((r) => r[1] || 0n);
-    const p90 = rewards.map((r) => r[2] || 0n);
-
-    const tipSlow = medianBigInt(p10);
-    const tipStd = medianBigInt(p50);
-    const tipFast = medianBigInt(p90);
-
-    return {
-      mode: 'EIP-1559',
-      tiers: {
-        slow: { maxFee: nextBaseFee * 2n + tipSlow, tip: tipSlow },
-        std: { maxFee: nextBaseFee * 2n + tipStd, tip: tipStd },
-        fast: { maxFee: nextBaseFee * 2n + tipFast, tip: tipFast }
+    @media (max-width: 640px){
+      .form-grid{
+        grid-template-columns:1fr;
       }
-    };
-  }
-
-  async function estimateFeesLegacy(rpcUrl) {
-    const gasPriceHex = await rpcCall(rpcUrl, 'eth_gasPrice', []);
-    const gasPrice = hexToBigInt(gasPriceHex);
-
-    return {
-      mode: 'Legacy fallback',
-      tiers: {
-        slow: { maxFee: gasPrice, tip: 0n },
-        std: { maxFee: (gasPrice * 12n) / 10n, tip: 0n },
-        fast: { maxFee: (gasPrice * 15n) / 10n, tip: 0n }
-      }
-    };
-  }
-
-  async function estimateFees(rpcUrl) {
-    try {
-      return await estimateFeesEip1559(rpcUrl);
-    } catch {
-      return await estimateFeesLegacy(rpcUrl);
-    }
-  }
-
-  function setTier(prefix, tier, symbol, usdPrice) {
-    const gasUnits = BigInt(getGasUnits());
-    const totalWei = gasUnits * tier.maxFee;
-    const nativeValue = weiToNativeNumber(totalWei);
-
-    if (els[prefix + 'Max']) {
-      els[prefix + 'Max'].textContent = `Max: ${formatGwei(tier.maxFee)}`;
-    }
-
-    if (els[prefix + 'Tip']) {
-      els[prefix + 'Tip'].textContent = `Tip: ${tier.tip > 0n ? formatGwei(tier.tip) : '—'}`;
-    }
-
-    if (els[prefix + 'Total']) {
-      els[prefix + 'Total'].textContent = `Gas: ${formatPerGasLine(tier.maxFee)}`;
-    }
-
-    if (els[prefix + 'Native']) {
-      els[prefix + 'Native'].textContent = formatNative(totalWei, symbol);
-    }
-
-    if (els[prefix + 'Usd']) {
-      if (Number.isFinite(usdPrice) && nativeValue !== null) {
-        els[prefix + 'Usd'].textContent = `${formatUsd(nativeValue * usdPrice)} estimated`;
-      } else {
-        els[prefix + 'Usd'].textContent = 'USD estimate unavailable';
+      .gas-actions .cta{
+        width:100%;
       }
     }
-  }
+  </style>
+</head>
 
-  function updateUI(feeData, priceInfo) {
-    const net = getSelectedNetwork();
-    const usdPrice = Number.isFinite(priceInfo?.usd) ? priceInfo.usd : null;
+<body>
+  <a class="skip" href="#main">Skip to content</a>
 
-    setTier('slow', feeData.tiers.slow, net.symbol, usdPrice);
-    setTier('std', feeData.tiers.std, net.symbol, usdPrice);
-    setTier('fast', feeData.tiers.fast, net.symbol, usdPrice);
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
 
-    if (els.modeText) els.modeText.textContent = feeData.mode;
-    if (els.lastUpdated) els.lastUpdated.textContent = `Last updated: ${formatDateTime(new Date())}`;
-    if (els.priceSourceText) {
-      els.priceSourceText.textContent = priceInfo?.source || 'Unavailable';
-    }
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/web3-tools.html">Web3 Tools</a>
+        <a href="/tools/crypto-profit-calculator.html">Crypto Profit</a>
+        <a href="/tools/token-contract-analyzer.html">Token Analyzer</a>
+      </nav>
+    </div>
+  </header>
 
-    updateSettingsMeta();
-  }
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">EVM Gas Fee Estimator</span></li>
+      </ol>
+    </nav>
 
-  async function testRpc() {
-    const rpcUrl = (els.rpcUrl.value || '').trim();
-    if (!rpcUrl) {
-      setStatus('bad', 'RPC missing', 'Please enter an RPC URL.');
-      return;
-    }
+    <section class="gas-grid" aria-label="EVM Gas Fee Estimator">
+      <section class="gas-card">
+        <div class="pill">⛽ EVM Gas • ⚡ Live Estimates • 🔒 Privacy-First</div>
 
-    setStatus('warn', 'Testing RPC', 'Testing the selected RPC endpoint…');
+        <h1>EVM Gas Fee Estimator</h1>
+        <p class="sub">
+          Estimate live gas fees for major EVM networks including Ethereum, BNB Smart Chain, Base, Arbitrum,
+          Optimism, Polygon, Avalanche, Gnosis, Celo, Scroll, Linea, zkSync Era, and KCC.
+          Choose a transaction preset, adjust gas units if needed, and see native token plus USD cost estimates.
+        </p>
 
-    try {
-      const chainHex = await rpcCall(rpcUrl, 'eth_chainId', []);
-      const chainId = parseInt(chainHex, 16);
-      setStatus('ok', 'RPC OK', `RPC responded successfully. Chain ID: ${chainId}.`);
-    } catch (error) {
-      setStatus('bad', 'RPC failed', `RPC test failed: ${error.message}`);
-    }
-  }
+        <div class="gas-actions">
+          <button class="cta primary" id="refreshBtn" type="button">Refresh Estimates</button>
+          <button class="cta ghost" id="testBtn" type="button">Test RPC</button>
+          <button class="cta ghost" id="copyBtn" type="button">Copy Summary</button>
+        </div>
 
-  function buildSummaryText() {
-    const net = getSelectedNetwork();
-    return [
-      `InstantQR EVM Gas Fee Estimator`,
-      `Network: ${net.name}`,
-      `Gas units: ${getGasUnits().toLocaleString()}`,
-      `Mode: ${els.modeText ? els.modeText.textContent : '—'}`,
-      `USD source: ${els.priceSourceText ? els.priceSourceText.textContent : '—'}`,
-      `Slow: ${els.slowNative ? els.slowNative.textContent : '—'} | ${els.slowUsd ? els.slowUsd.textContent : '—'} | ${els.slowMax ? els.slowMax.textContent : '—'} | ${els.slowTip ? els.slowTip.textContent : '—'} | ${els.slowTotal ? els.slowTotal.textContent : '—'}`,
-      `Standard: ${els.stdNative ? els.stdNative.textContent : '—'} | ${els.stdUsd ? els.stdUsd.textContent : '—'} | ${els.stdMax ? els.stdMax.textContent : '—'} | ${els.stdTip ? els.stdTip.textContent : '—'} | ${els.stdTotal ? els.stdTotal.textContent : '—'}`,
-      `Fast: ${els.fastNative ? els.fastNative.textContent : '—'} | ${els.fastUsd ? els.fastUsd.textContent : '—'} | ${els.fastMax ? els.fastMax.textContent : '—'} | ${els.fastTip ? els.fastTip.textContent : '—'} | ${els.fastTotal ? els.fastTotal.textContent : '—'}`
-    ].join('\n');
-  }
+        <div class="form-grid">
+          <div class="fieldCard">
+            <label for="network">Network</label>
+            <select id="network"></select>
+          </div>
 
-  async function copySummary() {
-    const text = buildSummaryText();
-    try {
-      if (window.InstantQR && typeof window.InstantQR.copyText === 'function') {
-        await window.InstantQR.copyText(text);
-      } else {
-        await navigator.clipboard.writeText(text);
-      }
-      setStatus('ok', 'Copied', 'Gas summary copied to clipboard.');
-    } catch {
-      setStatus('bad', 'Copy failed', 'Unable to copy the summary.');
-    }
-  }
+          <div class="fieldCard">
+            <label for="txType">Transaction Type</label>
+            <select id="txType">
+              <option value="custom">Custom gas units</option>
+              <option value="transfer" selected>Transfer</option>
+              <option value="erc20">ERC-20 Transfer</option>
+              <option value="swap">Swap</option>
+              <option value="nft-mint">NFT Mint</option>
+              <option value="contract-call">Contract Call</option>
+              <option value="bridge">Bridge</option>
+            </select>
+            <div class="resultLine" id="txTypeHelp">Preset gas estimate for a simple native token transfer.</div>
+          </div>
 
-  async function refresh(useCache = true) {
-    if (inflight) return;
+          <div class="fieldCard full">
+            <label for="gasUnits">Gas Units</label>
+            <input id="gasUnits" type="number" min="1" step="1" value="21000" inputmode="numeric" />
+            <div class="resultLine" id="gasUnitsHelp">Preset loaded: 21,000 gas units for a simple transfer.</div>
+          </div>
 
-    const rpcUrl = (els.rpcUrl.value || '').trim();
-    if (!rpcUrl) {
-      setStatus('bad', 'RPC missing', 'Please enter an RPC URL.');
-      return;
-    }
+          <div class="fieldCard full">
+            <label for="rpcUrl">RPC URL</label>
+            <input id="rpcUrl" type="url" placeholder="https://your-rpc-endpoint.example" inputmode="url" />
+            <div class="resultLine">This tool sends requests directly from your browser to the RPC endpoint you choose.</div>
+          </div>
+        </div>
 
-    const net = getSelectedNetwork();
-    updateSettingsMeta();
+        <div class="tierGrid" aria-label="Gas fee results">
+          <div class="tierCard">
+            <div class="tierHead">
+              <div class="tierTitle">Slow</div>
+              <div class="tierTag">Budget</div>
+            </div>
+            <div class="tierRows">
+              <div class="tierRow"><span>Fee line</span><b class="mono" id="slowTotal">—</b></div>
+              <div class="tierRow"><span>Max fee</span><b class="mono" id="slowMax">—</b></div>
+              <div class="tierRow"><span>Priority fee</span><b class="mono" id="slowTip">—</b></div>
+            </div>
+            <div class="tierCost mono" id="slowNative">—</div>
+            <div class="tierUsd" id="slowUsd">USD estimate unavailable</div>
+          </div>
 
-    if (useCache) {
-      const cached = cacheGet();
-      if (cached) {
-        const priceInfo = await getUsdPriceForNetwork(net);
-        updateUI(cached, priceInfo);
-        setStatus('ok', 'Cached', `${net.name} gas data loaded from short-term cache.`);
-        return;
-      }
-    }
+          <div class="tierCard">
+            <div class="tierHead">
+              <div class="tierTitle">Standard</div>
+              <div class="tierTag">Recommended</div>
+            </div>
+            <div class="tierRows">
+              <div class="tierRow"><span>Fee line</span><b class="mono" id="stdTotal">—</b></div>
+              <div class="tierRow"><span>Max fee</span><b class="mono" id="stdMax">—</b></div>
+              <div class="tierRow"><span>Priority fee</span><b class="mono" id="stdTip">—</b></div>
+            </div>
+            <div class="tierCost mono" id="stdNative">—</div>
+            <div class="tierUsd" id="stdUsd">USD estimate unavailable</div>
+          </div>
 
-    inflight = true;
-    setStatus('warn', 'Refreshing', `Fetching gas data for ${net.name}…`);
+          <div class="tierCard">
+            <div class="tierHead">
+              <div class="tierTitle">Fast</div>
+              <div class="tierTag">Priority</div>
+            </div>
+            <div class="tierRows">
+              <div class="tierRow"><span>Fee line</span><b class="mono" id="fastTotal">—</b></div>
+              <div class="tierRow"><span>Max fee</span><b class="mono" id="fastMax">—</b></div>
+              <div class="tierRow"><span>Priority fee</span><b class="mono" id="fastTip">—</b></div>
+            </div>
+            <div class="tierCost mono" id="fastNative">—</div>
+            <div class="tierUsd" id="fastUsd">USD estimate unavailable</div>
+          </div>
+        </div>
+      </section>
 
-    try {
-      const [feeData, priceInfo] = await Promise.all([
-        estimateFees(rpcUrl),
-        getUsdPriceForNetwork(net)
-      ]);
+      <aside class="gas-panel" aria-label="Estimator details">
+        <div class="panel-top">
+          <div>
+            <h2>Results</h2>
+            <div class="hint" style="margin:6px 0 0;">EIP-1559 first, legacy fallback when needed.</div>
+          </div>
+          <div class="statusPill" aria-live="polite">
+            <span class="statusDot" id="statusDot"></span>
+            <span id="statusText">Ready</span>
+          </div>
+        </div>
 
-      updateUI(feeData, priceInfo);
-      cacheSet(feeData);
-      setStatus('ok', 'Updated', `${net.name} gas estimates updated successfully using ${feeData.mode}.`);
-    } catch (error) {
-      setStatus('bad', 'Failed', `Unable to fetch gas data: ${error.message}`);
-    } finally {
-      inflight = false;
-    }
-  }
+        <div class="metaCard">
+          <h3>Current Settings</h3>
+          <div class="metaRow">
+            <span>Network</span>
+            <b class="mono" id="chainText">—</b>
+          </div>
+          <div class="metaRow">
+            <span>Mode</span>
+            <b class="mono" id="modeText">—</b>
+          </div>
+          <div class="metaRow">
+            <span>Transaction type</span>
+            <b class="mono" id="txTypeText">Transfer</b>
+          </div>
+          <div class="metaRow">
+            <span>Gas units</span>
+            <b class="mono" id="gasUnitsText">21,000</b>
+          </div>
+          <div class="metaRow">
+            <span>Native asset</span>
+            <b class="mono" id="symbolText">—</b>
+          </div>
+          <div class="metaRow">
+            <span>USD source</span>
+            <b class="mono" id="priceSourceText">—</b>
+          </div>
+        </div>
 
-  function populateNetworks() {
-    els.network.innerHTML = NETWORKS.map((network) => {
-      return `<option value="${network.key}">${network.name}</option>`;
-    }).join('');
+        <div class="infoCard">
+          <h3>Status</h3>
+          <p id="statusMessage">Ready to fetch gas data.</p>
+          <div class="resultLine" id="lastUpdated">Last updated: —</div>
+        </div>
 
-    els.network.value = 'eth';
-    const selected = getSelectedNetwork();
-    els.rpcUrl.value = selected.rpc;
-    updateSettingsMeta();
-  }
+        <div class="infoCard">
+          <h3>How to use</h3>
+          <ul>
+            <li>Select a network and transaction type preset.</li>
+            <li>Use custom gas units when you know the exact contract cost.</li>
+            <li>Paste your own RPC URL if a public RPC is rate-limited.</li>
+            <li>Compare slow, standard, and fast estimates before sending.</li>
+          </ul>
+        </div>
 
-  function setupAutoRefresh() {
-    if (refreshTimer) {
-      clearInterval(refreshTimer);
-      refreshTimer = null;
-    }
+        <div class="infoCard">
+          <h3>Notes</h3>
+          <p>
+            Native token and USD values are estimates only. Public RPC endpoints can fail, rate-limit, or return stale data.
+            Bitcoin, Litecoin, and Monero are not EVM chains and need separate fee estimation logic.
+          </p>
+        </div>
+      </aside>
+    </section>
 
-    refreshTimer = setInterval(() => {
-      refresh(false);
-    }, AUTO_REFRESH_MS);
-  }
+    <section class="faqCard" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
 
-  els.network?.addEventListener('change', () => {
-    const selected = getSelectedNetwork();
-    els.rpcUrl.value = selected.rpc;
-    updateSettingsMeta();
-    refresh(false);
-  });
+      <details>
+        <summary>How do gas fees work on EVM networks?</summary>
+        <p>
+          Most EVM networks use a gas model where a base fee or network gas price changes with demand.
+          Many chains support EIP-1559 fee estimation, while others rely on legacy gasPrice methods.
+        </p>
+      </details>
 
-  els.gasUnits?.addEventListener('input', () => {
-    updateSettingsMeta();
-    window.clearTimeout(els.gasUnits._debounce);
-    els.gasUnits._debounce = window.setTimeout(() => refresh(false), 300);
-  });
+      <details>
+        <summary>Which networks does this EVM gas fee estimator support?</summary>
+        <p>
+          This tool supports Ethereum, BNB Smart Chain, Arbitrum, Optimism, Base, Polygon, Avalanche,
+          Gnosis, Celo, zkSync Era, Linea, Scroll, and KCC.
+        </p>
+      </details>
 
-  els.rpcUrl?.addEventListener('change', () => refresh(false));
-  els.refreshBtn?.addEventListener('click', () => refresh(false));
-  els.testBtn?.addEventListener('click', testRpc);
-  els.copyBtn?.addEventListener('click', copySummary);
+      <details>
+        <summary>What transaction presets are included?</summary>
+        <p>
+          You can choose Transfer, ERC-20 Transfer, Swap, NFT Mint, Contract Call, Bridge, or Custom gas units.
+          These are practical starting points and actual gas usage can vary by contract.
+        </p>
+      </details>
 
-  populateNetworks();
-  setStatus('idle', 'Ready', 'Ready to fetch gas data.');
-  setupAutoRefresh();
-  refresh(true);
-});
+      <details>
+        <summary>Does InstantQR store my RPC URL or data?</summary>
+        <p>
+          No. This tool runs in your browser and calls the RPC endpoint directly from your device.
+          InstantQR does not intentionally store your RPC URL or transaction inputs on a server.
+        </p>
+      </details>
+    </section>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/sitemap.xml">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/web3-gas-fee-estimator.js" defer></script>
+</body>
+</html>
