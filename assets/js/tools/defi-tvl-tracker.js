@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const $ = (id) => document.getElementById(id);
 
   const els = {
-    year: $("year"),
+    years: document.querySelectorAll("#year"),
     summaryText: $("summaryText"),
     apiStatus: $("apiStatus"),
     cacheState: $("cacheState"),
@@ -75,9 +75,9 @@ document.addEventListener("DOMContentLoaded", () => {
     tvlChart: $("tvlChart")
   };
 
-  if (els.year) {
-    els.year.textContent = new Date().getFullYear();
-  }
+  els.years.forEach((el) => {
+    el.textContent = new Date().getFullYear();
+  });
 
   function fmtMoney(n) {
     if (!isFinite(Number(n))) return "—";
@@ -175,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function fetchFirstWorking(urls) {
     let lastErr = null;
+
     for (const url of urls) {
       try {
         const json = await fetchJsonWithTimeout(url);
@@ -183,6 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lastErr = err;
       }
     }
+
     return { ok: false, error: lastErr || new Error("All endpoints failed") };
   }
 
@@ -419,8 +421,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <tbody>
           ${rows.map((r, i) => `
             <tr>
-              <td><span class="rank-badge">${i + 1}</span></td>
-              <td>
+              <td data-label="#"><span class="rank-badge">${i + 1}</span></td>
+              <td data-label="Protocol">
                 <div class="proto">
                   <img class="protoIcon" src="${escapeHtml(r.logo || "/assets/instantqr-logo.svg")}" alt="" loading="lazy" onerror="this.src='/assets/instantqr-logo.svg'">
                   <div>
@@ -429,13 +431,13 @@ document.addEventListener("DOMContentLoaded", () => {
                   </div>
                 </div>
               </td>
-              <td><span class="tag">${escapeHtml(r.category || "Unknown")}</span></td>
-              <td><span class="trend-neutral">${escapeHtml(r.chains?.slice(0,3).join(", ") || "—")}${(r.chains?.length || 0) > 3 ? " +" + (r.chains.length - 3) : ""}</span></td>
-              <td>${fmtMoney(r.tvl)}</td>
-              <td>${valueCellPct(r.change_1d)}</td>
-              <td>${valueCellPct(r.change_7d)}</td>
-              <td>${isFinite(r.mcap) ? fmtMoney(r.mcap) : '<span class="trend-neutral">—</span>'}</td>
-              <td><button class="row-btn" type="button" data-slug="${escapeHtml(r.slug || "")}" data-name="${escapeHtml(r.name)}">Open</button></td>
+              <td data-label="Category"><span class="tag">${escapeHtml(r.category || "Unknown")}</span></td>
+              <td data-label="Chains"><span class="trend-neutral">${escapeHtml(r.chains?.slice(0,3).join(", ") || "—")}${(r.chains?.length || 0) > 3 ? " +" + (r.chains.length - 3) : ""}</span></td>
+              <td data-label="TVL">${fmtMoney(r.tvl)}</td>
+              <td data-label="24h">${valueCellPct(r.change_1d)}</td>
+              <td data-label="7d">${valueCellPct(r.change_7d)}</td>
+              <td data-label="MCap">${isFinite(r.mcap) ? fmtMoney(r.mcap) : '<span class="trend-neutral">—</span>'}</td>
+              <td data-label="Details"><button class="row-btn" type="button" data-slug="${escapeHtml(r.slug || "")}" data-name="${escapeHtml(r.name)}">Open</button></td>
             </tr>
           `).join("")}
         </tbody>
@@ -461,8 +463,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <tbody>
           ${rows.map((r, i) => `
             <tr>
-              <td><span class="rank-badge">${i + 1}</span></td>
-              <td>
+              <td data-label="#"><span class="rank-badge">${i + 1}</span></td>
+              <td data-label="Chain">
                 <div class="proto">
                   <img class="protoIcon" src="/assets/instantqr-logo.svg" alt="" loading="lazy">
                   <div>
@@ -471,12 +473,12 @@ document.addEventListener("DOMContentLoaded", () => {
                   </div>
                 </div>
               </td>
-              <td>${escapeHtml(r.symbol || "—")}</td>
-              <td>${fmtMoney(r.tvl)}</td>
-              <td>${valueCellPct(r.change_1d)}</td>
-              <td>${valueCellPct(r.change_7d)}</td>
-              <td>${r.chainId ? escapeHtml(String(r.chainId)) : '<span class="trend-neutral">—</span>'}</td>
-              <td><span class="tag">Chain TVL</span></td>
+              <td data-label="Token">${escapeHtml(r.symbol || "—")}</td>
+              <td data-label="TVL">${fmtMoney(r.tvl)}</td>
+              <td data-label="24h">${valueCellPct(r.change_1d)}</td>
+              <td data-label="7d">${valueCellPct(r.change_7d)}</td>
+              <td data-label="Chain ID">${r.chainId ? escapeHtml(String(r.chainId)) : '<span class="trend-neutral">—</span>'}</td>
+              <td data-label="Reference"><span class="tag">Chain TVL</span></td>
             </tr>
           `).join("")}
         </tbody>
