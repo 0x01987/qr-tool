@@ -40,31 +40,24 @@ document.addEventListener("DOMContentLoaded", () => {
     cacheState: $("cacheState"),
     cacheSub: $("cacheSub"),
     lastUpdated: $("lastUpdated"),
-
     tabProtocols: $("tabProtocols"),
     tabChains: $("tabChains"),
-
     searchInput: $("searchInput"),
     categoryFilter: $("categoryFilter"),
     chainFilter: $("chainFilter"),
     sortBy: $("sortBy"),
     limitSelect: $("limitSelect"),
-
     resetBtn: $("resetBtn"),
     refreshBtn: $("refreshBtn"),
     jumpTableBtn: $("jumpTableBtn"),
     tracker: $("tracker"),
-
     trendingGrid: $("trendingGrid"),
     trendingMeta: $("trendingMeta"),
-
     statTracked: $("statTracked"),
     statTvl: $("statTvl"),
     statMedian: $("statMedian"),
     statChange: $("statChange"),
-
     modeLabel: $("modeLabel"),
-
     detailModal: $("detailModal"),
     closeModalBtn: $("closeModalBtn"),
     detailTitle: $("detailTitle"),
@@ -136,9 +129,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function lastUpdatedLabel(iso) {
-    if (!iso) return "—";
+    if (!iso) return "Last updated: —";
     const d = new Date(iso);
-    return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    return `Last updated: ${d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
   }
 
   function cacheGet(key) {
@@ -182,7 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function fetchFirstWorking(urls) {
     let lastErr = null;
-
     for (const url of urls) {
       try {
         const json = await fetchJsonWithTimeout(url);
@@ -191,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
         lastErr = err;
       }
     }
-
     return { ok: false, error: lastErr || new Error("All endpoints failed") };
   }
 
@@ -233,15 +224,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return data.map((p) => {
       const currentTvl =
         Number(p.tvl) ||
-        Number(
-          p.currentChainTvls &&
-          Object.values(p.currentChainTvls).reduce((a, b) => a + Number(b || 0), 0)
-        ) ||
+        Number(p.currentChainTvls && Object.values(p.currentChainTvls).reduce((a, b) => a + Number(b || 0), 0)) ||
         0;
 
-      const chainList = Array.isArray(p.chains)
-        ? p.chains
-        : p.chain ? [p.chain] : [];
+      const chainList = Array.isArray(p.chains) ? p.chains : p.chain ? [p.chain] : [];
 
       return {
         type: "protocol",
@@ -253,8 +239,8 @@ document.addEventListener("DOMContentLoaded", () => {
         chains: chainList,
         chainLabel: chainList.join(", "),
         tvl: currentTvl,
-        change_1d: Number(p.change_1d ?? p.change1d ?? p.change_1d_percent ?? NaN),
-        change_7d: Number(p.change_7d ?? p.change7d ?? p.change_7d_percent ?? NaN),
+        change_1d: Number(p.change_1d ?? p.change1d ?? NaN),
+        change_7d: Number(p.change_7d ?? p.change7d ?? NaN),
         mcap: Number(p.mcap ?? NaN),
         logo: p.logo || "",
         url: p.url || "",
@@ -265,7 +251,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function normalizeChains(data) {
     if (!Array.isArray(data)) return [];
-
     return data.map((c) => ({
       type: "chain",
       id: c.name || c.gecko_id || c.chainId,
@@ -334,7 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? sourceRows
       : (STATE.mode === "protocols" ? STATE.protocols : STATE.chains);
 
-    if (!Array.isArray(source) || !source.length) {
+    if (!source.length) {
       els.trendingGrid.innerHTML = '<div class="loading">No trending data available yet.</div>';
       if (els.trendingMeta) els.trendingMeta.textContent = "Waiting for data";
       return;
@@ -382,15 +367,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }).join("");
 
     if (els.trendingMeta) {
-      els.trendingMeta.textContent = STATE.mode === "protocols"
-        ? "Top 24h protocol movers"
-        : "Top 24h chain movers";
+      els.trendingMeta.textContent = STATE.mode === "protocols" ? "Top 24h protocol movers" : "Top 24h chain movers";
     }
 
     els.trendingGrid.querySelectorAll("[data-trending-slug]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        openProtocolDetail(btn.dataset.trendingSlug, btn.dataset.trendingName);
-      });
+      btn.addEventListener("click", () => openProtocolDetail(btn.dataset.trendingSlug, btn.dataset.trendingName));
     });
   }
 
@@ -512,9 +493,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    els.tracker.innerHTML = STATE.mode === "protocols"
-      ? buildProtocolsTable(rows)
-      : buildChainsTable(rows);
+    els.tracker.innerHTML = STATE.mode === "protocols" ? buildProtocolsTable(rows) : buildChainsTable(rows);
 
     if (STATE.mode === "protocols") {
       els.tracker.querySelectorAll("[data-slug]").forEach((btn) => {
@@ -549,10 +528,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (q) {
       rows = rows.filter((r) => {
-        const hay = [
-          r.name, r.symbol, r.category, r.chainLabel,
-          ...(r.chains || [])
-        ].join(" ").toLowerCase();
+        const hay = [r.name, r.symbol, r.category, r.chainLabel, ...(r.chains || [])].join(" ").toLowerCase();
         return hay.includes(q);
       });
     }
@@ -635,7 +611,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       fillFilters();
       setStatus(STATE.usingStale ? "Stale Data" : STATE.fresh ? "Live Data" : "Cached Data");
-
       applyFilters();
     } catch (err) {
       console.error(err);
@@ -900,10 +875,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener("resize", () => {
-      if (
-        els.detailModal?.classList.contains("open") &&
-        !els.detailContent?.classList.contains("hidden")
-      ) {
+      if (els.detailModal?.classList.contains("open") && !els.detailContent?.classList.contains("hidden")) {
         drawChart(STATE.activeChartPoints);
       }
     });
