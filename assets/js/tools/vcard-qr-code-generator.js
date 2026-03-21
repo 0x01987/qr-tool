@@ -28,17 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
     charCount: document.getElementById('charCount'),
 
     qrCanvas: document.getElementById('qrCanvas'),
+    qrImage: document.getElementById('qrImage'),
     qrEmpty: document.getElementById('qrEmpty'),
     year: document.getElementById('year')
   };
 
-  if (!els.firstName || !els.qrCanvas) return;
+  if (!els.firstName || !els.qrCanvas || !els.qrImage) return;
 
   if (els.year) {
     els.year.textContent = String(new Date().getFullYear());
   }
 
   let lastVCard = '';
+  let lastQrMode = '';
+  let lastQrImageUrl = '';
 
   function safeTrim(value) {
     return String(value || '').trim();
@@ -94,15 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!street && !city && !state && !postal && !country) return '';
 
-    return [
-      '',
-      '',
-      street,
-      city,
-      state,
-      postal,
-      country
-    ].map(escapeText).join(';');
+    return ['', '', street, city, state, postal, country]
+      .map(escapeText)
+      .join(';');
   }
 
   function buildVCard() {
@@ -163,32 +160,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function waitForQRCodeLibrary(timeoutMs = 4000) {
-    return new Promise((resolve, reject) => {
-      const started = Date.now();
-
-      function check() {
-        if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
-          resolve(window.QRCode);
-          return;
-        }
-
-        if (Date.now() - started > timeoutMs) {
-          reject(new Error('QRCode library did not load in time.'));
-          return;
-        }
-
-        setTimeout(check, 100);
-      }
-
-      check();
-    });
+  function showEmptyState() {
+    els.qrCanvas.hidden = true;
+    els.qrImage.hidden = true;
+    els.qrEmpty.hidden = false;
   }
 
-  async function renderQr(text) {
-    const QR = await waitForQRCodeLibrary();
+  function showCanvas() {
+    els.qrCanvas.hidden = false;
+    els.qrImage.hidden = true;
+    els.qrEmpty.hidden = true;
+  }
 
-    await QR.toCanvas(els.qrCanvas, text, {
+  function showImage() {
+    els.qrCanvas.hidden = true;
+    els.qrImage.hidden = false;
+    els.qrEmpty.hidden = true;
+  }
+
+  function getFallbackQrUrl(text) {
+    return 'https://api.qrserver.com/v1/create-qr-code/?size=640x640&margin=16&data=' + encodeURIComponent(text);
+  }
+
+  async function renderQrCanvas(text) {
+    if (!window.QRCode || typeof window.QRCode.toCanvas !== 'function') {
+      throw new Error('QRCode library unavailable');
+    }
+
+    await window.QRCode.toCanvas(els.qrCanvas, text, {
       width: 320,
       margin: 2,
       errorCorrectionLevel: 'M',
@@ -197,6 +196,17 @@ document.addEventListener('DOMContentLoaded', () => {
         light: '#ffffff'
       }
     });
+
+    lastQrMode = 'canvas';
+    showCanvas();
+  }
+
+  function renderQrFallback(text) {
+    const url = getFallbackQrUrl(text);
+    lastQrImageUrl = url;
+    els.qrImage.src = url;
+    lastQrMode = 'image';
+    showImage();
   }
 
   async function generate() {
@@ -208,9 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (fieldCount === 0) {
       if (els.readyLabel) els.readyLabel.textContent = 'No';
-      if (els.qrCanvas) els.qrCanvas.hidden = true;
-      if (els.qrEmpty) els.qrEmpty.hidden = false;
-
+      showEmptyState();
       setStatus('<strong>Not enough data.</strong><br>Add at least a name, phone, email, or company to generate a useful contact QR code.');
       return;
     }
@@ -218,10 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setStatus('<strong>Generating...</strong><br>Rendering your vCard QR code.');
 
     try {
-      await renderQr(vcard);
-
-      if (els.qrCanvas) els.qrCanvas.hidden = false;
-      if (els.qrEmpty) els.qrEmpty.hidden = true;
+      await renderQrCanvas(vcard);
       if (els.readyLabel) els.readyLabel.textContent = 'Yes';
 
       setStatus(
@@ -230,15 +235,13 @@ document.addEventListener('DOMContentLoaded', () => {
         `You can scan it, copy the vCard, or download the PNG.`
       );
     } catch (err) {
-      console.error('QR generation failed:', err);
-
-      if (els.readyLabel) els.readyLabel.textContent = 'No';
-      if (els.qrCanvas) els.qrCanvas.hidden = true;
-      if (els.qrEmpty) els.qrEmpty.hidden = false;
+      renderQrFallback(vcard);
+      if (els.readyLabel) els.readyLabel.textContent = 'Yes';
 
       setStatus(
-        '<strong>QR generation failed.</strong><br>' +
-        'The QR library did not load correctly. Check that the QR script is present and not blocked by the browser or network.'
+        `<strong>Generated with fallback.</strong><br>` +
+        `Your vCard QR code is ready for <b>${displayName}</b>. ` +
+        `The page used the fallback QR renderer because the local QR library was unavailable.`
       );
     }
   }
@@ -252,14 +255,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     lastVCard = '';
+    lastQrMode = '';
+    lastQrImageUrl = '';
+    els.qrImage.removeAttribute('src');
 
     if (els.outputCode) els.outputCode.textContent = 'No vCard generated yet.';
     if (els.displayName) els.displayName.textContent = 'Contact: —';
     if (els.fieldCount) els.fieldCount.textContent = '0';
     if (els.charCount) els.charCount.textContent = '0';
     if (els.readyLabel) els.readyLabel.textContent = 'No';
-    if (els.qrCanvas) els.qrCanvas.hidden = true;
-    if (els.qrEmpty) els.qrEmpty.hidden = false;
+
+    showEmptyState();
 
     setStatus('<strong>Ready.</strong><br>Add your contact details, then click <b>Generate QR Code</b>.');
   }
@@ -332,25 +338,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function downloadPng() {
-    if (!lastVCard || !els.qrCanvas || els.qrCanvas.hidden) {
+  async function downloadPng() {
+    if (!lastVCard) {
       setStatus('<strong>Nothing to download.</strong><br>Generate a QR code first.');
       return;
     }
 
-    const link = document.createElement('a');
-    const name = buildDisplayName()
+    const safeName = buildDisplayName()
       .replace(/[^\w\-]+/g, '-')
       .replace(/-+/g, '-')
       .replace(/^-|-$/g, '') || 'vcard-qr';
 
-    link.href = els.qrCanvas.toDataURL('image/png');
-    link.download = `${name}.png`;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    if (lastQrMode === 'canvas' && !els.qrCanvas.hidden) {
+      const link = document.createElement('a');
+      link.href = els.qrCanvas.toDataURL('image/png');
+      link.download = `${safeName}.png`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
 
-    setStatus('<strong>Downloaded.</strong><br>Your vCard QR code PNG was downloaded.');
+      setStatus('<strong>Downloaded.</strong><br>Your vCard QR code PNG was downloaded.');
+      return;
+    }
+
+    if (lastQrMode === 'image' && lastQrImageUrl) {
+      const link = document.createElement('a');
+      link.href = lastQrImageUrl;
+      link.download = `${safeName}.png`;
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      setStatus('<strong>Opened download source.</strong><br>Your fallback QR image was opened for saving.');
+      return;
+    }
+
+    setStatus('<strong>Nothing to download.</strong><br>Generate a QR code first.');
   }
 
   els.generateBtn?.addEventListener('click', async (e) => {
@@ -373,9 +397,9 @@ document.addEventListener('DOMContentLoaded', () => {
     await copyVCard();
   });
 
-  els.downloadBtn?.addEventListener('click', (e) => {
+  els.downloadBtn?.addEventListener('click', async (e) => {
     e.preventDefault();
-    downloadPng();
+    await downloadPng();
   });
 
   document.querySelectorAll('[data-preset]').forEach(btn => {
