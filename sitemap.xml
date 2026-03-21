@@ -474,5 +474,10 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
-
+  
+<url>
+<loc>https://instantqr.io/tools/vcard-qr-code-generator.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 </urlset>
