@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   if (!els.generateBtn || !els.qrCanvas) return;
-
   if (els.year) els.year.textContent = String(new Date().getFullYear());
 
   let currentMode = 'single';
@@ -48,23 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setStatus(html) {
     if (els.statusBox) els.statusBox.innerHTML = html;
-  }
-
-  function waitForQRCode(timeoutMs = 5000) {
-    return new Promise((resolve, reject) => {
-      const start = Date.now();
-      (function check() {
-        if (window.QRCode && typeof window.QRCode.toCanvas === 'function' && typeof window.QRCode.toString === 'function') {
-          resolve(window.QRCode);
-          return;
-        }
-        if (Date.now() - start > timeoutMs) {
-          reject(new Error('QRCode library did not load in time.'));
-          return;
-        }
-        setTimeout(check, 80);
-      })();
-    });
   }
 
   function setMode(mode) {
@@ -99,11 +81,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const count = currentMode === 'single' ? (getSingleText() ? 1 : 0) : getBatchItems().length;
     if (els.activeCount) els.activeCount.textContent = String(count);
     if (els.summaryCount) els.summaryCount.textContent = String(count);
+
     if (currentMode === 'single') {
       els.outputCode.textContent = getSingleText() || 'No QR content generated yet.';
     } else {
       const items = getBatchItems();
-      els.outputCode.textContent = items.length ? items.map((item, i) => `${i + 1}. ${item}`).join('\n') : 'No QR content generated yet.';
+      els.outputCode.textContent = items.length
+        ? items.map((item, i) => `${i + 1}. ${item}`).join('\n')
+        : 'No QR content generated yet.';
+    }
+  }
+
+  function hexToApiColor(hex) {
+    return String(hex || '#000000').replace('#', '');
+  }
+
+  function buildQrApiUrl(text, format) {
+    const size = getSize();
+    const params = new URLSearchParams({
+      data: text,
+      size: `${size}x${size}`,
+      margin: '16',
+      color: hexToApiColor(els.qrColor.value || '#000000'),
+      bgcolor: hexToApiColor(els.bgColor.value || '#ffffff'),
+      format: format || 'png'
+    });
+    return `https://api.qrserver.com/v1/create-qr-code/?${params.toString()}`;
+  }
+
+  async function fetchBlob(url) {
+    const res = await fetch(url, { mode: 'cors', cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.blob();
+  }
+
+  async function blobToImage(blob) {
+    const objectUrl = URL.createObjectURL(blob);
+    try {
+      const img = await new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = objectUrl;
+      });
+      return img;
+    } finally {
+      URL.revokeObjectURL(objectUrl);
     }
   }
 
@@ -116,15 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.arcTo(x, y + height, x, y, r);
     ctx.arcTo(x, y, x + width, y, r);
     ctx.closePath();
-  }
-
-  function clearCanvas(canvas, size) {
-    const ctx = canvas.getContext('2d');
-    canvas.width = size;
-    canvas.height = size;
-    ctx.clearRect(0, 0, size, size);
-    ctx.fillStyle = els.bgColor.value || '#ffffff';
-    ctx.fillRect(0, 0, size, size);
   }
 
   async function drawLogoOnCanvas(canvas, size) {
@@ -152,20 +166,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function renderSingleCanvas(text, canvas) {
-    const QRCodeLib = await waitForQRCode();
     const size = getSize();
+    canvas.width = size;
+    canvas.height = size;
 
-    clearCanvas(canvas, size);
+    const blob = await fetchBlob(buildQrApiUrl(text, 'png'));
+    const qrImg = await blobToImage(blob);
 
-    await QRCodeLib.toCanvas(canvas, text, {
-      width: size,
-      margin: 2,
-      errorCorrectionLevel: logoDataUrl ? 'H' : 'M',
-      color: {
-        dark: els.qrColor.value || '#000000',
-        light: els.bgColor.value || '#ffffff'
-      }
-    });
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, size, size);
+    ctx.fillStyle = els.bgColor.value || '#ffffff';
+    ctx.fillRect(0, 0, size, size);
+    ctx.drawImage(qrImg, 0, 0, size, size);
 
     await drawLogoOnCanvas(canvas, size);
   }
@@ -192,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
       els.qrCanvas.hidden = true;
       els.qrEmpty.hidden = false;
       if (els.readyLabel) els.readyLabel.textContent = 'No';
-      setStatus('<strong>Generation failed.</strong><br>The QR code could not be rendered. Check that the QR library is loading and try again.');
+      setStatus('<strong>Generation failed.</strong><br>The QR code could not be rendered.');
     }
   }
 
@@ -310,26 +322,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const QRCodeLib = await waitForQRCode();
-      const svg = await QRCodeLib.toString(text, {
-        type: 'svg',
-        margin: 2,
-        errorCorrectionLevel: logoDataUrl ? 'H' : 'M',
-        color: {
-          dark: els.qrColor.value || '#000000',
-          light: els.bgColor.value || '#ffffff'
-        },
-        width: getSize()
-      });
-
-      const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
+      const blob = await fetchBlob(buildQrApiUrl(text, 'svg'));
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
       link.download = 'text-qr-code.svg';
       link.click();
       setTimeout(() => URL.revokeObjectURL(url), 500);
-
       setStatus('<strong>Exported.</strong><br>Your SVG file was downloaded.');
     } catch (err) {
       console.error('SVG export failed:', err);
@@ -436,13 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  [
-    els.textInput,
-    els.batchInput,
-    els.qrColor,
-    els.bgColor,
-    els.sizeSelect
-  ].forEach(el => {
+  [els.textInput, els.batchInput, els.qrColor, els.bgColor, els.sizeSelect].forEach(el => {
     el?.addEventListener('input', updateCounts);
     el?.addEventListener('change', updateCounts);
   });
