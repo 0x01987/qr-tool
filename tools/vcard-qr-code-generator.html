@@ -14,7 +14,6 @@
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
-  <!-- Core Meta -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
@@ -42,7 +41,6 @@
 
   <link rel="stylesheet" href="/assets/site.css" />
 
-  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
@@ -57,7 +55,6 @@
   <meta name="twitter:description" content="Generate a vCard QR code for contact sharing in seconds." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -338,7 +335,8 @@
       padding:20px;
     }
 
-    #qrCanvas{
+    #qrCanvas,
+    #qrImage{
       width:min(280px, 100%);
       height:auto;
       background:#fff;
@@ -631,6 +629,7 @@
               Fill in contact fields and click <strong>Generate QR Code</strong>.
             </div>
             <canvas id="qrCanvas" width="320" height="320" hidden></canvas>
+            <img id="qrImage" alt="Generated vCard QR code" hidden />
           </div>
         </div>
 
@@ -713,7 +712,7 @@
     </footer>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
   <script src="/assets/site.js" defer></script>
   <script src="/assets/js/tools/vcard-qr-code-generator.js" defer></script>
 </body>
