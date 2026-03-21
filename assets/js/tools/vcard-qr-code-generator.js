@@ -60,10 +60,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function countFilledFields() {
     const fields = [
-      els.firstName.value, els.lastName.value, els.org.value, els.title.value,
-      els.phone.value, els.email.value, els.website.value, els.street.value,
-      els.city.value, els.state.value, els.postal.value, els.country.value, els.note.value
+      els.firstName.value,
+      els.lastName.value,
+      els.org.value,
+      els.title.value,
+      els.phone.value,
+      els.email.value,
+      els.website.value,
+      els.street.value,
+      els.city.value,
+      els.state.value,
+      els.postal.value,
+      els.country.value,
+      els.note.value
     ];
+
     return fields.filter(v => safeTrim(v)).length;
   }
 
@@ -135,20 +146,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const vcard = buildVCard();
     lastVCard = vcard;
 
-    if (els.displayName) els.displayName.textContent = `Contact: ${buildDisplayName()}`;
-    if (els.fieldCount) els.fieldCount.textContent = String(countFilledFields());
-    if (els.charCount) els.charCount.textContent = String(vcard.length);
+    if (els.displayName) {
+      els.displayName.textContent = `Contact: ${buildDisplayName()}`;
+    }
+
+    if (els.fieldCount) {
+      els.fieldCount.textContent = String(countFilledFields());
+    }
+
+    if (els.charCount) {
+      els.charCount.textContent = String(vcard.length);
+    }
+
     if (els.outputCode) {
       els.outputCode.textContent = countFilledFields() ? vcard : 'No vCard generated yet.';
     }
   }
 
-  async function renderQr(text) {
-    if (typeof QRCode === 'undefined') {
-      throw new Error('QRCode library is unavailable.');
-    }
+  function waitForQRCodeLibrary(timeoutMs = 4000) {
+    return new Promise((resolve, reject) => {
+      const started = Date.now();
 
-    await QRCode.toCanvas(els.qrCanvas, text, {
+      function check() {
+        if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
+          resolve(window.QRCode);
+          return;
+        }
+
+        if (Date.now() - started > timeoutMs) {
+          reject(new Error('QRCode library did not load in time.'));
+          return;
+        }
+
+        setTimeout(check, 100);
+      }
+
+      check();
+    });
+  }
+
+  async function renderQr(text) {
+    const QR = await waitForQRCodeLibrary();
+
+    await QR.toCanvas(els.qrCanvas, text, {
       width: 320,
       margin: 2,
       errorCorrectionLevel: 'M',
@@ -170,9 +210,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (els.readyLabel) els.readyLabel.textContent = 'No';
       if (els.qrCanvas) els.qrCanvas.hidden = true;
       if (els.qrEmpty) els.qrEmpty.hidden = false;
+
       setStatus('<strong>Not enough data.</strong><br>Add at least a name, phone, email, or company to generate a useful contact QR code.');
       return;
     }
+
+    setStatus('<strong>Generating...</strong><br>Rendering your vCard QR code.');
 
     try {
       await renderQr(vcard);
@@ -187,13 +230,15 @@ document.addEventListener('DOMContentLoaded', () => {
         `You can scan it, copy the vCard, or download the PNG.`
       );
     } catch (err) {
+      console.error('QR generation failed:', err);
+
       if (els.readyLabel) els.readyLabel.textContent = 'No';
       if (els.qrCanvas) els.qrCanvas.hidden = true;
       if (els.qrEmpty) els.qrEmpty.hidden = false;
 
       setStatus(
-        '<strong>QR library not ready.</strong><br>' +
-        'Your contact fields and vCard text loaded correctly, but the QR image could not be rendered yet.'
+        '<strong>QR generation failed.</strong><br>' +
+        'The QR library did not load correctly. Check that the QR script is present and not blocked by the browser or network.'
       );
     }
   }
@@ -207,6 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     lastVCard = '';
+
     if (els.outputCode) els.outputCode.textContent = 'No vCard generated yet.';
     if (els.displayName) els.displayName.textContent = 'Contact: —';
     if (els.fieldCount) els.fieldCount.textContent = '0';
@@ -238,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
       els.title.value = 'Business Development Manager';
       els.phone.value = '+1 602 555 0108';
       els.email.value = 'jane@smithconsulting.com';
-      els.website.value = 'smithconsulting.com';
+      els.website.value = 'https://smithconsulting.com';
       els.street.value = '100 Business Ave';
       els.city.value = 'Scottsdale';
       els.state.value = 'AZ';
@@ -279,6 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.execCommand('copy');
         temp.remove();
       }
+
       setStatus('<strong>Copied.</strong><br>Your vCard data was copied to the clipboard.');
     } catch (_) {
       setStatus('<strong>Copy failed.</strong><br>Please copy the vCard output manually.');
