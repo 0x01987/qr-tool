@@ -37,14 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!els.generateBtn || !els.qrCanvas) return;
 
-  if (els.year) {
-    els.year.textContent = String(new Date().getFullYear());
-  }
+  if (els.year) els.year.textContent = String(new Date().getFullYear());
 
   let currentMode = 'single';
   let logoDataUrl = '';
-  let lastSingleText = '';
-  let lastBatchItems = [];
 
   function safeTrim(value) {
     return String(value || '').trim();
@@ -52,6 +48,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setStatus(html) {
     if (els.statusBox) els.statusBox.innerHTML = html;
+  }
+
+  function waitForQRCode(timeoutMs = 5000) {
+    return new Promise((resolve, reject) => {
+      const start = Date.now();
+      (function check() {
+        if (window.QRCode && typeof window.QRCode.toCanvas === 'function' && typeof window.QRCode.toString === 'function') {
+          resolve(window.QRCode);
+          return;
+        }
+        if (Date.now() - start > timeoutMs) {
+          reject(new Error('QRCode library did not load in time.'));
+          return;
+        }
+        setTimeout(check, 80);
+      })();
+    });
   }
 
   function setMode(mode) {
@@ -62,9 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     els.batchModeFields.classList.toggle('hidden', mode !== 'batch');
     els.singlePreviewBox.classList.toggle('hidden', mode !== 'single');
     els.batchPreviewBox.classList.toggle('hidden', mode !== 'batch');
-    if (els.resultMode) {
-      els.resultMode.textContent = `Mode: ${mode === 'single' ? 'Single' : 'Batch'}`;
-    }
+    if (els.resultMode) els.resultMode.textContent = `Mode: ${mode === 'single' ? 'Single' : 'Batch'}`;
     updateCounts();
   }
 
@@ -85,27 +96,41 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateCounts() {
-    const count = currentMode === 'single'
-      ? (getSingleText() ? 1 : 0)
-      : getBatchItems().length;
-
+    const count = currentMode === 'single' ? (getSingleText() ? 1 : 0) : getBatchItems().length;
     if (els.activeCount) els.activeCount.textContent = String(count);
     if (els.summaryCount) els.summaryCount.textContent = String(count);
-
     if (currentMode === 'single') {
       els.outputCode.textContent = getSingleText() || 'No QR content generated yet.';
     } else {
       const items = getBatchItems();
-      els.outputCode.textContent = items.length
-        ? items.map((item, i) => `${i + 1}. ${item}`).join('\n')
-        : 'No QR content generated yet.';
+      els.outputCode.textContent = items.length ? items.map((item, i) => `${i + 1}. ${item}`).join('\n') : 'No QR content generated yet.';
     }
   }
 
-  function drawLogoOnCanvas(canvas, size) {
-    if (!logoDataUrl) return Promise.resolve();
+  function roundRect(ctx, x, y, width, height, radius) {
+    const r = Math.min(radius, width / 2, height / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + width, y, x + width, y + height, r);
+    ctx.arcTo(x + width, y + height, x, y + height, r);
+    ctx.arcTo(x, y + height, x, y, r);
+    ctx.arcTo(x, y, x + width, y, r);
+    ctx.closePath();
+  }
 
-    return new Promise((resolve) => {
+  function clearCanvas(canvas, size) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = size;
+    canvas.height = size;
+    ctx.clearRect(0, 0, size, size);
+    ctx.fillStyle = els.bgColor.value || '#ffffff';
+    ctx.fillRect(0, 0, size, size);
+  }
+
+  async function drawLogoOnCanvas(canvas, size) {
+    if (!logoDataUrl) return;
+
+    await new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
         const ctx = canvas.getContext('2d');
@@ -126,21 +151,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function roundRect(ctx, x, y, width, height, radius) {
-    const r = Math.min(radius, width / 2, height / 2);
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.arcTo(x + width, y, x + width, y + height, r);
-    ctx.arcTo(x + width, y + height, x, y + height, r);
-    ctx.arcTo(x, y + height, x, y, r);
-    ctx.arcTo(x, y, x + width, y, r);
-    ctx.closePath();
-  }
-
   async function renderSingleCanvas(text, canvas) {
+    const QRCodeLib = await waitForQRCode();
     const size = getSize();
 
-    await QRCode.toCanvas(canvas, text, {
+    clearCanvas(canvas, size);
+
+    await QRCodeLib.toCanvas(canvas, text, {
       width: size,
       margin: 2,
       errorCorrectionLevel: logoDataUrl ? 'H' : 'M',
@@ -155,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function generateSingle() {
     const text = getSingleText();
-    lastSingleText = text;
 
     if (!text) {
       els.qrCanvas.hidden = true;
@@ -173,14 +189,66 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus('<strong>Generated.</strong><br>Your styled text QR code is ready.');
     } catch (err) {
       console.error('Single QR generation failed:', err);
+      els.qrCanvas.hidden = true;
+      els.qrEmpty.hidden = false;
       if (els.readyLabel) els.readyLabel.textContent = 'No';
-      setStatus('<strong>Generation failed.</strong><br>The QR code could not be rendered.');
+      setStatus('<strong>Generation failed.</strong><br>The QR code could not be rendered. Check that the QR library is loading and try again.');
     }
+  }
+
+  async function renderBatchItem(item, index) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'batch-item';
+
+    const head = document.createElement('div');
+    head.className = 'batch-item-head';
+
+    const title = document.createElement('div');
+    title.className = 'batch-item-title';
+    title.textContent = `${index + 1}. ${item.length > 80 ? item.slice(0, 80) + '…' : item}`;
+    head.appendChild(title);
+
+    const canvasWrap = document.createElement('div');
+    canvasWrap.className = 'batch-canvas-wrap';
+
+    const canvas = document.createElement('canvas');
+    canvasWrap.appendChild(canvas);
+
+    const actions = document.createElement('div');
+    actions.className = 'batch-actions';
+
+    const downloadBtn = document.createElement('button');
+    downloadBtn.type = 'button';
+    downloadBtn.className = 'mini-btn';
+    downloadBtn.textContent = 'Download PNG';
+    downloadBtn.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = `text-qr-${index + 1}.png`;
+      link.click();
+    });
+
+    const copyBtn = document.createElement('button');
+    copyBtn.type = 'button';
+    copyBtn.className = 'mini-btn';
+    copyBtn.textContent = 'Copy Text';
+    copyBtn.addEventListener('click', async () => {
+      await copyText(item, 'Text copied.', 'Copy failed.');
+    });
+
+    actions.appendChild(downloadBtn);
+    actions.appendChild(copyBtn);
+
+    wrapper.appendChild(head);
+    wrapper.appendChild(canvasWrap);
+    wrapper.appendChild(actions);
+    els.batchList.appendChild(wrapper);
+
+    await renderSingleCanvas(item, canvas);
   }
 
   async function generateBatch() {
     const items = getBatchItems();
-    lastBatchItems = items;
     els.batchList.innerHTML = '';
 
     if (!items.length) {
@@ -189,83 +257,21 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const size = getSize();
-
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      const wrapper = document.createElement('div');
-      wrapper.className = 'batch-item';
-
-      const head = document.createElement('div');
-      head.className = 'batch-item-head';
-
-      const title = document.createElement('div');
-      title.className = 'batch-item-title';
-      title.textContent = `${i + 1}. ${item.length > 80 ? item.slice(0, 80) + '…' : item}`;
-
-      head.appendChild(title);
-
-      const canvasWrap = document.createElement('div');
-      canvasWrap.className = 'batch-canvas-wrap';
-
-      const canvas = document.createElement('canvas');
-      canvas.width = size;
-      canvas.height = size;
-      canvasWrap.appendChild(canvas);
-
-      const actions = document.createElement('div');
-      actions.className = 'batch-actions';
-
-      const downloadBtn = document.createElement('button');
-      downloadBtn.type = 'button';
-      downloadBtn.className = 'mini-btn';
-      downloadBtn.textContent = 'Download PNG';
-      downloadBtn.addEventListener('click', () => {
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png');
-        link.download = `text-qr-${i + 1}.png`;
-        link.click();
-      });
-
-      const copyBtn = document.createElement('button');
-      copyBtn.type = 'button';
-      copyBtn.className = 'mini-btn';
-      copyBtn.textContent = 'Copy Text';
-      copyBtn.addEventListener('click', async () => {
-        await copyText(item, 'Text copied.', 'Copy failed.');
-      });
-
-      actions.appendChild(downloadBtn);
-      actions.appendChild(copyBtn);
-
-      wrapper.appendChild(head);
-      wrapper.appendChild(canvasWrap);
-      wrapper.appendChild(actions);
-      els.batchList.appendChild(wrapper);
-
-      try {
-        await QRCode.toCanvas(canvas, item, {
-          width: size,
-          margin: 2,
-          errorCorrectionLevel: logoDataUrl ? 'H' : 'M',
-          color: {
-            dark: els.qrColor.value || '#000000',
-            light: els.bgColor.value || '#ffffff'
-          }
-        });
-        await drawLogoOnCanvas(canvas, size);
-      } catch (err) {
-        console.error('Batch QR generation failed for item:', item, err);
+    try {
+      for (let i = 0; i < items.length; i++) {
+        await renderBatchItem(items[i], i);
       }
+      if (els.readyLabel) els.readyLabel.textContent = 'Yes';
+      setStatus(`<strong>Generated.</strong><br>${items.length} QR code(s) created in batch mode.`);
+    } catch (err) {
+      console.error('Batch QR generation failed:', err);
+      if (els.readyLabel) els.readyLabel.textContent = 'No';
+      setStatus('<strong>Generation failed.</strong><br>One or more batch QR codes could not be rendered.');
     }
-
-    if (els.readyLabel) els.readyLabel.textContent = 'Yes';
-    setStatus(`<strong>Generated.</strong><br>${items.length} QR code(s) created in batch mode.`);
   }
 
   async function generate() {
     updateCounts();
-
     if (currentMode === 'single') {
       await generateSingle();
     } else {
@@ -304,7 +310,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const svg = await QRCode.toString(text, {
+      const QRCodeLib = await waitForQRCode();
+      const svg = await QRCodeLib.toString(text, {
         type: 'svg',
         margin: 2,
         errorCorrectionLevel: logoDataUrl ? 'H' : 'M',
@@ -338,8 +345,6 @@ document.addEventListener('DOMContentLoaded', () => {
     els.sizeSelect.value = '320';
     els.logoFile.value = '';
     logoDataUrl = '';
-    lastSingleText = '';
-    lastBatchItems = [];
     els.qrCanvas.hidden = true;
     els.qrEmpty.hidden = false;
     els.batchList.innerHTML = '';
@@ -395,9 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   els.copyTextBtn?.addEventListener('click', async () => {
-    const text = currentMode === 'single'
-      ? getSingleText()
-      : getBatchItems().join('\n');
+    const text = currentMode === 'single' ? getSingleText() : getBatchItems().join('\n');
     await copyText(text, 'The current text was copied.', 'Nothing to copy.');
   });
 
