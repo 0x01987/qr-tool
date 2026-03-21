@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     country: document.getElementById('country'),
     note: document.getElementById('note'),
     brandColor: document.getElementById('brandColor'),
-    avatarUrl: document.getElementById('avatarUrl'),
+    avatarFile: document.getElementById('avatarFile'),
 
     generateBtn: document.getElementById('generateBtn'),
     sampleBtn: document.getElementById('sampleBtn'),
@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     year: document.getElementById('year'),
 
     profileCard: document.getElementById('profileCard'),
-    avatarBox: document.getElementById('avatarBox'),
     avatarFallback: document.getElementById('avatarFallback'),
     avatarImg: document.getElementById('avatarImg'),
     profileName: document.getElementById('profileName'),
@@ -58,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let lastQrMode = '';
   let lastQrImageUrl = '';
   let lastShareLink = '';
+  let localAvatarDataUrl = '';
 
   function safeTrim(value) {
     return String(value || '').trim();
@@ -68,6 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/\r?\n/g, '\\n')
       .replace(/;/g, '\\;')
       .replace(/,/g, '\\,');
+  }
+
+  function escapeHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
   }
 
   function normalizeWebsite(value) {
@@ -82,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       els.firstName.value, els.lastName.value, els.org.value, els.title.value,
       els.phone.value, els.email.value, els.website.value, els.street.value,
       els.city.value, els.state.value, els.postal.value, els.country.value,
-      els.note.value, els.avatarUrl.value
+      els.note.value
     ];
     return fields.filter(v => safeTrim(v)).length;
   }
@@ -97,10 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function buildInitials() {
     const first = safeTrim(els.firstName.value);
     const last = safeTrim(els.lastName.value);
-    const fallback = safeTrim(els.org.value);
+    const org = safeTrim(els.org.value);
     const initials = `${first.charAt(0)}${last.charAt(0)}`.trim();
     if (initials) return initials.toUpperCase();
-    return (fallback.slice(0, 2) || 'VC').toUpperCase();
+    return (org.slice(0, 2) || 'VC').toUpperCase();
   }
 
   function buildAddressLine() {
@@ -162,9 +171,54 @@ document.addEventListener('DOMContentLoaded', () => {
     if (els.statusBox) els.statusBox.innerHTML = html;
   }
 
-  function buildShareLink(vcard) {
-    const encoded = btoa(unescape(encodeURIComponent(vcard)));
-    return `${window.location.origin}${window.location.pathname}?vcard=${encodeURIComponent(encoded)}`;
+  function getSharePayload() {
+    return {
+      firstName: safeTrim(els.firstName.value),
+      lastName: safeTrim(els.lastName.value),
+      org: safeTrim(els.org.value),
+      title: safeTrim(els.title.value),
+      phone: safeTrim(els.phone.value),
+      email: safeTrim(els.email.value),
+      website: normalizeWebsite(els.website.value),
+      street: safeTrim(els.street.value),
+      city: safeTrim(els.city.value),
+      state: safeTrim(els.state.value),
+      postal: safeTrim(els.postal.value),
+      country: safeTrim(els.country.value),
+      note: safeTrim(els.note.value),
+      brandColor: safeTrim(els.brandColor.value) || '#2563eb'
+    };
+  }
+
+  function encodeSharePayload(obj) {
+    return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
+  }
+
+  function decodeSharePayload(str) {
+    return JSON.parse(decodeURIComponent(escape(atob(str))));
+  }
+
+  function buildShareLink() {
+    const payload = getSharePayload();
+    const encoded = encodeSharePayload(payload);
+    return `${window.location.origin}${window.location.pathname}#c=${encodeURIComponent(encoded)}`;
+  }
+
+  function applyPayloadToFields(data) {
+    els.firstName.value = data.firstName || '';
+    els.lastName.value = data.lastName || '';
+    els.org.value = data.org || '';
+    els.title.value = data.title || '';
+    els.phone.value = data.phone || '';
+    els.email.value = data.email || '';
+    els.website.value = data.website || '';
+    els.street.value = data.street || '';
+    els.city.value = data.city || '';
+    els.state.value = data.state || '';
+    els.postal.value = data.postal || '';
+    els.country.value = data.country || '';
+    els.note.value = data.note || '';
+    els.brandColor.value = data.brandColor || '#2563eb';
   }
 
   function updateProfilePreview() {
@@ -177,7 +231,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const address = buildHumanAddress();
     const note = safeTrim(els.note.value);
     const color = safeTrim(els.brandColor.value) || '#2563eb';
-    const avatarUrl = safeTrim(els.avatarUrl.value);
 
     if (els.profileCard) {
       els.profileCard.style.setProperty('--cardBrand', color);
@@ -215,14 +268,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (els.avatarImg) {
-      if (avatarUrl) {
-        els.avatarImg.src = avatarUrl;
+      if (localAvatarDataUrl) {
+        els.avatarImg.src = localAvatarDataUrl;
         els.avatarImg.hidden = false;
         els.avatarFallback.hidden = true;
-        els.avatarImg.onerror = () => {
-          els.avatarImg.hidden = true;
-          els.avatarFallback.hidden = false;
-        };
       } else {
         els.avatarImg.removeAttribute('src');
         els.avatarImg.hidden = true;
@@ -237,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fieldCount = countFilledFields();
 
     lastVCard = vcard;
-    lastShareLink = fieldCount ? buildShareLink(vcard) : '';
+    lastShareLink = fieldCount ? buildShareLink() : '';
 
     if (els.displayName) {
       els.displayName.textContent = `Contact: ${name}`;
@@ -329,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    setStatus('<strong>Generating...</strong><br>Rendering your branded contact QR code.');
+    setStatus('<strong>Generating...</strong><br>Rendering your contact QR code.');
 
     try {
       await renderQrCanvas(vcard);
@@ -355,14 +404,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function reset() {
     [
       els.firstName, els.lastName, els.org, els.title, els.phone, els.email,
-      els.website, els.street, els.city, els.state, els.postal, els.country,
-      els.note, els.avatarUrl
+      els.website, els.street, els.city, els.state, els.postal, els.country, els.note
     ].forEach(el => {
       if (el) el.value = '';
     });
 
     if (els.brandColor) els.brandColor.value = '#2563eb';
+    if (els.avatarFile) els.avatarFile.value = '';
 
+    localAvatarDataUrl = '';
     lastVCard = '';
     lastShareLink = '';
     lastQrMode = '';
@@ -514,33 +564,20 @@ document.addEventListener('DOMContentLoaded', () => {
     setStatus('<strong>Downloaded.</strong><br>Your VCF contact file was downloaded.');
   }
 
-  function escapeHtml(str) {
-    return String(str || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-
   function loadFromShareLink() {
     try {
-      const params = new URLSearchParams(window.location.search);
-      const raw = params.get('vcard');
-      if (!raw) return;
+      const hash = window.location.hash || '';
+      const match = hash.match(/#c=([^&]+)/);
+      if (!match) return;
 
-      const decoded = decodeURIComponent(raw);
-      const text = decodeURIComponent(escape(atob(decoded)));
+      const payload = decodeSharePayload(decodeURIComponent(match[1]));
+      applyPayloadToFields(payload);
+      updateMetaOnly();
+      generate();
 
-      if (!text.includes('BEGIN:VCARD')) return;
-
-      lastVCard = text;
-      if (els.outputCode) els.outputCode.textContent = text;
-      if (els.shareLinkOutput) els.shareLinkOutput.value = window.location.href;
-      if (els.shareReady) els.shareReady.textContent = 'Yes';
-      setStatus('<strong>Share link loaded.</strong><br>The vCard data was loaded from the URL.');
-    } catch (_) {
-      /* ignore malformed shared links */
+      setStatus('<strong>Share link loaded.</strong><br>The contact data was restored from the shared link.');
+    } catch (err) {
+      console.error('Failed to load shared contact:', err);
     }
   }
 
@@ -598,10 +635,28 @@ document.addEventListener('DOMContentLoaded', () => {
   [
     els.firstName, els.lastName, els.org, els.title, els.phone, els.email,
     els.website, els.street, els.city, els.state, els.postal, els.country,
-    els.note, els.brandColor, els.avatarUrl
+    els.note, els.brandColor
   ].forEach(el => {
     el?.addEventListener('input', updateMetaOnly);
   });
+
+  if (els.avatarFile) {
+    els.avatarFile.addEventListener('change', () => {
+      const file = els.avatarFile.files && els.avatarFile.files[0];
+      if (!file) {
+        localAvatarDataUrl = '';
+        updateProfilePreview();
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        localAvatarDataUrl = typeof reader.result === 'string' ? reader.result : '';
+        updateProfilePreview();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
 
   reset();
   loadFromShareLink();
