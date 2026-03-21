@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>DeFi TVL Tracker | Protocol & Chain TVL Dashboard | InstantQR</title>
-  <meta name="description" content="Track DeFi TVL across protocols and chains. Search, filter, sort, compare live TVL, view 24h and 7d changes, inspect protocol details, and monitor trending DeFi gainers in a fast responsive dashboard." />
+  <meta name="description" content="Track DeFi TVL across protocols and chains. Search, filter, sort, inspect trending gainers, compare capital flows, and open protocol details with historical TVL charts." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
@@ -125,7 +125,8 @@
       grid-template-columns:minmax(260px,1.4fr) 1fr 1fr 1fr 120px;
     }
 
-    .metricGrid,.detailGrid{
+    .metricGrid,
+    .detailGrid{
       display:grid;
       gap:12px;
       margin-top:12px;
@@ -134,7 +135,9 @@
     .metricGrid{grid-template-columns:repeat(4,minmax(0,1fr))}
     .detailGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 
-    .metricCard,.detailCard,.trendingCard{
+    .metricCard,
+    .detailCard,
+    .trendingCard{
       border-radius:16px;
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
@@ -150,7 +153,9 @@
       flex-wrap:wrap;
     }
 
-    .metricCard h3,.detailCard h3,.trendingCard h3{
+    .metricCard h3,
+    .detailCard h3,
+    .trendingCard h3{
       margin:0;
       font-size:15px;
     }
@@ -461,33 +466,205 @@
     }
 
     @media (max-width:980px){
-      .controls.cols-5,.metricGrid,.detailGrid,.detailSheetGrid,.detailStats{grid-template-columns:1fr}
+      .controls.cols-5,
+      .metricGrid,
+      .detailGrid,
+      .detailSheetGrid,
+      .detailStats{
+        grid-template-columns:1fr;
+      }
+
+      .summary.summary-3{
+        grid-template-columns:1fr;
+      }
+
+      .panelHead{
+        align-items:flex-start;
+      }
+
+      .statusLine{
+        width:100%;
+      }
     }
 
     @media (max-width:760px){
-      .tableWrap.defiTableWrap thead{display:none}
+      .hero{
+        padding:18px;
+        margin-top:14px;
+      }
+
+      h1{
+        font-size:clamp(24px, 8vw, 34px);
+        line-height:1.08;
+      }
+
+      .sub{
+        font-size:14px;
+        line-height:1.55;
+      }
+
+      .panelBody{
+        padding:14px;
+      }
+
+      .panelHead{
+        padding:14px;
+      }
+
+      .statusLine{
+        gap:8px;
+      }
+
+      .statusLine .cta{
+        width:100%;
+      }
+
+      .controls.cols-5{
+        grid-template-columns:1fr;
+      }
+
+      .trendingGrid{
+        grid-template-columns:1fr;
+      }
+
+      .metricGrid{
+        grid-template-columns:1fr;
+      }
+
+      .detailGrid{
+        grid-template-columns:1fr;
+      }
+
+      .detailStats{
+        grid-template-columns:1fr;
+      }
+
+      .tableWrap.defiTableWrap{
+        border:0;
+        background:transparent;
+      }
+
       .tableWrap.defiTableWrap table,
+      .tableWrap.defiTableWrap thead,
       .tableWrap.defiTableWrap tbody,
-      .tableWrap.defiTableWrap tr,
-      .tableWrap.defiTableWrap td{
+      .tableWrap.defiTableWrap th,
+      .tableWrap.defiTableWrap td,
+      .tableWrap.defiTableWrap tr{
         display:block;
         width:100%;
       }
+
+      .tableWrap.defiTableWrap thead{
+        display:none;
+      }
+
+      .tableWrap.defiTableWrap tbody{
+        display:grid;
+        gap:12px;
+      }
+
       .tableWrap.defiTableWrap tbody tr{
-        border-bottom:1px solid rgba(255,255,255,.08);
+        border:1px solid rgba(255,255,255,.10);
+        background:rgba(255,255,255,.04);
+        border-radius:16px;
         padding:12px;
       }
+
       .tableWrap.defiTableWrap tbody td{
-        padding:8px 0;
         border-bottom:none;
+        padding:8px 0;
       }
+
       .tableWrap.defiTableWrap tbody td::before{
         content:attr(data-label);
         display:block;
-        font-size:.78rem;
+        font-size:11px;
         color:var(--muted);
         margin-bottom:4px;
-        font-weight:700;
+        font-weight:800;
+        text-transform:uppercase;
+        letter-spacing:.3px;
+      }
+
+      .proto{
+        gap:10px;
+      }
+
+      .protoIcon{
+        width:30px;
+        height:30px;
+      }
+
+      .protoName{
+        font-size:14px;
+      }
+
+      .protoMeta{
+        font-size:11px;
+      }
+
+      .trendItem{
+        min-height:auto;
+      }
+
+      .detailSheet{
+        width:100%;
+        margin:0;
+        border-radius:18px;
+      }
+
+      .detailSheetHead,
+      .detailSheetBody{
+        padding:14px;
+      }
+
+      .chartWrap canvas{
+        height:260px;
+      }
+
+      .footer-box{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+
+    @media (max-width:520px){
+      .wrap{
+        padding:0 12px 20px;
+      }
+
+      .topbar-inner{
+        padding:10px 12px;
+      }
+
+      .top-links{
+        display:none;
+      }
+
+      .pill{
+        font-size:12px;
+        padding:7px 10px;
+      }
+
+      .sumValue{
+        font-size:20px;
+      }
+
+      .metricVal{
+        font-size:20px;
+      }
+
+      .panelTitle{
+        font-size:16px;
+      }
+
+      .panelSub{
+        font-size:12px;
+      }
+
+      .cta{
+        padding:10px 12px;
+        font-size:14px;
       }
     }
   </style>
@@ -571,7 +748,7 @@
         <div class="controls cols-5" aria-label="Tracker filters">
           <div class="control">
             <label for="searchInput">Search</label>
-            <input id="searchInput" class="input" type="search" spellcheck="false" autocomplete="off" placeholder="Search protocol, chain, category, symbol..." />
+            <input id="searchInput" class="input" type="search" spellcheck="false" autocomplete="off" placeholder="Search protocol, chain, category..." />
           </div>
 
           <div class="control">
@@ -626,7 +803,7 @@
           <div class="monoBlock" id="resultText">Live DeFi TVL dashboard ready. Load protocols and chains, then search, sort, and inspect the current data.</div>
         </div>
 
-        <div class="formula" id="formulaText">Dataset: protocols or chains • Sorting + category + chain filter • 24h/7d changes • trending movers • protocol detail view</div>
+        <div class="formula" id="formulaText">Dataset: protocols • Sorting + category + chain filter • 24h/7d changes • trending movers • protocol detail view</div>
 
         <div class="metricGrid">
           <div class="metricCard">
