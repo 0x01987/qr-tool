@@ -18,8 +18,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>Free vCard QR Code Generator | Contact QR + VCF + Share Link | InstantQR</title>
-  <meta name="description" content="Create a branded vCard QR code with live profile preview, VCF download, PNG download, and share link. Fast, mobile friendly, and privacy-first." />
-  <meta name="keywords" content="vcard qr code generator, contact qr code generator, vcf qr code, digital contact qr, contact card qr, branded qr code contact" />
+  <meta name="description" content="Create a branded vCard QR code with live profile preview, VCF download, PNG download, profile image upload, and working share link. Fast, mobile friendly, and privacy-first." />
+  <meta name="keywords" content="vcard qr code generator, contact qr code generator, vcf qr code, digital contact qr, contact card qr, branded qr code contact, contact share link" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
@@ -36,13 +36,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:title" content="Free vCard QR Code Generator | Contact QR + VCF + Share Link | InstantQR" />
-  <meta property="og:description" content="Generate a contact QR code with live profile preview, branded card layout, VCF download, and share link." />
+  <meta property="og:description" content="Generate a contact QR code with live profile preview, branded card layout, VCF download, image upload, and share link." />
   <meta property="og:url" content="https://instantqr.io/tools/vcard-qr-code-generator.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free vCard QR Code Generator | InstantQR" />
-  <meta name="twitter:description" content="Create a branded contact QR code with VCF download and share link." />
+  <meta name="twitter:description" content="Create a branded contact QR code with VCF download, profile preview, and share link." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <script type="application/ld+json">
@@ -112,7 +112,7 @@
         "name":"Can I share the contact with a link?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Yes. This tool can generate a share link containing the encoded vCard data for quick browser-based sharing."
+          "text":"Yes. This tool generates a hash-based share link that restores contact fields in the browser."
         }
       },
       {
@@ -193,6 +193,17 @@
       outline:none;
       box-sizing:border-box;
       font:inherit;
+    }
+
+    .field input[type="color"]{
+      min-height:50px;
+      padding:8px;
+      cursor:pointer;
+    }
+
+    .field input[type="file"]{
+      padding:10px 12px;
+      cursor:pointer;
     }
 
     .field textarea{
@@ -573,8 +584,8 @@
         <h1>Free vCard QR Code Generator</h1>
         <p class="sub">
           Create a scannable <strong>vCard QR code</strong> with a <strong>live profile preview</strong>,
-          <strong>VCF download</strong>, and a <strong>share link</strong>. Great for business cards,
-          event booths, networking, and digital contact pages.
+          <strong>VCF download</strong>, and a <strong>working share link</strong>. Great for business cards,
+          event booths, networking, and digital contact sharing.
         </p>
 
         <div class="form-grid">
@@ -649,8 +660,8 @@
           </div>
 
           <div class="field">
-            <label for="avatarUrl">Profile photo URL (optional)</label>
-            <input id="avatarUrl" type="url" placeholder="https://example.com/photo.jpg" />
+            <label for="avatarFile">Profile image (optional)</label>
+            <input id="avatarFile" type="file" accept="image/*" />
           </div>
         </div>
 
@@ -672,7 +683,7 @@
         </div>
 
         <div class="hint" style="margin-top:14px;">
-          This tool builds the contact card, share link, and QR output in your browser.
+          Share links include contact fields and brand color, but not the uploaded profile image.
         </div>
       </section>
 
@@ -789,9 +800,9 @@
         <h2>Best upgrades included</h2>
         <ul>
           <li>Live branded profile preview</li>
+          <li>Profile image upload</li>
           <li>VCF file download</li>
-          <li>Shareable browser link</li>
-          <li>Contact card style layout</li>
+          <li>Working hash-based share link</li>
         </ul>
       </div>
 
@@ -799,7 +810,7 @@
         <h2>Best practices</h2>
         <p>
           Keep your contact details current and test the QR code on multiple phones before printing.
-          For better results, include a clear name, at least one direct contact method, and a company or website when relevant.
+          Share links restore contact fields and styling, while uploaded images stay local to the browser session.
         </p>
       </div>
     </section>
@@ -819,7 +830,7 @@
 
       <details>
         <summary>Can I share the contact with a link?</summary>
-        <p>Yes. This tool can generate a share link containing the encoded vCard data for quick browser-based sharing.</p>
+        <p>Yes. This tool generates a hash-based share link that restores contact fields in the browser.</p>
       </details>
 
       <details>
