@@ -49,6 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (els.statusBox) els.statusBox.innerHTML = html;
   }
 
+  function getScanSafeWarning() {
+    return logoDataUrl
+      ? '<br><span style="color:#fde68a;">Scan-safe tip: logos reduce reliability. For best results, use a small simple logo, keep dark-on-light colors, and test on your phone.</span>'
+      : '';
+  }
+
   function setMode(mode) {
     currentMode = mode;
     els.singleModeBtn.classList.toggle('active', mode === 'single');
@@ -101,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams({
       data: text,
       size: `${size}x${size}`,
-      margin: '16',
+      margin: '20',
       color: hexToApiColor(els.qrColor.value || '#000000'),
       bgcolor: hexToApiColor(els.bgColor.value || '#ffffff'),
       format: format || 'png'
@@ -148,13 +154,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const img = new Image();
       img.onload = () => {
         const ctx = canvas.getContext('2d');
-        const logoBox = Math.round(size * 0.22);
+
+        const logoBox = Math.round(size * 0.14);
         const x = Math.round((size - logoBox) / 2);
         const y = Math.round((size - logoBox) / 2);
-        const pad = Math.round(logoBox * 0.12);
+        const pad = Math.round(logoBox * 0.10);
 
         ctx.fillStyle = '#ffffff';
-        roundRect(ctx, x - pad, y - pad, logoBox + pad * 2, logoBox + pad * 2, 12);
+        roundRect(ctx, x - pad, y - pad, logoBox + pad * 2, logoBox + pad * 2, 10);
         ctx.fill();
 
         ctx.drawImage(img, x, y, logoBox, logoBox);
@@ -198,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
       els.qrCanvas.hidden = false;
       els.qrEmpty.hidden = true;
       if (els.readyLabel) els.readyLabel.textContent = 'Yes';
-      setStatus('<strong>Generated.</strong><br>Your styled text QR code is ready.');
+      setStatus('<strong>Generated.</strong><br>Your styled text QR code is ready.' + getScanSafeWarning());
     } catch (err) {
       console.error('Single QR generation failed:', err);
       els.qrCanvas.hidden = true;
@@ -274,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await renderBatchItem(items[i], i);
       }
       if (els.readyLabel) els.readyLabel.textContent = 'Yes';
-      setStatus(`<strong>Generated.</strong><br>${items.length} QR code(s) created in batch mode.`);
+      setStatus(`<strong>Generated.</strong><br>${items.length} QR code(s) created in batch mode.` + getScanSafeWarning());
     } catch (err) {
       console.error('Batch QR generation failed:', err);
       if (els.readyLabel) els.readyLabel.textContent = 'No';
@@ -329,7 +336,12 @@ document.addEventListener('DOMContentLoaded', () => {
       link.download = 'text-qr-code.svg';
       link.click();
       setTimeout(() => URL.revokeObjectURL(url), 500);
-      setStatus('<strong>Exported.</strong><br>Your SVG file was downloaded.');
+
+      const logoNote = logoDataUrl
+        ? '<br><span style="color:#fde68a;">Note: SVG export does not include the center logo overlay.</span>'
+        : '';
+
+      setStatus('<strong>Exported.</strong><br>Your SVG file was downloaded.' + logoNote);
     } catch (err) {
       console.error('SVG export failed:', err);
       setStatus('<strong>Export failed.</strong><br>The SVG file could not be generated.');
@@ -430,6 +442,11 @@ document.addEventListener('DOMContentLoaded', () => {
   els.logoFile?.addEventListener('change', async () => {
     const file = els.logoFile.files && els.logoFile.files[0];
     await loadLogo(file);
+
+    if (logoDataUrl) {
+      setStatus('<strong>Logo added.</strong><br>For best scan reliability, keep the logo small and simple. Dark QR on white background works best.');
+    }
+
     if ((currentMode === 'single' && getSingleText()) || (currentMode === 'batch' && getBatchItems().length)) {
       await generate();
     }
