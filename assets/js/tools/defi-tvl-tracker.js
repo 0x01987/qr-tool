@@ -34,30 +34,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const $ = (id) => document.getElementById(id);
 
   const els = {
-    years: document.querySelectorAll("#year"),
+    years: [$("yearFooter")].filter(Boolean),
+
     summaryText: $("summaryText"),
     apiStatus: $("apiStatus"),
+    apiStatusSide: $("apiStatusSide"),
     cacheState: $("cacheState"),
+    cacheStateSide: $("cacheStateSide"),
     cacheSub: $("cacheSub"),
+    cacheSubSide: $("cacheSubSide"),
     lastUpdated: $("lastUpdated"),
+
     tabProtocols: $("tabProtocols"),
     tabChains: $("tabChains"),
+
     searchInput: $("searchInput"),
     categoryFilter: $("categoryFilter"),
     chainFilter: $("chainFilter"),
     sortBy: $("sortBy"),
     limitSelect: $("limitSelect"),
+
     resetBtn: $("resetBtn"),
     refreshBtn: $("refreshBtn"),
     jumpTableBtn: $("jumpTableBtn"),
+
     tracker: $("tracker"),
     trendingGrid: $("trendingGrid"),
     trendingMeta: $("trendingMeta"),
+
     statTracked: $("statTracked"),
     statTvl: $("statTvl"),
     statMedian: $("statMedian"),
     statChange: $("statChange"),
+
     modeLabel: $("modeLabel"),
+    modeLabelSide: $("modeLabelSide"),
+
     detailModal: $("detailModal"),
     closeModalBtn: $("closeModalBtn"),
     detailTitle: $("detailTitle"),
@@ -78,6 +90,10 @@ document.addEventListener("DOMContentLoaded", () => {
   els.years.forEach((el) => {
     el.textContent = new Date().getFullYear();
   });
+
+  function setText(el, value) {
+    if (el) el.textContent = value;
+  }
 
   function fmtMoney(n) {
     if (!isFinite(Number(n))) return "—";
@@ -115,17 +131,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateSummary(text) {
-    if (els.summaryText) els.summaryText.textContent = text;
+    setText(els.summaryText, text);
   }
 
   function setStatus(status, sub) {
-    if (els.apiStatus) els.apiStatus.textContent = status;
-    if (sub && els.cacheSub) els.cacheSub.textContent = sub;
+    setText(els.apiStatus, status);
+    setText(els.apiStatusSide, status);
+    if (sub) {
+      setText(els.cacheSub, sub);
+      setText(els.cacheSubSide, sub);
+    }
   }
 
   function setCacheState(label, sub) {
-    if (els.cacheState) els.cacheState.textContent = label;
-    if (sub && els.cacheSub) els.cacheSub.textContent = sub;
+    setText(els.cacheState, label);
+    setText(els.cacheStateSide, label);
+    if (sub) {
+      setText(els.cacheSub, sub);
+      setText(els.cacheSubSide, sub);
+    }
   }
 
   function lastUpdatedLabel(iso) {
@@ -148,10 +172,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function cacheSet(key, data) {
     try {
-      localStorage.setItem(key, JSON.stringify({
-        timestamp: Date.now(),
-        data
-      }));
+      localStorage.setItem(
+        key,
+        JSON.stringify({
+          timestamp: Date.now(),
+          data
+        })
+      );
     } catch {}
   }
 
@@ -191,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function getDataset(name, urls) {
     const key = "defi-tvl-tracker:" + name;
     const cached = cacheGet(key);
-    const freshEnough = cached && (Date.now() - cached.timestamp < CACHE_TTL_MS);
+    const freshEnough = cached && Date.now() - cached.timestamp < CACHE_TTL_MS;
 
     if (freshEnough) {
       STATE.fresh = false;
@@ -223,32 +250,37 @@ document.addEventListener("DOMContentLoaded", () => {
   function normalizeProtocols(data) {
     if (!Array.isArray(data)) return [];
 
-    return data.map((p) => {
-      const currentTvl =
-        Number(p.tvl) ||
-        Number(p.currentChainTvls && Object.values(p.currentChainTvls).reduce((a, b) => a + Number(b || 0), 0)) ||
-        0;
+    return data
+      .map((p) => {
+        const currentTvl =
+          Number(p.tvl) ||
+          Number(
+            p.currentChainTvls &&
+              Object.values(p.currentChainTvls).reduce((a, b) => a + Number(b || 0), 0)
+          ) ||
+          0;
 
-      const chainList = Array.isArray(p.chains) ? p.chains : p.chain ? [p.chain] : [];
+        const chainList = Array.isArray(p.chains) ? p.chains : p.chain ? [p.chain] : [];
 
-      return {
-        type: "protocol",
-        id: p.id || p.slug || p.name,
-        slug: p.slug || (p.name || "").toLowerCase().replace(/\s+/g, "-"),
-        name: p.name || "Unknown",
-        symbol: p.symbol || "",
-        category: p.category || "Unknown",
-        chains: chainList,
-        chainLabel: chainList.join(", "),
-        tvl: currentTvl,
-        change_1d: Number(p.change_1d ?? p.change1d ?? NaN),
-        change_7d: Number(p.change_7d ?? p.change7d ?? NaN),
-        mcap: Number(p.mcap ?? NaN),
-        logo: p.logo || "",
-        url: p.url || "",
-        description: p.description || ""
-      };
-    }).filter((x) => x.name);
+        return {
+          type: "protocol",
+          id: p.id || p.slug || p.name,
+          slug: p.slug || (p.name || "").toLowerCase().replace(/\s+/g, "-"),
+          name: p.name || "Unknown",
+          symbol: p.symbol || "",
+          category: p.category || "Unknown",
+          chains: chainList,
+          chainLabel: chainList.join(", "),
+          tvl: currentTvl,
+          change_1d: Number(p.change_1d ?? p.change1d ?? NaN),
+          change_7d: Number(p.change_7d ?? p.change7d ?? NaN),
+          mcap: Number(p.mcap ?? NaN),
+          logo: p.logo || "",
+          url: p.url || "",
+          description: p.description || ""
+        };
+      })
+      .filter((x) => x.name);
   }
 
   function normalizeChains(data) {
@@ -272,7 +304,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function uniqueSorted(values) {
-    return [...new Set(values.filter(Boolean))].sort((a, b) => String(a).localeCompare(String(b)));
+    return [...new Set(values.filter(Boolean))].sort((a, b) =>
+      String(a).localeCompare(String(b))
+    );
   }
 
   function fillFilters() {
@@ -281,13 +315,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const chains = uniqueSorted(protocols.flatMap((p) => p.chains || []));
 
     if (els.categoryFilter) {
-      els.categoryFilter.innerHTML = '<option value="">All</option>' +
-        categories.map((v) => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join("");
+      els.categoryFilter.innerHTML =
+        '<option value="">All</option>' +
+        categories
+          .map((v) => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`)
+          .join("");
     }
 
     if (els.chainFilter) {
-      els.chainFilter.innerHTML = '<option value="">All</option>' +
-        chains.map((v) => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join("");
+      els.chainFilter.innerHTML =
+        '<option value="">All</option>' +
+        chains
+          .map((v) => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`)
+          .join("");
     }
   }
 
@@ -309,21 +349,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function valueCellPct(value) {
-    if (!isFinite(value)) return '<span class="trend-neutral">—</span>';
-    const cls = value > 0 ? "trend-pos" : value < 0 ? "trend-neg" : "trend-neutral";
+    if (!isFinite(value)) return '<span class="defi-trend-neutral">—</span>';
+    const cls =
+      value > 0 ? "defi-trend-pos" : value < 0 ? "defi-trend-neg" : "defi-trend-neutral";
     return `<span class="${cls}">${fmtPct(value)}</span>`;
   }
 
   function renderTrending(sourceRows) {
     if (!els.trendingGrid) return;
 
-    const source = (Array.isArray(sourceRows) && sourceRows.length)
-      ? sourceRows
-      : (STATE.mode === "protocols" ? STATE.protocols : STATE.chains);
+    const source =
+      Array.isArray(sourceRows) && sourceRows.length
+        ? sourceRows
+        : STATE.mode === "protocols"
+          ? STATE.protocols
+          : STATE.chains;
 
     if (!source.length) {
-      els.trendingGrid.innerHTML = '<div class="loading">No trending data available yet.</div>';
-      if (els.trendingMeta) els.trendingMeta.textContent = "Waiting for data";
+      els.trendingGrid.innerHTML =
+        '<div class="defi-loading">No trending data available yet.</div>';
+      setText(els.trendingMeta, "Waiting for data");
       return;
     }
 
@@ -333,47 +378,66 @@ document.addEventListener("DOMContentLoaded", () => {
       .slice(0, 4);
 
     if (!movers.length) {
-      els.trendingGrid.innerHTML = '<div class="loading">No top gainers available from the current dataset.</div>';
-      if (els.trendingMeta) els.trendingMeta.textContent = "No 24h change data found";
+      els.trendingGrid.innerHTML =
+        '<div class="defi-loading">No top gainers available from the current dataset.</div>';
+      setText(els.trendingMeta, "No 24h change data found");
       return;
     }
 
-    els.trendingGrid.innerHTML = movers.map((item, index) => {
-      const chainsLabel = STATE.mode === "protocols"
-        ? escapeHtml((item.chains || []).slice(0, 2).join(", ") || "—")
-        : escapeHtml(item.symbol || "—");
+    els.trendingGrid.innerHTML = movers
+      .map((item, index) => {
+        const chainsLabel =
+          STATE.mode === "protocols"
+            ? escapeHtml((item.chains || []).slice(0, 2).join(", ") || "—")
+            : escapeHtml(item.symbol || "—");
 
-      return `
-        <article class="trendingItem">
-          <div class="trendingTop">
-            <span class="trendingRank">#${index + 1}</span>
-            <span class="trendingChange ${Number(item.change_1d) > 0 ? "trend-pos" : Number(item.change_1d) < 0 ? "trend-neg" : "trend-neutral"}">
-              ${fmtPct(Number(item.change_1d))}
-            </span>
-          </div>
+        return `
+          <article class="defi-trending-item">
+            <div class="defi-trending-top">
+              <span class="defi-rank">#${index + 1}</span>
+              <span class="defi-trending-change ${
+                Number(item.change_1d) > 0
+                  ? "defi-trend-pos"
+                  : Number(item.change_1d) < 0
+                    ? "defi-trend-neg"
+                    : "defi-trend-neutral"
+              }">
+                ${fmtPct(Number(item.change_1d))}
+              </span>
+            </div>
 
-          <div class="trendingName">${escapeHtml(item.name || "Unknown")}</div>
-          <div class="trendingMetaRow">${STATE.mode === "protocols" ? escapeHtml(item.category || "Unknown") : "Chain TVL"}</div>
-          <div class="trendingMetaRow">${chainsLabel}</div>
-
-          <div class="trendingActions">
-            <div class="trendingTvl">${fmtMoney(item.tvl)}</div>
-            ${
+            <div class="defi-trending-name">${escapeHtml(item.name || "Unknown")}</div>
+            <div class="defi-trending-meta">${
               STATE.mode === "protocols"
-                ? `<button class="trendingOpen" type="button" data-trending-slug="${escapeHtml(item.slug || "")}" data-trending-name="${escapeHtml(item.name || "")}">Open</button>`
-                : `<span class="tiny">Top gainer</span>`
-            }
-          </div>
-        </article>
-      `;
-    }).join("");
+                ? escapeHtml(item.category || "Unknown")
+                : "Chain TVL"
+            }</div>
+            <div class="defi-trending-meta">${chainsLabel}</div>
 
-    if (els.trendingMeta) {
-      els.trendingMeta.textContent = STATE.mode === "protocols" ? "Top 24h protocol movers" : "Top 24h chain movers";
-    }
+            <div class="defi-trending-actions">
+              <div class="defi-trending-tvl">${fmtMoney(item.tvl)}</div>
+              ${
+                STATE.mode === "protocols"
+                  ? `<button class="defi-link-btn" type="button" data-trending-slug="${escapeHtml(
+                      item.slug || ""
+                    )}" data-trending-name="${escapeHtml(item.name || "")}">Open</button>`
+                  : `<span class="defi-tiny">Top gainer</span>`
+              }
+            </div>
+          </article>
+        `;
+      })
+      .join("");
+
+    setText(
+      els.trendingMeta,
+      STATE.mode === "protocols" ? "Top 24h protocol movers" : "Top 24h chain movers"
+    );
 
     els.trendingGrid.querySelectorAll("[data-trending-slug]").forEach((btn) => {
-      btn.addEventListener("click", () => openProtocolDetail(btn.dataset.trendingSlug, btn.dataset.trendingName));
+      btn.addEventListener("click", () => {
+        openProtocolDetail(btn.dataset.trendingSlug, btn.dataset.trendingName);
+      });
     });
   }
 
@@ -383,23 +447,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const med = median(tvls);
     const avg1d = avg(allVisibleRows.map((r) => Number(r.change_1d)));
 
-    if (els.statTracked) els.statTracked.textContent = fmtCompact(allVisibleRows.length);
-    if (els.statTvl) els.statTvl.textContent = fmtMoney(sum);
-    if (els.statMedian) els.statMedian.textContent = fmtMoney(med);
+    setText(els.statTracked, fmtCompact(allVisibleRows.length));
+    setText(els.statTvl, fmtMoney(sum));
+    setText(els.statMedian, fmtMoney(med));
 
     if (els.statChange) {
       if (isFinite(avg1d)) {
         els.statChange.textContent = fmtPct(avg1d);
-        els.statChange.className = "v " + (avg1d > 0 ? "trend-pos" : avg1d < 0 ? "trend-neg" : "trend-neutral");
+        els.statChange.className =
+          "v " +
+          (avg1d > 0 ? "defi-trend-pos" : avg1d < 0 ? "defi-trend-neg" : "defi-trend-neutral");
       } else {
         els.statChange.textContent = "—";
-        els.statChange.className = "v trend-neutral";
+        els.statChange.className = "v defi-trend-neutral";
       }
     }
 
-    if (els.modeLabel) {
-      els.modeLabel.textContent = STATE.mode === "protocols" ? "Protocols" : "Chains";
-    }
+    const modeText = STATE.mode === "protocols" ? "Protocols" : "Chains";
+    setText(els.modeLabel, modeText);
+    setText(els.modeLabelSide, modeText);
   }
 
   function buildProtocolsTable(rows) {
@@ -419,27 +485,41 @@ document.addEventListener("DOMContentLoaded", () => {
           </tr>
         </thead>
         <tbody>
-          ${rows.map((r, i) => `
+          ${rows
+            .map(
+              (r, i) => `
             <tr>
-              <td data-label="#"><span class="rank-badge">${i + 1}</span></td>
+              <td data-label="#"><span class="defi-rank-badge">${i + 1}</span></td>
               <td data-label="Protocol">
-                <div class="proto">
-                  <img class="protoIcon" src="${escapeHtml(r.logo || "/assets/instantqr-logo.svg")}" alt="" loading="lazy" onerror="this.src='/assets/instantqr-logo.svg'">
+                <div class="defi-proto">
+                  <img class="defi-proto-icon" src="${escapeHtml(
+                    r.logo || "/assets/instantqr-logo.svg"
+                  )}" alt="" loading="lazy" onerror="this.src='/assets/instantqr-logo.svg'">
                   <div>
-                    <div class="protoName">${escapeHtml(r.name)}</div>
-                    <div class="protoMeta">${escapeHtml(r.symbol || "—")}</div>
+                    <div class="defi-proto-name">${escapeHtml(r.name)}</div>
+                    <div class="defi-proto-meta">${escapeHtml(r.symbol || "—")}</div>
                   </div>
                 </div>
               </td>
-              <td data-label="Category"><span class="tag">${escapeHtml(r.category || "Unknown")}</span></td>
-              <td data-label="Chains"><span class="trend-neutral">${escapeHtml(r.chains?.slice(0,3).join(", ") || "—")}${(r.chains?.length || 0) > 3 ? " +" + (r.chains.length - 3) : ""}</span></td>
+              <td data-label="Category"><span class="defi-tag">${escapeHtml(
+                r.category || "Unknown"
+              )}</span></td>
+              <td data-label="Chains"><span class="defi-trend-neutral">${escapeHtml(
+                r.chains?.slice(0, 3).join(", ") || "—"
+              )}${(r.chains?.length || 0) > 3 ? " +" + (r.chains.length - 3) : ""}</span></td>
               <td data-label="TVL">${fmtMoney(r.tvl)}</td>
               <td data-label="24h">${valueCellPct(r.change_1d)}</td>
               <td data-label="7d">${valueCellPct(r.change_7d)}</td>
-              <td data-label="MCap">${isFinite(r.mcap) ? fmtMoney(r.mcap) : '<span class="trend-neutral">—</span>'}</td>
-              <td data-label="Details"><button class="row-btn" type="button" data-slug="${escapeHtml(r.slug || "")}" data-name="${escapeHtml(r.name)}">Open</button></td>
+              <td data-label="MCap">${
+                isFinite(r.mcap) ? fmtMoney(r.mcap) : '<span class="defi-trend-neutral">—</span>'
+              }</td>
+              <td data-label="Details"><button class="defi-link-btn" type="button" data-slug="${escapeHtml(
+                r.slug || ""
+              )}" data-name="${escapeHtml(r.name)}">Open</button></td>
             </tr>
-          `).join("")}
+          `
+            )
+            .join("")}
         </tbody>
       </table>
     `;
@@ -461,15 +541,17 @@ document.addEventListener("DOMContentLoaded", () => {
           </tr>
         </thead>
         <tbody>
-          ${rows.map((r, i) => `
+          ${rows
+            .map(
+              (r, i) => `
             <tr>
-              <td data-label="#"><span class="rank-badge">${i + 1}</span></td>
+              <td data-label="#"><span class="defi-rank-badge">${i + 1}</span></td>
               <td data-label="Chain">
-                <div class="proto">
-                  <img class="protoIcon" src="/assets/instantqr-logo.svg" alt="" loading="lazy">
+                <div class="defi-proto">
+                  <img class="defi-proto-icon" src="/assets/instantqr-logo.svg" alt="" loading="lazy">
                   <div>
-                    <div class="protoName">${escapeHtml(r.name)}</div>
-                    <div class="protoMeta">${escapeHtml(r.gecko_id || "chain")}</div>
+                    <div class="defi-proto-name">${escapeHtml(r.name)}</div>
+                    <div class="defi-proto-meta">${escapeHtml(r.gecko_id || "chain")}</div>
                   </div>
                 </div>
               </td>
@@ -477,10 +559,16 @@ document.addEventListener("DOMContentLoaded", () => {
               <td data-label="TVL">${fmtMoney(r.tvl)}</td>
               <td data-label="24h">${valueCellPct(r.change_1d)}</td>
               <td data-label="7d">${valueCellPct(r.change_7d)}</td>
-              <td data-label="Chain ID">${r.chainId ? escapeHtml(String(r.chainId)) : '<span class="trend-neutral">—</span>'}</td>
-              <td data-label="Reference"><span class="tag">Chain TVL</span></td>
+              <td data-label="Chain ID">${
+                r.chainId
+                  ? escapeHtml(String(r.chainId))
+                  : '<span class="defi-trend-neutral">—</span>'
+              }</td>
+              <td data-label="Reference"><span class="defi-tag">Chain TVL</span></td>
             </tr>
-          `).join("")}
+          `
+            )
+            .join("")}
         </tbody>
       </table>
     `;
@@ -490,12 +578,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!els.tracker) return;
 
     if (!rows.length) {
-      els.tracker.innerHTML = '<div class="empty">No matching results found. Try a broader search or clear filters.</div>';
+      els.tracker.innerHTML =
+        '<div class="defi-empty">No matching results found. Try a broader search or clear filters.</div>';
       updateSummary("No matching results found for the current filter set.");
       return;
     }
 
-    els.tracker.innerHTML = STATE.mode === "protocols" ? buildProtocolsTable(rows) : buildChainsTable(rows);
+    els.tracker.innerHTML =
+      STATE.mode === "protocols" ? buildProtocolsTable(rows) : buildChainsTable(rows);
 
     if (STATE.mode === "protocols") {
       els.tracker.querySelectorAll("[data-slug]").forEach((btn) => {
@@ -530,7 +620,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (q) {
       rows = rows.filter((r) => {
-        const hay = [r.name, r.symbol, r.category, r.chainLabel, ...(r.chains || [])].join(" ").toLowerCase();
+        const hay = [r.name, r.symbol, r.category, r.chainLabel, ...(r.chains || [])]
+          .join(" ")
+          .toLowerCase();
         return hay.includes(q);
       });
     }
@@ -545,15 +637,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     rows.sort((a, b) => {
       switch (sort) {
-        case "tvl-asc": return (a.tvl || 0) - (b.tvl || 0);
-        case "tvl-desc": return (b.tvl || 0) - (a.tvl || 0);
-        case "change1d-asc": return (a.change_1d || -999999) - (b.change_1d || -999999);
-        case "change1d-desc": return (b.change_1d || -999999) - (a.change_1d || -999999);
-        case "change7d-asc": return (a.change_7d || -999999) - (b.change_7d || -999999);
-        case "change7d-desc": return (b.change_7d || -999999) - (a.change_7d || -999999);
-        case "name-desc": return String(b.name).localeCompare(String(a.name));
+        case "tvl-asc":
+          return (a.tvl || 0) - (b.tvl || 0);
+        case "tvl-desc":
+          return (b.tvl || 0) - (a.tvl || 0);
+        case "change1d-asc":
+          return (a.change_1d || -999999) - (b.change_1d || -999999);
+        case "change1d-desc":
+          return (b.change_1d || -999999) - (a.change_1d || -999999);
+        case "change7d-asc":
+          return (a.change_7d || -999999) - (b.change_7d || -999999);
+        case "change7d-desc":
+          return (b.change_7d || -999999) - (a.change_7d || -999999);
+        case "name-desc":
+          return String(b.name).localeCompare(String(a.name));
         case "name-asc":
-        default: return String(a.name).localeCompare(String(b.name));
+        default:
+          return String(a.name).localeCompare(String(b.name));
       }
     });
 
@@ -585,7 +685,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadAllData(force) {
     if (els.tracker) {
-      els.tracker.innerHTML = '<div class="loading">Loading DeFi TVL data…</div>';
+      els.tracker.innerHTML = '<div class="defi-loading">Loading DeFi TVL data…</div>';
     }
 
     setStatus("Loading", "Fetching protocols and chains");
@@ -607,12 +707,13 @@ document.addEventListener("DOMContentLoaded", () => {
       STATE.chains = normalizeChains(chainsRes.data);
       STATE.lastUpdatedISO = new Date().toISOString();
 
-      if (els.lastUpdated) {
-        els.lastUpdated.textContent = lastUpdatedLabel(STATE.lastUpdatedISO);
-      }
+      setText(els.lastUpdated, lastUpdatedLabel(STATE.lastUpdatedISO));
 
       fillFilters();
-      setStatus(STATE.usingStale ? "Stale Data" : STATE.fresh ? "Live Data" : "Cached Data");
+      setStatus(
+        STATE.usingStale ? "Stale Data" : STATE.fresh ? "Live Data" : "Cached Data"
+      );
+
       applyFilters();
     } catch (err) {
       console.error(err);
@@ -620,9 +721,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (els.tracker) {
         els.tracker.innerHTML = `
-          <div class="error">
+          <div class="defi-error">
             Unable to load TVL data right now.<br>
-            <span class="tiny">Try again in a moment. Cached fallback support is enabled when data is available.</span>
+            <span class="defi-tiny">Try again in a moment. Cached fallback support is enabled when data is available.</span>
           </div>`;
       }
 
@@ -637,7 +738,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function protocolLinkChip(href, text) {
     if (!href) return "";
-    return `<a class="tag" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`;
+    return `<a class="defi-tag" href="${escapeHtml(
+      href
+    )}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`;
   }
 
   function normalizeHistory(detail) {
@@ -763,7 +866,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const lastDate = new Date(last.date * 1000);
 
     ctx.fillStyle = "#9db0d3";
-    ctx.fillText(firstDate.toLocaleDateString([], { month: "short", year: "2-digit" }), pad.left, cssH - 6);
+    ctx.fillText(
+      firstDate.toLocaleDateString([], { month: "short", year: "2-digit" }),
+      pad.left,
+      cssH - 6
+    );
 
     const lastText = lastDate.toLocaleDateString([], { month: "short", year: "2-digit" });
     const width = ctx.measureText(lastText).width;
@@ -777,10 +884,10 @@ document.addEventListener("DOMContentLoaded", () => {
     els.detailModal.classList.add("open");
     els.detailModal.setAttribute("aria-hidden", "false");
 
-    if (els.detailTitle) els.detailTitle.textContent = name || "Protocol";
-    if (els.detailLoading) els.detailLoading.classList.remove("hidden");
-    if (els.detailError) els.detailError.classList.add("hidden");
-    if (els.detailContent) els.detailContent.classList.add("hidden");
+    setText(els.detailTitle, name || "Protocol");
+    if (els.detailLoading) els.detailLoading.classList.remove("defi-hidden");
+    if (els.detailError) els.detailError.classList.add("defi-hidden");
+    if (els.detailContent) els.detailContent.classList.add("defi-hidden");
     drawChart([]);
 
     try {
@@ -790,7 +897,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const d = res.data || {};
       const current = STATE.protocols.find((p) => p.slug === slug || p.name === name) || {};
 
-      if (els.detailTitle) els.detailTitle.textContent = d.name || current.name || name || "Protocol";
+      setText(els.detailTitle, d.name || current.name || name || "Protocol");
 
       const currentTvl = Number(
         d.currentChainTvls
@@ -798,44 +905,54 @@ document.addEventListener("DOMContentLoaded", () => {
           : d.tvl?.[d.tvl.length - 1]?.totalLiquidityUSD ?? current.tvl ?? 0
       );
 
-      if (els.detailTvl) els.detailTvl.textContent = fmtMoney(currentTvl);
-      if (els.detailCategory) els.detailCategory.textContent = d.category || current.category || "Unknown";
+      setText(els.detailTvl, fmtMoney(currentTvl));
+      setText(els.detailCategory, d.category || current.category || "Unknown");
       if (els.detail1d) els.detail1d.innerHTML = valueCellPct(Number(d.change_1d ?? current.change_1d));
       if (els.detail7d) els.detail7d.innerHTML = valueCellPct(Number(d.change_7d ?? current.change_7d));
-      if (els.detailDescription) {
-        els.detailDescription.textContent = d.description || current.description || "No description available from source.";
-      }
+      setText(
+        els.detailDescription,
+        d.description || current.description || "No description available from source."
+      );
 
-      const chains = Array.isArray(d.chains) ? d.chains : (current.chains || []);
+      const chains = Array.isArray(d.chains) ? d.chains : current.chains || [];
       if (els.detailChains) {
         els.detailChains.innerHTML = chains.length
-          ? chains.map((c) => `<span class="tag">${escapeHtml(c)}</span>`).join("")
-          : '<span class="trend-neutral">No chain data available</span>';
+          ? chains.map((c) => `<span class="defi-tag">${escapeHtml(c)}</span>`).join("")
+          : '<span class="defi-trend-neutral">No chain data available</span>';
       }
 
       if (els.detailLinks) {
-        els.detailLinks.innerHTML = [
-          protocolLinkChip(d.url || current.url, "Website"),
-          d.twitter ? protocolLinkChip("https://x.com/" + String(d.twitter).replace(/^@/, ""), "X / Twitter") : ""
-        ].filter(Boolean).join("") || '<span class="trend-neutral">No external links provided</span>';
+        els.detailLinks.innerHTML =
+          [
+            protocolLinkChip(d.url || current.url, "Website"),
+            d.twitter
+              ? protocolLinkChip(
+                  "https://x.com/" + String(d.twitter).replace(/^@/, ""),
+                  "X / Twitter"
+                )
+              : ""
+          ]
+            .filter(Boolean)
+            .join("") || '<span class="defi-trend-neutral">No external links provided</span>';
       }
 
       const history = normalizeHistory(d);
       drawChart(history);
 
-      if (els.chartMeta) {
-        els.chartMeta.textContent = history.length
+      setText(
+        els.chartMeta,
+        history.length
           ? `${history.length} historical data points loaded`
-          : "Historical TVL unavailable from current source response.";
-      }
+          : "Historical TVL unavailable from current source response."
+      );
 
-      if (els.detailLoading) els.detailLoading.classList.add("hidden");
-      if (els.detailContent) els.detailContent.classList.remove("hidden");
+      if (els.detailLoading) els.detailLoading.classList.add("defi-hidden");
+      if (els.detailContent) els.detailContent.classList.remove("defi-hidden");
     } catch (err) {
       console.error(err);
-      if (els.detailLoading) els.detailLoading.classList.add("hidden");
+      if (els.detailLoading) els.detailLoading.classList.add("defi-hidden");
       if (els.detailError) {
-        els.detailError.classList.remove("hidden");
+        els.detailError.classList.remove("defi-hidden");
         els.detailError.textContent = "Unable to load protocol detail right now.";
       }
     }
@@ -848,36 +965,35 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function bindEvents() {
-    if (els.tabProtocols) els.tabProtocols.addEventListener("click", () => setMode("protocols"));
-    if (els.tabChains) els.tabChains.addEventListener("click", () => setMode("chains"));
+    els.tabProtocols?.addEventListener("click", () => setMode("protocols"));
+    els.tabChains?.addEventListener("click", () => setMode("chains"));
 
-    if (els.searchInput) els.searchInput.addEventListener("input", applyFilters);
-    if (els.categoryFilter) els.categoryFilter.addEventListener("change", applyFilters);
-    if (els.chainFilter) els.chainFilter.addEventListener("change", applyFilters);
-    if (els.sortBy) els.sortBy.addEventListener("change", applyFilters);
-    if (els.limitSelect) els.limitSelect.addEventListener("change", applyFilters);
+    els.searchInput?.addEventListener("input", applyFilters);
+    els.categoryFilter?.addEventListener("change", applyFilters);
+    els.chainFilter?.addEventListener("change", applyFilters);
+    els.sortBy?.addEventListener("change", applyFilters);
+    els.limitSelect?.addEventListener("change", applyFilters);
 
-    if (els.resetBtn) els.resetBtn.addEventListener("click", resetFilters);
-    if (els.refreshBtn) els.refreshBtn.addEventListener("click", () => loadAllData(true));
-    if (els.jumpTableBtn) {
-      els.jumpTableBtn.addEventListener("click", () => {
-        els.tracker?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    }
+    els.resetBtn?.addEventListener("click", resetFilters);
+    els.refreshBtn?.addEventListener("click", () => loadAllData(true));
+    els.jumpTableBtn?.addEventListener("click", () => {
+      els.tracker?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
 
-    if (els.closeModalBtn) els.closeModalBtn.addEventListener("click", closeModal);
-    if (els.detailModal) {
-      els.detailModal.addEventListener("click", (e) => {
-        if (e.target === els.detailModal) closeModal();
-      });
-    }
+    els.closeModalBtn?.addEventListener("click", closeModal);
+    els.detailModal?.addEventListener("click", (e) => {
+      if (e.target === els.detailModal) closeModal();
+    });
 
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeModal();
     });
 
     window.addEventListener("resize", () => {
-      if (els.detailModal?.classList.contains("open") && !els.detailContent?.classList.contains("hidden")) {
+      if (
+        els.detailModal?.classList.contains("open") &&
+        !els.detailContent?.classList.contains("defi-hidden")
+      ) {
         drawChart(STATE.activeChartPoints);
       }
     });
