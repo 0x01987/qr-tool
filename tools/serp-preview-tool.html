@@ -7,7 +7,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-6213N2G8R2');
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
   <!-- Google AdSense -->
@@ -16,424 +16,65 @@
     crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>SERP Preview Tool | Free Google Snippet Preview | InstantQR</title>
   <meta name="description" content="Preview how your page title, URL, and meta description may appear in Google search results. Fast, responsive, and privacy-first SERP preview tool." />
-  <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://instantqr.io/serp-preview-tool.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-  <!-- Open Graph -->
+  <link rel="canonical" href="https://instantqr.io/tools/serp-preview-tool.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
-  <meta property="og:title" content="SERP Preview Tool | Free Google Snippet Preview" />
+  <meta property="og:title" content="SERP Preview Tool | Free Google Snippet Preview | InstantQR" />
   <meta property="og:description" content="Preview title tags, URLs, and meta descriptions in a clean Google-style snippet preview for desktop and mobile." />
-  <meta property="og:url" content="https://instantqr.io/serp-preview-tool.html" />
-  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:url" content="https://instantqr.io/tools/serp-preview-tool.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="SERP Preview Tool | InstantQR" />
   <meta name="twitter:description" content="Free SEO SERP preview tool for title tags, URLs, and meta descriptions." />
-  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
-
-  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
-  <link rel="alternate icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
-  <meta name="theme-color" content="#0b0f19" />
-
-  <style>
-    :root{
-      --bg:#0b1220;
-      --card:#111a2b;
-      --card2:rgba(255,255,255,.04);
-      --text:#e7eefc;
-      --muted:#9db0d1;
-      --brand:#69a6ff;
-      --ok:#19c37d;
-      --warn:#ffcc66;
-      --danger:#ff6b6b;
-      --border:rgba(255,255,255,.08);
-      --radius:18px;
-      --radius2:22px;
-      --max:1140px;
-      --shadow:0 12px 40px rgba(0,0,0,.45);
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:
-        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
-        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.12), transparent 50%),
-        radial-gradient(900px 600px at 55% 90%, rgba(99,102,241,.10), transparent 50%),
-        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-
-    a{color:inherit;text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .wrap{max-width:var(--max);margin:auto;padding:24px}
-
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter:blur(10px);
-      background:rgba(7,11,20,.58);
-      border-bottom:1px solid var(--border);
-    }
-    .topbar .inner{
-      max-width:var(--max);
-      margin:auto;
-      padding:14px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-    }
-    .logo{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:800;
-      letter-spacing:.2px;
-    }
-    .logo img{height:34px;width:auto;display:block}
-    nav{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    nav a{
-      color:var(--muted);
-      font-size:14px;
-      padding:8px 10px;
-      border-radius:12px;
-    }
-    nav a:hover{
-      color:#fff;
-      background:rgba(255,255,255,.06);
-      text-decoration:none;
-    }
-
-    .cta{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      font-weight:700;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      transition:.15s ease;
-      cursor:pointer;
-      white-space:nowrap;
-    }
-    .cta:hover{
-      transform:translateY(-1px);
-      text-decoration:none;
-    }
-    .cta.primary{
-      border:0;
-      background:linear-gradient(135deg, rgba(105,166,255,1), rgba(105,166,255,.78));
-      box-shadow:0 14px 28px rgba(105,166,255,.22);
-    }
-    .cta.primary:hover{filter:brightness(1.06)}
-    .cta.ghost:hover{background:rgba(255,255,255,.10)}
-
-    .hero{padding:28px 0 8px}
-    .heroCard{
-      border:1px solid var(--border);
-      border-radius:var(--radius2);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow:var(--shadow);
-      padding:28px;
-      position:relative;
-      overflow:hidden;
-    }
-    .heroCard:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(760px 260px at 18% 18%, rgba(105,166,255,.18), transparent 62%),
-        radial-gradient(520px 220px at 82% 40%, rgba(25,195,125,.10), transparent 55%);
-      pointer-events:none;
-    }
-    .heroCard > *{position:relative}
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      width:fit-content;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      color:var(--muted);
-      font-size:13px;
-    }
-    h1{
-      margin:14px 0 10px;
-      font-size:clamp(30px, 4vw, 46px);
-      line-height:1.05;
-      letter-spacing:-.7px;
-    }
-    .sub{
-      margin:0 0 18px;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.6;
-      max-width:72ch;
-    }
-    .heroActions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:8px;
-    }
-
-    .section{
-      padding:18px 0 8px;
-    }
-    .section h2{
-      margin:0 0 10px;
-      font-size:24px;
-      letter-spacing:-.25px;
-    }
-    .section p{
-      margin:0 0 12px;
-      color:var(--muted);
-      line-height:1.6;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-      margin-top:18px;
-    }
-
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:var(--shadow);
-    }
-
-    .label{
-      display:block;
-      margin:0 0 6px;
-      font-size:13px;
-      color:var(--muted);
-      font-weight:600;
-    }
-
-    .input,.textarea{
-      width:100%;
-      border:1px solid var(--border);
-      background:#08101d;
-      color:#fff;
-      border-radius:14px;
-      padding:12px 14px;
-      font-size:14px;
-      outline:none;
-    }
-
-    .textarea{
-      min-height:140px;
-      resize:vertical;
-      line-height:1.5;
-    }
-
-    .actionRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
-
-    .kpis{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-top:14px;
-    }
-    .kpi{
-      background:var(--card2);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:14px;
-    }
-    .kpiNum{
-      font-weight:900;
-      font-size:20px;
-      letter-spacing:-.3px;
-    }
-    .kpiLabel{
-      margin-top:4px;
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .status{
-      margin-top:14px;
-      padding:12px 14px;
-      border-radius:14px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--border);
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.5;
-    }
-    .status.ok{
-      border-color:rgba(25,195,125,.35);
-      background:rgba(25,195,125,.08);
-      color:#d7ffee;
-    }
-    .status.warn{
-      border-color:rgba(255,204,102,.35);
-      background:rgba(255,204,102,.08);
-      color:#fff0c8;
-    }
-
-    .toggleRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:14px;
-    }
-
-    .previewShell{
-      border:1px solid var(--border);
-      border-radius:18px;
-      background:#fff;
-      color:#202124;
-      padding:18px;
-      transition:.15s ease;
-    }
-    .previewShell.mobile{
-      max-width:390px;
-    }
-    .previewShell.desktop{
-      max-width:640px;
-    }
-
-    .googleTitle{
-      color:#1a0dab;
-      font-size:20px;
-      line-height:1.3;
-      margin:0 0 4px;
-      font-weight:500;
-      word-break:break-word;
-    }
-    .googleUrl{
-      color:#202124;
-      font-size:14px;
-      margin:0 0 6px;
-      word-break:break-word;
-    }
-    .googleDesc{
-      color:#4d5156;
-      font-size:14px;
-      line-height:1.5;
-      margin:0;
-      word-break:break-word;
-    }
-
-    .helper{
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.6;
-      margin-top:10px;
-    }
-
-    .tips{
-      display:grid;
-      grid-template-columns:1fr 1fr 1fr;
-      gap:12px;
-      margin-top:16px;
-    }
-    .tip{
-      border:1px solid var(--border);
-      border-radius:16px;
-      background:var(--card2);
-      padding:16px;
-    }
-    .tip h3{
-      margin:0 0 6px;
-      font-size:16px;
-    }
-    .tip p{
-      margin:0;
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.55;
-    }
-
-    .codeBox{
-      margin-top:14px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#08101d;
-      padding:14px;
-      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-      font-size:13px;
-      color:#dff7ea;
-      white-space:pre-wrap;
-      word-break:break-word;
-    }
-
-    .footer{
-      margin-top:40px;
-      padding-top:20px;
-      border-top:1px solid var(--border);
-      font-size:13px;
-      color:var(--muted);
-    }
-    .footer a{
-      color:var(--muted);
-      text-decoration:none;
-      margin-right:10px;
-    }
-    .footer a:hover{color:#fff}
-
-    @media (max-width:1000px){
-      .grid{grid-template-columns:1fr}
-      .tips{grid-template-columns:1fr}
-    }
-    @media (max-width:760px){
-      .kpis{grid-template-columns:1fr 1fr 1fr}
-    }
-    @media (max-width:560px){
-      nav{display:none}
-      h1{font-size:34px}
-      .heroCard{padding:20px}
-      .cta{width:100%}
-      .heroActions .cta{flex:1}
-      .kpis{grid-template-columns:1fr}
-    }
-  </style>
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"WebApplication",
+    "@type":"WebPage",
     "name":"SERP Preview Tool",
-    "url":"https://instantqr.io/serp-preview-tool.html",
+    "url":"https://instantqr.io/tools/serp-preview-tool.html",
+    "description":"Preview how your page title, URL, and meta description may appear in Google search results.",
+    "isPartOf":{"@type":"WebSite","name":"InstantQR","url":"https://instantqr.io/"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"SERP Preview Tool",
     "applicationCategory":"SEOApplication",
     "operatingSystem":"All",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript",
+    "url":"https://instantqr.io/tools/serp-preview-tool.html",
     "description":"Preview page titles, URLs, and meta descriptions in a Google-style SERP snippet. Free, fast, and privacy-first."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+      {"@type":"ListItem","position":3,"name":"SERP Preview Tool","item":"https://instantqr.io/tools/serp-preview-tool.html"}
+    ]
   }
   </script>
 
@@ -469,288 +110,694 @@
     ]
   }
   </script>
-</head>
 
+  <style>
+    .skip{
+      position:absolute;
+      left:-9999px;
+      top:auto;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+    }
+    .skip:focus{
+      left:16px;
+      top:16px;
+      width:auto;
+      height:auto;
+      padding:10px 14px;
+      border-radius:12px;
+      background:#0b1220;
+      color:#fff;
+      z-index:999;
+    }
+
+    .wrap{
+      width:min(1180px, calc(100% - 24px));
+      margin:0 auto;
+      padding:24px 0 48px;
+    }
+
+    .breadcrumb{
+      margin:10px 0 16px;
+    }
+    .breadcrumb ol{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      color:var(--muted, #94a3b8);
+      font-size:.92rem;
+    }
+    .breadcrumb a{
+      color:var(--muted, #94a3b8);
+      text-decoration:none;
+    }
+    .breadcrumb a:hover{
+      text-decoration:underline;
+    }
+
+    .hero{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      padding:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:0 10px 30px rgba(0,0,0,.22);
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(96,165,250,.12);
+      border:1px solid rgba(96,165,250,.24);
+      color:#dbeafe;
+      font-size:.88rem;
+      font-weight:700;
+      margin-bottom:14px;
+    }
+
+    .hero h1{
+      margin:0 0 10px;
+      font-size:clamp(2rem, 4vw, 3rem);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted, #94a3b8);
+      max-width:880px;
+      font-size:1.03rem;
+      line-height:1.7;
+    }
+
+    .summary{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .sumCard{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+
+    .greenGlow{
+      box-shadow:inset 0 0 0 1px rgba(25,195,125,.14), 0 0 0 1px rgba(25,195,125,.02);
+    }
+
+    .sumLabel{
+      color:var(--muted, #94a3b8);
+      font-size:.82rem;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+
+    .sumValue{
+      color:#f8fbff;
+      font-weight:900;
+      line-height:1.2;
+      font-size:1.1rem;
+      word-break:break-word;
+    }
+
+    .sumValue.small{
+      font-size:.98rem;
+    }
+
+    .sumNote{
+      color:var(--muted, #94a3b8);
+      font-size:.82rem;
+      margin-top:8px;
+      line-height:1.5;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    }
+
+    .panel{
+      margin-top:18px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.018));
+      box-shadow:0 10px 30px rgba(0,0,0,.22);
+    }
+
+    .panelHead{
+      padding:18px 20px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .panelTitle{
+      font-size:1.08rem;
+      font-weight:900;
+      color:#eef6ff;
+      margin-bottom:5px;
+    }
+
+    .panelSub{
+      color:var(--muted, #94a3b8);
+      font-size:.95rem;
+      line-height:1.6;
+      max-width:720px;
+    }
+
+    .panelBody{
+      padding:18px 20px 20px;
+    }
+
+    .statusLine{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:74px;
+      padding:8px 11px;
+      border-radius:999px;
+      font-size:.84rem;
+      font-weight:800;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);
+      color:#e5eefc;
+    }
+
+    .cta{
+      appearance:none;
+      border:0;
+      border-radius:14px;
+      padding:12px 14px;
+      font:inherit;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .08s ease, opacity .2s ease;
+    }
+
+    .cta:hover{ transform:translateY(-1px); }
+    .cta:active{ transform:translateY(0); }
+
+    .cta.primary{
+      background:linear-gradient(135deg,#60a5fa,#38bdf8);
+      color:#081120;
+      box-shadow:0 12px 24px rgba(56,189,248,.22);
+    }
+
+    .cta.ghost{
+      background:rgba(255,255,255,.05);
+      color:#dbeafe;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .card{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+
+    .label{
+      display:block;
+      margin:0 0 8px;
+      font-weight:800;
+      font-size:.94rem;
+      color:#eef6ff;
+    }
+
+    .input,.textarea{
+      width:100%;
+      border:1px solid rgba(255,255,255,.12);
+      background:#091327;
+      color:#e5eefc;
+      border-radius:14px;
+      padding:14px;
+      font:inherit;
+      outline:none;
+      transition:border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .textarea{
+      min-height:140px;
+      resize:vertical;
+      line-height:1.5;
+    }
+
+    .input:focus,.textarea:focus{
+      border-color:rgba(96,165,250,.65);
+      box-shadow:0 0 0 4px rgba(96,165,250,.15);
+    }
+
+    .actionRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .kpis{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .kpi{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      padding:14px;
+    }
+
+    .kpiNum{
+      font-weight:900;
+      font-size:20px;
+      letter-spacing:-.3px;
+    }
+
+    .kpiLabel{
+      margin-top:4px;
+      color:var(--muted, #94a3b8);
+      font-size:12px;
+    }
+
+    .status{
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      font-size:13px;
+      color:var(--muted, #94a3b8);
+      line-height:1.5;
+    }
+
+    .status.ok{
+      border-color:rgba(25,195,125,.35);
+      background:rgba(25,195,125,.08);
+      color:#d7ffee;
+    }
+
+    .status.warn{
+      border-color:rgba(255,204,102,.35);
+      background:rgba(255,204,102,.08);
+      color:#fff0c8;
+    }
+
+    .toggleRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .previewShell{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      background:#fff;
+      color:#202124;
+      padding:18px;
+      transition:.15s ease;
+    }
+
+    .previewShell.mobile{
+      max-width:390px;
+    }
+
+    .previewShell.desktop{
+      max-width:640px;
+    }
+
+    .googleTitle{
+      color:#1a0dab;
+      font-size:20px;
+      line-height:1.3;
+      margin:0 0 4px;
+      font-weight:500;
+      word-break:break-word;
+    }
+
+    .googleUrl{
+      color:#202124;
+      font-size:14px;
+      margin:0 0 6px;
+      word-break:break-word;
+    }
+
+    .googleDesc{
+      color:#4d5156;
+      font-size:14px;
+      line-height:1.5;
+      margin:0;
+      word-break:break-word;
+    }
+
+    .helper{
+      font-size:12px;
+      color:var(--muted, #94a3b8);
+      line-height:1.6;
+      margin-top:10px;
+    }
+
+    .codeBox{
+      margin-top:14px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:#08101d;
+      padding:14px;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:13px;
+      color:#dff7ea;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+
+    .tips{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .tip{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+
+    .tip h3{
+      margin:0 0 6px;
+      font-size:16px;
+      color:#eef6ff;
+    }
+
+    .tip p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted, #94a3b8);
+      line-height:1.55;
+    }
+
+    .faq{
+      margin-top:16px;
+    }
+
+    details.faqPanel{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+
+    details.faqPanel + details.faqPanel{
+      margin-top:12px;
+    }
+
+    details.faqPanel summary{
+      list-style:none;
+      cursor:pointer;
+      padding:14px;
+      font-weight:800;
+      color:#eaf2ff;
+    }
+
+    details.faqPanel summary::-webkit-details-marker{
+      display:none;
+    }
+
+    .faqBody{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:14px;
+      color:var(--muted, #94a3b8);
+      line-height:1.7;
+    }
+
+    @media (max-width:1000px){
+      .grid{grid-template-columns:1fr}
+      .tips{grid-template-columns:1fr}
+      .summary{grid-template-columns:repeat(2, minmax(0,1fr))}
+    }
+
+    @media (max-width:720px){
+      .wrap{
+        width:min(1180px, calc(100% - 18px));
+      }
+      .hero,
+      .panelBody,
+      .panelHead{
+        padding-left:16px;
+        padding-right:16px;
+      }
+      .summary{grid-template-columns:1fr}
+      .statusLine .cta{width:100%}
+      .actionRow .cta{width:100%}
+      .kpis{grid-template-columns:1fr}
+      .toggleRow .cta{width:100%}
+      .googleTitle{font-size:1.14rem}
+    }
+  </style>
+</head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
+
   <header class="topbar">
-    <div class="inner">
-      <a class="logo" href="/" aria-label="InstantQR Home">
-        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
         <span>InstantQR</span>
       </a>
 
-      <nav>
+      <nav class="top-links" aria-label="Primary">
         <a href="/">Home</a>
-        <a href="/tools.html">Tools</a>
-        <a href="/seo-tools.html">SEO Tools</a>
-        <a href="/about.html">About</a>
-        <a href="/contact.html">Contact</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/ip-lookup.html">IP Lookup</a>
+        <a href="/tools/unit-converter.html">Unit Converter</a>
+        <a href="/tools/password-leak-checker.html">Password Leak</a>
       </nav>
-
-      <a class="cta primary" href="/seo-tools.html">SEO Tools →</a>
     </div>
   </header>
 
-  <main class="wrap">
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">SERP Preview Tool</span></li>
+      </ol>
+    </nav>
+
     <section class="hero" aria-label="SERP Preview Hero">
-      <div class="heroCard">
-        <div class="pill">🔍 Google Snippet Preview • ⚡ Fast • ✅ Free</div>
-        <h1>SERP Preview Tool</h1>
-        <p class="sub">
-          Preview how your <strong>title</strong>, <strong>URL</strong>, and
-          <strong>meta description</strong> may appear in Google search results.
-          Fast, responsive, privacy-first, and built for real SEO workflows.
-        </p>
-
-        <div class="heroActions">
-          <a class="cta primary" href="#tool">Start Preview</a>
-          <a class="cta" href="/meta-title-description-best-practices.html">SEO Guide</a>
-          <a class="cta" href="/seo-tools.html">All SEO Tools</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="tool" aria-label="SERP Preview Tool">
-      <h2>Preview Your Search Snippet</h2>
-      <p>
-        Enter a title, URL, and description to see a clean SERP-style snippet preview.
-        This tool also gives quick recommendations for title and description length.
+      <div class="pill">🔍 Google Snippet Preview • ⚡ Fast • ✅ Free</div>
+      <h1>SERP Preview Tool</h1>
+      <p class="sub">
+        Preview how your title, URL, and meta description may appear in Google search results.
+        Fast, responsive, privacy-first, and built for real SEO workflows.
       </p>
 
-      <div class="grid">
-        <div class="card">
-          <label class="label" for="pageUrl">Page URL</label>
-          <input id="pageUrl" class="input" placeholder="https://instantqr.io/seo-tools.html" />
-
-          <div style="height:12px"></div>
-
-          <label class="label" for="pageTitle">SEO Title</label>
-          <input id="pageTitle" class="input" maxlength="120" placeholder="Example: Free SEO Tools | Meta, SERP, Sitemap & Robots.txt | InstantQR" />
-
-          <div style="height:12px"></div>
-
-          <label class="label" for="pageDesc">Meta Description</label>
-          <textarea id="pageDesc" class="textarea" maxlength="320" placeholder="Example: Free SEO tools by InstantQR to preview titles, descriptions, snippets, sitemaps, robots.txt, canonical tags, and more."></textarea>
-
-          <div class="actionRow">
-            <button class="cta primary" id="copyMetaBtn" type="button">Copy Meta Tags</button>
-            <button class="cta ghost" id="loadExampleBtn" type="button">Load Example</button>
-            <button class="cta ghost" id="clearBtn" type="button">Clear</button>
-          </div>
-
-          <div class="kpis">
-            <div class="kpi">
-              <div class="kpiNum" id="titleChars">0</div>
-              <div class="kpiLabel">Title chars</div>
-            </div>
-            <div class="kpi">
-              <div class="kpiNum" id="descChars">0</div>
-              <div class="kpiLabel">Description chars</div>
-            </div>
-            <div class="kpi">
-              <div class="kpiNum" id="urlChars">0</div>
-              <div class="kpiLabel">URL chars</div>
-            </div>
-          </div>
-
-          <div id="status" class="status">
-            Start typing to preview your search snippet.
-          </div>
-
-          <div class="helper">
-            Tip: this is an estimate. Google may rewrite titles or descriptions depending on user query and page content.
-          </div>
-
-          <div class="codeBox" id="metaCode">&lt;title&gt;&lt;/title&gt;
-&lt;meta name="description" content="" /&gt;</div>
+      <div class="summary" aria-label="SERP summary">
+        <div class="sumCard greenGlow">
+          <div class="sumLabel">Title Length</div>
+          <div class="sumValue small mono" id="titleLengthSummary">0</div>
+          <div class="sumNote">Quick title character count.</div>
         </div>
 
-        <div class="card">
-          <div class="toggleRow">
-            <button class="cta primary" id="desktopBtn" type="button">Desktop Preview</button>
-            <button class="cta ghost" id="mobileBtn" type="button">Mobile Preview</button>
-          </div>
-
-          <div class="previewShell desktop" id="previewShell">
-            <p class="googleTitle" id="previewTitle">Your SEO title will appear here</p>
-            <p class="googleUrl" id="previewUrl">https://example.com/page</p>
-            <p class="googleDesc" id="previewDesc">Your meta description preview will appear here. Write a concise, useful description that explains the value of the page.</p>
-          </div>
-
-          <div class="helper" style="margin-top:12px;">
-            Keep titles clear and compelling. Write descriptions for humans first, then refine for search intent.
-          </div>
+        <div class="sumCard">
+          <div class="sumLabel">Description Length</div>
+          <div class="sumValue small mono" id="descLengthSummary">0</div>
+          <div class="sumNote">Quick description character count.</div>
         </div>
-      </div>
 
-      <div class="tips">
-        <div class="tip">
-          <h3>Title best practice</h3>
-          <p>
-            Aim for a concise title that includes the main keyword naturally and communicates the value of the page.
-          </p>
+        <div class="sumCard">
+          <div class="sumLabel">URL Length</div>
+          <div class="sumValue small mono" id="urlLengthSummary">0</div>
+          <div class="sumNote">Quick URL character count.</div>
         </div>
-        <div class="tip">
-          <h3>Description best practice</h3>
-          <p>
-            Write a useful summary with relevant terms and a clear benefit. Avoid stuffing keywords unnaturally.
-          </p>
-        </div>
-        <div class="tip">
-          <h3>URL best practice</h3>
-          <p>
-            Use short, descriptive URLs with simple words. Avoid long, confusing parameter-heavy links when possible.
-          </p>
+
+        <div class="sumCard">
+          <div class="sumLabel">Mode</div>
+          <div class="sumValue small mono" id="modeLabel">Desktop</div>
+          <div class="sumNote">Preview mode currently selected.</div>
         </div>
       </div>
     </section>
 
-    <footer class="footer">
-      <div>
-        <a href="/">Home</a>
-        <a href="/tools.html">All Tools</a>
-        <a href="/seo-tools.html">SEO Tools</a>
-        <a href="/meta-title-description-best-practices.html">SEO Guide</a>
-        <a href="/contact.html">Contact</a>
-        <a href="/sitemap.xml">Sitemap</a>
+    <section class="panel" aria-label="SERP Preview Tool">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Preview Your Search Snippet</div>
+          <div class="panelSub">
+            Enter a title, URL, and description to see a clean SERP-style snippet preview with quick recommendations.
+          </div>
+        </div>
+
+        <div class="statusLine">
+          <span class="badge" id="statusBadge">Ready</span>
+          <button class="cta primary" id="copyMetaBtn" type="button">Copy Meta Tags</button>
+          <button class="cta ghost" id="loadExampleBtn" type="button">Load Example</button>
+          <button class="cta ghost" id="clearBtn" type="button">Clear</button>
+        </div>
       </div>
-      <div style="margin-top:8px;">
-        © <span id="year"></span> InstantQR.io
+
+      <div class="panelBody">
+        <div class="grid">
+          <div class="card">
+            <label class="label" for="pageUrl">Page URL</label>
+            <input id="pageUrl" class="input" type="url" spellcheck="false" autocomplete="off" placeholder="https://instantqr.io/tools/seo-tools.html" />
+
+            <div style="height:12px"></div>
+
+            <label class="label" for="pageTitle">SEO Title</label>
+            <input id="pageTitle" class="input" type="text" maxlength="120" spellcheck="false" autocomplete="off" placeholder="Example: Free SEO Tools | Meta, SERP, Sitemap & Robots.txt | InstantQR" />
+
+            <div style="height:12px"></div>
+
+            <label class="label" for="pageDesc">Meta Description</label>
+            <textarea id="pageDesc" class="textarea" maxlength="320" placeholder="Example: Free SEO tools by InstantQR to preview titles, descriptions, snippets, sitemaps, robots.txt, canonical tags, and more."></textarea>
+
+            <div class="kpis">
+              <div class="kpi">
+                <div class="kpiNum" id="titleChars">0</div>
+                <div class="kpiLabel">Title chars</div>
+              </div>
+              <div class="kpi">
+                <div class="kpiNum" id="descChars">0</div>
+                <div class="kpiLabel">Description chars</div>
+              </div>
+              <div class="kpi">
+                <div class="kpiNum" id="urlChars">0</div>
+                <div class="kpiLabel">URL chars</div>
+              </div>
+            </div>
+
+            <div id="status" class="status">
+              Start typing to preview your search snippet.
+            </div>
+
+            <div class="helper">
+              Tip: this is an estimate. Google may rewrite titles or descriptions depending on the query and page content.
+            </div>
+
+            <div class="codeBox" id="metaCode">&lt;title&gt;&lt;/title&gt;
+&lt;meta name="description" content="" /&gt;</div>
+          </div>
+
+          <div class="card">
+            <div class="toggleRow">
+              <button class="cta primary" id="desktopBtn" type="button">Desktop Preview</button>
+              <button class="cta ghost" id="mobileBtn" type="button">Mobile Preview</button>
+            </div>
+
+            <div class="previewShell desktop" id="previewShell">
+              <p class="googleTitle" id="previewTitle">Your SEO title will appear here</p>
+              <p class="googleUrl" id="previewUrl">https://example.com/page</p>
+              <p class="googleDesc" id="previewDesc">Your meta description preview will appear here. Write a concise, useful description that explains the value of the page.</p>
+            </div>
+
+            <div class="helper">
+              Keep titles clear and compelling. Write descriptions for humans first, then refine for search intent.
+            </div>
+          </div>
+        </div>
+
+        <div class="tips">
+          <div class="tip">
+            <h3>Title best practice</h3>
+            <p>
+              Aim for a concise title that includes the main keyword naturally and communicates the value of the page.
+            </p>
+          </div>
+          <div class="tip">
+            <h3>Description best practice</h3>
+            <p>
+              Write a useful summary with relevant terms and a clear benefit. Avoid stuffing keywords unnaturally.
+            </p>
+          </div>
+          <div class="tip">
+            <h3>URL best practice</h3>
+            <p>
+              Use short, descriptive URLs with simple words. Avoid long, confusing parameter-heavy links when possible.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel faq" style="margin-top:16px;">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Frequently Asked Questions</div>
+          <div class="panelSub">Quick answers about SERP previews and search snippets.</div>
+        </div>
+      </div>
+
+      <div class="panelBody">
+        <details class="faqPanel" open>
+          <summary>What is a SERP preview tool?</summary>
+          <div class="faqBody">
+            A SERP preview tool helps you estimate how your page title, URL, and meta description may appear in Google search results.
+          </div>
+        </details>
+
+        <details class="faqPanel">
+          <summary>Will Google always show my exact title and description?</summary>
+          <div class="faqBody">
+            No. Google may rewrite titles or descriptions depending on the search query and page content.
+          </div>
+        </details>
+
+        <details class="faqPanel">
+          <summary>Is this SERP preview tool free?</summary>
+          <div class="faqBody">
+            Yes. InstantQR’s SERP preview tool is free to use.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/sitemap.xml">Sitemap</a>
+        </div>
       </div>
     </footer>
   </main>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const pageUrl = document.getElementById("pageUrl");
-    const pageTitle = document.getElementById("pageTitle");
-    const pageDesc = document.getElementById("pageDesc");
-
-    const previewTitle = document.getElementById("previewTitle");
-    const previewUrl = document.getElementById("previewUrl");
-    const previewDesc = document.getElementById("previewDesc");
-    const previewShell = document.getElementById("previewShell");
-
-    const titleChars = document.getElementById("titleChars");
-    const descChars = document.getElementById("descChars");
-    const urlChars = document.getElementById("urlChars");
-    const status = document.getElementById("status");
-    const metaCode = document.getElementById("metaCode");
-
-    const desktopBtn = document.getElementById("desktopBtn");
-    const mobileBtn = document.getElementById("mobileBtn");
-
-    let mode = "desktop";
-
-    function sanitizeText(value) {
-      return String(value || "").replace(/[<>]/g, "").trim();
-    }
-
-    function updatePreview() {
-      const url = sanitizeText(pageUrl.value) || "https://example.com/page";
-      const title = sanitizeText(pageTitle.value) || "Your SEO title will appear here";
-      const desc = sanitizeText(pageDesc.value) || "Your meta description preview will appear here. Write a concise, useful description that explains the value of the page.";
-
-      previewUrl.textContent = url;
-      previewTitle.textContent = title;
-      previewDesc.textContent = desc;
-
-      titleChars.textContent = String(sanitizeText(pageTitle.value).length);
-      descChars.textContent = String(sanitizeText(pageDesc.value).length);
-      urlChars.textContent = String(sanitizeText(pageUrl.value).length);
-
-      metaCode.textContent =
-        "<title>" + title.replace(/&/g, "&amp;") + "</title>\\n" +
-        "<meta name=\\"description\\" content=\\"" +
-        desc.replace(/&/g, "&amp;").replace(/"/g, "&quot;") +
-        "\\" />";
-
-      const titleLen = sanitizeText(pageTitle.value).length;
-      const descLen = sanitizeText(pageDesc.value).length;
-
-      let notes = [];
-
-      if (titleLen === 0) {
-        notes.push("Add a page title.");
-      } else if (titleLen < 30) {
-        notes.push("Title may be a bit short.");
-      } else if (titleLen > 65) {
-        notes.push("Title may be too long.");
-      }
-
-      if (descLen === 0) {
-        notes.push("Add a meta description.");
-      } else if (descLen < 70) {
-        notes.push("Description may be too short.");
-      } else if (descLen > 170) {
-        notes.push("Description may be too long.");
-      }
-
-      if (!notes.length) {
-        status.textContent = "Looks good. Your title and description are within a common recommended range.";
-        status.className = "status ok";
-      } else {
-        status.textContent = notes.join(" ");
-        status.className = "status warn";
-      }
-    }
-
-    function setMode(nextMode) {
-      mode = nextMode;
-
-      if (mode === "mobile") {
-        previewShell.classList.remove("desktop");
-        previewShell.classList.add("mobile");
-        mobileBtn.classList.add("primary");
-        mobileBtn.classList.remove("ghost");
-        desktopBtn.classList.remove("primary");
-        desktopBtn.classList.add("ghost");
-      } else {
-        previewShell.classList.remove("mobile");
-        previewShell.classList.add("desktop");
-        desktopBtn.classList.add("primary");
-        desktopBtn.classList.remove("ghost");
-        mobileBtn.classList.remove("primary");
-        mobileBtn.classList.add("ghost");
-      }
-    }
-
-    pageUrl.addEventListener("input", updatePreview);
-    pageTitle.addEventListener("input", updatePreview);
-    pageDesc.addEventListener("input", updatePreview);
-
-    desktopBtn.addEventListener("click", () => setMode("desktop"));
-    mobileBtn.addEventListener("click", () => setMode("mobile"));
-
-    document.getElementById("clearBtn").addEventListener("click", () => {
-      pageUrl.value = "";
-      pageTitle.value = "";
-      pageDesc.value = "";
-      updatePreview();
-    });
-
-    document.getElementById("loadExampleBtn").addEventListener("click", () => {
-      pageUrl.value = "https://instantqr.io/seo-tools.html";
-      pageTitle.value = "SEO Tools | Free Meta, SERP, Sitemap, Robots.txt & Canonical Tools | InstantQR";
-      pageDesc.value = "Free SEO tools by InstantQR to preview titles, descriptions, SERP snippets, canonical tags, robots.txt files, sitemaps, and more.";
-      updatePreview();
-    });
-
-    document.getElementById("copyMetaBtn").addEventListener("click", async () => {
-      const text = metaCode.textContent;
-      try {
-        await navigator.clipboard.writeText(text);
-        status.textContent = "Meta tags copied to clipboard.";
-        status.className = "status ok";
-      } catch (e) {
-        status.textContent = "Unable to copy automatically. Please copy the meta tags manually.";
-        status.className = "status warn";
-      }
-    });
-
-    setMode("desktop");
-    updatePreview();
-  </script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/serp-preview-tool.js" defer></script>
 </body>
 </html>
