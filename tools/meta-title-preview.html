@@ -27,6 +27,7 @@
 
   <link rel="canonical" href="https://instantqr.io/seo-tools/meta-title-preview.html" />
   <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -136,747 +137,696 @@
   </script>
 
   <style>
-    :root{
-      --bg:#081120;
-      --bg2:#0f172a;
-      --panel:#111c34;
-      --card:#12203d;
-      --text:#e5eefc;
-      --muted:#9cb0d1;
-      --line:rgba(255,255,255,.10);
-      --primary:#60a5fa;
-      --accent:#38bdf8;
-      --good:#22c55e;
-      --warn:#fbbf24;
-      --danger:#f87171;
-      --shadow:0 10px 30px rgba(0,0,0,.28);
-      --radius:18px;
-      --max:1220px;
+    .tool-shell {
+      padding: 36px 0 56px;
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(56,189,248,.14), transparent 24%),
-        radial-gradient(circle at top right, rgba(96,165,250,.12), transparent 20%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      color:var(--text);
-      line-height:1.6;
+    .tool-hero {
+      margin-bottom: 22px;
     }
 
-    a{color:var(--primary);text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .container{
-      width:min(var(--max), calc(100% - 28px));
-      margin:0 auto;
+    .breadcrumbs {
+      color: var(--muted, #94a3b8);
+      font-size: .92rem;
+      margin-bottom: 14px;
     }
 
-    header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter:blur(12px);
-      background:rgba(8,17,32,.72);
-      border-bottom:1px solid var(--line);
+    .breadcrumbs a {
+      color: var(--muted, #94a3b8);
+      text-decoration: none;
     }
 
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      min-height:72px;
+    .breadcrumbs a:hover {
+      text-decoration: underline;
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:800;
-      color:#fff;
-      letter-spacing:.2px;
+    .hero-card,
+    .tool-panel {
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 22px;
+      box-shadow: 0 12px 35px rgba(0,0,0,.22);
     }
 
-    .brand img{
-      width:36px;
-      height:36px;
-      display:block;
+    .hero-card {
+      padding: 28px;
     }
 
-    .navlinks{
-      display:flex;
-      gap:16px;
-      flex-wrap:wrap;
-      align-items:center;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(96,165,250,.12);
+      border: 1px solid rgba(96,165,250,.24);
+      color: #dbeafe;
+      font-size: .88rem;
+      font-weight: 700;
+      margin-bottom: 14px;
     }
 
-    .navlinks a{
-      color:var(--muted);
-      font-weight:600;
-      font-size:.95rem;
+    .tool-hero h1 {
+      margin: 0 0 10px;
+      line-height: 1.1;
+      font-size: clamp(2rem, 4vw, 3rem);
     }
 
-    .hero{
-      padding:36px 0 18px;
+    .tool-lead {
+      margin: 0;
+      max-width: 860px;
+      color: var(--muted, #94a3b8);
+      font-size: 1.03rem;
     }
 
-    .breadcrumbs{
-      color:var(--muted);
-      font-size:.92rem;
-      margin-bottom:16px;
+    .tool-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+      gap: 20px;
+      align-items: start;
     }
 
-    .breadcrumbs a{color:var(--muted)}
-    .breadcrumbs span{color:#c7d6f5}
-
-    .heroCard{
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border:1px solid var(--line);
-      border-radius:24px;
-      box-shadow:var(--shadow);
-      padding:28px;
+    .tool-panel {
+      padding: 20px;
     }
 
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(56,189,248,.10);
-      border:1px solid rgba(56,189,248,.22);
-      color:#cfe8ff;
-      font-size:.88rem;
-      font-weight:700;
-      margin-bottom:14px;
+    .tool-panel h2,
+    .tool-panel h3 {
+      margin-top: 0;
+      line-height: 1.2;
     }
 
-    h1{
-      margin:0 0 10px;
-      font-size:clamp(2rem, 4vw, 3rem);
-      line-height:1.1;
-      letter-spacing:-.03em;
+    .tool-controls {
+      display: grid;
+      gap: 14px;
     }
 
-    .lead{
-      margin:0;
-      color:var(--muted);
-      max-width:900px;
-      font-size:1.05rem;
+    .tool-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: .96rem;
     }
 
-    main{
-      padding:20px 0 56px;
+    .tool-input,
+    .tool-textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.12);
+      background: #091327;
+      color: #e5eefc;
+      border-radius: 14px;
+      padding: 14px;
+      font: inherit;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:20px;
-      align-items:start;
+    .tool-input:focus,
+    .tool-textarea:focus {
+      border-color: rgba(96,165,250,.65);
+      box-shadow: 0 0 0 4px rgba(96,165,250,.15);
     }
 
-    .panel{
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:20px;
-      box-shadow:var(--shadow);
+    .tool-textarea {
+      min-height: 120px;
+      resize: vertical;
     }
 
-    .panel h2,.panel h3{
-      margin-top:0;
-      line-height:1.2;
+    .tool-textarea.code {
+      min-height: 180px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      line-height: 1.5;
     }
 
-    .controls{
-      display:grid;
-      gap:14px;
+    .tool-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .row2{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
+    .tool-btn {
+      appearance: none;
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 16px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .08s ease, opacity .2s ease, box-shadow .2s ease;
     }
 
-    label{
-      display:block;
-      font-weight:700;
-      font-size:.96rem;
-      margin-bottom:8px;
+    .tool-btn:hover { transform: translateY(-1px); }
+    .tool-btn:active { transform: translateY(0); }
+
+    .tool-btn-primary {
+      background: linear-gradient(135deg, #60a5fa, #38bdf8);
+      color: #081120;
+      box-shadow: 0 12px 24px rgba(56,189,248,.22);
     }
 
-    input, textarea{
-      width:100%;
-      border:1px solid rgba(255,255,255,.12);
-      background:#091327;
-      color:var(--text);
-      border-radius:14px;
-      padding:14px 14px;
-      font:inherit;
-      outline:none;
-      transition:border-color .2s ease, box-shadow .2s ease;
+    .tool-btn-secondary {
+      background: #152648;
+      color: #dbeafe;
+      border: 1px solid rgba(255,255,255,.08);
     }
 
-    textarea{
-      min-height:120px;
-      resize:vertical;
+    .tool-btn-ghost {
+      background: transparent;
+      color: var(--muted, #94a3b8);
+      border: 1px solid rgba(255,255,255,.10);
     }
 
-    textarea.code{
-      min-height:190px;
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-      line-height:1.5;
+    .meter {
+      margin-top: 18px;
+      background: #0a1428;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 14px;
     }
 
-    input:focus, textarea:focus{
-      border-color:rgba(96,165,250,.65);
-      box-shadow:0 0 0 4px rgba(96,165,250,.15);
+    .meter small {
+      display: block;
+      color: var(--muted, #94a3b8);
+      margin-bottom: 8px;
     }
 
-    .buttons{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:2px;
+    .meter strong {
+      display: block;
+      margin-bottom: 10px;
     }
 
-    button{
-      appearance:none;
-      border:0;
-      border-radius:14px;
-      padding:13px 16px;
-      font:inherit;
-      font-weight:800;
-      cursor:pointer;
-      transition:transform .08s ease, opacity .2s ease, box-shadow .2s ease;
+    .meter-bar {
+      height: 10px;
+      border-radius: 999px;
+      background: #12203d;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.06);
     }
 
-    button:hover{transform:translateY(-1px)}
-    button:active{transform:translateY(0)}
-
-    .btnPrimary{
-      background:linear-gradient(135deg, var(--primary), var(--accent));
-      color:#081120;
-      box-shadow:0 12px 24px rgba(56,189,248,.22);
+    .meter-bar > span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #22c55e, #38bdf8);
+      transition: width .25s ease, background .25s ease;
     }
 
-    .btnSecondary{
-      background:#152648;
-      color:#dbeafe;
-      border:1px solid rgba(255,255,255,.08);
+    .meter-hint {
+      margin-top: 8px;
+      color: var(--muted, #94a3b8);
+      font-size: .9rem;
     }
 
-    .btnGhost{
-      background:transparent;
-      color:var(--muted);
-      border:1px solid rgba(255,255,255,.10);
+    .status-good { color: #86efac; }
+    .status-warn { color: #fde68a; }
+    .status-danger { color: #fecaca; }
+
+    .card {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #091327;
+      margin-top: 18px;
     }
 
-    .meterGrid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
-      margin-top:8px;
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: #102040;
+      color: #dbeafe;
+      font-weight: 800;
     }
 
-    .meter{
-      background:#0a1428;
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px;
+    .card-body {
+      padding: 16px;
     }
 
-    .meter small{
-      display:block;
-      color:var(--muted);
-      margin-bottom:8px;
+    .muted {
+      color: var(--muted, #94a3b8);
     }
 
-    .meter strong{
-      display:block;
-      margin-bottom:10px;
-      font-size:1rem;
+    .google-preview {
+      background: #fff;
+      color: #111827;
+      border-radius: 16px;
+      padding: 16px;
     }
 
-    .bar{
-      height:10px;
-      border-radius:999px;
-      background:#12203d;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.06);
+    .google-url {
+      color: #188038;
+      font-size: .92rem;
+      margin-bottom: 6px;
+      word-break: break-word;
     }
 
-    .bar > span{
-      display:block;
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg, var(--good), var(--accent));
-      transition:width .25s ease;
+    .google-title {
+      color: #1a0dab;
+      font-size: 1.35rem;
+      line-height: 1.3;
+      margin-bottom: 6px;
+      word-break: break-word;
     }
 
-    .hint{
-      margin-top:8px;
-      color:var(--muted);
-      font-size:.9rem;
+    .google-desc {
+      color: #4b5563;
+      font-size: .98rem;
+      line-height: 1.55;
+      word-break: break-word;
     }
 
-    .status-good{color:#86efac}
-    .status-warn{color:#fde68a}
-    .status-danger{color:#fecaca}
-
-    .previewCard{
-      border:1px solid var(--line);
-      border-radius:18px;
-      overflow:hidden;
-      background:#091327;
+    .tip-box,
+    .warn-box {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 16px;
     }
 
-    .previewHead{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:12px 14px;
-      border-bottom:1px solid var(--line);
-      background:#102040;
-      color:#dbeafe;
-      font-weight:800;
+    .tip-box {
+      background: rgba(34,197,94,.08);
+      border: 1px solid rgba(34,197,94,.18);
+      color: #d7ffe4;
     }
 
-    .previewBody{
-      padding:16px;
+    .warn-box {
+      background: rgba(251,191,36,.08);
+      border: 1px solid rgba(251,191,36,.18);
+      color: #fde7a2;
     }
 
-    .googlePreview{
-      background:#fff;
-      color:#111827;
-      border-radius:16px;
-      padding:16px;
+    .table-wrap {
+      margin-top: 16px;
+      overflow: auto;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
     }
 
-    .googleUrl{
-      color:#188038;
-      font-size:.92rem;
-      margin-bottom:6px;
-      word-break:break-all;
+    .tool-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 620px;
+      background: #091327;
     }
 
-    .googleTitle{
-      color:#1a0dab;
-      font-size:1.35rem;
-      line-height:1.3;
-      margin-bottom:6px;
-      word-break:break-word;
+    .tool-table th {
+      background: #102040;
+      color: #dbeafe;
+      font-size: .92rem;
+      text-align: left;
+      padding: 13px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
-    .googleDesc{
-      color:#4b5563;
-      font-size:.98rem;
-      line-height:1.55;
-      word-break:break-word;
+    .tool-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      color: #dbeafe;
+      vertical-align: top;
     }
 
-    .tip{
-      margin-top:16px;
-      padding:14px;
-      border-radius:16px;
-      background:rgba(34,197,94,.08);
-      border:1px solid rgba(34,197,94,.18);
-      color:#d7ffe4;
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 72px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: .84rem;
+      background: rgba(34,197,94,.12);
+      color: #b7f7cb;
+      border: 1px solid rgba(34,197,94,.20);
     }
 
-    .warnBox{
-      margin-top:16px;
-      padding:14px;
-      border-radius:16px;
-      background:rgba(251,191,36,.08);
-      border:1px solid rgba(251,191,36,.18);
-      color:#fde7a2;
+    .badge.warn {
+      background: rgba(251,191,36,.12);
+      color: #fde7a2;
+      border-color: rgba(251,191,36,.20);
     }
 
-    .tableWrap{
-      margin-top:16px;
-      overflow:auto;
-      border:1px solid var(--line);
-      border-radius:16px;
+    .badge.danger {
+      background: rgba(248,113,113,.12);
+      color: #fecaca;
+      border-color: rgba(248,113,113,.20);
     }
 
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:620px;
-      background:#091327;
+    .section-space {
+      margin-top: 22px;
     }
 
-    thead th{
-      background:#102040;
-      color:#dbeafe;
-      font-size:.92rem;
-      text-align:left;
-      padding:13px 14px;
-      border-bottom:1px solid var(--line);
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 22px;
     }
 
-    tbody td{
-      padding:12px 14px;
-      border-bottom:1px solid rgba(255,255,255,.06);
-      color:#dbeafe;
-      vertical-align:top;
+    .faq details {
+      background: #0a1428;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 14px 16px;
     }
 
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:72px;
-      padding:7px 10px;
-      border-radius:999px;
-      font-weight:800;
-      font-size:.84rem;
-      background:rgba(34,197,94,.12);
-      color:#b7f7cb;
-      border:1px solid rgba(34,197,94,.20);
+    .faq details + details {
+      margin-top: 12px;
     }
 
-    .badge.warn{
-      background:rgba(251,191,36,.12);
-      color:#fde7a2;
-      border-color:rgba(251,191,36,.20);
+    .faq summary {
+      cursor: pointer;
+      font-weight: 800;
+      color: #eef6ff;
+      list-style: none;
     }
 
-    .badge.danger{
-      background:rgba(248,113,113,.12);
-      color:#fecaca;
-      border-color:rgba(248,113,113,.20);
+    .faq summary::-webkit-details-marker {
+      display: none;
     }
 
-    .section{
-      margin-top:22px;
+    .tool-list {
+      margin: 0;
+      padding-left: 18px;
     }
 
-    .twoCol{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:20px;
-      margin-top:22px;
+    .tool-list li + li {
+      margin-top: 8px;
     }
 
-    .faq details{
-      background:#0a1428;
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:14px 16px;
+    .ad-slot {
+      margin-top: 20px;
+      min-height: 90px;
+      border: 1px dashed rgba(255,255,255,.14);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted, #94a3b8);
+      background: rgba(255,255,255,.015);
+      text-align: center;
+      padding: 14px;
     }
 
-    .faq details + details{
-      margin-top:12px;
+    .tool-footer {
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin-top: 40px;
+      padding: 28px 0 42px;
+      color: var(--muted, #94a3b8);
     }
 
-    .faq summary{
-      cursor:pointer;
-      font-weight:800;
-      color:#eef6ff;
-      list-style:none;
+    .tool-footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .faq summary::-webkit-details-marker{display:none}
-
-    .muted{color:var(--muted)}
-
-    .adSlot{
-      margin:22px 0 0;
-      min-height:90px;
-      border:1px dashed rgba(255,255,255,.14);
-      border-radius:16px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--muted);
-      background:rgba(255,255,255,.015);
-      text-align:center;
-      padding:14px;
+    .tool-footer-links a {
+      color: var(--muted, #94a3b8);
+      text-decoration: none;
     }
 
-    footer{
-      border-top:1px solid var(--line);
-      margin-top:40px;
-      padding:28px 0 42px;
-      color:var(--muted);
+    .tool-footer-links a:hover {
+      text-decoration: underline;
     }
 
-    .footerLinks{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-
-    .footerLinks a{
-      color:var(--muted);
-    }
-
-    @media (max-width: 1024px){
-      .grid,
-      .twoCol{
-        grid-template-columns:1fr;
+    @media (max-width: 1024px) {
+      .tool-grid,
+      .two-col {
+        grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 720px){
-      .nav{
-        min-height:auto;
-        padding:14px 0;
-        flex-direction:column;
-        align-items:flex-start;
+    @media (max-width: 720px) {
+      .tool-shell {
+        padding: 24px 0 44px;
       }
-      .row2{
-        grid-template-columns:1fr;
-      }
-      .heroCard{
-        padding:22px;
-      }
-      h1{
-        font-size:2rem;
-      }
-    }
 
-    @media (max-width: 540px){
-      .buttons button{
-        width:100%;
+      .hero-card,
+      .tool-panel {
+        padding: 18px;
+        border-radius: 18px;
       }
-      .container{
-        width:min(var(--max), calc(100% - 20px));
+
+      .tool-hero h1 {
+        font-size: 2rem;
+      }
+
+      .tool-buttons .tool-btn {
+        width: 100%;
+      }
+
+      .google-title {
+        font-size: 1.15rem;
+      }
+
+      .tool-table {
+        min-width: 560px;
       }
     }
   </style>
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <div class="container nav">
       <a class="brand" href="/" aria-label="InstantQR home">
-        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" width="36" height="36" />
         <span>InstantQR.io</span>
       </a>
+
       <nav class="navlinks" aria-label="Primary">
         <a href="/">Home</a>
         <a href="/tools.html">Tools</a>
-        <a href="/seo-tools.html">SEO Tools</a>
+        <a href="/seo-tools.html" aria-current="page">SEO Tools</a>
         <a href="/about.html">About</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
+  <main class="tool-shell">
     <div class="container">
-      <div class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a> / <a href="/seo-tools.html">SEO Tools</a> / <span>Meta Title Preview</span>
-      </div>
-
-      <div class="heroCard">
-        <div class="eyebrow">SEO Tool • Live Preview • Fast</div>
-        <h1>Meta Title Preview Tool</h1>
-        <p class="lead">
-          Preview how your title tag may appear in search results. Optimize title length, improve clarity,
-          and generate a clean title tag before you publish.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <main class="container">
-    <div class="grid">
-      <section class="panel">
-        <h2>Preview your title tag</h2>
-
-        <div class="controls">
-          <div>
-            <label for="pageTitle">Page title</label>
-            <input id="pageTitle" type="text" maxlength="120" placeholder="Example: Best Meta Title Preview Tool | InstantQR.io" />
-          </div>
-
-          <div>
-            <label for="pageUrl">Page URL</label>
-            <input id="pageUrl" type="url" placeholder="https://example.com/page" />
-          </div>
-
-          <div>
-            <label for="pageDescription">Optional snippet description</label>
-            <textarea id="pageDescription" maxlength="220" placeholder="Optional supporting text for a more realistic preview."></textarea>
-          </div>
-
-          <div class="buttons">
-            <button id="sampleBtn" class="btnSecondary" type="button">Load Example</button>
-            <button id="copyBtn" class="btnGhost" type="button">Copy Title Tag</button>
-            <button id="downloadBtn" class="btnGhost" type="button">Download</button>
-            <button id="clearBtn" class="btnGhost" type="button">Clear</button>
-          </div>
+      <section class="tool-hero">
+        <div class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a> /
+          <a href="/seo-tools.html">SEO Tools</a> /
+          <span>Meta Title Preview</span>
         </div>
 
-        <div class="meterGrid">
+        <div class="hero-card">
+          <div class="eyebrow">SEO Tool • Live Preview • Fast</div>
+          <h1>Meta Title Preview Tool</h1>
+          <p class="tool-lead">
+            Preview how your title tag may appear in search results. Optimize title length, improve clarity,
+            and generate a clean title tag before you publish.
+          </p>
+        </div>
+      </section>
+
+      <section class="tool-grid">
+        <section class="tool-panel">
+          <h2>Preview your title tag</h2>
+
+          <div class="tool-controls">
+            <div>
+              <label class="tool-label" for="pageTitle">Page title</label>
+              <input
+                id="pageTitle"
+                class="tool-input"
+                type="text"
+                maxlength="120"
+                placeholder="Example: Best Meta Title Preview Tool | InstantQR.io"
+                autocomplete="off"
+              />
+            </div>
+
+            <div>
+              <label class="tool-label" for="pageUrl">Page URL</label>
+              <input
+                id="pageUrl"
+                class="tool-input"
+                type="url"
+                inputmode="url"
+                placeholder="https://example.com/page"
+                autocomplete="off"
+              />
+            </div>
+
+            <div>
+              <label class="tool-label" for="pageDescription">Optional snippet description</label>
+              <textarea
+                id="pageDescription"
+                class="tool-textarea"
+                maxlength="220"
+                placeholder="Optional supporting text for a more realistic preview."
+              ></textarea>
+            </div>
+
+            <div class="tool-buttons">
+              <button id="sampleBtn" class="tool-btn tool-btn-secondary" type="button">Load Example</button>
+              <button id="copyBtn" class="tool-btn tool-btn-ghost" type="button">Copy Title Tag</button>
+              <button id="downloadBtn" class="tool-btn tool-btn-ghost" type="button">Download</button>
+              <button id="clearBtn" class="tool-btn tool-btn-ghost" type="button">Clear</button>
+            </div>
+          </div>
+
           <div class="meter">
             <small>Title length</small>
             <strong id="titleCount">0 characters</strong>
-            <div class="bar"><span id="titleBar"></span></div>
-            <div class="hint" id="titleHint">Recommended: about 50–60 characters</div>
+            <div class="meter-bar" aria-hidden="true">
+              <span id="titleBar"></span>
+            </div>
+            <div class="meter-hint" id="titleHint">Recommended: about 50–60 characters</div>
           </div>
-        </div>
 
-        <div class="previewCard section">
-          <div class="previewHead">
-            <span>Title tag output</span>
-            <span class="muted">Ready to paste into &lt;head&gt;</span>
-          </div>
-          <div class="previewBody">
-            <textarea id="titleTagOutput" class="code" readonly spellcheck="false" aria-label="Generated title tag"></textarea>
-          </div>
-        </div>
-
-        <div class="tip">
-          Tip: Put the main topic first, then add your brand at the end when it makes sense.
-        </div>
-
-        <div class="warnBox">
-          Search engines sometimes rewrite titles, but a strong original title still matters for SEO and click-through rate.
-        </div>
-
-        <div class="adSlot">
-          Ad space
-        </div>
-      </section>
-
-      <aside class="panel">
-        <h3>Live Google-style preview</h3>
-
-        <div class="previewCard" style="margin-top:0;">
-          <div class="previewHead">
-            <span>Search result preview</span>
-          </div>
-          <div class="previewBody">
-            <div class="googlePreview">
-              <div class="googleUrl" id="googleUrl">https://example.com/page</div>
-              <div class="googleTitle" id="googleTitle">Your page title will appear here</div>
-              <div class="googleDesc" id="googleDesc">Optional snippet description will appear here for preview purposes.</div>
+          <div class="card">
+            <div class="card-head">
+              <span>Title tag output</span>
+              <span class="muted">Ready to paste into &lt;head&gt;</span>
+            </div>
+            <div class="card-body">
+              <textarea
+                id="titleTagOutput"
+                class="tool-textarea code"
+                readonly
+                spellcheck="false"
+                aria-label="Generated title tag"
+              ></textarea>
             </div>
           </div>
-        </div>
 
-        <h3 class="section">SEO guidance</h3>
-        <p class="muted">
-          Title tags are one of the most important on-page SEO signals. They help search engines understand the page topic
-          and strongly influence whether users click your result.
+          <div class="tip-box">
+            Tip: Put the main topic first, then add your brand at the end when it makes sense.
+          </div>
+
+          <div class="warn-box">
+            Search engines sometimes rewrite titles, but a strong original title still matters for SEO and click-through rate.
+          </div>
+
+          <div class="ad-slot">Ad space</div>
+        </section>
+
+        <aside class="tool-panel">
+          <h3>Live Google-style preview</h3>
+
+          <div class="card" style="margin-top:0;">
+            <div class="card-head">
+              <span>Search result preview</span>
+            </div>
+            <div class="card-body">
+              <div class="google-preview">
+                <div class="google-url" id="googleUrl">https://example.com/page</div>
+                <div class="google-title" id="googleTitle">Your page title will appear here</div>
+                <div class="google-desc" id="googleDesc">Optional snippet description will appear here for preview purposes.</div>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="section-space">SEO guidance</h3>
+          <p class="muted">
+            Title tags are one of the most important on-page SEO signals. They help search engines understand the page topic
+            and strongly influence whether users click your result.
+          </p>
+
+          <div class="table-wrap">
+            <table class="tool-table" aria-label="Meta title recommendations">
+              <thead>
+                <tr>
+                  <th>Range</th>
+                  <th>Status</th>
+                  <th>Guidance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>50–60</strong></td>
+                  <td><span class="badge">Good</span></td>
+                  <td>Usually a strong target for many pages</td>
+                </tr>
+                <tr>
+                  <td><strong>&lt; 30</strong></td>
+                  <td><span class="badge warn">Short</span></td>
+                  <td>May not communicate enough page value</td>
+                </tr>
+                <tr>
+                  <td><strong>61–70</strong></td>
+                  <td><span class="badge warn">Long</span></td>
+                  <td>May begin to truncate in some results</td>
+                </tr>
+                <tr>
+                  <td><strong>&gt; 70</strong></td>
+                  <td><span class="badge danger">Too long</span></td>
+                  <td>Higher chance of truncation or rewriting</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </aside>
+      </section>
+
+      <section class="tool-panel section-space">
+        <h2>About this meta title preview tool</h2>
+        <p>
+          This free meta title preview tool helps you test how your title tag may appear in a Google-style search result.
+          It gives instant feedback on title length and helps you create stronger, clearer SEO titles before publishing.
         </p>
+        <p>
+          It is useful for blog posts, landing pages, service pages, product pages, and any important page you want to optimize for search visibility.
+        </p>
+      </section>
 
-        <div class="tableWrap">
-          <table aria-label="Meta title recommendations">
-            <thead>
-              <tr>
-                <th>Range</th>
-                <th>Status</th>
-                <th>Guidance</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>50–60</strong></td>
-                <td><span class="badge">Good</span></td>
-                <td>Usually a strong target for many pages</td>
-              </tr>
-              <tr>
-                <td><strong>&lt; 30</strong></td>
-                <td><span class="badge warn">Short</span></td>
-                <td>May not communicate enough page value</td>
-              </tr>
-              <tr>
-                <td><strong>61–70</strong></td>
-                <td><span class="badge warn">Long</span></td>
-                <td>May begin to truncate in some results</td>
-              </tr>
-              <tr>
-                <td><strong>&gt; 70</strong></td>
-                <td><span class="badge danger">Too long</span></td>
-                <td>Higher chance of truncation or rewriting</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </aside>
+      <section class="two-col">
+        <section class="tool-panel">
+          <h2>Best practices</h2>
+          <ul class="tool-list">
+            <li>Make the title unique for every important page</li>
+            <li>Lead with the primary topic or keyword</li>
+            <li>Keep it readable and useful for humans</li>
+            <li>Add branding when it helps recognition</li>
+            <li>Match the page content honestly and clearly</li>
+          </ul>
+        </section>
+
+        <section class="tool-panel">
+          <h2>Common mistakes</h2>
+          <ul class="tool-list">
+            <li>Using the same title on many pages</li>
+            <li>Stuffing too many keywords into one title</li>
+            <li>Making titles vague or generic</li>
+            <li>Making the title too long</li>
+            <li>Using clickbait that does not match the page</li>
+          </ul>
+        </section>
+      </section>
+
+      <section class="tool-panel section-space faq">
+        <h2>Frequently asked questions</h2>
+
+        <details open>
+          <summary>What is a meta title preview tool?</summary>
+          <p>It shows how your title tag may appear in a search snippet so you can refine it before publishing.</p>
+        </details>
+
+        <details>
+          <summary>How long should a meta title be?</summary>
+          <p>Around 50 to 60 characters is often a strong target, though actual visible length can vary by query and device.</p>
+        </details>
+
+        <details>
+          <summary>Does the title tag affect SEO?</summary>
+          <p>Yes. It is one of the most important on-page SEO elements because it helps define page relevance and influences clicks.</p>
+        </details>
+
+        <details>
+          <summary>Can I copy the generated title tag?</summary>
+          <p>Yes. This tool generates a ready-to-use title tag you can paste into the head section of your page.</p>
+        </details>
+      </section>
     </div>
-
-    <section class="panel section">
-      <h2>About this meta title preview tool</h2>
-      <p>
-        This free meta title preview tool helps you test how your title tag may appear in a Google-style search result.
-        It gives instant feedback on title length and helps you create stronger, clearer SEO titles before publishing.
-      </p>
-      <p>
-        It is useful for blog posts, landing pages, service pages, product pages, and any important page you want to optimize for search visibility.
-      </p>
-    </section>
-
-    <section class="twoCol">
-      <section class="panel">
-        <h2>Best practices</h2>
-        <ul>
-          <li>Make the title unique for every important page</li>
-          <li>Lead with the primary topic or keyword</li>
-          <li>Keep it readable and useful for humans</li>
-          <li>Add branding when it helps recognition</li>
-          <li>Match the page content honestly and clearly</li>
-        </ul>
-      </section>
-
-      <section class="panel">
-        <h2>Common mistakes</h2>
-        <ul>
-          <li>Using the same title on many pages</li>
-          <li>Stuffing too many keywords into one title</li>
-          <li>Making titles vague or generic</li>
-          <li>Making the title too long</li>
-          <li>Using clickbait that does not match the page</li>
-        </ul>
-      </section>
-    </section>
-
-    <section class="panel section faq">
-      <h2>Frequently asked questions</h2>
-
-      <details open>
-        <summary>What is a meta title preview tool?</summary>
-        <p>
-          It shows how your title tag may appear in a search snippet so you can refine it before publishing.
-        </p>
-      </details>
-
-      <details>
-        <summary>How long should a meta title be?</summary>
-        <p>
-          Around 50 to 60 characters is often a strong target, though actual visible length can vary by query and device.
-        </p>
-      </details>
-
-      <details>
-        <summary>Does the title tag affect SEO?</summary>
-        <p>
-          Yes. It is one of the most important on-page SEO elements because it helps define page relevance and influences clicks.
-        </p>
-      </details>
-
-      <details>
-        <summary>Can I copy the generated title tag?</summary>
-        <p>
-          Yes. This tool generates a ready-to-use title tag you can paste into the head section of your page.
-        </p>
-      </details>
-    </section>
   </main>
 
-  <footer>
-    <div class="container footerLinks">
+  <footer class="tool-footer">
+    <div class="container tool-footer-links">
       <div>
         <a href="/seo-tools.html">SEO Tools</a> ·
         <a href="/tools.html">All Tools</a> ·
@@ -894,132 +844,7 @@
     </div>
   </footer>
 
-  <script>
-    (function(){
-      const pageTitle = document.getElementById('pageTitle');
-      const pageUrl = document.getElementById('pageUrl');
-      const pageDescription = document.getElementById('pageDescription');
-      const titleTagOutput = document.getElementById('titleTagOutput');
-
-      const googleUrl = document.getElementById('googleUrl');
-      const googleTitle = document.getElementById('googleTitle');
-      const googleDesc = document.getElementById('googleDesc');
-
-      const titleCount = document.getElementById('titleCount');
-      const titleBar = document.getElementById('titleBar');
-      const titleHint = document.getElementById('titleHint');
-
-      const sampleBtn = document.getElementById('sampleBtn');
-      const copyBtn = document.getElementById('copyBtn');
-      const downloadBtn = document.getElementById('downloadBtn');
-      const clearBtn = document.getElementById('clearBtn');
-      const year = document.getElementById('year');
-
-      year.textContent = new Date().getFullYear();
-
-      function escapeHtml(str){
-        return String(str || '')
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      }
-
-      function getTitleStatus(len){
-        if(len === 0) return { width:0, text:'Recommended: about 50–60 characters', cls:'' };
-        if(len < 30) return { width:Math.min((len/60)*100, 100), text:'Title may be too short', cls:'status-warn' };
-        if(len <= 60) return { width:Math.min((len/60)*100, 100), text:'Title length looks good', cls:'status-good' };
-        if(len <= 70) return { width:100, text:'Title may get truncated', cls:'status-warn' };
-        return { width:100, text:'Title is too long', cls:'status-danger' };
-      }
-
-      function updateMeter(){
-        const len = pageTitle.value.trim().length;
-        const status = getTitleStatus(len);
-
-        titleCount.textContent = `${len} characters`;
-        titleBar.style.width = `${status.width}%`;
-        titleHint.textContent = status.text;
-        titleHint.className = 'hint ' + (status.cls || '');
-      }
-
-      function updatePreview(){
-        const title = pageTitle.value.trim() || 'Your page title will appear here';
-        const url = pageUrl.value.trim() || 'https://example.com/page';
-        const desc = pageDescription.value.trim() || 'Optional snippet description will appear here for preview purposes.';
-
-        googleUrl.textContent = url;
-        googleTitle.textContent = title.length > 65 ? title.slice(0, 62) + '...' : title;
-        googleDesc.textContent = desc.length > 170 ? desc.slice(0, 167) + '...' : desc;
-      }
-
-      function updateTitleTag(){
-        const title = pageTitle.value.trim();
-        titleTagOutput.value = `<title>${escapeHtml(title || 'Your Page Title')}</title>`;
-      }
-
-      function updateAll(){
-        updateMeter();
-        updatePreview();
-        updateTitleTag();
-      }
-
-      function loadSample(){
-        pageTitle.value = 'Meta Title Preview Tool | Free SEO Title Tag Preview | InstantQR.io';
-        pageUrl.value = 'https://instantqr.io/seo-tools/meta-title-preview.html';
-        pageDescription.value = 'Preview your title tag in a Google-style snippet, check title length, and improve your SEO before publishing.';
-        updateAll();
-      }
-
-      function clearAll(){
-        pageTitle.value = '';
-        pageUrl.value = '';
-        pageDescription.value = '';
-        updateAll();
-      }
-
-      async function copyTitleTag(){
-        if(!titleTagOutput.value.trim()){
-          alert('Nothing to copy yet.');
-          return;
-        }
-        try{
-          await navigator.clipboard.writeText(titleTagOutput.value);
-          copyBtn.textContent = 'Copied';
-          setTimeout(() => copyBtn.textContent = 'Copy Title Tag', 1400);
-        }catch(err){
-          alert('Copy failed on this device/browser.');
-        }
-      }
-
-      function downloadTitleTag(){
-        if(!titleTagOutput.value.trim()){
-          alert('Nothing to download yet.');
-          return;
-        }
-        const blob = new Blob([titleTagOutput.value], { type:'text/html;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'meta-title-tag.html';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      }
-
-      [pageTitle, pageUrl, pageDescription].forEach(el => {
-        el.addEventListener('input', updateAll);
-      });
-
-      sampleBtn.addEventListener('click', loadSample);
-      clearBtn.addEventListener('click', clearAll);
-      copyBtn.addEventListener('click', copyTitleTag);
-      downloadBtn.addEventListener('click', downloadTitleTag);
-
-      updateAll();
-    })();
-  </script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/tools/js/meta-title-preview.js" defer></script>
 </body>
 </html>
