@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     country: document.getElementById('country'),
     note: document.getElementById('note'),
     brandColor: document.getElementById('brandColor'),
-    avatarFile: document.getElementById('avatarFile'),
 
     generateBtn: document.getElementById('generateBtn'),
     sampleBtn: document.getElementById('sampleBtn'),
@@ -40,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     profileCard: document.getElementById('profileCard'),
     avatarFallback: document.getElementById('avatarFallback'),
-    avatarImg: document.getElementById('avatarImg'),
     profileName: document.getElementById('profileName'),
     profileRole: document.getElementById('profileRole'),
     profileLines: document.getElementById('profileLines'),
@@ -57,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let lastQrMode = '';
   let lastQrImageUrl = '';
   let lastShareLink = '';
-  let localAvatarDataUrl = '';
 
   function safeTrim(value) {
     return String(value || '').trim();
@@ -266,18 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (els.avatarFallback) {
       els.avatarFallback.textContent = buildInitials();
     }
-
-    if (els.avatarImg) {
-      if (localAvatarDataUrl) {
-        els.avatarImg.src = localAvatarDataUrl;
-        els.avatarImg.hidden = false;
-        els.avatarFallback.hidden = true;
-      } else {
-        els.avatarImg.removeAttribute('src');
-        els.avatarImg.hidden = true;
-        els.avatarFallback.hidden = false;
-      }
-    }
   }
 
   function updateMetaOnly() {
@@ -410,9 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (els.brandColor) els.brandColor.value = '#2563eb';
-    if (els.avatarFile) els.avatarFile.value = '';
 
-    localAvatarDataUrl = '';
     lastVCard = '';
     lastShareLink = '';
     lastQrMode = '';
@@ -639,24 +622,6 @@ document.addEventListener('DOMContentLoaded', () => {
   ].forEach(el => {
     el?.addEventListener('input', updateMetaOnly);
   });
-
-  if (els.avatarFile) {
-    els.avatarFile.addEventListener('change', () => {
-      const file = els.avatarFile.files && els.avatarFile.files[0];
-      if (!file) {
-        localAvatarDataUrl = '';
-        updateProfilePreview();
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        localAvatarDataUrl = typeof reader.result === 'string' ? reader.result : '';
-        updateProfilePreview();
-      };
-      reader.readAsDataURL(file);
-    });
-  }
 
   reset();
   loadFromShareLink();
