@@ -15,143 +15,689 @@
     crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>Text QR Code Generator | Free QR for Text | InstantQR</title>
-  <meta name="description" content="Generate a QR code from any text instantly. Free, fast, mobile-friendly text QR code generator with download and copy features." />
+  <title>Text QR Code Generator | Color, Logo, Batch & SVG Export | InstantQR</title>
+  <meta name="description" content="Create QR codes from text with color picker, background picker, logo center embed, size selector, batch QR generation, PNG download, and SVG export. Fast, mobile-friendly, and free." />
+  <meta name="keywords" content="text qr code generator, qr code color picker, qr code logo, qr code svg export, batch qr code generator, styled qr code generator" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
 
   <link rel="canonical" href="https://instantqr.io/tools/text-qr-code-generator.html" />
-  <link rel="icon" href="/assets/instantqr-logo.svg" />
-
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
 
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="Text QR Code Generator | Color, Logo, Batch & SVG Export" />
+  <meta property="og:description" content="Generate text QR codes with styling, logo embed, batch mode, and SVG export." />
+  <meta property="og:url" content="https://instantqr.io/tools/text-qr-code-generator.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Text QR Code Generator | InstantQR" />
+  <meta name="twitter:description" content="Create styled text QR codes with color, logo, batch generation, and SVG export." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Text QR Code Generator",
+    "url":"https://instantqr.io/tools/text-qr-code-generator.html",
+    "description":"Generate QR codes from text with styling, logo embed, batch mode, and SVG export.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Text QR Code Generator",
+    "applicationCategory":"BusinessApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript",
+    "url":"https://instantqr.io/tools/text-qr-code-generator.html",
+    "description":"Generate styled QR codes from text with QR color, background color, logo embed, size selector, batch generation, and SVG export."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+      {"@type":"ListItem","position":3,"name":"Text QR Code Generator","item":"https://instantqr.io/tools/text-qr-code-generator.html"}
+    ]
+  }
+  </script>
+
   <style>
-    .tool-wrap{
+    .qr-grid{
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:1.06fr .94fr;
       gap:18px;
-      margin-top:20px;
+      margin-top:18px;
     }
 
-    .card{
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--border);
+    .tool-card,
+    .result-panel,
+    .faqCard{
       border-radius:var(--radius2);
-      padding:20px;
-    }
-
-    .field textarea{
-      width:100%;
-      min-height:140px;
-      resize:vertical;
-      border-radius:14px;
       border:1px solid var(--border);
-      background:#13213b;
-      color:var(--text);
-      padding:14px;
-      font:inherit;
-    }
-
-    .qr-box{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:300px;
-      border:1px solid var(--border);
-      border-radius:14px;
       background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
     }
 
-    canvas{
-      background:#fff;
-      border-radius:12px;
-      padding:10px;
+    .tool-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
     }
+    .tool-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(760px 280px at 16% 18%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(520px 240px at 82% 34%, rgba(34,197,94,.12), transparent 56%);
+      pointer-events:none;
+    }
+    .tool-card > *{ position:relative; }
 
-    .actions{
+    .mode-switch{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       margin-top:14px;
     }
 
-    @media(max-width:900px){
-      .tool-wrap{grid-template-columns:1fr}
+    .mode-btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .mode-btn.active{
+      background:rgba(96,165,250,.16);
+      border-color:rgba(96,165,250,.35);
+      color:#fff;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .field.full{ grid-column:1 / -1; }
+
+    .field label{
+      font-size:13px;
+      font-weight:800;
+      color:#fff;
+    }
+
+    .field input,
+    .field textarea,
+    .field select{
+      width:100%;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#13213b;
+      color:var(--text);
+      padding:13px 14px;
+      outline:none;
+      box-sizing:border-box;
+      font:inherit;
+      -webkit-appearance:none;
+      appearance:none;
+    }
+
+    .field select{
+      cursor:pointer;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #cfe0ff 50%),
+        linear-gradient(135deg, #cfe0ff 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) calc(50% - 3px),
+        calc(100% - 12px) calc(50% - 3px);
+      background-size:6px 6px, 6px 6px;
+      background-repeat:no-repeat;
+      padding-right:42px;
+    }
+
+    .field select option{
+      background:#13213b;
+      color:#e7eefc;
+    }
+
+    .field input[type="color"]{
+      min-height:50px;
+      padding:8px;
+      cursor:pointer;
+    }
+
+    .field input[type="file"]{
+      padding:10px 12px;
+      cursor:pointer;
+    }
+
+    .field textarea{
+      min-height:150px;
+      resize:vertical;
+      line-height:1.5;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus{
+      border-color:rgba(96,165,250,.55);
+      box-shadow:0 0 0 3px rgba(96,165,250,.14);
+    }
+
+    .helper-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .tool-actions,
+    .quick-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .mini-btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:12px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .mini-btn:hover{
+      border-color:rgba(255,255,255,.2);
+      background:rgba(255,255,255,.07);
+    }
+
+    .result-panel{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .panel-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+
+    .summary-box,
+    .qr-box,
+    .output-box,
+    .batch-box,
+    .status-box{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .metric{
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:6px;
+    }
+
+    .metric .k{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .metric .v{
+      font-size:24px;
+      font-weight:900;
+      letter-spacing:-.4px;
+      word-break:break-word;
+    }
+
+    .metric .u{
+      font-size:12px;
+      color:rgba(233,238,252,.55);
+    }
+
+    .qr-shell{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:320px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      padding:20px;
+    }
+
+    #qrCanvas{
+      max-width:min(320px, 100%);
+      height:auto;
+      border-radius:12px;
+      box-shadow:0 10px 25px rgba(0,0,0,.25);
+    }
+
+    .qr-empty{
+      text-align:center;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    }
+
+    .output-code{
+      white-space:pre-wrap;
+      word-break:break-word;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.16);
+      padding:14px;
+      font-size:13px;
+      line-height:1.65;
+      color:#fff;
+      min-height:140px;
+    }
+
+    .status-box{
+      line-height:1.6;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .batch-list{
+      display:grid;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .batch-item{
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+
+    .batch-item-head{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+
+    .batch-item-title{
+      font-weight:800;
+      color:#fff;
+      word-break:break-word;
+    }
+
+    .batch-canvas-wrap{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      margin-bottom:10px;
+    }
+
+    .batch-canvas-wrap canvas{
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 8px 20px rgba(0,0,0,.22);
+      max-width:220px;
+      height:auto;
+    }
+
+    .batch-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .faqCard{
+      margin-top:14px;
+      padding:18px;
+    }
+
+    .faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+
+    .faqCard summary::-webkit-details-marker{ display:none; }
+
+    .faqCard p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .hidden{display:none!important}
+
+    @media (max-width:980px){
+      .qr-grid,
+      .summary-grid,
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:640px){
+      .tool-actions .cta{
+        width:100%;
+      }
     }
   </style>
 </head>
 
 <body>
-<header class="topbar">
-  <div class="topbar-inner">
-    <a class="brand" href="/">
-      <img src="/assets/instantqr-logo.svg" alt="">
-      <span>InstantQR</span>
-    </a>
+  <a class="skip" href="#main">Skip to content</a>
 
-    <nav class="top-links">
-      <a href="/">Home</a>
-      <a href="/tools/tools.html">Tools</a>
-      <a href="/tools/url-qr-code-generator.html">URL QR</a>
-      <a href="/tools/vcard-qr-code-generator.html">vCard QR</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
+
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/url-qr-code-generator.html">URL QR</a>
+        <a href="/tools/vcard-qr-code-generator.html">vCard QR</a>
+        <a href="/tools/social-media-qr-code-generator.html">Social QR</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Text QR Code Generator</span></li>
+      </ol>
     </nav>
-  </div>
-</header>
 
-<main class="wrap">
-  <h1>Text QR Code Generator</h1>
-  <p class="sub">Turn any text into a QR code instantly. Great for notes, messages, WiFi, or sharing information.</p>
+    <section class="qr-grid" aria-label="Text QR Code Generator">
+      <section class="tool-card">
+        <div class="pill">📝 Text QR • 🎨 Styled • ⚡ Fast</div>
 
-  <div class="tool-wrap">
+        <h1>Text QR Code Generator</h1>
+        <p class="sub">
+          Turn any text into a QR code instantly. Customize the QR color, background color, center logo,
+          and size. Generate one QR or batch multiple text lines at once.
+        </p>
 
-    <!-- INPUT -->
-    <div class="card">
-      <div class="field">
-        <label>Enter text</label>
-        <textarea id="textInput" placeholder="Type or paste any text..."></textarea>
+        <div class="mode-switch" role="tablist" aria-label="Generator mode">
+          <button class="mode-btn active" id="singleModeBtn" type="button" data-mode="single">Single QR</button>
+          <button class="mode-btn" id="batchModeBtn" type="button" data-mode="batch">Batch QR</button>
+        </div>
+
+        <div id="singleModeFields">
+          <div class="field full" style="margin-top:14px;">
+            <label for="textInput">Enter text</label>
+            <textarea id="textInput" placeholder="Type or paste any text..."></textarea>
+          </div>
+        </div>
+
+        <div id="batchModeFields" class="hidden">
+          <div class="field full" style="margin-top:14px;">
+            <label for="batchInput">Enter one text per line</label>
+            <textarea id="batchInput" placeholder="Line 1&#10;Line 2&#10;Line 3"></textarea>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="qrColor">QR color</label>
+            <input id="qrColor" type="color" value="#000000" />
+          </div>
+
+          <div class="field">
+            <label for="bgColor">Background color</label>
+            <input id="bgColor" type="color" value="#ffffff" />
+          </div>
+
+          <div class="field">
+            <label for="sizeSelect">Size</label>
+            <select id="sizeSelect">
+              <option value="220">Small</option>
+              <option value="320" selected>Medium</option>
+              <option value="420">Large</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="logoFile">Center logo (optional)</label>
+            <input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" />
+          </div>
+        </div>
+
+        <div class="helper-row">
+          <span>Batch mode creates one QR per non-empty line.</span>
+          <span><span id="activeCount">0</span> active item(s)</span>
+        </div>
+
+        <div class="tool-actions">
+          <button class="cta primary" id="generateBtn" type="button">Generate QR Code</button>
+          <button class="cta ghost" id="sampleBtn" type="button">Load Sample</button>
+          <button class="cta ghost" id="clearBtn" type="button">Clear</button>
+        </div>
+
+        <div class="quick-actions">
+          <button class="mini-btn" type="button" id="copyTextBtn">Copy Text</button>
+          <button class="mini-btn" type="button" id="removeLogoBtn">Remove Logo</button>
+          <button class="mini-btn" type="button" id="exportSvgBtn">Export SVG</button>
+        </div>
+      </section>
+
+      <aside class="result-panel" aria-label="Generated Text QR Output">
+        <div class="panel-top">
+          <div>
+            <h2>QR Preview</h2>
+            <div class="hint" style="margin:6px 0 0;">Live preview updates as you edit.</div>
+          </div>
+          <div class="hint mono" id="resultMode">Mode: Single</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-grid">
+            <div class="metric">
+              <div class="k">Active Items</div>
+              <div class="v" id="summaryCount">0</div>
+              <div class="u">Text entries</div>
+            </div>
+            <div class="metric">
+              <div class="k">QR Ready</div>
+              <div class="v" id="readyLabel">No</div>
+              <div class="u">Generated state</div>
+            </div>
+            <div class="metric">
+              <div class="k">Export</div>
+              <div class="v">PNG</div>
+              <div class="u">Single + batch</div>
+            </div>
+            <div class="metric">
+              <div class="k">Designer Export</div>
+              <div class="v">SVG</div>
+              <div class="u">Single mode</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qr-box" id="singlePreviewBox">
+          <div class="panel-top">
+            <div>
+              <h2 style="font-size:16px;">Single QR Preview</h2>
+            </div>
+            <div class="quick-actions" style="margin-top:0;">
+              <button class="mini-btn" id="downloadBtn" type="button">Download PNG</button>
+            </div>
+          </div>
+
+          <div class="qr-shell">
+            <div class="qr-empty" id="qrEmpty">
+              Enter text, then click <strong>Generate QR Code</strong>.
+            </div>
+            <canvas id="qrCanvas" width="320" height="320" hidden></canvas>
+          </div>
+        </div>
+
+        <div class="batch-box hidden" id="batchPreviewBox">
+          <div class="panel-top">
+            <div>
+              <h2 style="font-size:16px;">Batch QR Preview</h2>
+            </div>
+          </div>
+          <div class="batch-list" id="batchList"></div>
+        </div>
+
+        <div class="output-box">
+          <div class="panel-top">
+            <div>
+              <h2 style="font-size:16px;">Generated Output</h2>
+            </div>
+          </div>
+          <pre class="output-code mono" id="outputCode">No QR content generated yet.</pre>
+        </div>
+
+        <div class="status-box" id="statusBox">
+          <strong>Ready.</strong><br>
+          Enter text, customize styling, then click <b>Generate QR Code</b>.
+        </div>
+      </aside>
+    </section>
+
+    <section class="faqCard" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>Can I change the QR code color?</summary>
+        <p>Yes. You can customize both the QR foreground color and the background color.</p>
+      </details>
+
+      <details>
+        <summary>Can I add a logo in the center?</summary>
+        <p>Yes. You can upload a logo image and place it in the center of the QR code preview and PNG export.</p>
+      </details>
+
+      <details>
+        <summary>Can I create multiple QR codes at once?</summary>
+        <p>Yes. Batch mode creates one QR code for each non-empty line in your input.</p>
+      </details>
+
+      <details>
+        <summary>Can I export SVG?</summary>
+        <p>Yes. Single mode supports SVG export, which is useful for designers and print workflows.</p>
+      </details>
+    </section>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/sitemap.xml">Sitemap</a>
+        </div>
       </div>
+    </footer>
+  </main>
 
-      <div class="actions">
-        <button class="cta primary" id="generateBtn">Generate QR</button>
-        <button class="cta ghost" id="sampleBtn">Load Sample</button>
-        <button class="cta ghost" id="clearBtn">Clear</button>
-      </div>
-
-      <div class="actions">
-        <button class="mini-btn" id="copyBtn">Copy Text</button>
-      </div>
-    </div>
-
-    <!-- OUTPUT -->
-    <div class="card">
-      <h3>QR Preview</h3>
-
-      <div class="qr-box">
-        <canvas id="qrCanvas" width="300" height="300"></canvas>
-      </div>
-
-      <div class="actions">
-        <button class="mini-btn" id="downloadBtn">Download PNG</button>
-      </div>
-    </div>
-
-  </div>
-</main>
-
-<footer class="footer">
-  <div class="footer-box">
-    <div>© <span id="year"></span> InstantQR</div>
-    <div class="footer-links">
-      <a href="/">Home</a>
-      <a href="/tools/tools.html">Tools</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-    </div>
-  </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
-<script src="/assets/site.js"></script>
-<script src="/assets/js/tools/text-qr-code-generator.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/text-qr-code-generator.js" defer></script>
 </body>
 </html>
