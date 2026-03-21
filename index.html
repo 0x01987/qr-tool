@@ -30,7 +30,7 @@
     crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>InstantQR | Free Online Tools for QR Codes, SEO, DNS, Converters, Crypto & Security</title>
   <meta name="description" content="InstantQR.io provides free, privacy-first online tools including QR code generators, SEO tools, DNS lookup, internet speed test, password tools, converters, world clock, crypto calculators, Web3 tools, mini-games, guides, and advertising opportunities. No signup required." />
@@ -173,20 +173,33 @@
       max-width:var(--max);
       margin:0 auto;
       padding:14px 20px;
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
     }
     .brandRow{
       display:flex; align-items:center; gap:10px;
       font-weight:800; letter-spacing:.2px;
+      min-width:0;
     }
     .brandRow img{display:block; height:34px; width:auto}
 
-    nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    nav{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      flex:1 1 auto;
+    }
     nav a{
       color:var(--muted);
       font-size:14px;
       padding:8px 10px;
       border-radius:12px;
+      white-space:nowrap;
     }
     nav a:hover{
       color:var(--text);
@@ -330,6 +343,7 @@
       color: var(--text);
       outline:none;
       font-size:14px;
+      min-width:0;
     }
     .input::placeholder{color: rgba(233,238,252,.55)}
     .hint{font-size:12px; color: rgba(233,238,252,.60); line-height:1.45}
@@ -496,14 +510,54 @@
       .heroGrid{grid-template-columns: 1fr}
       .grid{grid-template-columns: repeat(2, 1fr)}
       .featureRow{grid-template-columns: 1fr}
-      nav{display:none}
+      .topbar .inner{
+        align-items:flex-start;
+      }
+      nav{
+        order:3;
+        width:100%;
+        justify-content:flex-start;
+      }
+    }
+    @media (max-width: 680px){
+      .topbar .inner{
+        padding:12px 16px;
+      }
+      nav{
+        gap:6px;
+      }
+      nav a{
+        font-size:13px;
+        padding:8px 9px;
+      }
+      .topbar .inner > .cta.primary{
+        width:100%;
+      }
+      .brandRow{
+        width:100%;
+      }
     }
     @media (max-width: 560px){
+      .wrap{padding:16px}
       .grid{grid-template-columns: 1fr}
       .searchRow{flex-direction:column}
-      .cta{width:100%}
-      .actions .cta{flex:1}
+      .searchRow .cta{width:100%}
+      .actions .cta{width:100%}
+      .quickLinks a{width:100%; justify-content:center}
       .ico{width:52px;height:52px}
+      h1{font-size: clamp(28px, 9vw, 38px)}
+      .heroCard, .finder, .faq{padding:16px}
+      .toolControls{align-items:stretch}
+      .toolControls .select,
+      .toolControls .cta{width:100%}
+      nav{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        width:100%;
+      }
+      nav a{
+        text-align:center;
+      }
     }
   </style>
 
@@ -633,11 +687,9 @@
         <a href="/mini-games/games.html">Games</a>
         <a href="/guides/guides.html">Guides</a>
         <a href="#tools">Popular</a>
-        <a href="#why">Why</a>
         <a href="#faq">FAQ</a>
         <a href="/about.html">About</a>
         <a href="/contact.html">Contact</a>
-        <a href="/advertise.html">Advertise</a>
       </nav>
 
       <a class="cta primary" href="/tools/tools.html">Explore Tools →</a>
@@ -689,9 +741,6 @@
             <a href="/tools/tools.html">All Tools</a>
             <a href="/tools/seo-tools.html">SEO Tools</a>
             <a href="/tools/web3-tools.html">Web3 Tools</a>
-            <a href="/tools/dns-lookup.html">DNS Tools</a>
-            <a href="/tools/wifi-qr-code-generator.html">QR Tools</a>
-            <a href="/tools/password.html">Security Tools</a>
             <a href="/guides/guides.html">Guides</a>
             <a href="/mini-games/games.html">Games</a>
             <a href="/advertise.html">Advertise</a>
@@ -1047,7 +1096,6 @@
         <a class="cta ghost" href="/mini-games/games.html">Play games</a>
         <a class="cta ghost" href="/guides/guides.html">Read guides</a>
         <a class="cta ghost" href="/contact.html">Contact</a>
-        <a class="cta ghost" href="/advertise.html">Advertise with us</a>
       </div>
     </section>
 
@@ -1116,7 +1164,7 @@
 
         <details>
           <summary>Can I advertise on InstantQR.io?</summary>
-          <p>Yes — visit <a href="/advertise.html"><u>/advertise.html</u></a> to learn about featured placements, sponsorship opportunities, and how to reach the InstantQR audience.</p>
+          <p>Yes — visit <a href="/advertise.html"><u>/advertise.html</u></a> to learn about featured placements and sponsorship opportunities.</p>
         </details>
       </div>
     </section>
@@ -1144,8 +1192,7 @@
             <a href="/tools/seo-tools.html">SEO Tools</a> ·
             <a href="/tools/web3-tools.html">Web3 Tools</a> ·
             <a href="/mini-games/games.html">Games</a> ·
-            <a href="/guides/guides.html">Guides</a> ·
-            <a href="/tools/dns-lookup.html">DNS Lookup</a>
+            <a href="/guides/guides.html">Guides</a>
           </div>
 
           <div>
