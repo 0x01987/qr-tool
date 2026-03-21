@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>Free vCard QR Code Generator | Contact QR + VCF + Share Link | InstantQR</title>
-  <meta name="description" content="Create a branded vCard QR code with live profile preview, VCF download, PNG download, profile image upload, and working share link. Fast, mobile friendly, and privacy-first." />
+  <meta name="description" content="Create a branded vCard QR code with live profile preview, VCF download, PNG download, and working share link. Fast, mobile friendly, and privacy-first." />
   <meta name="keywords" content="vcard qr code generator, contact qr code generator, vcf qr code, digital contact qr, contact card qr, branded qr code contact, contact share link" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
@@ -36,7 +36,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:title" content="Free vCard QR Code Generator | Contact QR + VCF + Share Link | InstantQR" />
-  <meta property="og:description" content="Generate a contact QR code with live profile preview, branded card layout, VCF download, image upload, and share link." />
+  <meta property="og:description" content="Generate a contact QR code with live profile preview, branded card layout, VCF download, and share link." />
   <meta property="og:url" content="https://instantqr.io/tools/vcard-qr-code-generator.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
@@ -182,8 +182,7 @@
     }
 
     .field input,
-    .field textarea,
-    .field select{
+    .field textarea{
       width:100%;
       border-radius:14px;
       border:1px solid var(--border);
@@ -201,11 +200,6 @@
       cursor:pointer;
     }
 
-    .field input[type="file"]{
-      padding:10px 12px;
-      cursor:pointer;
-    }
-
     .field textarea{
       min-height:88px;
       resize:vertical;
@@ -213,8 +207,7 @@
     }
 
     .field input:focus,
-    .field textarea:focus,
-    .field select:focus{
+    .field textarea:focus{
       border-color:rgba(96,165,250,.55);
       box-shadow:0 0 0 3px rgba(96,165,250,.14);
     }
@@ -364,13 +357,6 @@
       font-weight:900;
       color:#fff;
       overflow:hidden;
-    }
-
-    .avatar img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
     }
 
     .profile-name{
@@ -658,11 +644,6 @@
             <label for="brandColor">Brand color</label>
             <input id="brandColor" type="color" value="#2563eb" />
           </div>
-
-          <div class="field">
-            <label for="avatarFile">Profile image (optional)</label>
-            <input id="avatarFile" type="file" accept="image/*" />
-          </div>
         </div>
 
         <div class="helper-row">
@@ -683,7 +664,7 @@
         </div>
 
         <div class="hint" style="margin-top:14px;">
-          Share links include contact fields and brand color, but not the uploaded profile image.
+          Share links include contact fields and brand color only.
         </div>
       </section>
 
@@ -730,9 +711,8 @@
 
           <div class="profile-card" id="profileCard" style="--cardBrand:#2563eb;">
             <div class="profile-inner">
-              <div class="avatar" id="avatarBox">
+              <div class="avatar">
                 <span id="avatarFallback">JD</span>
-                <img id="avatarImg" alt="Profile preview" hidden />
               </div>
 
               <div>
@@ -797,12 +777,12 @@
 
     <section class="miniGrid2" aria-label="vCard QR code guidance">
       <div class="miniBox">
-        <h2>Best upgrades included</h2>
+        <h2>Included upgrades</h2>
         <ul>
           <li>Live branded profile preview</li>
-          <li>Profile image upload</li>
           <li>VCF file download</li>
           <li>Working hash-based share link</li>
+          <li>PNG QR download</li>
         </ul>
       </div>
 
@@ -810,7 +790,7 @@
         <h2>Best practices</h2>
         <p>
           Keep your contact details current and test the QR code on multiple phones before printing.
-          Share links restore contact fields and styling, while uploaded images stay local to the browser session.
+          Share links restore contact fields and brand color directly in the browser.
         </p>
       </div>
     </section>
