@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -9,15 +10,16 @@
     gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
+  <!-- Google AdSense -->
   <script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>Meta Title Preview Tool | Free SEO Title Tag Preview | InstantQR</title>
-  <meta name="description" content="Preview your meta title in a Google-style search result snippet. Check title length, optimize clarity, and generate a ready-to-copy title tag for SEO." />
+  <meta name="description" content="Preview your meta title in a Google-style search result snippet. Check title length, improve clarity, and generate a ready-to-copy title tag for SEO." />
   <meta name="keywords" content="meta title preview, title tag preview, SEO title checker, SERP title preview, title tag optimizer, free SEO tools" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
@@ -26,25 +28,20 @@
   <meta name="format-detection" content="telephone=no" />
 
   <link rel="canonical" href="https://instantqr.io/tools/meta-title-preview.html" />
-  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
-  <link rel="alternate icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
-  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
-  <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Meta Title Preview Tool | InstantQR" />
   <meta property="og:description" content="Preview and optimize title tags with live SERP-style preview, title length guidance, and ready-to-copy output." />
   <meta property="og:url" content="https://instantqr.io/tools/meta-title-preview.html" />
-  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
-  <meta property="og:image:alt" content="InstantQR Meta Title Preview Tool" />
+  <meta property="og:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Meta Title Preview Tool | InstantQR" />
   <meta name="twitter:description" content="Preview title tags with live Google-style results and SEO guidance." />
-  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta name="twitter:image" content="https://instantqr.io/assets/instantqr-logo.svg" />
 
   <script type="application/ld+json">
   {
@@ -67,7 +64,7 @@
     "isAccessibleForFree":true,
     "browserRequirements":"Requires JavaScript. Works in modern browsers.",
     "url":"https://instantqr.io/tools/meta-title-preview.html",
-    "description":"Preview your meta title in a Google-style search result snippet. Check title length, optimize clarity, and generate a ready-to-copy title tag for SEO.",
+    "description":"Preview your meta title in a Google-style search result snippet. Check title length, improve clarity, and generate a ready-to-copy title tag for SEO.",
     "publisher":{
       "@type":"Organization",
       "name":"InstantQR",
@@ -122,120 +119,412 @@
   </script>
 
   <style>
-    .controls.cols-3{grid-template-columns:1.2fr 1fr 1fr}
-    .summaryPreviewGrid,
-    .detailGrid{
-      display:grid;
-      gap:12px;
-      margin-top:12px;
+    .skip{
+      position:absolute;
+      left:-9999px;
+      top:auto;
+      width:1px;
+      height:1px;
+      overflow:hidden;
     }
-    .summaryPreviewGrid{grid-template-columns:1fr 1fr}
-    .detailGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .metricCard,.detailCard{
-      border-radius:16px;
-      border:1px solid var(--border);
+    .skip:focus{
+      left:16px;
+      top:16px;
+      width:auto;
+      height:auto;
+      padding:10px 14px;
+      border-radius:12px;
+      background:#0b1220;
+      color:#fff;
+      z-index:999;
+    }
+
+    .wrap{
+      width:min(1180px, calc(100% - 24px));
+      margin:0 auto;
+      padding:24px 0 48px;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:40;
+      backdrop-filter:blur(12px);
+      background:rgba(8,17,32,.82);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .topbar-inner{
+      width:min(1180px, calc(100% - 24px));
+      margin:0 auto;
+      min-height:70px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:#fff;
+      text-decoration:none;
+      font-weight:800;
+    }
+
+    .brand-logo{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+
+    .brand-logo img{
+      width:28px;
+      height:28px;
+      display:block;
+    }
+
+    .top-links{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .top-links a{
+      color:var(--muted, #94a3b8);
+      text-decoration:none;
+      font-weight:700;
+      font-size:.95rem;
+    }
+
+    .top-links a:hover{
+      color:#fff;
+    }
+
+    .breadcrumb{
+      margin:10px 0 16px;
+    }
+
+    .breadcrumb ol{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      color:var(--muted, #94a3b8);
+      font-size:.92rem;
+    }
+
+    .breadcrumb a{
+      color:var(--muted, #94a3b8);
+      text-decoration:none;
+    }
+
+    .breadcrumb a:hover{
+      text-decoration:underline;
+    }
+
+    .hero{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      padding:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:0 10px 30px rgba(0,0,0,.22);
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(96,165,250,.12);
+      border:1px solid rgba(96,165,250,.24);
+      color:#dbeafe;
+      font-size:.88rem;
+      font-weight:700;
+      margin-bottom:14px;
+    }
+
+    .hero h1{
+      margin:0 0 10px;
+      font-size:clamp(2rem, 4vw, 3rem);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted, #94a3b8);
+      max-width:880px;
+      font-size:1.03rem;
+      line-height:1.7;
+    }
+
+    .summary{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .sumCard{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
       background:rgba(255,255,255,.04);
       padding:14px;
     }
-    .cardHead{
+
+    .greenGlow{
+      box-shadow:inset 0 0 0 1px rgba(25,195,125,.14), 0 0 0 1px rgba(25,195,125,.02);
+    }
+
+    .sumLabel{
+      color:var(--muted, #94a3b8);
+      font-size:.82rem;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+
+    .sumValue{
+      color:#f8fbff;
+      font-weight:900;
+      line-height:1.2;
+      font-size:1.1rem;
+      word-break:break-word;
+    }
+
+    .sumValue.small{
+      font-size:.98rem;
+    }
+
+    .sumNote{
+      color:var(--muted, #94a3b8);
+      font-size:.82rem;
+      margin-top:8px;
+      line-height:1.5;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    }
+
+    .panel{
+      margin-top:18px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.018));
+      box-shadow:0 10px 30px rgba(0,0,0,.22);
+    }
+
+    .panelHead{
+      padding:18px 20px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .panelTitle{
+      font-size:1.08rem;
+      font-weight:900;
+      color:#eef6ff;
+      margin-bottom:5px;
+    }
+
+    .panelSub{
+      color:var(--muted, #94a3b8);
+      font-size:.95rem;
+      line-height:1.6;
+      max-width:720px;
+    }
+
+    .panelBody{
+      padding:18px 20px 20px;
+    }
+
+    .statusLine{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:74px;
+      padding:8px 11px;
+      border-radius:999px;
+      font-size:.84rem;
+      font-weight:800;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);
+      color:#e5eefc;
+    }
+
+    .cta{
+      appearance:none;
+      border:0;
+      border-radius:14px;
+      padding:12px 14px;
+      font:inherit;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .08s ease, opacity .2s ease;
+    }
+
+    .cta:hover{ transform:translateY(-1px); }
+    .cta:active{ transform:translateY(0); }
+
+    .cta.primary{
+      background:linear-gradient(135deg,#60a5fa,#38bdf8);
+      color:#081120;
+      box-shadow:0 12px 24px rgba(56,189,248,.22);
+    }
+
+    .cta.ghost{
+      background:rgba(255,255,255,.05);
+      color:#dbeafe;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .controls{
+      display:grid;
+      gap:12px;
+    }
+
+    .controls.cols-3{
+      grid-template-columns:1.2fr 1fr 1fr;
+    }
+
+    .control label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:800;
+      font-size:.94rem;
+      color:#eef6ff;
+    }
+
+    .input{
+      width:100%;
+      border:1px solid rgba(255,255,255,.12);
+      background:#091327;
+      color:#e5eefc;
+      border-radius:14px;
+      padding:14px;
+      font:inherit;
+      outline:none;
+      transition:border-color .2s ease, box-shadow .2s ease;
+    }
+
+    textarea.input{
+      min-height:54px;
+      resize:vertical;
+    }
+
+    .input:focus{
+      border-color:rgba(96,165,250,.65);
+      box-shadow:0 0 0 4px rgba(96,165,250,.15);
+    }
+
+    .quick{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .quick button,
+    .miniBtn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:#eef6ff;
+      border-radius:12px;
+      padding:10px 12px;
+      font:inherit;
+      font-size:.92rem;
+      cursor:pointer;
+    }
+
+    .quick button:hover,
+    .miniBtn:hover{
+      background:rgba(255,255,255,.09);
+    }
+
+    .resultBox{
+      border-radius:18px;
+      padding:14px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.12);
+    }
+
+    .resultBox.ok{
+      box-shadow:inset 0 0 0 1px rgba(25,195,125,.08);
+    }
+
+    .resultTop{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      margin-bottom:8px;
       flex-wrap:wrap;
+      margin-bottom:10px;
     }
-    .metricCard h3,.detailCard h3{
-      margin:0;
-      font-size:15px;
-    }
-    .metricVal{
-      font-size:22px;
+
+    .resultStatus{
       font-weight:900;
-      line-height:1.1;
+      font-size:.95rem;
+    }
+
+    .resultStatus.ok{ color:#c8ffe9; }
+
+    .small{
+      font-size:.85rem;
+    }
+
+    .muted{
+      color:var(--muted, #94a3b8);
+    }
+
+    .monoBlock{
+      margin:0;
+      white-space:pre-wrap;
       word-break:break-word;
       overflow-wrap:anywhere;
+      font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      color:#f0f6ff;
     }
-    .neutralVal{color:#f0f6ff}
-    .goodVal{color:#c8ffe9}
-    .warnVal{color:#fde7a2}
-    .badVal{color:#ffd3d3}
-    .metricNote{
-      margin-top:6px;
-      font-size:12px;
-      color:var(--muted);
+
+    .formula{
+      margin-top:10px;
+      color:var(--muted, #94a3b8);
+      font-size:.88rem;
       line-height:1.5;
     }
-    .kv{display:grid;gap:10px}
-    .kvRow{
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.10);
-      padding:12px;
-    }
-    .kvKey{
-      font-weight:800;
-      color:#eaf2ff;
-      margin-bottom:6px;
-      font-size:13px;
-    }
-    .kvVal{
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.6;
-      word-break:break-word;
-      overflow-wrap:anywhere;
-      white-space:pre-wrap;
-    }
-    .miniActions{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-    .miniBtn{
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      border-radius:10px;
-      padding:7px 10px;
-      font-size:12px;
-      cursor:pointer;
-      font:inherit;
-    }
-    .miniBtn:hover{background:rgba(255,255,255,.10)}
-    .googleCard{
-      background:#fff;
-      color:#111827;
-      border-radius:16px;
-      padding:16px;
-      min-height:210px;
-    }
-    .googleUrl{
-      color:#188038;
-      font-size:.92rem;
-      margin-bottom:6px;
-      word-break:break-word;
-    }
-    .googleTitle{
-      color:#1a0dab;
-      font-size:1.35rem;
-      line-height:1.3;
-      margin-bottom:6px;
-      word-break:break-word;
-    }
-    .googleDesc{
-      color:#4b5563;
-      font-size:.98rem;
-      line-height:1.55;
-      word-break:break-word;
-    }
+
     .meterWrap{
-      margin-top:12px;
-      border-radius:16px;
+      margin-top:14px;
+      border-radius:18px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(0,0,0,.12);
       padding:14px;
     }
+
     .meterHead{
       display:flex;
       justify-content:space-between;
@@ -244,15 +533,18 @@
       flex-wrap:wrap;
       margin-bottom:8px;
     }
+
     .meterTitle{
       font-weight:900;
       font-size:15px;
-      color:#eaf2ff;
+      color:#eef6ff;
     }
+
     .meterValue{
       font-weight:900;
       font-size:20px;
     }
+
     .meter{
       height:12px;
       border-radius:999px;
@@ -260,49 +552,165 @@
       background:rgba(255,255,255,.08);
       border:1px solid rgba(255,255,255,.08);
     }
+
     .meterFill{
       height:100%;
       width:0%;
-      transition:width .25s ease;
       background:linear-gradient(90deg,#19c37d,#60a5fa);
+      transition:width .25s ease;
     }
+
     .meterLegend{
       margin-top:8px;
-      color:var(--muted);
+      color:var(--muted, #94a3b8);
       font-size:12px;
       line-height:1.5;
     }
-    .monoBlock{
-      white-space:pre-wrap;
+
+    .summaryPreviewGrid,
+    .detailGrid{
+      display:grid;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .summaryPreviewGrid{
+      grid-template-columns:1fr 1fr;
+    }
+
+    .detailGrid{
+      grid-template-columns:repeat(2, minmax(0,1fr));
+    }
+
+    .metricCard,
+    .detailCard{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+
+    .metricCard h3,
+    .detailCard h3{
+      margin:0;
+      font-size:15px;
+      color:#eef6ff;
+    }
+
+    .metricNote{
+      margin-top:6px;
+      font-size:12px;
+      color:var(--muted, #94a3b8);
+      line-height:1.5;
+    }
+
+    .cardHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:8px;
+    }
+
+    .miniActions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .kv{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .kvRow{
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.10);
+      padding:12px;
+    }
+
+    .kvKey{
+      font-weight:800;
+      color:#eaf2ff;
+      margin-bottom:6px;
+      font-size:13px;
+    }
+
+    .kvVal{
+      color:var(--muted, #94a3b8);
+      font-size:13px;
+      line-height:1.6;
       word-break:break-word;
       overflow-wrap:anywhere;
-      font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-      color:#f0f6ff;
-      margin:0;
+      white-space:pre-wrap;
     }
+
+    .googleCard{
+      background:#fff;
+      color:#111827;
+      border-radius:16px;
+      padding:16px;
+      min-height:210px;
+      margin-top:10px;
+    }
+
+    .googleUrl{
+      color:#188038;
+      font-size:.92rem;
+      margin-bottom:6px;
+      word-break:break-word;
+    }
+
+    .googleTitle{
+      color:#1a0dab;
+      font-size:1.35rem;
+      line-height:1.3;
+      margin-bottom:6px;
+      word-break:break-word;
+    }
+
+    .googleDesc{
+      color:#4b5563;
+      font-size:.98rem;
+      line-height:1.55;
+      word-break:break-word;
+    }
+
+    .tipsList{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted, #94a3b8);
+    }
+
+    .tipsList li + li{
+      margin-top:8px;
+    }
+
     .hintBox{
       margin-top:12px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(0,0,0,.10);
       padding:12px;
-      color:var(--muted);
+      color:var(--muted, #94a3b8);
       font-size:13px;
       line-height:1.6;
     }
-    .tipsList{
-      margin:0;
-      padding-left:18px;
-      color:var(--muted);
-    }
-    .tipsList li + li{margin-top:8px}
+
     details.faqPanel{
       border-radius:16px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(255,255,255,.04);
       overflow:hidden;
     }
-    details.faqPanel + details.faqPanel{margin-top:12px}
+
+    details.faqPanel + details.faqPanel{
+      margin-top:12px;
+    }
+
     details.faqPanel summary{
       list-style:none;
       cursor:pointer;
@@ -310,19 +718,100 @@
       font-weight:800;
       color:#eaf2ff;
     }
-    details.faqPanel summary::-webkit-details-marker{display:none}
+
+    details.faqPanel summary::-webkit-details-marker{
+      display:none;
+    }
+
     .faqBody{
       border-top:1px solid rgba(255,255,255,.08);
       padding:14px;
-      color:var(--muted);
+      color:var(--muted, #94a3b8);
       line-height:1.7;
     }
-    @media (max-width:980px){
-      .controls.cols-3,.summaryPreviewGrid,.detailGrid{grid-template-columns:1fr}
+
+    .footer{
+      margin-top:18px;
+      padding-bottom:20px;
+    }
+
+    .footer-box{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:16px 18px;
+      background:rgba(255,255,255,.03);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      color:var(--muted, #94a3b8);
+    }
+
+    .footer-links{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .footer-links a{
+      color:var(--muted, #94a3b8);
+      text-decoration:none;
+    }
+
+    .footer-links a:hover{
+      text-decoration:underline;
+      color:#fff;
+    }
+
+    @media (max-width: 1100px){
+      .summary{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+      .controls.cols-3,
+      .summaryPreviewGrid,
+      .detailGrid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 720px){
+      .topbar-inner{
+        min-height:auto;
+        padding:14px 0;
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .wrap{
+        width:min(1180px, calc(100% - 18px));
+      }
+
+      .hero,
+      .panelBody,
+      .panelHead{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .summary{
+        grid-template-columns:1fr;
+      }
+
+      .statusLine .cta{
+        width:100%;
+      }
+
+      .quick button{
+        width:100%;
+      }
+
+      .googleTitle{
+        font-size:1.14rem;
+      }
     }
   </style>
 </head>
-
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
@@ -368,16 +857,19 @@
           <div class="sumValue small mono" id="titleLengthSummary">0 characters</div>
           <div class="sumNote">Recommended target is often around 50–60 characters.</div>
         </div>
+
         <div class="sumCard">
           <div class="sumLabel">Status</div>
           <div class="sumValue small mono" id="titleStatusSummary">Ready</div>
           <div class="sumNote">Quick quality signal for your current title.</div>
         </div>
+
         <div class="sumCard">
           <div class="sumLabel">Preview URL</div>
           <div class="sumValue small mono" id="urlSummary">https://example.com/page</div>
           <div class="sumNote">Live URL shown in the search preview area.</div>
         </div>
+
         <div class="sumCard">
           <div class="sumLabel">Mode</div>
           <div class="sumValue small mono" id="modeLabel">Ready</div>
@@ -390,7 +882,9 @@
       <div class="panelHead">
         <div>
           <div class="panelTitle">Title Tag Preview</div>
-          <div class="panelSub">Create better SEO titles with live SERP-style preview, title length guidance, and copy-ready output.</div>
+          <div class="panelSub">
+            Create better SEO titles with live SERP-style preview, title length guidance, and copy-ready output.
+          </div>
         </div>
 
         <div class="statusLine">
@@ -432,10 +926,12 @@
             <div class="resultStatus ok">Live result</div>
             <div class="small muted">Updates while you type</div>
           </div>
-          <div class="monoBlock" id="resultText">Enter a title and URL to preview your meta title output.</div>
+          <pre class="monoBlock" id="resultText">Enter a title and URL to preview your meta title output.</pre>
         </div>
 
-        <div class="formula" id="formulaText">Checks: title length + preview truncation + URL formatting + title tag output</div>
+        <div class="formula" id="formulaText">
+          Checks: title length + preview truncation + URL formatting + title tag output
+        </div>
 
         <div class="meterWrap" aria-label="Title length meter">
           <div class="meterHead">
@@ -452,7 +948,7 @@
           <div class="metricCard">
             <h3>Generated Title Tag</h3>
             <div class="metricNote">Ready to paste into your page head.</div>
-            <div class="kv" style="margin-top:10px;">
+            <div class="kv">
               <div class="kvRow">
                 <div class="kvKey">Title Tag Output</div>
                 <div class="kvVal monoBlock" id="titleTagOutput">&lt;title&gt;Your Page Title&lt;/title&gt;</div>
@@ -463,7 +959,7 @@
           <div class="metricCard">
             <h3>Google-Style Preview</h3>
             <div class="metricNote">Approximate search result appearance.</div>
-            <div class="googleCard" style="margin-top:10px;">
+            <div class="googleCard">
               <div class="googleUrl" id="googleUrl">https://example.com/page</div>
               <div class="googleTitle" id="googleTitle">Your page title will appear here</div>
               <div class="googleDesc" id="googleDesc">Optional snippet description will appear here for preview purposes.</div>
@@ -556,6 +1052,7 @@
           <div class="panelSub">Quick answers about title tags and SEO previews.</div>
         </div>
       </div>
+
       <div class="panelBody">
         <details class="faqPanel" open>
           <summary>What is a meta title preview tool?</summary>
