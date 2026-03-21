@@ -52,139 +52,84 @@
   <link rel="stylesheet" href="/assets/site.css" />
 
   <style>
-    .tool-grid{
+    .defi-layout{
       display:grid;
-      grid-template-columns:1.15fr .85fr;
+      grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);
       gap:18px;
       margin-top:14px;
       align-items:start;
     }
 
-    .tool-card,
-    .tool-panel,
-    .faqCard,
-    .contentCard{
-      border-radius:var(--radius2);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      box-shadow:var(--shadow);
-    }
-
-    .tool-card{
-      padding:24px;
-      position:relative;
-      overflow:visible;
-      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
-    }
-
-    .tool-card::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
-        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
-      pointer-events:none;
-    }
-
-    .tool-card > *{ position:relative; }
-
-    .tool-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+    .defi-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:12px;
       margin-top:16px;
     }
 
-    .tool-panel,
-    .contentCard,
-    .faqCard{
-      padding:18px;
+    .defi-stat{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      min-height:96px;
     }
 
-    .panel-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .panel-top h2{
-      margin:0;
-      font-size:18px;
-      letter-spacing:-.2px;
-    }
-
-    .networkHint{
-      font-size:12px;
+    .defi-stat .k{
       color:var(--muted);
-    }
-
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:14px;
-    }
-
-    .full{ grid-column:1 / -1; }
-
-    .form-grid label{
-      display:block;
-      font-size:12px;
-      color:var(--muted);
+      font-size:.86rem;
       margin-bottom:6px;
     }
 
-    .form-grid input,
-    .form-grid select{
-      width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:rgba(10,20,39,.96);
-      color:var(--text);
-      outline:none;
-      appearance:none;
-      -webkit-appearance:none;
-      -moz-appearance:none;
+    .defi-stat .v{
+      font-size:1.28rem;
+      font-weight:900;
+      letter-spacing:-.02em;
+      line-height:1.15;
     }
 
-    .form-grid select{
-      background-image:
-        linear-gradient(45deg, transparent 50%, rgba(255,255,255,.7) 50%),
-        linear-gradient(135deg, rgba(255,255,255,.7) 50%, transparent 50%),
-        linear-gradient(to right, rgba(255,255,255,.06), rgba(255,255,255,.06));
-      background-position:
-        calc(100% - 18px) calc(50% - 3px),
-        calc(100% - 12px) calc(50% - 3px),
-        calc(100% - 40px) 50%;
-      background-size:6px 6px, 6px 6px, 1px 22px;
-      background-repeat:no-repeat;
-      padding-right:48px;
+    .defi-toolbar{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:16px;
     }
 
-    .form-grid input:focus,
-    .form-grid select:focus{
-      border-color:rgba(96,165,250,.65);
-      box-shadow:0 0 0 3px rgba(96,165,250,.14);
+    .defi-toolbar .full{
+      grid-column:1 / -1;
     }
 
-    .form-grid select option{
-      background:#0b1222;
-      color:#e7eefc;
+    .defi-switcher{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
     }
 
-    .helper{
-      margin-top:6px;
+    .defi-pill-btn{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
       color:var(--muted);
-      font-size:12px;
-      line-height:1.55;
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:700;
+      cursor:pointer;
+      transition:background .15s ease,border-color .15s ease,color .15s ease,transform .15s ease;
+      font:inherit;
     }
 
-    .notice{
-      margin:0 0 16px;
+    .defi-pill-btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .defi-pill-btn.active{
+      color:#fff;
+      background:rgba(96,165,250,.16);
+      border-color:rgba(96,165,250,.28);
+    }
+
+    .defi-note{
+      margin-top:16px;
       padding:12px 14px;
       border-radius:16px;
       background:rgba(96,165,250,.08);
@@ -193,82 +138,62 @@
       font-size:.95rem;
     }
 
-    .switcher{
+    .defi-note strong{ color:#fff; }
+
+    .defi-actions{
+      margin-top:16px;
       display:flex;
-      flex-wrap:wrap;
       gap:10px;
-      margin:14px 0 8px;
+      flex-wrap:wrap;
     }
 
-    .pill-btn{
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      color:var(--muted);
-      border-radius:999px;
-      padding:10px 14px;
-      font-weight:700;
-      cursor:pointer;
-      transition:background .15s ease,border-color .15s ease,color .15s ease,transform .15s ease;
-    }
-
-    .pill-btn:hover{ transform:translateY(-1px); }
-
-    .pill-btn.active{
-      color:#fff;
-      background:rgba(96,165,250,.16);
-      border-color:rgba(96,165,250,.28);
-    }
-
-    .statusBox{
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.14);
+    .defi-summary-box{
       padding:14px;
-      font-size:13px;
-      line-height:1.55;
-      color:var(--muted);
-      margin-top:16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      margin-bottom:14px;
     }
 
-    .overview-grid{
+    .defi-summary-box p{
+      margin:0;
+      color:#dbeafe;
+    }
+
+    .defi-results{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:12px;
-      margin-top:16px;
+      gap:10px;
     }
 
-    .overview-item{
+    .defi-result-item{
       border:1px solid var(--border);
       background:rgba(255,255,255,.03);
-      border-radius:16px;
-      padding:14px;
+      border-radius:14px;
+      padding:12px 13px;
     }
 
-    .overview-item .k{
-      color:var(--muted);
-      font-size:.86rem;
-      margin-bottom:6px;
+    .defi-result-item strong{
+      display:block;
+      margin-bottom:5px;
+      color:#fff;
+      font-size:.95rem;
     }
 
-    .overview-item .v{
-      font-size:1.3rem;
-      font-weight:800;
-      letter-spacing:-.02em;
+    .defi-result-item span{
+      color:#cbd5e1;
+      font-size:.92rem;
+      line-height:1.45;
     }
 
-    .trend-pos{ color:#4ade80; }
-    .trend-neg{ color:#f87171; }
-    .trend-neutral{ color:#e5eefc; }
-
-    .trendingCard{
+    .defi-trending{
       margin-top:18px;
-      padding:18px;
       border-radius:var(--radius2);
       border:1px solid var(--border);
       background:rgba(255,255,255,.03);
+      padding:18px;
     }
 
-    .trendingHead{
+    .defi-trending-head{
       display:flex;
       justify-content:space-between;
       align-items:flex-start;
@@ -276,24 +201,24 @@
       margin-bottom:14px;
     }
 
-    .trendingHead h2{
+    .defi-trending-head h2{
       margin:4px 0 0;
       font-size:1.15rem;
       letter-spacing:-.02em;
     }
 
-    .tiny{
+    .defi-tiny{
       font-size:.84rem;
       color:var(--muted);
     }
 
-    .trendingGrid{
+    .defi-trending-grid{
       display:grid;
       grid-template-columns:repeat(4,minmax(0,1fr));
       gap:12px;
     }
 
-    .trendingItem{
+    .defi-trending-item{
       border:1px solid var(--border);
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border-radius:18px;
@@ -304,14 +229,14 @@
       gap:8px;
     }
 
-    .trendingTop{
+    .defi-trending-top{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
     }
 
-    .trendingRank{
+    .defi-rank{
       display:inline-grid;
       place-items:center;
       min-width:30px;
@@ -325,24 +250,24 @@
       color:#fff;
     }
 
-    .trendingChange{
+    .defi-trending-change{
       font-size:.92rem;
       font-weight:800;
     }
 
-    .trendingName{
+    .defi-trending-name{
       font-size:1rem;
       font-weight:800;
       line-height:1.25;
       word-break:break-word;
     }
 
-    .trendingMetaRow{
+    .defi-trending-meta{
       font-size:.86rem;
       color:var(--muted);
     }
 
-    .trendingActions{
+    .defi-trending-actions{
       margin-top:auto;
       display:flex;
       justify-content:space-between;
@@ -350,63 +275,52 @@
       gap:10px;
     }
 
-    .trendingTvl{
+    .defi-trending-tvl{
       font-size:.92rem;
       font-weight:700;
       color:#dce8ff;
     }
 
-    .trendingOpen{
+    .defi-link-btn{
       border:none;
       background:transparent;
       color:var(--brand);
       font-weight:800;
       cursor:pointer;
       padding:0;
+      font:inherit;
     }
 
-    .trendingOpen:hover{text-decoration:underline}
+    .defi-link-btn:hover{ text-decoration:underline; }
 
-    .tableWrap{
-      overflow:visible;
+    .defi-table-wrap{
+      margin-top:16px;
       border-radius:16px;
       border:1px solid var(--border);
       background:rgba(255,255,255,.02);
-      margin-top:16px;
+      overflow:visible;
     }
 
-    table{
-      width:100%;
-      border-collapse:collapse;
+    .defi-table-wrap table{
       min-width:0;
+      width:100%;
       table-layout:auto;
     }
 
-    thead th{
-      text-align:left;
-      padding:14px;
-      background:#0e1a31;
-      color:#d9e5ff;
-      font-size:.84rem;
-      border-bottom:1px solid var(--border);
+    .defi-table-wrap thead th{
       white-space:normal;
-      vertical-align:top;
     }
 
-    tbody td{
-      padding:14px;
-      border-bottom:1px solid var(--border);
-      vertical-align:top;
+    .defi-table-wrap tbody td{
       white-space:normal;
       word-break:break-word;
     }
 
-    tbody tr:hover{ background:rgba(255,255,255,.03); }
-
-    .rank-badge{
+    .defi-rank-badge{
       display:inline-grid;
       place-items:center;
-      width:30px;height:30px;
+      width:30px;
+      height:30px;
       border-radius:999px;
       background:rgba(255,255,255,.05);
       border:1px solid var(--border);
@@ -414,15 +328,16 @@
       font-size:.86rem;
     }
 
-    .proto{
+    .defi-proto{
       display:flex;
       align-items:flex-start;
       gap:12px;
       min-width:0;
     }
 
-    .protoIcon{
-      width:34px;height:34px;
+    .defi-proto-icon{
+      width:34px;
+      height:34px;
       border-radius:10px;
       object-fit:cover;
       background:#15274b;
@@ -430,10 +345,10 @@
       flex:0 0 auto;
     }
 
-    .protoName{ font-weight:800; }
-    .protoMeta{ font-size:.84rem;color:var(--muted); }
+    .defi-proto-name{ font-weight:800; }
+    .defi-proto-meta{ font-size:.84rem;color:var(--muted); }
 
-    .tag{
+    .defi-tag{
       display:inline-flex;
       align-items:center;
       padding:7px 10px;
@@ -446,113 +361,60 @@
       white-space:normal;
     }
 
-    .row-btn{
-      border:none;
-      background:transparent;
-      color:var(--brand);
-      font-weight:800;
-      cursor:pointer;
-      padding:0;
-    }
+    .defi-trend-pos{ color:#4ade80; }
+    .defi-trend-neg{ color:#f87171; }
+    .defi-trend-neutral{ color:#e5eefc; }
 
-    .row-btn:hover{text-decoration:underline}
-
-    .loading,.empty,.error{
+    .defi-loading,
+    .defi-empty,
+    .defi-error{
       padding:28px;
       text-align:center;
       color:var(--muted);
     }
 
-    .error{ color:#ffd0d7; }
+    .defi-error{ color:#ffd0d7; }
 
-    .results{
-      display:grid;
-      gap:10px;
-    }
-
-    .result-item{
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.03);
-      border-radius:14px;
-      padding:12px 13px;
-    }
-
-    .result-item strong{
-      display:block;
-      margin-bottom:5px;
-      color:#fff;
-      font-size:.95rem;
-    }
-
-    .result-item span{
-      color:#cbd5e1;
-      font-size:.92rem;
-      line-height:1.45;
-    }
-
-    .result-box{
-      padding:14px;
-      border-radius:16px;
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--border);
-      margin-bottom:14px;
-    }
-
-    .result-box p{ margin:0;color:#dbeafe; }
-
-    .content{
+    .defi-content{
       margin-top:20px;
       display:grid;
       gap:18px;
     }
 
-    .content p{
+    .defi-content-card{
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+
+    .defi-content-card h2{
+      margin:0 0 10px;
+      letter-spacing:-.02em;
+    }
+
+    .defi-content-card p{
       color:#cbd5e1;
       margin:0 0 12px;
       line-height:1.65;
     }
 
-    .content ul{
+    .defi-content-card ul{
       margin:10px 0 0 18px;
       color:#cbd5e1;
     }
 
-    .content li{ margin:8px 0; }
+    .defi-content-card li{ margin:8px 0; }
 
-    .faqCard details{
-      border-top:1px solid rgba(255,255,255,.10);
-      padding:12px 0;
-    }
-
-    .faqCard details:first-of-type{
-      border-top:0;
-      padding-top:0;
-    }
-
-    .faqCard summary{
-      cursor:pointer;
-      font-weight:800;
-      list-style:none;
-      color:#fff;
-    }
-
-    .faqCard summary::-webkit-details-marker{ display:none; }
-
-    .faqCard p{
-      margin:8px 0 0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:14px;
-    }
-
-    .related-links{
+    .defi-related-links{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
       margin-top:10px;
     }
 
-    .related-links a{
+    .defi-related-links a{
       display:inline-flex;
       align-items:center;
       gap:8px;
@@ -563,14 +425,52 @@
       color:var(--text);
     }
 
-    .related-links a:hover{
+    .defi-related-links a:hover{
       background:rgba(255,255,255,.06);
       text-decoration:none;
     }
 
-    .hidden{ display:none !important; }
+    .defi-faq{
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
 
-    .modal{
+    .defi-faq h2{
+      margin:0 0 10px;
+    }
+
+    .defi-faq details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+
+    .defi-faq details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+
+    .defi-faq summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+
+    .defi-faq summary::-webkit-details-marker{ display:none; }
+
+    .defi-faq p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .defi-hidden{ display:none !important; }
+
+    .defi-modal{
       position:fixed;
       inset:0;
       background:rgba(3,7,16,.72);
@@ -583,12 +483,10 @@
       overflow-y:auto;
     }
 
-    .modal.open{ display:flex; }
+    .defi-modal.open{ display:flex; }
 
-    .sheet{
+    .defi-sheet{
       width:min(100%,980px);
-      max-height:none;
-      overflow:visible;
       border-radius:24px;
       background:linear-gradient(180deg,#0e1a31,#0b162c);
       border:1px solid var(--border);
@@ -596,7 +494,7 @@
       margin:12px 0 24px;
     }
 
-    .sheetHead{
+    .defi-sheet-head{
       display:flex;
       justify-content:space-between;
       gap:14px;
@@ -606,42 +504,42 @@
       border-bottom:1px solid var(--border);
     }
 
-    .sheetBody{ padding:18px; }
+    .defi-sheet-body{ padding:18px; }
 
-    .sheetGrid{
+    .defi-sheet-grid{
       display:grid;
       grid-template-columns:1.1fr .9fr;
       gap:16px;
     }
 
-    .detailStats{
+    .defi-detail-stats{
       display:grid;
       grid-template-columns:repeat(2,1fr);
       gap:12px;
       margin-bottom:14px;
     }
 
-    .detailCard{
+    .defi-detail-card{
       padding:14px;
       border:1px solid var(--border);
       border-radius:18px;
       background:rgba(255,255,255,.03);
     }
 
-    .canvasWrap{
+    .defi-canvas-wrap{
       border:1px solid var(--border);
       border-radius:18px;
       background:rgba(255,255,255,.02);
       padding:10px;
     }
 
-    canvas{
+    .defi-canvas-wrap canvas{
       width:100%;
       height:320px;
       display:block;
     }
 
-    .chip-list{
+    .defi-chip-list{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
@@ -649,36 +547,39 @@
     }
 
     @media (max-width:1080px){
-      .overview-grid{grid-template-columns:repeat(2,1fr)}
-      .trendingGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .sheetGrid{grid-template-columns:1fr}
+      .defi-grid{grid-template-columns:repeat(2,1fr)}
+      .defi-trending-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .defi-sheet-grid{grid-template-columns:1fr}
     }
 
     @media (max-width:980px){
-      .tool-grid{grid-template-columns:1fr}
+      .defi-layout{grid-template-columns:1fr}
     }
 
     @media (max-width:760px){
-      table thead{
+      .defi-table-wrap thead{
         display:none;
       }
 
-      table, tbody, tr, td{
+      .defi-table-wrap table,
+      .defi-table-wrap tbody,
+      .defi-table-wrap tr,
+      .defi-table-wrap td{
         display:block;
         width:100%;
       }
 
-      tbody tr{
+      .defi-table-wrap tbody tr{
         border-bottom:1px solid var(--border);
         padding:12px;
       }
 
-      tbody td{
+      .defi-table-wrap tbody td{
         padding:8px 0;
         border-bottom:none;
       }
 
-      tbody td::before{
+      .defi-table-wrap tbody td::before{
         content:attr(data-label);
         display:block;
         font-size:.78rem;
@@ -686,16 +587,15 @@
         margin-bottom:4px;
         font-weight:700;
       }
-
-      .proto{
-        min-width:0;
-      }
     }
 
     @media (max-width:700px){
-      .form-grid,.overview-grid,.trendingGrid,.detailStats{grid-template-columns:1fr}
-      .tool-card,.tool-panel,.contentCard,.faqCard,.trendingCard{padding:18px}
-      .trendingHead{flex-direction:column}
+      .defi-toolbar,
+      .defi-grid,
+      .defi-trending-grid,
+      .defi-detail-stats{
+        grid-template-columns:1fr;
+      }
     }
   </style>
 
@@ -781,154 +681,167 @@
       </ol>
     </nav>
 
-    <section class="tool-grid" aria-label="DeFi TVL Tracker">
-      <section class="tool-card" id="tool">
-        <div class="pill">📊 DeFi TVL • ⚡ Live Filters • 🔒 Browser-Based</div>
+    <section class="hero">
+      <div class="pill">DeFi analytics • Live protocol + chain TVL • Trending movers</div>
+      <h1>DeFi TVL Tracker</h1>
+      <p class="sub">
+        Track DeFi TVL across protocols and chains with fast search, sorting, filters, top gainers, and protocol detail views with historical chart support.
+      </p>
+    </section>
 
-        <h1>DeFi TVL Tracker</h1>
-        <p class="sub">
-          Track DeFi TVL across protocols and chains with fast search, sorting, top gainers, and protocol detail views with historical chart support.
-        </p>
-
-        <div class="tool-actions">
-          <button class="cta primary" id="refreshBtn" type="button">Refresh Data</button>
-          <button class="cta ghost" id="resetBtn" type="button">Reset Filters</button>
-          <button class="cta ghost" id="jumpTableBtn" type="button">Jump to Tracker</button>
-        </div>
-
-        <div class="notice" id="proxyNotice">
-          <strong>Reliable data loading:</strong> this tool uses browser cache first when possible and falls back to public endpoints automatically.
-        </div>
-
-        <div class="switcher" role="tablist" aria-label="View selector">
-          <button class="pill-btn active" id="tabProtocols" role="tab" aria-selected="true" type="button">Protocols</button>
-          <button class="pill-btn" id="tabChains" role="tab" aria-selected="false" type="button">Chains</button>
-        </div>
-
-        <div class="form-grid">
-          <div class="full">
-            <label for="searchInput">Search</label>
-            <input id="searchInput" type="search" placeholder="Search protocol, chain, category, symbol..." autocomplete="off" />
-            <div class="helper">Search by protocol name, chain, token symbol, or category.</div>
+    <section class="defi-layout" aria-label="DeFi TVL Tracker">
+      <section class="panel">
+        <div class="panelBody">
+          <div class="defi-note" id="proxyNotice">
+            <strong>Reliable data loading:</strong> this tool uses browser cache first when possible and falls back to public endpoints automatically.
           </div>
 
-          <div>
-            <label for="categoryFilter">Category</label>
-            <select id="categoryFilter">
-              <option value="">All</option>
-            </select>
+          <div class="defi-switcher" role="tablist" aria-label="View selector">
+            <button class="defi-pill-btn active" id="tabProtocols" role="tab" aria-selected="true" type="button">Protocols</button>
+            <button class="defi-pill-btn" id="tabChains" role="tab" aria-selected="false" type="button">Chains</button>
           </div>
 
-          <div>
-            <label for="chainFilter">Chain</label>
-            <select id="chainFilter">
-              <option value="">All</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="sortBy">Sort by</label>
-            <select id="sortBy">
-              <option value="tvl-desc">TVL: High to Low</option>
-              <option value="tvl-asc">TVL: Low to High</option>
-              <option value="change1d-desc">24h: Best</option>
-              <option value="change1d-asc">24h: Worst</option>
-              <option value="change7d-desc">7d: Best</option>
-              <option value="change7d-asc">7d: Worst</option>
-              <option value="name-asc">Name: A to Z</option>
-              <option value="name-desc">Name: Z to A</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="limitSelect">Rows</label>
-            <select id="limitSelect">
-              <option>25</option>
-              <option selected>50</option>
-              <option>100</option>
-              <option>250</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="statusBox">
-          <strong>Status:</strong> <span id="summaryText">Live DeFi TVL dashboard ready. Load protocols and chains, then search, sort, and inspect the current data.</span><br>
-          <span id="lastUpdated">Last updated: —</span>
-        </div>
-
-        <section class="trendingCard" aria-labelledby="trendingTitle">
-          <div class="trendingHead">
-            <div>
-              <div class="tiny">Live momentum snapshot</div>
-              <h2 id="trendingTitle">Trending Protocols / Top Gainers</h2>
+          <div class="defi-toolbar">
+            <div class="full">
+              <label for="searchInput">Search</label>
+              <input class="input" id="searchInput" type="search" placeholder="Search protocol, chain, category, symbol..." autocomplete="off" />
+              <div class="helper">Search by protocol name, chain, token symbol, or category.</div>
             </div>
-            <div class="tiny" id="trendingMeta">Updates with current filtered data</div>
+
+            <div>
+              <label for="categoryFilter">Category</label>
+              <select class="select" id="categoryFilter">
+                <option value="">All</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="chainFilter">Chain</label>
+              <select class="select" id="chainFilter">
+                <option value="">All</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="sortBy">Sort by</label>
+              <select class="select" id="sortBy">
+                <option value="tvl-desc">TVL: High to Low</option>
+                <option value="tvl-asc">TVL: Low to High</option>
+                <option value="change1d-desc">24h: Best</option>
+                <option value="change1d-asc">24h: Worst</option>
+                <option value="change7d-desc">7d: Best</option>
+                <option value="change7d-asc">7d: Worst</option>
+                <option value="name-asc">Name: A to Z</option>
+                <option value="name-desc">Name: Z to A</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="limitSelect">Rows</label>
+              <select class="select" id="limitSelect">
+                <option>25</option>
+                <option selected>50</option>
+                <option>100</option>
+                <option>250</option>
+              </select>
+            </div>
           </div>
 
-          <div class="trendingGrid" id="trendingGrid">
-            <div class="loading">Loading top movers…</div>
+          <div class="defi-actions">
+            <button class="cta primary" id="refreshBtn" type="button">Refresh Data</button>
+            <button class="cta ghost" id="resetBtn" type="button">Reset Filters</button>
+            <button class="cta ghost" id="jumpTableBtn" type="button">Jump to Tracker</button>
           </div>
-        </section>
 
-        <div class="overview-grid" aria-label="Overview stats">
-          <div class="overview-item">
-            <div class="k">Tracked items</div>
-            <div class="v" id="statTracked">—</div>
-          </div>
-          <div class="overview-item">
-            <div class="k">Aggregate TVL</div>
-            <div class="v" id="statTvl">—</div>
-          </div>
-          <div class="overview-item">
-            <div class="k">Median TVL</div>
-            <div class="v" id="statMedian">—</div>
-          </div>
-          <div class="overview-item">
-            <div class="k">24h trend</div>
-            <div class="v" id="statChange">—</div>
-          </div>
-        </div>
+          <div class="defi-trending" aria-labelledby="trendingTitle">
+            <div class="defi-trending-head">
+              <div>
+                <div class="defi-tiny">Live momentum snapshot</div>
+                <h2 id="trendingTitle">Trending Protocols / Top Gainers</h2>
+              </div>
+              <div class="defi-tiny" id="trendingMeta">Updates with current filtered data</div>
+            </div>
 
-        <div class="tableWrap" id="tracker" aria-live="polite">
-          <div class="loading">Loading DeFi TVL data…</div>
+            <div class="defi-trending-grid" id="trendingGrid">
+              <div class="defi-loading">Loading top movers…</div>
+            </div>
+          </div>
+
+          <div class="defi-grid" aria-label="Overview stats">
+            <div class="defi-stat">
+              <div class="k">Tracked items</div>
+              <div class="v" id="statTracked">—</div>
+            </div>
+            <div class="defi-stat">
+              <div class="k">Aggregate TVL</div>
+              <div class="v" id="statTvl">—</div>
+            </div>
+            <div class="defi-stat">
+              <div class="k">Median TVL</div>
+              <div class="v" id="statMedian">—</div>
+            </div>
+            <div class="defi-stat">
+              <div class="k">24h trend</div>
+              <div class="v" id="statChange">—</div>
+            </div>
+          </div>
+
+          <div class="statusLine" style="margin-top:16px;">
+            <span class="badge" id="modeLabel">Protocols</span>
+            <span class="badge" id="cacheState">Ready</span>
+            <span class="badge" id="apiStatus">Idle</span>
+            <span class="badge" id="cacheSub">Smart local cache enabled</span>
+          </div>
+
+          <div class="loader show" id="summaryLoader">
+            <span id="summaryText">Live DeFi TVL dashboard ready. Load protocols and chains, then search, sort, and inspect the current data.</span><br>
+            <span class="small muted" id="lastUpdated">Last updated: —</span>
+          </div>
+
+          <div class="defi-table-wrap" id="tracker" aria-live="polite">
+            <div class="defi-loading">Loading DeFi TVL data…</div>
+          </div>
         </div>
       </section>
 
-      <aside class="tool-panel" aria-labelledby="results-title">
-        <div class="panel-top">
+      <aside class="panel">
+        <div class="panelHead">
           <div>
-            <h2 id="results-title">Tracker Summary</h2>
-            <div class="networkHint">Protocol and chain TVL with caching and detail views.</div>
+            <div class="panelTitle">Tracker Summary</div>
+            <div class="panelSub">Protocol and chain TVL with caching and detail views.</div>
           </div>
         </div>
+        <div class="panelBody">
+          <div class="defi-summary-box">
+            <p>
+              Privacy note: this tool stores short-lived cached responses in your browser for speed and resilience. It does not require an account.
+            </p>
+          </div>
 
-        <div class="results" id="resultsList">
-          <div class="result-item">
-            <strong>Mode</strong>
-            <span id="modeLabel">Protocols</span>
+          <div class="defi-results">
+            <div class="defi-result-item">
+              <strong>Mode</strong>
+              <span id="modeLabelSide">Protocols</span>
+            </div>
+            <div class="defi-result-item">
+              <strong>Cache</strong>
+              <span id="cacheStateSide">Ready</span>
+            </div>
+            <div class="defi-result-item">
+              <strong>Cache details</strong>
+              <span id="cacheSubSide">Smart local cache enabled</span>
+            </div>
+            <div class="defi-result-item">
+              <strong>Status</strong>
+              <span id="apiStatusSide">Idle</span>
+            </div>
           </div>
-          <div class="result-item">
-            <strong>Cache</strong>
-            <span id="cacheState">Ready</span>
-          </div>
-          <div class="result-item">
-            <strong>Cache details</strong>
-            <span id="cacheSub">Smart local cache enabled</span>
-          </div>
-          <div class="result-item">
-            <strong>Status</strong>
-            <span id="apiStatus">Idle</span>
-          </div>
-        </div>
-
-        <div class="helper" style="margin-top:14px;">
-          Privacy note: this tool stores short-lived cached responses in your browser for speed and resilience. It does not require an account.
         </div>
       </aside>
     </section>
 
-    <section class="content">
-      <article class="contentCard">
+    <section class="defi-content">
+      <article class="defi-content-card">
         <h2>How this DeFi TVL tracker works</h2>
         <p>
           This tool loads DeFi TVL data for protocols and chains, then lets you search, filter, and sort the results in a fast browser-based dashboard. It also highlights trending top gainers based on 24-hour changes and can open a protocol detail view when additional metadata and historical TVL are available from the source.
@@ -938,7 +851,7 @@
         </p>
       </article>
 
-      <article class="contentCard">
+      <article class="defi-content-card">
         <h2>Why use this tool?</h2>
         <p>
           A live TVL dashboard helps you quickly understand where capital is flowing in DeFi. It is useful for spotting protocol momentum, identifying ecosystem concentration, comparing chains, and checking whether a recent move is broad or isolated.
@@ -950,9 +863,9 @@
         </ul>
       </article>
 
-      <article class="contentCard">
+      <article class="defi-content-card">
         <h2>Related tools</h2>
-        <div class="related-links">
+        <div class="defi-related-links">
           <a href="/tools/dca-calculator.html">DCA Calculator</a>
           <a href="/tools/crypto-profit-calculator.html">Crypto Profit Calculator</a>
           <a href="/tools/gas-tracker.html">Gas Tracker</a>
@@ -960,7 +873,7 @@
         </div>
       </article>
 
-      <article class="faqCard">
+      <article class="defi-faq">
         <h2>FAQ</h2>
 
         <details open>
@@ -980,9 +893,9 @@
       </article>
     </section>
 
-    <footer class="footer" aria-label="Footer">
+    <footer class="footer">
       <div class="footer-box">
-        <div>© <span id="year"></span> InstantQR</div>
+        <div>© <span id="yearFooter"></span> InstantQR</div>
         <div class="footer-links">
           <a href="/">Home</a>
           <a href="/tools/tools.html">Tools</a>
@@ -998,63 +911,63 @@
     </footer>
   </main>
 
-  <div class="modal" id="detailModal" aria-hidden="true">
-    <div class="sheet">
-      <div class="sheetHead">
+  <div class="defi-modal" id="detailModal" aria-hidden="true">
+    <div class="defi-sheet">
+      <div class="defi-sheet-head">
         <div>
-          <div class="tiny">Protocol details</div>
+          <div class="defi-tiny">Protocol details</div>
           <h2 id="detailTitle" style="margin:4px 0 0;font-size:1.6rem">Loading…</h2>
         </div>
         <button class="cta ghost" id="closeModalBtn" type="button" aria-label="Close detail view">Close</button>
       </div>
-      <div class="sheetBody">
-        <div id="detailLoading" class="loading">Loading protocol detail…</div>
-        <div id="detailError" class="error hidden"></div>
+      <div class="defi-sheet-body">
+        <div id="detailLoading" class="defi-loading">Loading protocol detail…</div>
+        <div id="detailError" class="defi-error defi-hidden"></div>
 
-        <div id="detailContent" class="hidden">
-          <div class="sheetGrid">
+        <div id="detailContent" class="defi-hidden">
+          <div class="defi-sheet-grid">
             <div>
-              <div class="detailStats">
-                <div class="detailCard">
-                  <div class="tiny">Current TVL</div>
+              <div class="defi-detail-stats">
+                <div class="defi-detail-card">
+                  <div class="defi-tiny">Current TVL</div>
                   <div id="detailTvl" style="font-size:1.55rem;font-weight:800;margin-top:6px">—</div>
                 </div>
-                <div class="detailCard">
-                  <div class="tiny">Category</div>
+                <div class="defi-detail-card">
+                  <div class="defi-tiny">Category</div>
                   <div id="detailCategory" style="font-size:1.05rem;font-weight:800;margin-top:6px">—</div>
                 </div>
-                <div class="detailCard">
-                  <div class="tiny">24h change</div>
+                <div class="defi-detail-card">
+                  <div class="defi-tiny">24h change</div>
                   <div id="detail1d" style="font-size:1.05rem;font-weight:800;margin-top:6px">—</div>
                 </div>
-                <div class="detailCard">
-                  <div class="tiny">7d change</div>
+                <div class="defi-detail-card">
+                  <div class="defi-tiny">7d change</div>
                   <div id="detail7d" style="font-size:1.05rem;font-weight:800;margin-top:6px">—</div>
                 </div>
               </div>
 
-              <div class="detailCard" style="margin-bottom:14px">
-                <div class="tiny">Description</div>
+              <div class="defi-detail-card" style="margin-bottom:14px">
+                <div class="defi-tiny">Description</div>
                 <div id="detailDescription" style="margin-top:8px;color:var(--muted)">—</div>
               </div>
 
-              <div class="detailCard" style="margin-bottom:14px">
-                <div class="tiny">Chains</div>
-                <div class="chip-list" id="detailChains"></div>
+              <div class="defi-detail-card" style="margin-bottom:14px">
+                <div class="defi-tiny">Chains</div>
+                <div class="defi-chip-list" id="detailChains"></div>
               </div>
 
-              <div class="detailCard">
-                <div class="tiny">Links</div>
-                <div class="chip-list" id="detailLinks"></div>
+              <div class="defi-detail-card">
+                <div class="defi-tiny">Links</div>
+                <div class="defi-chip-list" id="detailLinks"></div>
               </div>
             </div>
 
             <div>
-              <div class="canvasWrap">
-                <div class="tiny" style="padding:4px 4px 10px">Historical TVL</div>
+              <div class="defi-canvas-wrap">
+                <div class="defi-tiny" style="padding:4px 4px 10px">Historical TVL</div>
                 <canvas id="tvlChart" width="760" height="360" aria-label="TVL chart"></canvas>
               </div>
-              <div class="tiny" id="chartMeta" style="margin-top:8px">Historical chart loads when available from the source.</div>
+              <div class="defi-tiny" id="chartMeta" style="margin-top:8px">Historical chart loads when available from the source.</div>
             </div>
           </div>
         </div>
@@ -1064,5 +977,11 @@
 
   <script src="/assets/site.js" defer></script>
   <script src="/assets/js/tools/defi-tvl-tracker.js" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const footerYear = document.getElementById("yearFooter");
+      if (footerYear) footerYear.textContent = new Date().getFullYear();
+    });
+  </script>
 </body>
 </html>
