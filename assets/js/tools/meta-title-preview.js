@@ -2,41 +2,57 @@
   'use strict';
 
   document.addEventListener('DOMContentLoaded', function () {
-    const pageTitle = document.getElementById('pageTitle');
-    const pageUrl = document.getElementById('pageUrl');
-    const pageDescription = document.getElementById('pageDescription');
-    const titleTagOutput = document.getElementById('titleTagOutput');
+    const els = {
+      pageTitle: document.getElementById('pageTitle'),
+      pageUrl: document.getElementById('pageUrl'),
+      pageDescription: document.getElementById('pageDescription'),
 
-    const googleUrl = document.getElementById('googleUrl');
-    const googleTitle = document.getElementById('googleTitle');
-    const googleDesc = document.getElementById('googleDesc');
+      sampleBtn: document.getElementById('sampleBtn'),
+      copyBtn: document.getElementById('copyBtn'),
+      downloadBtn: document.getElementById('downloadBtn'),
+      clearBtn: document.getElementById('clearBtn'),
+      trimBtn: document.getElementById('trimBtn'),
+      pasteBtn: document.getElementById('pasteBtn'),
+      brandBtn: document.getElementById('brandBtn'),
+      clearDescBtn: document.getElementById('clearDescBtn'),
 
-    const titleCount = document.getElementById('titleCount');
-    const titleBar = document.getElementById('titleBar');
-    const titleHint = document.getElementById('titleHint');
+      titleCount: document.getElementById('titleCount'),
+      titleBar: document.getElementById('titleBar'),
+      titleHint: document.getElementById('titleHint'),
 
-    const sampleBtn = document.getElementById('sampleBtn');
-    const copyBtn = document.getElementById('copyBtn');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const clearBtn = document.getElementById('clearBtn');
-    const year = document.getElementById('year');
+      googleUrl: document.getElementById('googleUrl'),
+      googleTitle: document.getElementById('googleTitle'),
+      googleDesc: document.getElementById('googleDesc'),
 
-    if (
-      !pageTitle || !pageUrl || !pageDescription || !titleTagOutput ||
-      !googleUrl || !googleTitle || !googleDesc ||
-      !titleCount || !titleBar || !titleHint ||
-      !sampleBtn || !copyBtn || !downloadBtn || !clearBtn || !year
-    ) {
-      return;
-    }
+      titleTagOutput: document.getElementById('titleTagOutput'),
+      resultText: document.getElementById('resultText'),
 
-    year.textContent = String(new Date().getFullYear());
+      titleLengthSummary: document.getElementById('titleLengthSummary'),
+      titleStatusSummary: document.getElementById('titleStatusSummary'),
+      urlSummary: document.getElementById('urlSummary'),
+      modeLabel: document.getElementById('modeLabel'),
+      statusBadge: document.getElementById('statusBadge'),
+
+      titleGuidanceSummary: document.getElementById('titleGuidanceSummary'),
+      titleGuidanceText: document.getElementById('titleGuidanceText'),
+      previewSummary: document.getElementById('previewSummary'),
+      previewDetails: document.getElementById('previewDetails'),
+      outputDetails: document.getElementById('outputDetails'),
+      usageNotes: document.getElementById('usageNotes'),
+      year: document.getElementById('year')
+    };
+
+    if (!els.pageTitle || !els.pageUrl || !els.pageDescription) return;
 
     const DEFAULTS = {
       title: 'Your page title will appear here',
       url: 'https://example.com/page',
-      description: 'Optional snippet description will appear here for preview purposes.'
+      desc: 'Optional snippet description will appear here for preview purposes.'
     };
+
+    if (els.year) {
+      els.year.textContent = String(new Date().getFullYear());
+    }
 
     function escapeHtml(str) {
       return String(str || '')
@@ -51,196 +67,315 @@
       return String(value || '').trim();
     }
 
-    function truncateText(text, max) {
-      const clean = safeTrim(text);
-      if (!clean) return '';
-      if (clean.length <= max) return clean;
-      return clean.slice(0, Math.max(0, max - 1)).trimEnd() + '…';
+    function truncate(text, max) {
+      const t = safeTrim(text);
+      if (!t) return '';
+      if (t.length <= max) return t;
+      return t.slice(0, Math.max(0, max - 1)).trimEnd() + '…';
     }
 
-    function normalizeUrl(input) {
-      const raw = safeTrim(input);
+    function normalizeUrl(url) {
+      const raw = safeTrim(url);
       if (!raw) return DEFAULTS.url;
 
       if (/^https?:\/\//i.test(raw)) return raw;
-
-      if (
-        raw.startsWith('/') ||
-        raw.startsWith('./') ||
-        raw.startsWith('../') ||
-        raw.startsWith('#') ||
-        raw.startsWith('?')
-      ) {
-        return raw;
-      }
+      if (raw.startsWith('/') || raw.startsWith('#') || raw.startsWith('?')) return raw;
 
       return 'https://' + raw;
     }
 
-    function getTitleStatus(len) {
+    function getStatus(len) {
       if (len === 0) {
         return {
+          label: 'Ready',
+          hint: 'Recommended: about 50–60 characters.',
           width: 0,
-          text: 'Recommended: about 50–60 characters',
-          cls: '',
-          bar: 'linear-gradient(90deg, #22c55e, #38bdf8)'
+          fill: 'linear-gradient(90deg,#19c37d,#60a5fa)',
+          statusClass: 'ok'
         };
       }
-
       if (len < 30) {
         return {
+          label: 'Short',
+          hint: 'This title may be too short for many pages.',
           width: Math.min((len / 60) * 100, 100),
-          text: 'Title may be too short',
-          cls: 'status-warn',
-          bar: 'linear-gradient(90deg, #f59e0b, #fbbf24)'
+          fill: 'linear-gradient(90deg,#f59e0b,#fbbf24)',
+          statusClass: 'warn'
         };
       }
-
       if (len <= 60) {
         return {
+          label: 'Good',
+          hint: 'Title length looks strong for many search results.',
           width: Math.min((len / 60) * 100, 100),
-          text: 'Title length looks good',
-          cls: 'status-good',
-          bar: 'linear-gradient(90deg, #22c55e, #38bdf8)'
+          fill: 'linear-gradient(90deg,#19c37d,#60a5fa)',
+          statusClass: 'ok'
         };
       }
-
       if (len <= 70) {
         return {
+          label: 'Long',
+          hint: 'This title may begin truncating in some results.',
           width: 100,
-          text: 'Title may get truncated',
-          cls: 'status-warn',
-          bar: 'linear-gradient(90deg, #f59e0b, #fbbf24)'
+          fill: 'linear-gradient(90deg,#f59e0b,#fbbf24)',
+          statusClass: 'warn'
         };
       }
-
       return {
+        label: 'Too Long',
+        hint: 'This title has a higher chance of truncation or rewriting.',
         width: 100,
-        text: 'Title is too long',
-        cls: 'status-danger',
-        bar: 'linear-gradient(90deg, #ef4444, #f87171)'
+        fill: 'linear-gradient(90deg,#ef4444,#f87171)',
+        statusClass: 'bad'
       };
     }
 
-    function buildTitleTag(title) {
-      const cleanTitle = safeTrim(title) || 'Your Page Title';
-      return '<title>' + escapeHtml(cleanTitle) + '</title>';
+    function setBadgeState(stateText) {
+      if (!els.statusBadge) return;
+      els.statusBadge.textContent = stateText;
     }
 
-    function updateMeter() {
-      const len = safeTrim(pageTitle.value).length;
-      const status = getTitleStatus(len);
+    function buildTitleTag(title) {
+      const clean = safeTrim(title) || 'Your Page Title';
+      return '<title>' + escapeHtml(clean) + '</title>';
+    }
 
-      titleCount.textContent = len + ' characters';
-      titleBar.style.width = status.width + '%';
-      titleBar.style.background = status.bar;
-      titleHint.textContent = status.text;
-      titleHint.className = 'meter-hint ' + (status.cls || '');
+    function updateMeter(title) {
+      const len = safeTrim(title).length;
+      const status = getStatus(len);
+
+      if (els.titleCount) els.titleCount.textContent = len + ' characters';
+      if (els.titleBar) {
+        els.titleBar.style.width = status.width + '%';
+        els.titleBar.style.background = status.fill;
+      }
+      if (els.titleHint) els.titleHint.textContent = status.hint;
+      if (els.titleLengthSummary) els.titleLengthSummary.textContent = len + ' characters';
+      if (els.titleStatusSummary) els.titleStatusSummary.textContent = status.label;
+      if (els.modeLabel) els.modeLabel.textContent = len ? 'Editing' : 'Ready';
+
+      return status;
     }
 
     function updatePreview() {
-      const rawTitle = safeTrim(pageTitle.value);
-      const rawUrl = safeTrim(pageUrl.value);
-      const rawDesc = safeTrim(pageDescription.value);
+      const rawTitle = safeTrim(els.pageTitle.value);
+      const rawUrl = safeTrim(els.pageUrl.value);
+      const rawDesc = safeTrim(els.pageDescription.value);
 
-      const previewTitle = rawTitle || DEFAULTS.title;
-      const previewUrl = normalizeUrl(rawUrl);
-      const previewDesc = rawDesc || DEFAULTS.description;
+      const finalUrl = normalizeUrl(rawUrl);
+      const finalTitle = rawTitle || DEFAULTS.title;
+      const finalDesc = rawDesc || DEFAULTS.desc;
 
-      googleUrl.textContent = previewUrl;
-      googleTitle.textContent = truncateText(previewTitle, 65) || DEFAULTS.title;
-      googleDesc.textContent = truncateText(previewDesc, 170) || DEFAULTS.description;
+      if (els.googleUrl) els.googleUrl.textContent = finalUrl;
+      if (els.googleTitle) els.googleTitle.textContent = truncate(finalTitle, 65) || DEFAULTS.title;
+      if (els.googleDesc) els.googleDesc.textContent = truncate(finalDesc, 170) || DEFAULTS.desc;
+      if (els.urlSummary) els.urlSummary.textContent = finalUrl;
     }
 
-    function updateTitleTag() {
-      titleTagOutput.value = buildTitleTag(pageTitle.value);
+    function updateOutput() {
+      const output = buildTitleTag(els.pageTitle.value);
+      if (els.titleTagOutput) els.titleTagOutput.textContent = output;
+      if (els.outputDetails) els.outputDetails.textContent = output;
+      if (els.usageNotes) {
+        els.usageNotes.textContent = 'Paste this inside the <head> section of your page. Keep one clear, unique title per important page.';
+      }
+    }
+
+    function updateGuidance() {
+      const title = safeTrim(els.pageTitle.value);
+      const desc = safeTrim(els.pageDescription.value);
+      const len = title.length;
+      const status = getStatus(len);
+
+      if (els.titleGuidanceSummary) {
+        els.titleGuidanceSummary.textContent = status.label + ' • ' + len + ' characters';
+      }
+
+      const guidance = [];
+      if (!title) {
+        guidance.push('Start by entering a page title.');
+      } else {
+        guidance.push('Primary title length: ' + len + ' characters.');
+        if (len < 30) guidance.push('Consider adding more context so the title communicates stronger page value.');
+        if (len >= 30 && len <= 60) guidance.push('This is within a strong target range for many pages.');
+        if (len > 60 && len <= 70) guidance.push('You may want to tighten the wording to reduce truncation risk.');
+        if (len > 70) guidance.push('Shorten this title to reduce truncation and improve clarity.');
+        if (!/\|/.test(title) && !/-/.test(title)) guidance.push('You can optionally add a brand separator near the end if useful.');
+      }
+
+      if (els.titleGuidanceText) {
+        els.titleGuidanceText.textContent = guidance.join(' ');
+      }
+
+      const previewParts = [];
+      previewParts.push('Preview title may be truncated around common SERP widths.');
+      previewParts.push('Preview URL: ' + normalizeUrl(els.pageUrl.value) + '.');
+      previewParts.push(desc ? 'Description is included for a fuller preview.' : 'No custom description entered; placeholder text is shown.');
+
+      if (els.previewSummary) {
+        els.previewSummary.textContent = title ? 'Live preview active' : 'Waiting for title input';
+      }
+      if (els.previewDetails) {
+        els.previewDetails.textContent = previewParts.join(' ');
+      }
+    }
+
+    function updateResultText() {
+      const title = safeTrim(els.pageTitle.value);
+      const url = normalizeUrl(els.pageUrl.value);
+      const len = title.length;
+      const status = getStatus(len);
+
+      const lines = [];
+      lines.push('Title status: ' + status.label);
+      lines.push('Title length: ' + len + ' characters');
+      lines.push('Preview URL: ' + url);
+      lines.push('Title tag: ' + buildTitleTag(title));
+
+      if (els.resultText) els.resultText.textContent = lines.join('\n');
+      setBadgeState(status.label);
     }
 
     function updateAll() {
-      updateMeter();
+      const title = safeTrim(els.pageTitle.value);
+      updateMeter(title);
       updatePreview();
-      updateTitleTag();
+      updateOutput();
+      updateGuidance();
+      updateResultText();
     }
 
     function loadSample() {
-      pageTitle.value = 'Meta Title Preview Tool | Free SEO Title Tag Preview | InstantQR.io';
-      pageUrl.value = 'https://instantqr.io/seo-tools/meta-title-preview.html';
-      pageDescription.value = 'Preview your title tag in a Google-style snippet, check title length, and improve your SEO before publishing.';
+      els.pageTitle.value = 'Meta Title Preview Tool | Free SEO Title Tag Preview | InstantQR';
+      els.pageUrl.value = 'https://instantqr.io/tools/meta-title-preview.html';
+      els.pageDescription.value = 'Preview your title tag in a Google-style result, check title length, and improve clarity before publishing.';
+      if (els.modeLabel) els.modeLabel.textContent = 'Sample Loaded';
       updateAll();
     }
 
     function clearAll() {
-      pageTitle.value = '';
-      pageUrl.value = '';
-      pageDescription.value = '';
+      els.pageTitle.value = '';
+      els.pageUrl.value = '';
+      els.pageDescription.value = '';
+      if (els.modeLabel) els.modeLabel.textContent = 'Cleared';
+      setBadgeState('Ready');
       updateAll();
-      pageTitle.focus();
+      els.pageTitle.focus();
+    }
+
+    function trimTitle() {
+      els.pageTitle.value = safeTrim(els.pageTitle.value).replace(/\s+/g, ' ');
+      if (els.modeLabel) els.modeLabel.textContent = 'Trimmed';
+      updateAll();
+    }
+
+    function addBrand() {
+      const title = safeTrim(els.pageTitle.value);
+      if (!title) {
+        els.pageTitle.value = 'Your Page Title | InstantQR';
+      } else if (!/instantqr/i.test(title)) {
+        els.pageTitle.value = title + ' | InstantQR';
+      }
+      if (els.modeLabel) els.modeLabel.textContent = 'Brand Added';
+      updateAll();
+    }
+
+    function clearDescription() {
+      els.pageDescription.value = '';
+      if (els.modeLabel) els.modeLabel.textContent = 'Description Cleared';
+      updateAll();
+    }
+
+    async function pasteUrl() {
+      try {
+        if (!navigator.clipboard || !window.isSecureContext) return;
+        const text = await navigator.clipboard.readText();
+        if (safeTrim(text)) {
+          els.pageUrl.value = safeTrim(text);
+          if (els.modeLabel) els.modeLabel.textContent = 'Pasted';
+          updateAll();
+        }
+      } catch (err) {}
     }
 
     async function copyTitleTag() {
-      const text = safeTrim(titleTagOutput.value);
-
-      if (!text) {
-        alert('Nothing to copy yet.');
-        return;
-      }
-
+      const text = buildTitleTag(els.pageTitle.value);
       try {
         if (navigator.clipboard && window.isSecureContext) {
           await navigator.clipboard.writeText(text);
         } else {
-          titleTagOutput.removeAttribute('readonly');
-          titleTagOutput.select();
-          titleTagOutput.setSelectionRange(0, titleTagOutput.value.length);
+          const temp = document.createElement('textarea');
+          temp.value = text;
+          document.body.appendChild(temp);
+          temp.select();
           document.execCommand('copy');
-          titleTagOutput.setAttribute('readonly', 'readonly');
+          temp.remove();
         }
-
-        const originalText = copyBtn.textContent;
-        copyBtn.textContent = 'Copied';
-        copyBtn.disabled = true;
-
-        window.setTimeout(function () {
-          copyBtn.textContent = originalText;
-          copyBtn.disabled = false;
+        const original = els.copyBtn.textContent;
+        els.copyBtn.textContent = 'Copied';
+        els.copyBtn.disabled = true;
+        setTimeout(function () {
+          els.copyBtn.textContent = original;
+          els.copyBtn.disabled = false;
         }, 1400);
-      } catch (error) {
+      } catch (err) {
         alert('Copy failed on this device/browser.');
       }
     }
 
     function downloadTitleTag() {
-      const text = safeTrim(titleTagOutput.value);
-
-      if (!text) {
-        alert('Nothing to download yet.');
-        return;
-      }
-
-      const blob = new Blob([text + '\n'], { type: 'text/html;charset=utf-8' });
+      const text = buildTitleTag(els.pageTitle.value) + '\n';
+      const blob = new Blob([text], { type: 'text/html;charset=utf-8' });
       const blobUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');
-
       a.href = blobUrl;
       a.download = 'meta-title-tag.html';
       document.body.appendChild(a);
       a.click();
       a.remove();
-
-      window.setTimeout(function () {
+      setTimeout(function () {
         URL.revokeObjectURL(blobUrl);
       }, 500);
     }
 
-    [pageTitle, pageUrl, pageDescription].forEach(function (el) {
+    function copyFromTarget(targetId) {
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      const text = (el.textContent || '').trim();
+      if (!text) return;
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).catch(function () {});
+        return;
+      }
+
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      temp.remove();
+    }
+
+    [els.pageTitle, els.pageUrl, els.pageDescription].forEach(function (el) {
       el.addEventListener('input', updateAll);
       el.addEventListener('change', updateAll);
     });
 
-    sampleBtn.addEventListener('click', loadSample);
-    clearBtn.addEventListener('click', clearAll);
-    copyBtn.addEventListener('click', copyTitleTag);
-    downloadBtn.addEventListener('click', downloadTitleTag);
+    if (els.sampleBtn) els.sampleBtn.addEventListener('click', loadSample);
+    if (els.copyBtn) els.copyBtn.addEventListener('click', copyTitleTag);
+    if (els.downloadBtn) els.downloadBtn.addEventListener('click', downloadTitleTag);
+    if (els.clearBtn) els.clearBtn.addEventListener('click', clearAll);
+    if (els.trimBtn) els.trimBtn.addEventListener('click', trimTitle);
+    if (els.pasteBtn) els.pasteBtn.addEventListener('click', pasteUrl);
+    if (els.brandBtn) els.brandBtn.addEventListener('click', addBrand);
+    if (els.clearDescBtn) els.clearDescBtn.addEventListener('click', clearDescription);
+
+    document.querySelectorAll('[data-copy-target]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        copyFromTarget(btn.getAttribute('data-copy-target'));
+      });
+    });
 
     updateAll();
   });
