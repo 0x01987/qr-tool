@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,7 +9,6 @@
     gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
   </script>
 
-  <!-- AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
@@ -19,7 +17,6 @@
 
   <title>Text QR Code Generator | Color, Logo, Batch & SVG Export | InstantQR</title>
   <meta name="description" content="Create QR codes from text with color picker, background picker, logo center embed, size selector, batch QR generation, PNG download, and SVG export. Fast, mobile-friendly, and free." />
-  <meta name="keywords" content="text qr code generator, qr code color picker, qr code logo, qr code svg export, batch qr code generator, styled qr code generator" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
   <meta name="theme-color" content="#0f172a" />
@@ -28,59 +25,6 @@
   <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
 
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="InstantQR" />
-  <meta property="og:title" content="Text QR Code Generator | Color, Logo, Batch & SVG Export" />
-  <meta property="og:description" content="Generate text QR codes with styling, logo embed, batch mode, and SVG export." />
-  <meta property="og:url" content="https://instantqr.io/tools/text-qr-code-generator.html" />
-  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Text QR Code Generator | InstantQR" />
-  <meta name="twitter:description" content="Create styled text QR codes with color, logo, batch generation, and SVG export." />
-  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"Text QR Code Generator",
-    "url":"https://instantqr.io/tools/text-qr-code-generator.html",
-    "description":"Generate QR codes from text with styling, logo embed, batch mode, and SVG export.",
-    "isPartOf":{
-      "@type":"WebSite",
-      "name":"InstantQR",
-      "url":"https://instantqr.io/"
-    }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"Text QR Code Generator",
-    "applicationCategory":"BusinessApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "browserRequirements":"Requires JavaScript",
-    "url":"https://instantqr.io/tools/text-qr-code-generator.html",
-    "description":"Generate styled QR codes from text with QR color, background color, logo embed, size selector, batch generation, and SVG export."
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"BreadcrumbList",
-    "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
-      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
-      {"@type":"ListItem","position":3,"name":"Text QR Code Generator","item":"https://instantqr.io/tools/text-qr-code-generator.html"}
-    ]
-  }
-  </script>
-
   <style>
     .qr-grid{
       display:grid;
@@ -88,16 +32,12 @@
       gap:18px;
       margin-top:18px;
     }
-
-    .tool-card,
-    .result-panel,
-    .faqCard{
+    .tool-card,.result-panel,.faqCard{
       border-radius:var(--radius2);
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
       box-shadow:var(--shadow);
     }
-
     .tool-card{
       padding:24px;
       position:relative;
@@ -121,7 +61,6 @@
       flex-wrap:wrap;
       margin-top:14px;
     }
-
     .mode-btn{
       appearance:none;
       border:1px solid var(--border);
@@ -145,23 +84,18 @@
       gap:12px;
       margin-top:14px;
     }
-
     .field{
       display:flex;
       flex-direction:column;
       gap:8px;
     }
     .field.full{ grid-column:1 / -1; }
-
     .field label{
       font-size:13px;
       font-weight:800;
       color:#fff;
     }
-
-    .field input,
-    .field textarea,
-    .field select{
+    .field input,.field textarea,.field select{
       width:100%;
       border-radius:14px;
       border:1px solid var(--border);
@@ -174,7 +108,6 @@
       -webkit-appearance:none;
       appearance:none;
     }
-
     .field select{
       cursor:pointer;
       background-image:
@@ -187,32 +120,25 @@
       background-repeat:no-repeat;
       padding-right:42px;
     }
-
     .field select option{
       background:#13213b;
       color:#e7eefc;
     }
-
     .field input[type="color"]{
       min-height:50px;
       padding:8px;
       cursor:pointer;
     }
-
     .field input[type="file"]{
       padding:10px 12px;
       cursor:pointer;
     }
-
     .field textarea{
       min-height:150px;
       resize:vertical;
       line-height:1.5;
     }
-
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus{
+    .field input:focus,.field textarea:focus,.field select:focus{
       border-color:rgba(96,165,250,.55);
       box-shadow:0 0 0 3px rgba(96,165,250,.14);
     }
@@ -226,15 +152,12 @@
       font-size:12px;
       color:var(--muted);
     }
-
-    .tool-actions,
-    .quick-actions{
+    .tool-actions,.quick-actions{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       margin-top:14px;
     }
-
     .mini-btn{
       appearance:none;
       border:1px solid var(--border);
@@ -246,7 +169,6 @@
       font-weight:800;
       cursor:pointer;
     }
-
     .mini-btn:hover{
       border-color:rgba(255,255,255,.2);
       background:rgba(255,255,255,.07);
@@ -258,7 +180,6 @@
       flex-direction:column;
       gap:14px;
     }
-
     .panel-top{
       display:flex;
       justify-content:space-between;
@@ -266,30 +187,23 @@
       gap:10px;
       flex-wrap:wrap;
     }
-
     .panel-top h2{
       margin:0;
       font-size:18px;
       letter-spacing:-.2px;
     }
 
-    .summary-box,
-    .qr-box,
-    .output-box,
-    .batch-box,
-    .status-box{
+    .summary-box,.qr-box,.output-box,.batch-box,.status-box{
       border-radius:var(--radius);
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
       padding:14px;
     }
-
     .summary-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
     }
-
     .metric{
       border-radius:14px;
       border:1px solid var(--border);
@@ -301,19 +215,16 @@
       justify-content:center;
       gap:6px;
     }
-
     .metric .k{
       font-size:12px;
       color:var(--muted);
     }
-
     .metric .v{
       font-size:24px;
       font-weight:900;
       letter-spacing:-.4px;
       word-break:break-word;
     }
-
     .metric .u{
       font-size:12px;
       color:rgba(233,238,252,.55);
@@ -329,14 +240,13 @@
       background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       padding:20px;
     }
-
     #qrCanvas{
       max-width:min(320px, 100%);
       height:auto;
       border-radius:12px;
       box-shadow:0 10px 25px rgba(0,0,0,.25);
+      background:#fff;
     }
-
     .qr-empty{
       text-align:center;
       color:var(--muted);
@@ -347,7 +257,6 @@
     .mono{
       font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
     }
-
     .output-code{
       white-space:pre-wrap;
       word-break:break-word;
@@ -360,7 +269,6 @@
       color:#fff;
       min-height:140px;
     }
-
     .status-box{
       line-height:1.6;
       color:var(--muted);
@@ -372,14 +280,12 @@
       gap:12px;
       margin-top:10px;
     }
-
     .batch-item{
       border-radius:16px;
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
       padding:14px;
     }
-
     .batch-item-head{
       display:flex;
       justify-content:space-between;
@@ -388,13 +294,11 @@
       flex-wrap:wrap;
       margin-bottom:10px;
     }
-
     .batch-item-title{
       font-weight:800;
       color:#fff;
       word-break:break-word;
     }
-
     .batch-canvas-wrap{
       display:flex;
       justify-content:center;
@@ -405,7 +309,6 @@
       background:rgba(255,255,255,.03);
       margin-bottom:10px;
     }
-
     .batch-canvas-wrap canvas{
       background:#fff;
       border-radius:12px;
@@ -413,7 +316,6 @@
       max-width:220px;
       height:auto;
     }
-
     .batch-actions{
       display:flex;
       gap:8px;
@@ -424,32 +326,26 @@
       margin-top:14px;
       padding:18px;
     }
-
     .faqCard h2{
       margin:0 0 10px;
       font-size:22px;
       letter-spacing:-.25px;
     }
-
     .faqCard details{
       border-top:1px solid rgba(255,255,255,.10);
       padding:12px 0;
     }
-
     .faqCard details:first-of-type{
       border-top:0;
       padding-top:0;
     }
-
     .faqCard summary{
       cursor:pointer;
       font-weight:800;
       list-style:none;
       color:#fff;
     }
-
     .faqCard summary::-webkit-details-marker{ display:none; }
-
     .faqCard p{
       margin:8px 0 0;
       color:var(--muted);
@@ -460,13 +356,10 @@
     .hidden{display:none!important}
 
     @media (max-width:980px){
-      .qr-grid,
-      .summary-grid,
-      .form-grid{
+      .qr-grid,.summary-grid,.form-grid{
         grid-template-columns:1fr;
       }
     }
-
     @media (max-width:640px){
       .tool-actions .cta{
         width:100%;
