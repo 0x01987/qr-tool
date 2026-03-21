@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Daily Message of Hope | Faith-Based Encouragement</title>
+  <meta name="description" content="Receive a random faith-based motivational message each time you visit. Save favorites, share encouragement, and return daily for a new message of hope." />
+  <meta name="theme-color" content="#081120" />
+  <style>
+    :root{
+      --bg:#081120;
+      --bg2:#0f172a;
+      --panel:rgba(17,28,52,.78);
+      --panel2:rgba(22,35,63,.7);
+      --line:rgba(255,255,255,.08);
+      --line2:rgba(255,255,255,.12);
+      --text:#e5eefc;
+      --muted:#94a3b8;
+      --brand:#60a5fa;
+      --brand2:#22c55e;
+      --gold:#fbbf24;
+      --shadow:0 18px 48px rgba(0,0,0,.35);
+      --radius:24px;
+      --radius2:18px;
+      --max:980px;
+      --focus:0 0 0 4px rgba(96,165,250,.28);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      min-height:100vh;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(96,165,250,.16), transparent 28%),
+        radial-gradient(circle at 90% 15%, rgba(34,197,94,.10), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(251,191,36,.08), transparent 30%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    body::before,
+    body::after{
+      content:"";
+      position:fixed;
+      inset:auto;
+      width:34rem;
+      height:34rem;
+      border-radius:999px;
+      filter:blur(80px);
+      pointer-events:none;
+      opacity:.2;
+      z-index:0;
+      animation:floatGlow 16s ease-in-out infinite;
+    }
+
+    body::before{
+      top:-10rem;
+      left:-8rem;
+      background:rgba(96,165,250,.32);
+    }
+
+    body::after{
+      right:-10rem;
+      bottom:-8rem;
+      background:rgba(34,197,94,.18);
+      animation-delay:-8s;
+    }
+
+    @keyframes floatGlow{
+      0%,100%{transform:translate3d(0,0,0) scale(1)}
+      50%{transform:translate3d(16px,22px,0) scale(1.06)}
+    }
+
+    .wrap{
+      position:relative;
+      z-index:1;
+      width:100%;
+      max-width:var(--max);
+      margin:0 auto;
+      padding:24px;
+    }
+
+    .shell{
+      display:grid;
+      gap:18px;
+    }
+
+    .card,
+    .favorites{
+      background:linear-gradient(180deg, var(--panel), var(--panel2));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(14px);
+    }
+
+    .card{
+      padding:28px;
+    }
+
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line2);
+      color:var(--brand);
+      background:rgba(255,255,255,.03);
+      font-size:.85rem;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
+    .day-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line2);
+      color:var(--muted);
+      background:rgba(255,255,255,.03);
+      font-size:.9rem;
+      font-weight:700;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(2rem, 5vw, 3.2rem);
+      line-height:1.05;
+      letter-spacing:-.03em;
+    }
+
+    .sub{
+      margin:0 0 22px;
+      max-width:760px;
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.65;
+    }
+
+    .message-box{
+      position:relative;
+      padding:26px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line2);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      min-height:240px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .message-box::before{
+      content:"";
+      position:absolute;
+      inset:-1px auto auto -1px;
+      width:46%;
+      height:2px;
+      background:linear-gradient(90deg, var(--brand), transparent);
+      opacity:.9;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:16px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 11px;
+      border:1px solid var(--line2);
+      border-radius:999px;
+      font-size:.85rem;
+      font-weight:700;
+      color:var(--muted);
+      background:rgba(255,255,255,.03);
+    }
+
+    .message{
+      margin:0;
+      font-size:clamp(1.3rem, 2.8vw, 1.95rem);
+      line-height:1.7;
+      font-weight:800;
+      letter-spacing:-.01em;
+    }
+
+    .verse{
+      margin:18px 0 0;
+      color:var(--brand2);
+      font-size:1rem;
+      font-weight:800;
+      letter-spacing:.01em;
+    }
+
+    .actions{
+      display:grid;
+      grid-template-columns:repeat(5, minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+
+    button{
+      appearance:none;
+      border:1px solid var(--line2);
+      border-radius:14px;
+      padding:14px 14px;
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      font-size:.97rem;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .16s ease, border-color .16s ease, background .16s ease, opacity .16s ease;
+      min-height:52px;
+    }
+
+    button:hover{
+      transform:translateY(-1px);
+      border-color:rgba(96,165,250,.36);
+      background:rgba(255,255,255,.06);
+    }
+
+    button:focus-visible{
+      outline:none;
+      box-shadow:var(--focus);
+    }
+
+    .primary{
+      background:linear-gradient(135deg, rgba(96,165,250,.94), rgba(59,130,246,.92));
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .primary:hover{
+      background:linear-gradient(135deg, rgba(96,165,250,1), rgba(59,130,246,1));
+    }
+
+    .favorite-active{
+      border-color:rgba(251,191,36,.42);
+      background:rgba(251,191,36,.08);
+      color:#fde68a;
+    }
+
+    .footer-note{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:.95rem;
+      text-align:center;
+    }
+
+    .favorites{
+      padding:22px;
+    }
+
+    .favorites-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .favorites h2{
+      margin:0;
+      font-size:1.2rem;
+    }
+
+    .favorites-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .favorite-item{
+      border:1px solid var(--line2);
+      border-radius:16px;
+      padding:16px;
+      background:rgba(255,255,255,.03);
+    }
+
+    .favorite-item p{
+      margin:0;
+      line-height:1.65;
+      font-weight:700;
+    }
+
+    .favorite-item small{
+      display:block;
+      margin-top:10px;
+      color:var(--brand2);
+      font-weight:800;
+    }
+
+    .favorite-item .row{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+
+    .mini{
+      padding:10px 12px;
+      min-height:auto;
+      font-size:.9rem;
+      border-radius:12px;
+    }
+
+    .empty{
+      color:var(--muted);
+      padding:6px 2px 2px;
+    }
+
+    .fade-in{
+      animation:fadeIn .26s ease;
+    }
+
+    @keyframes fadeIn{
+      from{opacity:.2; transform:translateY(4px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    @media (max-width:900px){
+      .actions{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+    }
+
+    @media (max-width:640px){
+      .wrap{padding:16px}
+      .card,.favorites{padding:18px}
+      .message-box{padding:18px; min-height:220px}
+      .actions{grid-template-columns:1fr}
+      .top{align-items:flex-start}
+      h1{font-size:2rem}
+      .sub{font-size:.96rem}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="shell">
+      <section class="card" aria-labelledby="page-title">
+        <div class="top">
+          <div class="eyebrow">Faith-Based Encouragement</div>
+          <div class="day-chip" id="dayChip">Loading daily message...</div>
+        </div>
+
+        <h1 id="page-title">A Message of Hope</h1>
+        <p class="sub">
+          Each visit brings a message rooted in faith, courage, peace, and purpose. Come back daily for a fresh word of encouragement, or generate another message whenever you need one.
+        </p>
+
+        <div class="message-box">
+          <div class="meta">
+            <span class="pill" id="messageType">Type: —</span>
+            <span class="pill" id="messageSource">Source: Daily Message</span>
+          </div>
+
+          <p class="message fade-in" id="messageText">Loading message...</p>
+          <p class="verse fade-in" id="messageVerse"></p>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="primary" id="newMessageBtn">Show Another Message</button>
+          <button type="button" id="dailyBtn">Today’s Message</button>
+          <button type="button" id="copyBtn">Copy</button>
+          <button type="button" id="shareBtn">Share</button>
+          <button type="button" id="favoriteBtn">Save Favorite</button>
+        </div>
+
+        <p class="footer-note">
+          Messages rotate automatically and favorites are saved on this device.
+        </p>
+      </section>
+
+      <section class="favorites" aria-labelledby="favorites-title">
+        <div class="favorites-head">
+          <h2 id="favorites-title">Saved Favorites</h2>
+          <button type="button" class="mini" id="clearFavoritesBtn">Clear All</button>
+        </div>
+        <div class="favorites-list" id="favoritesList">
+          <div class="empty">No favorites saved yet.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const messages = [
+        { type: "Strength", text: "God is already making a way for you, even when you cannot see it yet.", verse: "Isaiah 43:19" },
+        { type: "Comfort", text: "You are not forgotten. God sees your struggle and is strengthening you right now.", verse: "Psalm 34:17-18" },
+        { type: "Courage", text: "Do not let fear lead your day. God goes before you with peace and purpose.", verse: "Deuteronomy 31:8" },
+        { type: "Patience", text: "The delay is not the denial. God’s timing is still working in your favor.", verse: "Ecclesiastes 3:11" },
+        { type: "Grace", text: "When your strength feels small, God’s power is still more than enough.", verse: "2 Corinthians 12:9" },
+        { type: "Opportunity", text: "God can open doors no person can shut.", verse: "Revelation 3:8" },
+        { type: "Guidance", text: "Even in uncertainty, God is guiding your next step.", verse: "Proverbs 3:5-6" },
+        { type: "Perseverance", text: "You may feel tired, but God has not finished the good work He started in you.", verse: "Philippians 1:6" },
+        { type: "Purpose", text: "Nothing is wasted when it is placed in God’s hands.", verse: "Romans 8:28" },
+        { type: "Peace", text: "Be still for a moment. God’s peace can reach you even in the middle of chaos.", verse: "Psalm 46:10" },
+        { type: "Mercy", text: "God’s grace is greater than your past, your fear, and your mistakes.", verse: "Ephesians 2:8-9" },
+        { type: "Hope", text: "Hold on. What God promised still matters, even if the road feels long.", verse: "Habakkuk 2:3" },
+        { type: "Identity", text: "You are deeply loved, fully seen, and never beyond God’s reach.", verse: "Romans 5:8" },
+        { type: "Renewal", text: "God can restore what feels broken and breathe life into what feels empty.", verse: "Joel 2:25" },
+        { type: "Faith", text: "Keep walking by faith. God is building something greater than what you can measure today.", verse: "Hebrews 11:1" },
+        { type: "Rest", text: "Lay your burdens down. God was never asking you to carry everything alone.", verse: "Matthew 11:28" },
+        { type: "Healing", text: "Even unseen wounds matter to God. He knows how to heal what others never noticed.", verse: "Psalm 147:3" },
+        { type: "Direction", text: "God is not confused about your future, even when you are.", verse: "Jeremiah 29:11" },
+        { type: "Trust", text: "What feels uncertain to you is still fully known by God.", verse: "Proverbs 16:9" },
+        { type: "New Beginnings", text: "This is not the end of your story. God still writes redemption into real life.", verse: "Lamentations 3:22-23" }
+      ];
+
+      const STORAGE_KEYS = {
+        dailyIndex: 'godMessages.dailyIndex',
+        dailyDate: 'godMessages.dailyDate',
+        lastIndex: 'godMessages.lastIndex',
+        favorites: 'godMessages.favorites'
+      };
+
+      const els = {
+        dayChip: document.getElementById('dayChip'),
+        type: document.getElementById('messageType'),
+        source: document.getElementById('messageSource'),
+        text: document.getElementById('messageText'),
+        verse: document.getElementById('messageVerse'),
+        newBtn: document.getElementById('newMessageBtn'),
+        dailyBtn: document.getElementById('dailyBtn'),
+        copyBtn: document.getElementById('copyBtn'),
+        shareBtn: document.getElementById('shareBtn'),
+        favoriteBtn: document.getElementById('favoriteBtn'),
+        favoritesList: document.getElementById('favoritesList'),
+        clearFavoritesBtn: document.getElementById('clearFavoritesBtn')
+      };
+
+      let currentIndex = 0;
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function todayKey() {
+        const now = new Date();
+        const y = now.getFullYear();
+        const m = String(now.getMonth() + 1).padStart(2, '0');
+        const d = String(now.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+      }
+
+      function loadJSON(key, fallback) {
+        try {
+          const raw = localStorage.getItem(key);
+          return raw ? JSON.parse(raw) : fallback;
+        } catch {
+          return fallback;
+        }
+      }
+
+      function saveJSON(key, value) {
+        localStorage.setItem(key, JSON.stringify(value));
+      }
+
+      function getRandomIndex(excludeIndex) {
+        if (messages.length <= 1) return 0;
+        let idx;
+        do {
+          idx = Math.floor(Math.random() * messages.length);
+        } while (idx === excludeIndex);
+        return idx;
+      }
+
+      function getDailyIndex() {
+        const today = todayKey();
+        const savedDate = localStorage.getItem(STORAGE_KEYS.dailyDate);
+        const savedIndex = Number(localStorage.getItem(STORAGE_KEYS.dailyIndex));
+
+        if (savedDate === today && Number.isInteger(savedIndex) && savedIndex >= 0 && savedIndex < messages.length) {
+          return savedIndex;
+        }
+
+        const prev = Number(localStorage.getItem(STORAGE_KEYS.lastIndex));
+        const next = getRandomIndex(Number.isInteger(prev) ? prev : -1);
+
+        localStorage.setItem(STORAGE_KEYS.dailyDate, today);
+        localStorage.setItem(STORAGE_KEYS.dailyIndex, String(next));
+        localStorage.setItem(STORAGE_KEYS.lastIndex, String(next));
+        return next;
+      }
+
+      function animateSwap() {
+        els.text.classList.remove('fade-in');
+        els.verse.classList.remove('fade-in');
+        void els.text.offsetWidth;
+        els.text.classList.add('fade-in');
+        els.verse.classList.add('fade-in');
+      }
+
+      function updateFavoriteButton() {
+        const favorites = loadJSON(STORAGE_KEYS.favorites, []);
+        const exists = favorites.some(item => item.index === currentIndex);
+        els.favoriteBtn.textContent = exists ? 'Saved' : 'Save Favorite';
+        els.favoriteBtn.classList.toggle('favorite-active', exists);
+      }
+
+      function renderMessage(index, sourceLabel) {
+        const item = messages[index];
+        currentIndex = index;
+
+        els.type.textContent = `Type: ${item.type}`;
+        els.source.textContent = `Source: ${sourceLabel}`;
+        els.text.innerHTML = escapeHtml(item.text);
+        els.verse.innerHTML = escapeHtml(item.verse);
+
+        animateSwap();
+        updateFavoriteButton();
+      }
+
+      function renderDailyChip() {
+        const date = new Date();
+        const label = date.toLocaleDateString(undefined, {
+          weekday: 'long',
+          month: 'short',
+          day: 'numeric'
+        });
+        els.dayChip.textContent = `Daily Message • ${label}`;
+      }
+
+      function showDailyMessage() {
+        const index = getDailyIndex();
+        renderMessage(index, 'Daily Message');
+      }
+
+      function showRandomMessage() {
+        const index = getRandomIndex(currentIndex);
+        localStorage.setItem(STORAGE_KEYS.lastIndex, String(index));
+        renderMessage(index, 'Random Message');
+      }
+
+      function currentMessagePayload() {
+        const item = messages[currentIndex];
+        return {
+          index: currentIndex,
+          type: item.type,
+          text: item.text,
+          verse: item.verse,
+          savedAt: new Date().toISOString()
+        };
+      }
+
+      function saveFavorite() {
+        const payload = currentMessagePayload();
+        const favorites = loadJSON(STORAGE_KEYS.favorites, []);
+        const exists = favorites.some(item => item.index === payload.index);
+
+        if (!exists) {
+          favorites.unshift(payload);
+          saveJSON(STORAGE_KEYS.favorites, favorites.slice(0, 50));
+        }
+
+        renderFavorites();
+        updateFavoriteButton();
+
+        const old = els.favoriteBtn.textContent;
+        els.favoriteBtn.textContent = 'Saved';
+        setTimeout(() => updateFavoriteButton(), 1000);
+      }
+
+      function removeFavorite(index) {
+        const favorites = loadJSON(STORAGE_KEYS.favorites, []).filter(item => item.index !== index);
+        saveJSON(STORAGE_KEYS.favorites, favorites);
+        renderFavorites();
+        updateFavoriteButton();
+      }
+
+      function clearFavorites() {
+        localStorage.removeItem(STORAGE_KEYS.favorites);
+        renderFavorites();
+        updateFavoriteButton();
+      }
+
+      async function copyCurrentMessage() {
+        const item = messages[currentIndex];
+        const text = `${item.text} — ${item.verse}`;
+        const original = els.copyBtn.textContent;
+
+        try {
+          await navigator.clipboard.writeText(text);
+          els.copyBtn.textContent = 'Copied';
+        } catch {
+          els.copyBtn.textContent = 'Copy Failed';
+        }
+
+        setTimeout(() => {
+          els.copyBtn.textContent = original;
+        }, 1200);
+      }
+
+      async function shareCurrentMessage() {
+        const item = messages[currentIndex];
+        const shareText = `${item.text} — ${item.verse}`;
+        const original = els.shareBtn.textContent;
+
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: 'Message of Hope',
+              text: shareText
+            });
+            els.shareBtn.textContent = 'Shared';
+          } catch {
+            return;
+          }
+        } else {
+          try {
+            await navigator.clipboard.writeText(shareText);
+            els.shareBtn.textContent = 'Copied to Share';
+          } catch {
+            els.shareBtn.textContent = 'Share Unavailable';
+          }
+        }
+
+        setTimeout(() => {
+          els.shareBtn.textContent = original;
+        }, 1400);
+      }
+
+      function renderFavorites() {
+        const favorites = loadJSON(STORAGE_KEYS.favorites, []);
+        if (!favorites.length) {
+          els.favoritesList.innerHTML = '<div class="empty">No favorites saved yet.</div>';
+          return;
+        }
+
+        els.favoritesList.innerHTML = favorites.map(item => `
+          <article class="favorite-item">
+            <p>${escapeHtml(item.text)}</p>
+            <small>${escapeHtml(item.verse)} • ${escapeHtml(item.type)}</small>
+            <div class="row">
+              <button type="button" class="mini" data-copy-favorite="${item.index}">Copy</button>
+              <button type="button" class="mini" data-load-favorite="${item.index}">Open</button>
+              <button type="button" class="mini" data-remove-favorite="${item.index}">Remove</button>
+            </div>
+          </article>
+        `).join('');
+      }
+
+      async function copyFavorite(index) {
+        const item = messages[index];
+        if (!item) return;
+        try {
+          await navigator.clipboard.writeText(`${item.text} — ${item.verse}`);
+        } catch {}
+      }
+
+      els.newBtn.addEventListener('click', showRandomMessage);
+      els.dailyBtn.addEventListener('click', showDailyMessage);
+      els.copyBtn.addEventListener('click', copyCurrentMessage);
+      els.shareBtn.addEventListener('click', shareCurrentMessage);
+      els.favoriteBtn.addEventListener('click', saveFavorite);
+      els.clearFavoritesBtn.addEventListener('click', clearFavorites);
+
+      els.favoritesList.addEventListener('click', function (e) {
+        const copyIndex = e.target.getAttribute('data-copy-favorite');
+        const loadIndex = e.target.getAttribute('data-load-favorite');
+        const removeIndex = e.target.getAttribute('data-remove-favorite');
+
+        if (copyIndex !== null) {
+          copyFavorite(Number(copyIndex));
+        }
+        if (loadIndex !== null) {
+          renderMessage(Number(loadIndex), 'Saved Favorite');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        if (removeIndex !== null) {
+          removeFavorite(Number(removeIndex));
+        }
+      });
+
+      renderDailyChip();
+      renderFavorites();
+      showDailyMessage();
+    });
+  </script>
+</body>
+</html>
