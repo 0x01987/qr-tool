@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     year: document.getElementById('year')
   };
 
-  if (!els.firstName || !els.qrCanvas || typeof QRCode === 'undefined') return;
+  if (!els.firstName || !els.qrCanvas) return;
 
   if (els.year) {
     els.year.textContent = String(new Date().getFullYear());
@@ -131,7 +131,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (els.statusBox) els.statusBox.innerHTML = html;
   }
 
+  function updateMetaOnly() {
+    const vcard = buildVCard();
+    lastVCard = vcard;
+
+    if (els.displayName) els.displayName.textContent = `Contact: ${buildDisplayName()}`;
+    if (els.fieldCount) els.fieldCount.textContent = String(countFilledFields());
+    if (els.charCount) els.charCount.textContent = String(vcard.length);
+    if (els.outputCode) {
+      els.outputCode.textContent = countFilledFields() ? vcard : 'No vCard generated yet.';
+    }
+  }
+
   async function renderQr(text) {
+    if (typeof QRCode === 'undefined') {
+      throw new Error('QRCode library is unavailable.');
+    }
+
     await QRCode.toCanvas(els.qrCanvas, text, {
       width: 320,
       margin: 2,
@@ -144,16 +160,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function generate() {
+    updateMetaOnly();
+
     const fieldCount = countFilledFields();
     const displayName = buildDisplayName();
     const vcard = buildVCard();
-
-    lastVCard = vcard;
-
-    if (els.displayName) els.displayName.textContent = `Contact: ${displayName}`;
-    if (els.fieldCount) els.fieldCount.textContent = String(fieldCount);
-    if (els.charCount) els.charCount.textContent = String(vcard.length);
-    if (els.outputCode) els.outputCode.textContent = vcard;
 
     if (fieldCount === 0) {
       if (els.readyLabel) els.readyLabel.textContent = 'No';
@@ -165,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       await renderQr(vcard);
+
       if (els.qrCanvas) els.qrCanvas.hidden = false;
       if (els.qrEmpty) els.qrEmpty.hidden = true;
       if (els.readyLabel) els.readyLabel.textContent = 'Yes';
@@ -174,9 +186,15 @@ document.addEventListener('DOMContentLoaded', () => {
         `Your vCard QR code is ready for <b>${displayName}</b>. ` +
         `You can scan it, copy the vCard, or download the PNG.`
       );
-    } catch (_) {
+    } catch (err) {
       if (els.readyLabel) els.readyLabel.textContent = 'No';
-      setStatus('<strong>Generation failed.</strong><br>Unable to render the QR code right now. Please try again.');
+      if (els.qrCanvas) els.qrCanvas.hidden = true;
+      if (els.qrEmpty) els.qrEmpty.hidden = false;
+
+      setStatus(
+        '<strong>QR library not ready.</strong><br>' +
+        'Your contact fields and vCard text loaded correctly, but the QR image could not be rendered yet.'
+      );
     }
   }
 
@@ -200,9 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setStatus('<strong>Ready.</strong><br>Add your contact details, then click <b>Generate QR Code</b>.');
   }
 
-  function loadSample(kind = 'basic') {
-    reset();
-
+  function fillSample(kind = 'basic') {
     if (kind === 'creator') {
       els.firstName.value = 'Danny';
       els.lastName.value = 'Bun';
@@ -235,8 +251,13 @@ document.addEventListener('DOMContentLoaded', () => {
       els.phone.value = '+1 555 123 4567';
       els.email.value = 'john@example.com';
     }
+  }
 
-    generate();
+  async function loadSample(kind = 'business') {
+    reset();
+    fillSample(kind);
+    updateMetaOnly();
+    await generate();
   }
 
   async function copyVCard() {
@@ -271,7 +292,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const link = document.createElement('a');
-    const name = buildDisplayName().replace(/[^\w\-]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') || 'vcard-qr';
+    const name = buildDisplayName()
+      .replace(/[^\w\-]+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '') || 'vcard-qr';
+
     link.href = els.qrCanvas.toDataURL('image/png');
     link.download = `${name}.png`;
     document.body.appendChild(link);
@@ -281,15 +306,36 @@ document.addEventListener('DOMContentLoaded', () => {
     setStatus('<strong>Downloaded.</strong><br>Your vCard QR code PNG was downloaded.');
   }
 
-  els.generateBtn?.addEventListener('click', generate);
-  els.sampleBtn?.addEventListener('click', () => loadSample('business'));
-  els.clearBtn?.addEventListener('click', reset);
-  els.copyBtn?.addEventListener('click', copyVCard);
-  els.downloadBtn?.addEventListener('click', downloadPng);
+  els.generateBtn?.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await generate();
+  });
+
+  els.sampleBtn?.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await loadSample('business');
+  });
+
+  els.clearBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    reset();
+  });
+
+  els.copyBtn?.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await copyVCard();
+  });
+
+  els.downloadBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    downloadPng();
+  });
 
   document.querySelectorAll('[data-preset]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      loadSample(btn.getAttribute('data-preset'));
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const preset = btn.getAttribute('data-preset') || 'basic';
+      await loadSample(preset);
     });
   });
 
@@ -297,12 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
     els.firstName, els.lastName, els.org, els.title, els.phone, els.email,
     els.website, els.street, els.city, els.state, els.postal, els.country, els.note
   ].forEach(el => {
-    el?.addEventListener('input', () => {
-      const current = buildVCard();
-      if (els.charCount) els.charCount.textContent = String(current.length);
-      if (els.fieldCount) els.fieldCount.textContent = String(countFilledFields());
-      if (els.displayName) els.displayName.textContent = `Contact: ${buildDisplayName()}`;
-    });
+    el?.addEventListener('input', updateMetaOnly);
   });
 
   reset();
