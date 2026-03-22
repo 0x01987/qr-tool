@@ -31,14 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
     !modeEl || !couponUrlWrap || !couponUrlEl || !offerTitleEl || !promoCodeEl ||
     !discountTypeEl || !discountValueEl || !startDateEl || !endDateEl ||
     !descriptionEl || !termsEl || !sizeEl || !levelEl || !marginEl ||
-    !generateBtn || !loadSampleBtn || !downloadBtn || !copyPayloadBtn || !copyShareBtn ||
-    !clearBtn || !qrWrap || !charsOut || !sizeOut || !levelOut || !status
+    !generateBtn || !loadSampleBtn || !downloadBtn || !copyPayloadBtn ||
+    !copyShareBtn || !clearBtn || !qrWrap || !charsOut || !sizeOut ||
+    !levelOut || !status
   ) {
     return;
   }
 
   let lastPayload = '';
   let lastCanvas = null;
+  let qrLibPromise = null;
 
   function setStatus(message, type = '') {
     status.className = 'status-box';
@@ -48,8 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateModeUI() {
-    const isUrl = modeEl.value === 'url';
-    couponUrlWrap.classList.toggle('hidden', !isUrl);
+    couponUrlWrap.classList.toggle('hidden', modeEl.value !== 'url');
   }
 
   function normalizeUrl(value) {
@@ -88,10 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getPayload() {
-    if (modeEl.value === 'url') {
-      return normalizeUrl(couponUrlEl.value);
-    }
-    return buildTextPayload();
+    return modeEl.value === 'url' ? normalizeUrl(couponUrlEl.value) : buildTextPayload();
   }
 
   function resetPreview() {
@@ -104,34 +102,77 @@ document.addEventListener('DOMContentLoaded', () => {
     setStatus('Ready. Fill in your coupon details and click <strong>Generate</strong>.');
   }
 
-  function waitForQRCodeLib(timeoutMs = 4000, intervalMs = 50) {
-    return new Promise((resolve) => {
-      if (window.QRCode) {
-        resolve(true);
-        return;
-      }
-
-      const start = Date.now();
-      const timer = setInterval(() => {
+  function loadScript(src, timeoutMs = 7000) {
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[data-src="${src}"]`);
+      if (existing) {
         if (window.QRCode) {
-          clearInterval(timer);
           resolve(true);
           return;
         }
+      }
 
-        if (Date.now() - start >= timeoutMs) {
-          clearInterval(timer);
-          resolve(false);
-        }
-      }, intervalMs);
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = true;
+      script.defer = true;
+      script.setAttribute('data-src', src);
+
+      const timeout = setTimeout(() => {
+        script.onerror = null;
+        script.onload = null;
+        reject(new Error(`Timeout loading ${src}`));
+      }, timeoutMs);
+
+      script.onload = () => {
+        clearTimeout(timeout);
+        resolve(true);
+      };
+
+      script.onerror = () => {
+        clearTimeout(timeout);
+        reject(new Error(`Failed loading ${src}`));
+      };
+
+      document.head.appendChild(script);
     });
   }
 
-  async function renderQr() {
-    const libReady = await waitForQRCodeLib();
+  async function ensureQRCodeLib() {
+    if (window.QRCode) return true;
+    if (qrLibPromise) return qrLibPromise;
 
-    if (!libReady) {
-      setStatus('QR code library failed to load. Please check your connection and try again.', 'bad');
+    const sources = [
+      '/assets/js/vendor/qrcode.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js',
+      'https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js',
+      'https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js'
+    ];
+
+    qrLibPromise = (async () => {
+      for (const src of sources) {
+        try {
+          await loadScript(src);
+          if (window.QRCode) return true;
+        } catch (error) {
+          // try next source
+        }
+      }
+      return false;
+    })();
+
+    return qrLibPromise;
+  }
+
+  async function renderQr() {
+    setStatus('Loading QR engine...', '');
+
+    const libReady = await ensureQRCodeLib();
+    if (!libReady || !window.QRCode) {
+      setStatus(
+        'QR code library could not be loaded. Best fix: place a local copy at <span class="mono">/assets/js/vendor/qrcode.min.js</span>.',
+        'bad'
+      );
       return;
     }
 
