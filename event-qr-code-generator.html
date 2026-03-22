@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Event QR Code Generator | Free Calendar Event QR Creator | InstantQR</title>
+  <meta name="description" content="Create an event QR code with title, date, time, location, and description. Free, fast, mobile-friendly event QR generator with PNG and ICS download." />
+  <meta name="keywords" content="event qr code generator, calendar qr code, event calendar qr, ics qr code, meeting qr code, schedule qr code" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/event-qr-code-generator.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="Event QR Code Generator | InstantQR" />
+  <meta property="og:description" content="Create a QR code for an event with date, time, location, and description." />
+  <meta property="og:url" content="https://instantqr.io/tools/event-qr-code-generator.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Event QR Code Generator | InstantQR" />
+  <meta name="twitter:description" content="Generate a QR code for an event and download the ICS file." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Event QR Code Generator",
+    "url":"https://instantqr.io/tools/event-qr-code-generator.html",
+    "description":"Create a QR code for an event with date, time, location, and description.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Event QR Code Generator",
+    "applicationCategory":"BusinessApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript",
+    "url":"https://instantqr.io/tools/event-qr-code-generator.html",
+    "description":"Generate a QR code for an event and download a matching ICS calendar file."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+      {"@type":"ListItem","position":3,"name":"Event QR Code Generator","item":"https://instantqr.io/tools/event-qr-code-generator.html"}
+    ]
+  }
+  </script>
+
+  <style>
+    .event-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .tool-card,.result-panel,.faqCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
+    }
+
+    .tool-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+    }
+    .tool-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(760px 280px at 16% 18%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(520px 240px at 82% 34%, rgba(244,63,94,.14), transparent 56%);
+      pointer-events:none;
+    }
+    .tool-card > *{ position:relative; }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .field.full{ grid-column:1 / -1; }
+
+    .field label{
+      font-size:13px;
+      font-weight:800;
+      color:#fff;
+    }
+
+    .field input,
+    .field textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#13213b;
+      color:var(--text);
+      padding:13px 14px;
+      outline:none;
+      box-sizing:border-box;
+      font:inherit;
+    }
+
+    .field textarea{
+      min-height:110px;
+      resize:vertical;
+      line-height:1.5;
+    }
+
+    .field input:focus,
+    .field textarea:focus{
+      border-color:rgba(96,165,250,.55);
+      box-shadow:0 0 0 3px rgba(96,165,250,.14);
+    }
+
+    .checkbox-row{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-top:12px;
+      color:var(--text);
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .checkbox-row input{
+      width:18px;
+      height:18px;
+      accent-color:#60a5fa;
+    }
+
+    .helper-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .tool-actions,.quick-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .mini-btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:12px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .mini-btn:hover{
+      border-color:rgba(255,255,255,.2);
+      background:rgba(255,255,255,.07);
+    }
+
+    .result-panel{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .panel-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+
+    .summary-box,.preview-box,.qr-box,.output-box,.status-box{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .metric{
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:6px;
+    }
+
+    .metric .k{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .metric .v{
+      font-size:24px;
+      font-weight:900;
+      letter-spacing:-.4px;
+      word-break:break-word;
+    }
+
+    .metric .u{
+      font-size:12px;
+      color:rgba(233,238,252,.55);
+    }
+
+    .event-card{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(135deg, #e11d48, rgba(10,15,28,.96));
+      padding:18px;
+      box-shadow:0 14px 30px rgba(0,0,0,.28);
+    }
+
+    .event-name{
+      font-size:24px;
+      line-height:1.1;
+      font-weight:900;
+      color:#fff;
+      letter-spacing:-.4px;
+      margin:0 0 8px;
+      word-break:break-word;
+    }
+
+    .event-sub{
+      color:rgba(255,255,255,.82);
+      font-size:14px;
+      line-height:1.6;
+      margin:0 0 12px;
+      word-break:break-word;
+    }
+
+    .event-lines{
+      display:grid;
+      gap:8px;
+    }
+
+    .event-line{
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);
+      padding:10px 12px;
+      color:#fff;
+      font-size:13px;
+      line-height:1.5;
+      word-break:break-word;
+    }
+
+    .qr-shell{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:320px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      padding:20px;
+    }
+
+    #qrCanvas{
+      max-width:min(320px, 100%);
+      height:auto;
+      border-radius:12px;
+      box-shadow:0 10px 25px rgba(0,0,0,.25);
+      background:#fff;
+    }
+
+    .qr-empty{
+      text-align:center;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    }
+
+    .output-code{
+      white-space:pre-wrap;
+      word-break:break-word;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.16);
+      padding:14px;
+      font-size:13px;
+      line-height:1.65;
+      color:#fff;
+      min-height:170px;
+    }
+
+    .status-box{
+      line-height:1.6;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .faqCard{
+      margin-top:14px;
+      padding:18px;
+    }
+
+    .faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+
+    .faqCard summary::-webkit-details-marker{ display:none; }
+
+    .faqCard p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    @media (max-width:980px){
+      .event-grid,
+      .summary-grid,
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:640px){
+      .tool-actions .cta{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
+
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/email-qr-code-generator.html">Email QR</a>
+        <a href="/tools/sms-qr-code-generator.html">SMS QR</a>
+        <a href="/tools/google-maps-location-qr-code-generator.html">Maps QR</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Event QR Code Generator</span></li>
+      </ol>
+    </nav>
+
+    <section class="event-grid" aria-label="Event QR Code Generator">
+      <section class="tool-card">
+        <div class="pill">📅 Event QR • 🗓️ Calendar • ⚡ Fast</div>
+
+        <h1>Event QR Code Generator</h1>
+        <p class="sub">
+          Create a QR code for an event with title, date, time, location, and description.
+          Great for flyers, invitations, conferences, meetups, weddings, and appointments.
+        </p>
+
+        <div class="form-grid">
+          <div class="field full">
+            <label for="eventTitle">Event title</label>
+            <input id="eventTitle" type="text" placeholder="Example: InstantQR Launch Event" />
+          </div>
+
+          <div class="field">
+            <label for="startDate">Start date</label>
+            <input id="startDate" type="date" />
+          </div>
+
+          <div class="field">
+            <label for="startTime">Start time</label>
+            <input id="startTime" type="time" />
+          </div>
+
+          <div class="field">
+            <label for="endDate">End date</label>
+            <input id="endDate" type="date" />
+          </div>
+
+          <div class="field">
+            <label for="endTime">End time</label>
+            <input id="endTime" type="time" />
+          </div>
+
+          <div class="field full">
+            <label for="eventLocation">Location</label>
+            <input id="eventLocation" type="text" placeholder="Example: Phoenix Convention Center" />
+          </div>
+
+          <div class="field full">
+            <label for="eventDescription">Description</label>
+            <textarea id="eventDescription" placeholder="Optional event details..."></textarea>
+          </div>
+        </div>
+
+        <label class="checkbox-row" for="allDayEvent">
+          <input id="allDayEvent" type="checkbox" />
+          <span>All-day event</span>
+        </label>
+
+        <div class="helper-row">
+          <span>For best results, include title and at least a start date.</span>
+          <span><span id="charCount">0</span> description characters</span>
+        </div>
+
+        <div class="tool-actions">
+          <button class="cta primary" id="generateBtn" type="button">Generate QR Code</button>
+          <button class="cta ghost" id="sampleBtn" type="button">Load Sample</button>
+          <button class="cta ghost" id="clearBtn" type="button">Clear</button>
+        </div>
+
+        <div class="quick-actions">
+          <button class="mini-btn" type="button" id="copyEventBtn">Copy Event Text</button>
+          <button class="mini-btn" type="button" id="downloadIcsBtn">Download ICS</button>
+        </div>
+      </section>
+
+      <aside class="result-panel" aria-label="Generated event QR output">
+        <div class="panel-top">
+          <div>
+            <h2>Event Preview + QR</h2>
+            <div class="hint" style="margin:6px 0 0;">Live preview updates as you edit.</div>
+          </div>
+          <div class="hint mono">Type: Calendar Event</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-grid">
+            <div class="metric">
+              <div class="k">QR Ready</div>
+              <div class="v" id="readyLabel">No</div>
+              <div class="u">Generated state</div>
+            </div>
+            <div class="metric">
+              <div class="k">All Day</div>
+              <div class="v" id="allDayMetric">No</div>
+              <div class="u">Event mode</div>
+            </div>
+            <div class="metric">
+              <div class="k">Location</div>
+              <div class="v" id="locationMetric">—</div>
+              <div class="u">Event place</div>
+            </div>
+            <div class="metric">
+              <div class="k">Output</div>
+              <div class="v">PNG + ICS</div>
+              <div class="u">Download formats</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-box">
+          <div class="panel-top">
+            <div>
+              <h2 style="font-size:16px;">Event Preview</h2>
+            </div>
+          </div>
+
+          <div class="event-card">
+            <div class="event-name" id="previewName">Your event title</div>
+            <div class="event-sub" id="previewSub">Your event date, time, and details will appear here.</div>
+            <div class="event-lines" id="previewLines">
+              <div class="event-line">An event preview will appear here.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qr-box">
+          <div class="panel-top">
+            <div>
+              <h2 style="font-size:16px;">QR Preview</h2>
+            </div>
+            <div class="quick-actions" style="margin-top:0;">
+              <button class="mini-btn" id="downloadBtn" type="button">Download PNG</button>
+            </div>
+          </div>
+
+          <div class="qr-shell">
+            <div class="qr-empty" id="qrEmpty">
+              Enter your event details, then click <strong>Generate QR Code</strong>.
+            </div>
+            <canvas id="qrCanvas" width="320" height="320" hidden></canvas>
+          </div>
+        </div>
+
+        <div class="output-box">
+          <div class="panel-top">
+            <div>
+              <h2 style="font-size:16px;">Generated Event Text</h2>
+            </div>
+          </div>
+          <pre class="output-code mono" id="outputCode">No event content generated yet.</pre>
+        </div>
+
+        <div class="status-box" id="statusBox">
+          <strong>Ready.</strong><br>
+          Enter event details and click <b>Generate QR Code</b>.
+        </div>
+      </aside>
+    </section>
+
+    <section class="faqCard" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>Can I create an all-day event?</summary>
+        <p>Yes. Toggle the all-day option and the event will be generated without timed start and end fields.</p>
+      </details>
+
+      <details>
+        <summary>Can I download an ICS file?</summary>
+        <p>Yes. This tool can generate a downloadable ICS calendar file for the event.</p>
+      </details>
+
+      <details>
+        <summary>Can I download the QR code?</summary>
+        <p>Yes. You can download the generated event QR as a PNG image.</p>
+      </details>
+
+      <details>
+        <summary>Does this work for invitations and meetings?</summary>
+        <p>Yes. It works well for meetups, conferences, weddings, school events, and appointments.</p>
+      </details>
+    </section>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/sitemap.xml">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/event-qr-code-generator.js" defer></script>
+</body>
+</html>
