@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Analytics / Monetization -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>PDF to Image Converter | Image to PDF Converter | InstantQR</title>
+  <meta name="description" content="Convert PDF to image or image to PDF online for free. Export PDF pages as PNG or JPG, or turn one or more images into a PDF file in your browser." />
+  <meta name="keywords" content="pdf to image, image to pdf, pdf to png, pdf to jpg, jpg to pdf, png to pdf, convert pdf online, instantqr" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/pdf-to-image.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+  <link rel="stylesheet" href="/assets/site.css" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="PDF to Image Converter | Image to PDF Converter | InstantQR" />
+  <meta property="og:description" content="Convert PDF pages to PNG or JPG, and combine images into a PDF online." />
+  <meta property="og:url" content="https://instantqr.io/tools/pdf-to-image.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PDF to Image Converter | Image to PDF Converter | InstantQR" />
+  <meta name="twitter:description" content="Convert PDF pages to images or merge images into a PDF online." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+      {"@type":"ListItem","position":3,"name":"PDF to Image Converter","item":"https://instantqr.io/tools/pdf-to-image.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Can this tool convert PDF pages into images?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can upload a PDF and export one page or multiple pages as PNG or JPG images."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can this tool turn images into a PDF?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can upload one or more JPG, PNG, or WebP images and combine them into a single PDF file."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Does this tool upload my files to a server?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"This tool is designed for browser-side processing. Your files are handled locally in your browser during conversion."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What output formats are supported?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"For PDF to image, you can export PNG or JPG. For image to PDF, you can generate a PDF document from one or more images."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      margin-top:14px;
+    }
+    .tool-card,.result-panel,.faqCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
+    }
+    .tool-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+    }
+    .tool-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.12), transparent 56%);
+      pointer-events:none;
+    }
+    .tool-card>*{position:relative}
+
+    .mode-switch{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .mode-btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .mode-btn.active{
+      background:rgba(96,165,250,.16);
+      border-color:rgba(96,165,250,.35);
+      color:#fff;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .field.full{grid-column:1/-1}
+    .field label{
+      font-size:13px;
+      font-weight:800;
+      color:#fff;
+    }
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#13213b;
+      color:var(--text);
+      padding:13px 14px;
+      outline:none;
+      box-sizing:border-box;
+      font:inherit;
+      -webkit-appearance:none;
+      appearance:none;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color:rgba(96,165,250,.55);
+      box-shadow:0 0 0 3px rgba(96,165,250,.14);
+    }
+    .helper-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .tool-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .mini-btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:12px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .dropzone{
+      border:1.5px dashed rgba(255,255,255,.16);
+      border-radius:18px;
+      padding:18px;
+      background:rgba(255,255,255,.03);
+      text-align:center;
+    }
+    .dropzone.dragover{
+      border-color:rgba(96,165,250,.55);
+      background:rgba(96,165,250,.10);
+    }
+
+    .result-panel{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .panel-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+
+    .summary-box,.preview-box,.output-box,.status-box{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+    .summary-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .metric{
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:6px;
+    }
+    .metric .k{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .metric .v{
+      font-size:24px;
+      font-weight:900;
+      letter-spacing:-.4px;
+      word-break:break-word;
+    }
+    .metric .u{
+      font-size:12px;
+      color:rgba(233,238,252,.55);
+    }
+
+    .preview-stage{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+    .thumb{
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.18);
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .thumb img{
+      width:100%;
+      height:180px;
+      object-fit:contain;
+      border-radius:10px;
+      background:#fff;
+    }
+    .thumb .meta{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+      word-break:break-word;
+    }
+
+    .output-code{
+      white-space:pre-wrap;
+      word-break:break-word;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.16);
+      padding:14px;
+      font-size:13px;
+      line-height:1.65;
+      color:#fff;
+      min-height:150px;
+    }
+
+    .status-box{
+      line-height:1.6;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .miniGrid2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .miniBox{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+    .miniBox h2{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+    .miniBox p,.miniBox li{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+    .miniBox ul,.miniBox ol{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .faqCard{
+      margin-top:14px;
+      padding:18px;
+    }
+    .faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+    .faqCard summary::-webkit-details-marker{display:none}
+    .faqCard p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .hidden{display:none!important}
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    }
+
+    @media (max-width:980px){
+      .tool-grid,.miniGrid2,.summary-grid,.form-grid,.preview-stage{
+        grid-template-columns:1fr;
+      }
+    }
+    @media (max-width:640px){
+      .tool-actions .cta,.tool-actions .mini-btn{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
+
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/image-converter-tool.html">Image Tools</a>
+        <a href="/tools/pdf-to-image.html">PDF Tool</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">PDF to Image Converter</span></li>
+      </ol>
+    </nav>
+
+    <section class="tool-grid" aria-label="PDF and image conversion tool">
+      <section class="tool-card">
+        <div class="pill">📄 PDF • 🖼️ Images • 🔒 Browser-side</div>
+
+        <h1>PDF to Image + Image to PDF</h1>
+        <p class="sub">
+          Convert PDF pages into PNG or JPG images, or combine one or more images into a PDF file.
+          Fast, browser-based, and easy to use.
+        </p>
+
+        <div class="mode-switch" role="tablist" aria-label="Conversion mode">
+          <button class="mode-btn active" id="pdfToImageBtn" type="button">PDF → Image</button>
+          <button class="mode-btn" id="imageToPdfBtn" type="button">Image → PDF</button>
+        </div>
+
+        <div class="form-grid">
+          <div class="field full" id="dropzoneWrap">
+            <label for="fileInput">Upload file(s)</label>
+            <div class="dropzone" id="dropzone">
+              <p><strong>Drop files here</strong> or use the picker below.</p>
+              <p class="helper-row">
+                <span id="dropzoneHint">Upload a PDF file</span>
+              </p>
+              <input id="fileInput" type="file" accept="application/pdf" />
+            </div>
+          </div>
+
+          <div class="field" id="outputFormatWrap">
+            <label for="outputFormat">Output format</label>
+            <select id="outputFormat">
+              <option value="png">PNG</option>
+              <option value="jpg">JPG</option>
+            </select>
+          </div>
+
+          <div class="field" id="pageScaleWrap">
+            <label for="pageScale">Render quality</label>
+            <select id="pageScale">
+              <option value="1.25">Standard</option>
+              <option value="1.75" selected>High</option>
+              <option value="2.25">Very High</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="pageSelection">Pages</label>
+            <select id="pageSelection">
+              <option value="first">First page only</option>
+              <option value="all">All pages</option>
+            </select>
+          </div>
+
+          <div class="field" id="jpgQualityWrap">
+            <label for="jpgQuality">JPG quality</label>
+            <select id="jpgQuality">
+              <option value="0.75">75%</option>
+              <option value="0.85" selected>85%</option>
+              <option value="0.92">92%</option>
+            </select>
+          </div>
+
+          <div class="field" id="pdfPageSizeWrap">
+            <label for="pdfPageSize">PDF page size</label>
+            <select id="pdfPageSize">
+              <option value="a4" selected>A4</option>
+              <option value="letter">Letter</option>
+              <option value="fit">Fit to image</option>
+            </select>
+          </div>
+
+          <div class="field" id="pdfOrientationWrap">
+            <label for="pdfOrientation">Orientation</label>
+            <select id="pdfOrientation">
+              <option value="auto" selected>Auto</option>
+              <option value="portrait">Portrait</option>
+              <option value="landscape">Landscape</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="helper-row">
+          <span id="modeHelp">Export one PDF page or all pages as images.</span>
+          <span><span id="fileCount">0</span> file(s) selected</span>
+        </div>
+
+        <div class="tool-actions">
+          <button class="cta primary" id="processBtn" type="button">Process Files</button>
+          <button class="cta ghost" id="sampleBtn" type="button">Load Sample State</button>
+          <button class="cta ghost" id="clearBtn" type="button">Clear</button>
+        </div>
+      </section>
+
+      <aside class="result-panel" aria-label="Conversion output">
+        <div class="panel-top">
+          <div>
+            <h2>Preview + Output</h2>
+            <div class="hint" style="margin:6px 0 0;">Preview updates after processing.</div>
+          </div>
+          <div class="hint mono" id="resultMode">Mode: PDF → Image</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-grid">
+            <div class="metric">
+              <div class="k">Input files</div>
+              <div class="v" id="summaryInputCount">0</div>
+              <div class="u">Selected</div>
+            </div>
+            <div class="metric">
+              <div class="k">Output items</div>
+              <div class="v" id="summaryOutputCount">0</div>
+              <div class="u">Generated</div>
+            </div>
+            <div class="metric">
+              <div class="k">Mode</div>
+              <div class="v" id="summaryMode">PDF → Image</div>
+              <div class="u">Current workflow</div>
+            </div>
+            <div class="metric">
+              <div class="k">Ready</div>
+              <div class="v" id="summaryReady">No</div>
+              <div class="u">Processed state</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-box">
+          <div class="panel-top">
+            <div>
+              <h2 style="font-size:16px;">Preview</h2>
+            </div>
+            <div class="tool-actions" style="margin-top:0;">
+              <button class="mini-btn" id="downloadAllBtn" type="button">Download Output</button>
+            </div>
+          </div>
+
+          <div class="preview-stage" id="previewStage">
+            <div class="thumb">
+              <div class="meta">No output yet. Process a PDF or image file to preview results here.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="output-box">
+          <div class="panel-top">
+            <div>
+              <h2 style="font-size:16px;">Conversion Log</h2>
+            </div>
+          </div>
+          <pre class="output-code mono" id="outputLog">Ready. Upload a PDF to export image pages, or switch to image-to-PDF mode.</pre>
+        </div>
+
+        <div class="status-box" id="statusBox">
+          <strong>Ready.</strong><br>
+          Choose a mode, upload files, and click <b>Process Files</b>.
+        </div>
+      </aside>
+    </section>
+
+    <section class="miniGrid2" aria-label="Tool help">
+      <div class="miniBox">
+        <h2>PDF to Image</h2>
+        <ul>
+          <li>Upload a PDF file</li>
+          <li>Choose PNG or JPG output</li>
+          <li>Export the first page or all pages</li>
+          <li>Download each result after processing</li>
+        </ul>
+      </div>
+
+      <div class="miniBox">
+        <h2>Image to PDF</h2>
+        <ul>
+          <li>Upload one or more JPG, PNG, or WebP images</li>
+          <li>Choose page size and orientation</li>
+          <li>Combine images into one PDF</li>
+          <li>Download the generated PDF file</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="faqCard" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>Can this tool convert PDF pages into images?</summary>
+        <p>Yes. You can upload a PDF and export one page or multiple pages as PNG or JPG images.</p>
+      </details>
+
+      <details>
+        <summary>Can this tool turn images into a PDF?</summary>
+        <p>Yes. You can upload one or more JPG, PNG, or WebP images and combine them into a single PDF file.</p>
+      </details>
+
+      <details>
+        <summary>Does this tool upload my files to a server?</summary>
+        <p>This tool is designed for browser-side processing. Your files are handled locally in your browser during conversion.</p>
+      </details>
+
+      <details>
+        <summary>What output formats are supported?</summary>
+        <p>For PDF to image, you can export PNG or JPG. For image to PDF, you can generate a PDF document from one or more images.</p>
+      </details>
+    </section>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script defer src="/assets/site.js"></script>
+  <script defer src="/assets/js/tools/pdf-to-image.js"></script>
+</body>
+</html>
