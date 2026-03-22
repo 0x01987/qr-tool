@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Coupon QR Code Generator | Create Promo Code QR Codes Free | InstantQR</title>
+  <meta name="description" content="Free coupon QR code generator. Create promo code QR codes for discounts, offers, sales, events, and marketing campaigns. Download PNG or SVG instantly." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#081120" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/coupon-qr-code-generator.html" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/favicon.ico" />
+
+  <meta property="og:title" content="Coupon QR Code Generator | Create Promo Code QR Codes Free" />
+  <meta property="og:description" content="Generate QR codes for coupons, promo codes, sales, and special offers. Free PNG and SVG downloads." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://instantqr.io/tools/coupon-qr-code-generator.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Coupon QR Code Generator | InstantQR" />
+  <meta name="twitter:description" content="Create promo and coupon QR codes online for discounts, offers, and campaigns." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <link rel="stylesheet" href="/site.css" />
+  <script defer src="/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script defer src="/tools/coupon-qr-code-generator.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+      {"@type":"ListItem","position":3,"name":"Coupon QR Code Generator","item":"https://instantqr.io/tools/coupon-qr-code-generator.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is a coupon QR code?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A coupon QR code is a scannable code that opens a coupon page, promo landing page, or displays a discount code and offer details when scanned."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I create a QR code for a promo code without a website?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. You can generate a coupon QR code that stores plain offer text, discount code, expiration date, and redemption terms directly in the QR code."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Should I use a URL or text for coupon QR codes?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Use a URL if you want to send people to a landing page, menu, product page, or campaign page. Use text if you want the QR code itself to contain the coupon details."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What format should I download my coupon QR code in?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"PNG is a good choice for most digital and print uses. SVG is better when you need scalable high-resolution output for posters, packaging, or professional print."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .tool-hero{ padding:32px 0 12px; }
+    .breadcrumbs{ font-size:.95rem; color:var(--muted); margin-bottom:14px; }
+    .breadcrumbs a{ color:inherit; text-decoration:none; }
+    .breadcrumbs a:hover{ text-decoration:underline; }
+
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:start;
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+
+    .panel h2{ margin:0 0 14px; }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .form-grid .full{ grid-column:1 / -1; }
+
+    label{
+      display:block;
+      font-weight:700;
+      margin:0 0 8px;
+    }
+
+    input, textarea, select{
+      width:100%;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:var(--bg2);
+      color:var(--text);
+      font:inherit;
+    }
+
+    textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+
+    .hint{
+      color:var(--muted);
+      font-size:.92rem;
+      margin-top:8px;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .btn-secondary{
+      background:transparent;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+
+    .preview-wrap{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      position:sticky;
+      top:18px;
+    }
+
+    .qr-stage{
+      min-height:320px;
+      display:grid;
+      place-items:center;
+      border:1px dashed var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.02);
+      padding:16px;
+      overflow:hidden;
+    }
+
+    .qr-stage canvas,
+    .qr-stage svg{
+      max-width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#fff;
+      padding:10px;
+    }
+
+    .result-card{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+    }
+
+    .result-card h3{
+      margin:0 0 10px;
+      font-size:1rem;
+    }
+
+    .payload-box{
+      white-space:pre-wrap;
+      word-break:break-word;
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size:.88rem;
+      color:var(--muted);
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      max-height:220px;
+      overflow:auto;
+    }
+
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:.86rem;
+      color:var(--muted);
+      background:rgba(255,255,255,.03);
+    }
+
+    .faq-list{
+      display:grid;
+      gap:14px;
+    }
+
+    .faq-item{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .faq-item h3{
+      margin:0 0 8px;
+      font-size:1.02rem;
+    }
+
+    .related-links{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+    }
+
+    .related-links a{
+      display:block;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      text-decoration:none;
+      background:var(--panel);
+      color:var(--text);
+    }
+
+    .related-links a:hover{
+      transform:translateY(-1px);
+      box-shadow:var(--shadow);
+    }
+
+    .warn{
+      border-left:3px solid var(--warn);
+      padding-left:12px;
+      color:var(--muted);
+      margin-top:10px;
+    }
+
+    .section-spacer{ margin-top:28px; }
+
+    @media (max-width: 980px){
+      .tool-grid{ grid-template-columns:1fr; }
+      .preview-wrap{ position:static; }
+    }
+
+    @media (max-width: 720px){
+      .form-grid{ grid-template-columns:1fr; }
+      .related-links{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="tool-hero">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> /
+        <a href="/tools/tools.html">Tools</a> /
+        <span aria-current="page">Coupon QR Code Generator</span>
+      </nav>
+
+      <h1>Coupon QR Code Generator</h1>
+      <p class="lead">
+        Create a coupon QR code for promo codes, discount offers, flash sales, loyalty rewards, event deals, and print marketing. Generate a QR code that opens a coupon URL or stores the offer details directly inside the code.
+      </p>
+    </section>
+
+    <section class="tool-grid section-spacer">
+      <div class="panel">
+        <h2>Create Your Coupon or Promo QR Code</h2>
+
+        <div class="form-grid">
+          <div class="full">
+            <label for="mode">Coupon QR type</label>
+            <select id="mode">
+              <option value="url">Coupon URL / landing page</option>
+              <option value="text">Coupon text / promo details</option>
+            </select>
+            <div class="hint">Use URL mode for landing pages, product pages, menu deals, and campaign pages. Use text mode to store the offer details directly in the QR code.</div>
+          </div>
+
+          <div class="full" id="urlWrap">
+            <label for="couponUrl">Coupon URL</label>
+            <input id="couponUrl" type="url" placeholder="https://yourstore.com/promo/summer-sale" />
+          </div>
+
+          <div>
+            <label for="offerTitle">Offer title</label>
+            <input id="offerTitle" type="text" placeholder="Summer Sale 20% Off" />
+          </div>
+
+          <div>
+            <label for="promoCode">Promo / coupon code</label>
+            <input id="promoCode" type="text" placeholder="SUMMER20" />
+          </div>
+
+          <div>
+            <label for="discountType">Discount type</label>
+            <select id="discountType">
+              <option value="Percent discount">Percent discount</option>
+              <option value="Fixed amount discount">Fixed amount discount</option>
+              <option value="Buy one get one">Buy one get one</option>
+              <option value="Free shipping">Free shipping</option>
+              <option value="Limited-time deal">Limited-time deal</option>
+              <option value="Custom offer">Custom offer</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="discountValue">Discount value</label>
+            <input id="discountValue" type="text" placeholder="20% or $10" />
+          </div>
+
+          <div>
+            <label for="startDate">Start date</label>
+            <input id="startDate" type="date" />
+          </div>
+
+          <div>
+            <label for="endDate">End date / expiration</label>
+            <input id="endDate" type="date" />
+          </div>
+
+          <div class="full">
+            <label for="description">Offer description</label>
+            <textarea id="description" placeholder="Example: Save 20% on all online orders over $50. Valid once per customer."></textarea>
+          </div>
+
+          <div class="full">
+            <label for="terms">Terms and redemption details</label>
+            <textarea id="terms" placeholder="Example: Valid in-store and online. Cannot be combined with other offers. Expires at 11:59 PM."></textarea>
+          </div>
+
+          <div>
+            <label for="size">QR size</label>
+            <select id="size">
+              <option value="256">256 px</option>
+              <option value="320" selected>320 px</option>
+              <option value="512">512 px</option>
+              <option value="768">768 px</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="margin">Quiet zone / margin</label>
+            <select id="margin">
+              <option value="1">Small</option>
+              <option value="2" selected>Medium</option>
+              <option value="4">Large</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="fgColor">QR color</label>
+            <input id="fgColor" type="color" value="#111827" />
+          </div>
+
+          <div>
+            <label for="bgColor">Background color</label>
+            <input id="bgColor" type="color" value="#ffffff" />
+          </div>
+        </div>
+
+        <div class="warn">
+          For the most reliable scanning, keep strong contrast between the QR color and background. Dark code on a light background is safest.
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="generateBtn" type="button">Generate QR Code</button>
+          <button class="btn btn-secondary" id="downloadPngBtn" type="button">Download PNG</button>
+          <button class="btn btn-secondary" id="downloadSvgBtn" type="button">Download SVG</button>
+          <button class="btn btn-secondary" id="copyPayloadBtn" type="button">Copy Payload</button>
+          <button class="btn btn-secondary" id="resetBtn" type="button">Reset</button>
+        </div>
+      </div>
+
+      <aside class="preview-wrap">
+        <div class="panel">
+          <h2>Coupon QR Preview</h2>
+          <div class="qr-stage" id="qrStage" aria-live="polite">
+            <div class="hint">Your coupon QR code will appear here.</div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <h3>QR Payload Preview</h3>
+          <div class="payload-box" id="payloadPreview">No coupon payload generated yet.</div>
+          <div class="pill-row">
+            <span class="pill">Best for: flyers, menus, receipts, signs</span>
+            <span class="pill">Formats: PNG, SVG</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section-spacer">
+      <div class="panel">
+        <h2>How to Use This Coupon QR Code Generator</h2>
+        <p>
+          Add your offer title, promo code, discount type, expiration date, and redemption details. Then choose whether your QR code should open a landing page or store the coupon text directly. Generate the QR code, test it on your phone, and download it as PNG or SVG for digital or print use.
+        </p>
+        <p>
+          Coupon QR codes work well for restaurant promos, retail sales, event discounts, loyalty campaigns, email offers, direct mail, posters, product packaging, and storefront signage.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-spacer">
+      <div class="panel">
+        <h2>Coupon QR Code Best Practices</h2>
+        <ul>
+          <li>Use a short and clear offer title.</li>
+          <li>Make the promo code easy to read and remember.</li>
+          <li>Include expiration details to avoid confusion.</li>
+          <li>Use URL mode when you want tracking and a branded landing page.</li>
+          <li>Keep strong contrast for better scan reliability.</li>
+          <li>Always test the QR code before printing in bulk.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section-spacer">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <article class="faq-item">
+          <h3>What is a coupon QR code?</h3>
+          <p>A coupon QR code is a scannable code that opens a coupon page, promo landing page, or displays a discount code and offer details when scanned.</p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Can I create a QR code for a promo code without a website?</h3>
+          <p>Yes. You can generate a coupon QR code that stores plain offer text, discount code, expiration date, and redemption terms directly in the QR code.</p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Should I use a URL or text for coupon QR codes?</h3>
+          <p>Use a URL if you want to send people to a landing page, menu, product page, or campaign page. Use text if you want the QR code itself to contain the coupon details.</p>
+        </article>
+
+        <article class="faq-item">
+          <h3>What format should I download my coupon QR code in?</h3>
+          <p>PNG is a great option for most uses. SVG is best when you want a crisp scalable file for posters, packaging, and professional printing.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-spacer">
+      <h2>Related QR Code Tools</h2>
+      <div class="related-links">
+        <a href="/tools/url-qr-code-generator.html">
+          <strong>URL QR Code Generator</strong>
+          <div class="hint">Create QR codes for websites, landing pages, and campaigns.</div>
+        </a>
+        <a href="/tools/google-review-qr-code-generator.html">
+          <strong>Google Review QR Code Generator</strong>
+          <div class="hint">Turn review requests into a quick scan experience.</div>
+        </a>
+        <a href="/tools/google-maps-qr-code-generator.html">
+          <strong>Google Maps QR Code Generator</strong>
+          <div class="hint">Send customers directly to your location.</div>
+        </a>
+        <a href="/tools/event-qr-code-generator.html">
+          <strong>Event QR Code Generator</strong>
+          <div class="hint">Create QR codes for event info and calendar details.</div>
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
