@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+  </script>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <title>Google Review QR Code Generator | Free Review QR Creator | InstantQR</title>
+  <meta name="description" content="Create a Google Review QR code for your business. Paste your Google review link, generate a scannable QR code, copy the link, and download the QR as PNG." />
+  <meta name="keywords" content="google review qr code generator, review qr code, google reviews qr, business review qr code, qr code for google review link" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="InstantQR" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <link rel="canonical" href="https://instantqr.io/tools/google-review-qr-code-generator.html" />
+  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InstantQR" />
+  <meta property="og:title" content="Google Review QR Code Generator | InstantQR" />
+  <meta property="og:description" content="Generate a QR code that opens your Google review page." />
+  <meta property="og:url" content="https://instantqr.io/tools/google-review-qr-code-generator.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Google Review QR Code Generator | InstantQR" />
+  <meta name="twitter:description" content="Create a QR code for your Google review page." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Google Review QR Code Generator",
+    "url":"https://instantqr.io/tools/google-review-qr-code-generator.html",
+    "description":"Create a QR code for a Google review page using a Google review link.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"InstantQR",
+      "url":"https://instantqr.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Google Review QR Code Generator",
+    "applicationCategory":"BusinessApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "browserRequirements":"Requires JavaScript",
+    "url":"https://instantqr.io/tools/google-review-qr-code-generator.html",
+    "description":"Generate a QR code for a Google review link."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+      {"@type":"ListItem","position":3,"name":"Google Review QR Code Generator","item":"https://instantqr.io/tools/google-review-qr-code-generator.html"}
+    ]
+  }
+  </script>
+
+  <style>
+    .review-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .tool-card,.result-panel,.faqCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
+    }
+
+    .tool-card{
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+    }
+    .tool-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(760px 280px at 16% 18%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(520px 240px at 82% 34%, rgba(251,191,36,.14), transparent 56%);
+      pointer-events:none;
+    }
+    .tool-card > *{ position:relative; }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .field.full{ grid-column:1 / -1; }
+
+    .field label{
+      font-size:13px;
+      font-weight:800;
+      color:#fff;
+    }
+
+    .field input,
+    .field textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#13213b;
+      color:var(--text);
+      padding:13px 14px;
+      outline:none;
+      box-sizing:border-box;
+      font:inherit;
+    }
+
+    .field textarea{
+      min-height:110px;
+      resize:vertical;
+      line-height:1.5;
+    }
+
+    .field input:focus,
+    .field textarea:focus{
+      border-color:rgba(96,165,250,.55);
+      box-shadow:0 0 0 3px rgba(96,165,250,.14);
+    }
+
+    .helper-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .tool-actions,.quick-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .mini-btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:12px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .mini-btn:hover{
+      border-color:rgba(255,255,255,.2);
+      background:rgba(255,255,255,.07);
+    }
+
+    .result-panel{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .panel-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .panel-top h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+
+    .summary-box,.preview-box,.qr-box,.output-box,.status-box{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+    }
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .metric{
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:6px;
+    }
+
+    .metric .k{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .metric .v{
+      font-size:24px;
+      font-weight:900;
+      letter-spacing:-.4px;
+      word-break:break-word;
+    }
+
+    .metric .u{
+      font-size:12px;
+      color:rgba(233,238,252,.55);
+    }
+
+    .review-card{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(135deg, #f59e0b, rgba(10,15,28,.96));
+      padding:18px;
+      box-shadow:0 14px 30px rgba(0,0,0,.28);
+    }
+
+    .review-name{
+      font-size:24px;
+      line-height:1.1;
+      font-weight:900;
+      color:#fff;
+      letter-spacing:-.4px;
+      margin:0 0 8px;
+      word-break:break-word;
+    }
+
+    .review-sub{
+      color:rgba(255,255,255,.82);
+      font-size:14px;
+      line-height:1.6;
+      margin:0 0 12px;
+      word-break:break-word;
+    }
+
+    .review-lines{
+      display:grid;
+      gap:8px;
+    }
+
+    .review-line{
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);
+      padding:10px 12px;
+      color:#fff;
+      font-size:13px;
+      line-height:1.5;
+      word-break:break-word;
+    }
+
+    .qr-shell{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:320px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      padding:20px;
+    }
+
+    #qrCanvas{
+      max-width:min(320px, 100%);
+      height:auto;
+      border-radius:12px;
+      box-shadow:0 10px 25px rgba(0,0,0,.25);
+      background:#fff;
+    }
+
+    .qr-empty{
+      text-align:center;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    }
+
+    .output-code{
+      white-space:pre-wrap;
+      word-break:break-word;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.16);
+      padding:14px;
+      font-size:13px;
+      line-height:1.65;
+      color:#fff;
+      min-height:140px;
+    }
+
+    .status-box{
+      line-height:1.6;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .faqCard{
+      margin-top:14px;
+      padding:18px;
+    }
+
+    .faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+
+    .faqCard summary::-webkit-details-marker{ display:none; }
+
+    .faqCard p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    @media (max-width:980px){
+      .review-grid,
+      .summary-grid,
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:640px){
+      .tool-actions .cta{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="InstantQR home">
+        <span class="brand-logo">
+          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        </span>
+        <span>InstantQR</span>
+      </a>
+
+      <nav class="top-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/tools/google-maps-location-qr-code-generator.html">Maps QR</a>
+        <a href="/tools/social-media-qr-code-generator.html">Social QR</a>
+        <a href="/tools/text-qr-code-generator.html">Text QR</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/tools.html">Tools</a></li>
+        <li><span aria-current="page">Google Review QR Code Generator</span></li>
+      </ol>
+    </nav>
+
+    <section class="review-grid" aria-label="Google Review QR Code Generator">
+      <section class="tool-card">
+        <div class="pill">⭐ Reviews QR • 🏪 Local Business • ⚡ Fast</div>
+
+        <h1>Google Review QR Code Generator</h1>
+        <p class="sub">
+          Create a QR code that opens your Google review page. Great for counters, tables, flyers,
+          checkout areas, receipts, menus, and business cards.
+        </p>
+
+        <div class="form-grid">
+          <div class="field full">
+            <label for="businessName">Business name</label>
+            <input id="businessName" type="text" placeholder="Example: InstantQR Coffee" />
+          </div>
+
+          <div class="field full">
+            <label for="reviewUrl">Google review link</label>
+            <textarea id="reviewUrl" placeholder="Paste your Google review URL here..."></textarea>
+          </div>
+        </div>
+
+        <div class="helper-row">
+          <span>Use your direct Google review link for the best experience.</span>
+          <span><span id="charCount">0</span> characters</span>
+        </div>
+
+        <div class="tool-actions">
+          <button class="cta primary" id="generateBtn" type="button">Generate QR Code</button>
+          <button class="cta ghost" id="sampleBtn" type="button">Load Sample</button>
+          <button class="cta ghost" id="clearBtn" type="button">Clear</button>
+        </div>
+
+        <div class="quick-actions">
+          <button class="mini-btn" type="button" id="copyLinkBtn">Copy Review Link</button>
+          <button class="mini-btn" type="button" id="openLinkBtn">Open Review Page</button>
+        </div>
+      </section>
+
+      <aside class="result-panel" aria-label="Generated review QR output">
+        <div class="panel-top">
+          <div>
+            <h2>Review Preview + QR</h2>
+            <div class="hint" style="margin:6px 0 0;">Live preview updates as you edit.</div>
+          </div>
+          <div class="hint mono">Provider: Google</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-grid">
+            <div class="metric">
+              <div class="k">QR Ready</div>
+              <div class="v" id="readyLabel">No</div>
+              <div class="u">Generated state</div>
+            </div>
+            <div class="metric">
+              <div class="k">Provider</div>
+              <div class="v">Google</div>
+              <div class="u">Review source</div>
+            </div>
+            <div class="metric">
+              <div class="k">Use Case</div>
+              <div class="v">Review</div>
+              <div class="u">Customer feedback</div>
+            </div>
+            <div class="metric">
+              <div class="k">Output</div>
+              <div class="v">PNG</div>
+              <div class="u">Download format</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-box">
+          <div class="panel-top">
+            <div>
+              <h2 style="font-size:16px;">Business Preview</h2>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-name" id="previewName">Your business name</div>
+            <div class="review-sub" id="previewSub">Customers can scan this QR to leave a Google review.</div>
+            <div class="review-lines" id="previewLines">
+              <div class="review-line">A Google review link preview will appear here.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qr-box">
+          <div class="panel-top">
+            <div>
+              <h2 style="font-size:16px;">QR Preview</h2>
+            </div>
+            <div class="quick-actions" style="margin-top:0;">
+              <button class="mini-btn" id="downloadBtn" type="button">Download PNG</button>
+            </div>
+          </div>
+
+          <div class="qr-shell">
+            <div class="qr-empty" id="qrEmpty">
+              Enter your review link, then click <strong>Generate QR Code</strong>.
+            </div>
+            <canvas id="qrCanvas" width="320" height="320" hidden></canvas>
+          </div>
+        </div>
+
+        <div class="output-box">
+          <div class="panel-top">
+            <div>
+              <h2 style="font-size:16px;">Generated Link</h2>
+            </div>
+          </div>
+          <pre class="output-code mono" id="outputCode">No review link generated yet.</pre>
+        </div>
+
+        <div class="status-box" id="statusBox">
+          <strong>Ready.</strong><br>
+          Paste a Google review link and click <b>Generate QR Code</b>.
+        </div>
+      </aside>
+    </section>
+
+    <section class="faqCard" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>What link should I use?</summary>
+        <p>Use your direct Google review link so customers can go straight to the review page.</p>
+      </details>
+
+      <details>
+        <summary>Can I put this on printed materials?</summary>
+        <p>Yes. This works well on receipts, menus, posters, table tents, counters, and business cards.</p>
+      </details>
+
+      <details>
+        <summary>Can I download the QR code?</summary>
+        <p>Yes. You can download the generated review QR as a PNG image.</p>
+      </details>
+
+      <details>
+        <summary>Does this tool host or store my review link?</summary>
+        <p>No. This version generates the QR code in your browser flow using the link you provide.</p>
+      </details>
+    </section>
+
+    <footer class="footer" aria-label="Footer">
+      <div class="footer-box">
+        <div>© <span id="year"></span> InstantQR</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools/tools.html">Tools</a>
+          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/sitemap.xml">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/js/tools/google-review-qr-code-generator.js" defer></script>
+</body>
+</html>
