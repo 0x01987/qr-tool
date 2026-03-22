@@ -225,17 +225,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function copyShareLink() {
-    const shareUrl = window.location.href;
     try {
-      await navigator.clipboard.writeText(shareUrl);
+      await navigator.clipboard.writeText(window.location.href);
       setStatus('Tool link copied to clipboard.', 'ok');
     } catch (error) {
       setStatus('Could not copy the tool link.', 'bad');
     }
   }
 
-  function loadSample() {
+  async function loadSample() {
     modeEl.value = 'text';
+    couponUrlEl.value = 'https://example.com/weekend-sale';
     offerTitleEl.value = 'Weekend Flash Sale';
     promoCodeEl.value = 'FLASH25';
     discountTypeEl.value = 'Percent discount';
@@ -244,7 +244,6 @@ document.addEventListener('DOMContentLoaded', () => {
     endDateEl.value = '';
     descriptionEl.value = 'Save 25% on orders over $40 this weekend only.';
     termsEl.value = 'One use per customer. Cannot be combined with other offers.';
-    couponUrlEl.value = 'https://example.com/weekend-sale';
     sizeEl.value = '320';
     levelEl.value = 'M';
     marginEl.value = '2';
@@ -252,7 +251,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateModeUI();
     sizeOut.textContent = `${sizeEl.value} px`;
     levelOut.textContent = levelEl.value;
-    setStatus('Sample coupon data loaded. Click <strong>Generate</strong> to preview it.', 'ok');
+    setStatus('Sample coupon loaded. Generating preview...', 'ok');
+
+    await renderQr();
   }
 
   function clearForm() {
