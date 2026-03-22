@@ -28,22 +28,23 @@
   <link rel="icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/favicon.ico" />
 
-  <meta property="og:title" content="Coupon QR Code Generator | Create Promo Code QR Codes Free" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Coupon QR Code Generator | Create Promo Code QR Codes Free | InstantQR" />
   <meta property="og:description" content="Generate QR codes for coupons, promo codes, sales, and special offers. Free PNG and SVG downloads." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://instantqr.io/tools/coupon-qr-code-generator.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="Coupon QR Code Generator by InstantQR" />
 
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Coupon QR Code Generator | InstantQR" />
   <meta name="twitter:description" content="Create promo and coupon QR codes online for discounts, offers, and campaigns." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <link rel="stylesheet" href="/site.css" />
-  <script defer src="/site.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-  <script defer src="/tools/coupon-qr-code-generator.js"></script>
 
+  <!-- Breadcrumb schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -56,6 +57,7 @@
   }
   </script>
 
+  <!-- FAQ schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -98,205 +100,205 @@
   </script>
 
   <style>
-    .tool-hero{ padding:32px 0 12px; }
-    .breadcrumbs{ font-size:.95rem; color:var(--muted); margin-bottom:14px; }
-    .breadcrumbs a{ color:inherit; text-decoration:none; }
-    .breadcrumbs a:hover{ text-decoration:underline; }
+    .tool-hero { padding: 32px 0 12px; }
+    .breadcrumbs { font-size: .95rem; color: var(--muted); margin-bottom: 14px; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
+    .breadcrumbs a:hover { text-decoration: underline; }
 
-    .tool-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:24px;
-      align-items:start;
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 24px;
+      align-items: start;
     }
 
-    .panel{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:18px;
-      box-shadow:var(--shadow);
-      padding:18px;
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 18px;
     }
 
-    .panel h2{ margin:0 0 14px; }
+    .panel h2 { margin: 0 0 14px; }
 
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
 
-    .form-grid .full{ grid-column:1 / -1; }
+    .form-grid .full { grid-column: 1 / -1; }
 
-    label{
-      display:block;
-      font-weight:700;
-      margin:0 0 8px;
+    label {
+      display: block;
+      font-weight: 700;
+      margin: 0 0 8px;
     }
 
-    input, textarea, select{
-      width:100%;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:var(--bg2);
-      color:var(--text);
-      font:inherit;
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--bg2);
+      color: var(--text);
+      font: inherit;
     }
 
-    textarea{
-      min-height:110px;
-      resize:vertical;
+    textarea {
+      min-height: 110px;
+      resize: vertical;
     }
 
-    .hint{
-      color:var(--muted);
-      font-size:.92rem;
-      margin-top:8px;
+    .hint {
+      color: var(--muted);
+      font-size: .92rem;
+      margin-top: 8px;
     }
 
-    .actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:16px;
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
     }
 
-    .btn-secondary{
-      background:transparent;
-      color:var(--text);
-      border:1px solid var(--line);
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
     }
 
-    .preview-wrap{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      position:sticky;
-      top:18px;
+    .preview-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: sticky;
+      top: 18px;
     }
 
-    .qr-stage{
-      min-height:320px;
-      display:grid;
-      place-items:center;
-      border:1px dashed var(--line);
-      border-radius:18px;
-      background:rgba(255,255,255,.02);
-      padding:16px;
-      overflow:hidden;
+    .qr-stage {
+      min-height: 320px;
+      display: grid;
+      place-items: center;
+      border: 1px dashed var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.02);
+      padding: 16px;
+      overflow: hidden;
     }
 
     .qr-stage canvas,
-    .qr-stage svg{
-      max-width:100%;
-      height:auto;
-      display:block;
-      border-radius:12px;
-      background:#fff;
-      padding:10px;
+    .qr-stage svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      background: #fff;
+      padding: 10px;
     }
 
-    .result-card{
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px;
+    .result-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
     }
 
-    .result-card h3{
-      margin:0 0 10px;
-      font-size:1rem;
+    .result-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
     }
 
-    .payload-box{
-      white-space:pre-wrap;
-      word-break:break-word;
-      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size:.88rem;
-      color:var(--muted);
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:12px;
-      max-height:220px;
-      overflow:auto;
+    .payload-box {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: .88rem;
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      max-height: 220px;
+      overflow: auto;
     }
 
-    .pill-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:10px;
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
     }
 
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:6px 10px;
-      font-size:.86rem;
-      color:var(--muted);
-      background:rgba(255,255,255,.03);
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: .86rem;
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
     }
 
-    .faq-list{
-      display:grid;
-      gap:14px;
+    .faq-list {
+      display: grid;
+      gap: 14px;
     }
 
-    .faq-item{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
+    .faq-item {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
     }
 
-    .faq-item h3{
-      margin:0 0 8px;
-      font-size:1.02rem;
+    .faq-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
     }
 
-    .related-links{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0,1fr));
-      gap:12px;
+    .related-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
     }
 
-    .related-links a{
-      display:block;
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      text-decoration:none;
-      background:var(--panel);
-      color:var(--text);
+    .related-links a {
+      display: block;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      text-decoration: none;
+      background: var(--panel);
+      color: var(--text);
     }
 
-    .related-links a:hover{
-      transform:translateY(-1px);
-      box-shadow:var(--shadow);
+    .related-links a:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
     }
 
-    .warn{
-      border-left:3px solid var(--warn);
-      padding-left:12px;
-      color:var(--muted);
-      margin-top:10px;
+    .warn {
+      border-left: 3px solid var(--warn);
+      padding-left: 12px;
+      color: var(--muted);
+      margin-top: 10px;
     }
 
-    .section-spacer{ margin-top:28px; }
+    .section-spacer { margin-top: 28px; }
 
-    @media (max-width: 980px){
-      .tool-grid{ grid-template-columns:1fr; }
-      .preview-wrap{ position:static; }
+    @media (max-width: 980px) {
+      .tool-grid { grid-template-columns: 1fr; }
+      .preview-wrap { position: static; }
     }
 
-    @media (max-width: 720px){
-      .form-grid{ grid-template-columns:1fr; }
-      .related-links{ grid-template-columns:1fr; }
+    @media (max-width: 720px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .related-links { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -516,5 +518,14 @@
       </div>
     </section>
   </main>
+
+  <!-- Shared site logic -->
+  <script src="/assets/site.js"></script>
+
+  <!-- QR code library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+  <!-- Tool-specific JS -->
+  <script src="/assets/js/tools/coupon-qr-code-generator.js"></script>
 </body>
 </html>
