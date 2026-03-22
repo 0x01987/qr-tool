@@ -37,27 +37,27 @@ document.addEventListener('DOMContentLoaded', () => {
   let lastSvg = '';
   let lastCanvas = null;
 
-  function escapeText(v) {
-    return String(v || '').replace(/\s+/g, ' ').trim();
+  function cleanText(value) {
+    return String(value || '').replace(/\s+/g, ' ').trim();
   }
 
-  function maybeNormalizeUrl(url) {
+  function normalizeUrl(url) {
     const clean = String(url || '').trim();
     if (!clean) return '';
     if (/^https?:\/\//i.test(clean)) return clean;
-    return 'https://' + clean;
+    return `https://${clean}`;
   }
 
   function buildTextPayload() {
     const lines = [];
-    const offerTitle = escapeText(offerTitleEl.value);
-    const promoCode = escapeText(promoCodeEl.value);
-    const discountType = escapeText(discountTypeEl.value);
-    const discountValue = escapeText(discountValueEl.value);
+    const offerTitle = cleanText(offerTitleEl.value);
+    const promoCode = cleanText(promoCodeEl.value);
+    const discountType = cleanText(discountTypeEl.value);
+    const discountValue = cleanText(discountValueEl.value);
     const startDate = startDateEl.value;
     const endDate = endDateEl.value;
-    const description = escapeText(descriptionEl.value);
-    const terms = escapeText(termsEl.value);
+    const description = cleanText(descriptionEl.value);
+    const terms = cleanText(termsEl.value);
 
     if (offerTitle) lines.push(`Offer: ${offerTitle}`);
     if (promoCode) lines.push(`Code: ${promoCode}`);
@@ -73,18 +73,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getPayload() {
-    const mode = modeEl.value;
-    if (mode === 'url') {
-      const url = maybeNormalizeUrl(couponUrlEl.value);
-      if (!url) return '';
-      return url;
+    if (modeEl.value === 'url') {
+      return normalizeUrl(couponUrlEl.value);
     }
     return buildTextPayload();
   }
 
   function updateModeUI() {
-    const isUrl = modeEl.value === 'url';
-    urlWrap.style.display = isUrl ? '' : 'none';
+    urlWrap.style.display = modeEl.value === 'url' ? '' : 'none';
+  }
+
+  function resetPreview() {
+    qrStage.innerHTML = '<div class="hint">Your coupon QR code will appear here.</div>';
+    payloadPreview.textContent = 'No coupon payload generated yet.';
+    lastPayload = '';
+    lastSvg = '';
+    lastCanvas = null;
   }
 
   async function renderQr() {
@@ -94,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const payload = getPayload();
-
     if (!payload) {
       payloadPreview.textContent = 'Enter a coupon URL or coupon details to generate a QR code.';
       qrStage.innerHTML = '<div class="hint">Your coupon QR code will appear here.</div>';
@@ -116,22 +119,22 @@ document.addEventListener('DOMContentLoaded', () => {
       await QRCode.toCanvas(canvas, payload, {
         width: size,
         margin,
-        color: { dark, light },
-        errorCorrectionLevel: 'M'
+        errorCorrectionLevel: 'M',
+        color: { dark, light }
       });
 
-      const svgString = await QRCode.toString(payload, {
+      const svgMarkup = await QRCode.toString(payload, {
         type: 'svg',
         width: size,
         margin,
-        color: { dark, light },
-        errorCorrectionLevel: 'M'
+        errorCorrectionLevel: 'M',
+        color: { dark, light }
       });
 
       qrStage.appendChild(canvas);
       payloadPreview.textContent = payload;
       lastPayload = payload;
-      lastSvg = svgString;
+      lastSvg = svgMarkup;
       lastCanvas = canvas;
     } catch (error) {
       qrStage.innerHTML = '<div class="hint">Generation failed. Please check your input and try again.</div>';
@@ -143,16 +146,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function downloadBlob(blob, filename) {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    const objectUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = objectUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
 
     setTimeout(() => {
-      URL.revokeObjectURL(url);
+      URL.revokeObjectURL(objectUrl);
     }, 1200);
   }
 
@@ -208,12 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bgColorEl.value = '#ffffff';
 
     updateModeUI();
-
-    qrStage.innerHTML = '<div class="hint">Your coupon QR code will appear here.</div>';
-    payloadPreview.textContent = 'No coupon payload generated yet.';
-    lastPayload = '';
-    lastSvg = '';
-    lastCanvas = null;
+    resetPreview();
   }
 
   modeEl.addEventListener('change', updateModeUI);
@@ -239,13 +237,14 @@ document.addEventListener('DOMContentLoaded', () => {
     fgColorEl,
     bgColorEl
   ].forEach((el) => {
-    el.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && el.tagName !== 'TEXTAREA') {
-        e.preventDefault();
+    el.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && el.tagName !== 'TEXTAREA') {
+        event.preventDefault();
         renderQr();
       }
     });
   });
 
   updateModeUI();
+  resetPreview();
 });
