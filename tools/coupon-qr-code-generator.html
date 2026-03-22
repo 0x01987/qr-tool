@@ -14,7 +14,6 @@
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
-  <!-- Core Meta -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
@@ -37,15 +36,17 @@
 
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
   <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
-  <link rel="preload" as="image" href="/assets/instantqr-logo.svg" type="image/svg+xml">
+  <link rel="dns-prefetch" href="//unpkg.com">
 
   <link rel="stylesheet" href="/assets/site.css" />
 
-  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
@@ -60,7 +61,6 @@
   <meta name="twitter:description" content="Create coupon and promo QR codes online and download as PNG. Fast, free, and privacy-first." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -100,24 +100,9 @@
     "@context":"https://schema.org",
     "@type":"BreadcrumbList",
     "itemListElement":[
-      {
-        "@type":"ListItem",
-        "position":1,
-        "name":"Home",
-        "item":"https://instantqr.io/"
-      },
-      {
-        "@type":"ListItem",
-        "position":2,
-        "name":"Tools",
-        "item":"https://instantqr.io/tools/tools.html"
-      },
-      {
-        "@type":"ListItem",
-        "position":3,
-        "name":"Coupon QR Code Generator",
-        "item":"https://instantqr.io/tools/coupon-qr-code-generator.html"
-      }
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
+      {"@type":"ListItem","position":3,"name":"Coupon QR Code Generator","item":"https://instantqr.io/tools/coupon-qr-code-generator.html"}
     ]
   }
   </script>
@@ -130,319 +115,82 @@
       {
         "@type":"Question",
         "name":"What is a coupon QR code?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"A coupon QR code is a scannable QR code that contains a promo URL or coupon details like offer name, code, expiration date, and terms."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"A coupon QR code is a scannable QR code that contains a promo URL or coupon details like offer name, code, expiration date, and terms."}
       },
       {
         "@type":"Question",
         "name":"Should I use text mode or URL mode?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Use URL mode if you want people to open a landing page or checkout page. Use text mode if you want the coupon details to be stored directly in the QR code itself."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"Use URL mode if you want people to open a landing page or checkout page. Use text mode if you want the coupon details to be stored directly in the QR code itself."}
       },
       {
         "@type":"Question",
         "name":"Can I create a coupon QR code without a website?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes. In text mode, you can encode the offer title, promo code, discount amount, expiration date, and terms directly into the QR code."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. In text mode, you can encode the offer title, promo code, discount amount, expiration date, and terms directly into the QR code."}
       },
       {
         "@type":"Question",
         "name":"Does InstantQR store my coupon details?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"No. This tool is privacy-first and runs in your browser. It does not intentionally store your coupon input."
-        }
+        "acceptedAnswer":{"@type":"Answer","text":"No. This tool is privacy-first and runs in your browser. It does not intentionally store your coupon input."}
       }
     ]
   }
   </script>
 
   <style>
-    .qr-grid{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:18px;
-      margin-top:14px;
-    }
-    .qr-card,
-    .qr-panel,
-    .faqCard{
-      border-radius:var(--radius2);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      box-shadow:var(--shadow);
-    }
-    .qr-card{
-      padding:24px;
-      position:relative;
-      overflow:hidden;
-      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
-    }
-    .qr-card:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),
-        radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);
-      pointer-events:none;
-    }
-    .qr-card > *{position:relative}
-    .qr-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:16px;
-    }
-    .qr-panel{
-      padding:18px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-    .panel-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .panel-top h2{
-      margin:0;
-      font-size:18px;
-      letter-spacing:-.2px;
-    }
-    .panel-sub{
-      font-size:12px;
-      color:var(--muted);
-    }
-    .qr-preview{
-      width:100%;
-      min-height:360px;
-      border-radius:var(--radius);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:16px;
-    }
-    .qr-placeholder{
-      color:var(--muted);
-      text-align:center;
-      font-size:14px;
-      line-height:1.6;
-      max-width:30ch;
-    }
-    .qr-canvas-shell{
-      width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#ffffff;
-      border-radius:16px;
-      padding:14px;
-      overflow:hidden;
-      box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);
-    }
-    .qr-canvas-shell canvas{
-      display:block;
-      width:100%;
-      max-width:320px;
-      height:auto;
-      image-rendering:pixelated;
-    }
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:14px;
-    }
+    .qr-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:14px}
+    .qr-card,.qr-panel,.faqCard{border-radius:var(--radius2);border:1px solid var(--border);background:rgba(255,255,255,.04);box-shadow:var(--shadow)}
+    .qr-card{padding:24px;position:relative;overflow:hidden;background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96))}
+    .qr-card:before{content:"";position:absolute;inset:-2px;background:radial-gradient(700px 280px at 20% 20%, rgba(96,165,250,.20), transparent 60%),radial-gradient(520px 240px at 80% 40%, rgba(34,197,94,.14), transparent 55%);pointer-events:none}
+    .qr-card>*{position:relative}
+    .qr-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .qr-panel{padding:18px;display:flex;flex-direction:column;gap:14px}
+    .panel-top{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap}
+    .panel-top h2{margin:0;font-size:18px;letter-spacing:-.2px}
+    .panel-sub{font-size:12px;color:var(--muted)}
+    .qr-preview{width:100%;min-height:360px;border-radius:var(--radius);border:1px solid var(--border);background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;padding:16px}
+    .qr-placeholder{color:var(--muted);text-align:center;font-size:14px;line-height:1.6;max-width:30ch}
+    .qr-canvas-shell{width:100%;display:flex;align-items:center;justify-content:center;background:#ffffff;border-radius:16px;padding:14px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
+    .qr-canvas-shell canvas{display:block;width:100%;max-width:320px;height:auto;image-rendering:pixelated}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
     .form-grid .full{grid-column:1/-1}
-    .field-label{
-      display:block;
-      font-size:13px;
-      color:var(--muted);
-      margin-bottom:6px;
-      font-weight:700;
-    }
-    .field,
-    .field-select,
-    .field-textarea{
-      width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:#0a1427;
-      color:var(--text);
-      outline:none;
-      font-size:14px;
-    }
-    .field-textarea{
-      min-height:110px;
-      resize:vertical;
-      line-height:1.6;
-    }
-    .field:focus,
-    .field-select:focus,
-    .field-textarea:focus{
-      border-color:rgba(96,165,250,.5);
-      box-shadow:0 0 0 4px rgba(96,165,250,.14);
-      background:#0b172d;
-    }
-    .helper{
-      color:var(--muted);
-      font-size:12px;
-      margin-top:6px;
-      line-height:1.5;
-    }
-    .status-box{
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.14);
-      padding:14px;
-      font-size:13px;
-      line-height:1.55;
-      color:var(--muted);
-    }
-    .status-box.ok{
-      border-color:rgba(25,195,125,.35);
-      background:rgba(25,195,125,.08);
-      color:#d7fff0;
-    }
-    .status-box.bad{
-      border-color:rgba(255,107,107,.35);
-      background:rgba(255,107,107,.08);
-      color:#ffdede;
-    }
-    .statsGrid{
-      display:grid;
-      grid-template-columns:1fr 1fr 1fr;
-      gap:12px;
-    }
-    .metric{
-      border-radius:var(--radius);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:14px;
-      min-height:92px;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-    .metric .k{
-      font-size:12px;
-      color:var(--muted);
-    }
-    .metric .v{
-      font-size:22px;
-      font-weight:900;
-      letter-spacing:-.3px;
-      word-break:break-word;
-    }
-    .metric .u{
-      font-size:12px;
-      color:rgba(233,238,252,.55);
-    }
-    .miniGrid2{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:14px;
-    }
-    .miniBox{
-      border-radius:var(--radius);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:16px;
-    }
-    .miniBox h2{
-      margin:0 0 6px;
-      font-size:16px;
-    }
-    .miniBox p,
-    .miniBox li{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:14px;
-    }
-    .miniBox ul,
-    .miniBox ol{
-      margin:0;
-      padding-left:18px;
-    }
-    .faqCard{
-      margin-top:14px;
-      padding:18px;
-    }
-    .faqCard h2{
-      margin:0 0 10px;
-      font-size:22px;
-      letter-spacing:-.25px;
-    }
-    .faqCard details{
-      border-top:1px solid rgba(255,255,255,.10);
-      padding:12px 0;
-    }
-    .faqCard details:first-of-type{
-      border-top:0;
-      padding-top:0;
-    }
-    .faqCard summary{
-      cursor:pointer;
-      font-weight:800;
-      list-style:none;
-      color:#fff;
-    }
+    .field-label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:700}
+    .field,.field-select,.field-textarea{width:100%;padding:12px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:#0a1427;color:var(--text);outline:none;font-size:14px}
+    .field-textarea{min-height:110px;resize:vertical;line-height:1.6}
+    .field:focus,.field-select:focus,.field-textarea:focus{border-color:rgba(96,165,250,.5);box-shadow:0 0 0 4px rgba(96,165,250,.14);background:#0b172d}
+    .helper{color:var(--muted);font-size:12px;margin-top:6px;line-height:1.5}
+    .status-box{border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.14);padding:14px;font-size:13px;line-height:1.55;color:var(--muted)}
+    .status-box.ok{border-color:rgba(25,195,125,.35);background:rgba(25,195,125,.08);color:#d7fff0}
+    .status-box.bad{border-color:rgba(255,107,107,.35);background:rgba(255,107,107,.08);color:#ffdede}
+    .statsGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+    .metric{border-radius:var(--radius);border:1px solid var(--border);background:rgba(255,255,255,.04);padding:14px;min-height:92px;display:flex;flex-direction:column;gap:6px}
+    .metric .k{font-size:12px;color:var(--muted)}
+    .metric .v{font-size:22px;font-weight:900;letter-spacing:-.3px;word-break:break-word}
+    .metric .u{font-size:12px;color:rgba(233,238,252,.55)}
+    .miniGrid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+    .miniBox{border-radius:var(--radius);border:1px solid var(--border);background:rgba(255,255,255,.04);padding:16px}
+    .miniBox h2{margin:0 0 6px;font-size:16px}
+    .miniBox p,.miniBox li{margin:0;color:var(--muted);line-height:1.6;font-size:14px}
+    .miniBox ul,.miniBox ol{margin:0;padding-left:18px}
+    .faqCard{margin-top:14px;padding:18px}
+    .faqCard h2{margin:0 0 10px;font-size:22px;letter-spacing:-.25px}
+    .faqCard details{border-top:1px solid rgba(255,255,255,.10);padding:12px 0}
+    .faqCard details:first-of-type{border-top:0;padding-top:0}
+    .faqCard summary{cursor:pointer;font-weight:800;list-style:none;color:#fff}
     .faqCard summary::-webkit-details-marker{display:none}
-    .faqCard p{
-      margin:8px 0 0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:14px;
-    }
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-    }
-    .hidden{
-      display:none !important;
-    }
-    @media (max-width: 980px){
-      .qr-grid,
-      .miniGrid2{
-        grid-template-columns:1fr;
-      }
-    }
-    @media (max-width: 700px){
-      .form-grid,
-      .statsGrid{
-        grid-template-columns:1fr;
-      }
-      .qr-actions .cta{
-        width:100%;
-      }
-      .qr-preview{
-        min-height:300px;
-      }
-    }
+    .faqCard p{margin:8px 0 0;color:var(--muted);line-height:1.6;font-size:14px}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    .hidden{display:none!important}
+    @media (max-width:980px){.qr-grid,.miniGrid2{grid-template-columns:1fr}}
+    @media (max-width:700px){.form-grid,.statsGrid{grid-template-columns:1fr}.qr-actions .cta{width:100%}.qr-preview{min-height:300px}}
   </style>
 </head>
-
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="/" aria-label="InstantQR home">
-        <span class="brand-logo">
-          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
-        </span>
+        <span class="brand-logo"><img src="/assets/instantqr-logo.svg" alt="InstantQR logo" /></span>
         <span>InstantQR</span>
       </a>
 
@@ -491,15 +239,7 @@
 
           <div class="full" id="couponUrlWrap">
             <label class="field-label" for="couponUrl">Coupon URL</label>
-            <textarea
-              id="couponUrl"
-              class="field-textarea"
-              placeholder="https://example.com/sale or example.com/deal"
-              inputmode="url"
-              autocomplete="off"
-              spellcheck="false"
-              aria-describedby="urlHelp"
-            ></textarea>
+            <textarea id="couponUrl" class="field-textarea" placeholder="https://example.com/sale or example.com/deal" inputmode="url" autocomplete="off" spellcheck="false" aria-describedby="urlHelp"></textarea>
             <div class="helper" id="urlHelp">
               URL mode opens a landing page, product page, checkout page, or campaign page after scan.
             </div>
@@ -544,20 +284,12 @@
 
           <div class="full">
             <label class="field-label" for="description">Offer Details</label>
-            <textarea
-              id="description"
-              class="field-textarea"
-              placeholder="Example: Save 20% on all orders over $50. Valid once per customer."
-            ></textarea>
+            <textarea id="description" class="field-textarea" placeholder="Example: Save 20% on all orders over $50. Valid once per customer."></textarea>
           </div>
 
           <div class="full">
             <label class="field-label" for="terms">Terms & Conditions</label>
-            <textarea
-              id="terms"
-              class="field-textarea"
-              placeholder="Example: Cannot be combined with other offers. Valid in-store and online."
-            ></textarea>
+            <textarea id="terms" class="field-textarea" placeholder="Example: Cannot be combined with other offers. Valid in-store and online."></textarea>
           </div>
 
           <div>
@@ -737,7 +469,6 @@
   </main>
 
   <script src="/assets/site.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js" defer></script>
   <script src="/assets/js/tools/coupon-qr-code-generator.js" defer></script>
 </body>
 </html>
