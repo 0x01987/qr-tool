@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const modeEl = document.getElementById('mode');
-  const urlWrap = document.getElementById('urlWrap');
+  const couponUrlWrap = document.getElementById('couponUrlWrap');
   const couponUrlEl = document.getElementById('couponUrl');
   const offerTitleEl = document.getElementById('offerTitle');
   const promoCodeEl = document.getElementById('promoCode');
@@ -11,41 +11,55 @@ document.addEventListener('DOMContentLoaded', () => {
   const descriptionEl = document.getElementById('description');
   const termsEl = document.getElementById('terms');
   const sizeEl = document.getElementById('size');
+  const levelEl = document.getElementById('level');
   const marginEl = document.getElementById('margin');
-  const fgColorEl = document.getElementById('fgColor');
-  const bgColorEl = document.getElementById('bgColor');
-  const qrStage = document.getElementById('qrStage');
-  const payloadPreview = document.getElementById('payloadPreview');
 
   const generateBtn = document.getElementById('generateBtn');
-  const downloadPngBtn = document.getElementById('downloadPngBtn');
-  const downloadSvgBtn = document.getElementById('downloadSvgBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
   const copyPayloadBtn = document.getElementById('copyPayloadBtn');
-  const resetBtn = document.getElementById('resetBtn');
+  const copyShareBtn = document.getElementById('copyShareBtn');
+  const clearBtn = document.getElementById('clearBtn');
+
+  const qrWrap = document.getElementById('qrWrap');
+  const charsOut = document.getElementById('charsOut');
+  const sizeOut = document.getElementById('sizeOut');
+  const levelOut = document.getElementById('levelOut');
+  const status = document.getElementById('status');
 
   if (
-    !modeEl || !urlWrap || !couponUrlEl || !offerTitleEl || !promoCodeEl ||
+    !modeEl || !couponUrlWrap || !couponUrlEl || !offerTitleEl || !promoCodeEl ||
     !discountTypeEl || !discountValueEl || !startDateEl || !endDateEl ||
-    !descriptionEl || !termsEl || !sizeEl || !marginEl || !fgColorEl ||
-    !bgColorEl || !qrStage || !payloadPreview || !generateBtn ||
-    !downloadPngBtn || !downloadSvgBtn || !copyPayloadBtn || !resetBtn
+    !descriptionEl || !termsEl || !sizeEl || !levelEl || !marginEl ||
+    !generateBtn || !downloadBtn || !copyPayloadBtn || !copyShareBtn ||
+    !clearBtn || !qrWrap || !charsOut || !sizeOut || !levelOut || !status
   ) {
     return;
   }
 
   let lastPayload = '';
-  let lastSvg = '';
   let lastCanvas = null;
 
-  function cleanText(value) {
-    return String(value || '').replace(/\s+/g, ' ').trim();
+  function setStatus(message, type = '') {
+    status.className = 'status-box';
+    if (type === 'ok') status.classList.add('ok');
+    if (type === 'bad') status.classList.add('bad');
+    status.innerHTML = message;
   }
 
-  function normalizeUrl(url) {
-    const clean = String(url || '').trim();
+  function updateModeUI() {
+    const isUrl = modeEl.value === 'url';
+    couponUrlWrap.classList.toggle('hidden', !isUrl);
+  }
+
+  function normalizeUrl(value) {
+    const clean = String(value || '').trim();
     if (!clean) return '';
     if (/^https?:\/\//i.test(clean)) return clean;
     return `https://${clean}`;
+  }
+
+  function cleanText(value) {
+    return String(value || '').replace(/\s+/g, ' ').trim();
   }
 
   function buildTextPayload() {
@@ -79,122 +93,122 @@ document.addEventListener('DOMContentLoaded', () => {
     return buildTextPayload();
   }
 
-  function updateModeUI() {
-    urlWrap.style.display = modeEl.value === 'url' ? '' : 'none';
-  }
-
   function resetPreview() {
-    qrStage.innerHTML = '<div class="hint">Your coupon QR code will appear here.</div>';
-    payloadPreview.textContent = 'No coupon payload generated yet.';
+    qrWrap.innerHTML = '<div class="qr-placeholder">Your coupon QR code will appear here.</div>';
+    charsOut.textContent = '0 chars';
+    sizeOut.textContent = `${sizeEl.value || 320} px`;
+    levelOut.textContent = levelEl.value || 'M';
     lastPayload = '';
-    lastSvg = '';
     lastCanvas = null;
+    setStatus('Ready. Fill in your coupon details and click <strong>Generate</strong>.');
   }
 
   async function renderQr() {
     if (!window.QRCode) {
-      payloadPreview.textContent = 'QR library failed to load. Please refresh and try again.';
+      setStatus('QR code library failed to load. Please refresh and try again.', 'bad');
       return;
     }
 
     const payload = getPayload();
+    const size = Math.max(128, Math.min(1024, Number(sizeEl.value || 320)));
+    const level = levelEl.value || 'M';
+    const margin = Math.max(0, Number(marginEl.value || 2));
+
+    sizeEl.value = String(size);
+    sizeOut.textContent = `${size} px`;
+    levelOut.textContent = level;
+
     if (!payload) {
-      payloadPreview.textContent = 'Enter a coupon URL or coupon details to generate a QR code.';
-      qrStage.innerHTML = '<div class="hint">Your coupon QR code will appear here.</div>';
+      setStatus('Please enter a coupon URL or coupon details before generating.', 'bad');
+      qrWrap.innerHTML = '<div class="qr-placeholder">Your coupon QR code will appear here.</div>';
+      charsOut.textContent = '0 chars';
       lastPayload = '';
-      lastSvg = '';
       lastCanvas = null;
       return;
     }
 
-    const size = Number(sizeEl.value || 320);
-    const margin = Number(marginEl.value || 2);
-    const dark = fgColorEl.value || '#111827';
-    const light = bgColorEl.value || '#ffffff';
-
-    qrStage.innerHTML = '';
     const canvas = document.createElement('canvas');
 
     try {
       await QRCode.toCanvas(canvas, payload, {
         width: size,
         margin,
-        errorCorrectionLevel: 'M',
-        color: { dark, light }
+        errorCorrectionLevel: level,
+        color: {
+          dark: '#000000',
+          light: '#ffffff'
+        }
       });
 
-      const svgMarkup = await QRCode.toString(payload, {
-        type: 'svg',
-        width: size,
-        margin,
-        errorCorrectionLevel: 'M',
-        color: { dark, light }
-      });
+      qrWrap.innerHTML = '';
+      const shell = document.createElement('div');
+      shell.className = 'qr-canvas-shell';
+      shell.appendChild(canvas);
+      qrWrap.appendChild(shell);
 
-      qrStage.appendChild(canvas);
-      payloadPreview.textContent = payload;
       lastPayload = payload;
-      lastSvg = svgMarkup;
       lastCanvas = canvas;
+      charsOut.textContent = `${payload.length} chars`;
+      setStatus('Coupon QR code generated successfully. You can now download it or copy the payload.', 'ok');
     } catch (error) {
-      qrStage.innerHTML = '<div class="hint">Generation failed. Please check your input and try again.</div>';
-      payloadPreview.textContent = 'Generation failed.';
+      qrWrap.innerHTML = '<div class="qr-placeholder">Generation failed. Please review your input and try again.</div>';
       lastPayload = '';
-      lastSvg = '';
       lastCanvas = null;
+      charsOut.textContent = '0 chars';
+      setStatus('Generation failed. Please review your coupon input and try again.', 'bad');
     }
-  }
-
-  function downloadBlob(blob, filename) {
-    const objectUrl = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = objectUrl;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-
-    setTimeout(() => {
-      URL.revokeObjectURL(objectUrl);
-    }, 1200);
   }
 
   function downloadPng() {
-    if (!lastCanvas) return;
+    if (!lastCanvas) {
+      setStatus('Generate a coupon QR code before downloading.', 'bad');
+      return;
+    }
 
     lastCanvas.toBlob((blob) => {
-      if (!blob) return;
-      downloadBlob(blob, 'coupon-qr-code.png');
+      if (!blob) {
+        setStatus('PNG export failed. Please try again.', 'bad');
+        return;
+      }
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'coupon-qr-code.png';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      setStatus('PNG download started.', 'ok');
     }, 'image/png');
   }
 
-  function downloadSvg() {
-    if (!lastSvg) return;
-
-    const blob = new Blob([lastSvg], {
-      type: 'image/svg+xml;charset=utf-8'
-    });
-    downloadBlob(blob, 'coupon-qr-code.svg');
-  }
-
   async function copyPayload() {
-    if (!lastPayload) return;
+    if (!lastPayload) {
+      setStatus('Generate a coupon QR code before copying the payload.', 'bad');
+      return;
+    }
 
     try {
       await navigator.clipboard.writeText(lastPayload);
-      copyPayloadBtn.textContent = 'Copied';
-      setTimeout(() => {
-        copyPayloadBtn.textContent = 'Copy Payload';
-      }, 1400);
+      setStatus('Coupon payload copied to clipboard.', 'ok');
     } catch (error) {
-      copyPayloadBtn.textContent = 'Copy Failed';
-      setTimeout(() => {
-        copyPayloadBtn.textContent = 'Copy Payload';
-      }, 1400);
+      setStatus('Clipboard copy failed. Please try again.', 'bad');
     }
   }
 
-  function resetForm() {
+  async function copyShareLink() {
+    const shareUrl = window.location.href;
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setStatus('Tool link copied to clipboard.', 'ok');
+    } catch (error) {
+      setStatus('Could not copy the tool link.', 'bad');
+    }
+  }
+
+  function clearForm() {
     modeEl.value = 'url';
     couponUrlEl.value = '';
     offerTitleEl.value = '';
@@ -206,37 +220,21 @@ document.addEventListener('DOMContentLoaded', () => {
     descriptionEl.value = '';
     termsEl.value = '';
     sizeEl.value = '320';
+    levelEl.value = 'M';
     marginEl.value = '2';
-    fgColorEl.value = '#111827';
-    bgColorEl.value = '#ffffff';
 
     updateModeUI();
     resetPreview();
   }
 
-  modeEl.addEventListener('change', updateModeUI);
   generateBtn.addEventListener('click', renderQr);
-  downloadPngBtn.addEventListener('click', downloadPng);
-  downloadSvgBtn.addEventListener('click', downloadSvg);
+  downloadBtn.addEventListener('click', downloadPng);
   copyPayloadBtn.addEventListener('click', copyPayload);
-  resetBtn.addEventListener('click', resetForm);
+  copyShareBtn.addEventListener('click', copyShareLink);
+  clearBtn.addEventListener('click', clearForm);
+  modeEl.addEventListener('change', updateModeUI);
 
-  [
-    modeEl,
-    couponUrlEl,
-    offerTitleEl,
-    promoCodeEl,
-    discountTypeEl,
-    discountValueEl,
-    startDateEl,
-    endDateEl,
-    descriptionEl,
-    termsEl,
-    sizeEl,
-    marginEl,
-    fgColorEl,
-    bgColorEl
-  ].forEach((el) => {
+  [couponUrlEl, offerTitleEl, promoCodeEl, discountTypeEl, discountValueEl, startDateEl, endDateEl, descriptionEl, termsEl, sizeEl, levelEl, marginEl].forEach((el) => {
     el.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' && el.tagName !== 'TEXTAREA') {
         event.preventDefault();
@@ -245,6 +243,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  sizeOut.textContent = `${sizeEl.value || 320} px`;
+  levelOut.textContent = levelEl.value || 'M';
   updateModeUI();
   resetPreview();
 });
