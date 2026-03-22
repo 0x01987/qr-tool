@@ -19,8 +19,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>All Tools | QR, SEO, DNS, Security, Web3 & Utility Tools | InstantQR</title>
-  <meta name="description" content="Browse all InstantQR tools organized by category including QR code generators, social media QR, text QR, DNS and network tools, ping, traceroute, port checker, subnet calculator, converters, crypto calculators, time utilities, security tools, website scam checker, and developer tools. Fast, privacy-first, and free online." />
-  <meta name="keywords" content="all tools, qr tools, social media qr, text qr, seo tools, dns tools, network tools, security tools, website scam checker, developer tools, crypto tools, web3 tools, instantqr" />
+  <meta name="description" content="Browse all InstantQR tools organized by category including QR code generators, social media QR, text QR, Google Maps QR, Google Review QR, SMS QR, Email QR, Event QR, DNS and network tools, ping, traceroute, port checker, subnet calculator, converters, crypto calculators, time utilities, security tools, website scam checker, and developer tools. Fast, privacy-first, and free online." />
+  <meta name="keywords" content="all tools, qr tools, social media qr, text qr, google maps qr, google review qr, sms qr, email qr, event qr, seo tools, dns tools, network tools, security tools, website scam checker, developer tools, crypto tools, web3 tools, instantqr" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
   <meta name="application-name" content="InstantQR" />
@@ -37,13 +37,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:title" content="All Tools | InstantQR" />
-  <meta property="og:description" content="Browse all InstantQR tools organized by category including QR code generators, social media QR, text QR, internet speed test, DNS tools, ping, traceroute, port checker, subnet calculator, converters, crypto calculators, time utilities, security tools, website scam checker, and developer tools." />
+  <meta property="og:description" content="Browse all InstantQR tools organized by category including QR code generators, social media QR, text QR, Google Maps QR, Google Review QR, SMS QR, Email QR, Event QR, internet speed test, DNS tools, ping, traceroute, port checker, subnet calculator, converters, crypto calculators, time utilities, security tools, website scam checker, and developer tools." />
   <meta property="og:url" content="https://instantqr.io/tools/tools.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="All Tools | InstantQR" />
-  <meta name="twitter:description" content="Browse all InstantQR tools organized by category including QR code generators, social media QR, text QR, internet speed test, DNS tools, ping, traceroute, port checker, subnet calculator, converters, crypto calculators, time utilities, security tools, website scam checker, and developer tools." />
+  <meta name="twitter:description" content="Browse all InstantQR tools organized by category including QR code generators, social media QR, text QR, Google Maps QR, Google Review QR, SMS QR, Email QR, Event QR, internet speed test, DNS tools, ping, traceroute, port checker, subnet calculator, converters, crypto calculators, time utilities, security tools, website scam checker, and developer tools." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
@@ -70,7 +70,7 @@
     "@type":"ItemList",
     "name":"InstantQR Tools Directory",
     "itemListOrder":"https://schema.org/ItemListOrderAscending",
-    "numberOfItems":31,
+    "numberOfItems":36,
     "itemListElement":[
       {"@type":"ListItem","position":1,"url":"https://instantqr.io/tools/wifi-qr-code-generator.html","name":"WiFi QR Code Generator"},
       {"@type":"ListItem","position":2,"url":"https://instantqr.io/tools/url-qr-code-generator.html","name":"URL QR Code Generator"},
@@ -102,7 +102,12 @@
       {"@type":"ListItem","position":28,"url":"https://instantqr.io/tools/regex-tester.html","name":"Regex Tester"},
       {"@type":"ListItem","position":29,"url":"https://instantqr.io/tools/hash-generator.html","name":"Hash Generator"},
       {"@type":"ListItem","position":30,"url":"https://instantqr.io/tools/text-qr-code-generator.html","name":"Text QR Code Generator"},
-      {"@type":"ListItem","position":31,"url":"https://instantqr.io/tools/social-media-qr-code-generator.html","name":"Social Media QR Code Generator"}
+      {"@type":"ListItem","position":31,"url":"https://instantqr.io/tools/social-media-qr-code-generator.html","name":"Social Media QR Code Generator"},
+      {"@type":"ListItem","position":32,"url":"https://instantqr.io/tools/google-maps-location-qr-code-generator.html","name":"Google Maps Location QR Code Generator"},
+      {"@type":"ListItem","position":33,"url":"https://instantqr.io/tools/google-review-qr-code-generator.html","name":"Google Review QR Code Generator"},
+      {"@type":"ListItem","position":34,"url":"https://instantqr.io/tools/sms-qr-code-generator.html","name":"SMS QR Code Generator"},
+      {"@type":"ListItem","position":35,"url":"https://instantqr.io/tools/email-qr-code-generator.html","name":"Email QR Code Generator"},
+      {"@type":"ListItem","position":36,"url":"https://instantqr.io/tools/event-qr-code-generator.html","name":"Event QR Code Generator"}
     ]
   }
   </script>
@@ -425,7 +430,7 @@
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
       padding:14px;
-      min-height:110px;
+      min-height:118px;
       display:flex;
       gap:12px;
       align-items:flex-start;
@@ -460,6 +465,13 @@
       flex:1 1 auto;
     }
 
+    .titleRow{
+      display:flex;
+      align-items:flex-start;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
     .cardTitle{
       font-weight:800;
       letter-spacing:-.15px;
@@ -474,15 +486,26 @@
     }
 
     .badge{
-      font-size:12px;
-      color:var(--muted);
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.10);
+      font-size:11px;
+      font-weight:800;
       padding:4px 8px;
       border-radius:999px;
       white-space:nowrap;
       flex:0 0 auto;
       align-self:flex-start;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.10);
+      color:var(--muted);
+    }
+    .badge.new{
+      background:rgba(25,195,125,.12);
+      color:#b9f5d2;
+      border-color:rgba(25,195,125,.20);
+    }
+    .badge.popular{
+      background:rgba(255,193,7,.12);
+      color:#ffe08a;
+      border-color:rgba(255,193,7,.20);
     }
 
     .faq{
@@ -621,12 +644,13 @@
         <h1>All InstantQR Tools</h1>
         <p class="sub">
           InstantQR makes everyday web utilities simple and fast. Whether you need a DNS lookup, ping test, port checker,
-          traceroute, QR code generator, social media QR, text QR, password tool, random string generator, unit converter,
-          world clock, crypto calculator, website scam checker, or developer utility, this tools hub helps you find it quickly.
+          traceroute, QR code generator, social media QR, text QR, Google Maps QR, Google Review QR, SMS QR, Email QR,
+          Event QR, password tool, random string generator, unit converter, world clock, crypto calculator, website scam
+          checker, or developer utility, this tools hub helps you find it quickly.
         </p>
 
         <div class="finder">
-          <input id="search" class="input" placeholder="Search tools (QR, social, text, site legit, scam, JSON, UUID, hash, regex, speed, dns, ping...)" aria-label="Search tools" />
+          <input id="search" class="input" placeholder="Search tools (QR, social, text, maps, review, sms, email, event, site legit, scam, JSON, UUID, hash, regex, speed, dns, ping...)" aria-label="Search tools" />
           <select id="categoryFilter" class="input select" aria-label="Filter by category">
             <option value="all">All categories</option>
             <option value="qr">QR</option>
@@ -646,55 +670,119 @@
       <div class="toolSectionHeader">
         <div>
           <h2>QR Code Tools</h2>
-          <p>Create QR codes for WiFi, websites, contacts, text, social profiles, and other everyday use cases.</p>
+          <p>Create QR codes for WiFi, websites, contacts, text, social profiles, maps, reviews, SMS, email, and events.</p>
         </div>
-        <div class="countPill"><span data-count-for="qr">5</span> tools</div>
+        <div class="countPill"><span data-count-for="qr">10</span> tools</div>
       </div>
 
       <div class="grid">
-        <a class="card" href="/tools/wifi-qr-code-generator.html" data-category="qr" data-tags="wifi qr code generator wireless network ssid">
+        <a class="card" href="/tools/wifi-qr-code-generator.html" data-category="qr" data-tags="wifi qr code generator wireless network ssid guest connection">
           <div class="icon">📶</div>
           <div class="main">
-            <div class="cardTitle">WiFi QR Code Generator</div>
+            <div class="titleRow">
+              <div class="cardTitle">WiFi QR Code Generator</div>
+              <span class="badge popular">Popular</span>
+            </div>
             <div class="cardDesc">Create a WiFi QR code for fast guest connections.</div>
           </div>
-          <span class="badge">QR</span>
         </a>
 
-        <a class="card" href="/tools/url-qr-code-generator.html" data-category="qr" data-tags="url qr code generator website link">
+        <a class="card" href="/tools/url-qr-code-generator.html" data-category="qr" data-tags="url qr code generator website link web page">
           <div class="icon">🔗</div>
           <div class="main">
-            <div class="cardTitle">URL QR Code Generator</div>
+            <div class="titleRow">
+              <div class="cardTitle">URL QR Code Generator</div>
+              <span class="badge popular">Popular</span>
+            </div>
             <div class="cardDesc">Turn a website link into a clean, scannable QR code.</div>
           </div>
-          <span class="badge">QR</span>
         </a>
 
-        <a class="card" href="/tools/vcard-qr-code-generator.html" data-category="qr" data-tags="vcard qr contact business card">
+        <a class="card" href="/tools/vcard-qr-code-generator.html" data-category="qr" data-tags="vcard qr contact business card person details">
           <div class="icon">👤</div>
           <div class="main">
-            <div class="cardTitle">vCard QR Code Generator</div>
+            <div class="titleRow">
+              <div class="cardTitle">vCard QR Code Generator</div>
+            </div>
             <div class="cardDesc">Create a QR code for sharing contact information quickly.</div>
           </div>
-          <span class="badge">QR</span>
         </a>
 
         <a class="card" href="/tools/text-qr-code-generator.html" data-category="qr" data-tags="text qr code generator text qr styled qr logo qr batch qr svg export">
           <div class="icon">📝</div>
           <div class="main">
-            <div class="cardTitle">Text QR Code Generator</div>
+            <div class="titleRow">
+              <div class="cardTitle">Text QR Code Generator</div>
+              <span class="badge new">New</span>
+            </div>
             <div class="cardDesc">Turn text into a QR code with styling, logo, batch mode, and export options.</div>
           </div>
-          <span class="badge">QR</span>
         </a>
 
         <a class="card" href="/tools/social-media-qr-code-generator.html" data-category="qr" data-tags="social media qr code generator instagram qr tiktok qr youtube qr x qr linkedin qr multi link social hub">
           <div class="icon">📱</div>
           <div class="main">
-            <div class="cardTitle">Social Media QR Code Generator</div>
+            <div class="titleRow">
+              <div class="cardTitle">Social Media QR Code Generator</div>
+              <span class="badge new">New</span>
+            </div>
             <div class="cardDesc">Create a QR for a single profile or a multi-link social hub.</div>
           </div>
-          <span class="badge">QR</span>
+        </a>
+
+        <a class="card" href="/tools/google-maps-location-qr-code-generator.html" data-category="qr" data-tags="google maps location qr code generator maps qr address qr coordinates qr directions qr">
+          <div class="icon">📍</div>
+          <div class="main">
+            <div class="titleRow">
+              <div class="cardTitle">Google Maps Location QR Code Generator</div>
+              <span class="badge new">New</span>
+            </div>
+            <div class="cardDesc">Create a QR code for an address, place name, or coordinates.</div>
+          </div>
+        </a>
+
+        <a class="card" href="/tools/google-review-qr-code-generator.html" data-category="qr" data-tags="google review qr code generator reviews qr business review qr reputation local business">
+          <div class="icon">⭐</div>
+          <div class="main">
+            <div class="titleRow">
+              <div class="cardTitle">Google Review QR Code Generator</div>
+              <span class="badge new">New</span>
+            </div>
+            <div class="cardDesc">Create a QR code that opens your Google review page.</div>
+          </div>
+        </a>
+
+        <a class="card" href="/tools/sms-qr-code-generator.html" data-category="qr" data-tags="sms qr code generator text message qr code sms link qr phone number prefilled message">
+          <div class="icon">💬</div>
+          <div class="main">
+            <div class="titleRow">
+              <div class="cardTitle">SMS QR Code Generator</div>
+              <span class="badge new">New</span>
+            </div>
+            <div class="cardDesc">Generate a QR code for a phone number and prefilled text message.</div>
+          </div>
+        </a>
+
+        <a class="card" href="/tools/email-qr-code-generator.html" data-category="qr" data-tags="email qr code generator mailto qr code email link qr email address subject message">
+          <div class="icon">✉️</div>
+          <div class="main">
+            <div class="titleRow">
+              <div class="cardTitle">Email QR Code Generator</div>
+              <span class="badge new">New</span>
+            </div>
+            <div class="cardDesc">Create a QR code for an email address, subject, and prefilled message.</div>
+          </div>
+        </a>
+
+        <a class="card" href="/tools/event-qr-code-generator.html" data-category="qr" data-tags="event qr code generator calendar qr code event calendar qr ics qr code meeting invitation date time location">
+          <div class="icon">📅</div>
+          <div class="main">
+            <div class="titleRow">
+              <div class="cardTitle">Event QR Code Generator</div>
+              <span class="badge new">New</span>
+            </div>
+            <div class="cardDesc">Create a QR code for an event with date, time, location, and description.</div>
+          </div>
         </a>
       </div>
     </section>
@@ -709,76 +797,85 @@
       </div>
 
       <div class="grid">
-        <a class="card" href="/tools/internet-speed-test.html" data-category="network" data-tags="internet speed test wifi speed mbps download upload ping">
+        <a class="card" href="/tools/internet-speed-test.html" data-category="network" data-tags="internet speed test wifi speed mbps download upload ping bandwidth">
           <div class="icon">🚀</div>
           <div class="main">
-            <div class="cardTitle">Internet Speed Test</div>
+            <div class="titleRow">
+              <div class="cardTitle">Internet Speed Test</div>
+              <span class="badge popular">Popular</span>
+            </div>
             <div class="cardDesc">Check download speed, upload speed, and latency fast.</div>
           </div>
-          <span class="badge">Network</span>
         </a>
 
         <a class="card" href="/tools/dns-lookup.html" data-category="network" data-tags="dns lookup cname mx txt a aaaa ns records">
           <div class="icon">🌐</div>
           <div class="main">
-            <div class="cardTitle">DNS Lookup</div>
+            <div class="titleRow">
+              <div class="cardTitle">DNS Lookup</div>
+            </div>
             <div class="cardDesc">Lookup common DNS records quickly and cleanly.</div>
           </div>
-          <span class="badge">Network</span>
         </a>
 
         <a class="card" href="/tools/dns-propagation-checker.html" data-category="network" data-tags="dns propagation checker nameserver cache domain">
           <div class="icon">🛰️</div>
           <div class="main">
-            <div class="cardTitle">DNS Propagation Checker</div>
+            <div class="titleRow">
+              <div class="cardTitle">DNS Propagation Checker</div>
+            </div>
             <div class="cardDesc">Check whether DNS updates appear across resolvers.</div>
           </div>
-          <span class="badge">Network</span>
         </a>
 
         <a class="card" href="/tools/ip-lookup.html" data-category="network" data-tags="ip lookup address geolocation asn isp">
           <div class="icon">📍</div>
           <div class="main">
-            <div class="cardTitle">IP Lookup</div>
+            <div class="titleRow">
+              <div class="cardTitle">IP Lookup</div>
+            </div>
             <div class="cardDesc">Inspect public IP details and location signals.</div>
           </div>
-          <span class="badge">Network</span>
         </a>
 
         <a class="card" href="/tools/ping-tool.html" data-category="network" data-tags="ping tool latency response time host connectivity">
           <div class="icon">📡</div>
           <div class="main">
-            <div class="cardTitle">Ping Tool</div>
+            <div class="titleRow">
+              <div class="cardTitle">Ping Tool</div>
+            </div>
             <div class="cardDesc">Check reachability and response timing for hosts.</div>
           </div>
-          <span class="badge">Network</span>
         </a>
 
         <a class="card" href="/tools/traceroute-tool.html" data-category="network" data-tags="traceroute route hops path network route">
           <div class="icon">🧭</div>
           <div class="main">
-            <div class="cardTitle">Traceroute Tool</div>
+            <div class="titleRow">
+              <div class="cardTitle">Traceroute Tool</div>
+            </div>
             <div class="cardDesc">Trace the network path between your device and a host.</div>
           </div>
-          <span class="badge">Network</span>
         </a>
 
         <a class="card" href="/tools/port-checker.html" data-category="network" data-tags="port checker open port closed port network service">
           <div class="icon">🚪</div>
           <div class="main">
-            <div class="cardTitle">Port Checker</div>
+            <div class="titleRow">
+              <div class="cardTitle">Port Checker</div>
+            </div>
             <div class="cardDesc">Check whether a network port appears open or closed.</div>
           </div>
-          <span class="badge">Network</span>
         </a>
 
         <a class="card" href="/tools/subnet-calculator.html" data-category="network" data-tags="subnet calculator cidr netmask network ip range">
           <div class="icon">🧮</div>
           <div class="main">
-            <div class="cardTitle">Subnet Calculator</div>
+            <div class="titleRow">
+              <div class="cardTitle">Subnet Calculator</div>
+            </div>
             <div class="cardDesc">Calculate network ranges, CIDR, and subnet details.</div>
           </div>
-          <span class="badge">Network</span>
         </a>
       </div>
     </section>
@@ -793,40 +890,46 @@
       </div>
 
       <div class="grid">
-        <a class="card" href="/tools/password.html" data-category="security" data-tags="password generator secure random">
+        <a class="card" href="/tools/password.html" data-category="security" data-tags="password generator secure random strong passwords">
           <div class="icon">🔐</div>
           <div class="main">
-            <div class="cardTitle">Password Generator</div>
+            <div class="titleRow">
+              <div class="cardTitle">Password Generator</div>
+              <span class="badge popular">Popular</span>
+            </div>
             <div class="cardDesc">Generate secure passwords.</div>
           </div>
-          <span class="badge">Security</span>
         </a>
 
         <a class="card" href="/tools/password-leak-checker.html" data-category="security" data-tags="password breach security leak checker pwned">
           <div class="icon">🛡️</div>
           <div class="main">
-            <div class="cardTitle">Password Leak Checker</div>
+            <div class="titleRow">
+              <div class="cardTitle">Password Leak Checker</div>
+            </div>
             <div class="cardDesc">Check if a password appears in breaches.</div>
           </div>
-          <span class="badge">Security</span>
         </a>
 
         <a class="card" href="/tools/site-legit-checker.html" data-category="security" data-tags="site legit checker website scam checker phishing url checker suspicious website safe site trust checker fraud checker">
           <div class="icon">🕵️</div>
           <div class="main">
-            <div class="cardTitle">Site Legit Checker</div>
+            <div class="titleRow">
+              <div class="cardTitle">Site Legit Checker</div>
+              <span class="badge popular">Popular</span>
+            </div>
             <div class="cardDesc">Check whether a website looks safe, suspicious, or high risk.</div>
           </div>
-          <span class="badge">Security</span>
         </a>
 
         <a class="card" href="/tools/random-string-generator.html" data-category="security" data-tags="random string generator secure token secret api key password salt nonce security">
           <div class="icon">🎲</div>
           <div class="main">
-            <div class="cardTitle">Random String Generator</div>
+            <div class="titleRow">
+              <div class="cardTitle">Random String Generator</div>
+            </div>
             <div class="cardDesc">Generate random strings, tokens, and secrets quickly.</div>
           </div>
-          <span class="badge">Security</span>
         </a>
       </div>
     </section>
@@ -844,10 +947,11 @@
         <a class="card" href="/tools/unit-converter.html" data-category="converter" data-tags="unit converter inches feet cm kg lbs cups ounces mph celsius fahrenheit">
           <div class="icon">📏</div>
           <div class="main">
-            <div class="cardTitle">Unit Converter</div>
+            <div class="titleRow">
+              <div class="cardTitle">Unit Converter</div>
+            </div>
             <div class="cardDesc">Convert common units fast across length, weight, volume, and more.</div>
           </div>
-          <span class="badge">Converter</span>
         </a>
       </div>
     </section>
@@ -865,28 +969,31 @@
         <a class="card" href="/tools/world-clock.html" data-category="time" data-tags="world clock time zones cities countries">
           <div class="icon">🌍</div>
           <div class="main">
-            <div class="cardTitle">World Clock</div>
+            <div class="titleRow">
+              <div class="cardTitle">World Clock</div>
+            </div>
             <div class="cardDesc">Compare time across cities and regions instantly.</div>
           </div>
-          <span class="badge">Time</span>
         </a>
 
         <a class="card" href="/tools/time-zone-converter.html" data-category="time" data-tags="time zone converter timezone meeting schedule utc">
           <div class="icon">🕒</div>
           <div class="main">
-            <div class="cardTitle">Time Zone Converter</div>
+            <div class="titleRow">
+              <div class="cardTitle">Time Zone Converter</div>
+            </div>
             <div class="cardDesc">Convert time between cities and major time zones.</div>
           </div>
-          <span class="badge">Time</span>
         </a>
 
         <a class="card" href="/tools/countdown-timer.html" data-category="time" data-tags="countdown timer countdown event timer">
           <div class="icon">⏳</div>
           <div class="main">
-            <div class="cardTitle">Countdown Timer</div>
+            <div class="titleRow">
+              <div class="cardTitle">Countdown Timer</div>
+            </div>
             <div class="cardDesc">Set a simple countdown for work, study, or events.</div>
           </div>
-          <span class="badge">Time</span>
         </a>
       </div>
     </section>
@@ -904,28 +1011,31 @@
         <a class="card" href="/tools/crypto-profit-calculator.html" data-category="crypto" data-tags="crypto profit calculator roi gain loss break even">
           <div class="icon">💰</div>
           <div class="main">
-            <div class="cardTitle">Crypto Profit Calculator</div>
+            <div class="titleRow">
+              <div class="cardTitle">Crypto Profit Calculator</div>
+            </div>
             <div class="cardDesc">Estimate gains, losses, and break-even levels.</div>
           </div>
-          <span class="badge">Crypto</span>
         </a>
 
         <a class="card" href="/tools/web3-gas-fee-estimator.html" data-category="crypto" data-tags="web3 gas fee estimator ethereum base arbitrum polygon bnb">
           <div class="icon">⛽</div>
           <div class="main">
-            <div class="cardTitle">Web3 Gas Fee Estimator</div>
+            <div class="titleRow">
+              <div class="cardTitle">Web3 Gas Fee Estimator</div>
+            </div>
             <div class="cardDesc">Estimate transaction gas across major EVM chains.</div>
           </div>
-          <span class="badge">Web3</span>
         </a>
 
         <a class="card" href="/tools/multi-chain-network-fee-estimator.html" data-category="crypto" data-tags="multi chain network fee estimator bitcoin solana tron ethereum crypto fee">
           <div class="icon">🪙</div>
           <div class="main">
-            <div class="cardTitle">Multi-Chain Network Fee Estimator</div>
+            <div class="titleRow">
+              <div class="cardTitle">Multi-Chain Network Fee Estimator</div>
+            </div>
             <div class="cardDesc">Estimate common on-chain fees across multiple networks.</div>
           </div>
-          <span class="badge">Web3</span>
         </a>
       </div>
     </section>
@@ -936,71 +1046,79 @@
           <h2>Developer Tools</h2>
           <p>Format, encode, decode, generate, and test common development data quickly.</p>
         </div>
-        <div class="countPill"><span data-count-for="developer">8</span> tools</div>
+        <div class="countPill"><span data-count-for="developer">7</span> tools</div>
       </div>
 
       <div class="grid">
         <a class="card" href="/tools/json-formatter.html" data-category="developer" data-tags="json formatter validator beautify minify">
           <div class="icon">🧾</div>
           <div class="main">
-            <div class="cardTitle">JSON Formatter</div>
+            <div class="titleRow">
+              <div class="cardTitle">JSON Formatter</div>
+              <span class="badge popular">Popular</span>
+            </div>
             <div class="cardDesc">Format and validate JSON quickly.</div>
           </div>
-          <span class="badge">Developer</span>
         </a>
 
         <a class="card" href="/tools/base64-encoder.html" data-category="developer" data-tags="base64 encoder decoder encode decode">
           <div class="icon">🔡</div>
           <div class="main">
-            <div class="cardTitle">Base64 Encoder</div>
+            <div class="titleRow">
+              <div class="cardTitle">Base64 Encoder</div>
+            </div>
             <div class="cardDesc">Encode and decode Base64 strings easily.</div>
           </div>
-          <span class="badge">Developer</span>
         </a>
 
         <a class="card" href="/tools/uuid-generator.html" data-category="developer" data-tags="uuid generator guid random id">
           <div class="icon">🆔</div>
           <div class="main">
-            <div class="cardTitle">UUID Generator</div>
+            <div class="titleRow">
+              <div class="cardTitle">UUID Generator</div>
+            </div>
             <div class="cardDesc">Generate UUIDs for apps, APIs, and database work.</div>
           </div>
-          <span class="badge">Developer</span>
         </a>
 
         <a class="card" href="/tools/jwt-decoder.html" data-category="developer" data-tags="jwt decoder token auth json web token">
           <div class="icon">🎫</div>
           <div class="main">
-            <div class="cardTitle">JWT Decoder</div>
+            <div class="titleRow">
+              <div class="cardTitle">JWT Decoder</div>
+            </div>
             <div class="cardDesc">Decode JWT payloads and headers instantly.</div>
           </div>
-          <span class="badge">Developer</span>
         </a>
 
         <a class="card" href="/tools/timestamp-converter.html" data-category="developer" data-tags="timestamp converter unix epoch date time">
           <div class="icon">🗓️</div>
           <div class="main">
-            <div class="cardTitle">Timestamp Converter</div>
+            <div class="titleRow">
+              <div class="cardTitle">Timestamp Converter</div>
+            </div>
             <div class="cardDesc">Convert Unix timestamps into readable dates and back.</div>
           </div>
-          <span class="badge">Developer</span>
         </a>
 
         <a class="card" href="/tools/regex-tester.html" data-category="developer" data-tags="regex tester regular expression test pattern">
           <div class="icon">🧪</div>
           <div class="main">
-            <div class="cardTitle">Regex Tester</div>
+            <div class="titleRow">
+              <div class="cardTitle">Regex Tester</div>
+            </div>
             <div class="cardDesc">Test regular expressions quickly with live pattern checks.</div>
           </div>
-          <span class="badge">Developer</span>
         </a>
 
         <a class="card" href="/tools/hash-generator.html" data-category="developer" data-tags="hash generator md5 sha1 sha256 sha512">
           <div class="icon">#️⃣</div>
           <div class="main">
-            <div class="cardTitle">Hash Generator</div>
+            <div class="titleRow">
+              <div class="cardTitle">Hash Generator</div>
+            </div>
             <div class="cardDesc">Generate common hashes for text input fast.</div>
           </div>
-          <span class="badge">Developer</span>
         </a>
       </div>
     </section>
