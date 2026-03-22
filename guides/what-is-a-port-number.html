@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
+  </script>
+
+  <!-- Google AdSense -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-3460548141741256"
+    crossorigin="anonymous"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>What Is a Port Number? Beginner Network Guide | InstantQR</title>
+  <meta name="description" content="Understand what a port number is, why services use ports, and how port checking helps with troubleshooting and security reviews." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
+
+  <link rel="canonical" href="https://instantqr.io/guides/what-is-a-port-number.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+
+  <meta property="og:title" content="What Is a Port Number? Beginner Network Guide | InstantQR" />
+  <meta property="og:description" content="Understand what a port number is, why services use ports, and how port checking helps with troubleshooting and security reviews." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://instantqr.io/guides/what-is-a-port-number.html" />
+  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  <meta property="og:image:alt" content="What Is a Port Number? guide on InstantQR" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Is a Port Number? Beginner Network Guide | InstantQR" />
+  <meta name="twitter:description" content="Understand what a port number is, why services use ports, and how port checking helps with troubleshooting and security reviews." />
+  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
+      {"@type":"ListItem","position":2,"name":"Guides","item":"https://instantqr.io/guides/guides.html"},
+      {"@type":"ListItem","position":3,"name":"What Is a Port Number?","item":"https://instantqr.io/guides/what-is-a-port-number.html"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"What Is a Port Number?",
+    "description":"Understand what a port number is, why services use ports, and how port checking helps with troubleshooting and security reviews.",
+    "mainEntityOfPage":"https://instantqr.io/guides/what-is-a-port-number.html",
+    "author":{"@type":"Organization","name":"InstantQR"},
+    "publisher":{"@type":"Organization","name":"InstantQR"},
+    "dateModified":"2026-03-21"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[{ "@type":"Question","name":'Are ports the same as protocols?',"acceptedAnswer":{"@type":"Answer","text":'No. Protocols define communication rules, while ports identify service endpoints on a device.'}},{ "@type":"Question","name":'Does every service use a port?',"acceptedAnswer":{"@type":"Answer","text":'For TCP and UDP network services, yes. Local-only apps may not expose anything over the network.'}},{ "@type":"Question","name":'Can a firewall block a port?',"acceptedAnswer":{"@type":"Answer","text":'Yes. Firewalls commonly allow or deny traffic based on port and protocol.'}}]
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(0,0,0,.22);
+      --line:rgba(255,255,255,.10);
+      --text:#eaf2ff;
+      --muted:rgba(234,242,255,.72);
+      --brand:#1f6feb;
+      --good:#2ecc71;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --focus:0 0 0 3px rgba(31,111,235,.22);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--text);background:radial-gradient(1200px 600px at 50% -10%, #152b55 0%, var(--bg) 60%);}
+    a{color:inherit}
+    :focus-visible{outline:none;box-shadow:var(--focus);border-radius:12px}
+    .skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;}
+    .skip:focus{left:14px;top:14px;width:auto;height:auto;z-index:9999;padding:10px 12px;border-radius:12px;background:#08101d;color:#fff;border:1px solid var(--line);}
+    .wrap{max-width:900px;margin:0 auto;padding:18px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);}
+    .brand img{width:30px;height:30px}
+    .brand span{font-weight:800;letter-spacing:.2px}
+    nav a{color:var(--muted);text-decoration:none;margin-left:12px;font-size:14px}
+    nav a:hover{color:var(--text)}
+    .crumbs{margin:6px 0 14px;font-size:13px;color:var(--muted)}
+    .crumbs a{text-decoration:none;color:var(--muted)}
+    .crumbs a:hover{color:var(--text)}
+    .hero,.section,.faq,.cta{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      box-shadow:var(--shadow);
+      margin-bottom:16px;
+    }
+    .hero h1{margin:0 0 8px;font-size:30px;line-height:1.15}
+    .hero p{margin:0;color:var(--muted);line-height:1.65}
+    .tag{display:inline-block;margin-bottom:10px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(31,111,235,.15);color:var(--text);font-size:12px;font-weight:700;letter-spacing:.2px}
+    .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    .quick .item{padding:12px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.05)}
+    .quick strong{display:block;margin-bottom:4px;font-size:14px}
+    .quick span{font-size:13px;color:var(--muted);line-height:1.45}
+    .section h2,.faq h2,.cta h2{margin:0 0 10px;font-size:22px}
+    .section h3{margin:16px 0 8px;font-size:18px}
+    .section p,.section li,.faq p{color:var(--muted);line-height:1.7}
+    .section ul,.section ol{padding-left:18px}
+    .callout{padding:12px 14px;border:1px solid rgba(46,204,113,.25);background:rgba(46,204,113,.08);border-radius:14px;color:var(--text);margin:14px 0}
+    .toolbox{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{appearance:none;border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;font-weight:800;color:var(--text);background:rgba(255,255,255,.08);text-decoration:none;display:inline-block}
+    .btn.primary{background:var(--brand);border-color:rgba(31,111,235,.55)}
+    .faq details{border-top:1px solid var(--line);padding:12px 0}
+    .faq details:first-of-type{border-top:none;padding-top:0}
+    .faq summary{cursor:pointer;font-weight:700}
+    .faq .answer{padding-top:8px;color:var(--muted);line-height:1.65}
+    .related{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .related a{display:block;padding:12px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.05);text-decoration:none}
+    .related strong{display:block;margin-bottom:4px}
+    .related span{color:var(--muted);font-size:13px;line-height:1.45}
+    .footerLinks{margin-top:14px;font-size:14px;color:var(--muted)}
+    .footerLinks a{color:var(--muted);text-decoration:none}
+    .footerLinks a:hover{color:var(--text)}
+    .hr{height:1px;background:var(--line);margin:14px 0}
+    @media (max-width:800px){.quick,.related{grid-template-columns:1fr}}
+    @media (max-width:640px){
+      header{flex-direction:column;align-items:flex-start}
+      nav{display:none}
+      .hero h1{font-size:26px}
+    }
+</style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
+        <span>InstantQR</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="/tools/tools.html">Tools</a>
+        <a href="/mini-games/games.html">Games</a>
+        <a href="/guides/guides.html" aria-current="page" style="color:var(--text);font-weight:800;">Guides</a>
+        <a href="/privacy.html">Privacy</a>
+      </nav>
+    </header>
+
+    <div class="crumbs">
+      <a href="/">Home</a> / <a href="/guides/guides.html">Guides</a> / <span>What Is a Port Number?</span>
+    </div>
+
+    <main id="main">
+      <section class="hero">
+        <span class="tag">Network Guide</span>
+        <h1>What Is a Port Number?</h1>
+        <p>A port number is a logical endpoint used by networked applications. While an IP address identifies a device, the port helps identify which service or app on that device should receive the traffic.</p>
+
+        <div class="quick">
+          <div class="item"><strong>Best for</strong><span>Search intent, practical learning, and fast tool-to-guide conversion.</span></div>
+          <div class="item"><strong>Pairs with</strong><span><a href="/tools/port-checker.html" style="text-decoration:none;color:var(--text)">Port Checker</a></span></div>
+          <div class="item"><strong>Why it helps</strong><span>Teaches the concept and gives users an immediate action path.</span></div>
+        </div>
+
+        <div class="toolbox">
+          <a class="btn primary" href="/tools/port-checker.html">Try the Tool</a>
+          <a class="btn" href="/guides/guides.html">Browse More Guides</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Quick Answer</h2>
+        <p>A port number is a logical endpoint used by networked applications. While an IP address identifies a device, the port helps identify which service or app on that device should receive the traffic. The easiest approach is to use a focused tool, keep the destination accurate, test the result on multiple devices, and add a clear call to action so the user knows exactly what happens after scanning or clicking.</p>
+      </section>
+
+      <section class="section"><h2>Simple example</h2><p>If an IP address is like a building address, a port is like a suite number. The address gets you to the right building, and the port gets you to the right service inside it.</p></section><section class="section"><h2>Common port use cases</h2><ul><li>Web traffic</li><li>Email services</li><li>Remote administration</li><li>Databases and APIs</li></ul></section><section class="section"><h2>Why port checking matters</h2><p>Port checking helps verify whether a service is reachable from the network. It is useful for diagnosing connectivity problems, firewall issues, and basic deployment errors.</p></section><section class="section"><h2>Security perspective</h2><p>Open ports are not automatically a problem, but unnecessary or poorly managed exposed services can increase risk. Good network hygiene means only exposing what you actually need.</p></section>
+
+      <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details><summary>Are ports the same as protocols?</summary><div class="answer">No. Protocols define communication rules, while ports identify service endpoints on a device.</div></details><details><summary>Does every service use a port?</summary><div class="answer">For TCP and UDP network services, yes. Local-only apps may not expose anything over the network.</div></details><details><summary>Can a firewall block a port?</summary><div class="answer">Yes. Firewalls commonly allow or deny traffic based on port and protocol.</div></details>
+      </section>
+
+      <section class="cta">
+        <h2>Use the Matching InstantQR Tool</h2>
+        <p>This guide is designed to work with the matching utility so readers can learn the concept and apply it immediately without leaving your site.</p>
+        <div class="toolbox">
+          <a class="btn primary" href="/tools/port-checker.html">Port Checker</a>
+          <a class="btn" href="/tools/tools.html">All Tools</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Related Guides</h2>
+        <div class="related">
+          <a href="/guides/what-is-an-ip-address.html"><strong>What Is an IP Address?</strong><span>Understand the device side of network traffic.</span></a><a href="/guides/what-is-reverse-dns-lookup.html"><strong>What Is Reverse DNS Lookup?</strong><span>Another foundational network concept.</span></a>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+
+      <div class="footerLinks">
+        <div style="margin-bottom:8px;">
+          <a href="/tools/tools.html">All Tools</a> ·
+          <a href="/guides/guides.html">All Guides</a> ·
+          <a href="/tools/port-checker.html">Port Checker</a>
+        </div>
+        <div>
+          <a href="/about.html">About</a> ·
+          <a href="/privacy.html">Privacy</a> ·
+          <a href="/terms.html">Terms</a> ·
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
