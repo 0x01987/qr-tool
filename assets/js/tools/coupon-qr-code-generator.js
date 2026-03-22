@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const marginEl = document.getElementById('margin');
 
   const generateBtn = document.getElementById('generateBtn');
+  const loadSampleBtn = document.getElementById('loadSampleBtn');
   const downloadBtn = document.getElementById('downloadBtn');
   const copyPayloadBtn = document.getElementById('copyPayloadBtn');
   const copyShareBtn = document.getElementById('copyShareBtn');
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     !modeEl || !couponUrlWrap || !couponUrlEl || !offerTitleEl || !promoCodeEl ||
     !discountTypeEl || !discountValueEl || !startDateEl || !endDateEl ||
     !descriptionEl || !termsEl || !sizeEl || !levelEl || !marginEl ||
-    !generateBtn || !downloadBtn || !copyPayloadBtn || !copyShareBtn ||
+    !generateBtn || !loadSampleBtn || !downloadBtn || !copyPayloadBtn || !copyShareBtn ||
     !clearBtn || !qrWrap || !charsOut || !sizeOut || !levelOut || !status
   ) {
     return;
@@ -103,9 +104,34 @@ document.addEventListener('DOMContentLoaded', () => {
     setStatus('Ready. Fill in your coupon details and click <strong>Generate</strong>.');
   }
 
+  function waitForQRCodeLib(timeoutMs = 4000, intervalMs = 50) {
+    return new Promise((resolve) => {
+      if (window.QRCode) {
+        resolve(true);
+        return;
+      }
+
+      const start = Date.now();
+      const timer = setInterval(() => {
+        if (window.QRCode) {
+          clearInterval(timer);
+          resolve(true);
+          return;
+        }
+
+        if (Date.now() - start >= timeoutMs) {
+          clearInterval(timer);
+          resolve(false);
+        }
+      }, intervalMs);
+    });
+  }
+
   async function renderQr() {
-    if (!window.QRCode) {
-      setStatus('QR code library failed to load. Please refresh and try again.', 'bad');
+    const libReady = await waitForQRCodeLib();
+
+    if (!libReady) {
+      setStatus('QR code library failed to load. Please check your connection and try again.', 'bad');
       return;
     }
 
@@ -130,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.createElement('canvas');
 
     try {
-      await QRCode.toCanvas(canvas, payload, {
+      await window.QRCode.toCanvas(canvas, payload, {
         width: size,
         margin,
         errorCorrectionLevel: level,
@@ -208,6 +234,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function loadSample() {
+    modeEl.value = 'text';
+    offerTitleEl.value = 'Weekend Flash Sale';
+    promoCodeEl.value = 'FLASH25';
+    discountTypeEl.value = 'Percent discount';
+    discountValueEl.value = '25%';
+    startDateEl.value = '';
+    endDateEl.value = '';
+    descriptionEl.value = 'Save 25% on orders over $40 this weekend only.';
+    termsEl.value = 'One use per customer. Cannot be combined with other offers.';
+    couponUrlEl.value = 'https://example.com/weekend-sale';
+    sizeEl.value = '320';
+    levelEl.value = 'M';
+    marginEl.value = '2';
+
+    updateModeUI();
+    sizeOut.textContent = `${sizeEl.value} px`;
+    levelOut.textContent = levelEl.value;
+    setStatus('Sample coupon data loaded. Click <strong>Generate</strong> to preview it.', 'ok');
+  }
+
   function clearForm() {
     modeEl.value = 'url';
     couponUrlEl.value = '';
@@ -228,13 +275,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   generateBtn.addEventListener('click', renderQr);
+  loadSampleBtn.addEventListener('click', loadSample);
   downloadBtn.addEventListener('click', downloadPng);
   copyPayloadBtn.addEventListener('click', copyPayload);
   copyShareBtn.addEventListener('click', copyShareLink);
   clearBtn.addEventListener('click', clearForm);
   modeEl.addEventListener('change', updateModeUI);
 
-  [couponUrlEl, offerTitleEl, promoCodeEl, discountTypeEl, discountValueEl, startDateEl, endDateEl, descriptionEl, termsEl, sizeEl, levelEl, marginEl].forEach((el) => {
+  [
+    couponUrlEl, offerTitleEl, promoCodeEl, discountTypeEl, discountValueEl,
+    startDateEl, endDateEl, descriptionEl, termsEl, sizeEl, levelEl, marginEl
+  ].forEach((el) => {
     el.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' && el.tagName !== 'TEXTAREA') {
         event.preventDefault();
