@@ -85,6 +85,38 @@ document.addEventListener('DOMContentLoaded', function () {
     return 'https://' + clean.replace(/^\/+/, '');
   }
 
+  function base64UrlEncode(str) {
+    const utf8 = new TextEncoder().encode(str);
+    let binary = '';
+    utf8.forEach(function (b) { binary += String.fromCharCode(b); });
+    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+  }
+
+  function buildViewerUrl() {
+    const data = {
+      businessName: safeTrim(els.businessName.value),
+      menuTitle: safeTrim(els.menuTitle.value),
+      hoursText: safeTrim(els.hoursText.value),
+      menuText: normalizeMultiline(els.menuText.value),
+      notesText: normalizeMultiline(els.notesText.value),
+      themeColor: safeTrim(els.themeColor.value) || '#0f766e'
+    };
+
+    const encoded = base64UrlEncode(JSON.stringify(data));
+    return window.location.origin + '/tools/menu-viewer.html?d=' + encodeURIComponent(encoded);
+  }
+
+  function getPayload() {
+    if (currentMode === 'url') {
+      return normalizeUrl(els.menuUrl.value);
+    }
+    return buildViewerUrl();
+  }
+
+  function getPrimaryTarget() {
+    return getPayload();
+  }
+
   function setStatus(html) {
     els.statusBox.innerHTML = html;
   }
@@ -97,42 +129,10 @@ document.addEventListener('DOMContentLoaded', function () {
     els.urlModeFields.classList.toggle('hidden', currentMode !== 'url');
     els.textModeFields.classList.toggle('hidden', currentMode !== 'text');
 
-    els.resultMode.textContent = 'Mode: ' + (currentMode === 'url' ? 'URL' : 'Text');
-    els.modeLabel.textContent = currentMode === 'url' ? 'URL' : 'Text';
+    els.resultMode.textContent = 'Mode: ' + (currentMode === 'url' ? 'URL' : 'Viewer');
+    els.modeLabel.textContent = currentMode === 'url' ? 'URL' : 'Viewer';
 
     updateMetaOnly();
-  }
-
-  function buildTextPayload() {
-    const businessName = safeTrim(els.businessName.value);
-    const menuTitle = safeTrim(els.menuTitle.value);
-    const hoursText = safeTrim(els.hoursText.value);
-    const menuText = normalizeMultiline(els.menuText.value);
-    const notesText = normalizeMultiline(els.notesText.value);
-
-    const parts = [];
-
-    if (businessName) parts.push(businessName);
-    if (menuTitle) parts.push(menuTitle);
-    if (hoursText) parts.push('Hours: ' + hoursText);
-    if (menuText) parts.push(menuText);
-    if (notesText) parts.push('Notes: ' + notesText);
-
-    return parts.join('\n\n').trim();
-  }
-
-  function getPayload() {
-    if (currentMode === 'url') {
-      return normalizeUrl(els.menuUrl.value);
-    }
-    return buildTextPayload();
-  }
-
-  function getPrimaryTarget() {
-    if (currentMode === 'url') {
-      return normalizeUrl(els.menuUrl.value);
-    }
-    return buildTextPayload();
   }
 
   function updatePreviewCard() {
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (currentMode === 'url') {
       subText = normalizeUrl(els.menuUrl.value) || 'Your hosted menu link preview will appear here.';
     } else {
-      subText = normalizeMultiline(els.menuText.value) || 'Your menu text preview will appear here.';
+      subText = normalizeMultiline(els.menuText.value) || 'Your menu viewer page will be generated from this text.';
     }
 
     els.menuCard.style.setProperty('--cardBrand', themeColor);
@@ -172,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const count = payload.length;
 
     lastPrimaryTarget = getPrimaryTarget();
-
     els.payloadCount.textContent = String(count);
     els.summaryPayload.textContent = String(count);
     els.outputCode.textContent = payload || 'No menu payload generated yet.';
@@ -209,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!payload || !String(payload).trim()) {
       els.readyLabel.textContent = 'No';
       showEmptyState();
-      setStatus('<strong>Not enough data.</strong><br>Add a menu URL or menu text to generate a QR code.');
+      setStatus('<strong>Not enough data.</strong><br>Add a menu URL or menu details to generate a QR code.');
       return;
     }
 
@@ -220,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
     els.readyLabel.textContent = 'Yes';
 
     if (currentMode === 'text') {
-      setStatus('<strong>Generated.</strong><br>Your Menu Text QR contains plain text, so scanners should show text instead of opening a browser.');
+      setStatus('<strong>Generated.</strong><br>Your Menu Viewer QR is ready. Scanning it will open a clean menu page instead of a raw text payload.');
     } else {
       setStatus('<strong>Generated.</strong><br>Your Menu URL QR is ready. Scanning it will open the linked menu page.');
     }
@@ -248,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
     setMode('url');
     showEmptyState();
     updateMetaOnly();
-    setStatus('<strong>Ready.</strong><br>Add a menu URL or text details, then click <b>Generate QR Code</b>.');
+    setStatus('<strong>Ready.</strong><br>Add a menu URL or menu details, then click <b>Generate QR Code</b>.');
   }
 
   function loadSample(preset) {
