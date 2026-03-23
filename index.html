@@ -48,7 +48,6 @@
   <link rel="alternate" href="https://instantqr.io/" hreflang="en" />
   <link rel="alternate" href="https://instantqr.io/" hreflang="x-default" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
@@ -61,20 +60,17 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="InstantQR homepage featuring free online tools for QR codes, SEO, DNS, converters, crypto, Web3, security, games, and guides." />
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="InstantQR | Free Online Tools" />
   <meta name="twitter:description" content="Fast, privacy-first tools for QR, SEO, DNS, conversions, crypto, Web3, security, time, guides, mini-games, and more." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta name="twitter:image:alt" content="InstantQR homepage featuring free online tools for QR codes, SEO, DNS, converters, crypto, Web3, security, games, and guides." />
 
-  <!-- Icons -->
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
   <link rel="image_src" href="https://instantqr.io/assets/og-instantqr.png" />
 
-  <!-- Performance -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
@@ -230,12 +226,11 @@
     }
     .cta.primary:hover{ filter:brightness(1.06); }
     .cta.ghost:hover{ background: rgba(255,255,255,.10); }
-    .cta:active{ transform: translateY(0px) scale(.99); }
 
     .hero{padding:44px 0 18px;}
     .heroGrid{
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
+      grid-template-columns: 1.2fr .8fr;
       gap:14px;
       align-items:stretch;
     }
@@ -277,8 +272,8 @@
       margin:0 0 18px;
       color: var(--muted);
       font-size: 16px;
-      line-height:1.5;
-      max-width: 62ch;
+      line-height:1.6;
+      max-width: 66ch;
     }
     .bullets{
       display:flex; flex-wrap:wrap; gap:10px;
@@ -361,7 +356,23 @@
 
     .section{padding: 14px 0}
     .section h2{margin: 0 0 10px; font-size: 22px; letter-spacing:-.25px;}
-    .section p{margin: 0 0 12px; color:var(--muted); line-height:1.6}
+    .section p{margin: 0 0 12px; color:var(--muted); line-height:1.7}
+
+    .infoGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .infoCard{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding:16px;
+    }
+    .infoCard h3{margin:0 0 8px;font-size:16px}
+    .infoCard p,.infoCard li{color:var(--muted);line-height:1.65;font-size:14px}
+    .infoCard ul{margin:0;padding-left:18px}
 
     .toolControls{
       display:flex; gap:10px; align-items:center; flex-wrap:wrap;
@@ -429,15 +440,7 @@
       white-space:nowrap;
       flex:0 0 auto;
     }
-    .toolDesc{color:var(--muted); font-size:13px; line-height:1.45}
-
-    .pillLink{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      margin-top: 12px;
-      flex-wrap:wrap;
-    }
+    .toolDesc{color:var(--muted); font-size:13px; line-height:1.5}
 
     .featureRow{
       display:grid;
@@ -463,22 +466,7 @@
     }
     .feature .ico{background: rgba(25,195,125,.12)}
     .featureTitle{font-weight:900; margin:0 0 4px}
-    .featureDesc{margin:0; color:var(--muted); font-size:13px; line-height:1.45}
-
-    .why{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      margin-top: 12px;
-    }
-    .whyBox{
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      padding:16px;
-    }
-    .whyBox h3{margin:0 0 6px; font-size:16px}
-    .whyBox ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.6}
+    .featureDesc{margin:0; color:var(--muted); font-size:13px; line-height:1.5}
 
     .faq{
       border-radius: var(--radius2);
@@ -490,7 +478,7 @@
     details:first-child{border-top:0; padding-top:0}
     summary{cursor:pointer; font-weight:800; list-style:none;}
     summary::-webkit-details-marker{display:none}
-    .faq p{margin:8px 0 0; color:var(--muted); line-height:1.6}
+    .faq p{margin:8px 0 0; color:var(--muted); line-height:1.65}
 
     .footer{
       margin-top: 22px;
@@ -509,34 +497,16 @@
     @media (max-width: 980px){
       .heroGrid{grid-template-columns: 1fr}
       .grid{grid-template-columns: repeat(2, 1fr)}
-      .featureRow{grid-template-columns: 1fr}
-      .topbar .inner{
-        align-items:flex-start;
-      }
-      nav{
-        order:3;
-        width:100%;
-        justify-content:flex-start;
-      }
-      .why{grid-template-columns:1fr}
+      .featureRow,.infoGrid{grid-template-columns: 1fr}
+      .topbar .inner{align-items:flex-start;}
+      nav{order:3;width:100%;justify-content:flex-start;}
     }
     @media (max-width: 680px){
-      .topbar .inner{
-        padding:12px 16px;
-      }
-      nav{
-        gap:6px;
-      }
-      nav a{
-        font-size:13px;
-        padding:8px 9px;
-      }
-      .topbar .inner > .cta.primary{
-        width:100%;
-      }
-      .brandRow{
-        width:100%;
-      }
+      .topbar .inner{padding:12px 16px;}
+      nav{gap:6px;}
+      nav a{font-size:13px;padding:8px 9px;}
+      .topbar .inner > .cta.primary{width:100%}
+      .brandRow{width:100%}
     }
     @media (max-width: 560px){
       .wrap{padding:16px}
@@ -549,16 +519,9 @@
       h1{font-size: clamp(28px, 9vw, 38px)}
       .heroCard, .finder, .faq{padding:16px}
       .toolControls{align-items:stretch}
-      .toolControls .select,
-      .toolControls .cta{width:100%}
-      nav{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        width:100%;
-      }
-      nav a{
-        text-align:center;
-      }
+      .toolControls .select,.toolControls .cta{width:100%}
+      nav{display:grid;grid-template-columns:1fr 1fr;width:100%}
+      nav a{text-align:center}
     }
   </style>
 
@@ -598,23 +561,6 @@
       "@type":"WebSite",
       "name":"InstantQR",
       "url":"https://instantqr.io/"
-    },
-    "about":[
-      {"@type":"Thing","name":"QR code generator"},
-      {"@type":"Thing","name":"SEO tools"},
-      {"@type":"Thing","name":"DNS lookup"},
-      {"@type":"Thing","name":"Internet speed test"},
-      {"@type":"Thing","name":"Password generator"},
-      {"@type":"Thing","name":"Website scam checker"},
-      {"@type":"Thing","name":"World clock"},
-      {"@type":"Thing","name":"Web3 tools"},
-      {"@type":"Thing","name":"Advertising opportunities"}
-    ],
-    "primaryImageOfPage":{
-      "@type":"ImageObject",
-      "url":"https://instantqr.io/assets/og-instantqr.png",
-      "width":"1200",
-      "height":"630"
     }
   }
   </script>
@@ -630,45 +576,6 @@
         "name":"Home",
         "item":"https://instantqr.io/"
       }
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"ItemList",
-    "name":"Featured InstantQR Tools",
-    "itemListOrder":"https://schema.org/ItemListOrderAscending",
-    "numberOfItems":10,
-    "itemListElement":[
-      {"@type":"ListItem","position":1,"url":"https://instantqr.io/tools/internet-speed-test.html","name":"Internet Speed Test"},
-      {"@type":"ListItem","position":2,"url":"https://instantqr.io/tools/dns-lookup.html","name":"DNS Lookup"},
-      {"@type":"ListItem","position":3,"url":"https://instantqr.io/tools/ip-lookup.html","name":"IP Lookup"},
-      {"@type":"ListItem","position":4,"url":"https://instantqr.io/tools/wifi-qr-code-generator.html","name":"WiFi QR Code Generator"},
-      {"@type":"ListItem","position":5,"url":"https://instantqr.io/tools/url-qr-code-generator.html","name":"URL QR Code Generator"},
-      {"@type":"ListItem","position":6,"url":"https://instantqr.io/tools/password.html","name":"Password Generator"},
-      {"@type":"ListItem","position":7,"url":"https://instantqr.io/tools/world-clock.html","name":"World Clock"},
-      {"@type":"ListItem","position":8,"url":"https://instantqr.io/tools/seo-tools.html","name":"SEO Tools"},
-      {"@type":"ListItem","position":9,"url":"https://instantqr.io/tools/web3-tools.html","name":"Web3 Tools"},
-      {"@type":"ListItem","position":10,"url":"https://instantqr.io/tools/site-legit-checker.html","name":"Site Legit Checker"}
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {"@type":"Question","name":"Is InstantQR.io free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes. InstantQR.io provides free online tools with no signup required."}},
-      {"@type":"Question","name":"Do you store my inputs?","acceptedAnswer":{"@type":"Answer","text":"InstantQR is privacy-first. Tools are designed to run locally in your browser where possible, and we do not intentionally store sensitive inputs."}},
-      {"@type":"Question","name":"Do you have SEO tools?","acceptedAnswer":{"@type":"Answer","text":"Yes. Visit /tools/seo-tools.html for search engine optimization tools like sitemap generators, SERP preview tools, and other SEO utilities."}},
-      {"@type":"Question","name":"Do you have Web3 tools?","acceptedAnswer":{"@type":"Answer","text":"Yes. Visit /tools/web3-tools.html for wallet approval checks, token analysis, crypto profit tools, gas estimators, and multi-chain network fee tools."}},
-      {"@type":"Question","name":"Do you have a website scam checker?","acceptedAnswer":{"@type":"Answer","text":"Yes. Visit /tools/site-legit-checker.html to check whether a website URL looks safe, suspicious, or high risk using browser-based phishing signal analysis."}},
-      {"@type":"Question","name":"Do you have games too?","acceptedAnswer":{"@type":"Answer","text":"Yes. Visit /mini-games/games.html to play fast mini-games like 2048 Mini, Tap Aim, and Snake."}},
-      {"@type":"Question","name":"Do you have guides?","acceptedAnswer":{"@type":"Answer","text":"Yes. Visit /guides/guides.html for short, clear explainers like what WHOIS lookup is and how it helps with domains and security."}},
-      {"@type":"Question","name":"Can I advertise on InstantQR.io?","acceptedAnswer":{"@type":"Answer","text":"Yes. Visit /advertise.html for sponsorship and featured placement opportunities on InstantQR.io."}}
     ]
   }
   </script>
@@ -714,32 +621,33 @@
 
           <h1>Free Online Tools for QR Codes, SEO, DNS, Conversions, Crypto, Web3, Security & More</h1>
           <p class="sub">
-            Generate <strong>WiFi</strong> and <strong>URL QR codes</strong>, run <strong>DNS lookups</strong>,
-            explore <strong>SEO tools</strong>, convert units, estimate Web3 gas fees, check IP details,
-            use password tools, check whether a website looks suspicious with our <strong>Site Legit Checker</strong>,
-            and access a dedicated <strong>Web3 tools hub</strong> — built for speed, simplicity, and trust.
+            InstantQR is a free tools platform built for people who want practical results without friction. The site brings together QR code generators, SEO helpers, DNS and network tools, password and trust utilities, time and converter tools, crypto calculators, Web3 utilities, short guides, and lightweight games in one place.
+          </p>
+          <p class="sub">
+            Instead of acting like a thin directory, InstantQR is designed as a useful hub. You can create a WiFi QR code for guests, generate a Google Review QR code for a local business, run a DNS lookup after changing records, check whether a website looks suspicious, compare time zones, estimate gas fees, or use the guides to understand why a tool matters before using it.
           </p>
 
           <ul class="bullets">
-            <li>✅ 20+ tools</li>
+            <li>✅ Free tools</li>
             <li>📈 SEO tools hub</li>
             <li>🪙 Web3 tools hub</li>
             <li>🔒 Privacy-first design</li>
             <li>📱 Mobile-friendly</li>
             <li>🚀 Instant results</li>
             <li>🎮 Mini-games hub</li>
-            <li>📚 Short guides</li>
+            <li>📚 Guides + explainers</li>
           </ul>
 
           <div class="actions">
             <a class="cta primary" href="/tools/tools.html">Browse All Tools</a>
             <a class="cta ghost" href="/tools/seo-tools.html">Open SEO Tools</a>
             <a class="cta ghost" href="/tools/web3-tools.html">Open Web3 Tools</a>
-            <a class="cta ghost" href="/mini-games/games.html">Play Games</a>
             <a class="cta ghost" href="/guides/guides.html">Read Guides</a>
           </div>
 
-          <div class="miniNote">Tip: Bookmark InstantQR for quick daily utilities, SEO helpers, Web3 tools, website scam checks, quick break games, simple guides, and partnership opportunities.</div>
+          <div class="miniNote">
+            InstantQR is built for site owners, developers, freelancers, local businesses, creators, marketers, and everyday users who need quick utilities that are easy to trust and easy to use.
+          </div>
 
           <div class="quickLinks" aria-label="Popular categories and tools">
             <a href="/tools/tools.html">All Tools</a>
@@ -778,16 +686,55 @@
             No results. Try: “qr”, “speed”, “password”, “site legit”, “scam”, “ip”, “dns”, “gas”, “sitemap”.
           </div>
 
-          <div class="pillLink">
-            <a class="cta ghost" href="/tools/tools.html">Open tools.html</a>
-            <a class="cta ghost" href="/tools/seo-tools.html">Open seo-tools.html</a>
-            <a class="cta ghost" href="/tools/web3-tools.html">Open web3-tools.html</a>
-            <a class="cta ghost" href="/tools/site-legit-checker.html">Open site-legit-checker.html</a>
-            <a class="cta ghost" href="/mini-games/games.html">Open games.html</a>
-            <a class="cta ghost" href="/guides/guides.html">Open guides.html</a>
-            <a class="cta ghost" href="/advertise.html">Open advertise.html</a>
+          <div class="quickLinks">
+            <a href="/tools/tools.html">Open tools.html</a>
+            <a href="/tools/seo-tools.html">Open seo-tools.html</a>
+            <a href="/tools/web3-tools.html">Open web3-tools.html</a>
+            <a href="/guides/guides.html">Open guides.html</a>
           </div>
         </aside>
+      </div>
+    </section>
+
+    <section class="section" aria-label="How to use InstantQR">
+      <h2>How to Use InstantQR</h2>
+      <p>
+        The easiest way to use InstantQR is to start with the task you actually need to finish. If you need a scannable code, begin with the QR tools. If you are troubleshooting a domain, site, or server, use the network tools. If you are working on site visibility, use the SEO hub. If you want to check whether a site looks suspicious, use the security tools. If you are comparing fees or crypto workflows, use the Web3 tools.
+      </p>
+      <div class="infoGrid">
+        <div class="infoCard">
+          <h3>For businesses</h3>
+          <p>Use QR tools for menus, reviews, maps, events, WiFi access, and customer contact. This is especially useful for restaurants, local services, retail counters, and printed marketing materials.</p>
+        </div>
+        <div class="infoCard">
+          <h3>For site owners and developers</h3>
+          <p>Use DNS lookup, speed checks, IP tools, sitemap tools, and SEO utilities to troubleshoot, organize, and improve websites without extra complexity.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="What makes this site useful">
+      <h2>What Makes InstantQR Useful</h2>
+      <p>
+        Many utility sites are just lists of tools with little explanation. InstantQR is being built as more than a tool dump. The goal is to combine practical utilities with clear descriptions, category hubs, and guides so users can understand what a tool does, when to use it, and how to get better results from it.
+      </p>
+      <div class="infoGrid">
+        <div class="infoCard">
+          <h3>Useful beyond the button</h3>
+          <ul>
+            <li>Guides explain core concepts and best practices</li>
+            <li>Hub pages group related tools by purpose</li>
+            <li>Popular tools are surfaced for faster discovery</li>
+          </ul>
+        </div>
+        <div class="infoCard">
+          <h3>Built for repeat use</h3>
+          <ul>
+            <li>Fast access without signup friction</li>
+            <li>Simple layouts that work on desktop and mobile</li>
+            <li>Useful for both one-off tasks and daily workflows</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -825,7 +772,7 @@
     </section>
 
     <section class="section" aria-label="Web3 Tools">
-      <h2>New: Web3 Tools Hub</h2>
+      <h2>Web3 Tools Hub</h2>
       <p>Explore wallet approval checks, token contract analysis, gas estimators, network fee tools, and crypto profit calculators in one clean hub.</p>
 
       <div class="featureRow">
@@ -892,7 +839,7 @@
 
     <section class="section" aria-label="Guides">
       <h2>Guides</h2>
-      <p>Fast explainers for everyday internet, security, and domain concepts — written for normal humans.</p>
+      <p>Fast explainers for everyday internet, security, SEO, and domain concepts — written to be clear, practical, and useful.</p>
 
       <div class="featureRow">
         <a class="feature" href="/guides/guides.html">
@@ -904,7 +851,7 @@
           </div>
           <div>
             <div class="featureTitle">Guides Hub</div>
-            <p class="featureDesc">Short, clean guides with FAQs and quick tips. Built for SEO + clarity.</p>
+            <p class="featureDesc">Short, useful guides that support the tools and help users make better decisions.</p>
           </div>
         </a>
 
@@ -925,7 +872,7 @@
 
     <section class="section" aria-label="Games">
       <h2>Games Hub</h2>
-      <p>Need a quick break? Play fast mini-games — built to load instantly and run smoothly on mobile.</p>
+      <p>Need a quick break? Play fast mini-games built to load quickly and work smoothly on mobile devices.</p>
 
       <div class="featureRow">
         <a class="feature" href="/mini-games/games.html">
@@ -938,7 +885,7 @@
           </div>
           <div>
             <div class="featureTitle">Games Hub</div>
-            <p class="featureDesc">2048 Mini • Tap Aim • Snake — with search + categories.</p>
+            <p class="featureDesc">Quick browser games like 2048 Mini, Tap Aim, and Snake.</p>
           </div>
         </a>
 
@@ -950,7 +897,7 @@
           </div>
           <div>
             <div class="featureTitle">Play 2048 Mini</div>
-            <p class="featureDesc">Quick puzzle. Swipe/arrow keys. Great on mobile.</p>
+            <p class="featureDesc">A lightweight puzzle game for quick breaks.</p>
           </div>
         </a>
       </div>
@@ -958,7 +905,7 @@
 
     <section id="tools" class="section" aria-label="Tools">
       <h2>Popular Tools</h2>
-      <p>Clean, fast, and made for real-world use. Use search + filter to find what you need.</p>
+      <p>Clean, fast, and made for real-world use. Use search and category filtering to find what you need faster.</p>
 
       <div class="toolControls">
         <label for="cat" class="sr-only">Filter by category</label>
@@ -990,7 +937,7 @@
               <div class="toolName">Internet Speed Test</div>
               <div class="badge">Network</div>
             </div>
-            <div class="toolDesc">Check download speed (Mbps) and ping (ms) instantly with a clean UI.</div>
+            <div class="toolDesc">Check download speed and latency quickly with a simple interface.</div>
           </div>
         </a>
 
@@ -1007,7 +954,7 @@
               <div class="toolName">DNS Lookup</div>
               <div class="badge">Network</div>
             </div>
-            <div class="toolDesc">Lookup DNS records (A/AAAA/CNAME/MX/TXT/NS) instantly with clean output.</div>
+            <div class="toolDesc">Lookup common DNS records for domains during troubleshooting and setup.</div>
           </div>
         </a>
 
@@ -1025,7 +972,7 @@
               <div class="toolName">IP Lookup</div>
               <div class="badge">Network</div>
             </div>
-            <div class="toolDesc">Check public IP details fast for troubleshooting and security checks.</div>
+            <div class="toolDesc">Inspect IP-related details for troubleshooting and visibility checks.</div>
           </div>
         </a>
 
@@ -1043,7 +990,7 @@
               <div class="toolName">WiFi QR Code Generator</div>
               <div class="badge">QR Code</div>
             </div>
-            <div class="toolDesc">Create a scannable WiFi QR code so guests can connect instantly — no typing.</div>
+            <div class="toolDesc">Create a scannable WiFi QR code so guests can connect instantly.</div>
           </div>
         </a>
 
@@ -1059,7 +1006,7 @@
               <div class="toolName">URL QR Code Generator</div>
               <div class="badge">QR Code</div>
             </div>
-            <div class="toolDesc">Turn any link into a QR code for menus, flyers, business cards, and signage.</div>
+            <div class="toolDesc">Turn any link into a QR code for signs, flyers, menus, and cards.</div>
           </div>
         </a>
 
@@ -1076,7 +1023,7 @@
               <div class="toolName">Password Generator</div>
               <div class="badge">Security</div>
             </div>
-            <div class="toolDesc">Generate strong, random passwords for accounts, apps, and security best practices.</div>
+            <div class="toolDesc">Generate strong random passwords for better account security.</div>
           </div>
         </a>
 
@@ -1092,7 +1039,7 @@
               <div class="toolName">Site Legit Checker</div>
               <div class="badge">Security</div>
             </div>
-            <div class="toolDesc">Check whether a website looks safe, suspicious, or high risk using browser-based phishing and scam signal analysis.</div>
+            <div class="toolDesc">Check whether a website looks safe, suspicious, or high risk.</div>
           </div>
         </a>
 
@@ -1108,7 +1055,7 @@
               <div class="toolName">World Clock</div>
               <div class="badge">Time</div>
             </div>
-            <div class="toolDesc">Compare times across major cities and time zones — perfect for scheduling.</div>
+            <div class="toolDesc">Compare times across major cities and time zones quickly.</div>
           </div>
         </a>
 
@@ -1124,7 +1071,7 @@
               <div class="toolName">SEO Tools</div>
               <div class="badge">SEO</div>
             </div>
-            <div class="toolDesc">Explore sitemap generators, SERP preview tools, and SEO utilities to improve visibility and indexing.</div>
+            <div class="toolDesc">Explore sitemap tools, preview tools, and SEO helpers to improve visibility.</div>
           </div>
         </a>
 
@@ -1140,7 +1087,7 @@
               <div class="toolName">Web3 Tools Hub</div>
               <div class="badge">Web3</div>
             </div>
-            <div class="toolDesc">Access wallet approvals, token analysis, crypto profit calculators, gas estimators, and network fee tools.</div>
+            <div class="toolDesc">Access wallet approval checks, token tools, gas estimators, and crypto utilities.</div>
           </div>
         </a>
       </div>
@@ -1149,37 +1096,7 @@
         <a class="cta ghost" href="/tools/tools.html">See every tool</a>
         <a class="cta ghost" href="/tools/seo-tools.html">See SEO tools</a>
         <a class="cta ghost" href="/tools/web3-tools.html">See Web3 tools</a>
-        <a class="cta ghost" href="/tools/site-legit-checker.html">Open Site Legit Checker</a>
-        <a class="cta ghost" href="/mini-games/games.html">Play games</a>
         <a class="cta ghost" href="/guides/guides.html">Read guides</a>
-        <a class="cta ghost" href="/contact.html">Contact</a>
-      </div>
-    </section>
-
-    <section id="why" class="section" aria-label="Why InstantQR">
-      <h2>Why InstantQR?</h2>
-      <p>
-        InstantQR is built for people who want quick results without clutter.
-        Our focus is simple: fast tools, clean UX, and a privacy-first approach.
-      </p>
-
-      <div class="why">
-        <div class="whyBox">
-          <h3>Built for speed</h3>
-          <ul>
-            <li>Lightweight pages that load quickly</li>
-            <li>Simple UI that gets you to the result</li>
-            <li>Works smoothly on mobile</li>
-          </ul>
-        </div>
-        <div class="whyBox">
-          <h3>Privacy-first</h3>
-          <ul>
-            <li>Designed to run locally in your browser where possible</li>
-            <li>No account needed</li>
-            <li>Clear policy pages for transparency</li>
-          </ul>
-        </div>
       </div>
     </section>
 
@@ -1188,45 +1105,37 @@
       <div class="faq">
         <details open>
           <summary>Is InstantQR.io free to use?</summary>
-          <p>Yes — all tools on InstantQR.io are free and available without creating an account.</p>
+          <p>Yes. InstantQR.io provides free online tools with no signup required.</p>
         </details>
 
         <details>
           <summary>Do you store my QR codes, passwords, or input data?</summary>
-          <p>
-            InstantQR is privacy-first. Our tools are designed to run locally in your browser where possible,
-            and we do not intentionally store generated QR codes or sensitive inputs.
-          </p>
+          <p>InstantQR is privacy-first. Tools are designed to run locally in your browser where possible, and we do not intentionally store sensitive inputs.</p>
         </details>
 
         <details>
           <summary>Do you have SEO tools?</summary>
-          <p>Yes — visit <a href="/tools/seo-tools.html"><u>/tools/seo-tools.html</u></a> for sitemap generators, SERP preview tools, and other SEO utilities.</p>
+          <p>Yes. Visit <a href="/tools/seo-tools.html"><u>/tools/seo-tools.html</u></a> for sitemap generators, SERP preview tools, and other SEO utilities.</p>
         </details>
 
         <details>
           <summary>Do you have Web3 tools?</summary>
-          <p>Yes — visit <a href="/tools/web3-tools.html"><u>/tools/web3-tools.html</u></a> for wallet approval checks, token contract analysis, crypto profit tools, gas estimators, and multi-chain network fee tools.</p>
+          <p>Yes. Visit <a href="/tools/web3-tools.html"><u>/tools/web3-tools.html</u></a> for wallet approval checks, token analysis, crypto profit tools, gas estimators, and multi-chain network fee tools.</p>
         </details>
 
         <details>
           <summary>Do you have a website scam checker?</summary>
-          <p>Yes — visit <a href="/tools/site-legit-checker.html"><u>/tools/site-legit-checker.html</u></a> to check whether a website URL looks safe, suspicious, or high risk using browser-based phishing signal analysis.</p>
+          <p>Yes. Visit <a href="/tools/site-legit-checker.html"><u>/tools/site-legit-checker.html</u></a> to check whether a website URL looks safe, suspicious, or high risk.</p>
         </details>
 
         <details>
           <summary>Where can I read guides?</summary>
-          <p>Visit <a href="/guides/guides.html"><u>/guides/guides.html</u></a> for quick explainers like WHOIS lookup, DNS basics, and security topics.</p>
+          <p>Visit <a href="/guides/guides.html"><u>/guides/guides.html</u></a> for practical explainers that support the tools.</p>
         </details>
 
         <details>
           <summary>Do you have games?</summary>
-          <p>Yes — visit <a href="/mini-games/games.html"><u>/mini-games/games.html</u></a> for mini-games like 2048 Mini, Tap Aim, and Snake.</p>
-        </details>
-
-        <details>
-          <summary>Can I advertise on InstantQR.io?</summary>
-          <p>Yes — visit <a href="/advertise.html"><u>/advertise.html</u></a> to learn about featured placements and sponsorship opportunities.</p>
+          <p>Yes. Visit <a href="/mini-games/games.html"><u>/mini-games/games.html</u></a> for lightweight mini-games like 2048 Mini, Tap Aim, and Snake.</p>
         </details>
       </div>
     </section>
@@ -1240,7 +1149,7 @@
           </div>
 
           <div class="small">
-            InstantQR.io provides free privacy-first web tools, SEO utilities, Web3 utilities, website scam checks, mini-games, and quick guides.
+            InstantQR.io provides free privacy-first web tools, SEO utilities, Web3 utilities, website trust checks, mini-games, and practical guides.
           </div>
 
           <div class="small" style="margin-top:8px;">
@@ -1327,18 +1236,5 @@
 
     applyFilters();
   </script>
-
-  <noscript>
-    <div style="max-width:1120px;margin:16px auto;padding:14px 16px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(0,0,0,.25);color:rgba(233,238,252,.85);">
-      JavaScript is disabled. Some features may not work, but you can still browse:
-      <a href="/tools/tools.html" style="text-decoration:underline;">tools</a> ·
-      <a href="/tools/seo-tools.html" style="text-decoration:underline;">seo tools</a> ·
-      <a href="/tools/web3-tools.html" style="text-decoration:underline;">web3 tools</a> ·
-      <a href="/tools/site-legit-checker.html" style="text-decoration:underline;">site legit checker</a> ·
-      <a href="/mini-games/games.html" style="text-decoration:underline;">games</a> ·
-      <a href="/guides/guides.html" style="text-decoration:underline;">guides</a> ·
-      <a href="/advertise.html" style="text-decoration:underline;">advertise</a>.
-    </div>
-  </noscript>
 </body>
 </html>
