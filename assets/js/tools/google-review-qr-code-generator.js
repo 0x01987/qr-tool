@@ -24,7 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
     year: document.getElementById('year')
   };
 
-  if (!els.businessName || !els.reviewUrl || !els.generateBtn || !els.qrCanvas) return;
+  if (
+    !els.businessName ||
+    !els.reviewUrl ||
+    !els.generateBtn ||
+    !els.qrCanvas ||
+    !els.qrEmpty ||
+    !els.statusBox
+  ) {
+    return;
+  }
 
   if (els.year) {
     els.year.textContent = String(new Date().getFullYear());
@@ -32,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let lastReviewUrl = '';
   let autoTimer = null;
+  let qriousInstance = null;
 
   function safeTrim(value) {
     return String(value || '').trim();
@@ -47,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setStatus(html) {
-    if (els.statusBox) els.statusBox.innerHTML = html;
+    els.statusBox.innerHTML = html;
   }
 
   function normalizeUrl(value) {
@@ -73,8 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const businessName = safeTrim(els.businessName.value) || 'Your business name';
     const url = normalizeUrl(els.reviewUrl.value);
 
-    if (els.charCount) els.charCount.textContent = String(url.length);
-    if (els.previewName) els.previewName.textContent = businessName;
+    if (els.charCount) {
+      els.charCount.textContent = String(url.length);
+    }
+
+    if (els.previewName) {
+      els.previewName.textContent = businessName;
+    }
+
     if (els.previewSub) {
       els.previewSub.textContent = 'Customers can scan this QR to leave a Google review.';
     }
@@ -84,12 +100,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const note = looksLikeGoogleReviewUrl(url)
           ? 'Google review link detected.'
           : 'This does not look like a standard Google review URL, but it can still be encoded.';
+
         els.previewLines.innerHTML = `
           <div class="review-line">${escapeHtml(url)}</div>
           <div class="review-line">${escapeHtml(note)}</div>
         `;
       } else {
-        els.previewLines.innerHTML = '<div class="review-line">A Google review link preview will appear here.</div>';
+        els.previewLines.innerHTML =
+          '<div class="review-line">A Google review link preview will appear here.</div>';
       }
     }
 
@@ -100,12 +118,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showQr() {
     els.qrCanvas.hidden = false;
-    if (els.qrEmpty) els.qrEmpty.hidden = true;
+    els.qrEmpty.hidden = true;
   }
 
   function hideQr() {
     els.qrCanvas.hidden = true;
-    if (els.qrEmpty) els.qrEmpty.hidden = false;
+    els.qrEmpty.hidden = false;
   }
 
   function clearCanvas() {
@@ -113,6 +131,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ctx) {
       ctx.clearRect(0, 0, els.qrCanvas.width, els.qrCanvas.height);
     }
+  }
+
+  function resetCanvasSize(size = 320) {
+    els.qrCanvas.width = size;
+    els.qrCanvas.height = size;
+    els.qrCanvas.style.width = '100%';
+    els.qrCanvas.style.maxWidth = `${size}px`;
+    els.qrCanvas.style.height = 'auto';
+    els.qrCanvas.style.display = 'block';
+    els.qrCanvas.style.background = '#ffffff';
   }
 
   function loadScript(src) {
@@ -124,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         existing.addEventListener('load', () => resolve(), { once: true });
-        existing.addEventListener('error', () => reject(new Error(`Failed: ${src}`)), { once: true });
+        existing.addEventListener('error', () => reject(new Error(`Failed to load ${src}`)), { once: true });
         return;
       }
 
@@ -135,45 +163,41 @@ document.addEventListener('DOMContentLoaded', () => {
         s.dataset.loaded = 'true';
         resolve();
       }, { once: true });
-      s.addEventListener('error', () => reject(new Error(`Failed: ${src}`)), { once: true });
+      s.addEventListener('error', () => reject(new Error(`Failed to load ${src}`)), { once: true });
       document.head.appendChild(s);
     });
   }
 
-  async function ensureQrLib() {
+  async function ensureQrEngine() {
     if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
-      return true;
+      return 'qrcode';
     }
 
-    const sources = [
-      'https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js',
-      'https://unpkg.com/qrcode@1.5.4/build/qrcode.min.js'
+    if (window.QRious) {
+      return 'qrious';
+    }
+
+    const qriousSources = [
+      'https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js'
     ];
 
-    for (const src of sources) {
+    for (const src of qriousSources) {
       try {
         await loadScript(src);
-        if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
-          return true;
+        if (window.QRious) {
+          return 'qrious';
         }
       } catch (_) {
         // try next source
       }
     }
 
-    return false;
+    throw new Error('No QR engine available');
   }
 
-  async function renderQr(text) {
-    const ok = await ensureQrLib();
-    if (!ok) {
-      throw new Error('QR library unavailable');
-    }
-
-    // Ensure visible size is consistent
-    els.qrCanvas.width = 320;
-    els.qrCanvas.height = 320;
-
+  async function renderWithQRCodeLib(text) {
+    resetCanvasSize(320);
     await window.QRCode.toCanvas(els.qrCanvas, text, {
       width: 320,
       margin: 2,
@@ -183,6 +207,45 @@ document.addEventListener('DOMContentLoaded', () => {
         light: '#ffffff'
       }
     });
+  }
+
+  function renderWithQRious(text) {
+    resetCanvasSize(320);
+
+    if (!qriousInstance) {
+      qriousInstance = new window.QRious({
+        element: els.qrCanvas,
+        value: text,
+        size: 320,
+        level: 'M',
+        padding: 10,
+        foreground: '#000000',
+        background: '#ffffff'
+      });
+    } else {
+      qriousInstance.value = text;
+      qriousInstance.size = 320;
+      qriousInstance.level = 'M';
+      qriousInstance.padding = 10;
+      qriousInstance.foreground = '#000000';
+      qriousInstance.background = '#ffffff';
+    }
+  }
+
+  async function renderQr(text) {
+    const engine = await ensureQrEngine();
+
+    if (engine === 'qrcode') {
+      await renderWithQRCodeLib(text);
+      return;
+    }
+
+    if (engine === 'qrious') {
+      renderWithQRious(text);
+      return;
+    }
+
+    throw new Error('Unable to render QR');
   }
 
   async function generate() {
@@ -199,12 +262,15 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    setStatus('<strong>Generating...</strong><br>Rendering your review QR code.');
+    setStatus('<strong>Generating...</strong><br>Rendering your review QR code...');
 
     try {
       await renderQr(url);
       showQr();
-      if (els.readyLabel) els.readyLabel.textContent = 'Yes';
+
+      if (els.readyLabel) {
+        els.readyLabel.textContent = 'Yes';
+      }
 
       const msg = looksLikeGoogleReviewUrl(url)
         ? 'Your Google review QR code is ready.'
@@ -215,8 +281,12 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('QR generation failed:', err);
       clearCanvas();
       hideQr();
-      if (els.readyLabel) els.readyLabel.textContent = 'No';
-      setStatus('<strong>Generation failed.</strong><br>The QR code could not be rendered. Check that the QR library is loading and try again.');
+
+      if (els.readyLabel) {
+        els.readyLabel.textContent = 'No';
+      }
+
+      setStatus('<strong>Generation failed.</strong><br>The QR code could not be rendered. The QR library may be blocked or unavailable.');
     }
   }
 
@@ -299,7 +369,10 @@ document.addEventListener('DOMContentLoaded', () => {
     clearCanvas();
     hideQr();
 
-    if (els.readyLabel) els.readyLabel.textContent = 'No';
+    if (els.readyLabel) {
+      els.readyLabel.textContent = 'No';
+    }
+
     updateMeta();
     setStatus('<strong>Cleared.</strong><br>Your business name and review link were reset.');
   }
@@ -362,14 +435,12 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('change', scheduleAutoUpdate);
   });
 
-  if (els.reviewUrl) {
-    els.reviewUrl.addEventListener('keydown', async (e) => {
-      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
-        e.preventDefault();
-        await generate();
-      }
-    });
-  }
+  els.reviewUrl.addEventListener('keydown', async (e) => {
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      await generate();
+    }
+  });
 
   updateMeta();
   hideQr();
