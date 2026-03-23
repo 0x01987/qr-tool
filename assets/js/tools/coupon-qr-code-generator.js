@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
     couponText: $('couponText'),
     terms: $('terms'),
     qrSize: $('qrSize'),
-    errorLevel: $('errorLevel'),
 
     generateBtn: $('generateBtn'),
     sampleBtn: $('sampleBtn'),
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
     readyLabel: $('readyLabel'),
     modeLabel: $('modeLabel'),
 
-    qrCanvas: $('qrCanvas'),
     qrImage: $('qrImage'),
     qrEmpty: $('qrEmpty'),
     year: $('year'),
@@ -48,12 +46,12 @@ document.addEventListener('DOMContentLoaded', function () {
     previewMeta: $('previewMeta')
   };
 
-  if (!els.generateBtn || !els.sampleBtn || !els.clearBtn) return;
+  if (!els.generateBtn) return;
 
   let currentMode = 'url';
   let lastPayload = '';
   let lastPrimaryTarget = '';
-  let lastRenderType = '';
+  let lastQrUrl = '';
 
   if (els.year) {
     els.year.textContent = String(new Date().getFullYear());
@@ -61,6 +59,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function safeTrim(value) {
     return String(value || '').trim();
+  }
+
+  function normalizeMultiline(value) {
+    return String(value || '')
+      .replace(/\r\n/g, '\n')
+      .replace(/\r/g, '\n')
+      .split('\n')
+      .map(function (line) { return line.trim(); })
+      .filter(Boolean)
+      .join('\n');
   }
 
   function escapeHtml(str) {
@@ -79,10 +87,42 @@ document.addEventListener('DOMContentLoaded', function () {
     return 'https://' + clean.replace(/^\/+/, '');
   }
 
-  function setStatus(html) {
-    if (els.statusBox) {
-      els.statusBox.innerHTML = html;
+  function base64UrlEncode(str) {
+    const utf8 = new TextEncoder().encode(str);
+    let binary = '';
+    utf8.forEach(function (b) { binary += String.fromCharCode(b); });
+    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+  }
+
+  function buildViewerUrl() {
+    const data = {
+      offerTitle: safeTrim(els.offerTitle.value),
+      themeColor: safeTrim(els.themeColor.value) || '#2563eb',
+      promoCode: safeTrim(els.promoCode.value),
+      discountValue: safeTrim(els.discountValue.value),
+      discountType: safeTrim(els.discountType.value),
+      expiresOn: safeTrim(els.expiresOn.value),
+      couponText: normalizeMultiline(els.couponText.value),
+      terms: normalizeMultiline(els.terms.value)
+    };
+
+    const encoded = base64UrlEncode(JSON.stringify(data));
+    return window.location.origin + '/tools/coupon-viewer.html?d=' + encodeURIComponent(encoded);
+  }
+
+  function getPayload() {
+    if (currentMode === 'url') {
+      return normalizeUrl(els.couponUrl.value);
     }
+    return buildViewerUrl();
+  }
+
+  function getPrimaryTarget() {
+    return getPayload();
+  }
+
+  function setStatus(html) {
+    els.statusBox.innerHTML = html;
   }
 
   function setMode(mode) {
@@ -93,76 +133,38 @@ document.addEventListener('DOMContentLoaded', function () {
     els.urlModeFields.classList.toggle('hidden', currentMode !== 'url');
     els.textModeFields.classList.toggle('hidden', currentMode !== 'text');
 
-    if (els.resultMode) {
-      els.resultMode.textContent = 'Mode: ' + (currentMode === 'url' ? 'URL' : 'Text');
-    }
-    if (els.modeLabel) {
-      els.modeLabel.textContent = currentMode === 'url' ? 'URL' : 'Text';
-    }
+    els.resultMode.textContent = 'Mode: ' + (currentMode === 'url' ? 'URL' : 'Viewer');
+    els.modeLabel.textContent = currentMode === 'url' ? 'URL' : 'Viewer';
 
     updateMetaOnly();
   }
 
-  function buildTextPayload() {
-    const lines = [];
-    const title = safeTrim(els.offerTitle.value);
-    const code = safeTrim(els.promoCode.value);
-    const discountType = safeTrim(els.discountType.value);
-    const discountValue = safeTrim(els.discountValue.value);
-    const expiresOn = safeTrim(els.expiresOn.value);
-    const couponText = safeTrim(els.couponText.value);
-    const terms = safeTrim(els.terms.value);
-
-    if (title) lines.push('Offer: ' + title);
-    if (code) lines.push('Code: ' + code);
-    if (discountType || discountValue) {
-      lines.push('Discount: ' + [discountType, discountValue].filter(Boolean).join(' - '));
-    }
-    if (expiresOn) lines.push('Expires: ' + expiresOn);
-    if (couponText) lines.push('Details: ' + couponText);
-    if (terms) lines.push('Terms: ' + terms);
-
-    return lines.join('\n');
-  }
-
-  function getPayload() {
-    return currentMode === 'url'
-      ? normalizeUrl(els.couponUrl.value)
-      : buildTextPayload();
-  }
-
-  function getPrimaryTarget() {
-    return currentMode === 'url'
-      ? normalizeUrl(els.couponUrl.value)
-      : buildTextPayload();
-  }
-
   function updatePreviewCard() {
-    const title = safeTrim(els.offerTitle.value) || 'Your Coupon Offer';
-    const code = safeTrim(els.promoCode.value);
-    const discountType = safeTrim(els.discountType.value) || 'Offer';
+    const offerTitle = safeTrim(els.offerTitle.value) || 'Your Coupon Offer';
+    const promoCode = safeTrim(els.promoCode.value);
     const discountValue = safeTrim(els.discountValue.value);
+    const discountType = safeTrim(els.discountType.value) || 'Offer';
     const expiresOn = safeTrim(els.expiresOn.value);
-    const terms = safeTrim(els.terms.value);
+    const terms = normalizeMultiline(els.terms.value);
     const themeColor = safeTrim(els.themeColor.value) || '#2563eb';
 
     let subText = '';
     if (currentMode === 'url') {
       subText = normalizeUrl(els.couponUrl.value) || 'Your coupon landing page preview will appear here.';
     } else {
-      subText = safeTrim(els.couponText.value) || 'Your coupon text preview will appear here.';
+      subText = normalizeMultiline(els.couponText.value) || 'Your coupon viewer page will be generated from this offer.';
     }
 
     els.couponCard.style.setProperty('--cardBrand', themeColor);
     els.previewDiscountType.textContent = discountType;
-    els.previewTitle.textContent = title;
+    els.previewTitle.textContent = offerTitle;
     els.previewSub.textContent = subText;
 
     const lines = [];
-    if (code) lines.push('Promo code • ' + code);
+    if (promoCode) lines.push('Promo code • ' + promoCode);
     if (discountValue) lines.push('Value • ' + discountValue);
     if (expiresOn) lines.push('Expires • ' + expiresOn);
-    if (terms) lines.push('Terms • ' + terms);
+    if (terms) lines.push('Terms • ' + terms.replace(/\n/g, ' / '));
 
     if (!lines.length) {
       els.previewMeta.innerHTML = '<div class="coupon-line">Promo code and coupon details will appear here.</div>';
@@ -180,96 +182,60 @@ document.addEventListener('DOMContentLoaded', function () {
     const count = payload.length;
 
     lastPrimaryTarget = getPrimaryTarget();
-
-    if (els.payloadCount) els.payloadCount.textContent = String(count);
-    if (els.summaryPayload) els.summaryPayload.textContent = String(count);
-    if (els.outputCode) els.outputCode.textContent = payload || 'No coupon payload generated yet.';
-    if (els.shareOutput) els.shareOutput.value = lastPrimaryTarget || '';
+    els.payloadCount.textContent = String(count);
+    els.summaryPayload.textContent = String(count);
+    els.outputCode.textContent = payload || 'No coupon payload generated yet.';
+    els.shareOutput.value = lastPrimaryTarget || '';
 
     updatePreviewCard();
   }
 
   function showEmptyState() {
-    els.qrCanvas.hidden = true;
     els.qrImage.hidden = true;
     els.qrEmpty.hidden = false;
-    lastRenderType = '';
+    lastQrUrl = '';
   }
 
-  function showCanvas() {
-    els.qrCanvas.hidden = false;
-    els.qrImage.hidden = true;
-    els.qrEmpty.hidden = true;
-    lastRenderType = 'canvas';
-  }
-
-  function showImage() {
-    els.qrCanvas.hidden = true;
+  function showQr(url) {
+    els.qrImage.src = url;
     els.qrImage.hidden = false;
     els.qrEmpty.hidden = true;
-    lastRenderType = 'image';
+    lastQrUrl = url;
   }
 
-  function getFallbackQrUrl(text, size) {
+  function buildQrUrl(text) {
+    const size = Math.max(256, Number(els.qrSize.value || 320));
     return 'https://api.qrserver.com/v1/create-qr-code/?size=' +
       encodeURIComponent(size + 'x' + size) +
       '&margin=16&data=' + encodeURIComponent(text);
   }
 
-  async function renderCanvasQr(text) {
-    if (!window.QRCode || typeof window.QRCode.toCanvas !== 'function') {
-      throw new Error('QRCode library unavailable');
-    }
-
-    const size = Number(els.qrSize.value || 320);
-    const level = safeTrim(els.errorLevel.value) || 'M';
-
-    await window.QRCode.toCanvas(els.qrCanvas, text, {
-      width: size,
-      margin: 2,
-      errorCorrectionLevel: level,
-      color: {
-        dark: '#000000',
-        light: '#ffffff'
-      }
-    });
-  }
-
-  function renderFallbackQr(text) {
-    const size = Math.max(256, Number(els.qrSize.value || 320));
-    const fallbackUrl = getFallbackQrUrl(text, size);
-    els.qrImage.src = fallbackUrl;
-    showImage();
-  }
-
-  async function generateQr() {
+  function generateQr() {
     updateMetaOnly();
 
     const payload = getPayload();
-    if (!payload) {
-      if (els.readyLabel) els.readyLabel.textContent = 'No';
+
+    if (!payload || !String(payload).trim()) {
+      els.readyLabel.textContent = 'No';
       showEmptyState();
-      setStatus('<strong>Not enough data.</strong><br>Add a coupon URL or coupon text to generate a QR code.');
+      setStatus('<strong>Not enough data.</strong><br>Add a coupon URL or coupon details to generate a QR code.');
       return;
     }
 
-    try {
-      await renderCanvasQr(payload);
-      lastPayload = payload;
-      showCanvas();
-      if (els.readyLabel) els.readyLabel.textContent = 'Yes';
-      setStatus('<strong>Generated.</strong><br>Your coupon QR code is ready. You can download the PNG or copy the payload.');
-    } catch (err) {
-      renderFallbackQr(payload);
-      lastPayload = payload;
-      if (els.readyLabel) els.readyLabel.textContent = 'Yes';
-      setStatus('<strong>Generated with fallback.</strong><br>Your coupon QR code is ready using the fallback renderer.');
+    const qrUrl = buildQrUrl(payload);
+
+    lastPayload = payload;
+    showQr(qrUrl);
+    els.readyLabel.textContent = 'Yes';
+
+    if (currentMode === 'text') {
+      setStatus('<strong>Generated.</strong><br>Your Coupon Viewer QR is ready. Scanning it will open a clean coupon page instead of a raw text payload.');
+    } else {
+      setStatus('<strong>Generated.</strong><br>Your Coupon URL QR is ready. Scanning it will open the linked coupon page.');
     }
   }
 
   function resetTool() {
-    currentMode = 'url';
-
     els.offerTitle.value = '';
     els.themeColor.value = '#2563eb';
     els.promoCode.value = '';
@@ -280,20 +246,20 @@ document.addEventListener('DOMContentLoaded', function () {
     els.couponText.value = '';
     els.terms.value = '';
     els.qrSize.value = '320';
-    els.errorLevel.value = 'M';
 
     lastPayload = '';
     lastPrimaryTarget = '';
+    lastQrUrl = '';
 
     els.qrImage.removeAttribute('src');
-    if (els.outputCode) els.outputCode.textContent = 'No coupon payload generated yet.';
-    if (els.shareOutput) els.shareOutput.value = '';
-    if (els.readyLabel) els.readyLabel.textContent = 'No';
+    els.outputCode.textContent = 'No coupon payload generated yet.';
+    els.shareOutput.value = '';
+    els.readyLabel.textContent = 'No';
 
     setMode('url');
     showEmptyState();
     updateMetaOnly();
-    setStatus('<strong>Ready.</strong><br>Add a coupon URL or text details, then click <b>Generate QR Code</b>.');
+    setStatus('<strong>Ready.</strong><br>Add a coupon URL or coupon details, then click <b>Generate QR Code</b>.');
   }
 
   function loadSample(preset) {
@@ -304,28 +270,28 @@ document.addEventListener('DOMContentLoaded', function () {
       els.offerTitle.value = 'Lunch Special';
       els.themeColor.value = '#dc2626';
       els.promoCode.value = 'LUNCH10';
-      els.discountValue.value = '$10';
       els.discountType.value = 'Fixed amount discount';
+      els.discountValue.value = '$10';
       els.couponText.value = 'Get $10 off orders over $35 during lunch hours this week.';
-      els.terms.value = 'Valid 11 AM to 2 PM. One use per customer.';
+      els.terms.value = 'Valid 11 AM to 2 PM.\nOne use per customer.';
     } else if (preset === 'retail') {
       setMode('url');
       els.offerTitle.value = 'Holiday Savings';
       els.themeColor.value = '#0f766e';
       els.promoCode.value = 'SAVE20';
-      els.discountValue.value = '20%';
       els.discountType.value = 'Percent discount';
+      els.discountValue.value = '20%';
       els.couponUrl.value = 'https://example.com/holiday-sale';
-      els.terms.value = 'Online only. Limited-time offer.';
+      els.terms.value = 'Online only.\nLimited-time offer.';
     } else {
       setMode('text');
       els.offerTitle.value = 'Weekend Flash Sale';
       els.themeColor.value = '#2563eb';
       els.promoCode.value = 'FLASH25';
-      els.discountValue.value = '25%';
       els.discountType.value = 'Percent discount';
+      els.discountValue.value = '25%';
       els.couponText.value = 'Save 25% on orders over $40 this weekend only.';
-      els.terms.value = 'One use per customer. Cannot be combined with other offers.';
+      els.terms.value = 'One use per customer.\nCannot be combined with other offers.';
     }
 
     updateMetaOnly();
@@ -347,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function downloadPng() {
-    if (!lastPayload) {
+    if (!lastQrUrl) {
       setStatus('<strong>Nothing to download.</strong><br>Generate a QR code first.');
       return;
     }
@@ -357,55 +323,23 @@ document.addEventListener('DOMContentLoaded', function () {
       .replace(/-+/g, '-')
       .replace(/^-|-$/g, '');
 
-    if (lastRenderType === 'canvas' && !els.qrCanvas.hidden) {
-      const link = document.createElement('a');
-      link.href = els.qrCanvas.toDataURL('image/png');
-      link.download = safeName + '.png';
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setStatus('<strong>Downloaded.</strong><br>Your coupon QR code PNG was downloaded.');
-      return;
-    }
+    const link = document.createElement('a');
+    link.href = lastQrUrl;
+    link.download = safeName + '.png';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
 
-    if (lastRenderType === 'image' && els.qrImage.src) {
-      const link = document.createElement('a');
-      link.href = els.qrImage.src;
-      link.download = safeName + '.png';
-      link.target = '_blank';
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setStatus('<strong>Opened download source.</strong><br>Your fallback QR image was opened for saving.');
-      return;
-    }
-
-    setStatus('<strong>Nothing to download.</strong><br>Generate a QR code first.');
+    setStatus('<strong>Opened download source.</strong><br>Your coupon QR image was opened for saving.');
   }
 
-  els.urlModeBtn.addEventListener('click', function () {
-    setMode('url');
-  });
-
-  els.textModeBtn.addEventListener('click', function () {
-    setMode('text');
-  });
-
-  els.generateBtn.addEventListener('click', function () {
-    generateQr();
-  });
-
-  els.sampleBtn.addEventListener('click', function () {
-    loadSample('flash');
-  });
-
-  els.clearBtn.addEventListener('click', function () {
-    resetTool();
-  });
-
-  els.downloadBtn.addEventListener('click', function () {
-    downloadPng();
-  });
+  els.urlModeBtn.addEventListener('click', function () { setMode('url'); });
+  els.textModeBtn.addEventListener('click', function () { setMode('text'); });
+  els.generateBtn.addEventListener('click', generateQr);
+  els.sampleBtn.addEventListener('click', function () { loadSample('flash'); });
+  els.clearBtn.addEventListener('click', resetTool);
+  els.downloadBtn.addEventListener('click', downloadPng);
 
   els.copyPayloadBtn.addEventListener('click', function () {
     copyText(
@@ -439,8 +373,7 @@ document.addEventListener('DOMContentLoaded', function () {
     els.couponUrl,
     els.couponText,
     els.terms,
-    els.qrSize,
-    els.errorLevel
+    els.qrSize
   ].forEach(function (el) {
     if (!el) return;
     el.addEventListener('input', updateMetaOnly);
