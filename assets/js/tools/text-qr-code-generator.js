@@ -1,868 +1,464 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
-  </script>
+document.addEventListener('DOMContentLoaded', () => {
+  const els = {
+    singleModeBtn: document.getElementById('singleModeBtn'),
+    batchModeBtn: document.getElementById('batchModeBtn'),
+    singleModeFields: document.getElementById('singleModeFields'),
+    batchModeFields: document.getElementById('batchModeFields'),
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
-    crossorigin="anonymous"></script>
+    textInput: document.getElementById('textInput'),
+    batchInput: document.getElementById('batchInput'),
+    qrColor: document.getElementById('qrColor'),
+    bgColor: document.getElementById('bgColor'),
+    sizeSelect: document.getElementById('sizeSelect'),
+    logoFile: document.getElementById('logoFile'),
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    generateBtn: document.getElementById('generateBtn'),
+    sampleBtn: document.getElementById('sampleBtn'),
+    clearBtn: document.getElementById('clearBtn'),
+    copyTextBtn: document.getElementById('copyTextBtn'),
+    removeLogoBtn: document.getElementById('removeLogoBtn'),
+    exportSvgBtn: document.getElementById('exportSvgBtn'),
+    downloadBtn: document.getElementById('downloadBtn'),
 
-  <title>Text QR Code Generator | Color, Logo, Batch & SVG Export | InstantQR</title>
-  <meta name="description" content="Create QR codes from text with color picker, background picker, center logo, size selector, batch QR generation, PNG download, and SVG export. Free, mobile-friendly, and privacy-first." />
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-  <meta name="author" content="InstantQR" />
-  <meta name="theme-color" content="#0f172a" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta name="color-scheme" content="dark" />
+    activeCount: document.getElementById('activeCount'),
+    summaryCount: document.getElementById('summaryCount'),
+    readyLabel: document.getElementById('readyLabel'),
+    resultMode: document.getElementById('resultMode'),
 
-  <link rel="canonical" href="https://instantqr.io/tools/text-qr-code-generator.html" />
-  <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/assets/site.css" />
+    qrCanvas: document.getElementById('qrCanvas'),
+    qrEmpty: document.getElementById('qrEmpty'),
+    singlePreviewBox: document.getElementById('singlePreviewBox'),
+    batchPreviewBox: document.getElementById('batchPreviewBox'),
+    batchList: document.getElementById('batchList'),
+    outputCode: document.getElementById('outputCode'),
+    statusBox: document.getElementById('statusBox'),
+    year: document.getElementById('year')
+  };
 
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="InstantQR" />
-  <meta property="og:title" content="Text QR Code Generator | InstantQR" />
-  <meta property="og:description" content="Create styled QR codes from plain text with custom colors, logo upload, batch mode, PNG download, and SVG export." />
-  <meta property="og:url" content="https://instantqr.io/tools/text-qr-code-generator.html" />
-  <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  if (!els.generateBtn || !els.qrCanvas) return;
+  if (els.year) els.year.textContent = String(new Date().getFullYear());
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Text QR Code Generator | InstantQR" />
-  <meta name="twitter:description" content="Generate text QR codes with style controls, batch mode, PNG download, and SVG export." />
-  <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
+  let currentMode = 'single';
+  let logoDataUrl = '';
 
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"Text QR Code Generator",
-    "url":"https://instantqr.io/tools/text-qr-code-generator.html",
-    "description":"Create QR codes from plain text with color controls, logo upload, batch generation, PNG download, and SVG export.",
-    "isPartOf":{
-      "@type":"WebSite",
-      "name":"InstantQR",
-      "url":"https://instantqr.io/"
+  function safeTrim(value) {
+    return String(value || '').trim();
+  }
+
+  function setStatus(html) {
+    if (els.statusBox) els.statusBox.innerHTML = html;
+  }
+
+  function getScanSafeWarning() {
+    return logoDataUrl
+      ? '<br><span style="color:#fde68a;">Scan-safe tip: logos reduce reliability. Keep the logo small, use strong contrast, and test on your phone before printing.</span>'
+      : '';
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    els.singleModeBtn.classList.toggle('active', mode === 'single');
+    els.batchModeBtn.classList.toggle('active', mode === 'batch');
+    els.singleModeFields.classList.toggle('hidden', mode !== 'single');
+    els.batchModeFields.classList.toggle('hidden', mode !== 'batch');
+    els.singlePreviewBox.classList.toggle('hidden', mode !== 'single');
+    els.batchPreviewBox.classList.toggle('hidden', mode !== 'batch');
+    if (els.resultMode) els.resultMode.textContent = `Mode: ${mode === 'single' ? 'Single' : 'Batch'}`;
+    updateCounts();
+  }
+
+  function getSize() {
+    const size = parseInt(els.sizeSelect.value, 10);
+    return Number.isFinite(size) ? size : 320;
+  }
+
+  function getSingleText() {
+    return safeTrim(els.textInput.value);
+  }
+
+  function getBatchItems() {
+    return String(els.batchInput.value || '')
+      .split(/\r?\n/)
+      .map(line => line.trim())
+      .filter(Boolean);
+  }
+
+  function updateCounts() {
+    const count = currentMode === 'single' ? (getSingleText() ? 1 : 0) : getBatchItems().length;
+    if (els.activeCount) els.activeCount.textContent = String(count);
+    if (els.summaryCount) els.summaryCount.textContent = String(count);
+
+    if (currentMode === 'single') {
+      els.outputCode.textContent = getSingleText() || 'No QR content generated yet.';
+    } else {
+      const items = getBatchItems();
+      els.outputCode.textContent = items.length
+        ? items.map((item, i) => `${i + 1}. ${item}`).join('\n')
+        : 'No QR content generated yet.';
     }
   }
-  </script>
 
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"Text QR Code Generator",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "isAccessibleForFree":true,
-    "browserRequirements":"Requires JavaScript",
-    "url":"https://instantqr.io/tools/text-qr-code-generator.html",
-    "description":"Generate styled QR codes from text with single mode, batch mode, PNG download, and SVG export.",
-    "publisher":{
-      "@type":"Organization",
-      "name":"InstantQR",
-      "url":"https://instantqr.io/"
+  function hexToApiColor(hex) {
+    return String(hex || '#000000').replace('#', '');
+  }
+
+  function buildQrApiUrl(text, format) {
+    const size = getSize();
+    const params = new URLSearchParams({
+      data: text,
+      size: `${size}x${size}`,
+      margin: '20',
+      color: hexToApiColor(els.qrColor.value || '#000000'),
+      bgcolor: hexToApiColor(els.bgColor.value || '#ffffff'),
+      format: format || 'png'
+    });
+    return `https://api.qrserver.com/v1/create-qr-code/?${params.toString()}`;
+  }
+
+  async function fetchBlob(url) {
+    const res = await fetch(url, { mode: 'cors', cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.blob();
+  }
+
+  async function blobToImage(blob) {
+    const objectUrl = URL.createObjectURL(blob);
+    try {
+      const img = await new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = objectUrl;
+      });
+      return img;
+    } finally {
+      URL.revokeObjectURL(objectUrl);
     }
   }
-  </script>
 
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"BreadcrumbList",
-    "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
-      {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
-      {"@type":"ListItem","position":3,"name":"Text QR Code Generator","item":"https://instantqr.io/tools/text-qr-code-generator.html"}
-    ]
+  function roundRect(ctx, x, y, width, height, radius) {
+    const r = Math.min(radius, width / 2, height / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + width, y, x + width, y + height, r);
+    ctx.arcTo(x + width, y + height, x, y + height, r);
+    ctx.arcTo(x, y + height, x, y, r);
+    ctx.arcTo(x, y, x + width, y, r);
+    ctx.closePath();
   }
-  </script>
 
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What can I put inside a text QR code?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"You can encode plain text such as short notes, instructions, messages, contact prompts, labels, inventory notes, and internal reference text."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"Can I change the QR code color?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes. You can customize both the QR foreground color and the background color."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"Can I add a logo to the center?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes. You can upload a center logo, but large logos can reduce scan reliability, so test before printing."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"Can I create multiple QR codes at once?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes. Batch mode creates one QR code for each non-empty line in your input."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"Can I export SVG?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes. SVG export is available in single mode and is useful for design and print workflows."
-        }
+  async function drawLogoOnCanvas(canvas, size) {
+    if (!logoDataUrl) return;
+
+    await new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        const ctx = canvas.getContext('2d');
+
+        const logoBox = Math.round(size * 0.14);
+        const x = Math.round((size - logoBox) / 2);
+        const y = Math.round((size - logoBox) / 2);
+        const pad = Math.round(logoBox * 0.10);
+
+        ctx.fillStyle = '#ffffff';
+        roundRect(ctx, x - pad, y - pad, logoBox + pad * 2, logoBox + pad * 2, 10);
+        ctx.fill();
+
+        ctx.drawImage(img, x, y, logoBox, logoBox);
+        resolve();
+      };
+      img.onerror = () => resolve();
+      img.src = logoDataUrl;
+    });
+  }
+
+  async function renderSingleCanvas(text, canvas) {
+    const size = getSize();
+    canvas.width = size;
+    canvas.height = size;
+
+    const blob = await fetchBlob(buildQrApiUrl(text, 'png'));
+    const qrImg = await blobToImage(blob);
+
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, size, size);
+    ctx.fillStyle = els.bgColor.value || '#ffffff';
+    ctx.fillRect(0, 0, size, size);
+    ctx.drawImage(qrImg, 0, 0, size, size);
+
+    await drawLogoOnCanvas(canvas, size);
+  }
+
+  async function generateSingle() {
+    const text = getSingleText();
+
+    if (!text) {
+      els.qrCanvas.hidden = true;
+      els.qrEmpty.hidden = false;
+      if (els.readyLabel) els.readyLabel.textContent = 'No';
+      setStatus('<strong>Not enough data.</strong><br>Enter some text to generate a QR code.');
+      return;
+    }
+
+    try {
+      await renderSingleCanvas(text, els.qrCanvas);
+      els.qrCanvas.hidden = false;
+      els.qrEmpty.hidden = true;
+      if (els.readyLabel) els.readyLabel.textContent = 'Yes';
+      setStatus('<strong>Generated.</strong><br>Your styled text QR code is ready.' + getScanSafeWarning());
+    } catch (err) {
+      console.error('Single QR generation failed:', err);
+      els.qrCanvas.hidden = true;
+      els.qrEmpty.hidden = false;
+      if (els.readyLabel) els.readyLabel.textContent = 'No';
+      setStatus('<strong>Generation failed.</strong><br>The QR code could not be rendered.');
+    }
+  }
+
+  async function renderBatchItem(item, index) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'batch-item';
+
+    const head = document.createElement('div');
+    head.className = 'batch-item-head';
+
+    const title = document.createElement('div');
+    title.className = 'batch-item-title';
+    title.textContent = `${index + 1}. ${item.length > 80 ? item.slice(0, 80) + '…' : item}`;
+    head.appendChild(title);
+
+    const canvasWrap = document.createElement('div');
+    canvasWrap.className = 'batch-canvas-wrap';
+
+    const canvas = document.createElement('canvas');
+    canvasWrap.appendChild(canvas);
+
+    const actions = document.createElement('div');
+    actions.className = 'batch-actions';
+
+    const downloadBtn = document.createElement('button');
+    downloadBtn.type = 'button';
+    downloadBtn.className = 'mini-btn';
+    downloadBtn.textContent = 'Download PNG';
+    downloadBtn.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = `text-qr-${index + 1}.png`;
+      link.click();
+    });
+
+    const copyBtn = document.createElement('button');
+    copyBtn.type = 'button';
+    copyBtn.className = 'mini-btn';
+    copyBtn.textContent = 'Copy Text';
+    copyBtn.addEventListener('click', async () => {
+      await copyText(item, 'Text copied.', 'Copy failed.');
+    });
+
+    actions.appendChild(downloadBtn);
+    actions.appendChild(copyBtn);
+
+    wrapper.appendChild(head);
+    wrapper.appendChild(canvasWrap);
+    wrapper.appendChild(actions);
+    els.batchList.appendChild(wrapper);
+
+    await renderSingleCanvas(item, canvas);
+  }
+
+  async function generateBatch() {
+    const items = getBatchItems();
+    els.batchList.innerHTML = '';
+
+    if (!items.length) {
+      if (els.readyLabel) els.readyLabel.textContent = 'No';
+      setStatus('<strong>Not enough data.</strong><br>Enter one text item per line for batch generation.');
+      return;
+    }
+
+    try {
+      for (let i = 0; i < items.length; i++) {
+        await renderBatchItem(items[i], i);
       }
-    ]
+      if (els.readyLabel) els.readyLabel.textContent = 'Yes';
+      setStatus(`<strong>Generated.</strong><br>${items.length} QR code(s) created in batch mode.` + getScanSafeWarning());
+    } catch (err) {
+      console.error('Batch QR generation failed:', err);
+      if (els.readyLabel) els.readyLabel.textContent = 'No';
+      setStatus('<strong>Generation failed.</strong><br>One or more batch QR codes could not be rendered.');
+    }
   }
-  </script>
 
-  <style>
-    .qr-grid{
-      display:grid;
-      grid-template-columns:1.06fr .94fr;
-      gap:18px;
-      margin-top:18px;
+  async function generate() {
+    updateCounts();
+    if (currentMode === 'single') {
+      await generateSingle();
+    } else {
+      await generateBatch();
     }
-    .tool-card,.result-panel,.faqCard,.contentCard,.relatedCard{
-      border-radius:var(--radius2);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      box-shadow:var(--shadow);
-    }
-    .tool-card{
-      padding:24px;
-      position:relative;
-      overflow:hidden;
-      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
-    }
-    .tool-card:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(760px 280px at 16% 18%, rgba(96,165,250,.18), transparent 60%),
-        radial-gradient(520px 240px at 82% 34%, rgba(34,197,94,.12), transparent 56%);
-      pointer-events:none;
-    }
-    .tool-card > *{ position:relative; }
+  }
 
-    .mode-switch{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
-    .mode-btn{
-      appearance:none;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      border-radius:999px;
-      padding:10px 14px;
-      font-size:13px;
-      font-weight:800;
-      cursor:pointer;
-    }
-    .mode-btn.active{
-      background:rgba(96,165,250,.16);
-      border-color:rgba(96,165,250,.35);
-      color:#fff;
-    }
-
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:14px;
-    }
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-    .field.full{ grid-column:1 / -1; }
-    .field label{
-      font-size:13px;
-      font-weight:800;
-      color:#fff;
-    }
-    .field input,.field textarea,.field select{
-      width:100%;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:#13213b;
-      color:var(--text);
-      padding:13px 14px;
-      outline:none;
-      box-sizing:border-box;
-      font:inherit;
-      -webkit-appearance:none;
-      appearance:none;
-    }
-    .field select{
-      cursor:pointer;
-      background-image:
-        linear-gradient(45deg, transparent 50%, #cfe0ff 50%),
-        linear-gradient(135deg, #cfe0ff 50%, transparent 50%);
-      background-position:
-        calc(100% - 18px) calc(50% - 3px),
-        calc(100% - 12px) calc(50% - 3px);
-      background-size:6px 6px, 6px 6px;
-      background-repeat:no-repeat;
-      padding-right:42px;
-    }
-    .field select option{
-      background:#13213b;
-      color:#e7eefc;
-    }
-    .field input[type="color"]{
-      min-height:50px;
-      padding:8px;
-      cursor:pointer;
-    }
-    .field input[type="file"]{
-      padding:10px 12px;
-      cursor:pointer;
-    }
-    .field textarea{
-      min-height:150px;
-      resize:vertical;
-      line-height:1.5;
-    }
-    .field input:focus,.field textarea:focus,.field select:focus{
-      border-color:rgba(96,165,250,.55);
-      box-shadow:0 0 0 3px rgba(96,165,250,.14);
-    }
-
-    .helper-row{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:8px;
-      font-size:12px;
-      color:var(--muted);
-    }
-    .tool-actions,.quick-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
-    .mini-btn{
-      appearance:none;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      border-radius:999px;
-      padding:8px 12px;
-      font-size:12px;
-      font-weight:800;
-      cursor:pointer;
-    }
-    .mini-btn:hover{
-      border-color:rgba(255,255,255,.2);
-      background:rgba(255,255,255,.07);
-    }
-
-    .result-panel{
-      padding:18px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-    .panel-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .panel-top h2{
-      margin:0;
-      font-size:18px;
-      letter-spacing:-.2px;
-    }
-
-    .summary-box,.qr-box,.output-box,.batch-box,.status-box{
-      border-radius:var(--radius);
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:14px;
-    }
-    .summary-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
-    .metric{
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:14px;
-      min-height:92px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:6px;
-    }
-    .metric .k{
-      font-size:12px;
-      color:var(--muted);
-    }
-    .metric .v{
-      font-size:24px;
-      font-weight:900;
-      letter-spacing:-.4px;
-      word-break:break-word;
-    }
-    .metric .u{
-      font-size:12px;
-      color:rgba(233,238,252,.55);
-    }
-
-    .qr-shell{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:320px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      padding:20px;
-    }
-    #qrCanvas{
-      max-width:min(320px, 100%);
-      height:auto;
-      border-radius:12px;
-      box-shadow:0 10px 25px rgba(0,0,0,.25);
-      background:#fff;
-    }
-    .qr-empty{
-      text-align:center;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:14px;
-    }
-
-    .mono{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-    }
-    .output-code{
-      white-space:pre-wrap;
-      word-break:break-word;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.16);
-      padding:14px;
-      font-size:13px;
-      line-height:1.65;
-      color:#fff;
-      min-height:140px;
-    }
-    .status-box{
-      line-height:1.6;
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .batch-list{
-      display:grid;
-      gap:12px;
-      margin-top:10px;
-    }
-    .batch-item{
-      border-radius:16px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:14px;
-    }
-    .batch-item-head{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:flex-start;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-    .batch-item-title{
-      font-weight:800;
-      color:#fff;
-      word-break:break-word;
-    }
-    .batch-canvas-wrap{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
-      margin-bottom:10px;
-    }
-    .batch-canvas-wrap canvas{
-      background:#fff;
-      border-radius:12px;
-      box-shadow:0 8px 20px rgba(0,0,0,.22);
-      max-width:220px;
-      height:auto;
-    }
-    .batch-actions{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-
-    .contentCard{
-      margin-top:14px;
-      padding:18px;
-    }
-    .contentCard h2{
-      margin:0 0 10px;
-      font-size:22px;
-      letter-spacing:-.25px;
-    }
-    .contentCard p,
-    .contentCard li{
-      color:var(--muted);
-      line-height:1.75;
-      font-size:15px;
-    }
-    .contentCard ul{
-      padding-left:18px;
-      margin:10px 0 0;
-    }
-
-    .infoGrid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:12px;
-    }
-    .infoCard{
-      border-radius:16px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:14px;
-    }
-    .infoCard h3{
-      margin:0 0 8px;
-      font-size:16px;
-    }
-    .infoCard p,.infoCard li{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.7;
-    }
-    .infoCard ul{
-      margin:0;
-      padding-left:18px;
-    }
-
-    .relatedCard{
-      margin-top:14px;
-      padding:18px;
-    }
-    .relatedCard h2{
-      margin:0 0 10px;
-      font-size:22px;
-      letter-spacing:-.25px;
-    }
-    .relatedGrid{
-      display:grid;
-      grid-template-columns:1fr 1fr 1fr;
-      gap:12px;
-      margin-top:12px;
-    }
-    .relatedLink{
-      display:block;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:14px;
-      text-decoration:none;
-    }
-    .relatedLink:hover{
-      background:rgba(255,255,255,.06);
-      text-decoration:none;
-    }
-    .relatedLink strong{
-      display:block;
-      margin-bottom:6px;
-      color:var(--text);
-      font-size:15px;
-    }
-    .relatedLink span{
-      display:block;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.55;
-    }
-
-    .faqCard{
-      margin-top:14px;
-      padding:18px;
-    }
-    .faqCard h2{
-      margin:0 0 10px;
-      font-size:22px;
-      letter-spacing:-.25px;
-    }
-    .faqCard details{
-      border-top:1px solid rgba(255,255,255,.10);
-      padding:12px 0;
-    }
-    .faqCard details:first-of-type{
-      border-top:0;
-      padding-top:0;
-    }
-    .faqCard summary{
-      cursor:pointer;
-      font-weight:800;
-      list-style:none;
-      color:#fff;
-    }
-    .faqCard summary::-webkit-details-marker{ display:none; }
-    .faqCard p{
-      margin:8px 0 0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:14px;
-    }
-
-    .hidden{display:none!important}
-
-    @media (max-width:980px){
-      .qr-grid,.summary-grid,.form-grid,.infoGrid,.relatedGrid{
-        grid-template-columns:1fr;
+  async function copyText(text, successMessage, failMessage) {
+    try {
+      if (!text) throw new Error('No text');
+      if (window.InstantQR && typeof window.InstantQR.copyText === 'function') {
+        await window.InstantQR.copyText(text);
+      } else if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        temp.remove();
       }
+      setStatus(`<strong>Copied.</strong><br>${successMessage}`);
+    } catch (_) {
+      setStatus(`<strong>Copy failed.</strong><br>${failMessage}`);
     }
-    @media (max-width:640px){
-      .tool-actions .cta{
-        width:100%;
+  }
+
+  async function exportSvg() {
+    const text = getSingleText();
+    if (currentMode !== 'single') {
+      setStatus('<strong>SVG export unavailable.</strong><br>SVG export is available in single mode only.');
+      return;
+    }
+    if (!text) {
+      setStatus('<strong>Nothing to export.</strong><br>Enter text first.');
+      return;
+    }
+
+    try {
+      const blob = await fetchBlob(buildQrApiUrl(text, 'svg'));
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'text-qr-code.svg';
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 500);
+
+      const logoNote = logoDataUrl
+        ? '<br><span style="color:#fde68a;">Note: SVG export does not include the center logo overlay.</span>'
+        : '';
+
+      setStatus('<strong>Exported.</strong><br>Your SVG file was downloaded.' + logoNote);
+    } catch (err) {
+      console.error('SVG export failed:', err);
+      setStatus('<strong>Export failed.</strong><br>The SVG file could not be generated.');
+    }
+  }
+
+  function clearAll() {
+    els.textInput.value = '';
+    els.batchInput.value = '';
+    els.qrColor.value = '#000000';
+    els.bgColor.value = '#ffffff';
+    els.sizeSelect.value = '320';
+    els.logoFile.value = '';
+    logoDataUrl = '';
+    els.qrCanvas.hidden = true;
+    els.qrEmpty.hidden = false;
+    els.batchList.innerHTML = '';
+    if (els.readyLabel) els.readyLabel.textContent = 'No';
+    updateCounts();
+    setStatus('<strong>Cleared.</strong><br>All text, styling, and logo settings were reset.');
+  }
+
+  function loadSample() {
+    if (currentMode === 'single') {
+      els.textInput.value = 'Hello from InstantQR 🚀\nFast • Free • Styled QR Codes';
+    } else {
+      els.batchInput.value = 'Hello from InstantQR\nhttps://instantqr.io\nScan me for more tools';
+    }
+    updateCounts();
+    generate();
+  }
+
+  function loadLogo(file) {
+    return new Promise((resolve) => {
+      if (!file) {
+        logoDataUrl = '';
+        resolve();
+        return;
       }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        logoDataUrl = typeof reader.result === 'string' ? reader.result : '';
+        resolve();
+      };
+      reader.onerror = () => {
+        logoDataUrl = '';
+        resolve();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  els.singleModeBtn?.addEventListener('click', () => setMode('single'));
+  els.batchModeBtn?.addEventListener('click', () => setMode('batch'));
+
+  els.generateBtn?.addEventListener('click', async () => {
+    await generate();
+  });
+
+  els.sampleBtn?.addEventListener('click', () => {
+    loadSample();
+  });
+
+  els.clearBtn?.addEventListener('click', () => {
+    clearAll();
+  });
+
+  els.copyTextBtn?.addEventListener('click', async () => {
+    const text = currentMode === 'single' ? getSingleText() : getBatchItems().join('\n');
+    await copyText(text, 'The current text was copied.', 'Nothing to copy.');
+  });
+
+  els.removeLogoBtn?.addEventListener('click', async () => {
+    els.logoFile.value = '';
+    logoDataUrl = '';
+    setStatus('<strong>Logo removed.</strong><br>The center logo was removed.');
+    if ((currentMode === 'single' && getSingleText()) || (currentMode === 'batch' && getBatchItems().length)) {
+      await generate();
     }
-  </style>
-</head>
+  });
 
-<body>
-  <a class="skip" href="#main">Skip to content</a>
+  els.exportSvgBtn?.addEventListener('click', async () => {
+    await exportSvg();
+  });
 
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="/" aria-label="InstantQR home">
-        <span class="brand-logo">
-          <img src="/assets/instantqr-logo.svg" alt="InstantQR logo" />
-        </span>
-        <span>InstantQR</span>
-      </a>
+  els.downloadBtn?.addEventListener('click', () => {
+    if (currentMode !== 'single' || els.qrCanvas.hidden) {
+      setStatus('<strong>Nothing to download.</strong><br>Generate a single QR code first.');
+      return;
+    }
+    const link = document.createElement('a');
+    link.href = els.qrCanvas.toDataURL('image/png');
+    link.download = 'text-qr-code.png';
+    link.click();
+  });
 
-      <nav class="top-links" aria-label="Primary">
-        <a href="/">Home</a>
-        <a href="/tools/tools.html">Tools</a>
-        <a href="/tools/url-qr-code-generator.html">URL QR</a>
-        <a href="/tools/vcard-qr-code-generator.html">vCard QR</a>
-        <a href="/tools/social-media-qr-code-generator.html">Social QR</a>
-      </nav>
-    </div>
-  </header>
+  els.logoFile?.addEventListener('change', async () => {
+    const file = els.logoFile.files && els.logoFile.files[0];
+    await loadLogo(file);
 
-  <main id="main" class="wrap">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <ol>
-        <li><a href="/">Home</a></li>
-        <li><a href="/tools/tools.html">Tools</a></li>
-        <li><span aria-current="page">Text QR Code Generator</span></li>
-      </ol>
-    </nav>
+    if (logoDataUrl) {
+      setStatus('<strong>Logo added.</strong><br>For best scan reliability, keep the logo small and simple. Dark QR on white background works best.');
+    }
 
-    <section class="qr-grid" aria-label="Text QR Code Generator">
-      <section class="tool-card">
-        <div class="pill">📝 Text QR • 🎨 Styled • ⚡ Fast</div>
+    if ((currentMode === 'single' && getSingleText()) || (currentMode === 'batch' && getBatchItems().length)) {
+      await generate();
+    }
+  });
 
-        <h1>Text QR Code Generator</h1>
-        <p class="sub">
-          Turn plain text into a QR code instantly. Customize the foreground color, background color, center logo,
-          and size. Generate a single QR code or create a whole batch from multiple lines of text.
-        </p>
-        <p class="sub">
-          This tool is useful for simple messages, internal labels, short instructions, table cards, classroom prompts,
-          inventory tags, event signage, workshop materials, printed notes, and other cases where plain text is more useful than a web link.
-        </p>
+  [els.textInput, els.batchInput, els.qrColor, els.bgColor, els.sizeSelect].forEach(el => {
+    el?.addEventListener('input', updateCounts);
+    el?.addEventListener('change', updateCounts);
+  });
 
-        <div class="mode-switch" role="tablist" aria-label="Generator mode">
-          <button class="mode-btn active" id="singleModeBtn" type="button" data-mode="single">Single QR</button>
-          <button class="mode-btn" id="batchModeBtn" type="button" data-mode="batch">Batch QR</button>
-        </div>
-
-        <div id="singleModeFields">
-          <div class="field full" style="margin-top:14px;">
-            <label for="textInput">Enter text</label>
-            <textarea id="textInput" placeholder="Type or paste any text..."></textarea>
-          </div>
-        </div>
-
-        <div id="batchModeFields" class="hidden">
-          <div class="field full" style="margin-top:14px;">
-            <label for="batchInput">Enter one text per line</label>
-            <textarea id="batchInput" placeholder="Line 1&#10;Line 2&#10;Line 3"></textarea>
-          </div>
-        </div>
-
-        <div class="form-grid">
-          <div class="field">
-            <label for="qrColor">QR color</label>
-            <input id="qrColor" type="color" value="#000000" />
-          </div>
-
-          <div class="field">
-            <label for="bgColor">Background color</label>
-            <input id="bgColor" type="color" value="#ffffff" />
-          </div>
-
-          <div class="field">
-            <label for="sizeSelect">Size</label>
-            <select id="sizeSelect">
-              <option value="220">Small</option>
-              <option value="320" selected>Medium</option>
-              <option value="420">Large</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="logoFile">Center logo (optional)</label>
-            <input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" />
-          </div>
-        </div>
-
-        <div class="helper-row">
-          <span>Batch mode creates one QR code for each non-empty line.</span>
-          <span><span id="activeCount">0</span> active item(s)</span>
-        </div>
-
-        <div class="tool-actions">
-          <button class="cta primary" id="generateBtn" type="button">Generate QR Code</button>
-          <button class="cta ghost" id="sampleBtn" type="button">Load Sample</button>
-          <button class="cta ghost" id="clearBtn" type="button">Clear</button>
-        </div>
-
-        <div class="quick-actions">
-          <button class="mini-btn" type="button" id="copyTextBtn">Copy Text</button>
-          <button class="mini-btn" type="button" id="removeLogoBtn">Remove Logo</button>
-          <button class="mini-btn" type="button" id="exportSvgBtn">Export SVG</button>
-        </div>
-      </section>
-
-      <aside class="result-panel" aria-label="Generated Text QR Output">
-        <div class="panel-top">
-          <div>
-            <h2>QR Preview</h2>
-            <div class="hint" style="margin:6px 0 0;">Live preview updates as you edit.</div>
-          </div>
-          <div class="hint mono" id="resultMode">Mode: Single</div>
-        </div>
-
-        <div class="summary-box">
-          <div class="summary-grid">
-            <div class="metric">
-              <div class="k">Active Items</div>
-              <div class="v" id="summaryCount">0</div>
-              <div class="u">Text entries</div>
-            </div>
-            <div class="metric">
-              <div class="k">QR Ready</div>
-              <div class="v" id="readyLabel">No</div>
-              <div class="u">Generated state</div>
-            </div>
-            <div class="metric">
-              <div class="k">Export</div>
-              <div class="v">PNG</div>
-              <div class="u">Single + batch</div>
-            </div>
-            <div class="metric">
-              <div class="k">Designer Export</div>
-              <div class="v">SVG</div>
-              <div class="u">Single mode</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="qr-box" id="singlePreviewBox">
-          <div class="panel-top">
-            <div>
-              <h2 style="font-size:16px;">Single QR Preview</h2>
-            </div>
-            <div class="quick-actions" style="margin-top:0;">
-              <button class="mini-btn" id="downloadBtn" type="button">Download PNG</button>
-            </div>
-          </div>
-
-          <div class="qr-shell">
-            <div class="qr-empty" id="qrEmpty">
-              Enter text, then click <strong>Generate QR Code</strong>.
-            </div>
-            <canvas id="qrCanvas" width="320" height="320" hidden></canvas>
-          </div>
-        </div>
-
-        <div class="batch-box hidden" id="batchPreviewBox">
-          <div class="panel-top">
-            <div>
-              <h2 style="font-size:16px;">Batch QR Preview</h2>
-            </div>
-          </div>
-          <div class="batch-list" id="batchList"></div>
-        </div>
-
-        <div class="output-box">
-          <div class="panel-top">
-            <div>
-              <h2 style="font-size:16px;">Generated Output</h2>
-            </div>
-          </div>
-          <pre class="output-code mono" id="outputCode">No QR content generated yet.</pre>
-        </div>
-
-        <div class="status-box" id="statusBox">
-          <strong>Ready.</strong><br>
-          Enter text, customize styling, then click <b>Generate QR Code</b>.
-        </div>
-      </aside>
-    </section>
-
-    <section class="contentCard" aria-label="What is a text QR code">
-      <h2>What Is a Text QR Code?</h2>
-      <p>
-        A text QR code is a scannable QR code that contains plain text instead of a website link. When someone scans it,
-        the text appears directly on the device. This makes text QR codes useful for short instructions, internal notes,
-        classroom prompts, labels, booth information, product handling notes, and other offline workflows where a URL is not necessary.
-      </p>
-      <p>
-        Text QR codes are especially useful when you want a quick scan-to-read experience without sending people to another website.
-        They can reduce confusion in environments where speed and clarity matter, such as events, offices, warehouses, schools,
-        workshops, and printed materials.
-      </p>
-    </section>
-
-    <section class="contentCard" aria-label="Best use cases">
-      <h2>Common Use Cases</h2>
-      <div class="infoGrid">
-        <div class="infoCard">
-          <h3>For classrooms and workshops</h3>
-          <p>Share short prompts, activity instructions, quiz text, or station notes without forcing students to type anything manually.</p>
-        </div>
-        <div class="infoCard">
-          <h3>For inventory and operations</h3>
-          <p>Add scannable text notes to shelves, bins, boxes, and storage areas for quick internal references.</p>
-        </div>
-        <div class="infoCard">
-          <h3>For events and signs</h3>
-          <p>Display welcome messages, booth notes, access instructions, or short support text in a format people can scan quickly.</p>
-        </div>
-        <div class="infoCard">
-          <h3>For print workflows</h3>
-          <p>Use SVG export in single mode when you need a cleaner vector file for design, print, or layout work.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="contentCard" aria-label="Best practices">
-      <h2>Best Practices for Better QR Scanning</h2>
-      <ul>
-        <li>Keep the text short when possible, because denser QR codes can be harder to scan.</li>
-        <li>Use dark QR colors on light backgrounds for better reliability.</li>
-        <li>Test your QR code on multiple phones before printing or publishing it broadly.</li>
-        <li>Use the logo option carefully, because larger logos can reduce scan success.</li>
-        <li>Choose larger sizes for posters, wall signs, and printed handouts viewed from farther away.</li>
-      </ul>
-      <p>
-        This matters because a good QR code is not only about generation. It is about real-world scan success. Strong contrast,
-        reasonable density, and proper testing are what make the output actually useful.
-      </p>
-    </section>
-
-    <section class="relatedCard" aria-label="Related tools">
-      <h2>Related Tools</h2>
-      <div class="relatedGrid">
-        <a class="relatedLink" href="/tools/url-qr-code-generator.html">
-          <strong>URL QR Code Generator</strong>
-          <span>Create QR codes for websites and landing pages when you want to send users to a link instead of plain text.</span>
-        </a>
-        <a class="relatedLink" href="/tools/social-media-qr-code-generator.html">
-          <strong>Social Media QR Code Generator</strong>
-          <span>Build QR codes for profiles and social hubs for creator, brand, and marketing use cases.</span>
-        </a>
-        <a class="relatedLink" href="/guides/qr-code-best-practices.html">
-          <strong>QR Code Best Practices</strong>
-          <span>Learn how to improve scan reliability for print, signs, cards, packaging, and other real-world placements.</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="faqCard" aria-label="Frequently asked questions">
-      <h2>FAQ</h2>
-
-      <details>
-        <summary>What can I put inside a text QR code?</summary>
-        <p>You can encode plain text such as short notes, messages, prompts, labels, and internal instructions.</p>
-      </details>
-
-      <details>
-        <summary>Can I change the QR code color?</summary>
-        <p>Yes. You can customize both the QR foreground color and the background color.</p>
-      </details>
-
-      <details>
-        <summary>Can I add a logo in the center?</summary>
-        <p>Yes. You can upload a logo image and place it in the center of the QR code preview and PNG export.</p>
-      </details>
-
-      <details>
-        <summary>Can I create multiple QR codes at once?</summary>
-        <p>Yes. Batch mode creates one QR code for each non-empty line in your input.</p>
-      </details>
-
-      <details>
-        <summary>Can I export SVG?</summary>
-        <p>Yes. Single mode supports SVG export, which is useful for designers and print workflows.</p>
-      </details>
-    </section>
-
-    <footer class="footer" aria-label="Footer">
-      <div class="footer-box">
-        <div>© <span id="year"></span> InstantQR</div>
-        <div class="footer-links">
-          <a href="/">Home</a>
-          <a href="/tools/tools.html">Tools</a>
-          <a href="/about.html">About</a>
-          <a href="/privacy.html">Privacy</a>
-          <a href="/terms.html">Terms</a>
-          <a href="/contact.html">Contact</a>
-          <a href="/sitemap.xml">Sitemap</a>
-        </div>
-      </div>
-    </footer>
-  </main>
-
-  <script src="/assets/site.js" defer></script>
-  <script src="/assets/js/tools/text-qr-code-generator.js" defer></script>
-</body>
-</html>
+  updateCounts();
+  els.qrCanvas.hidden = true;
+});
