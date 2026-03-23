@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let lastQrMode = '';
   let lastQrImageUrl = '';
   let lastShareLink = '';
+  let autoTimer = null;
 
   function safeTrim(value) {
     return String(value || '').trim();
@@ -62,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function escapeText(value) {
     return String(value || '')
+      .replace(/\\/g, '\\\\')
       .replace(/\r?\n/g, '\\n')
       .replace(/;/g, '\\;')
       .replace(/,/g, '\\,');
@@ -80,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const clean = safeTrim(value);
     if (!clean) return '';
     if (/^https?:\/\//i.test(clean)) return clean;
-    return 'https://' + clean;
+    return `https://${clean}`;
   }
 
   function countFilledFields() {
@@ -90,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
       els.city.value, els.state.value, els.postal.value, els.country.value,
       els.note.value
     ];
+
     return fields.filter(v => safeTrim(v)).length;
   }
 
@@ -105,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const last = safeTrim(els.lastName.value);
     const org = safeTrim(els.org.value);
     const initials = `${first.charAt(0)}${last.charAt(0)}`.trim();
+
     if (initials) return initials.toUpperCase();
     return (org.slice(0, 2) || 'VC').toUpperCase();
   }
@@ -188,16 +192,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function encodeSharePayload(obj) {
-    return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
+    try {
+      return btoa(encodeURIComponent(JSON.stringify(obj)));
+    } catch (_) {
+      return '';
+    }
   }
 
   function decodeSharePayload(str) {
-    return JSON.parse(decodeURIComponent(escape(atob(str))));
+    return JSON.parse(decodeURIComponent(atob(str)));
   }
 
   function buildShareLink() {
     const payload = getSharePayload();
     const encoded = encodeSharePayload(payload);
+    if (!encoded) return '';
     return `${window.location.origin}${window.location.pathname}#c=${encodeURIComponent(encoded)}`;
   }
 
@@ -319,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getFallbackQrUrl(text) {
-    return 'https://api.qrserver.com/v1/create-qr-code/?size=640x640&margin=16&data=' + encodeURIComponent(text);
+    return `https://api.qrserver.com/v1/create-qr-code/?size=640x640&margin=16&data=${encodeURIComponent(text)}`;
   }
 
   async function renderQrCanvas(text) {
@@ -338,6 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     lastQrMode = 'canvas';
+    lastQrImageUrl = '';
     showCanvas();
   }
 
@@ -370,18 +380,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (els.readyLabel) els.readyLabel.textContent = 'Yes';
 
       setStatus(
-        `<strong>Generated.</strong><br>` +
-        `Your branded vCard QR code is ready for <b>${displayName}</b>. ` +
-        `You can download the PNG, download the VCF, or copy the share link.`
+        `<strong>Generated.</strong><br>Your branded vCard QR code is ready for <b>${escapeHtml(displayName)}</b>. You can download the PNG, download the VCF, or copy the share link.`
       );
     } catch (_) {
       renderQrFallback(vcard);
       if (els.readyLabel) els.readyLabel.textContent = 'Yes';
 
       setStatus(
-        `<strong>Generated with fallback.</strong><br>` +
-        `Your contact QR code is ready for <b>${displayName}</b>. ` +
-        `The page used the fallback QR renderer because the local QR library was unavailable.`
+        `<strong>Generated with fallback.</strong><br>Your contact QR code is ready for <b>${escapeHtml(displayName)}</b>. The page used the fallback QR renderer because the local QR library was unavailable.`
       );
     }
   }
@@ -461,6 +467,31 @@ document.addEventListener('DOMContentLoaded', () => {
     await generate();
   }
 
+  async function fallbackCopyText(text) {
+    const temp = document.createElement('textarea');
+    temp.value = text;
+    temp.setAttribute('readonly', '');
+    temp.style.position = 'fixed';
+    temp.style.top = '-9999px';
+    temp.style.opacity = '0';
+    document.body.appendChild(temp);
+    temp.select();
+    temp.setSelectionRange(0, temp.value.length);
+
+    let success = false;
+    try {
+      success = document.execCommand('copy');
+    } catch (_) {
+      success = false;
+    }
+
+    temp.remove();
+
+    if (!success) {
+      throw new Error('Copy failed');
+    }
+  }
+
   async function copyText(text, successHtml, failHtml) {
     if (!text) {
       setStatus(failHtml);
@@ -473,17 +504,20 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
       } else {
-        const temp = document.createElement('textarea');
-        temp.value = text;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand('copy');
-        temp.remove();
+        await fallbackCopyText(text);
       }
+
       setStatus(successHtml);
     } catch (_) {
       setStatus(failHtml);
     }
+  }
+
+  function safeFileName(base, fallback = 'contact') {
+    return String(base || '')
+      .replace(/[^\w\-]+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '') || fallback;
   }
 
   function downloadPng() {
@@ -492,19 +526,20 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const safeName = buildDisplayName()
-      .replace(/[^\w\-]+/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '') || 'vcard-qr';
+    const safeName = safeFileName(buildDisplayName(), 'vcard-qr');
 
     if (lastQrMode === 'canvas' && !els.qrCanvas.hidden) {
-      const link = document.createElement('a');
-      link.href = els.qrCanvas.toDataURL('image/png');
-      link.download = `${safeName}.png`;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setStatus('<strong>Downloaded.</strong><br>Your vCard QR code PNG was downloaded.');
+      try {
+        const link = document.createElement('a');
+        link.href = els.qrCanvas.toDataURL('image/png');
+        link.download = `${safeName}.png`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setStatus('<strong>Downloaded.</strong><br>Your vCard QR code PNG was downloaded.');
+      } catch (_) {
+        setStatus('<strong>Download failed.</strong><br>Unable to prepare the PNG download.');
+      }
       return;
     }
 
@@ -529,25 +564,22 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const safeName = buildDisplayName()
-      .replace(/[^\w\-]+/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '') || 'contact';
-
-    const blob = new Blob([lastVCard + '\n'], { type: 'text/vcard;charset=utf-8' });
+    const safeName = safeFileName(buildDisplayName(), 'contact');
+    const blob = new Blob([`${lastVCard}\n`], { type: 'text/vcard;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
+
     link.href = url;
     link.download = `${safeName}.vcf`;
     document.body.appendChild(link);
     link.click();
     link.remove();
-    window.setTimeout(() => URL.revokeObjectURL(url), 600);
 
+    window.setTimeout(() => URL.revokeObjectURL(url), 600);
     setStatus('<strong>Downloaded.</strong><br>Your VCF contact file was downloaded.');
   }
 
-  function loadFromShareLink() {
+  async function loadFromShareLink() {
     try {
       const hash = window.location.hash || '';
       const match = hash.match(/#c=([^&]+)/);
@@ -556,12 +588,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const payload = decodeSharePayload(decodeURIComponent(match[1]));
       applyPayloadToFields(payload);
       updateMetaOnly();
-      generate();
+      await generate();
 
       setStatus('<strong>Share link loaded.</strong><br>The contact data was restored from the shared link.');
     } catch (err) {
       console.error('Failed to load shared contact:', err);
     }
+  }
+
+  function schedulePreviewRefresh() {
+    clearTimeout(autoTimer);
+    autoTimer = setTimeout(() => {
+      updateMetaOnly();
+    }, 120);
   }
 
   els.generateBtn?.addEventListener('click', async (e) => {
@@ -620,7 +659,8 @@ document.addEventListener('DOMContentLoaded', () => {
     els.website, els.street, els.city, els.state, els.postal, els.country,
     els.note, els.brandColor
   ].forEach(el => {
-    el?.addEventListener('input', updateMetaOnly);
+    el?.addEventListener('input', schedulePreviewRefresh);
+    el?.addEventListener('change', schedulePreviewRefresh);
   });
 
   reset();
