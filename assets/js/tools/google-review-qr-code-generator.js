@@ -24,18 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
     year: document.getElementById('year')
   };
 
-  if (!els.generateBtn || !els.qrCanvas) return;
-  if (els.year) els.year.textContent = String(new Date().getFullYear());
+  if (!els.businessName || !els.reviewUrl || !els.generateBtn || !els.qrCanvas) return;
+
+  if (els.year) {
+    els.year.textContent = String(new Date().getFullYear());
+  }
 
   let lastReviewUrl = '';
   let autoTimer = null;
 
   function safeTrim(value) {
     return String(value || '').trim();
-  }
-
-  function setStatus(html) {
-    if (els.statusBox) els.statusBox.innerHTML = html;
   }
 
   function escapeHtml(str) {
@@ -47,11 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#039;');
   }
 
+  function setStatus(html) {
+    if (els.statusBox) els.statusBox.innerHTML = html;
+  }
+
   function normalizeUrl(value) {
     const clean = safeTrim(value);
     if (!clean) return '';
     if (/^https?:\/\//i.test(clean)) return clean;
-    return 'https://' + clean.replace(/^\/+/, '');
+    return `https://${clean.replace(/^\/+/, '')}`;
   }
 
   function looksLikeGoogleReviewUrl(url) {
@@ -60,9 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
       value.includes('google.') ||
       value.includes('g.page') ||
       value.includes('maps.app.goo.gl') ||
-      value.includes('/review') ||
       value.includes('google.com/maps') ||
-      value.includes('google.com/local/writereview')
+      value.includes('google.com/local/writereview') ||
+      value.includes('/review')
     );
   }
 
@@ -72,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (els.charCount) els.charCount.textContent = String(url.length);
     if (els.previewName) els.previewName.textContent = businessName;
-
     if (els.previewSub) {
       els.previewSub.textContent = 'Customers can scan this QR to leave a Google review.';
     }
@@ -87,8 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="review-line">${escapeHtml(note)}</div>
         `;
       } else {
-        els.previewLines.innerHTML =
-          '<div class="review-line">A Google review link preview will appear here.</div>';
+        els.previewLines.innerHTML = '<div class="review-line">A Google review link preview will appear here.</div>';
       }
     }
 
@@ -99,18 +100,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showQr() {
     els.qrCanvas.hidden = false;
-    els.qrEmpty.hidden = true;
+    if (els.qrEmpty) els.qrEmpty.hidden = true;
   }
 
   function hideQr() {
     els.qrCanvas.hidden = true;
-    els.qrEmpty.hidden = false;
+    if (els.qrEmpty) els.qrEmpty.hidden = false;
+  }
+
+  function clearCanvas() {
+    const ctx = els.qrCanvas.getContext('2d');
+    if (ctx) {
+      ctx.clearRect(0, 0, els.qrCanvas.width, els.qrCanvas.height);
+    }
+  }
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[src="${src}"]`);
+      if (existing) {
+        if (existing.dataset.loaded === 'true') {
+          resolve();
+          return;
+        }
+        existing.addEventListener('load', () => resolve(), { once: true });
+        existing.addEventListener('error', () => reject(new Error(`Failed: ${src}`)), { once: true });
+        return;
+      }
+
+      const s = document.createElement('script');
+      s.src = src;
+      s.async = true;
+      s.addEventListener('load', () => {
+        s.dataset.loaded = 'true';
+        resolve();
+      }, { once: true });
+      s.addEventListener('error', () => reject(new Error(`Failed: ${src}`)), { once: true });
+      document.head.appendChild(s);
+    });
+  }
+
+  async function ensureQrLib() {
+    if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
+      return true;
+    }
+
+    const sources = [
+      'https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js',
+      'https://unpkg.com/qrcode@1.5.4/build/qrcode.min.js'
+    ];
+
+    for (const src of sources) {
+      try {
+        await loadScript(src);
+        if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
+          return true;
+        }
+      } catch (_) {
+        // try next source
+      }
+    }
+
+    return false;
   }
 
   async function renderQr(text) {
-    if (!window.QRCode || typeof window.QRCode.toCanvas !== 'function') {
-      throw new Error('QRCode library unavailable');
+    const ok = await ensureQrLib();
+    if (!ok) {
+      throw new Error('QR library unavailable');
     }
+
+    // Ensure visible size is consistent
+    els.qrCanvas.width = 320;
+    els.qrCanvas.height = 320;
 
     await window.QRCode.toCanvas(els.qrCanvas, text, {
       width: 320,
@@ -125,10 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function generate() {
     updateMeta();
+
     const url = normalizeUrl(els.reviewUrl.value);
     lastReviewUrl = url;
 
     if (!url) {
+      clearCanvas();
       hideQr();
       if (els.readyLabel) els.readyLabel.textContent = 'No';
       setStatus('<strong>Not enough data.</strong><br>Paste your Google review link first.');
@@ -142,16 +206,17 @@ document.addEventListener('DOMContentLoaded', () => {
       showQr();
       if (els.readyLabel) els.readyLabel.textContent = 'Yes';
 
-      const note = looksLikeGoogleReviewUrl(url)
+      const msg = looksLikeGoogleReviewUrl(url)
         ? 'Your Google review QR code is ready.'
         : 'Your QR code is ready, but the link may not be a standard Google review URL.';
 
-      setStatus(`<strong>Generated.</strong><br>${note}`);
+      setStatus(`<strong>Generated.</strong><br>${msg}`);
     } catch (err) {
-      console.error('Review QR generation failed:', err);
+      console.error('QR generation failed:', err);
+      clearCanvas();
       hideQr();
       if (els.readyLabel) els.readyLabel.textContent = 'No';
-      setStatus('<strong>Generation failed.</strong><br>The review QR code could not be rendered.');
+      setStatus('<strong>Generation failed.</strong><br>The QR code could not be rendered. Check that the QR library is loading and try again.');
     }
   }
 
@@ -198,31 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function clearCanvas() {
-    const ctx = els.qrCanvas.getContext('2d');
-    if (ctx) {
-      ctx.clearRect(0, 0, els.qrCanvas.width, els.qrCanvas.height);
-    }
-  }
-
-  function clearAll() {
-    els.businessName.value = '';
-    els.reviewUrl.value = '';
-    lastReviewUrl = '';
-    clearCanvas();
-    hideQr();
-    if (els.readyLabel) els.readyLabel.textContent = 'No';
-    updateMeta();
-    setStatus('<strong>Cleared.</strong><br>Your business name and review link were reset.');
-  }
-
-  async function loadSample() {
-    els.businessName.value = 'InstantQR Coffee';
-    els.reviewUrl.value = 'https://g.page/r/EXAMPLE/review';
-    updateMeta();
-    await generate();
-  }
-
   function openReviewLink() {
     const url = lastReviewUrl || normalizeUrl(els.reviewUrl.value);
     if (!url) {
@@ -251,6 +291,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function clearAll() {
+    els.businessName.value = '';
+    els.reviewUrl.value = '';
+    lastReviewUrl = '';
+
+    clearCanvas();
+    hideQr();
+
+    if (els.readyLabel) els.readyLabel.textContent = 'No';
+    updateMeta();
+    setStatus('<strong>Cleared.</strong><br>Your business name and review link were reset.');
+  }
+
+  async function loadSample() {
+    els.businessName.value = 'InstantQR Coffee';
+    els.reviewUrl.value = 'https://g.page/r/EXAMPLE/review';
+    updateMeta();
+    await generate();
+  }
+
   function scheduleAutoUpdate() {
     clearTimeout(autoTimer);
     autoTimer = setTimeout(() => {
@@ -258,45 +318,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 120);
   }
 
-  els.generateBtn?.addEventListener('click', async () => {
+  els.generateBtn.addEventListener('click', async () => {
     await generate();
   });
 
-  els.sampleBtn?.addEventListener('click', async () => {
-    await loadSample();
-  });
+  if (els.sampleBtn) {
+    els.sampleBtn.addEventListener('click', async () => {
+      await loadSample();
+    });
+  }
 
-  els.clearBtn?.addEventListener('click', () => {
-    clearAll();
-  });
+  if (els.clearBtn) {
+    els.clearBtn.addEventListener('click', () => {
+      clearAll();
+    });
+  }
 
-  els.copyLinkBtn?.addEventListener('click', async () => {
-    await copyText(
-      lastReviewUrl || normalizeUrl(els.reviewUrl.value),
-      'The review link was copied.',
-      'Nothing to copy.'
-    );
-  });
+  if (els.copyLinkBtn) {
+    els.copyLinkBtn.addEventListener('click', async () => {
+      await copyText(
+        lastReviewUrl || normalizeUrl(els.reviewUrl.value),
+        'The review link was copied.',
+        'Nothing to copy.'
+      );
+    });
+  }
 
-  els.openLinkBtn?.addEventListener('click', () => {
-    openReviewLink();
-  });
+  if (els.openLinkBtn) {
+    els.openLinkBtn.addEventListener('click', () => {
+      openReviewLink();
+    });
+  }
 
-  els.downloadBtn?.addEventListener('click', () => {
-    downloadPng();
-  });
+  if (els.downloadBtn) {
+    els.downloadBtn.addEventListener('click', () => {
+      downloadPng();
+    });
+  }
 
   [els.businessName, els.reviewUrl].forEach((el) => {
-    el?.addEventListener('input', scheduleAutoUpdate);
-    el?.addEventListener('change', scheduleAutoUpdate);
+    if (!el) return;
+    el.addEventListener('input', scheduleAutoUpdate);
+    el.addEventListener('change', scheduleAutoUpdate);
   });
 
-  els.reviewUrl?.addEventListener('keydown', async (e) => {
-    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
-      e.preventDefault();
-      await generate();
-    }
-  });
+  if (els.reviewUrl) {
+    els.reviewUrl.addEventListener('keydown', async (e) => {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        await generate();
+      }
+    });
+  }
 
   updateMeta();
   hideQr();
