@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     !els.businessName ||
     !els.reviewUrl ||
     !els.generateBtn ||
-    !els.qrCanvas ||
     !els.qrEmpty ||
     !els.statusBox
   ) {
@@ -40,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let lastReviewUrl = '';
+  let lastQrImageUrl = '';
   let autoTimer = null;
-  let qriousInstance = null;
   let isGenerating = false;
 
   function safeTrim(value) {
@@ -117,137 +116,83 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function showQr() {
-    els.qrCanvas.hidden = false;
+  function getQrShell() {
+    return els.qrEmpty.parentElement;
+  }
+
+  function getOrCreatePreviewImage() {
+    const shell = getQrShell();
+    let img = shell.querySelector('#qrPreviewImage');
+
+    if (!img) {
+      img = document.createElement('img');
+      img.id = 'qrPreviewImage';
+      img.alt = 'Generated Google review QR code';
+      img.style.maxWidth = 'min(320px, 100%)';
+      img.style.width = '100%';
+      img.style.height = 'auto';
+      img.style.display = 'block';
+      img.style.background = '#ffffff';
+      img.style.borderRadius = '12px';
+      img.style.boxShadow = '0 10px 25px rgba(0,0,0,.25)';
+      img.hidden = true;
+      shell.appendChild(img);
+    }
+
+    return img;
+  }
+
+  function showQrImage(src) {
+    const img = getOrCreatePreviewImage();
+    img.src = src;
+    img.hidden = false;
+
+    if (els.qrCanvas) {
+      els.qrCanvas.hidden = true;
+    }
     els.qrEmpty.hidden = true;
   }
 
   function hideQr() {
-    els.qrCanvas.hidden = true;
+    const shell = getQrShell();
+    const img = shell.querySelector('#qrPreviewImage');
+
+    if (img) {
+      img.hidden = true;
+      img.removeAttribute('src');
+    }
+
+    if (els.qrCanvas) {
+      els.qrCanvas.hidden = true;
+      const ctx = els.qrCanvas.getContext('2d');
+      if (ctx) {
+        ctx.clearRect(0, 0, els.qrCanvas.width, els.qrCanvas.height);
+      }
+    }
+
     els.qrEmpty.hidden = false;
   }
 
-  function resetCanvasElement(size = 320) {
-    const oldCanvas = els.qrCanvas;
-    const freshCanvas = oldCanvas.cloneNode(false);
+  function buildQrApiUrl(text) {
+    const params = new URLSearchParams({
+      data: text,
+      size: '640x640',
+      margin: '20',
+      color: '000000',
+      bgcolor: 'ffffff',
+      format: 'png'
+    });
 
-    freshCanvas.id = oldCanvas.id;
-    freshCanvas.width = size;
-    freshCanvas.height = size;
-    freshCanvas.hidden = oldCanvas.hidden;
-    freshCanvas.style.width = '100%';
-    freshCanvas.style.maxWidth = `${size}px`;
-    freshCanvas.style.height = 'auto';
-    freshCanvas.style.display = 'block';
-    freshCanvas.style.background = '#ffffff';
-
-    oldCanvas.parentNode.replaceChild(freshCanvas, oldCanvas);
-    els.qrCanvas = freshCanvas;
-
-    qriousInstance = null;
+    return `https://api.qrserver.com/v1/create-qr-code/?${params.toString()}`;
   }
 
-  function clearCanvasCompletely() {
-    resetCanvasElement(320);
-    const ctx = els.qrCanvas.getContext('2d');
-    if (ctx) {
-      ctx.clearRect(0, 0, els.qrCanvas.width, els.qrCanvas.height);
-    }
-  }
-
-  function loadScript(src) {
+  async function preloadImage(url) {
     return new Promise((resolve, reject) => {
-      const existing = document.querySelector(`script[src="${src}"]`);
-      if (existing) {
-        if (existing.dataset.loaded === 'true') {
-          resolve();
-          return;
-        }
-        existing.addEventListener('load', () => resolve(), { once: true });
-        existing.addEventListener('error', () => reject(new Error(`Failed to load ${src}`)), { once: true });
-        return;
-      }
-
-      const s = document.createElement('script');
-      s.src = src;
-      s.async = true;
-      s.addEventListener('load', () => {
-        s.dataset.loaded = 'true';
-        resolve();
-      }, { once: true });
-      s.addEventListener('error', () => reject(new Error(`Failed to load ${src}`)), { once: true });
-      document.head.appendChild(s);
+      const img = new Image();
+      img.onload = () => resolve(url);
+      img.onerror = () => reject(new Error('Image failed to load'));
+      img.src = url;
     });
-  }
-
-  async function ensureQrEngine() {
-    if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
-      return 'qrcode';
-    }
-
-    if (window.QRious) {
-      return 'qrious';
-    }
-
-    const qriousSources = [
-      'https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js',
-      'https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js'
-    ];
-
-    for (const src of qriousSources) {
-      try {
-        await loadScript(src);
-        if (window.QRious) {
-          return 'qrious';
-        }
-      } catch (_) {
-        // try next source
-      }
-    }
-
-    throw new Error('No QR engine available');
-  }
-
-  async function renderWithQRCodeLib(text) {
-    resetCanvasElement(320);
-    await window.QRCode.toCanvas(els.qrCanvas, text, {
-      width: 320,
-      margin: 2,
-      errorCorrectionLevel: 'M',
-      color: {
-        dark: '#000000',
-        light: '#ffffff'
-      }
-    });
-  }
-
-  function renderWithQRious(text) {
-    resetCanvasElement(320);
-    qriousInstance = new window.QRious({
-      element: els.qrCanvas,
-      value: text,
-      size: 320,
-      level: 'M',
-      padding: 10,
-      foreground: '#000000',
-      background: '#ffffff'
-    });
-  }
-
-  async function renderQr(text) {
-    const engine = await ensureQrEngine();
-
-    if (engine === 'qrcode') {
-      await renderWithQRCodeLib(text);
-      return;
-    }
-
-    if (engine === 'qrious') {
-      renderWithQRious(text);
-      return;
-    }
-
-    throw new Error('Unable to render QR');
   }
 
   async function generate() {
@@ -260,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lastReviewUrl = url;
 
     if (!url) {
-      clearCanvasCompletely();
       hideQr();
       if (els.readyLabel) {
         els.readyLabel.textContent = 'No';
@@ -273,8 +217,11 @@ document.addEventListener('DOMContentLoaded', () => {
     setStatus('<strong>Generating...</strong><br>Rendering your review QR code...');
 
     try {
-      await renderQr(url);
-      showQr();
+      const qrUrl = `${buildQrApiUrl(url)}&t=${Date.now()}`;
+      await preloadImage(qrUrl);
+
+      lastQrImageUrl = qrUrl;
+      showQrImage(qrUrl);
 
       if (els.readyLabel) {
         els.readyLabel.textContent = 'Yes';
@@ -287,14 +234,13 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(`<strong>Generated.</strong><br>${msg}`);
     } catch (err) {
       console.error('QR generation failed:', err);
-      clearCanvasCompletely();
       hideQr();
 
       if (els.readyLabel) {
         els.readyLabel.textContent = 'No';
       }
 
-      setStatus('<strong>Generation failed.</strong><br>The QR code could not be rendered. The QR library may be blocked or unavailable.');
+      setStatus('<strong>Generation failed.</strong><br>The QR code could not be loaded right now. Please try again.');
     } finally {
       isGenerating = false;
     }
@@ -352,22 +298,35 @@ document.addEventListener('DOMContentLoaded', () => {
     window.open(url, '_blank', 'noopener,noreferrer');
   }
 
-  function downloadPng() {
-    if (els.qrCanvas.hidden) {
+  async function downloadPng() {
+    if (!lastQrImageUrl) {
       setStatus('<strong>Nothing to download.</strong><br>Generate a QR code first.');
       return;
     }
 
     try {
+      const response = await fetch(lastQrImageUrl, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+
       const link = document.createElement('a');
-      link.href = els.qrCanvas.toDataURL('image/png');
+      link.href = objectUrl;
       link.download = 'google-review-qr-code.png';
       document.body.appendChild(link);
       link.click();
       link.remove();
+
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+
       setStatus('<strong>Downloaded.</strong><br>Your Google review QR code PNG was downloaded.');
-    } catch (_) {
-      setStatus('<strong>Download failed.</strong><br>Unable to prepare the PNG download.');
+    } catch (err) {
+      console.error('Download failed:', err);
+
+      // fallback: open image in new tab
+      window.open(lastQrImageUrl, '_blank', 'noopener,noreferrer');
+      setStatus('<strong>Opened image.</strong><br>Your browser blocked direct download, so the QR image was opened in a new tab.');
     }
   }
 
@@ -375,8 +334,8 @@ document.addEventListener('DOMContentLoaded', () => {
     els.businessName.value = '';
     els.reviewUrl.value = '';
     lastReviewUrl = '';
+    lastQrImageUrl = '';
 
-    clearCanvasCompletely();
     hideQr();
 
     if (els.readyLabel) {
@@ -392,8 +351,6 @@ document.addEventListener('DOMContentLoaded', () => {
     els.businessName.value = 'InstantQR Coffee';
     els.reviewUrl.value = 'https://g.page/r/EXAMPLE/review';
     updateMeta();
-
-    await new Promise((resolve) => requestAnimationFrame(() => resolve()));
     await generate();
   }
 
@@ -437,8 +394,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (els.downloadBtn) {
-    els.downloadBtn.addEventListener('click', () => {
-      downloadPng();
+    els.downloadBtn.addEventListener('click', async () => {
+      await downloadPng();
     });
   }
 
