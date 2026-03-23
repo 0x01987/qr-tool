@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Menu Viewer | InstantQR</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#0f172a" />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --text:#e7eefc;
+      --muted:#a9b7d6;
+      --border:rgba(255,255,255,.10);
+      --card:#111c34;
+      --radius:22px;
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(105,166,255,.22), transparent 55%),
+        radial-gradient(1000px 600px at 85% 15%, rgba(25,195,125,.14), transparent 50%),
+        linear-gradient(180deg, var(--bg), #070b14 60%, #060912);
+      min-height:100vh;
+    }
+    .wrap{
+      max-width:860px;
+      margin:0 auto;
+      padding:20px;
+    }
+    .card{
+      margin-top:18px;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(17,28,52,.96), rgba(12,21,38,.98));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .hero{
+      padding:22px;
+      background:linear-gradient(135deg, var(--brand, #0f766e), rgba(10,15,28,.96));
+    }
+    .badge{
+      display:inline-flex;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.18);
+      font-size:12px;
+      font-weight:800;
+      color:#fff;
+    }
+    h1{
+      margin:14px 0 8px;
+      font-size:clamp(30px, 5vw, 42px);
+      line-height:1.05;
+    }
+    .sub{
+      margin:0;
+      color:rgba(255,255,255,.88);
+      line-height:1.65;
+      white-space:pre-wrap;
+    }
+    .content{
+      padding:20px;
+      display:grid;
+      gap:14px;
+    }
+    .line{
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      line-height:1.7;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+    .muted{
+      color:var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <div class="hero" id="hero">
+        <div class="badge" id="businessName">Menu</div>
+        <h1 id="menuTitle">Menu Viewer</h1>
+        <p class="sub" id="hoursText">Scan opened successfully.</p>
+      </div>
+      <div class="content">
+        <div class="line" id="menuText">No menu details found.</div>
+        <div class="line muted" id="notesText">No additional notes.</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      function base64UrlDecode(str) {
+        const normalized = str.replace(/-/g, '+').replace(/_/g, '/');
+        const padded = normalized + '='.repeat((4 - normalized.length % 4) % 4);
+        const binary = atob(padded);
+        const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+        return new TextDecoder().decode(bytes);
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const encoded = params.get('d');
+
+      if (!encoded) return;
+
+      try {
+        const decoded = JSON.parse(base64UrlDecode(encoded));
+
+        const businessName = decoded.businessName || 'Menu';
+        const menuTitle = decoded.menuTitle || 'Menu Viewer';
+        const hoursText = decoded.hoursText || 'Open for service';
+        const menuText = decoded.menuText || 'No menu details found.';
+        const notesText = decoded.notesText || 'No additional notes.';
+        const themeColor = decoded.themeColor || '#0f766e';
+
+        document.getElementById('businessName').textContent = businessName;
+        document.getElementById('menuTitle').textContent = menuTitle;
+        document.getElementById('hoursText').textContent = hoursText;
+        document.getElementById('menuText').textContent = menuText;
+        document.getElementById('notesText').textContent = notesText;
+        document.getElementById('hero').style.setProperty('--brand', themeColor);
+        document.title = menuTitle + ' | InstantQR';
+      } catch (e) {
+        document.getElementById('menuText').textContent = 'Could not load menu details.';
+      }
+    })();
+  </script>
+</body>
+</html>
