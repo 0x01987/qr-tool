@@ -16,28 +16,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const sizeOut = document.getElementById('sizeOut');
   const levelOut = document.getElementById('levelOut');
 
-  if (!textEl || !sizeEl || !levelEl || !qrWrap) return;
+  if (
+    !textEl ||
+    !sizeEl ||
+    !levelEl ||
+    !generateBtn ||
+    !downloadBtn ||
+    !copyUrlBtn ||
+    !shareBtn ||
+    !clearBtn ||
+    !qrWrap ||
+    !statusEl ||
+    !charsOut ||
+    !sizeOut ||
+    !levelOut
+  ) {
+    return;
+  }
 
   let qr = null;
   let canvas = null;
   let autoTimer = null;
   let libraryReady = false;
+  let hasGenerated = false;
 
   function setStatus(message, kind = '') {
-    if (!statusEl) return;
-    statusEl.className = 'status-box' + (kind ? ' ' + kind : '');
+    statusEl.className = `status-box${kind ? ` ${kind}` : ''}`;
     statusEl.innerHTML = message || 'Ready.';
-  }
-
-  function updateSummary() {
-    if (charsOut) charsOut.textContent = `${textEl.value.length} chars`;
-    if (sizeOut) sizeOut.textContent = `${getSafeSize()} px`;
-    if (levelOut) levelOut.textContent = levelEl.value || 'M';
   }
 
   function getRawValue(raw) {
     const value = String(raw || '').trim();
-    if (!value) throw new Error('Please enter a website URL.');
+    if (!value) {
+      throw new Error('Please enter a website URL.');
+    }
     return value;
   }
 
@@ -47,10 +59,23 @@ document.addEventListener('DOMContentLoaded', () => {
     return Math.min(1024, Math.max(128, n));
   }
 
+  function normalizeSizeInput() {
+    const safe = getSafeSize();
+    sizeEl.value = String(safe);
+    return safe;
+  }
+
+  function updateSummary() {
+    charsOut.textContent = `${String(textEl.value || '').length} chars`;
+    sizeOut.textContent = `${getSafeSize()} px`;
+    levelOut.textContent = levelEl.value || 'M';
+  }
+
   function resetPreview() {
     qrWrap.innerHTML = '<div class="qr-placeholder">Your URL QR code will appear here.</div>';
     qr = null;
     canvas = null;
+    hasGenerated = false;
   }
 
   function ensureCanvas(size) {
@@ -63,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.style.maxWidth = `${size}px`;
     canvas.style.height = 'auto';
     canvas.style.display = 'block';
+    canvas.style.background = '#ffffff';
 
     const shell = document.createElement('div');
     shell.className = 'qr-canvas-shell';
@@ -77,7 +103,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function loadScript(src) {
     return new Promise((resolve, reject) => {
       const existing = document.querySelector(`script[src="${src}"]`);
+
       if (existing) {
+        if (existing.dataset.loaded === 'true') {
+          resolve();
+          return;
+        }
         existing.addEventListener('load', resolve, { once: true });
         existing.addEventListener('error', reject, { once: true });
         return;
@@ -86,8 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const s = document.createElement('script');
       s.src = src;
       s.async = true;
-      s.onload = resolve;
-      s.onerror = reject;
+      s.addEventListener('load', () => {
+        s.dataset.loaded = 'true';
+        resolve();
+      }, { once: true });
+      s.addEventListener('error', reject, { once: true });
       document.head.appendChild(s);
     });
   }
@@ -110,7 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
           libraryReady = true;
           return;
         }
-      } catch (_) {}
+      } catch (_) {
+        // Try next source
+      }
     }
 
     throw new Error('QR library failed to load.');
@@ -140,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const size = getSafeSize();
+    const size = normalizeSizeInput();
     const level = levelEl.value || 'M';
     const el = ensureCanvas(size);
 
@@ -164,16 +200,22 @@ document.addEventListener('DOMContentLoaded', () => {
         qr.foreground = 'black';
       }
 
+      el.width = size;
+      el.height = size;
       el.style.maxWidth = `${size}px`;
+
+      hasGenerated = true;
+      updateSummary();
       setStatus('QR code generated successfully.', 'ok');
     } catch (err) {
+      hasGenerated = false;
       setStatus('Unable to generate the QR code. Please try again.', 'bad');
       console.error(err);
     }
   }
 
   function downloadQr() {
-    if (!canvas) {
+    if (!hasGenerated || !canvas) {
       setStatus('Generate a QR code before downloading.', 'bad');
       return;
     }
@@ -191,6 +233,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  async function fallbackCopyText(text) {
+    const helper = document.createElement('textarea');
+    helper.value = text;
+    helper.setAttribute('readonly', '');
+    helper.style.position = 'fixed';
+    helper.style.top = '-9999px';
+    helper.style.opacity = '0';
+    document.body.appendChild(helper);
+    helper.select();
+    helper.setSelectionRange(0, helper.value.length);
+
+    let success = false;
+    try {
+      success = document.execCommand('copy');
+    } catch (_) {
+      success = false;
+    }
+
+    helper.remove();
+
+    if (!success) {
+      throw new Error('Copy failed');
+    }
+  }
+
+  async function safeCopyText(text) {
+    if (window.InstantQR && typeof window.InstantQR.copyText === 'function') {
+      await window.InstantQR.copyText(text);
+      return;
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    await fallbackCopyText(text);
+  }
+
   async function copyUrlValue() {
     const value = String(textEl.value || '').trim();
     if (!value) {
@@ -199,11 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      if (window.InstantQR && typeof window.InstantQR.copyText === 'function') {
-        await window.InstantQR.copyText(value);
-      } else {
-        await navigator.clipboard.writeText(value);
-      }
+      await safeCopyText(value);
       setStatus('URL copied to clipboard.', 'ok');
     } catch (_) {
       setStatus('Unable to copy the URL.', 'bad');
@@ -211,23 +288,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function copyShareLink() {
-    const url = new URL(window.location.href);
+    const current = new URL(window.location.href);
     const value = String(textEl.value || '').trim();
     const size = getSafeSize();
     const level = levelEl.value || 'M';
 
-    if (value) url.searchParams.set('url', value);
-    else url.searchParams.delete('url');
+    if (value) {
+      current.searchParams.set('url', value);
+    } else {
+      current.searchParams.delete('url');
+    }
 
-    url.searchParams.set('size', String(size));
-    url.searchParams.set('level', level);
+    current.searchParams.set('size', String(size));
+    current.searchParams.set('level', level);
 
     try {
-      if (window.InstantQR && typeof window.InstantQR.copyText === 'function') {
-        await window.InstantQR.copyText(url.toString());
-      } else {
-        await navigator.clipboard.writeText(url.toString());
-      }
+      await safeCopyText(current.toString());
       setStatus('Share link copied to clipboard.', 'ok');
     } catch (_) {
       setStatus('Unable to copy share link.', 'bad');
@@ -240,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
     levelEl.value = 'M';
     resetPreview();
     updateSummary();
-    setStatus('Ready. Enter a URL and click <strong>Generate</strong>.');
+    setStatus('Ready. Enter a website URL and click <strong>Generate</strong>.');
     textEl.focus();
   }
 
@@ -249,17 +325,21 @@ document.addEventListener('DOMContentLoaded', () => {
     autoTimer = setTimeout(() => {
       if (String(textEl.value || '').trim()) {
         generateQr();
+      } else {
+        updateSummary();
       }
     }, 350);
   }
 
-  function initFromQuery() {
+  async function initFromQuery() {
     const params = new URLSearchParams(window.location.search);
     const paramUrl = params.get('url');
     const paramSize = params.get('size');
     const paramLevel = params.get('level');
 
-    if (paramUrl) textEl.value = paramUrl;
+    if (paramUrl) {
+      textEl.value = paramUrl;
+    }
 
     if (paramSize) {
       const sizeNum = parseInt(paramSize, 10);
@@ -272,16 +352,19 @@ document.addEventListener('DOMContentLoaded', () => {
       levelEl.value = paramLevel.toUpperCase();
     }
 
+    normalizeSizeInput();
     updateSummary();
 
-    if (paramUrl) generateQr();
+    if (paramUrl) {
+      await generateQr();
+    }
   }
 
-  generateBtn?.addEventListener('click', generateQr);
-  downloadBtn?.addEventListener('click', downloadQr);
-  copyUrlBtn?.addEventListener('click', copyUrlValue);
-  shareBtn?.addEventListener('click', copyShareLink);
-  clearBtn?.addEventListener('click', clearAll);
+  generateBtn.addEventListener('click', generateQr);
+  downloadBtn.addEventListener('click', downloadQr);
+  copyUrlBtn.addEventListener('click', copyUrlValue);
+  shareBtn.addEventListener('click', copyShareLink);
+  clearBtn.addEventListener('click', clearAll);
 
   textEl.addEventListener('input', () => {
     updateSummary();
@@ -296,28 +379,30 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   sizeEl.addEventListener('input', updateSummary);
+
   sizeEl.addEventListener('change', () => {
+    normalizeSizeInput();
     updateSummary();
-    if (canvas) {
-      qr = null;
-      canvas = null;
-      resetPreview();
-      if (String(textEl.value || '').trim()) generateQr();
+    if (hasGenerated) {
+      generateQr();
     }
   });
 
   levelEl.addEventListener('change', () => {
     updateSummary();
-    if (canvas) generateQr();
+    if (hasGenerated || String(textEl.value || '').trim()) {
+      maybeAutoGenerate();
+    }
   });
 
   textEl.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
       generateQr();
     }
   });
 
+  normalizeSizeInput();
   updateSummary();
   initFromQuery();
 });
