@@ -17,14 +17,20 @@ document.addEventListener('DOMContentLoaded', () => {
     previewSub: document.getElementById('previewSub'),
     previewLines: document.getElementById('previewLines'),
 
-    qrCanvas: document.getElementById('qrCanvas'),
-    qrEmpty: document.getElementById('qrEmpty'),
+    qrShell: document.getElementById('qrShell'),
     outputCode: document.getElementById('outputCode'),
     statusBox: document.getElementById('statusBox'),
     year: document.getElementById('year')
   };
 
-  if (!els.businessName || !els.reviewUrl || !els.generateBtn || !els.qrEmpty || !els.statusBox) {
+  if (
+    !els.businessName ||
+    !els.reviewUrl ||
+    !els.generateBtn ||
+    !els.qrShell ||
+    !els.outputCode ||
+    !els.statusBox
+  ) {
     return;
   }
 
@@ -94,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const note = looksLikeGoogleReviewUrl(url)
           ? 'Google review link detected.'
           : 'This does not look like a standard Google review URL, but it can still be encoded.';
-
         els.previewLines.innerHTML = `
           <div class="review-line">${escapeHtml(url)}</div>
           <div class="review-line">${escapeHtml(note)}</div>
@@ -105,74 +110,26 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    if (els.outputCode) {
-      els.outputCode.textContent = url || 'No review link generated yet.';
-    }
+    els.outputCode.textContent = url || 'No review link generated yet.';
   }
 
-  function getQrShell() {
-    return els.qrEmpty.parentElement;
+  function renderEmptyState() {
+    els.qrShell.innerHTML = `
+      <div class="qr-empty" id="qrEmpty">
+        Enter your review link, then click <strong>Generate QR Code</strong>.
+      </div>
+    `;
   }
 
-  function getOrCreatePreviewImage() {
-    const shell = getQrShell();
-    let img = shell.querySelector('#qrPreviewImage');
-
-    if (!img) {
-      img = document.createElement('img');
-      img.id = 'qrPreviewImage';
-      img.alt = 'Generated Google review QR code';
-      img.style.maxWidth = 'min(320px, 100%)';
-      img.style.width = '100%';
-      img.style.height = 'auto';
-      img.style.display = 'block';
-      img.style.background = '#ffffff';
-      img.style.borderRadius = '12px';
-      img.style.boxShadow = '0 10px 25px rgba(0,0,0,.25)';
-      img.hidden = true;
-      shell.appendChild(img);
-    }
-
-    return img;
-  }
-
-  function showQrImage(src) {
-    const img = getOrCreatePreviewImage();
-    img.src = src;
-    img.hidden = false;
-
-    if (els.qrCanvas) {
-      els.qrCanvas.hidden = true;
-      els.qrCanvas.style.display = 'none';
-    }
-
-    els.qrEmpty.hidden = true;
-    els.qrEmpty.style.display = 'none';
-  }
-
-  function hideQr() {
-    const shell = getQrShell();
-    const img = shell.querySelector('#qrPreviewImage');
-
-    if (img) {
-      img.hidden = true;
-      img.style.display = 'none';
-      img.removeAttribute('src');
-    }
-
-    if (els.qrCanvas) {
-      const ctx = els.qrCanvas.getContext('2d');
-      if (ctx) {
-        ctx.clearRect(0, 0, els.qrCanvas.width, els.qrCanvas.height);
-      }
-      els.qrCanvas.hidden = true;
-      els.qrCanvas.style.display = 'none';
-      els.qrCanvas.width = 320;
-      els.qrCanvas.height = 320;
-    }
-
-    els.qrEmpty.hidden = false;
-    els.qrEmpty.style.display = 'block';
+  function renderQrImage(src) {
+    els.qrShell.innerHTML = `
+      <img
+        id="qrPreviewImage"
+        class="qr-preview-image"
+        src="${src}"
+        alt="Generated Google review QR code"
+      />
+    `;
   }
 
   function buildQrApiUrl(text) {
@@ -207,10 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
     lastReviewUrl = url;
 
     if (!url) {
-      hideQr();
-      if (els.readyLabel) {
-        els.readyLabel.textContent = 'No';
-      }
+      renderEmptyState();
+      if (els.readyLabel) els.readyLabel.textContent = 'No';
       setStatus('<strong>Not enough data.</strong><br>Paste your Google review link first.');
       isGenerating = false;
       return;
@@ -223,11 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
       await preloadImage(qrUrl);
 
       lastQrImageUrl = qrUrl;
-      showQrImage(qrUrl);
+      renderQrImage(qrUrl);
 
-      if (els.readyLabel) {
-        els.readyLabel.textContent = 'Yes';
-      }
+      if (els.readyLabel) els.readyLabel.textContent = 'Yes';
 
       const msg = looksLikeGoogleReviewUrl(url)
         ? 'Your Google review QR code is ready.'
@@ -236,12 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(`<strong>Generated.</strong><br>${msg}`);
     } catch (err) {
       console.error('QR generation failed:', err);
-      hideQr();
-
-      if (els.readyLabel) {
-        els.readyLabel.textContent = 'No';
-      }
-
+      renderEmptyState();
+      if (els.readyLabel) els.readyLabel.textContent = 'No';
       setStatus('<strong>Generation failed.</strong><br>The QR code could not be loaded right now. Please try again.');
     } finally {
       isGenerating = false;
@@ -320,8 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
       link.click();
       link.remove();
 
-      setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
-
+      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
       setStatus('<strong>Downloaded.</strong><br>Your Google review QR code PNG was downloaded.');
     } catch (err) {
       console.error('Download failed:', err);
@@ -336,11 +284,9 @@ document.addEventListener('DOMContentLoaded', () => {
     lastReviewUrl = '';
     lastQrImageUrl = '';
 
-    hideQr();
+    renderEmptyState();
 
-    if (els.readyLabel) {
-      els.readyLabel.textContent = 'No';
-    }
+    if (els.readyLabel) els.readyLabel.textContent = 'No';
 
     updateMeta();
     setStatus('<strong>Cleared.</strong><br>Your business name and review link were reset.');
@@ -413,5 +359,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   updateMeta();
-  hideQr();
+  renderEmptyState();
 });
