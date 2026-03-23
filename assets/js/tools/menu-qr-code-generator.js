@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     previewMeta: $('previewMeta')
   };
 
-  if (!els.generateBtn || !els.sampleBtn || !els.clearBtn) return;
+  if (!els.generateBtn) return;
 
   let currentMode = 'url';
   let lastPayload = '';
@@ -112,23 +112,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const parts = [];
 
-    if (businessName) parts.push('Business: ' + businessName);
-    if (menuTitle) parts.push('Menu: ' + menuTitle);
+    if (businessName) parts.push(businessName);
+    if (menuTitle) parts.push(menuTitle);
     if (hoursText) parts.push('Hours: ' + hoursText);
-    if (menuText) parts.push('Items:\n' + menuText);
-    if (notesText) parts.push('Notes:\n' + notesText);
+    if (menuText) parts.push(menuText);
+    if (notesText) parts.push('Notes: ' + notesText);
 
     return parts.join('\n\n').trim();
   }
 
   function getPayload() {
-    return currentMode === 'url'
-      ? normalizeUrl(els.menuUrl.value)
-      : buildTextPayload();
+    if (currentMode === 'url') {
+      return normalizeUrl(els.menuUrl.value);
+    }
+    return buildTextPayload();
   }
 
   function getPrimaryTarget() {
-    return getPayload();
+    if (currentMode === 'url') {
+      return normalizeUrl(els.menuUrl.value);
+    }
+    return buildTextPayload();
   }
 
   function updatePreviewCard() {
@@ -214,7 +218,12 @@ document.addEventListener('DOMContentLoaded', function () {
     lastPayload = payload;
     showQr(qrUrl);
     els.readyLabel.textContent = 'Yes';
-    setStatus('<strong>Generated.</strong><br>Your menu QR code is ready. You can download the PNG or copy the payload.');
+
+    if (currentMode === 'text') {
+      setStatus('<strong>Generated.</strong><br>Your Menu Text QR contains plain text, so scanners should show text instead of opening a browser.');
+    } else {
+      setStatus('<strong>Generated.</strong><br>Your Menu URL QR is ready. Scanning it will open the linked menu page.');
+    }
   }
 
   function resetTool() {
