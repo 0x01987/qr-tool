@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>Menu QR Code Generator | Restaurant Menu QR Code Maker | InstantQR</title>
-  <meta name="description" content="Create a menu QR code for restaurants, cafés, bars, food trucks, and takeout menus. Use a menu URL or menu text and download the QR code as PNG." />
+  <meta name="description" content="Create a menu QR code for restaurants, cafés, bars, food trucks, and takeout menus. Use a menu URL or menu viewer QR and download the QR code as PNG." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="theme-color" content="#0f172a" />
 
@@ -135,12 +135,12 @@
         <h1>Menu QR Code Generator</h1>
         <p class="sub">
           Create a QR code for restaurant menus, café menus, drink menus, food truck menus,
-          or daily specials. Use a menu URL or menu text and download the QR code as a PNG.
+          or daily specials. For reliable cross-device scanning, menu text mode opens a clean menu viewer page on your site.
         </p>
 
         <div class="mode-switch" role="tablist" aria-label="Menu mode">
           <button class="mode-btn active" id="urlModeBtn" type="button">Menu URL QR</button>
-          <button class="mode-btn" id="textModeBtn" type="button">Menu Text QR</button>
+          <button class="mode-btn" id="textModeBtn" type="button">Menu Viewer QR</button>
         </div>
 
         <div class="form-grid">
@@ -188,20 +188,10 @@
               <option value="768">768 px</option>
             </select>
           </div>
-
-          <div class="field">
-            <label for="errorLevel">Error correction</label>
-            <select id="errorLevel">
-              <option value="L">L (smallest)</option>
-              <option value="M" selected>M (recommended)</option>
-              <option value="Q">Q</option>
-              <option value="H">H (best)</option>
-            </select>
-          </div>
         </div>
 
         <div class="helper-row">
-          <span>URL mode is best for hosted menus, PDFs, or ordering pages. Text mode is best for short menus and specials.</span>
+          <span>URL mode opens your live menu page. Menu Viewer QR opens a mobile-friendly menu page built from your text.</span>
           <span><span id="payloadCount">0</span> payload chars</span>
         </div>
 
@@ -283,7 +273,7 @@
 
           <div class="qr-shell">
             <div class="qr-empty" id="qrEmpty">
-              Add a menu URL or menu text, then click <strong>Generate QR Code</strong>.
+              Add a menu URL or menu details, then click <strong>Generate QR Code</strong>.
             </div>
             <img id="qrImage" alt="Generated menu QR code" hidden />
           </div>
@@ -304,7 +294,7 @@
 
           <div class="field" style="margin-top:12px;">
             <label for="shareOutput">Primary link / target</label>
-            <input id="shareOutput" type="text" readonly placeholder="Generated URL or text target will appear here" />
+            <input id="shareOutput" type="text" readonly placeholder="Generated URL target will appear here" />
           </div>
         </div>
 
@@ -329,34 +319,9 @@
       <div class="miniBox">
         <h2>Best practices</h2>
         <p>
-          Use URL mode when your menu is hosted online or in a PDF. Use text mode for short menus,
-          quick specials, or ordering instructions. Keep payloads concise for easier scanning.
+          Use URL mode when your menu is hosted online or in a PDF. Use Menu Viewer QR when you want reliable scanning for typed menu content across phones.
         </p>
       </div>
-    </section>
-
-    <section class="faqCard" aria-label="Frequently asked questions">
-      <h2>FAQ</h2>
-
-      <details>
-        <summary>What is a menu QR code generator?</summary>
-        <p>A menu QR code generator creates a scannable QR code that opens a restaurant menu page or stores menu details directly in the QR code.</p>
-      </details>
-
-      <details>
-        <summary>Should I use URL mode or text mode for a menu QR code?</summary>
-        <p>Use URL mode if your menu is hosted on a website, PDF, Google Drive link, or ordering page. Use text mode if you want a short menu or specials list stored directly inside the QR code.</p>
-      </details>
-
-      <details>
-        <summary>Can I create a restaurant menu QR code without a website?</summary>
-        <p>Yes. Text mode lets you encode menu items, specials, hours, or ordering instructions directly in the QR code.</p>
-      </details>
-
-      <details>
-        <summary>Can I download the menu QR code as an image?</summary>
-        <p>Yes. You can download the generated menu QR code as a PNG image.</p>
-      </details>
     </section>
 
     <footer class="footer" aria-label="Footer">
