@@ -1,17 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Analytics -->
+  <!-- Analytics / Monetization -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6213N2G8R2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config','G-6213N2G8R2',{ anonymize_ip:true });
+    gtag('config', 'G-6213N2G8R2', { anonymize_ip: true });
   </script>
 
-  <!-- AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
@@ -122,10 +122,10 @@
       },
       {
         "@type":"Question",
-        "name":"Does this tool host or store my review link?",
+        "name":"Does this tool store my review link?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"No. This version generates the QR code in your browser flow using the link you provide."
+          "text":"No. This version generates the QR code from the link you provide and does not require account creation."
         }
       },
       {
@@ -133,7 +133,7 @@
         "name":"Why use a Google Review QR code?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"A Google Review QR code reduces friction by sending customers directly to the review page. That can improve response rates because people do not need to search for your business or navigate manually."
+          "text":"A Google Review QR code reduces friction by sending customers directly to the review page, which can improve review response rates."
         }
       }
     ]
@@ -143,12 +143,16 @@
   <style>
     .review-grid{
       display:grid;
-      grid-template-columns:1.05fr .95fr;
+      grid-template-columns:1.02fr .98fr;
       gap:18px;
-      margin-top:18px;
+      margin-top:14px;
     }
 
-    .tool-card,.result-panel,.faqCard,.contentCard,.relatedCard{
+    .tool-card,
+    .result-panel,
+    .faqCard,
+    .contentCard,
+    .relatedCard{
       border-radius:var(--radius2);
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
@@ -245,7 +249,6 @@
       font-weight:800;
       cursor:pointer;
     }
-
     .mini-btn:hover{
       border-color:rgba(255,255,255,.2);
       background:rgba(255,255,255,.07);
@@ -265,7 +268,6 @@
       gap:10px;
       flex-wrap:wrap;
     }
-
     .panel-top h2{
       margin:0;
       font-size:18px;
@@ -296,19 +298,16 @@
       justify-content:center;
       gap:6px;
     }
-
     .metric .k{
       font-size:12px;
       color:var(--muted);
     }
-
     .metric .v{
       font-size:24px;
       font-weight:900;
       letter-spacing:-.4px;
       word-break:break-word;
     }
-
     .metric .u{
       font-size:12px;
       color:rgba(233,238,252,.55);
@@ -367,12 +366,14 @@
       padding:20px;
     }
 
-    #qrCanvas{
+    .qr-preview-image{
       max-width:min(320px, 100%);
+      width:100%;
       height:auto;
+      display:block;
+      background:#ffffff;
       border-radius:12px;
       box-shadow:0 10px 25px rgba(0,0,0,.25);
-      background:#fff;
     }
 
     .qr-empty{
@@ -499,32 +500,26 @@
       margin-top:14px;
       padding:18px;
     }
-
     .faqCard h2{
       margin:0 0 10px;
       font-size:22px;
       letter-spacing:-.25px;
     }
-
     .faqCard details{
       border-top:1px solid rgba(255,255,255,.10);
       padding:12px 0;
     }
-
     .faqCard details:first-of-type{
       border-top:0;
       padding-top:0;
     }
-
     .faqCard summary{
       cursor:pointer;
       font-weight:800;
       list-style:none;
       color:#fff;
     }
-
     .faqCard summary::-webkit-details-marker{ display:none; }
-
     .faqCard p{
       margin:8px 0 0;
       color:var(--muted);
@@ -682,11 +677,10 @@
             </div>
           </div>
 
-          <div class="qr-shell">
+          <div class="qr-shell" id="qrShell">
             <div class="qr-empty" id="qrEmpty">
               Enter your review link, then click <strong>Generate QR Code</strong>.
             </div>
-            <canvas id="qrCanvas" width="320" height="320" hidden></canvas>
           </div>
         </div>
 
@@ -794,8 +788,8 @@
       </details>
 
       <details>
-        <summary>Does this tool host or store my review link?</summary>
-        <p>No. This version generates the QR code in your browser flow using the link you provide.</p>
+        <summary>Does this tool store my review link?</summary>
+        <p>No. This version generates the QR code from the link you provide and does not require account creation.</p>
       </details>
 
       <details>
@@ -820,7 +814,6 @@
     </footer>
   </main>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
   <script src="/assets/site.js" defer></script>
   <script src="/assets/js/tools/google-review-qr-code-generator.js" defer></script>
 </body>
