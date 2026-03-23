@@ -23,53 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
     previewLines: document.getElementById('previewLines'),
 
     qrCanvas: document.getElementById('qrCanvas'),
+    qrImage: document.getElementById('qrImage'),
     qrEmpty: document.getElementById('qrEmpty'),
     outputCode: document.getElementById('outputCode'),
     statusBox: document.getElementById('statusBox'),
     year: document.getElementById('year')
   };
 
-  if (!els.generateBtn || !els.qrCanvas) return;
+  if (!els.generateBtn || !els.qrCanvas || !els.qrImage) return;
   if (els.year) els.year.textContent = String(new Date().getFullYear());
 
   let lastMapUrl = '';
+  let lastQrMode = '';
+  let lastQrImageUrl = '';
 
   function safeTrim(value) {
     return String(value || '').trim();
-  }
-
-  function setStatus(html) {
-    if (els.statusBox) els.statusBox.innerHTML = html;
-  }
-
-  function updateMeta() {
-    const raw = safeTrim(els.locationInput.value);
-    const name = safeTrim(els.locationName.value) || 'Your location name';
-    const provider = els.mapProvider.value === 'apple' ? 'Apple Maps' : 'Google Maps';
-    const zoom = safeTrim(els.zoomLevel.value) || '15';
-
-    if (els.charCount) els.charCount.textContent = String(raw.length);
-    if (els.providerLabel) els.providerLabel.textContent = `Provider: ${provider}`;
-    if (els.providerMetric) els.providerMetric.textContent = provider.replace(' Maps', '');
-    if (els.zoomMetric) els.zoomMetric.textContent = zoom;
-
-    if (els.previewName) els.previewName.textContent = name;
-    if (els.previewSub) {
-      els.previewSub.textContent = raw || 'Your address, place, or coordinates will appear here.';
-    }
-
-    if (els.previewLines) {
-      const url = buildMapUrl();
-      if (url) {
-        els.previewLines.innerHTML = `<div class="location-line">${provider} • ${escapeHtml(url)}</div>`;
-      } else {
-        els.previewLines.innerHTML = '<div class="location-line">A map link preview will appear here.</div>';
-      }
-    }
-
-    if (els.outputCode) {
-      els.outputCode.textContent = buildMapUrl() || 'No map link generated yet.';
-    }
   }
 
   function escapeHtml(str) {
@@ -79,6 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
+  }
+
+  function setStatus(html) {
+    if (els.statusBox) els.statusBox.innerHTML = html;
   }
 
   function buildMapUrl() {
@@ -94,6 +67,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     return `https://www.google.com/maps/search/?api=1&query=${query}`;
+  }
+
+  function updateMeta() {
+    const raw = safeTrim(els.locationInput.value);
+    const name = safeTrim(els.locationName.value) || 'Your location name';
+    const provider = els.mapProvider.value === 'apple' ? 'Apple Maps' : 'Google Maps';
+    const zoom = safeTrim(els.zoomLevel.value) || '15';
+    const url = buildMapUrl();
+
+    if (els.charCount) els.charCount.textContent = String(raw.length);
+    if (els.providerLabel) els.providerLabel.textContent = `Provider: ${provider}`;
+    if (els.providerMetric) els.providerMetric.textContent = provider.replace(' Maps', '');
+    if (els.zoomMetric) els.zoomMetric.textContent = zoom;
+
+    if (els.previewName) els.previewName.textContent = name;
+    if (els.previewSub) {
+      els.previewSub.textContent = raw || 'Your address, place, or coordinates will appear here.';
+    }
+
+    if (els.previewLines) {
+      if (url) {
+        els.previewLines.innerHTML = `<div class="location-line">${escapeHtml(provider)} • ${escapeHtml(url)}</div>`;
+      } else {
+        els.previewLines.innerHTML = '<div class="location-line">A map link preview will appear here.</div>';
+      }
+    }
+
+    if (els.outputCode) {
+      els.outputCode.textContent = url || 'No map link generated yet.';
+    }
+  }
+
+  function showEmptyState() {
+    els.qrCanvas.hidden = true;
+    els.qrImage.hidden = true;
+    els.qrEmpty.hidden = false;
+  }
+
+  function showCanvas() {
+    els.qrCanvas.hidden = false;
+    els.qrImage.hidden = true;
+    els.qrEmpty.hidden = true;
+  }
+
+  function showImage() {
+    els.qrCanvas.hidden = true;
+    els.qrImage.hidden = false;
+    els.qrEmpty.hidden = true;
   }
 
   async function fetchBlob(url) {
@@ -120,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function buildQrApiUrl(text) {
     const params = new URLSearchParams({
       data: text,
-      size: '320x320',
+      size: '640x640',
       margin: '20',
       color: '000000',
       bgcolor: 'ffffff',
@@ -129,7 +150,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return `https://api.qrserver.com/v1/create-qr-code/?${params.toString()}`;
   }
 
-  async function renderQr(text) {
+  function getFallbackQrUrl(text) {
+    return buildQrApiUrl(text);
+  }
+
+  async function renderQrCanvas(text) {
     const blob = await fetchBlob(buildQrApiUrl(text));
     const qrImg = await blobToImage(blob);
 
@@ -141,6 +166,17 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, 320, 320);
     ctx.drawImage(qrImg, 0, 0, 320, 320);
+
+    lastQrMode = 'canvas';
+    showCanvas();
+  }
+
+  function renderQrFallback(text) {
+    const url = getFallbackQrUrl(text);
+    lastQrImageUrl = url;
+    els.qrImage.src = url;
+    lastQrMode = 'image';
+    showImage();
   }
 
   async function generate() {
@@ -149,32 +185,31 @@ document.addEventListener('DOMContentLoaded', () => {
     lastMapUrl = url;
 
     if (!url) {
-      els.qrCanvas.hidden = true;
-      els.qrEmpty.hidden = false;
       if (els.readyLabel) els.readyLabel.textContent = 'No';
-      setStatus('<strong>Not enough data.</strong><br>Enter an address, place name, or coordinates first.');
+      showEmptyState();
+      setStatus('<strong>Not enough data.</strong><br>Enter an address, place name, landmark, or coordinates first.');
       return;
     }
 
     try {
-      await renderQr(url);
-      els.qrCanvas.hidden = false;
-      els.qrEmpty.hidden = true;
+      await renderQrCanvas(url);
       if (els.readyLabel) els.readyLabel.textContent = 'Yes';
       setStatus('<strong>Generated.</strong><br>Your map QR code is ready.');
     } catch (err) {
       console.error('Map QR generation failed:', err);
-      els.qrCanvas.hidden = true;
-      els.qrEmpty.hidden = false;
-      if (els.readyLabel) els.readyLabel.textContent = 'No';
-      setStatus('<strong>Generation failed.</strong><br>The map QR code could not be rendered.');
+      renderQrFallback(url);
+      if (els.readyLabel) els.readyLabel.textContent = 'Yes';
+      setStatus('<strong>Generated with fallback.</strong><br>Your map QR code is ready using the fallback renderer.');
     }
   }
 
   async function copyText(text, successMessage, failMessage) {
     try {
       if (!text) throw new Error('No text');
-      if (navigator.clipboard && window.isSecureContext) {
+
+      if (window.InstantQR && typeof window.InstantQR.copyText === 'function') {
+        await window.InstantQR.copyText(text);
+      } else if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
       } else {
         const temp = document.createElement('textarea');
@@ -184,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.execCommand('copy');
         temp.remove();
       }
+
       setStatus(`<strong>Copied.</strong><br>${successMessage}`);
     } catch (_) {
       setStatus(`<strong>Copy failed.</strong><br>${failMessage}`);
@@ -195,11 +231,15 @@ document.addEventListener('DOMContentLoaded', () => {
     els.locationInput.value = '';
     els.mapProvider.value = 'google';
     els.zoomLevel.value = '15';
+
     lastMapUrl = '';
-    els.qrCanvas.hidden = true;
-    els.qrEmpty.hidden = false;
+    lastQrMode = '';
+    lastQrImageUrl = '';
+    els.qrImage.removeAttribute('src');
+
     if (els.readyLabel) els.readyLabel.textContent = 'No';
     updateMeta();
+    showEmptyState();
     setStatus('<strong>Cleared.</strong><br>All location fields were reset.');
   }
 
@@ -210,6 +250,45 @@ document.addEventListener('DOMContentLoaded', () => {
     els.zoomLevel.value = '15';
     updateMeta();
     generate();
+  }
+
+  function openMapLink() {
+    const url = lastMapUrl || buildMapUrl();
+    if (!url) {
+      setStatus('<strong>Nothing to open.</strong><br>Generate a map link first.');
+      return;
+    }
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
+  function downloadPng() {
+    if (!lastMapUrl) {
+      setStatus('<strong>Nothing to download.</strong><br>Generate a QR code first.');
+      return;
+    }
+
+    if (lastQrMode === 'canvas' && !els.qrCanvas.hidden) {
+      const link = document.createElement('a');
+      link.href = els.qrCanvas.toDataURL('image/png');
+      link.download = 'google-maps-location-qr-code.png';
+      link.click();
+      setStatus('<strong>Downloaded.</strong><br>Your map QR code PNG was downloaded.');
+      return;
+    }
+
+    if (lastQrMode === 'image' && lastQrImageUrl) {
+      const link = document.createElement('a');
+      link.href = lastQrImageUrl;
+      link.download = 'google-maps-location-qr-code.png';
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setStatus('<strong>Opened download source.</strong><br>Your fallback QR image was opened for saving.');
+      return;
+    }
+
+    setStatus('<strong>Nothing to download.</strong><br>Generate a QR code first.');
   }
 
   els.generateBtn?.addEventListener('click', async () => {
@@ -229,23 +308,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   els.openLinkBtn?.addEventListener('click', () => {
-    const url = lastMapUrl || buildMapUrl();
-    if (!url) {
-      setStatus('<strong>Nothing to open.</strong><br>Generate a map link first.');
-      return;
-    }
-    window.open(url, '_blank', 'noopener,noreferrer');
+    openMapLink();
   });
 
   els.downloadBtn?.addEventListener('click', () => {
-    if (els.qrCanvas.hidden) {
-      setStatus('<strong>Nothing to download.</strong><br>Generate a QR code first.');
-      return;
-    }
-    const link = document.createElement('a');
-    link.href = els.qrCanvas.toDataURL('image/png');
-    link.download = 'google-maps-location-qr-code.png';
-    link.click();
+    downloadPng();
   });
 
   [els.locationName, els.locationInput, els.mapProvider, els.zoomLevel].forEach(el => {
@@ -254,5 +321,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   updateMeta();
-  els.qrCanvas.hidden = true;
+  showEmptyState();
 });
