@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
     readyLabel: $('readyLabel'),
     modeLabel: $('modeLabel'),
 
-    qrCanvas: $('qrCanvas'),
     qrImage: $('qrImage'),
     qrEmpty: $('qrEmpty'),
     year: $('year'),
@@ -46,12 +45,12 @@ document.addEventListener('DOMContentLoaded', function () {
     previewMeta: $('previewMeta')
   };
 
-  if (!els.generateBtn || !els.sampleBtn || !els.clearBtn) return;
+  if (!els.generateBtn) return;
 
   let currentMode = 'url';
   let lastPayload = '';
   let lastPrimaryTarget = '';
-  let lastRenderType = '';
+  let lastQrUrl = '';
 
   if (els.year) {
     els.year.textContent = String(new Date().getFullYear());
@@ -106,26 +105,21 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function buildTextPayload() {
-    const lines = [];
     const businessName = safeTrim(els.businessName.value);
     const menuTitle = safeTrim(els.menuTitle.value);
     const hoursText = safeTrim(els.hoursText.value);
     const menuText = normalizeMultiline(els.menuText.value);
     const notesText = normalizeMultiline(els.notesText.value);
 
-    if (businessName) lines.push('Business: ' + businessName);
-    if (menuTitle) lines.push('Menu: ' + menuTitle);
-    if (hoursText) lines.push('Hours: ' + hoursText);
-    if (menuText) {
-      lines.push('Items:');
-      lines.push(menuText);
-    }
-    if (notesText) {
-      lines.push('Notes:');
-      lines.push(notesText);
-    }
+    const blocks = [];
 
-    return lines.join('\n').trim();
+    if (businessName) blocks.push('Business: ' + businessName);
+    if (menuTitle) blocks.push('Menu: ' + menuTitle);
+    if (hoursText) blocks.push('Hours: ' + hoursText);
+    if (menuText) blocks.push('Items:\n' + menuText);
+    if (notesText) blocks.push('Notes:\n' + notesText);
+
+    return blocks.join('\n\n').trim();
   }
 
   function getPayload() {
@@ -165,11 +159,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!lines.length) {
       els.previewMeta.innerHTML = '<div class="menu-line">Menu details and notes will appear here.</div>';
     } else {
-      els.previewMeta.innerHTML = lines
-        .map(function (line) {
-          return '<div class="menu-line">' + escapeHtml(line) + '</div>';
-        })
-        .join('');
+      els.previewMeta.innerHTML = lines.map(function (line) {
+        return '<div class="menu-line">' + escapeHtml(line) + '</div>';
+      }).join('');
     }
   }
 
@@ -178,7 +170,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const count = payload.length;
 
     lastPrimaryTarget = getPrimaryTarget();
-
     els.payloadCount.textContent = String(count);
     els.summaryPayload.textContent = String(count);
     els.outputCode.textContent = payload || 'No menu payload generated yet.';
@@ -188,58 +179,26 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function showEmptyState() {
-    els.qrCanvas.hidden = true;
     els.qrImage.hidden = true;
     els.qrEmpty.hidden = false;
-    lastRenderType = '';
+    lastQrUrl = '';
   }
 
-  function showCanvas() {
-    els.qrCanvas.hidden = false;
-    els.qrImage.hidden = true;
-    els.qrEmpty.hidden = true;
-    lastRenderType = 'canvas';
-  }
-
-  function showImage() {
-    els.qrCanvas.hidden = true;
+  function showQr(url) {
+    els.qrImage.src = url;
     els.qrImage.hidden = false;
     els.qrEmpty.hidden = true;
-    lastRenderType = 'image';
+    lastQrUrl = url;
   }
 
-  function fallbackQrUrl(text, size) {
+  function buildQrUrl(text) {
+    const size = Math.max(256, Number(els.qrSize.value || 320));
     return 'https://api.qrserver.com/v1/create-qr-code/?size=' +
       encodeURIComponent(size + 'x' + size) +
       '&margin=16&data=' + encodeURIComponent(text);
   }
 
-  async function renderCanvasQr(text) {
-    if (!window.QRCode || typeof window.QRCode.toCanvas !== 'function') {
-      throw new Error('QRCode library unavailable');
-    }
-
-    const size = Number(els.qrSize.value || 320);
-    const level = safeTrim(els.errorLevel.value) || 'M';
-
-    await window.QRCode.toCanvas(els.qrCanvas, String(text), {
-      width: size,
-      margin: 2,
-      errorCorrectionLevel: level,
-      color: {
-        dark: '#000000',
-        light: '#ffffff'
-      }
-    });
-  }
-
-  function renderFallbackQr(text) {
-    const size = Math.max(256, Number(els.qrSize.value || 320));
-    els.qrImage.src = fallbackQrUrl(text, size);
-    showImage();
-  }
-
-  async function generateQr() {
+  function generateQr() {
     updateMetaOnly();
 
     const payload = getPayload();
@@ -251,18 +210,11 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    try {
-      await renderCanvasQr(payload);
-      lastPayload = payload;
-      showCanvas();
-      els.readyLabel.textContent = 'Yes';
-      setStatus('<strong>Generated.</strong><br>Your menu QR code is ready. You can download the PNG or copy the payload.');
-    } catch (err) {
-      renderFallbackQr(payload);
-      lastPayload = payload;
-      els.readyLabel.textContent = 'Yes';
-      setStatus('<strong>Generated with fallback.</strong><br>Your menu QR code is ready using the fallback renderer.');
-    }
+    const qrUrl = buildQrUrl(payload);
+    lastPayload = payload;
+    showQr(qrUrl);
+    els.readyLabel.textContent = 'Yes';
+    setStatus('<strong>Generated.</strong><br>Your menu QR code is ready. You can download the PNG or copy the payload.');
   }
 
   function resetTool() {
@@ -278,6 +230,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     lastPayload = '';
     lastPrimaryTarget = '';
+    lastQrUrl = '';
+
     els.qrImage.removeAttribute('src');
     els.outputCode.textContent = 'No menu payload generated yet.';
     els.shareOutput.value = '';
@@ -309,13 +263,13 @@ document.addEventListener('DOMContentLoaded', function () {
       els.menuUrl.value = 'https://example.com/cocktail-menu';
       els.notesText.value = 'Signature cocktails, wine list, and happy hour specials.';
     } else {
-      setMode('url');
+      setMode('text');
       els.businessName.value = 'Sunset Grill';
       els.themeColor.value = '#0f766e';
       els.menuTitle.value = 'Lunch Menu';
       els.hoursText.value = 'Daily • 11 AM to 9 PM';
-      els.menuUrl.value = 'https://example.com/lunch-menu';
-      els.notesText.value = 'Dine-in • Takeout • Scan to view today’s menu and specials.';
+      els.menuText.value = 'Burger + Fries — $12\nCaesar Salad — $9\nIced Tea — $3';
+      els.notesText.value = 'Dine-in • Takeout\nAsk about today’s soup and dessert specials.';
     }
 
     updateMetaOnly();
@@ -337,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function downloadPng() {
-    if (!lastPayload) {
+    if (!lastQrUrl) {
       setStatus('<strong>Nothing to download.</strong><br>Generate a QR code first.');
       return;
     }
@@ -347,38 +301,23 @@ document.addEventListener('DOMContentLoaded', function () {
       .replace(/-+/g, '-')
       .replace(/^-|-$/g, '');
 
-    if (lastRenderType === 'canvas' && !els.qrCanvas.hidden) {
-      const link = document.createElement('a');
-      link.href = els.qrCanvas.toDataURL('image/png');
-      link.download = safeName + '.png';
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setStatus('<strong>Downloaded.</strong><br>Your menu QR code PNG was downloaded.');
-      return;
-    }
+    const link = document.createElement('a');
+    link.href = lastQrUrl;
+    link.download = safeName + '.png';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
 
-    if (lastRenderType === 'image' && els.qrImage.src) {
-      const link = document.createElement('a');
-      link.href = els.qrImage.src;
-      link.download = safeName + '.png';
-      link.target = '_blank';
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setStatus('<strong>Opened download source.</strong><br>Your fallback QR image was opened for saving.');
-      return;
-    }
-
-    setStatus('<strong>Nothing to download.</strong><br>Generate a QR code first.');
+    setStatus('<strong>Opened download source.</strong><br>Your menu QR image was opened for saving.');
   }
 
   els.urlModeBtn.addEventListener('click', function () { setMode('url'); });
   els.textModeBtn.addEventListener('click', function () { setMode('text'); });
-  els.generateBtn.addEventListener('click', function () { generateQr(); });
+  els.generateBtn.addEventListener('click', generateQr);
   els.sampleBtn.addEventListener('click', function () { loadSample('restaurant'); });
-  els.clearBtn.addEventListener('click', function () { resetTool(); });
-  els.downloadBtn.addEventListener('click', function () { downloadPng(); });
+  els.clearBtn.addEventListener('click', resetTool);
+  els.downloadBtn.addEventListener('click', downloadPng);
 
   els.copyPayloadBtn.addEventListener('click', function () {
     copyText(
@@ -410,8 +349,7 @@ document.addEventListener('DOMContentLoaded', function () {
     els.menuUrl,
     els.menuText,
     els.notesText,
-    els.qrSize,
-    els.errorLevel
+    els.qrSize
   ].forEach(function (el) {
     if (!el) return;
     el.addEventListener('input', updateMetaOnly);
