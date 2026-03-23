@@ -14,7 +14,6 @@
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
-  <!-- Core Meta -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
@@ -43,7 +42,6 @@
 
   <link rel="stylesheet" href="/assets/site.css" />
 
-  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
@@ -58,7 +56,6 @@
   <meta name="twitter:description" content="Create a QR code for any website link and download it as PNG. Fast, free, and privacy-first." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -156,6 +153,14 @@
           "@type":"Answer",
           "text":"Yes. You can generate a QR code for any URL, including UTM or campaign tracking links."
         }
+      },
+      {
+        "@type":"Question",
+        "name":"Where should I use a URL QR code?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"URL QR codes work well on flyers, product packaging, menus, posters, business cards, event signage, receipts, storefront windows, and printed marketing materials where users can scan and open a website quickly."
+        }
       }
     ]
   }
@@ -170,7 +175,9 @@
     }
     .qr-card,
     .qr-panel,
-    .faqCard{
+    .faqCard,
+    .contentCard,
+    .relatedCard{
       border-radius:var(--radius2);
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
@@ -248,7 +255,8 @@
       overflow:hidden;
       box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);
     }
-    .qr-canvas-shell canvas{
+    .qr-canvas-shell canvas,
+    .qr-canvas-shell img{
       display:block;
       width:100%;
       max-width:320px;
@@ -360,20 +368,77 @@
       padding:16px;
     }
     .miniBox h2{
-      margin:0 0 6px;
+      margin:0 0 8px;
       font-size:16px;
     }
     .miniBox p,
     .miniBox li{
-      margin:0;
       color:var(--muted);
-      line-height:1.6;
+      line-height:1.65;
       font-size:14px;
     }
     .miniBox ul,
     .miniBox ol{
       margin:0;
       padding-left:18px;
+    }
+    .contentCard{
+      margin-top:14px;
+      padding:18px;
+    }
+    .contentCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    .contentCard p,
+    .contentCard li{
+      color:var(--muted);
+      line-height:1.75;
+      font-size:15px;
+    }
+    .contentCard ul{
+      padding-left:18px;
+      margin:10px 0 0;
+    }
+    .relatedCard{
+      margin-top:14px;
+      padding:18px;
+    }
+    .relatedCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    .relatedGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .relatedLink{
+      display:block;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      text-decoration:none;
+    }
+    .relatedLink:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+    .relatedLink strong{
+      display:block;
+      margin-bottom:6px;
+      color:var(--text);
+      font-size:15px;
+    }
+    .relatedLink span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
     }
     .faqCard{
       margin-top:14px;
@@ -410,7 +475,8 @@
     }
     @media (max-width: 980px){
       .qr-grid,
-      .miniGrid2{
+      .miniGrid2,
+      .relatedGrid{
         grid-template-columns:1fr;
       }
     }
@@ -466,8 +532,10 @@
 
         <h1>URL QR Code Generator</h1>
         <p class="sub">
-          Create a QR code for any website link and let people open it instantly with a phone scan.
-          Paste your URL, generate your code, and download it as a PNG.
+          Create a QR code for any website link and let people open it instantly with a phone scan. Paste your URL, generate your code, and download it as a PNG for print or digital use.
+        </p>
+        <p class="sub">
+          This tool is useful for flyers, packaging, event signage, business cards, menus, posters, storefronts, product labels, checkout counters, brochures, and any printed material that should lead users to a webpage quickly.
         </p>
 
         <div class="form-grid" aria-label="QR code controls">
@@ -525,7 +593,7 @@
         </div>
 
         <div class="qr-preview" id="qrWrap">
-          <div class="qr-placeholder">Your URL QR code will appear here.</div>
+          <div class="qr-placeholder" id="placeholder">Your URL QR code will appear here.</div>
         </div>
 
         <div class="statsGrid" aria-label="QR summary">
@@ -554,23 +622,36 @@
       </aside>
     </section>
 
+    <section class="contentCard" aria-label="What is a URL QR code">
+      <h2>What Is a URL QR Code?</h2>
+      <p>
+        A URL QR code is a scannable code that opens a website link when a user scans it with a phone camera or QR reader. Instead of asking someone to type a long web address manually, you give them a faster path to the destination. That makes URL QR codes useful for both everyday convenience and real marketing workflows.
+      </p>
+      <p>
+        URL QR codes are one of the most flexible QR formats because they can point to landing pages, menus, booking forms, product pages, social hubs, campaign pages, online portfolios, support pages, and almost any web destination. They work especially well when you want to bridge printed materials and digital actions without adding friction.
+      </p>
+    </section>
+
     <section class="miniGrid2" aria-label="Additional information">
       <div class="miniBox">
         <h2>How to Create a QR Code for a Website</h2>
         <ol>
-          <li>Enter your website URL below.</li>
+          <li>Enter the exact website URL you want encoded.</li>
+          <li>Choose your export size and error correction level.</li>
           <li>Click <strong>Generate</strong>.</li>
           <li>Download your QR code as a PNG image.</li>
+          <li>Test-scan before printing or publishing publicly.</li>
         </ol>
       </div>
 
       <div class="miniBox">
         <h2>Why Use a URL QR Code?</h2>
         <ul>
-          <li>Share links instantly without typing</li>
-          <li>Print on flyers, posters, menus, and business cards</li>
-          <li>Use UTM or tracking links for marketing campaigns</li>
-          <li>Make offline promotions interactive</li>
+          <li>Share links instantly without manual typing</li>
+          <li>Connect flyers, menus, signs, and posters to digital pages</li>
+          <li>Use UTM or campaign links for marketing tracking</li>
+          <li>Make offline promotions interactive and easier to measure</li>
+          <li>Help users reach landing pages faster from printed materials</li>
         </ul>
       </div>
     </section>
@@ -583,15 +664,53 @@
           <li>Use the exact URL format you want encoded.</li>
           <li>Choose <strong>M</strong> or <strong>H</strong> error correction for printed materials.</li>
           <li>Use larger sizes like 512px+ for posters and signage.</li>
+          <li>Keep enough white space around the QR code for better scanning.</li>
         </ul>
       </div>
 
       <div class="miniBox">
         <h2>Privacy-first</h2>
         <p>
-          This tool runs in your browser and does not intentionally store your input.
-          It uses exactly what you type and does not auto-add <code>https://</code>.
+          This tool runs in your browser and does not intentionally store your input. It uses exactly what you type and does not auto-add <code>https://</code>, which gives you full control over the final encoded value.
         </p>
+      </div>
+    </section>
+
+    <section class="contentCard" aria-label="When to use a URL QR code">
+      <h2>When a URL QR Code Works Best</h2>
+      <p>
+        URL QR codes work best when the goal is to move a person from a physical object to a digital destination quickly. A restaurant may place one on a printed menu or table card. A local business may use one on a storefront sign, receipt, or review request flyer. A creator may add one to event posters, packaging inserts, product cards, or business cards. In each case, the QR code removes the need to type a web address and improves completion rates.
+      </p>
+      <p>
+        They are also useful for campaign tracking. If you use UTM parameters or dedicated landing pages, a URL QR code can help measure performance from printed marketing. That makes it easier to compare sign placements, flyer campaigns, booth traffic, or product packaging results.
+      </p>
+    </section>
+
+    <section class="contentCard" aria-label="Why this tool is useful">
+      <h2>Why This Tool Is More Useful Than a Thin Generator</h2>
+      <p>
+        A basic generator can create an image, but a stronger tool page should also help users make better decisions. This page is designed to do both. It gives users a fast browser-based generator while also explaining use cases, export choices, scan reliability, and how URL QR codes fit into real workflows.
+      </p>
+      <p>
+        That matters because a QR code is only useful if it works in the real world. Good sizing, the right error correction level, accurate URLs, and pre-print testing all affect scan success. By combining the generator with guidance and related resources, the page becomes more helpful for both users and site quality review.
+      </p>
+    </section>
+
+    <section class="relatedCard" aria-label="Related tools and guides">
+      <h2>Related Tools and Guides</h2>
+      <div class="relatedGrid">
+        <a class="relatedLink" href="/guides/qr-code-best-practices.html">
+          <strong>QR Code Best Practices</strong>
+          <span>Learn how to improve scan reliability on posters, cards, packaging, and other printed materials.</span>
+        </a>
+        <a class="relatedLink" href="/tools/wifi-qr-code-generator.html">
+          <strong>WiFi QR Code Generator</strong>
+          <span>Create guest WiFi QR codes for offices, restaurants, homes, events, and rentals.</span>
+        </a>
+        <a class="relatedLink" href="/tools/google-review-qr-code-generator.html">
+          <strong>Google Review QR Code Generator</strong>
+          <span>Turn customer review requests into a fast scan-to-review workflow.</span>
+        </a>
       </div>
     </section>
 
@@ -617,6 +736,11 @@
         <summary>Can I use tracking links?</summary>
         <p>Yes. You can generate a QR code for UTM links, campaign URLs, and other tracked website links.</p>
       </details>
+
+      <details>
+        <summary>Where should I use a URL QR code?</summary>
+        <p>Use it anywhere printed or displayed material should lead people to a webpage quickly, such as packaging, menus, signs, brochures, posters, business cards, product inserts, storefront windows, and event displays.</p>
+      </details>
     </section>
 
     <footer class="footer" aria-label="Footer">
@@ -635,6 +759,7 @@
     </footer>
   </main>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="/assets/site.js" defer></script>
   <script src="/assets/js/tools/url-qr-code-generator.js" defer></script>
 </body>
