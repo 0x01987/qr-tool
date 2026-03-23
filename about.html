@@ -16,37 +16,34 @@
     crossorigin="anonymous"></script>
 
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-  <title>About InstantQR | Free Online Tools for QR, DNS, Security, Crypto & More</title>
-  <meta name="description" content="Learn about InstantQR.io — a free, privacy-first platform for QR code tools, DNS and network tools, converters, crypto utilities, security tools, developer tools, guides, and mini-games." />
+  <title>About InstantQR | Free Online Tools for QR, SEO, DNS, Security, Crypto & More</title>
+  <meta name="description" content="Learn about InstantQR.io — a free, privacy-first platform for QR code tools, SEO tools, DNS and network tools, converters, crypto and Web3 utilities, security tools, developer tools, guides, and mini-games." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="theme-color" content="#0b0f19" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="dark" />
   <link rel="canonical" href="https://instantqr.io/about.html" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
-  <meta property="og:title" content="About InstantQR | Free Online Tools for QR, DNS, Security, Crypto & More" />
-  <meta property="og:description" content="InstantQR.io is a free, privacy-first tool hub for QR codes, DNS and network tools, converters, crypto tools, security utilities, developer tools, guides, and mini-games." />
+  <meta property="og:title" content="About InstantQR | Free Online Tools for QR, SEO, DNS, Security, Crypto & More" />
+  <meta property="og:description" content="InstantQR.io is a free, privacy-first tool hub for QR codes, SEO tools, DNS and network tools, converters, crypto and Web3 tools, security utilities, developer tools, guides, and mini-games." />
   <meta property="og:url" content="https://instantqr.io/about.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="About InstantQR and its free online tools" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="About InstantQR | Free Online Tools for QR, DNS, Security, Crypto & More" />
-  <meta name="twitter:description" content="Learn about InstantQR.io — a privacy-first platform for QR tools, DNS tools, converters, crypto utilities, security tools, guides, and mini-games." />
+  <meta name="twitter:title" content="About InstantQR | Free Online Tools for QR, SEO, DNS, Security, Crypto & More" />
+  <meta name="twitter:description" content="Learn about InstantQR.io — a privacy-first platform for QR tools, SEO tools, DNS tools, converters, crypto and Web3 utilities, security tools, guides, and mini-games." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <!-- Icons -->
   <link rel="icon" type="image/svg+xml" href="/assets/instantqr-logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
 
-  <!-- ✅ Organization Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -58,14 +55,13 @@
   }
   </script>
 
-  <!-- ✅ About Page / WebPage Schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"WebPage",
     "name":"About InstantQR",
     "url":"https://instantqr.io/about.html",
-    "description":"InstantQR.io is a free, privacy-first platform for QR code tools, DNS and network tools, converters, crypto utilities, security tools, developer tools, guides, and mini-games.",
+    "description":"InstantQR.io is a free, privacy-first platform for QR code tools, SEO tools, DNS and network tools, converters, crypto and Web3 utilities, security tools, developer tools, guides, and mini-games.",
     "isPartOf":{
       "@type":"WebSite",
       "name":"InstantQR",
@@ -74,7 +70,6 @@
   }
   </script>
 
-  <!-- ✅ Breadcrumb Schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -108,10 +103,11 @@
       --muted:#b8c0d6;
       --link:#cfe0ff;
       --brand:#3b82f6;
+      --ok:#19c37d;
       --radius:18px;
       --radius2:16px;
-      --shadow: 0 12px 40px rgba(0,0,0,.35);
-      --max: 920px;
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+      --max:980px;
     }
     *{box-sizing:border-box}
     body {
@@ -132,20 +128,57 @@
       box-shadow: var(--shadow);
     }
 
-    header{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    .brandRow{ display:flex; align-items:center; gap:10px; }
-    .logoImg{ height:30px; width:auto; display:block; }
-
-    h1{ margin:0; font-size:26px; letter-spacing:-.2px; }
-    .sub{ margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.55; }
-
-    .topnav{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-    .linkbtn{
-      display:inline-block; padding:10px 12px; border-radius:12px;
-      background:#0b1222; border:1px solid var(--border2);
-      color:var(--link); text-decoration:none; font-weight:700; font-size:12px;
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
     }
-    .linkbtn:hover{ border-color:var(--brand); text-decoration:none; }
+    .brandRow{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .logoImg{
+      height:30px;
+      width:auto;
+      display:block;
+    }
+
+    h1{
+      margin:0;
+      font-size:28px;
+      letter-spacing:-.2px;
+    }
+    .sub{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .topnav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .linkbtn{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      background:#0b1222;
+      border:1px solid var(--border2);
+      color:var(--link);
+      text-decoration:none;
+      font-weight:700;
+      font-size:12px;
+    }
+    .linkbtn:hover{
+      border-color:var(--brand);
+      text-decoration:none;
+    }
 
     .breadcrumb{
       margin-top:12px;
@@ -166,24 +199,42 @@
       color:#8ea0c8;
     }
 
+    .heroBox,
     .box{
       background:var(--panel);
       border:1px solid var(--border2);
       border-radius:var(--radius2);
-      padding:16px;
+      padding:18px;
       margin-top:14px;
     }
-    h2{ margin:16px 0 8px; font-size:16px; }
-    h2:first-child{margin-top:0}
-    p, li{ color:var(--muted); font-size:13px; line-height:1.75; }
-    ul{ margin:8px 0 0; padding-left:18px; }
 
-    a{ color:var(--link); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
+    h2{
+      margin:18px 0 8px;
+      font-size:18px;
+    }
+    h2:first-child{margin-top:0}
+
+    p, li{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.8;
+    }
+    ul{
+      margin:8px 0 0;
+      padding-left:18px;
+    }
+
+    a{
+      color:var(--link);
+      text-decoration:none;
+    }
+    a:hover{
+      text-decoration:underline;
+    }
 
     .grid{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns:1fr 1fr;
       gap:12px;
       margin-top:12px;
     }
@@ -191,16 +242,26 @@
       background:#0b1222;
       border:1px solid var(--border2);
       border-radius:14px;
-      padding:12px;
+      padding:14px;
     }
-    .miniTitle{ font-weight:800; color:var(--text); font-size:13px; margin-bottom:6px; }
-    .miniText{ color:var(--muted); font-size:13px; line-height:1.65; margin:0; }
+    .miniTitle{
+      font-weight:800;
+      color:var(--text);
+      font-size:14px;
+      margin-bottom:6px;
+    }
+    .miniText{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+      margin:0;
+    }
 
     .quickLinks{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-top:10px;
+      margin-top:12px;
     }
     .quickLinks a{
       display:inline-block;
@@ -218,8 +279,31 @@
       text-decoration:none;
     }
 
+    .trustGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .trustCard{
+      background:#0b1222;
+      border:1px solid var(--border2);
+      border-radius:14px;
+      padding:14px;
+    }
+    .trustCard h3{
+      margin:0 0 6px;
+      font-size:14px;
+      color:var(--text);
+    }
+    .trustCard p{
+      margin:0;
+      font-size:13px;
+      line-height:1.7;
+    }
+
     .footerLinks{
-      margin-top:14px;
+      margin-top:16px;
       text-align:center;
       color:#8ea0c8;
       font-size:12px;
@@ -227,8 +311,13 @@
     .footerLinks a{ color:var(--link); }
     code{ color:var(--link); }
 
+    @media (max-width: 800px){
+      .grid,
+      .trustGrid{
+        grid-template-columns:1fr;
+      }
+    }
     @media (max-width: 640px){
-      .grid{ grid-template-columns: 1fr; }
       h1{ font-size:24px; }
     }
   </style>
@@ -243,16 +332,17 @@
             <img class="logoImg" src="/assets/instantqr-logo.svg" alt="InstantQR Logo" />
             <div>
               <h1>About InstantQR</h1>
-              <div class="sub">Free, privacy-first online tools — fast, clean, and no signup required.</div>
+              <div class="sub">Free, privacy-first online tools built to solve real problems quickly.</div>
             </div>
           </div>
         </div>
 
         <div class="topnav">
           <a class="linkbtn" href="/">Home</a>
-          <a class="linkbtn" href="/tools.html">All Tools</a>
-          <a class="linkbtn" href="/guides.html">Guides</a>
-          <a class="linkbtn" href="/mini-games/games.html">Games</a>
+          <a class="linkbtn" href="/tools/tools.html">All Tools</a>
+          <a class="linkbtn" href="/tools/seo-tools.html">SEO Tools</a>
+          <a class="linkbtn" href="/tools/web3-tools.html">Web3 Tools</a>
+          <a class="linkbtn" href="/guides/guides.html">Guides</a>
           <a class="linkbtn" href="/contact.html">Contact</a>
         </div>
       </header>
@@ -264,108 +354,139 @@
         </ol>
       </nav>
 
-      <div class="box">
-        <h2>What is InstantQR.io?</h2>
+      <section class="heroBox">
+        <h2>What InstantQR Is</h2>
         <p>
-          <strong>InstantQR.io</strong> is a free, lightweight tool hub built to help you get quick results without clutter.
-          What started with QR code generation has grown into a broader platform for practical online utilities — including
-          <strong>QR tools</strong>, <strong>DNS and network tools</strong>, <strong>security tools</strong>,
-          <strong>crypto utilities</strong>, <strong>developer tools</strong>, <strong>time and converter tools</strong>,
-          plus <strong>guides</strong> and <strong>mini-games</strong>.
+          <strong>InstantQR.io</strong> is a free online tools platform focused on speed, usability, and practical value. What began with QR code generation has grown into a broader utility hub that supports everyday tasks across websites, networking, security, conversions, crypto, Web3, and lightweight productivity.
+        </p>
+        <p>
+          The goal of InstantQR is simple: make useful tools easier to access, easier to understand, and faster to use. Many online utility sites feel cluttered, thin, or overloaded with friction. InstantQR is being built as a cleaner alternative — one where people can solve a real problem quickly without unnecessary account creation or confusing workflows.
+        </p>
+      </section>
+
+      <div class="box">
+        <h2>What You Can Do on InstantQR</h2>
+        <p>
+          InstantQR includes practical tools for both simple everyday tasks and more technical workflows. The platform is organized so users can move from tool to tool, or from guide to tool, depending on what they need to finish.
         </p>
 
-        <h2>What you can do on InstantQR</h2>
         <div class="grid">
           <div class="miniCard">
             <div class="miniTitle">🔳 QR Code Tools</div>
             <p class="miniText">
-              Create <strong>WiFi QR codes</strong> for guests and <strong>URL QR codes</strong> for websites, menus, flyers, and business cards.
+              Create <strong>WiFi QR codes</strong>, <strong>URL QR codes</strong>, <strong>Google Review QR codes</strong>, <strong>Maps QR codes</strong>, <strong>event QR codes</strong>, and more for real-world business and sharing use cases.
             </p>
           </div>
+
           <div class="miniCard">
             <div class="miniTitle">🌐 DNS & Network Tools</div>
             <p class="miniText">
-              Use tools like <strong>DNS Lookup</strong>, <strong>DNS Propagation Checker</strong>, <strong>IP Lookup</strong>, and <strong>Internet Speed Test</strong>.
+              Use tools like <strong>DNS Lookup</strong>, <strong>DNS Propagation Checker</strong>, <strong>IP Lookup</strong>, <strong>Ping</strong>, <strong>Traceroute</strong>, and <strong>Internet Speed Test</strong>.
             </p>
           </div>
+
           <div class="miniCard">
-            <div class="miniTitle">📏 Time, Converters & Everyday Utilities</div>
+            <div class="miniTitle">📈 SEO Tools</div>
             <p class="miniText">
-              Convert common units, compare time zones, use a world clock, and access practical utilities built for speed and clarity.
+              Access SEO helpers for sitemaps, previews, metadata, and other search-focused workflows through the <strong>SEO Tools hub</strong>.
             </p>
           </div>
+
           <div class="miniCard">
             <div class="miniTitle">⛽ Crypto & Web3 Utilities</div>
             <p class="miniText">
-              Estimate gas fees and calculate crypto profit/loss with straightforward tools made for traders and builders.
+              Estimate gas fees, compare network fees, analyze token-related workflows, and calculate profit/loss with practical crypto and Web3 tools.
             </p>
           </div>
+
           <div class="miniCard">
             <div class="miniTitle">🔐 Security Tools</div>
             <p class="miniText">
-              Generate strong passwords and use privacy-minded tools like password breach checking for everyday online safety.
+              Generate strong passwords, check whether a site looks suspicious, and use privacy-minded tools designed to support safer browsing and account habits.
             </p>
           </div>
+
           <div class="miniCard">
-            <div class="miniTitle">🧾 Developer Tools</div>
+            <div class="miniTitle">🧾 Developer & Utility Tools</div>
             <p class="miniText">
-              Use JSON formatting, Base64 encoding, UUID generation, JWT decoding, timestamp conversion, regex testing, and hashing tools.
+              Use JSON formatting, Base64 tools, UUID generation, JWT decoding, timestamp conversion, regex testing, hash generation, converters, and time tools.
             </p>
           </div>
         </div>
 
-        <h2>Built for speed, privacy, and simplicity</h2>
+        <h2>Why InstantQR Exists</h2>
         <p>
-          We aim to keep InstantQR <strong>privacy-first</strong>. Many tools are designed to run locally in your browser.
-          We don’t require accounts and we don’t intentionally store sensitive inputs such as WiFi details, passwords, or text you enter.
-          Our goal is simple: build fast tools with a clean experience that work smoothly on both mobile and desktop.
+          A lot of utility sites are either too thin to be genuinely helpful or too bloated to feel efficient. InstantQR is being shaped around a different idea: tools should be useful on their own, but they should also be supported by clear context, guides, and category hubs so users understand what they are doing and why it matters.
+        </p>
+        <p>
+          That means InstantQR is not only about generating outputs. It is also about helping users get better results from those outputs. A QR code tool should explain where that code works best. A DNS tool should help users understand what they are checking. A security tool should help users pause and make better decisions. That practical layer is a core part of the site’s direction.
         </p>
 
-        <h2>Who InstantQR is for</h2>
+        <h2>Who InstantQR Is For</h2>
         <ul>
-          <li>Small businesses creating QR codes for menus, signs, and promotions</li>
-          <li>Events and venues sharing WiFi access instantly</li>
-          <li>Developers needing quick formatting, encoding, hashing, and testing tools</li>
-          <li>Teams and creators using time, DNS, and conversion tools for daily work</li>
-          <li>Crypto users estimating gas and calculating trade outcomes</li>
-          <li>Anyone who wants free, fast online utilities without clutter</li>
+          <li>Small businesses creating QR codes for menus, reviews, counters, receipts, flyers, and printed promotions</li>
+          <li>Developers and site owners who need quick formatting, DNS, SEO, and diagnostic utilities</li>
+          <li>Freelancers, marketers, and creators who need practical tools without signup friction</li>
+          <li>Crypto and Web3 users comparing fees or checking common workflow data</li>
+          <li>Anyone who wants clean online tools that load fast and work well on both mobile and desktop</li>
         </ul>
 
-        <h2>Guides and learning resources</h2>
+        <h2>Privacy-First Direction</h2>
         <p>
-          InstantQR also includes a growing <a href="/guides.html">Guides hub</a> with short, clear explainers that pair with our tools.
-          These guides help users understand topics like WHOIS, DNS, and other practical web concepts without technical overload.
+          InstantQR aims to stay <strong>privacy-first</strong>. Many tools are designed to run locally in the browser where possible, and the platform is built around quick access instead of mandatory account creation. We do not intentionally position InstantQR as a platform for collecting sensitive user data. The goal is utility first, friction second, and unnecessary data collection last.
         </p>
 
-        <h2>Mini-games and engagement</h2>
+        <div class="trustGrid">
+          <div class="trustCard">
+            <h3>Fast access</h3>
+            <p>Most tasks should be solvable in a few clicks without complicated setup.</p>
+          </div>
+          <div class="trustCard">
+            <h3>Practical value</h3>
+            <p>Tools are built for real use cases like sharing WiFi, collecting reviews, checking DNS, or formatting data.</p>
+          </div>
+          <div class="trustCard">
+            <h3>Guides + tools</h3>
+            <p>The platform pairs utilities with short explainers so users get both output and context.</p>
+          </div>
+        </div>
+
+        <h2>Guides and Learning Resources</h2>
         <p>
-          In addition to utility tools, InstantQR also includes a small <a href="/mini-games/games.html">Games hub</a> with lightweight mini-games
-          like 2048 Mini, Tap Aim, and Snake — built to load quickly and keep the site fun and engaging.
+          InstantQR also includes a growing <a href="/guides/guides.html">Guides hub</a> with short, readable explainers that pair with the tools. These guides are there to reduce confusion and help users understand common web, SEO, QR, DNS, and online trust topics without heavy jargon.
         </p>
 
-        <h2>Support & feedback</h2>
+        <h2>Games and Lightweight Engagement</h2>
         <p>
-          Have an idea, found an issue, or want a new tool added? Visit our
-          <a href="/contact.html">Contact</a> page and send us a message.
+          In addition to utilities, InstantQR includes a small <a href="/mini-games/games.html">Games hub</a> with lightweight mini-games like 2048 Mini, Tap Aim, and Snake. These are simple browser experiences meant to load quickly and add a lighter side to the site.
         </p>
 
-        <h2>Quick links</h2>
+        <h2>Feedback and Improvement</h2>
+        <p>
+          InstantQR is still growing. New tools, category hubs, guides, and page improvements continue to be added over time. If you found an issue, have an idea for a better workflow, or want to request a new tool, visit the <a href="/contact.html">Contact</a> page and send feedback.
+        </p>
+
+        <h2>Quick Links</h2>
         <div class="quickLinks">
-          <a href="/tools.html">All Tools</a>
-          <a href="/guides.html">Guides</a>
+          <a href="/tools/tools.html">All Tools</a>
+          <a href="/tools/seo-tools.html">SEO Tools</a>
+          <a href="/tools/web3-tools.html">Web3 Tools</a>
+          <a href="/guides/guides.html">Guides</a>
           <a href="/mini-games/games.html">Games</a>
           <a href="/tools/wifi-qr-code-generator.html">WiFi QR Generator</a>
           <a href="/tools/url-qr-code-generator.html">URL QR Generator</a>
           <a href="/tools/dns-lookup.html">DNS Lookup</a>
           <a href="/tools/password.html">Password Generator</a>
-          <a href="/tools/json-formatter.html">JSON Formatter</a>
+          <a href="/tools/site-legit-checker.html">Site Legit Checker</a>
         </div>
       </div>
 
       <div class="footerLinks">
         <a href="/about.html">About</a> ·
-        <a href="/tools.html">Tools</a> ·
-        <a href="/guides.html">Guides</a> ·
+        <a href="/tools/tools.html">All Tools</a> ·
+        <a href="/tools/seo-tools.html">SEO Tools</a> ·
+        <a href="/tools/web3-tools.html">Web3 Tools</a> ·
+        <a href="/guides/guides.html">Guides</a> ·
         <a href="/mini-games/games.html">Games</a> ·
         <a href="/privacy.html">Privacy</a> ·
         <a href="/terms.html">Terms</a> ·
