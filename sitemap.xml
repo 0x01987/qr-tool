@@ -593,5 +593,11 @@
 <loc>https://instantqr.io/tools/pdf-to-image.html</loc>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
-</url>   
+</url>  
+ 
+<url>
+<loc>https://instantqr.io/tools/menu-qr-code-generator.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url> 
 </urlset>
