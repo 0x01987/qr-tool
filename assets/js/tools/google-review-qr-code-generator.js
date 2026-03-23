@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let lastReviewUrl = '';
   let autoTimer = null;
   let qriousInstance = null;
+  let isGenerating = false;
 
   function safeTrim(value) {
     return String(value || '').trim();
@@ -126,21 +127,32 @@ document.addEventListener('DOMContentLoaded', () => {
     els.qrEmpty.hidden = false;
   }
 
-  function clearCanvas() {
+  function resetCanvasElement(size = 320) {
+    const oldCanvas = els.qrCanvas;
+    const freshCanvas = oldCanvas.cloneNode(false);
+
+    freshCanvas.id = oldCanvas.id;
+    freshCanvas.width = size;
+    freshCanvas.height = size;
+    freshCanvas.hidden = oldCanvas.hidden;
+    freshCanvas.style.width = '100%';
+    freshCanvas.style.maxWidth = `${size}px`;
+    freshCanvas.style.height = 'auto';
+    freshCanvas.style.display = 'block';
+    freshCanvas.style.background = '#ffffff';
+
+    oldCanvas.parentNode.replaceChild(freshCanvas, oldCanvas);
+    els.qrCanvas = freshCanvas;
+
+    qriousInstance = null;
+  }
+
+  function clearCanvasCompletely() {
+    resetCanvasElement(320);
     const ctx = els.qrCanvas.getContext('2d');
     if (ctx) {
       ctx.clearRect(0, 0, els.qrCanvas.width, els.qrCanvas.height);
     }
-  }
-
-  function resetCanvasSize(size = 320) {
-    els.qrCanvas.width = size;
-    els.qrCanvas.height = size;
-    els.qrCanvas.style.width = '100%';
-    els.qrCanvas.style.maxWidth = `${size}px`;
-    els.qrCanvas.style.height = 'auto';
-    els.qrCanvas.style.display = 'block';
-    els.qrCanvas.style.background = '#ffffff';
   }
 
   function loadScript(src) {
@@ -197,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function renderWithQRCodeLib(text) {
-    resetCanvasSize(320);
+    resetCanvasElement(320);
     await window.QRCode.toCanvas(els.qrCanvas, text, {
       width: 320,
       margin: 2,
@@ -210,26 +222,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderWithQRious(text) {
-    resetCanvasSize(320);
-
-    if (!qriousInstance) {
-      qriousInstance = new window.QRious({
-        element: els.qrCanvas,
-        value: text,
-        size: 320,
-        level: 'M',
-        padding: 10,
-        foreground: '#000000',
-        background: '#ffffff'
-      });
-    } else {
-      qriousInstance.value = text;
-      qriousInstance.size = 320;
-      qriousInstance.level = 'M';
-      qriousInstance.padding = 10;
-      qriousInstance.foreground = '#000000';
-      qriousInstance.background = '#ffffff';
-    }
+    resetCanvasElement(320);
+    qriousInstance = new window.QRious({
+      element: els.qrCanvas,
+      value: text,
+      size: 320,
+      level: 'M',
+      padding: 10,
+      foreground: '#000000',
+      background: '#ffffff'
+    });
   }
 
   async function renderQr(text) {
@@ -249,16 +251,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function generate() {
+    if (isGenerating) return;
+    isGenerating = true;
+
     updateMeta();
 
     const url = normalizeUrl(els.reviewUrl.value);
     lastReviewUrl = url;
 
     if (!url) {
-      clearCanvas();
+      clearCanvasCompletely();
       hideQr();
-      if (els.readyLabel) els.readyLabel.textContent = 'No';
+      if (els.readyLabel) {
+        els.readyLabel.textContent = 'No';
+      }
       setStatus('<strong>Not enough data.</strong><br>Paste your Google review link first.');
+      isGenerating = false;
       return;
     }
 
@@ -279,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(`<strong>Generated.</strong><br>${msg}`);
     } catch (err) {
       console.error('QR generation failed:', err);
-      clearCanvas();
+      clearCanvasCompletely();
       hideQr();
 
       if (els.readyLabel) {
@@ -287,6 +295,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       setStatus('<strong>Generation failed.</strong><br>The QR code could not be rendered. The QR library may be blocked or unavailable.');
+    } finally {
+      isGenerating = false;
     }
   }
 
@@ -366,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
     els.reviewUrl.value = '';
     lastReviewUrl = '';
 
-    clearCanvas();
+    clearCanvasCompletely();
     hideQr();
 
     if (els.readyLabel) {
@@ -378,9 +388,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function loadSample() {
+    clearAll();
     els.businessName.value = 'InstantQR Coffee';
     els.reviewUrl.value = 'https://g.page/r/EXAMPLE/review';
     updateMeta();
+
+    await new Promise((resolve) => requestAnimationFrame(() => resolve()));
     await generate();
   }
 
