@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
     menuText: $('menuText'),
     notesText: $('notesText'),
     qrSize: $('qrSize'),
-    errorLevel: $('errorLevel'),
 
     generateBtn: $('generateBtn'),
     sampleBtn: $('sampleBtn'),
@@ -45,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     previewMeta: $('previewMeta')
   };
 
-  if (!els.generateBtn) return;
+  if (!els.generateBtn || !els.sampleBtn || !els.clearBtn) return;
 
   let currentMode = 'url';
   let lastPayload = '';
@@ -111,22 +110,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const menuText = normalizeMultiline(els.menuText.value);
     const notesText = normalizeMultiline(els.notesText.value);
 
-    const blocks = [];
+    const parts = [];
 
-    if (businessName) blocks.push('Business: ' + businessName);
-    if (menuTitle) blocks.push('Menu: ' + menuTitle);
-    if (hoursText) blocks.push('Hours: ' + hoursText);
-    if (menuText) blocks.push('Items:\n' + menuText);
-    if (notesText) blocks.push('Notes:\n' + notesText);
+    if (businessName) parts.push('Business: ' + businessName);
+    if (menuTitle) parts.push('Menu: ' + menuTitle);
+    if (hoursText) parts.push('Hours: ' + hoursText);
+    if (menuText) parts.push('Items:\n' + menuText);
+    if (notesText) parts.push('Notes:\n' + notesText);
 
-    return blocks.join('\n\n').trim();
+    return parts.join('\n\n').trim();
   }
 
   function getPayload() {
-    if (currentMode === 'url') {
-      return normalizeUrl(els.menuUrl.value);
-    }
-    return buildTextPayload();
+    return currentMode === 'url'
+      ? normalizeUrl(els.menuUrl.value)
+      : buildTextPayload();
   }
 
   function getPrimaryTarget() {
@@ -170,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const count = payload.length;
 
     lastPrimaryTarget = getPrimaryTarget();
+
     els.payloadCount.textContent = String(count);
     els.summaryPayload.textContent = String(count);
     els.outputCode.textContent = payload || 'No menu payload generated yet.';
@@ -211,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const qrUrl = buildQrUrl(payload);
+
     lastPayload = payload;
     showQr(qrUrl);
     els.readyLabel.textContent = 'Yes';
@@ -226,7 +226,6 @@ document.addEventListener('DOMContentLoaded', function () {
     els.menuText.value = '';
     els.notesText.value = '';
     els.qrSize.value = '320';
-    els.errorLevel.value = 'M';
 
     lastPayload = '';
     lastPrimaryTarget = '';
