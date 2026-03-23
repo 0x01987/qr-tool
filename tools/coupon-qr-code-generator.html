@@ -66,15 +66,15 @@
         "name":"What is a coupon QR code generator?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"A coupon QR code generator creates a scannable QR code that opens a coupon landing page or stores promo details like the offer title, promo code, discount value, and terms."
+          "text":"A coupon QR code generator creates a scannable QR code that opens a coupon landing page or a coupon viewer page with offer details."
         }
       },
       {
         "@type":"Question",
-        "name":"Should I use URL mode or text mode?",
+        "name":"Should I use URL mode or viewer mode?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Use URL mode if you want the QR code to open a campaign page, product page, or checkout page. Use text mode if you want the coupon details stored directly in the QR code."
+          "text":"Use URL mode if you want the QR code to open a campaign page, product page, or checkout page. Use viewer mode if you want the coupon details shown on a clean mobile-friendly page."
         }
       },
       {
@@ -82,7 +82,7 @@
         "name":"Can I create a coupon QR code without a website?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Yes. Text mode lets you create a coupon QR code containing the offer title, promo code, expiration details, and terms without needing a website."
+          "text":"Yes. Viewer mode lets you generate a QR code that opens a coupon page built from your entered coupon details."
         }
       },
       {
@@ -340,6 +340,7 @@
       font-size:13px;
       line-height:1.5;
       word-break:break-word;
+      white-space:pre-wrap;
     }
     .qr-shell{
       display:flex;
@@ -351,7 +352,7 @@
       background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       padding:20px;
     }
-    #qrCanvas,#qrImage{
+    #qrImage{
       width:min(280px, 100%);
       height:auto;
       background:#fff;
@@ -491,13 +492,13 @@
 
         <h1>Free Coupon QR Code Generator</h1>
         <p class="sub">
-          Create a QR code for coupon landing pages or text-based promo offers. Great for flash sales,
+          Create a QR code for coupon landing pages or viewer-based promo offers. Great for flash sales,
           event discounts, restaurant specials, flyers, packaging, and retail campaigns.
         </p>
 
         <div class="mode-switch" role="tablist" aria-label="Coupon mode">
           <button class="mode-btn active" id="urlModeBtn" type="button">Coupon URL QR</button>
-          <button class="mode-btn" id="textModeBtn" type="button">Coupon Text QR</button>
+          <button class="mode-btn" id="textModeBtn" type="button">Coupon Viewer QR</button>
         </div>
 
         <div class="form-grid">
@@ -562,20 +563,10 @@
               <option value="768">768 px</option>
             </select>
           </div>
-
-          <div class="field">
-            <label for="errorLevel">Error correction</label>
-            <select id="errorLevel">
-              <option value="L">L (smallest)</option>
-              <option value="M" selected>M (recommended)</option>
-              <option value="Q">Q</option>
-              <option value="H">H (best)</option>
-            </select>
-          </div>
         </div>
 
         <div class="helper-row">
-          <span>URL mode is best for landing pages. Text mode is best for direct coupon details.</span>
+          <span>URL mode is best for landing pages. Viewer mode is best for reliable mobile coupon pages built from your text.</span>
           <span><span id="payloadCount">0</span> payload chars</span>
         </div>
 
@@ -657,9 +648,8 @@
 
           <div class="qr-shell" id="qrShell">
             <div class="qr-empty" id="qrEmpty">
-              Add a coupon URL or coupon text, then click <strong>Generate QR Code</strong>.
+              Add a coupon URL or coupon details, then click <strong>Generate QR Code</strong>.
             </div>
-            <canvas id="qrCanvas" width="320" height="320" hidden></canvas>
             <img id="qrImage" alt="Generated coupon QR code" hidden />
           </div>
         </div>
@@ -679,13 +669,13 @@
 
           <div class="field" style="margin-top:12px;">
             <label for="shareOutput">Primary link / target</label>
-            <input id="shareOutput" type="text" readonly placeholder="Generated URL or text target will appear here" />
+            <input id="shareOutput" type="text" readonly placeholder="Generated URL target will appear here" />
           </div>
         </div>
 
         <div class="status-box" id="statusBox">
           <strong>Ready.</strong><br>
-          Add a coupon URL or text details, then click <b>Generate QR Code</b>.
+          Add a coupon URL or coupon details, then click <b>Generate QR Code</b>.
         </div>
       </aside>
     </section>
@@ -705,8 +695,7 @@
         <h2>Best practices</h2>
         <p>
           Use URL mode when you want a branded landing page or checkout destination.
-          Use text mode when you want the offer itself stored directly in the QR code.
-          Keep payloads concise for easier scanning.
+          Use viewer mode when you want reliable mobile-friendly coupon pages built from your entered offer details.
         </p>
       </div>
     </section>
@@ -716,17 +705,17 @@
 
       <details>
         <summary>What is a coupon QR code generator?</summary>
-        <p>A coupon QR code generator creates a scannable QR code that opens a coupon landing page or stores promo offer details such as the offer title, code, discount value, and terms.</p>
+        <p>A coupon QR code generator creates a scannable QR code that opens a coupon landing page or a coupon viewer page with offer details.</p>
       </details>
 
       <details>
-        <summary>Should I use URL mode or text mode?</summary>
-        <p>Use URL mode if you want the QR code to open a coupon page, checkout page, or campaign landing page. Use text mode if you want the coupon details stored directly inside the QR code.</p>
+        <summary>Should I use URL mode or viewer mode?</summary>
+        <p>Use URL mode if you want the QR code to open a coupon page, checkout page, or campaign landing page. Use viewer mode if you want the coupon details shown on a clean mobile-friendly page.</p>
       </details>
 
       <details>
         <summary>Can I create a coupon QR code without a website?</summary>
-        <p>Yes. Text mode lets you create a coupon QR code containing the offer title, promo code, expiration date, and terms without needing a website.</p>
+        <p>Yes. Viewer mode lets you generate a QR code that opens a coupon page built from your entered coupon details.</p>
       </details>
 
       <details>
@@ -751,7 +740,6 @@
     </footer>
   </main>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
   <script defer src="/assets/site.js"></script>
   <script defer src="/assets/js/tools/coupon-qr-code-generator.js"></script>
 </body>
