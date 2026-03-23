@@ -61,6 +61,16 @@ document.addEventListener('DOMContentLoaded', function () {
     return String(value || '').trim();
   }
 
+  function normalizeMultiline(value) {
+    return String(value || '')
+      .replace(/\r\n/g, '\n')
+      .replace(/\r/g, '\n')
+      .split('\n')
+      .map(line => line.trim())
+      .filter(Boolean)
+      .join('\n');
+  }
+
   function escapeHtml(str) {
     return String(str || '')
       .replace(/&/g, '&amp;')
@@ -104,16 +114,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const businessName = safeTrim(els.businessName.value);
     const menuTitle = safeTrim(els.menuTitle.value);
     const hoursText = safeTrim(els.hoursText.value);
-    const menuText = safeTrim(els.menuText.value);
-    const notesText = safeTrim(els.notesText.value);
+    const menuText = normalizeMultiline(els.menuText.value);
+    const notesText = normalizeMultiline(els.notesText.value);
 
     if (businessName) lines.push('Business: ' + businessName);
     if (menuTitle) lines.push('Menu: ' + menuTitle);
     if (hoursText) lines.push('Hours: ' + hoursText);
-    if (menuText) lines.push('Items: ' + menuText);
-    if (notesText) lines.push('Notes: ' + notesText);
 
-    return lines.join('\n');
+    if (menuText) {
+      lines.push('Items:');
+      lines.push(menuText);
+    }
+
+    if (notesText) {
+      lines.push('Notes:');
+      lines.push(notesText);
+    }
+
+    return lines.join('\n').trim();
   }
 
   function getPayload() {
@@ -132,14 +150,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const businessName = safeTrim(els.businessName.value) || 'Restaurant Menu';
     const menuTitle = safeTrim(els.menuTitle.value) || 'Your Menu';
     const hoursText = safeTrim(els.hoursText.value);
-    const notesText = safeTrim(els.notesText.value);
+    const notesText = normalizeMultiline(els.notesText.value);
     const themeColor = safeTrim(els.themeColor.value) || '#0f766e';
 
     let subText = '';
     if (currentMode === 'url') {
       subText = normalizeUrl(els.menuUrl.value) || 'Your hosted menu link preview will appear here.';
     } else {
-      subText = safeTrim(els.menuText.value) || 'Your menu text preview will appear here.';
+      subText = normalizeMultiline(els.menuText.value) || 'Your menu text preview will appear here.';
     }
 
     els.menuCard.style.setProperty('--cardBrand', themeColor);
@@ -149,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const lines = [];
     if (hoursText) lines.push('Hours • ' + hoursText);
-    if (notesText) lines.push('Notes • ' + notesText);
+    if (notesText) lines.push('Notes • ' + notesText.replace(/\n/g, ' / '));
 
     if (!lines.length) {
       els.previewMeta.innerHTML = '<div class="menu-line">Menu details and notes will appear here.</div>';
@@ -211,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const size = Number(els.qrSize.value || 320);
     const level = safeTrim(els.errorLevel.value) || 'M';
 
-    await window.QRCode.toCanvas(els.qrCanvas, text, {
+    await window.QRCode.toCanvas(els.qrCanvas, String(text), {
       width: size,
       margin: 2,
       errorCorrectionLevel: level,
@@ -233,7 +251,8 @@ document.addEventListener('DOMContentLoaded', function () {
     updateMetaOnly();
 
     const payload = getPayload();
-    if (!payload) {
+
+    if (!payload || !String(payload).trim()) {
       if (els.readyLabel) els.readyLabel.textContent = 'No';
       showEmptyState();
       setStatus('<strong>Not enough data.</strong><br>Add a menu URL or menu text to generate a QR code.');
@@ -291,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function () {
       els.menuTitle.value = 'Coffee + Pastry Menu';
       els.hoursText.value = 'Mon–Sun • 7 AM to 4 PM';
       els.menuText.value = 'Latte — $5\nCold Brew — $4\nCroissant — $3.50\nBlueberry Muffin — $3';
-      els.notesText.value = 'Dine-in • Takeout • Ask about oat milk and seasonal specials.';
+      els.notesText.value = 'Dine-in • Takeout\nAsk about oat milk and seasonal specials.';
     } else if (preset === 'bar') {
       setMode('url');
       els.businessName.value = 'Skyline Bar';
