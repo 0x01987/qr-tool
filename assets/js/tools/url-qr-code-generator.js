@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  let qrInstance = null;
-  let previewCanvas = null;
+  let qrContainer = null;
+  let currentImgDataUrl = '';
   let autoTimer = null;
   let hasGenerated = false;
 
@@ -72,61 +72,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderPlaceholder() {
     qrWrap.innerHTML = '<div class="qr-placeholder">Your URL QR code will appear here.</div>';
-    previewCanvas = null;
-    qrInstance = null;
+    qrContainer = null;
+    currentImgDataUrl = '';
     hasGenerated = false;
   }
 
-  function createFreshCanvas(size) {
-    const shell = document.createElement('div');
-    shell.className = 'qr-canvas-shell';
-
-    const canvas = document.createElement('canvas');
-    canvas.width = size;
-    canvas.height = size;
-    canvas.style.width = '100%';
-    canvas.style.maxWidth = `${size}px`;
-    canvas.style.height = 'auto';
-    canvas.style.display = 'block';
-    canvas.style.background = '#ffffff';
-
-    shell.appendChild(canvas);
-    qrWrap.innerHTML = '';
-    qrWrap.appendChild(shell);
-
-    previewCanvas = canvas;
-    qrInstance = null;
-
-    return canvas;
-  }
-
   function ensureQrLibrary() {
-    if (window.QRious) return true;
+    if (window.QRCode) return true;
     throw new Error('QR library unavailable.');
   }
 
-  function buildQrOnFreshCanvas(value) {
+  function createFreshQrMount() {
+    const shell = document.createElement('div');
+    shell.className = 'qr-canvas-shell';
+
+    const mount = document.createElement('div');
+    mount.id = 'qrCodeMount';
+    mount.style.display = 'flex';
+    mount.style.alignItems = 'center';
+    mount.style.justifyContent = 'center';
+    mount.style.width = '100%';
+
+    shell.appendChild(mount);
+    qrWrap.innerHTML = '';
+    qrWrap.appendChild(shell);
+
+    qrContainer = mount;
+    return mount;
+  }
+
+  function buildQrOnFreshMount(value) {
     ensureQrLibrary();
 
     const size = normalizeSizeInput();
     const level = levelEl.value || 'M';
-    const canvas = createFreshCanvas(size);
+    const mount = createFreshQrMount();
 
-    qrInstance = new window.QRious({
-      element: canvas,
-      value,
-      size,
-      level,
-      padding: 10,
-      background: 'white',
-      foreground: 'black'
+    new window.QRCode(mount, {
+      text: value,
+      width: size,
+      height: size,
+      colorDark: '#000000',
+      colorLight: '#ffffff',
+      correctLevel: window.QRCode.CorrectLevel[level] || window.QRCode.CorrectLevel.M
     });
 
-    canvas.width = size;
-    canvas.height = size;
-    canvas.style.maxWidth = `${size}px`;
+    const canvas = mount.querySelector('canvas');
+    const img = mount.querySelector('img');
 
-    return canvas;
+    if (canvas) {
+      canvas.style.display = 'block';
+      canvas.style.width = '100%';
+      canvas.style.maxWidth = `${size}px`;
+      canvas.style.height = 'auto';
+      canvas.style.background = '#ffffff';
+      currentImgDataUrl = canvas.toDataURL('image/png');
+      return canvas;
+    }
+
+    if (img) {
+      img.style.display = 'block';
+      img.style.width = '100%';
+      img.style.maxWidth = `${size}px`;
+      img.style.height = 'auto';
+      img.style.background = '#ffffff';
+
+      currentImgDataUrl = img.src;
+      return img;
+    }
+
+    throw new Error('QR render output missing.');
   }
 
   function generateQr() {
@@ -139,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      buildQrOnFreshCanvas(value);
+      buildQrOnFreshMount(value);
       hasGenerated = true;
       updateSummary();
       setStatus('QR code generated successfully.', 'ok');
@@ -152,14 +167,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function downloadQr() {
-    if (!hasGenerated || !previewCanvas) {
+    if (!hasGenerated || !currentImgDataUrl) {
       setStatus('Generate a QR code before downloading.', 'bad');
       return;
     }
 
     try {
       const link = document.createElement('a');
-      link.href = previewCanvas.toDataURL('image/png');
+      link.href = currentImgDataUrl;
       link.download = 'url-qr-code.png';
       document.body.appendChild(link);
       link.click();
