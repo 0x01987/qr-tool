@@ -24,13 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     year: document.getElementById('year')
   };
 
-  if (
-    !els.businessName ||
-    !els.reviewUrl ||
-    !els.generateBtn ||
-    !els.qrEmpty ||
-    !els.statusBox
-  ) {
+  if (!els.businessName || !els.reviewUrl || !els.generateBtn || !els.qrEmpty || !els.statusBox) {
     return;
   }
 
@@ -149,8 +143,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (els.qrCanvas) {
       els.qrCanvas.hidden = true;
+      els.qrCanvas.style.display = 'none';
     }
+
     els.qrEmpty.hidden = true;
+    els.qrEmpty.style.display = 'none';
   }
 
   function hideQr() {
@@ -159,18 +156,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (img) {
       img.hidden = true;
+      img.style.display = 'none';
       img.removeAttribute('src');
     }
 
     if (els.qrCanvas) {
-      els.qrCanvas.hidden = true;
       const ctx = els.qrCanvas.getContext('2d');
       if (ctx) {
         ctx.clearRect(0, 0, els.qrCanvas.width, els.qrCanvas.height);
       }
+      els.qrCanvas.hidden = true;
+      els.qrCanvas.style.display = 'none';
+      els.qrCanvas.width = 320;
+      els.qrCanvas.height = 320;
     }
 
     els.qrEmpty.hidden = false;
+    els.qrEmpty.style.display = 'block';
   }
 
   function buildQrApiUrl(text) {
@@ -323,8 +325,6 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus('<strong>Downloaded.</strong><br>Your Google review QR code PNG was downloaded.');
     } catch (err) {
       console.error('Download failed:', err);
-
-      // fallback: open image in new tab
       window.open(lastQrImageUrl, '_blank', 'noopener,noreferrer');
       setStatus('<strong>Opened image.</strong><br>Your browser blocked direct download, so the QR image was opened in a new tab.');
     }
