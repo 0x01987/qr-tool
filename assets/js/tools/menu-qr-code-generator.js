@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .replace(/\r\n/g, '\n')
       .replace(/\r/g, '\n')
       .split('\n')
-      .map(line => line.trim())
+      .map(function (line) { return line.trim(); })
       .filter(Boolean)
       .join('\n');
   }
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function setStatus(html) {
-    if (els.statusBox) els.statusBox.innerHTML = html;
+    els.statusBox.innerHTML = html;
   }
 
   function setMode(mode) {
@@ -99,12 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
     els.urlModeFields.classList.toggle('hidden', currentMode !== 'url');
     els.textModeFields.classList.toggle('hidden', currentMode !== 'text');
 
-    if (els.resultMode) {
-      els.resultMode.textContent = 'Mode: ' + (currentMode === 'url' ? 'URL' : 'Text');
-    }
-    if (els.modeLabel) {
-      els.modeLabel.textContent = currentMode === 'url' ? 'URL' : 'Text';
-    }
+    els.resultMode.textContent = 'Mode: ' + (currentMode === 'url' ? 'URL' : 'Text');
+    els.modeLabel.textContent = currentMode === 'url' ? 'URL' : 'Text';
 
     updateMetaOnly();
   }
@@ -120,12 +116,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (businessName) lines.push('Business: ' + businessName);
     if (menuTitle) lines.push('Menu: ' + menuTitle);
     if (hoursText) lines.push('Hours: ' + hoursText);
-
     if (menuText) {
       lines.push('Items:');
       lines.push(menuText);
     }
-
     if (notesText) {
       lines.push('Notes:');
       lines.push(notesText);
@@ -135,15 +129,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function getPayload() {
-    return currentMode === 'url'
-      ? normalizeUrl(els.menuUrl.value)
-      : buildTextPayload();
+    if (currentMode === 'url') {
+      return normalizeUrl(els.menuUrl.value);
+    }
+    return buildTextPayload();
   }
 
   function getPrimaryTarget() {
-    return currentMode === 'url'
-      ? normalizeUrl(els.menuUrl.value)
-      : buildTextPayload();
+    return getPayload();
   }
 
   function updatePreviewCard() {
@@ -186,10 +179,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     lastPrimaryTarget = getPrimaryTarget();
 
-    if (els.payloadCount) els.payloadCount.textContent = String(count);
-    if (els.summaryPayload) els.summaryPayload.textContent = String(count);
-    if (els.outputCode) els.outputCode.textContent = payload || 'No menu payload generated yet.';
-    if (els.shareOutput) els.shareOutput.value = lastPrimaryTarget || '';
+    els.payloadCount.textContent = String(count);
+    els.summaryPayload.textContent = String(count);
+    els.outputCode.textContent = payload || 'No menu payload generated yet.';
+    els.shareOutput.value = lastPrimaryTarget || '';
 
     updatePreviewCard();
   }
@@ -215,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
     lastRenderType = 'image';
   }
 
-  function getFallbackQrUrl(text, size) {
+  function fallbackQrUrl(text, size) {
     return 'https://api.qrserver.com/v1/create-qr-code/?size=' +
       encodeURIComponent(size + 'x' + size) +
       '&margin=16&data=' + encodeURIComponent(text);
@@ -242,8 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function renderFallbackQr(text) {
     const size = Math.max(256, Number(els.qrSize.value || 320));
-    const fallbackUrl = getFallbackQrUrl(text, size);
-    els.qrImage.src = fallbackUrl;
+    els.qrImage.src = fallbackQrUrl(text, size);
     showImage();
   }
 
@@ -253,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const payload = getPayload();
 
     if (!payload || !String(payload).trim()) {
-      if (els.readyLabel) els.readyLabel.textContent = 'No';
+      els.readyLabel.textContent = 'No';
       showEmptyState();
       setStatus('<strong>Not enough data.</strong><br>Add a menu URL or menu text to generate a QR code.');
       return;
@@ -263,19 +255,17 @@ document.addEventListener('DOMContentLoaded', function () {
       await renderCanvasQr(payload);
       lastPayload = payload;
       showCanvas();
-      if (els.readyLabel) els.readyLabel.textContent = 'Yes';
+      els.readyLabel.textContent = 'Yes';
       setStatus('<strong>Generated.</strong><br>Your menu QR code is ready. You can download the PNG or copy the payload.');
     } catch (err) {
       renderFallbackQr(payload);
       lastPayload = payload;
-      if (els.readyLabel) els.readyLabel.textContent = 'Yes';
+      els.readyLabel.textContent = 'Yes';
       setStatus('<strong>Generated with fallback.</strong><br>Your menu QR code is ready using the fallback renderer.');
     }
   }
 
   function resetTool() {
-    currentMode = 'url';
-
     els.businessName.value = '';
     els.themeColor.value = '#0f766e';
     els.menuTitle.value = '';
@@ -288,11 +278,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     lastPayload = '';
     lastPrimaryTarget = '';
-
     els.qrImage.removeAttribute('src');
-    if (els.outputCode) els.outputCode.textContent = 'No menu payload generated yet.';
-    if (els.shareOutput) els.shareOutput.value = '';
-    if (els.readyLabel) els.readyLabel.textContent = 'No';
+    els.outputCode.textContent = 'No menu payload generated yet.';
+    els.shareOutput.value = '';
+    els.readyLabel.textContent = 'No';
 
     setMode('url');
     showEmptyState();
@@ -384,29 +373,12 @@ document.addEventListener('DOMContentLoaded', function () {
     setStatus('<strong>Nothing to download.</strong><br>Generate a QR code first.');
   }
 
-  els.urlModeBtn.addEventListener('click', function () {
-    setMode('url');
-  });
-
-  els.textModeBtn.addEventListener('click', function () {
-    setMode('text');
-  });
-
-  els.generateBtn.addEventListener('click', function () {
-    generateQr();
-  });
-
-  els.sampleBtn.addEventListener('click', function () {
-    loadSample('restaurant');
-  });
-
-  els.clearBtn.addEventListener('click', function () {
-    resetTool();
-  });
-
-  els.downloadBtn.addEventListener('click', function () {
-    downloadPng();
-  });
+  els.urlModeBtn.addEventListener('click', function () { setMode('url'); });
+  els.textModeBtn.addEventListener('click', function () { setMode('text'); });
+  els.generateBtn.addEventListener('click', function () { generateQr(); });
+  els.sampleBtn.addEventListener('click', function () { loadSample('restaurant'); });
+  els.clearBtn.addEventListener('click', function () { resetTool(); });
+  els.downloadBtn.addEventListener('click', function () { downloadPng(); });
 
   els.copyPayloadBtn.addEventListener('click', function () {
     copyText(
