@@ -34,10 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  let qr = null;
-  let canvas = null;
+  let qrInstance = null;
+  let previewCanvas = null;
   let autoTimer = null;
-  let libraryReady = false;
   let hasGenerated = false;
 
   function setStatus(message, kind = '') {
@@ -71,17 +70,18 @@ document.addEventListener('DOMContentLoaded', () => {
     levelOut.textContent = levelEl.value || 'M';
   }
 
-  function resetPreview() {
+  function renderPlaceholder() {
     qrWrap.innerHTML = '<div class="qr-placeholder">Your URL QR code will appear here.</div>';
-    qr = null;
-    canvas = null;
+    previewCanvas = null;
+    qrInstance = null;
     hasGenerated = false;
   }
 
-  function ensureCanvas(size) {
-    if (canvas) return canvas;
+  function createFreshCanvas(size) {
+    const shell = document.createElement('div');
+    shell.className = 'qr-canvas-shell';
 
-    canvas = document.createElement('canvas');
+    const canvas = document.createElement('canvas');
     canvas.width = size;
     canvas.height = size;
     canvas.style.width = '100%';
@@ -90,69 +90,46 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.style.display = 'block';
     canvas.style.background = '#ffffff';
 
-    const shell = document.createElement('div');
-    shell.className = 'qr-canvas-shell';
     shell.appendChild(canvas);
-
     qrWrap.innerHTML = '';
     qrWrap.appendChild(shell);
+
+    previewCanvas = canvas;
+    qrInstance = null;
 
     return canvas;
   }
 
-  function loadScript(src) {
-    return new Promise((resolve, reject) => {
-      const existing = document.querySelector(`script[src="${src}"]`);
+  function ensureQrLibrary() {
+    if (window.QRious) return true;
+    throw new Error('QR library unavailable.');
+  }
 
-      if (existing) {
-        if (existing.dataset.loaded === 'true') {
-          resolve();
-          return;
-        }
-        existing.addEventListener('load', resolve, { once: true });
-        existing.addEventListener('error', reject, { once: true });
-        return;
-      }
+  function buildQrOnFreshCanvas(value) {
+    ensureQrLibrary();
 
-      const s = document.createElement('script');
-      s.src = src;
-      s.async = true;
-      s.addEventListener('load', () => {
-        s.dataset.loaded = 'true';
-        resolve();
-      }, { once: true });
-      s.addEventListener('error', reject, { once: true });
-      document.head.appendChild(s);
+    const size = normalizeSizeInput();
+    const level = levelEl.value || 'M';
+    const canvas = createFreshCanvas(size);
+
+    qrInstance = new window.QRious({
+      element: canvas,
+      value,
+      size,
+      level,
+      padding: 10,
+      background: 'white',
+      foreground: 'black'
     });
+
+    canvas.width = size;
+    canvas.height = size;
+    canvas.style.maxWidth = `${size}px`;
+
+    return canvas;
   }
 
-  async function loadQrLibrary() {
-    if (window.QRious) {
-      libraryReady = true;
-      return;
-    }
-
-    const sources = [
-      'https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js',
-      'https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js'
-    ];
-
-    for (const src of sources) {
-      try {
-        await loadScript(src);
-        if (window.QRious) {
-          libraryReady = true;
-          return;
-        }
-      } catch (_) {
-        // Try next source
-      }
-    }
-
-    throw new Error('QR library failed to load.');
-  }
-
-  async function generateQr() {
+  function generateQr() {
     let value;
     try {
       value = getRawValue(textEl.value);
@@ -162,67 +139,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      if (!libraryReady && !window.QRious) {
-        setStatus('Loading QR generator library…');
-        await loadQrLibrary();
-      }
-    } catch (_) {
-      setStatus('The QR generator library failed to load. Check your connection and try again.', 'bad');
-      return;
-    }
-
-    if (!window.QRious) {
-      setStatus('QR library is not available right now.', 'bad');
-      return;
-    }
-
-    const size = normalizeSizeInput();
-    const level = levelEl.value || 'M';
-    const el = ensureCanvas(size);
-
-    try {
-      if (!qr) {
-        qr = new window.QRious({
-          element: el,
-          value,
-          size,
-          level,
-          padding: 10,
-          background: 'white',
-          foreground: 'black'
-        });
-      } else {
-        qr.value = value;
-        qr.size = size;
-        qr.level = level;
-        qr.padding = 10;
-        qr.background = 'white';
-        qr.foreground = 'black';
-      }
-
-      el.width = size;
-      el.height = size;
-      el.style.maxWidth = `${size}px`;
-
+      buildQrOnFreshCanvas(value);
       hasGenerated = true;
       updateSummary();
       setStatus('QR code generated successfully.', 'ok');
     } catch (err) {
-      hasGenerated = false;
-      setStatus('Unable to generate the QR code. Please try again.', 'bad');
       console.error(err);
+      hasGenerated = false;
+      renderPlaceholder();
+      setStatus('Unable to generate the QR code. Please try again.', 'bad');
     }
   }
 
   function downloadQr() {
-    if (!hasGenerated || !canvas) {
+    if (!hasGenerated || !previewCanvas) {
       setStatus('Generate a QR code before downloading.', 'bad');
       return;
     }
 
     try {
       const link = document.createElement('a');
-      link.href = canvas.toDataURL('image/png');
+      link.href = previewCanvas.toDataURL('image/png');
       link.download = 'url-qr-code.png';
       document.body.appendChild(link);
       link.click();
@@ -314,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
     textEl.value = '';
     sizeEl.value = '320';
     levelEl.value = 'M';
-    resetPreview();
+    renderPlaceholder();
     updateSummary();
     setStatus('Ready. Enter a website URL and click <strong>Generate</strong>.');
     textEl.focus();
@@ -327,11 +264,12 @@ document.addEventListener('DOMContentLoaded', () => {
         generateQr();
       } else {
         updateSummary();
+        renderPlaceholder();
       }
-    }, 350);
+    }, 250);
   }
 
-  async function initFromQuery() {
+  function initFromQuery() {
     const params = new URLSearchParams(window.location.search);
     const paramUrl = params.get('url');
     const paramSize = params.get('size');
@@ -356,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSummary();
 
     if (paramUrl) {
-      await generateQr();
+      generateQr();
     }
   }
 
@@ -383,15 +321,15 @@ document.addEventListener('DOMContentLoaded', () => {
   sizeEl.addEventListener('change', () => {
     normalizeSizeInput();
     updateSummary();
-    if (hasGenerated) {
+    if (String(textEl.value || '').trim()) {
       generateQr();
     }
   });
 
   levelEl.addEventListener('change', () => {
     updateSummary();
-    if (hasGenerated || String(textEl.value || '').trim()) {
-      maybeAutoGenerate();
+    if (String(textEl.value || '').trim()) {
+      generateQr();
     }
   });
 
@@ -404,5 +342,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   normalizeSizeInput();
   updateSummary();
+  renderPlaceholder();
   initFromQuery();
 });
