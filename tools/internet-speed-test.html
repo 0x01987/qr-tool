@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>Free Internet Speed Test | Check Download Speed & Ping | InstantQR</title>
-  <meta name="description" content="Run a fast, privacy-first internet speed test in your browser. Measure download speed in Mbps and ping in ms instantly with a smooth speedometer UI and connection quality rating." />
+  <meta name="description" content="Run a fast, privacy-first internet speed test in your browser. Measure download speed in Mbps and ping in ms instantly with a smooth speedometer UI, connection quality rating, and live history graph." />
   <meta name="keywords" content="internet speed test, wifi speed test, broadband speed test, download speed test, ping test, latency test, Mbps checker, browser speed test" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -50,14 +50,14 @@
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Free Internet Speed Test | Check Download Speed & Ping | InstantQR" />
-  <meta property="og:description" content="Fast, privacy-first internet speed test with download speed, ping, sparkline history, and connection quality rating." />
+  <meta property="og:description" content="Fast, privacy-first internet speed test with download speed, ping, live sparkline history, and connection quality rating." />
   <meta property="og:url" content="https://instantqr.io/tools/internet-speed-test.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="InstantQR Internet Speed Test" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Internet Speed Test | Check Download Speed & Ping | InstantQR" />
-  <meta name="twitter:description" content="Fast, privacy-first internet speed test with speedometer, sparkline history, and connection quality rating." />
+  <meta name="twitter:description" content="Fast, privacy-first internet speed test with speedometer, history graph, and connection quality rating." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <!-- Structured Data -->
@@ -158,6 +158,14 @@
           "@type":"Answer",
           "text":"Results vary based on Wi-Fi signal quality, network congestion, VPN use, background downloads, device performance, and distance to the test endpoint."
         }
+      },
+      {
+        "@type":"Question",
+        "name":"What is a good ping?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Lower ping is generally better. Very low latency helps video calls, gaming, and real-time apps feel more responsive."
+        }
       }
     ]
   }
@@ -172,7 +180,9 @@
     }
     .speed-panel,
     .speed-card,
-    .faqCard{
+    .faqCard,
+    .contentCard,
+    .relatedCard{
       border-radius:var(--radius2);
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
@@ -423,9 +433,29 @@
       line-height:1.6;
       font-size:14px;
     }
-    .miniBox ul{
+    .miniBox ul,
+    .miniBox ol{
       margin:0;
       padding-left:18px;
+    }
+    .contentCard{
+      margin-top:14px;
+      padding:18px;
+    }
+    .contentCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    .contentCard p,
+    .contentCard li{
+      color:var(--muted);
+      line-height:1.75;
+      font-size:15px;
+    }
+    .contentCard ul{
+      padding-left:18px;
+      margin:10px 0 0;
     }
     .faqCard{
       margin-top:14px;
@@ -457,13 +487,53 @@
       line-height:1.6;
       font-size:14px;
     }
+    .relatedCard{
+      margin-top:14px;
+      padding:18px;
+    }
+    .relatedCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    .relatedGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .relatedLink{
+      display:block;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      text-decoration:none;
+    }
+    .relatedLink:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+    .relatedLink strong{
+      display:block;
+      margin-bottom:6px;
+      color:var(--text);
+      font-size:15px;
+    }
+    .relatedLink span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
     .goodText{color:#22c55e}
     .mono{
       font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
     }
     @media (max-width: 980px){
       .speed-grid,
-      .miniGrid2{
+      .miniGrid2,
+      .relatedGrid{
         grid-template-columns:1fr;
       }
     }
@@ -494,8 +564,8 @@
         <a href="/">Home</a>
         <a href="/tools/tools.html">Tools</a>
         <a href="/tools/ip-lookup.html">IP Lookup</a>
-        <a href="/tools/unit-converter.html">Unit Converter</a>
-        <a href="/tools/password-leak-checker.html">Password Leak</a>
+        <a href="/tools/dns-lookup.html">DNS Lookup</a>
+        <a href="/tools/ping-tool.html">Ping Tool</a>
       </nav>
     </div>
   </header>
@@ -518,6 +588,9 @@
           Check your <strong>download speed</strong> in Mbps and <strong>ping</strong> in ms instantly with a clean speedometer UI,
           download history sparkline, and connection quality rating.
         </p>
+        <p class="sub">
+          This tool is useful when you want a quick picture of everyday connection performance for browsing, streaming, video calls, gaming, remote work, cloud backups, or comparing Wi-Fi conditions in different rooms or times of day.
+        </p>
 
         <div class="speed-actions" id="run">
           <button class="cta primary" id="startBtn" type="button">Start Speed Test</button>
@@ -526,8 +599,8 @@
         </div>
 
         <div class="hint">
-          Accuracy note: speed varies with Wi-Fi strength, VPN use, background downloads, and distance to the test endpoint.
-          For best results, pause large downloads and run the test twice.
+          Accuracy note: speed varies with Wi-Fi strength, VPN use, background downloads, device performance, browser limits, and distance to the test endpoint.
+          For best results, pause large downloads and run the test more than once.
         </div>
       </section>
 
@@ -681,18 +754,89 @@
       <div class="miniBox">
         <h2>How this speed test works</h2>
         <ul>
-          <li><strong>Ping</strong> is measured by timing a small request.</li>
-          <li><strong>Download</strong> is measured by streaming test data and timing total bytes.</li>
-          <li>Results are approximate, but useful for quick checks.</li>
+          <li><strong>Ping</strong> is estimated by timing a small request.</li>
+          <li><strong>Download speed</strong> is estimated by streaming test data and timing transferred bytes.</li>
+          <li>Results are approximate, but useful for quick checks and comparisons.</li>
         </ul>
       </div>
 
       <div class="miniBox">
         <h2>Privacy-first</h2>
         <p>
-          No signup and no personal data required. This tool does not intentionally store your results.
-          It only downloads test data to estimate speed and latency.
+          No signup and no account required. This tool is designed to run in your browser and does not intentionally store your results. It only transfers test data to estimate speed and latency.
         </p>
+      </div>
+    </section>
+
+    <section class="contentCard" aria-label="What an internet speed test tells you">
+      <h2>What an Internet Speed Test Tells You</h2>
+      <p>
+        An internet speed test gives you a quick snapshot of how your connection is performing right now. The two most common numbers people look at are download speed and ping. Download speed helps show how quickly your connection can receive data, while ping helps show how responsive the connection feels for real-time activities.
+      </p>
+      <p>
+        That means a speed test can be useful for more than one kind of problem. Someone streaming video may care most about download speed. Someone on video calls or playing online games may care more about latency. A remote worker may want both numbers to be stable, not just fast once.
+      </p>
+    </section>
+
+    <section class="miniGrid2" aria-label="When to use and what affects results">
+      <div class="miniBox">
+        <h2>When this tool is useful</h2>
+        <ul>
+          <li>Checking whether your Wi-Fi is slower in certain rooms</li>
+          <li>Comparing home internet performance at different times of day</li>
+          <li>Testing before a video call, meeting, or livestream</li>
+          <li>Checking whether a VPN is reducing performance</li>
+          <li>Spotting problems after router restarts or ISP issues</li>
+        </ul>
+      </div>
+
+      <div class="miniBox">
+        <h2>What can affect your result</h2>
+        <ul>
+          <li>Distance from the router or weak Wi-Fi signal</li>
+          <li>Other devices downloading at the same time</li>
+          <li>VPN usage or browser extensions</li>
+          <li>Network congestion on your ISP or local network</li>
+          <li>Device performance limits and browser behavior</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="contentCard" aria-label="How to get a more accurate result">
+      <h2>How to Get a More Accurate Speed Test Result</h2>
+      <p>
+        For the most useful reading, close heavy downloads, pause cloud backups, and stop streaming on other devices if possible. If you are using Wi-Fi, try testing once close to the router and once from your normal working area. That comparison can tell you whether your internet plan is the problem or whether the issue is local wireless coverage.
+      </p>
+      <p>
+        It is also smart to run the test more than once. One result can be misleading because internet performance changes from minute to minute. Two or three runs are often better for spotting whether the connection is consistently good or only occasionally fast.
+      </p>
+    </section>
+
+    <section class="contentCard" aria-label="Why this tool is useful">
+      <h2>Why This Tool Is More Useful Than a Thin Checker</h2>
+      <p>
+        A thin speed checker only throws out a number. A more useful page helps people understand what that number means, what affects it, and how to act on it. That is why this page combines live measurement with a speedometer, connection rating, history sparkline, and clear guidance about what download speed and ping actually represent.
+      </p>
+      <p>
+        That matters because a speed test only becomes useful when the user can interpret the result in context. A fast number is not enough by itself. What matters is whether the connection is fast enough, stable enough, and responsive enough for the task the person is actually trying to do.
+      </p>
+    </section>
+
+    <section class="relatedCard" aria-label="Related tools">
+      <h2>Related Tools</h2>
+      <div class="relatedGrid">
+        <a class="relatedLink" href="/tools/ping-tool.html">
+          <strong>Ping Tool</strong>
+          <span>Check host latency directly when you want a more focused look at responsiveness and reachability.</span>
+        </a>
+        <a class="relatedLink" href="/tools/traceroute-tool.html">
+          <strong>Traceroute Tool</strong>
+          <span>Inspect network path behavior when you suspect routing issues or unusual delay between hops.</span>
+        </a>
+        <a class="relatedLink" href="/tools/dns-lookup.html">
+          <strong>DNS Lookup</strong>
+          <span>Check DNS records when name resolution problems may be affecting the websites or services you are testing.</span>
+        </a>
       </div>
     </section>
 
@@ -717,6 +861,11 @@
       <details>
         <summary>Why is my speed different each time I test?</summary>
         <p>Results vary based on Wi-Fi signal quality, network congestion, VPN use, background downloads, device performance, and distance to the test endpoint.</p>
+      </details>
+
+      <details>
+        <summary>What is a good ping?</summary>
+        <p>Lower ping is generally better because it means the connection is responding faster. That can matter a lot for gaming, voice calls, video meetings, and other real-time tasks.</p>
       </details>
     </section>
 
