@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>DNS Propagation Checker | Check A, AAAA, CNAME, MX, TXT, NS & SOA | InstantQR</title>
-  <meta name="description" content="Fast DNS propagation checker to compare A, AAAA, CNAME, MX, TXT, NS, and SOA records across public DNS resolvers. Clean responsive UI for quick DNS troubleshooting." />
+  <meta name="description" content="Fast DNS propagation checker to compare A, AAAA, CNAME, MX, TXT, NS, and SOA records across public DNS resolvers. Clean responsive UI for troubleshooting domain changes, migrations, and verification records." />
   <meta name="keywords" content="dns propagation checker, dns checker, dns propagation, dns lookup, a record checker, aaaa checker, cname checker, mx checker, txt checker, ns checker, soa checker, domain dns test" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -149,7 +149,7 @@
         "name":"Why do some resolvers show different DNS results?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Resolvers may show different results because cached records expire at different times, propagation is still in progress, or your updated DNS changes have not reached every resolver yet."
+          "text":"Resolvers may show different results because cached records expire at different times, propagation is still in progress, or updated DNS changes have not reached every resolver yet."
         }
       },
       {
@@ -159,10 +159,456 @@
           "@type":"Answer",
           "text":"If multiple resolvers return the same expected value and the weighted propagation percentage is high, your DNS change is likely visible across most real-world public DNS paths."
         }
+      },
+      {
+        "@type":"Question",
+        "name":"Why are some resolvers weighted differently?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Standard public resolvers better represent common real-world DNS resolution paths, while security and family resolvers may apply additional filtering and are therefore treated as secondary signals."
+        }
       }
     ]
   }
   </script>
+
+  <style>
+    .hero{
+      padding:28px 0 12px;
+    }
+    .hero-copy{
+      margin-top:10px;
+      display:grid;
+      gap:12px;
+      max-width:960px;
+    }
+    .hero-copy p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .hero-metrics{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    .hero-metric{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:14px;
+    }
+    .hero-metric .label{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .hero-metric .value{
+      font-size:1.12rem;
+      font-weight:800;
+      color:#fff;
+      word-break:break-word;
+    }
+
+    .controls{
+      display:grid;
+      grid-template-columns:1.25fr .75fr 1fr auto;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .control{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .control label{
+      font-size:13px;
+      font-weight:800;
+      color:#fff;
+    }
+    .input,.select{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0a1427;
+      color:#fff;
+      padding:14px 14px;
+      font:inherit;
+      outline:none;
+      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .input:focus,.select:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 4px rgba(96,165,250,.14);
+      background:#0b172d;
+    }
+
+    .quick{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .quick button{
+      appearance:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:999px;
+      padding:10px 12px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+    .quick button:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.06);
+    }
+
+    .summary{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    .sumCard{
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+    .sumLabel{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .sumValue{
+      font-size:1.45rem;
+      font-weight:900;
+      letter-spacing:-.03em;
+      color:#fff;
+      word-break:break-word;
+    }
+    .sumValue.small{
+      font-size:1rem;
+      font-weight:800;
+    }
+    .sumNote{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .panel{
+      margin-top:16px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .panelHead{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:flex-start;
+      padding:18px 18px 12px;
+      border-bottom:1px solid var(--line);
+    }
+    .panelTitle{
+      font-size:1.15rem;
+      font-weight:900;
+      color:#fff;
+      margin-bottom:6px;
+    }
+    .panelSub{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+      max-width:860px;
+    }
+    .statusLine{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+      font-weight:800;
+      font-size:13px;
+      white-space:nowrap;
+    }
+
+    .panelBody{
+      padding:18px;
+    }
+
+    .loader{
+      display:none;
+      margin-bottom:14px;
+      color:#dbeafe;
+      font-weight:700;
+    }
+    .dots::after{
+      content:'...';
+      animation:dots 1.2s steps(4,end) infinite;
+    }
+    @keyframes dots{
+      0%{content:''}
+      25%{content:'.'}
+      50%{content:'..'}
+      75%{content:'...'}
+      100%{content:''}
+    }
+
+    .tableWrap{
+      overflow:auto;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.02);
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:820px;
+    }
+    thead th{
+      text-align:left;
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      color:#dbeafe;
+      background:rgba(255,255,255,.04);
+      font-size:.86rem;
+    }
+    tbody td{
+      padding:12px 14px;
+      border-top:1px solid rgba(255,255,255,.06);
+      color:#dbeafe;
+      vertical-align:top;
+      font-size:.92rem;
+      word-break:break-word;
+    }
+    .resolver{
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .resultCell{
+      min-width:280px;
+    }
+    .resultBox{
+      display:grid;
+      gap:8px;
+    }
+    .muted{
+      color:var(--muted);
+    }
+    .ttl{
+      white-space:nowrap;
+      color:#cbd5e1;
+    }
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    }
+
+    .helpBox{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .helpCard{
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:16px;
+    }
+    .helpCard h3{
+      margin:0 0 8px;
+      font-size:1rem;
+      color:#fff;
+      letter-spacing:-.02em;
+    }
+    .helpCard p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+
+    .contentSection{
+      margin-top:16px;
+      display:grid;
+      gap:16px;
+    }
+    .contentCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .contentCard h2{
+      margin:0 0 10px;
+      font-size:1.3rem;
+      letter-spacing:-.02em;
+    }
+    .contentCard p,
+    .contentCard li{
+      color:var(--muted);
+      line-height:1.72;
+      font-size:15px;
+    }
+    .contentCard ul,
+    .contentCard ol{
+      margin:10px 0 0 18px;
+    }
+
+    .splitGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .miniPanel{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+      padding:16px;
+    }
+    .miniPanel h3{
+      margin:0 0 8px;
+      font-size:1rem;
+      color:#fff;
+    }
+    .miniPanel p,
+    .miniPanel li{
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+    .miniPanel ul,
+    .miniPanel ol{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .relatedTools{
+      margin-top:16px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .relatedTools h2{
+      margin:0 0 10px;
+      font-size:1.3rem;
+    }
+    .relatedTools p{
+      color:var(--muted);
+      line-height:1.65;
+      margin:0 0 12px;
+    }
+    .relatedLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .relatedLinks a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+    .relatedLinks a:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .faq{
+      margin-top:16px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .faq h2{
+      margin:0 0 10px;
+      font-size:1.3rem;
+    }
+    .faq details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    .faq details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+    .faq summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+    .faq summary::-webkit-details-marker{
+      display:none;
+    }
+    .faq p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .greenGlow{
+      box-shadow:0 0 0 1px rgba(34,197,94,.12), 0 10px 24px rgba(34,197,94,.10);
+    }
+
+    @media (max-width:1100px){
+      .controls{
+        grid-template-columns:1fr 1fr;
+      }
+      .summary,
+      .hero-metrics{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width:780px){
+      .controls,
+      .summary,
+      .hero-metrics,
+      .helpBox,
+      .splitGrid{
+        grid-template-columns:1fr;
+      }
+      .panelHead{
+        flex-direction:column;
+      }
+      .statusLine{
+        width:100%;
+      }
+      .statusLine .cta{
+        flex:1 1 auto;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -199,10 +645,15 @@
     <section class="hero" aria-label="DNS Propagation Checker">
       <div class="pill">⚡ Faster results • 🌍 Weighted propagation • ✅ Cleaner real-world resolver mix</div>
       <h1>DNS Propagation Checker</h1>
-      <p class="sub">
-        Check whether your DNS changes are visible across multiple major public resolvers.
-        Great for A, AAAA, CNAME, MX, TXT, NS, and SOA records.
-      </p>
+
+      <div class="hero-copy">
+        <p>
+          Check whether DNS changes are visible across multiple major public resolvers. This is useful after updating A, AAAA, CNAME, MX, TXT, NS, or SOA records and wanting to know whether the new value is showing up in the real world yet.
+        </p>
+        <p>
+          A propagation checker is different from a simple DNS lookup. Instead of asking just one resolver for one answer, it compares multiple public resolver paths to help you see whether a new record value is appearing consistently or whether different caches are still returning older results.
+        </p>
+      </div>
 
       <div class="controls" aria-label="Checker controls">
         <div class="control">
@@ -263,13 +714,32 @@
           <div class="sumNote">Current domain + record type checked.</div>
         </div>
       </div>
+
+      <div class="hero-metrics" aria-label="Quick context">
+        <div class="hero-metric">
+          <div class="label">Best for</div>
+          <div class="value">DNS changes and migrations</div>
+        </div>
+        <div class="hero-metric">
+          <div class="label">Common checks</div>
+          <div class="value">Website, mail, TXT verification</div>
+        </div>
+        <div class="hero-metric">
+          <div class="label">Runs from</div>
+          <div class="value">Browser + public resolvers</div>
+        </div>
+        <div class="hero-metric">
+          <div class="label">Useful after</div>
+          <div class="value">Record edits and nameserver changes</div>
+        </div>
+      </div>
     </section>
 
     <section class="panel" aria-label="Results panel">
       <div class="panelHead">
         <div>
           <div class="panelTitle">Resolver Results</div>
-          <div class="panelSub">Results appear as each resolver finishes. DNS64 was removed from live checks to avoid slow or misleading browser behavior.</div>
+          <div class="panelSub">Results appear as each resolver finishes. DNS64 was removed from live checks to avoid slow or misleading browser behavior in normal public-web checks.</div>
         </div>
 
         <div class="statusLine">
@@ -315,23 +785,108 @@
           <div class="helpCard">
             <h3>How scoring works</h3>
             <p>
-              Standard public resolvers are weighted highest. Security and Family resolvers still count,
-              but they count less because they may intentionally filter or alter some domains.
+              Standard public resolvers are weighted highest because they better reflect common public DNS resolution paths. Security and Family resolvers still count, but they count less because they may intentionally filter or alter some domains.
             </p>
           </div>
           <div class="helpCard">
             <h3>Why DNS64 was removed</h3>
             <p>
-              DNS64 is meant for IPv6-only and NAT64 scenarios, not as a normal public browser check path.
-              Removing it avoids pointless timeouts and makes the tool feel faster and more realistic.
+              DNS64 is intended for IPv6-only and NAT64 scenarios, not as a normal public browser check path. Removing it avoids pointless timeouts and makes the tool feel faster and more representative for everyday DNS troubleshooting.
             </p>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="contentSection">
+      <article class="contentCard">
+        <h2>What DNS propagation means in practice</h2>
+        <p>
+          DNS propagation is the period during which different resolvers stop serving old cached values and begin returning your updated DNS records. In plain terms, one resolver might already show the new A record while another still returns the old address. That is why a site can look correct for one user but still appear broken for another user somewhere else.
+        </p>
+        <p>
+          This checker helps by comparing multiple resolvers at once instead of forcing you to check each one manually. That is especially helpful after changing hosting providers, mail configuration, CDN targets, verification TXT records, or nameservers.
+        </p>
+      </article>
+
+      <div class="splitGrid">
+        <article class="miniPanel">
+          <h3>Common use cases</h3>
+          <ul>
+            <li>Confirming website IP changes after moving to a new server</li>
+            <li>Checking MX records after switching email providers</li>
+            <li>Verifying TXT records for Google, Microsoft, or other services</li>
+            <li>Comparing results after updating nameservers</li>
+            <li>Checking whether a CNAME target is visible globally</li>
+          </ul>
+        </article>
+
+        <article class="miniPanel">
+          <h3>What can delay propagation?</h3>
+          <ul>
+            <li>Resolver cache still holding older records</li>
+            <li>Higher TTL values slowing refresh timing</li>
+            <li>Recent DNS provider or nameserver changes</li>
+            <li>Registrar updates not fully reflected yet</li>
+            <li>Resolver-specific filtering or regional behavior</li>
+          </ul>
+        </article>
+      </div>
+
+      <article class="contentCard">
+        <h2>Why some resolvers return different answers</h2>
+        <p>
+          Different resolvers can legitimately show different answers during propagation. Public DNS systems do not refresh at exactly the same moment. One resolver may have already expired the old cache while another still serves it. Some resolvers may also apply their own policies, filtering, or security adjustments, especially family-safe or security-focused variants.
+        </p>
+        <p>
+          That is why weighted propagation is useful. It avoids letting less representative resolver variants dominate the score while still giving you secondary signals that can be useful in edge cases.
+        </p>
+      </article>
+
+      <article class="contentCard">
+        <h2>How to interpret the results</h2>
+        <p>
+          A high weighted percentage usually means your DNS change is visible across most common public resolver paths. A lower percentage often means the update is still propagating, one or more resolvers are serving cached data, or the expected value does not match the actual live result yet.
+        </p>
+        <p>
+          The consensus value is especially helpful when you want a quick answer to the question, “What are most resolvers seeing right now?” If your expected value matches the consensus and the weighted percentage is high, that is usually a strong sign that the change is taking hold.
+        </p>
+      </article>
+
+      <div class="splitGrid">
+        <article class="miniPanel">
+          <h3>Best practices after DNS changes</h3>
+          <ol>
+            <li>Lower TTL before a planned migration when possible.</li>
+            <li>Update records carefully and verify syntax.</li>
+            <li>Check both direct lookup and propagation views.</li>
+            <li>Wait and retest if only some resolvers show the new value.</li>
+            <li>Document the old and new values for comparison.</li>
+          </ol>
+        </article>
+
+        <article class="miniPanel">
+          <h3>Why this page is useful</h3>
+          <p>
+            A thin propagation checker only spits out resolver answers. A stronger page explains what those differences mean, why weights matter, and how to use the data in a real troubleshooting workflow. That added context makes the tool more helpful to both technical and non-technical users.
+          </p>
+        </article>
+      </div>
+
+      <article class="contentCard">
+        <h2>Why trust InstantQR tools?</h2>
+        <p>
+          InstantQR tools are designed to be fast, practical, and privacy-conscious. This propagation checker runs from the browser using public DNS-over-HTTPS endpoints and presents results in a cleaner format that is easier to interpret than raw resolver responses alone.
+        </p>
+        <p>
+          That makes it useful for quick checks, migration validation, support tickets, and verification workflows without requiring an account or unnecessary friction.
+        </p>
+      </article>
+    </section>
+
     <section class="relatedTools" aria-label="Related network tools">
       <h2>Related Network Tools</h2>
+      <p>Use these alongside propagation checks when you want a fuller picture of DNS state, ownership, routing, or HTTP behavior.</p>
       <div class="relatedLinks">
         <a href="/tools/dns-lookup.html">DNS Lookup</a>
         <a href="/tools/whois-lookup.html">WHOIS Lookup</a>
@@ -362,6 +917,11 @@
       <details>
         <summary>Why are some resolvers weighted differently?</summary>
         <p>Standard public resolvers better represent common DNS resolution paths. Security and family-safe resolvers can apply additional filtering, so they are useful secondary signals but should not dominate the score.</p>
+      </details>
+
+      <details>
+        <summary>How do I know if my DNS change has propagated?</summary>
+        <p>If several resolvers match your expected value and the weighted propagation percentage is high, your update is likely visible across most real-world public DNS paths.</p>
       </details>
     </section>
 
