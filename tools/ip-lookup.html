@@ -14,11 +14,12 @@
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
+  <!-- Core Meta -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>IP Lookup | What Is My IP Address (IPv4/IPv6) | InstantQR</title>
-  <meta name="description" content="Find your public IPv4 and IPv6 address instantly, plus approximate location, ISP, timezone, ASN, country flag, and reverse DNS. Privacy-first and fast." />
+  <meta name="description" content="Find your public IPv4 and IPv6 address instantly, plus approximate location, ISP, timezone, ASN, country flag, and reverse DNS. Fast, privacy-first, and browser-friendly." />
   <meta name="keywords" content="ip lookup, what is my ip, ipv4 checker, ipv6 checker, public ip, reverse dns lookup, ptr lookup, ip address finder, asn lookup" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -48,20 +49,22 @@
 
   <link rel="stylesheet" href="/assets/site.css" />
 
+  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="IP Lookup | What Is My IP Address (IPv4/IPv6) | InstantQR" />
-  <meta property="og:description" content="Find your public IPv4 and IPv6 instantly plus approximate location, ISP, timezone, ASN, country flag, and reverse DNS." />
+  <meta property="og:description" content="Find your public IPv4/IPv6 instantly plus approximate location, ASN, ISP, timezone, and reverse DNS." />
   <meta property="og:url" content="https://instantqr.io/tools/ip-lookup.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="InstantQR IP Lookup tool page" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="IP Lookup | What Is My IP Address (IPv4/IPv6) | InstantQR" />
-  <meta name="twitter:description" content="Find your public IPv4/IPv6 instantly plus approximate location, ASN, and reverse DNS." />
+  <meta name="twitter:description" content="Find your public IPv4/IPv6 instantly plus approximate location, ASN, ISP, and reverse DNS." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -148,6 +151,11 @@
       },
       {
         "@type":"Question",
+        "name":"What is the difference between IPv4 and IPv6?",
+        "acceptedAnswer":{"@type":"Answer","text":"IPv4 is the older internet addressing format and IPv6 is the newer format designed to support a much larger number of devices and networks."}
+      },
+      {
+        "@type":"Question",
         "name":"Do you store my IP address?",
         "acceptedAnswer":{"@type":"Answer","text":"InstantQR does not intentionally store lookup results on a server. IP lookup requires contacting third-party providers to return IP and approximate network details."}
       }
@@ -163,13 +171,58 @@
       margin-top:14px;
       align-items:start;
     }
-    .ip-box,.faqCard{
+    .ip-box,.faqCard,.contentCard,.relatedCard{
       border-radius:var(--radius2);
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
       box-shadow:var(--shadow);
     }
     .ip-box{padding:16px}
+    .contentCard,.relatedCard{padding:18px;margin-top:14px}
+    .contentCard h2,.relatedCard h2,.faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    .contentCard p,
+    .contentCard li,
+    .relatedCard p{
+      color:var(--muted);
+      line-height:1.72;
+      font-size:15px;
+    }
+    .contentCard ul,.contentCard ol{
+      margin:10px 0 0 18px;
+    }
+
+    .splitGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .miniPanel{
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:16px;
+    }
+    .miniPanel h3{
+      margin:0 0 8px;
+      font-size:16px;
+      color:#fff;
+    }
+    .miniPanel p,
+    .miniPanel li{
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+    .miniPanel ul,.miniPanel ol{
+      margin:0;
+      padding-left:18px;
+    }
+
     .inputLabel{
       display:block;
       font-size:12px;
@@ -198,6 +251,31 @@
       flex-wrap:wrap;
       margin-top:12px;
     }
+
+    .heroStats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+    .heroStat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:12px;
+    }
+    .heroStat .label{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .heroStat .value{
+      font-size:14px;
+      font-weight:800;
+      color:#fff;
+      line-height:1.45;
+    }
+
     .resultsCard{
       margin-top:12px;
       padding:14px;
@@ -290,16 +368,27 @@
     }
     .relatedLinks{
       margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
     }
-    .relatedLinks a{color:#dce9ff}
+    .relatedLinks a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+    .relatedLinks a:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
     .faqCard{
       margin-top:14px;
       padding:18px;
-    }
-    .faqCard h2{
-      margin:0 0 10px;
-      font-size:22px;
-      letter-spacing:-.25px;
     }
     .faqCard details{
       border-top:1px solid rgba(255,255,255,.10);
@@ -322,8 +411,9 @@
       line-height:1.6;
       font-size:14px;
     }
-    @media (max-width:860px){
-      .ip-grid{grid-template-columns:1fr}
+
+    @media (max-width:980px){
+      .ip-grid,.splitGrid,.heroStats{grid-template-columns:1fr}
     }
     @media (max-width:520px){
       .kv{grid-template-columns:1fr}
@@ -378,6 +468,25 @@
           <span class="badge">🧭 Approx location</span>
           <span class="badge">🔁 Reverse DNS</span>
           <span class="badge">🔒 Privacy-first</span>
+        </div>
+      </div>
+
+      <div class="heroStats" aria-label="Quick overview">
+        <div class="heroStat">
+          <div class="label">Best for</div>
+          <div class="value">Checking public IP and network basics</div>
+        </div>
+        <div class="heroStat">
+          <div class="label">Includes</div>
+          <div class="value">IPv4, IPv6, ASN, ISP, timezone, reverse DNS</div>
+        </div>
+        <div class="heroStat">
+          <div class="label">Location</div>
+          <div class="value">Approximate city or region only</div>
+        </div>
+        <div class="heroStat">
+          <div class="label">Common use</div>
+          <div class="value">Troubleshooting, VPN checks, remote support</div>
         </div>
       </div>
     </section>
@@ -451,27 +560,107 @@
 
       <aside class="ip-box">
         <div class="sideSectionTitle">What is a public IP?</div>
-        <div class="sideText">Your public IP is your network’s address on the internet.</div>
+        <div class="sideText">
+          Your public IP is the address your network presents to the internet. Websites, APIs, and remote services use it to send data back to your device or router.
+        </div>
 
         <div class="sideSectionTitle" style="margin-top:14px;">Accuracy</div>
-        <div class="sideText">Location is approximate, usually city or region, not exact street address.</div>
+        <div class="sideText">
+          Location is approximate, usually city or region, not exact street address. IP geolocation is helpful for general context, but it is not precise enough to identify an exact home or office location.
+        </div>
 
         <div class="sideSectionTitle" style="margin-top:14px;">Reverse DNS</div>
-        <div class="sideText">Reverse DNS maps an IP address back to a hostname using PTR records. Some IPs return a hostname and some do not.</div>
+        <div class="sideText">
+          Reverse DNS maps an IP address back to a hostname using PTR records. Some IPs return a hostname and some do not, depending on how the network owner configured reverse DNS.
+        </div>
+
+        <div class="sideSectionTitle" style="margin-top:14px;">Why this tool is useful</div>
+        <div class="sideText">
+          IP lookup helps with quick checks during troubleshooting, VPN validation, CDN issues, remote support, firewall allow-listing, and general network diagnostics.
+        </div>
 
         <div class="relatedLinks">
-          <div class="sideSectionTitle">Related tools</div>
-          <div class="sideText">
-            <a href="/tools/dns-lookup.html">DNS Lookup</a> ·
-            <a href="/tools/json-formatter.html">JSON Formatter</a> ·
-            <a href="/tools/base64-encoder.html">Base64 Encoder</a>
-          </div>
-        </div>
-
-        <div class="sideText" style="margin-top:14px;">
-          This tool is designed for quick checks, troubleshooting, and basic IP information.
+          <a href="/tools/dns-lookup.html">DNS Lookup</a>
+          <a href="/tools/reverse-dns-lookup.html">Reverse DNS Lookup</a>
+          <a href="/tools/http-header-checker.html">HTTP Header Checker</a>
         </div>
       </aside>
+    </section>
+
+    <section class="contentCard">
+      <h2>What an IP lookup actually tells you</h2>
+      <p>
+        An IP lookup helps you see the public-facing network identity that websites and internet services can observe. For most users, that means checking the public IPv4 or IPv6 address currently assigned to the connection, along with approximate location details, network ownership, and sometimes a reverse DNS hostname.
+      </p>
+      <p>
+        This is useful because many networking and support questions start with knowing what public IP is currently visible. If a site is blocked, if a VPN is active, if a business firewall needs an allow-list, or if a service behaves differently by region, your public IP and related metadata can help explain what is happening.
+      </p>
+    </section>
+
+    <div class="splitGrid">
+      <section class="contentCard" style="margin-top:0;">
+        <h2>Common real-world use cases</h2>
+        <ul>
+          <li>Checking whether a VPN or proxy is changing your public IP</li>
+          <li>Confirming which ISP or network is visible to a service</li>
+          <li>Helping remote support teams identify the active public address</li>
+          <li>Testing whether IPv6 is available on the current connection</li>
+          <li>Reviewing reverse DNS when diagnosing hosting or mail issues</li>
+        </ul>
+      </section>
+
+      <section class="contentCard" style="margin-top:0;">
+        <h2>What affects the result</h2>
+        <ul>
+          <li>Your ISP or mobile carrier</li>
+          <li>VPN or proxy services</li>
+          <li>Carrier-grade NAT or shared network setups</li>
+          <li>Whether your network supports IPv6</li>
+          <li>Which third-party IP data provider responds</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="contentCard">
+      <h2>IPv4 vs IPv6</h2>
+      <p>
+        IPv4 is the older and still very common internet addressing system. IPv6 is the newer format designed to support far more devices and networks over time. Many users still operate mainly on IPv4, while some ISPs and mobile networks also expose IPv6 addresses. A modern IP tool should help you check both, because they do not always behave the same way.
+      </p>
+      <p>
+        In practical terms, one website or service may log your IPv4 while another may prefer IPv6 if your connection supports it. That is why seeing both values can be useful when debugging connectivity, firewall rules, analytics, or region-based service behavior.
+      </p>
+    </section>
+
+    <section class="contentCard">
+      <h2>What reverse DNS can tell you</h2>
+      <p>
+        Reverse DNS, sometimes called PTR lookup, attempts to map an IP address back to a hostname. In some environments that hostname gives a clue about the ISP, hosting provider, corporate network, or server role. In other cases there may be no reverse DNS at all, which is normal.
+      </p>
+      <p>
+        Reverse DNS is especially useful when working with servers, mail systems, hosting providers, and security logs. It does not identify a person, but it can provide context about what kind of network is behind the address.
+      </p>
+    </section>
+
+    <section class="contentCard">
+      <h2>Why this page is more useful than a thin IP checker</h2>
+      <p>
+        A thin IP checker only prints a number. A stronger IP lookup page helps users understand what the number means, what related details matter, and what the limitations are. That is why this page combines basic IP detection with approximate geolocation, ASN context, reverse DNS, practical notes, and related tools for deeper investigation.
+      </p>
+      <p>
+        That matters because IP information becomes most useful when it is interpreted correctly. Public IP data is great for troubleshooting and general network awareness, but it should not be mistaken for exact personal location data.
+      </p>
+    </section>
+
+    <section class="relatedCard" aria-label="Related tools">
+      <h2>Related tools</h2>
+      <p>Use these tools alongside IP lookup when you want a broader picture of networking, DNS, or request behavior.</p>
+      <div class="relatedLinks">
+        <a href="/tools/dns-lookup.html">DNS Lookup</a>
+        <a href="/tools/reverse-dns-lookup.html">Reverse DNS Lookup</a>
+        <a href="/tools/ping-tool.html">Ping Tool</a>
+        <a href="/tools/http-header-checker.html">HTTP Header Checker</a>
+        <a href="/tools/dns-propagation-checker.html">DNS Propagation Checker</a>
+      </div>
     </section>
 
     <section class="faqCard" aria-label="Frequently asked questions">
@@ -490,6 +679,11 @@
       <details>
         <summary>What is reverse DNS?</summary>
         <p>Reverse DNS maps an IP address back to a hostname using PTR records. Some IP addresses have reverse DNS names and some do not.</p>
+      </details>
+
+      <details>
+        <summary>What is the difference between IPv4 and IPv6?</summary>
+        <p>IPv4 is the older internet addressing format and IPv6 is the newer format designed to support a much larger number of devices and networks.</p>
       </details>
 
       <details>
