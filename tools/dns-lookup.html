@@ -22,9 +22,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>DNS Lookup | InstantQR</title>
-  <meta name="description" content="Fast DNS lookup tool for A, AAAA, CNAME, MX, TXT, NS, and SOA records. Uses DNS-over-HTTPS with a clean, responsive, privacy-first interface." />
-  <meta name="keywords" content="dns lookup, dns checker, dns lookup tool, A record lookup, AAAA record lookup, CNAME lookup, MX lookup, TXT lookup, NS lookup, SOA lookup, DNS over HTTPS, DoH checker" />
+  <title>DNS Lookup Tool | Check A, AAAA, MX, TXT, NS, CNAME & SOA Records | InstantQR</title>
+  <meta name="description" content="Fast DNS lookup tool for A, AAAA, CNAME, MX, TXT, NS, and SOA records. Uses DNS-over-HTTPS with a clean, responsive, privacy-first interface for troubleshooting websites, email, and domain setup." />
+  <meta name="keywords" content="dns lookup, dns checker, dns lookup tool, A record lookup, AAAA record lookup, CNAME lookup, MX lookup, TXT lookup, NS lookup, SOA lookup, DNS over HTTPS, DoH checker, domain diagnostics" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
   <meta name="application-name" content="InstantQR" />
@@ -56,14 +56,14 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="DNS Lookup | InstantQR" />
+  <meta property="og:title" content="DNS Lookup Tool | InstantQR" />
   <meta property="og:description" content="Fast DNS lookup tool for A, AAAA, CNAME, MX, TXT, NS, and SOA records with DNS-over-HTTPS." />
   <meta property="og:url" content="https://instantqr.io/tools/dns-lookup.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="DNS Lookup tool page preview on InstantQR" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="DNS Lookup | InstantQR" />
+  <meta name="twitter:title" content="DNS Lookup Tool | InstantQR" />
   <meta name="twitter:description" content="Check A, AAAA, CNAME, MX, TXT, NS, and SOA records with a fast browser-based DNS lookup tool." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
@@ -279,7 +279,7 @@
       margin:0 0 12px;
       line-height:1.65;
     }
-    .content ul{
+    .content ul,.content ol{
       margin:10px 0 0 18px;
       color:#cbd5e1;
     }
@@ -554,6 +554,22 @@
           "@type":"Answer",
           "text":"Yes. This tool queries the selected resolver from your browser using DNS-over-HTTPS."
         }
+      },
+      {
+        "@type":"Question",
+        "name":"Why would a DNS lookup return no answers?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A lookup may return no answers if the domain has no records for that type, the hostname is incorrect, or the resolver does not return results for that query."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why would DNS results look different between resolvers?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Resolvers can differ because of caching, propagation timing, filtering, geo-routing, or resolver-specific behavior."
+        }
       }
     ]
   }
@@ -593,7 +609,7 @@
         <div class="card hero-main">
           <div class="eyebrow">DNS-over-HTTPS • Fast Record Checks • Browser-Based</div>
           <h1>DNS Lookup</h1>
-          <p>Check A, AAAA, CNAME, MX, TXT, NS, and SOA records with a fast DNS-over-HTTPS lookup tool. Clean output, quick copy actions, and responsive results for desktop and mobile.</p>
+          <p>Check A, AAAA, CNAME, MX, TXT, NS, and SOA records with a fast DNS-over-HTTPS lookup tool. Clean output, quick copy actions, responsive results, and practical guidance for troubleshooting websites, email, and domain setup.</p>
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#tool">Use Tool</a>
@@ -772,11 +788,69 @@
       </article>
 
       <article class="card content-card">
+        <h2>Real-world DNS lookup use cases</h2>
+        <p>This DNS lookup tool is commonly used by developers, IT teams, marketers, and website owners to diagnose and verify domain configurations. DNS problems can affect much more than a homepage. They can break email delivery, block domain verification, delay migrations, and create difficult-to-trace issues across different services.</p>
+        <ul>
+          <li><strong>Website troubleshooting:</strong> Confirm A or AAAA records point to the correct server or CDN endpoint.</li>
+          <li><strong>Email setup:</strong> Validate MX records to make sure inbound email routing is configured correctly.</li>
+          <li><strong>Domain verification:</strong> Check TXT records for Google, Microsoft, search console tools, analytics, and external SaaS platforms.</li>
+          <li><strong>DNS migration:</strong> Verify records after switching providers or changing nameservers.</li>
+          <li><strong>Security checks:</strong> Inspect TXT records used for SPF, DKIM, DMARC, and related mail authentication policies.</li>
+        </ul>
+      </article>
+
+      <article class="card content-card">
+        <h2>Understanding DNS record types</h2>
+        <p>Each DNS record type serves a different purpose. Understanding what each one does makes troubleshooting much easier. A domain may work fine for website traffic while still failing for email, or a verification request may fail even though the main site loads correctly. That is why it helps to check the specific record type related to the problem.</p>
+        <ul>
+          <li><strong>A record:</strong> Maps a hostname to an IPv4 address.</li>
+          <li><strong>AAAA record:</strong> Maps a hostname to an IPv6 address.</li>
+          <li><strong>CNAME record:</strong> Points one hostname to another hostname instead of an IP.</li>
+          <li><strong>MX record:</strong> Specifies which mail servers should receive email for the domain.</li>
+          <li><strong>TXT record:</strong> Stores text data such as verification tokens, SPF rules, and other metadata.</li>
+          <li><strong>NS record:</strong> Identifies the authoritative nameservers for the zone.</li>
+          <li><strong>SOA record:</strong> Contains administrative details about the DNS zone and its authority.</li>
+        </ul>
+      </article>
+
+      <article class="card content-card">
+        <h2>Common DNS issues and what to check</h2>
+        <p>DNS failures are often small configuration mistakes with big visible effects. A wrong record value, old cache, or incomplete migration can cause a site to appear broken even when the underlying service is healthy. Running a direct lookup is one of the fastest ways to narrow down the issue.</p>
+        <ul>
+          <li><strong>Wrong IP address:</strong> A or AAAA records may still point to an old server.</li>
+          <li><strong>Propagation delay:</strong> Changes may not appear immediately across all resolvers.</li>
+          <li><strong>Missing MX records:</strong> Email may fail or bounce because mail routing is incomplete.</li>
+          <li><strong>Incorrect TXT entries:</strong> Verification and email authentication checks may fail.</li>
+          <li><strong>Nameserver mismatch:</strong> The domain may still be delegated to the wrong DNS provider.</li>
+        </ul>
+        <p>This tool helps you see whether the public resolver is returning the records you expect right now, which is often the fastest way to confirm whether a change has actually taken effect.</p>
+      </article>
+
+      <article class="card content-card">
+        <h2>Why DNS results can differ between resolvers</h2>
+        <p>Not every resolver answers in exactly the same way at exactly the same time. Public resolvers may cache results differently, refresh data on different schedules, apply filtering or geo-aware logic, or simply return data from different points in the update cycle. That is why Cloudflare and Google can sometimes show slightly different results even when both are working correctly.</p>
+        <p>When diagnosing a problem, it is often useful to compare more than one resolver. If both return the same answer, confidence is higher. If they differ, the issue may be related to caching, propagation, or resolver behavior rather than the domain itself.</p>
+      </article>
+
+      <article class="card content-card">
+        <h2>Why trust InstantQR tools?</h2>
+        <p>InstantQR tools are designed to be simple, privacy-first, and immediately useful. This DNS lookup runs from the browser, supports trusted DNS-over-HTTPS providers, and gives results in both human-readable and raw formats. That combination makes it useful for quick checks, deeper troubleshooting, and documentation workflows.</p>
+        <ul>
+          <li>No login required</li>
+          <li>No account creation needed</li>
+          <li>Direct browser-based lookups</li>
+          <li>Fast copying of answers and raw JSON</li>
+        </ul>
+      </article>
+
+      <article class="card content-card">
         <h2>Related tools</h2>
         <div class="related-links">
           <a href="/tools/dns-propagation-checker.html">DNS Propagation Checker</a>
           <a href="/tools/ip-lookup.html">IP Lookup</a>
           <a href="/tools/reverse-dns-lookup.html">Reverse DNS Lookup</a>
+          <a href="/tools/http-header-checker.html">HTTP Header Checker</a>
+          <a href="/tools/port-checker.html">Port Checker</a>
         </div>
       </article>
 
@@ -801,6 +875,11 @@
           <details>
             <summary>Why would a DNS lookup return no answers?</summary>
             <p>A lookup may return no answers if the domain has no records for that type, the hostname is incorrect, or the resolver does not return results for that query.</p>
+          </details>
+
+          <details>
+            <summary>Why would DNS results look different between resolvers?</summary>
+            <p>Resolvers can differ because of caching, propagation timing, filtering, geo-routing, or resolver-specific behavior.</p>
           </details>
         </div>
       </article>
