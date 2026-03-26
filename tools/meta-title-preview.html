@@ -26,6 +26,7 @@
   <meta name="theme-color" content="#0f172a" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="format-detection" content="telephone=no" />
+  <meta name="color-scheme" content="dark" />
 
   <link rel="canonical" href="https://instantqr.io/tools/meta-title-preview.html" />
   <link rel="icon" href="/assets/instantqr-logo.svg" type="image/svg+xml" />
@@ -112,6 +113,22 @@
         "acceptedAnswer":{
           "@type":"Answer",
           "text":"Yes. The title tag is one of the most important on-page SEO elements because it helps search engines and users understand what the page is about."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Will Google always show my exact title tag?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No. Search engines sometimes rewrite title tags, but writing a clear and useful original title still improves relevance and click potential."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Should I add my brand name to every title?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Branding can help recognition, but it should not make the title weaker. Add it when it improves clarity or trust without pushing the primary topic too far back."
         }
       }
     ]
@@ -251,7 +268,10 @@
       font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
     }
 
-    .panel{
+    .panel,
+    .contentCard,
+    .relatedCard,
+    .faqSection{
       margin-top:18px;
       border:1px solid rgba(255,255,255,.08);
       border-radius:24px;
@@ -284,7 +304,8 @@
       max-width:720px;
     }
 
-    .panelBody{
+    .panelBody,
+    .contentBody{
       padding:18px 20px 20px;
     }
 
@@ -362,6 +383,7 @@
       font:inherit;
       outline:none;
       transition:border-color .2s ease, box-shadow .2s ease;
+      box-sizing:border-box;
     }
 
     textarea.input{
@@ -628,6 +650,85 @@
       line-height:1.6;
     }
 
+    .contentCard h2,
+    .relatedCard h2,
+    .faqSection h2{
+      margin:0 0 10px;
+      font-size:1.3rem;
+      color:#eef6ff;
+      letter-spacing:-.02em;
+    }
+
+    .contentCard p,
+    .contentCard li,
+    .relatedCard p,
+    .faqIntro{
+      color:var(--muted, #94a3b8);
+      line-height:1.72;
+      font-size:15px;
+    }
+
+    .contentCard ul,
+    .contentCard ol{
+      margin:10px 0 0 18px;
+    }
+
+    .splitGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .miniPanel{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .miniPanel h3{
+      margin:0 0 8px;
+      font-size:1rem;
+      color:#fff;
+    }
+
+    .miniPanel p,
+    .miniPanel li{
+      color:var(--muted, #94a3b8);
+      line-height:1.65;
+      font-size:14px;
+    }
+
+    .miniPanel ul,
+    .miniPanel ol{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .relatedLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .relatedLinks a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      color:#eaf2ff;
+      text-decoration:none;
+    }
+
+    .relatedLinks a:hover{
+      background:rgba(255,255,255,.08);
+    }
+
     details.faqPanel{
       border-radius:16px;
       border:1px solid rgba(255,255,255,.10);
@@ -664,7 +765,8 @@
       }
       .controls.cols-3,
       .summaryPreviewGrid,
-      .detailGrid{
+      .detailGrid,
+      .splitGrid{
         grid-template-columns:1fr;
       }
     }
@@ -676,7 +778,8 @@
 
       .hero,
       .panelBody,
-      .panelHead{
+      .panelHead,
+      .contentBody{
         padding-left:16px;
         padding-right:16px;
       }
@@ -714,9 +817,9 @@
       <nav class="top-links" aria-label="Primary">
         <a href="/">Home</a>
         <a href="/tools/tools.html">Tools</a>
-        <a href="/tools/ip-lookup.html">IP Lookup</a>
-        <a href="/tools/unit-converter.html">Unit Converter</a>
-        <a href="/tools/password-leak-checker.html">Password Leak</a>
+        <a href="/tools/meta-description-preview.html">Meta Description</a>
+        <a href="/tools/http-header-checker.html">HTTP Headers</a>
+        <a href="/guides/guides.html">Guides</a>
       </nav>
     </div>
   </header>
@@ -932,15 +1035,118 @@
       </div>
     </section>
 
-    <section class="panel" style="margin-top:16px;">
-      <div class="panelHead">
-        <div>
-          <div class="panelTitle">Frequently Asked Questions</div>
-          <div class="panelSub">Quick answers about title tags and SEO previews.</div>
+    <section class="contentCard">
+      <div class="contentBody">
+        <h2>What a meta title preview tool actually helps with</h2>
+        <p>
+          A meta title preview tool helps you write titles that are both search-friendly and human-friendly before the page goes live. Instead of guessing how a title might look in search, you can check its length, readability, branding, and likely truncation in one place.
+        </p>
+        <p>
+          This matters because the title tag is often the first thing a person notices in a search result. Even if the page ranks, a weak or unclear title can reduce clicks. A stronger title can improve relevance, make the topic clearer, and help the search result stand out without relying on gimmicks or keyword stuffing.
+        </p>
+      </div>
+    </section>
+
+    <div class="splitGrid">
+      <section class="contentCard">
+        <div class="contentBody">
+          <h2>Common real-world use cases</h2>
+          <ul>
+            <li>Writing SEO titles for blog posts and guides</li>
+            <li>Improving product page title tags for ecommerce</li>
+            <li>Checking whether branding makes a title too long</li>
+            <li>Testing clearer alternatives before publishing</li>
+            <li>Creating cleaner titles for category and landing pages</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="contentCard">
+        <div class="contentBody">
+          <h2>What makes a title stronger</h2>
+          <ul>
+            <li>A clear main topic near the beginning</li>
+            <li>Useful wording that matches search intent</li>
+            <li>Readable phrasing instead of stuffed keywords</li>
+            <li>Reasonable length that avoids unnecessary truncation</li>
+            <li>Branding only when it adds trust or clarity</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <section class="contentCard">
+      <div class="contentBody">
+        <h2>Why title length matters</h2>
+        <p>
+          Title length matters because search results have limited display space. If the title is too short, it may miss context or fail to communicate value. If it is too long, the most important wording may get cut off. That is why many SEO workflows aim for roughly 50 to 60 characters, while still prioritizing clarity over hitting an exact number.
+        </p>
+        <p>
+          The best title is not always the shortest one. It is the one that communicates the page topic quickly, matches the content honestly, and gives users a reason to click. A preview tool helps you see that balance before you publish.
+        </p>
+      </div>
+    </section>
+
+    <section class="contentCard">
+      <div class="contentBody">
+        <h2>Why Google does not always show the exact title tag</h2>
+        <p>
+          Search engines sometimes rewrite titles based on the query, the page content, or other signals. That does not make title tags unimportant. It means your original title still needs to be strong enough to guide relevance and present the page clearly. In many cases, the better your original title is, the less likely it is to need rewriting.
+        </p>
+        <p>
+          A strong original title helps even when search results change slightly across devices or queries. Clear topic wording, natural phrasing, and good alignment with the page usually give you the best chance of stable and useful search presentation.
+        </p>
+      </div>
+    </section>
+
+    <div class="splitGrid">
+      <section class="miniPanel">
+        <h3>Best practices</h3>
+        <ol>
+          <li>Put the most important topic near the beginning.</li>
+          <li>Use wording that matches what the page actually delivers.</li>
+          <li>Keep titles readable instead of forcing keywords.</li>
+          <li>Add brand names when they improve trust or recognition.</li>
+          <li>Check titles before publishing, especially on key landing pages.</li>
+        </ol>
+      </section>
+
+      <section class="miniPanel">
+        <h3>Why this page is useful</h3>
+        <p>
+          A thin title preview page only shows a character count. A stronger page helps you understand why title wording matters, how length affects display, when branding helps, and why search engines may rewrite titles. That added context makes the tool more useful for real SEO work.
+        </p>
+      </section>
+    </div>
+
+    <section class="contentCard">
+      <div class="contentBody">
+        <h2>Why trust InstantQR tools?</h2>
+        <p>
+          InstantQR tools are designed to be practical, lightweight, and useful without unnecessary friction. This title preview tool focuses on live feedback, clear output, and straightforward SEO guidance so users can make better decisions before publishing changes.
+        </p>
+      </div>
+    </section>
+
+    <section class="relatedCard" aria-label="Related tools">
+      <div class="contentBody">
+        <h2>Related SEO tools</h2>
+        <p>Use these together when you want a more complete on-page SEO workflow.</p>
+        <div class="relatedLinks">
+          <a href="/tools/meta-description-preview.html">Meta Description Preview</a>
+          <a href="/tools/http-header-checker.html">HTTP Header Checker</a>
+          <a href="/tools/dns-lookup.html">DNS Lookup</a>
+          <a href="/guides/meta-title-description-best-practices.html">Title & Description Guide</a>
+          <a href="/tools/tools.html">All Tools</a>
         </div>
       </div>
+    </section>
 
-      <div class="panelBody">
+    <section class="faqSection">
+      <div class="contentBody">
+        <h2>Frequently Asked Questions</h2>
+        <p class="faqIntro">Quick answers about title tags, previews, and SEO basics.</p>
+
         <details class="faqPanel" open>
           <summary>What is a meta title preview tool?</summary>
           <div class="faqBody">
@@ -959,6 +1165,20 @@
           <summary>Does the title tag affect SEO?</summary>
           <div class="faqBody">
             Yes. It is one of the most important on-page SEO elements because it helps define page relevance and influences clicks.
+          </div>
+        </details>
+
+        <details class="faqPanel">
+          <summary>Will Google always show my exact title tag?</summary>
+          <div class="faqBody">
+            No. Search engines sometimes rewrite title tags, but writing a clear and useful original title still improves relevance and click potential.
+          </div>
+        </details>
+
+        <details class="faqPanel">
+          <summary>Should I add my brand name to every title?</summary>
+          <div class="faqBody">
+            Branding can help recognition, but it should not weaken the title. Add it when it improves trust or clarity without pushing the main topic too far back.
           </div>
         </details>
       </div>
