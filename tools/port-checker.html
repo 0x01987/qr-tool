@@ -18,9 +18,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
-  <title>Port Checker | Test Web Ports | InstantQR</title>
-  <meta name="description" content="Free browser-based port checker to test whether a web service is reachable on a specific HTTP or HTTPS port. Fast, clean, and responsive tool for troubleshooting websites and APIs.">
-  <meta name="keywords" content="port checker, web port checker, http port checker, https port checker, test port online, browser port checker, website port tester">
+  <title>Port Checker | Test Web Ports Online | InstantQR</title>
+  <meta name="description" content="Free browser-based port checker to test whether a web service is reachable on a specific HTTP or HTTPS port. Fast, clean, and responsive tool for troubleshooting websites, APIs, dashboards, and common web endpoints.">
+  <meta name="keywords" content="port checker, web port checker, http port checker, https port checker, test port online, browser port checker, website port tester, port reachability checker">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="author" content="InstantQR">
@@ -153,10 +153,451 @@
           "@type":"Answer",
           "text":"Reachable means the browser received some response signal from the target host and port over the selected HTTP or HTTPS protocol."
         }
+      },
+      {
+        "@type":"Question",
+        "name":"Why is a browser-based port checker still useful?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Even though it is not a raw TCP scanner, browser-based port checking is still useful for validating common website and API endpoints from the same environment real visitors and users are using."
+        }
       }
     ]
   }
   </script>
+
+  <style>
+    .hero-copy{
+      margin-top:10px;
+      display:grid;
+      gap:12px;
+      max-width:960px;
+    }
+    .hero-copy p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .hero-metrics{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    .hero-metric{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+      padding:14px;
+    }
+    .hero-metric .label{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .hero-metric .value{
+      font-size:1.08rem;
+      font-weight:800;
+      color:#fff;
+      word-break:break-word;
+      line-height:1.45;
+    }
+
+    .controls{
+      display:grid;
+      grid-template-columns:1.4fr .7fr .7fr auto;
+      gap:12px;
+      margin-top:18px;
+    }
+    .control{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .control label{
+      font-size:13px;
+      font-weight:800;
+      color:#fff;
+    }
+    .input,.select{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0a1427;
+      color:#fff;
+      padding:14px 14px;
+      font:inherit;
+      outline:none;
+      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .input:focus,.select:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 4px rgba(96,165,250,.14);
+      background:#0b172d;
+    }
+
+    .quick{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .quick button{
+      appearance:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:999px;
+      padding:10px 12px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+    .quick button:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.06);
+    }
+
+    .summary{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    .sumCard{
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+    .sumLabel{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .sumValue{
+      font-size:1.45rem;
+      font-weight:900;
+      letter-spacing:-.03em;
+      color:#fff;
+      word-break:break-word;
+    }
+    .sumValue.small{
+      font-size:1rem;
+      font-weight:800;
+    }
+    .sumNote{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .panel{
+      margin-top:16px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .panelHead{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:flex-start;
+      padding:18px 18px 12px;
+      border-bottom:1px solid var(--line);
+    }
+    .panelTitle{
+      font-size:1.15rem;
+      font-weight:900;
+      color:#fff;
+      margin-bottom:6px;
+    }
+    .panelSub{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+      max-width:860px;
+    }
+    .statusLine{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+      font-weight:800;
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .panelBody{
+      padding:18px;
+    }
+
+    .loader{
+      margin-bottom:14px;
+      color:#dbeafe;
+      font-weight:700;
+    }
+    .dots::after{
+      content:'...';
+      animation:dots 1.2s steps(4,end) infinite;
+    }
+    @keyframes dots{
+      0%{content:''}
+      25%{content:'.'}
+      50%{content:'..'}
+      75%{content:'...'}
+      100%{content:''}
+    }
+
+    .tableWrap{
+      overflow:auto;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.02);
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:820px;
+    }
+    thead th{
+      text-align:left;
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      color:#dbeafe;
+      background:rgba(255,255,255,.04);
+      font-size:.86rem;
+    }
+    tbody td{
+      padding:12px 14px;
+      border-top:1px solid rgba(255,255,255,.06);
+      color:#dbeafe;
+      vertical-align:top;
+      font-size:.92rem;
+      word-break:break-word;
+    }
+    .resolver{
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .resultCell{
+      min-width:280px;
+    }
+    .resultBox{
+      display:grid;
+      gap:8px;
+    }
+    .ttl{
+      white-space:nowrap;
+      color:#cbd5e1;
+    }
+    .muted{
+      color:var(--muted);
+    }
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    }
+
+    .helpBox{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .helpCard{
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:16px;
+    }
+    .helpCard h3{
+      margin:0 0 8px;
+      font-size:1rem;
+      color:#fff;
+      letter-spacing:-.02em;
+    }
+    .helpCard p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+
+    .contentSection{
+      margin-top:16px;
+      display:grid;
+      gap:16px;
+    }
+    .contentCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .contentCard h2{
+      margin:0 0 10px;
+      font-size:1.3rem;
+      letter-spacing:-.02em;
+    }
+    .contentCard p,
+    .contentCard li{
+      color:var(--muted);
+      line-height:1.72;
+      font-size:15px;
+    }
+    .contentCard ul,
+    .contentCard ol{
+      margin:10px 0 0 18px;
+    }
+
+    .splitGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .miniPanel{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+      padding:16px;
+    }
+    .miniPanel h3{
+      margin:0 0 8px;
+      font-size:1rem;
+      color:#fff;
+    }
+    .miniPanel p,
+    .miniPanel li{
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+    .miniPanel ul,
+    .miniPanel ol{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .relatedTools{
+      margin-top:16px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .relatedTools h2{
+      margin:0 0 10px;
+      font-size:1.3rem;
+    }
+    .relatedTools p{
+      color:var(--muted);
+      line-height:1.65;
+      margin:0 0 12px;
+    }
+    .relatedLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .relatedLinks a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+    .relatedLinks a:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .faq{
+      margin-top:16px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .faq h2{
+      margin:0 0 10px;
+      font-size:1.3rem;
+    }
+    .faq details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    .faq details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+    .faq summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+    .faq summary::-webkit-details-marker{
+      display:none;
+    }
+    .faq p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .greenGlow{
+      box-shadow:0 0 0 1px rgba(34,197,94,.12), 0 10px 24px rgba(34,197,94,.10);
+    }
+
+    @media (max-width:1100px){
+      .controls{
+        grid-template-columns:1fr 1fr;
+      }
+      .summary,
+      .hero-metrics{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width:780px){
+      .controls,
+      .summary,
+      .hero-metrics,
+      .helpBox,
+      .splitGrid{
+        grid-template-columns:1fr;
+      }
+      .panelHead{
+        flex-direction:column;
+      }
+      .statusLine{
+        width:100%;
+      }
+      .statusLine .cta{
+        flex:1 1 auto;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -198,6 +639,15 @@
         Useful for websites, APIs, dashboards, and common HTTP or HTTPS endpoints.
       </p>
 
+      <div class="hero-copy">
+        <p>
+          This tool helps answer a practical question: can a browser reach a target web service on the host, port, and protocol you expect? That is useful when checking public websites, API endpoints, dashboards, reverse proxies, and HTTPS services after deployment or configuration changes.
+        </p>
+        <p>
+          Because browsers cannot perform raw TCP socket scans, this tool focuses on browser-reachable web ports instead. That makes it more relevant to real users and web-facing troubleshooting, especially when testing the same environment that site visitors or application users actually experience.
+        </p>
+      </div>
+
       <div class="controls" aria-label="Port checker controls">
         <div class="control">
           <label for="host">Host</label>
@@ -227,6 +677,7 @@
         <button type="button" data-host="google.com" data-port="443" data-protocol="https">google.com:443</button>
         <button type="button" data-host="cloudflare.com" data-port="443" data-protocol="https">cloudflare.com:443</button>
         <button type="button" data-host="instantqr.io" data-port="443" data-protocol="https">instantqr.io:443</button>
+        <button type="button" data-host="example.com" data-port="80" data-protocol="http">example.com:80</button>
       </div>
 
       <div class="summary" aria-label="Port checker summary">
@@ -249,6 +700,25 @@
           <div class="sumLabel">Protocol</div>
           <div class="sumValue" id="protocolLabel">—</div>
           <div class="sumNote">Selected protocol for the test.</div>
+        </div>
+      </div>
+
+      <div class="hero-metrics" aria-label="Quick context">
+        <div class="hero-metric">
+          <div class="label">Best for</div>
+          <div class="value">Web service reachability checks</div>
+        </div>
+        <div class="hero-metric">
+          <div class="label">Works with</div>
+          <div class="value">HTTP and HTTPS endpoints</div>
+        </div>
+        <div class="hero-metric">
+          <div class="label">Useful for</div>
+          <div class="value">APIs, dashboards, sites, reverse proxies</div>
+        </div>
+        <div class="hero-metric">
+          <div class="label">Not the same as</div>
+          <div class="value">Raw TCP port scanning</div>
         </div>
       </div>
     </section>
@@ -293,22 +763,106 @@
             <h3>How this tool works</h3>
             <p>
               The tool tries to reach a web resource on the target host and port using your browser.
-              If the browser receives a response signal, the target is treated as reachable.
+              If the browser receives some response signal, the target is treated as reachable for that browser context.
             </p>
           </div>
           <div class="helpCard">
             <h3>Why some results can vary</h3>
             <p>
-              Some sites block browser requests, redirect heavily, or require authentication.
-              That can affect the result even when the host is online.
+              Some sites block browser requests, redirect heavily, require authentication, or use non-browser-friendly behavior.
+              That can affect the result even if the host is online.
             </p>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="contentSection">
+      <article class="contentCard">
+        <h2>What this port checker actually measures</h2>
+        <p>
+          A raw port scanner tests whether a low-level network port accepts connections. Browsers cannot do that directly for arbitrary TCP ports. Instead, this tool checks whether a browser can successfully reach a web-facing service on the specified host, port, and protocol using normal browser request behavior.
+        </p>
+        <p>
+          That makes this tool especially helpful for websites, APIs, dashboards, and reverse proxies where the real question is not just “is the port open?” but “can a normal browser user reach the service on this host and port right now?”
+        </p>
+      </article>
+
+      <div class="splitGrid">
+        <article class="miniPanel">
+          <h3>Common use cases</h3>
+          <ul>
+            <li>Checking whether a website responds on 80 or 443</li>
+            <li>Testing alternate web ports like 8080 or 8443</li>
+            <li>Verifying reverse proxy or HTTPS endpoint behavior</li>
+            <li>Checking reachability after firewall or hosting changes</li>
+            <li>Confirming whether an API endpoint looks browser-reachable</li>
+          </ul>
+        </article>
+
+        <article class="miniPanel">
+          <h3>What can affect the result</h3>
+          <ul>
+            <li>Browser security rules and cross-origin policy</li>
+            <li>Target redirects or authentication requirements</li>
+            <li>CDN or proxy behavior on the chosen port</li>
+            <li>Whether the service expects browser traffic at all</li>
+            <li>Whether the selected protocol matches the actual service</li>
+          </ul>
+        </article>
+      </div>
+
+      <article class="contentCard">
+        <h2>Why reachable does not always mean open in the network-scan sense</h2>
+        <p>
+          In this tool, reachable means the browser received some kind of response signal from the selected host, port, and protocol. That is useful for web troubleshooting, but it is not identical to a raw socket-level answer from a network scanner.
+        </p>
+        <p>
+          For example, a service may be reachable over HTTPS but still return an error page, redirect, or blocked response. From a browser perspective, that still proves something important: the target is responding on that port in a way a browser can detect.
+        </p>
+      </article>
+
+      <article class="contentCard">
+        <h2>Why a reachable port can still look broken</h2>
+        <p>
+          A target may be online and listening on the expected port, but still fail your actual use case. The site may require login, reject browser-originated requests, redirect unexpectedly, or use an application protocol that is not suitable for a browser check. That is why port checking is often just one part of a larger troubleshooting workflow.
+        </p>
+        <p>
+          In practice, it often makes sense to combine this page with DNS lookup, HTTP header checks, and ping-style latency checks to understand whether the problem is DNS, routing, browser access, redirect behavior, or service configuration.
+        </p>
+      </article>
+
+      <div class="splitGrid">
+        <article class="miniPanel">
+          <h3>Best practices</h3>
+          <ol>
+            <li>Use the correct protocol for the target service.</li>
+            <li>Try common web ports first: 80, 443, 8080, 8443.</li>
+            <li>Check whether redirects affect the result.</li>
+            <li>Retest after DNS or firewall changes settle.</li>
+            <li>Use related tools if the response looks inconsistent.</li>
+          </ol>
+        </article>
+
+        <article class="miniPanel">
+          <h3>Why this page is useful</h3>
+          <p>
+            A thin port page only says open or closed. A stronger page explains what the browser can actually test, where the results are meaningful, and how to interpret them in a real web troubleshooting workflow. That makes the output more useful and more honest.
+          </p>
+        </article>
+      </div>
+
+      <article class="contentCard">
+        <h2>Why trust InstantQR tools?</h2>
+        <p>
+          InstantQR tools are designed to be practical, browser-friendly, and clear about what they can and cannot do. This page does not pretend to be a raw socket scanner. Instead, it focuses on the kind of web-facing reachability questions that matter most to site owners, developers, and support teams.
+        </p>
+      </article>
+    </section>
+
     <section class="relatedTools" aria-label="Related network tools">
       <h2>Related Network Tools</h2>
+      <p>Use these together when you want a broader view of latency, DNS, headers, and browser-facing service behavior.</p>
       <div class="relatedLinks">
         <a href="/tools/ping-tool.html">Ping Tool</a>
         <a href="/tools/http-header-checker.html">HTTP Header Checker</a>
@@ -322,23 +876,28 @@
       <h2>FAQ</h2>
 
       <details>
-        <summary>Can browsers scan any TCP port?</summary>
-        <p>No. Browsers cannot perform raw TCP scans. This tool checks whether a browser can reach a web service on a specific port.</p>
+        <summary>Can this tool scan any TCP port?</summary>
+        <p>No. Browsers cannot perform raw TCP socket scans. This tool checks whether a browser can reach a web service on a host and port using HTTP or HTTPS.</p>
       </details>
 
       <details>
-        <summary>What ports work best?</summary>
-        <p>Ports used by web services such as 80, 443, 8080, and 8443 usually work best here.</p>
+        <summary>What ports work best with this tool?</summary>
+        <p>Ports commonly used by web services work best, such as 80, 443, 8080, and 8443.</p>
       </details>
 
       <details>
         <summary>Why might a port appear unreachable?</summary>
-        <p>The server may block browser requests, require authentication, redirect unusually, or use a non-browser protocol on that port.</p>
+        <p>A site may block browser requests, require authentication, redirect in unexpected ways, or use a non-browser protocol even if the port itself is open.</p>
       </details>
 
       <details>
-        <summary>What does reachable mean in this checker?</summary>
-        <p>It means the browser got some kind of response signal from the target host and port over HTTP or HTTPS.</p>
+        <summary>What does reachable mean in this tool?</summary>
+        <p>Reachable means the browser received some response signal from the target host and port over the selected HTTP or HTTPS protocol.</p>
+      </details>
+
+      <details>
+        <summary>Why is a browser-based port checker still useful?</summary>
+        <p>Even though it is not a raw TCP scanner, browser-based port checking is still useful for validating common website and API endpoints from the same environment real visitors and users are using.</p>
       </details>
     </section>
 
