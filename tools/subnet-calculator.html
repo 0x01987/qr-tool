@@ -19,8 +19,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
   <title>Subnet Calculator | CIDR Network Calculator | InstantQR</title>
-  <meta name="description" content="Free subnet calculator to compute network address, broadcast address, subnet mask, wildcard mask, host range, and usable hosts for IPv4 CIDR blocks.">
-  <meta name="keywords" content="subnet calculator, cidr calculator, ipv4 subnet calculator, network calculator, subnet mask calculator, broadcast address calculator">
+  <meta name="description" content="Free IPv4 subnet calculator to compute network address, broadcast address, subnet mask, wildcard mask, total addresses, usable hosts, and first/last host range from CIDR notation.">
+  <meta name="keywords" content="subnet calculator, cidr calculator, ipv4 subnet calculator, network calculator, subnet mask calculator, broadcast address calculator, wildcard mask, host range calculator">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="author" content="InstantQR">
@@ -46,14 +46,14 @@
   <meta property="og:site_name" content="InstantQR">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Subnet Calculator | InstantQR">
-  <meta property="og:description" content="Calculate IPv4 subnet details including network address, broadcast address, usable host range, subnet mask, and CIDR information.">
+  <meta property="og:description" content="Calculate IPv4 subnet details including network address, broadcast address, host range, subnet mask, wildcard mask, and usable hosts.">
   <meta property="og:url" content="https://instantqr.io/tools/subnet-calculator.html">
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png">
   <meta property="og:image:alt" content="InstantQR Subnet Calculator">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Subnet Calculator | InstantQR">
-  <meta name="twitter:description" content="Fast IPv4 subnet and CIDR calculator for network address, broadcast, host range, and masks.">
+  <meta name="twitter:description" content="Fast IPv4 subnet and CIDR calculator for network address, broadcast, host range, subnet mask, and usable hosts.">
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png">
 
   <script type="application/ld+json">
@@ -81,7 +81,7 @@
     "isAccessibleForFree":true,
     "browserRequirements":"Requires JavaScript. Works in modern browsers.",
     "url":"https://instantqr.io/tools/subnet-calculator.html",
-    "description":"Calculate IPv4 subnet details such as network, broadcast, host range, subnet mask, and CIDR size.",
+    "description":"Calculate IPv4 subnet details such as network, broadcast, first host, last host, subnet mask, wildcard mask, and CIDR size.",
     "publisher":{
       "@type":"Organization",
       "name":"InstantQR",
@@ -127,7 +127,7 @@
         "name":"What is subnetting?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Subnetting divides a larger IP network into smaller subnetworks. It helps with routing efficiency, network organization, and access control."
+          "text":"Subnetting divides a larger IP network into smaller subnetworks. It helps with routing efficiency, network organization, segmentation, and access control."
         }
       },
       {
@@ -148,6 +148,14 @@
       },
       {
         "@type":"Question",
+        "name":"What is a wildcard mask?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"A wildcard mask is the inverse of the subnet mask. It is often used in routing, firewall, and access control list configurations."
+        }
+      },
+      {
+        "@type":"Question",
         "name":"Does this calculator support IPv6?",
         "acceptedAnswer":{
           "@type":"Answer",
@@ -157,6 +165,422 @@
     ]
   }
   </script>
+
+  <style>
+    .hero-copy{
+      margin-top:10px;
+      display:grid;
+      gap:12px;
+      max-width:960px;
+    }
+    .hero-copy p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .hero-metrics{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    .hero-metric{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+      padding:14px;
+    }
+    .hero-metric .label{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .hero-metric .value{
+      font-size:1.08rem;
+      font-weight:800;
+      color:#fff;
+      word-break:break-word;
+      line-height:1.45;
+    }
+
+    .controls{
+      display:grid;
+      grid-template-columns:1.2fr .7fr auto;
+      gap:12px;
+      margin-top:18px;
+    }
+    .control{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .control label{
+      font-size:13px;
+      font-weight:800;
+      color:#fff;
+    }
+    .input{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0a1427;
+      color:#fff;
+      padding:14px 14px;
+      font:inherit;
+      outline:none;
+      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .input:focus{
+      border-color:rgba(96,165,250,.5);
+      box-shadow:0 0 0 4px rgba(96,165,250,.14);
+      background:#0b172d;
+    }
+
+    .quick{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .quick button{
+      appearance:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:999px;
+      padding:10px 12px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+    .quick button:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.06);
+    }
+
+    .summary{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    .sumCard{
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+    .sumLabel{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .sumValue{
+      font-size:1.45rem;
+      font-weight:900;
+      letter-spacing:-.03em;
+      color:#fff;
+      word-break:break-word;
+    }
+    .sumValue.small{
+      font-size:1rem;
+      font-weight:800;
+    }
+    .sumNote{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .panel{
+      margin-top:16px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .panelHead{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:flex-start;
+      padding:18px 18px 12px;
+      border-bottom:1px solid var(--line);
+    }
+    .panelTitle{
+      font-size:1.15rem;
+      font-weight:900;
+      color:#fff;
+      margin-bottom:6px;
+    }
+    .panelSub{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+      max-width:860px;
+    }
+    .statusLine{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+      font-weight:800;
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .panelBody{
+      padding:18px;
+    }
+
+    .tableWrap{
+      overflow:auto;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.02);
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:860px;
+    }
+    thead th{
+      text-align:left;
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      color:#dbeafe;
+      background:rgba(255,255,255,.04);
+      font-size:.86rem;
+    }
+    tbody td{
+      padding:12px 14px;
+      border-top:1px solid rgba(255,255,255,.06);
+      color:#dbeafe;
+      vertical-align:top;
+      font-size:.92rem;
+      word-break:break-word;
+    }
+    .resolver{
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .resultCell{
+      min-width:280px;
+    }
+    .resultBox{
+      display:grid;
+      gap:8px;
+    }
+    .ttl{
+      white-space:nowrap;
+      color:#cbd5e1;
+    }
+    .muted{
+      color:var(--muted);
+    }
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+    }
+
+    .helpBox{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .helpCard{
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:16px;
+    }
+    .helpCard h3{
+      margin:0 0 8px;
+      font-size:1rem;
+      color:#fff;
+      letter-spacing:-.02em;
+    }
+    .helpCard p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+
+    .contentSection{
+      margin-top:16px;
+      display:grid;
+      gap:16px;
+    }
+    .contentCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .contentCard h2{
+      margin:0 0 10px;
+      font-size:1.3rem;
+      letter-spacing:-.02em;
+    }
+    .contentCard p,
+    .contentCard li{
+      color:var(--muted);
+      line-height:1.72;
+      font-size:15px;
+    }
+    .contentCard ul,
+    .contentCard ol{
+      margin:10px 0 0 18px;
+    }
+
+    .splitGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .miniPanel{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+      padding:16px;
+    }
+    .miniPanel h3{
+      margin:0 0 8px;
+      font-size:1rem;
+      color:#fff;
+    }
+    .miniPanel p,
+    .miniPanel li{
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+    .miniPanel ul,
+    .miniPanel ol{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .relatedTools{
+      margin-top:16px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .relatedTools h2{
+      margin:0 0 10px;
+      font-size:1.3rem;
+    }
+    .relatedTools p{
+      color:var(--muted);
+      line-height:1.65;
+      margin:0 0 12px;
+    }
+    .relatedLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .relatedLinks a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+    .relatedLinks a:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .faq{
+      margin-top:16px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,28,52,.92), rgba(12,21,38,.96));
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .faq h2{
+      margin:0 0 10px;
+      font-size:1.3rem;
+    }
+    .faq details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    .faq details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+    .faq summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
+    .faq summary::-webkit-details-marker{
+      display:none;
+    }
+    .faq p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .greenGlow{
+      box-shadow:0 0 0 1px rgba(34,197,94,.12), 0 10px 24px rgba(34,197,94,.10);
+    }
+
+    @media (max-width:1100px){
+      .controls{
+        grid-template-columns:1fr 1fr;
+      }
+      .summary,
+      .hero-metrics{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width:780px){
+      .controls,
+      .summary,
+      .hero-metrics,
+      .helpBox,
+      .splitGrid{
+        grid-template-columns:1fr;
+      }
+      .panelHead{
+        flex-direction:column;
+      }
+      .statusLine{
+        width:100%;
+      }
+      .statusLine .cta{
+        flex:1 1 auto;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -191,12 +615,21 @@
     </nav>
 
     <section class="hero" aria-label="Subnet Calculator">
-      <div class="pill">🧮 IPv4 subnet math • 📡 CIDR ranges • ⚡ Fast network details</div>
+      <div class="pill">🧮 IPv4 subnet math • 📡 CIDR planning • ⚡ Fast network details</div>
       <h1>Subnet Calculator</h1>
       <p class="sub">
         Calculate IPv4 subnet details for an IP address and CIDR prefix.
-        Great for network planning, routing, firewall rules, and quick troubleshooting.
+        Great for network planning, routing, VLAN design, firewall rules, and quick troubleshooting.
       </p>
+
+      <div class="hero-copy">
+        <p>
+          A subnet calculator helps you understand how an IPv4 network is divided. Given an IP address and a CIDR prefix, it can show the network address, broadcast address, subnet mask, wildcard mask, total address count, usable host count, and the valid host range. That makes it useful for anyone working with routers, switches, firewalls, cloud networks, VPNs, and internal segmentation.
+        </p>
+        <p>
+          This page is designed for quick practical subnet work. Instead of doing the binary math by hand, you can calculate the important values instantly and use them when planning address ranges, validating configurations, or checking whether an IP belongs to the subnet you expect.
+        </p>
+      </div>
 
       <div class="controls" aria-label="Subnet calculator controls">
         <div class="control">
@@ -244,13 +677,32 @@
           <div class="sumNote">Usable IPv4 host count for the subnet.</div>
         </div>
       </div>
+
+      <div class="hero-metrics" aria-label="Quick context">
+        <div class="hero-metric">
+          <div class="label">Best for</div>
+          <div class="value">IPv4 network planning</div>
+        </div>
+        <div class="hero-metric">
+          <div class="label">Includes</div>
+          <div class="value">Network, broadcast, masks, host range</div>
+        </div>
+        <div class="hero-metric">
+          <div class="label">Useful for</div>
+          <div class="value">Routing, firewalls, VLANs, cloud networks</div>
+        </div>
+        <div class="hero-metric">
+          <div class="label">Current scope</div>
+          <div class="value">IPv4 only</div>
+        </div>
+      </div>
     </section>
 
     <section class="panel" aria-label="Results panel">
       <div class="panelHead">
         <div>
           <div class="panelTitle">Subnet Results</div>
-          <div class="panelSub">IPv4-only subnet calculation using CIDR notation and standard host range rules.</div>
+          <div class="panelSub">IPv4-only subnet calculation using CIDR notation, standard masks, and common host range rules.</div>
         </div>
 
         <div class="statusLine">
@@ -288,23 +740,107 @@
           <div class="helpCard">
             <h3>What is subnetting?</h3>
             <p>
-              Subnetting divides a larger IP network into smaller subnetworks.
-              This improves routing efficiency, network organization, and access control.
+              Subnetting divides a larger IPv4 network into smaller subnetworks.
+              This improves routing efficiency, segmentation, organization, and access control.
             </p>
           </div>
           <div class="helpCard">
             <h3>What is CIDR?</h3>
             <p>
               CIDR stands for Classless Inter-Domain Routing. A prefix like /24 means
-              24 bits are used for the network portion and the rest for hosts.
+              24 bits belong to the network portion and the remaining bits are available for hosts.
             </p>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="contentSection">
+      <article class="contentCard">
+        <h2>What a subnet calculator tells you</h2>
+        <p>
+          A subnet calculator turns an IPv4 address and prefix length into practical network information you can use. It shows the network boundary, broadcast address, the valid host range, and how many addresses are available. That is useful because networking tasks often depend on more than just the IP itself. You may need to know whether a host belongs inside a subnet, whether a broadcast address is correct, or how many usable devices can fit inside a planned network.
+        </p>
+        <p>
+          This kind of calculator is especially helpful when designing or verifying local networks, cloud subnets, VPN ranges, firewall rules, NAT scopes, and routing policies. It saves time and reduces mistakes compared with doing binary conversion manually.
+        </p>
+      </article>
+
+      <div class="splitGrid">
+        <article class="miniPanel">
+          <h3>Common use cases</h3>
+          <ul>
+            <li>Planning office or home lab IPv4 networks</li>
+            <li>Designing VLANs and segmented network ranges</li>
+            <li>Checking host ranges before assigning static IPs</li>
+            <li>Writing firewall and ACL rules with correct network scope</li>
+            <li>Validating cloud subnet and VPN address planning</li>
+          </ul>
+        </article>
+
+        <article class="miniPanel">
+          <h3>What this page helps avoid</h3>
+          <ul>
+            <li>Using the wrong broadcast address</li>
+            <li>Assigning IPs outside the valid host range</li>
+            <li>Confusing subnet masks and wildcard masks</li>
+            <li>Choosing a subnet that is too small for expected hosts</li>
+            <li>Mixing up total addresses and usable host counts</li>
+          </ul>
+        </article>
+      </div>
+
+      <article class="contentCard">
+        <h2>Understanding subnet mask, wildcard mask, and CIDR</h2>
+        <p>
+          CIDR notation and subnet masks describe the same network boundary in different formats. For example, /24 means the first 24 bits are used for the network portion, which corresponds to a subnet mask of 255.255.255.0. A wildcard mask is the inverse of the subnet mask and is often used in access control lists, routing policies, and certain firewall configurations.
+        </p>
+        <p>
+          Understanding all three formats matters because different devices, cloud platforms, and vendor interfaces present the same network information in different ways. A good subnet calculator helps you move between them quickly and accurately.
+        </p>
+      </article>
+
+      <article class="contentCard">
+        <h2>Why usable hosts are fewer than total addresses</h2>
+        <p>
+          In most IPv4 subnets, the first address is reserved as the network address and the last address is reserved as the broadcast address. That means they are not normally assigned to end devices, so the number of usable hosts is usually total addresses minus two.
+        </p>
+        <p>
+          There are special cases, though. Very small subnets like /31 and /32 behave differently in specific contexts. That is why it is helpful to use a calculator that shows both total addresses and usable hosts clearly instead of relying on memory alone.
+        </p>
+      </article>
+
+      <div class="splitGrid">
+        <article class="miniPanel">
+          <h3>Best practices</h3>
+          <ol>
+            <li>Confirm the prefix before assigning addresses manually.</li>
+            <li>Check the host range before picking a static IP.</li>
+            <li>Verify whether the target IP is the network or broadcast address.</li>
+            <li>Use subnetting to separate functions and reduce noise.</li>
+            <li>Document the subnet mask, CIDR, and gateway together.</li>
+          </ol>
+        </article>
+
+        <article class="miniPanel">
+          <h3>Why this page is useful</h3>
+          <p>
+            A thin subnet page only prints raw numbers. A stronger page explains what those numbers mean, how they are used in real networking work, and where people often make mistakes. That added context makes the calculator more practical for both learners and experienced admins.
+          </p>
+        </article>
+      </div>
+
+      <article class="contentCard">
+        <h2>Why trust InstantQR tools?</h2>
+        <p>
+          InstantQR tools are designed to be practical, clear, and fast to use. This subnet calculator focuses on the values most people actually need during planning and troubleshooting, while also explaining the context behind the calculation instead of only presenting bare outputs.
+        </p>
+      </article>
+    </section>
+
     <section class="relatedTools" aria-label="Related network tools">
       <h2>Related Network Tools</h2>
+      <p>Use these with the subnet calculator when you want a broader view of addressing, DNS, and connectivity.</p>
       <div class="relatedLinks">
         <a href="/tools/ip-lookup.html">IP Lookup</a>
         <a href="/tools/dns-lookup.html">DNS Lookup</a>
@@ -319,7 +855,7 @@
 
       <details>
         <summary>What is subnetting?</summary>
-        <p>Subnetting divides a large IP network into smaller subnetworks to improve routing efficiency, organization, and security.</p>
+        <p>Subnetting divides a large IP network into smaller subnetworks to improve routing efficiency, organization, segmentation, and security.</p>
       </details>
 
       <details>
@@ -330,6 +866,11 @@
       <details>
         <summary>Why are usable hosts fewer than total addresses?</summary>
         <p>In most IPv4 subnets, one address is reserved for the network and one for broadcast, so usable hosts are usually total addresses minus two.</p>
+      </details>
+
+      <details>
+        <summary>What is a wildcard mask?</summary>
+        <p>A wildcard mask is the inverse of the subnet mask and is often used in routing, firewall, and access control configurations.</p>
       </details>
 
       <details>
