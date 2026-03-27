@@ -412,6 +412,111 @@
       padding-left:18px;
       margin:10px 0 0;
     }
+
+    .affiliateCard{
+      margin-top:14px;
+      padding:18px;
+      border-radius:var(--radius2);
+      border:1px solid rgba(96,165,250,.24);
+      background:linear-gradient(180deg, rgba(18,31,56,.96), rgba(11,20,38,.98));
+      box-shadow:0 14px 34px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04);
+      position:relative;
+      overflow:hidden;
+    }
+    .affiliateCard:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(640px 220px at 0% 0%, rgba(96,165,250,.14), transparent 60%),
+        radial-gradient(460px 220px at 100% 0%, rgba(34,197,94,.10), transparent 58%);
+      pointer-events:none;
+    }
+    .affiliateCard > *{
+      position:relative;
+    }
+    .affiliateBadge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:12px;
+      padding:7px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.2px;
+      color:#dbeafe;
+    }
+    .affiliateProduct{
+      display:grid;
+      grid-template-columns:108px 1fr;
+      gap:16px;
+      align-items:center;
+    }
+    .affiliateThumb{
+      width:108px;
+      height:108px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      overflow:hidden;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+      display:block;
+    }
+    .affiliateThumb img{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .affiliateContent h2{
+      margin:0 0 8px;
+      font-size:22px;
+      letter-spacing:-.3px;
+    }
+    .affiliateContent p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
+    }
+    .affiliateMeta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .affiliateMeta span{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      color:#dbeafe;
+      font-size:12px;
+      font-weight:700;
+    }
+    .affiliateActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      margin-top:16px;
+    }
+    .affiliateActions .cta{
+      text-decoration:none;
+    }
+    .affiliateNote{
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
     .relatedCard{
       margin-top:14px;
       padding:18px;
@@ -490,6 +595,13 @@
       .relatedGrid{
         grid-template-columns:1fr;
       }
+      .affiliateProduct{
+        grid-template-columns:1fr;
+      }
+      .affiliateThumb{
+        width:100%;
+        height:180px;
+      }
     }
     @media (max-width: 700px){
       .form-grid,
@@ -501,6 +613,9 @@
       }
       .qr-preview{
         min-height:300px;
+      }
+      .affiliateActions .cta{
+        width:100%;
       }
     }
   </style>
@@ -652,28 +767,42 @@
       </aside>
     </section>
 
-    <section class="contentCard" aria-label="Recommended WiFi Router">
-      <h2>📶 Improve Your WiFi Performance</h2>
-      <p>
-        If you're sharing your WiFi with guests, having a fast and reliable router makes a huge difference.
-        Upgrade your network for better speed, stronger coverage, and improved security.
-      </p>
-      <ul>
-        <li>⚡ Faster and more stable internet connection</li>
-        <li>📡 Stronger signal coverage across your home or business</li>
-        <li>🔒 Better security for guest and personal devices</li>
-      </ul>
-      <div style="margin-top:14px;">
-        <a href="https://amzn.to/4bRliKj"
+    <section class="affiliateCard" aria-label="Recommended WiFi Router">
+      <div class="affiliateBadge">Amazon Pick • Network Upgrade</div>
+
+      <div class="affiliateProduct">
+        <a class="affiliateThumb"
+           href="https://amzn.to/4bRliKj"
            target="_blank"
            rel="nofollow sponsored"
-           class="cta primary">
-           View Recommended Router
+           aria-label="View recommended TP-Link router on Amazon">
+          <img src="/assets/tp-link-router.jpg" alt="TP-Link WiFi router" loading="lazy" />
         </a>
+
+        <div class="affiliateContent">
+          <h2>Improve Your WiFi Performance</h2>
+          <p>
+            Sharing WiFi with guests works best when your network is fast, stable, and secure. A reliable router can improve signal strength, reduce dead spots, and create a smoother connection experience for everyone who scans your WiFi QR code.
+          </p>
+
+          <div class="affiliateMeta">
+            <span>⚡ Better speed</span>
+            <span>📡 Stronger coverage</span>
+            <span>🔒 More secure network</span>
+          </div>
+
+          <div class="affiliateActions">
+            <a href="https://amzn.to/4bRliKj"
+               target="_blank"
+               rel="nofollow sponsored"
+               class="cta primary">View Recommended Router</a>
+          </div>
+
+          <p class="affiliateNote">
+            As an Amazon Associate, we earn from qualifying purchases.
+          </p>
+        </div>
       </div>
-      <p style="font-size:12px; color:var(--muted); margin-top:10px;">
-        As an Amazon Associate, we earn from qualifying purchases.
-      </p>
     </section>
 
     <section class="contentCard" aria-label="What is a WiFi QR code">
