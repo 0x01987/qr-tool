@@ -417,7 +417,7 @@
       margin-top:14px;
       padding:18px;
       border-radius:var(--radius2);
-      border:1px solid rgba(96,165,250,.24);
+      border:1px solid rgba(96,165,250,.22);
       background:linear-gradient(180deg, rgba(18,31,56,.96), rgba(11,20,38,.98));
       box-shadow:0 14px 34px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04);
       position:relative;
@@ -428,8 +428,8 @@
       position:absolute;
       inset:-1px;
       background:
-        radial-gradient(640px 220px at 0% 0%, rgba(96,165,250,.14), transparent 60%),
-        radial-gradient(460px 220px at 100% 0%, rgba(34,197,94,.10), transparent 58%);
+        radial-gradient(640px 220px at 0% 0%, rgba(96,165,250,.12), transparent 60%),
+        radial-gradient(460px 220px at 100% 0%, rgba(34,197,94,.08), transparent 58%);
       pointer-events:none;
     }
     .affiliateCard > *{
@@ -449,39 +449,63 @@
       letter-spacing:.2px;
       color:#dbeafe;
     }
+    .affiliateTopText{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
+    }
     .affiliateGrid{
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
       gap:14px;
+      align-items:stretch;
     }
     .affiliateItem{
+      height:100%;
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
       border-radius:18px;
       border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.04);
+      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.025));
       padding:14px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.03),
+        0 8px 20px rgba(0,0,0,.16);
     }
     .affiliateThumb{
       display:block;
       width:100%;
-      height:180px;
-      border-radius:16px;
+      height:104px;
+      border-radius:14px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       margin-bottom:12px;
+      flex-shrink:0;
     }
     .affiliateThumb img{
       display:block;
       width:100%;
       height:100%;
       object-fit:cover;
+      transition:transform .25s ease;
+    }
+    .affiliateItem:hover .affiliateThumb img{
+      transform:scale(1.03);
+    }
+    .affiliateBody{
+      display:flex;
+      flex-direction:column;
+      flex:1;
     }
     .affiliateLabel{
       display:inline-flex;
       align-items:center;
       gap:6px;
-      padding:6px 10px;
+      align-self:flex-start;
+      padding:5px 9px;
       border-radius:999px;
       background:rgba(255,255,255,.05);
       border:1px solid rgba(255,255,255,.08);
@@ -493,31 +517,35 @@
     }
     .affiliateItem h3{
       margin:0 0 8px;
-      font-size:18px;
+      font-size:17px;
+      line-height:1.25;
       letter-spacing:-.2px;
+      min-height:44px;
     }
     .affiliateItem p{
       margin:0;
       color:var(--muted);
-      line-height:1.7;
-      font-size:14px;
+      line-height:1.6;
+      font-size:13px;
     }
     .affiliateMeta{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
       margin-top:12px;
+      min-height:74px;
+      align-content:flex-start;
     }
     .affiliateMeta span{
       display:inline-flex;
       align-items:center;
       gap:6px;
-      padding:7px 10px;
+      padding:6px 9px;
       border-radius:999px;
       background:rgba(255,255,255,.04);
       border:1px solid rgba(255,255,255,.08);
       color:#dbeafe;
-      font-size:12px;
+      font-size:11px;
       font-weight:700;
     }
     .affiliateActions{
@@ -525,18 +553,13 @@
       flex-wrap:wrap;
       gap:12px;
       align-items:center;
-      margin-top:14px;
+      margin-top:auto;
+      padding-top:14px;
     }
     .affiliateActions .cta{
       text-decoration:none;
       width:100%;
       text-align:center;
-    }
-    .affiliateTopText{
-      margin:0 0 14px;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:15px;
     }
     .affiliateNote{
       margin-top:12px;
@@ -617,6 +640,11 @@
     .mono{
       font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
     }
+    @media (max-width: 1100px){
+      .affiliateGrid{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+      }
+    }
     @media (max-width: 980px){
       .qr-grid,
       .miniGrid2,
@@ -638,7 +666,11 @@
         min-height:300px;
       }
       .affiliateThumb{
-        height:160px;
+        height:110px;
+      }
+      .affiliateItem h3,
+      .affiliateMeta{
+        min-height:0;
       }
     }
   </style>
@@ -793,7 +825,7 @@
     <section class="affiliateCard" aria-label="Recommended WiFi gear">
       <div class="affiliateBadge">Amazon Picks • Better WiFi Setup</div>
       <p class="affiliateTopText">
-        A smoother guest WiFi experience does not stop at the QR code. The right hardware can improve speed, coverage, reliability, and printed presentation for homes, rentals, offices, cafés, and events.
+        A smoother guest WiFi experience does not stop at the QR code. The right hardware can improve speed, coverage, reliability, and presentation for homes, rentals, offices, cafés, and events.
       </p>
 
       <div class="affiliateGrid">
@@ -806,23 +838,25 @@
             <img src="/assets/tp-link-router.jpg" alt="TP-Link WiFi router" loading="lazy" />
           </a>
 
-          <div class="affiliateLabel">Network Upgrade</div>
-          <h3>Recommended WiFi Router</h3>
-          <p>
-            A reliable router can improve signal strength, reduce dead spots, and give guests a faster, more stable connection when they scan your WiFi QR code.
-          </p>
+          <div class="affiliateBody">
+            <div class="affiliateLabel">Network Upgrade</div>
+            <h3>Recommended WiFi Router</h3>
+            <p>
+              Improve signal strength, reduce dead spots, and give guests a faster, more stable connection after they scan your WiFi QR code.
+            </p>
 
-          <div class="affiliateMeta">
-            <span>⚡ Better speed</span>
-            <span>📡 Stronger coverage</span>
-            <span>🔒 More secure network</span>
-          </div>
+            <div class="affiliateMeta">
+              <span>⚡ Better speed</span>
+              <span>📡 Stronger coverage</span>
+              <span>🔒 More secure network</span>
+            </div>
 
-          <div class="affiliateActions">
-            <a href="https://amzn.to/4bRliKj"
-               target="_blank"
-               rel="nofollow sponsored"
-               class="cta primary">View Router</a>
+            <div class="affiliateActions">
+              <a href="https://amzn.to/4bRliKj"
+                 target="_blank"
+                 rel="nofollow sponsored"
+                 class="cta primary">View Router</a>
+            </div>
           </div>
         </article>
 
@@ -835,23 +869,56 @@
             <img src="/assets/qr-printer.jpg" alt="Printer for WiFi QR signs and labels" loading="lazy" />
           </a>
 
-          <div class="affiliateLabel">Print Your QR Code</div>
-          <h3>Recommended Printer</h3>
-          <p>
-            Print clean, easy-to-scan WiFi QR signs for guest rooms, front desks, table cards, office lobbies, Airbnb welcome books, and event check-in areas.
-          </p>
+          <div class="affiliateBody">
+            <div class="affiliateLabel">Print Your QR Code</div>
+            <h3>Recommended Printer</h3>
+            <p>
+              Print clean, easy-to-scan WiFi QR signs for guest rooms, front desks, table cards, office lobbies, Airbnb welcome books, and event areas.
+            </p>
 
-          <div class="affiliateMeta">
-            <span>🖨 Crisp prints</span>
-            <span>📄 Great for signs</span>
-            <span>🏠 Home or business</span>
+            <div class="affiliateMeta">
+              <span>🖨 Crisp prints</span>
+              <span>📄 Great for signs</span>
+              <span>🏠 Home or business</span>
+            </div>
+
+            <div class="affiliateActions">
+              <a href="https://amzn.to/4rWEVGI"
+                 target="_blank"
+                 rel="nofollow sponsored"
+                 class="cta primary">View Printer</a>
+            </div>
           </div>
+        </article>
 
-          <div class="affiliateActions">
-            <a href="https://amzn.to/4rWEVGI"
-               target="_blank"
-               rel="nofollow sponsored"
-               class="cta primary">View Printer</a>
+        <article class="affiliateItem" aria-label="Recommended QR Stand">
+          <a class="affiliateThumb"
+             href="https://amzn.to/4tbRxuE"
+             target="_blank"
+             rel="nofollow sponsored"
+             aria-label="View recommended QR stand on Amazon">
+            <img src="/assets/qr-stand.jpg" alt="QR stand for displaying WiFi QR codes" loading="lazy" />
+          </a>
+
+          <div class="affiliateBody">
+            <div class="affiliateLabel">Display Your QR Code</div>
+            <h3>Recommended QR Stand</h3>
+            <p>
+              Display your WiFi QR code neatly on counters, check-in desks, event tables, cafés, offices, and guest-facing spaces where people naturally look.
+            </p>
+
+            <div class="affiliateMeta">
+              <span>🪧 Clean display</span>
+              <span>📍 Counter ready</span>
+              <span>✨ More professional</span>
+            </div>
+
+            <div class="affiliateActions">
+              <a href="https://amzn.to/4tbRxuE"
+                 target="_blank"
+                 rel="nofollow sponsored"
+                 class="cta primary">View QR Stand</a>
+            </div>
           </div>
         </article>
       </div>
