@@ -17,9 +17,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-  <title>Airport Lookup | Search Airport Codes, Cities, and Timezones | InstantQR</title>
-  <meta name="description" content="Search airports by name, city, IATA code, or ICAO code. Find airport details, country, timezone, coordinates, and quick travel info fast." />
-  <meta name="keywords" content="airport lookup, airport code lookup, iata lookup, icao lookup, airport search, airport timezone, airport finder" />
+  <title>Airport Lookup & Flight Tracker | Airport Codes, Arrivals, Departures, Live Map | InstantQR</title>
+  <meta name="description" content="Search airports by code, city, or name. Track flights by flight number, arrivals, departures, status, terminals, gates, and live map position." />
+  <meta name="keywords" content="airport lookup, flight tracker, airport code lookup, iata lookup, icao lookup, arrivals, departures, live flight map" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="InstantQR" />
@@ -35,24 +35,37 @@
   <link rel="apple-touch-icon" href="/assets/instantqr-logo.svg" />
   <link rel="stylesheet" href="/assets/site.css" />
 
+  <!-- Leaflet -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="Airport Lookup | Search Airport Codes, Cities, and Timezones | InstantQR" />
-  <meta property="og:description" content="Search airports by city, airport name, IATA code, or ICAO code. Fast, clean, and mobile friendly." />
+  <meta property="og:title" content="Airport Lookup & Flight Tracker | InstantQR" />
+  <meta property="og:description" content="Search airports and track flights with arrivals, departures, status, and a live map." />
   <meta property="og:url" content="https://instantqr.io/tools/airport-lookup.html" />
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Airport Lookup | Search Airport Codes, Cities, and Timezones | InstantQR" />
-  <meta name="twitter:description" content="Find airport details, codes, timezone, country, and coordinates quickly." />
+  <meta name="twitter:title" content="Airport Lookup & Flight Tracker | InstantQR" />
+  <meta name="twitter:description" content="Search airport details and track flights with a live map." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"SoftwareApplication",
-    "name":"Airport Lookup",
+    "name":"Airport Lookup & Flight Tracker",
     "applicationCategory":"TravelApplication",
     "operatingSystem":"Web",
     "url":"https://instantqr.io/tools/airport-lookup.html",
@@ -73,71 +86,140 @@
     "itemListElement":[
       {"@type":"ListItem","position":1,"name":"Home","item":"https://instantqr.io/"},
       {"@type":"ListItem","position":2,"name":"Tools","item":"https://instantqr.io/tools/tools.html"},
-      {"@type":"ListItem","position":3,"name":"Airport Lookup","item":"https://instantqr.io/tools/airport-lookup.html"}
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is an IATA code?",
-        "acceptedAnswer":{"@type":"Answer","text":"An IATA code is a three-letter airport code commonly used by airlines and travelers, such as PHX or LAX."}
-      },
-      {
-        "@type":"Question",
-        "name":"What is an ICAO code?",
-        "acceptedAnswer":{"@type":"Answer","text":"An ICAO code is a four-letter airport identifier used more often in aviation operations and flight planning."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I search by city or airport name?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes. You can search by airport name, city, IATA code, or ICAO code."}
-      },
-      {
-        "@type":"Question",
-        "name":"Does this tool show live flight status?",
-        "acceptedAnswer":{"@type":"Answer","text":"No. This version focuses on airport directory information such as codes, city, country, timezone, and coordinates."}
-      }
+      {"@type":"ListItem","position":3,"name":"Airport Lookup & Flight Tracker","item":"https://instantqr.io/tools/airport-lookup.html"}
     ]
   }
   </script>
 
   <style>
-    .tool-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:14px;align-items:start}
-    .tool-box,.faqCard,.contentCard,.relatedCard{border-radius:var(--radius2);border:1px solid var(--border);background:rgba(255,255,255,.04);box-shadow:var(--shadow)}
+    .tool-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:14px;
+      margin-top:14px;
+      align-items:start;
+    }
+    .tool-box,.faqCard,.contentCard,.relatedCard{
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
+    }
     .tool-box{padding:16px}
     .contentCard,.relatedCard,.faqCard{padding:18px;margin-top:14px}
-    .contentCard h2,.relatedCard h2,.faqCard h2{margin:0 0 10px;font-size:22px;letter-spacing:-.25px}
-    .contentCard p,.contentCard li,.relatedCard p,.faqCard p{color:var(--muted);line-height:1.72;font-size:15px}
-    .contentCard ul{margin:10px 0 0 18px}
+    .contentCard h2,.relatedCard h2,.faqCard h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.25px;
+    }
+    .contentCard p,.contentCard li,.relatedCard p,.faqCard p{
+      color:var(--muted);
+      line-height:1.72;
+      font-size:15px;
+    }
 
-    .inputLabel{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:700}
+    .heroStats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+    .heroStat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:12px;
+    }
+    .heroStat .label{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .heroStat .value{
+      font-size:14px;
+      font-weight:800;
+      color:#fff;
+      line-height:1.45;
+    }
+
+    .tabRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .tabBtn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0a1427;
+      color:var(--text);
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .tabBtn.active{
+      border-color:rgba(96,165,250,.45);
+      box-shadow:0 0 0 4px rgba(96,165,250,.12);
+      background:rgba(96,165,250,.10);
+      color:#fff;
+    }
+
+    .panel{display:none}
+    .panel.active{display:block}
+
+    .inputLabel{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+      font-weight:700;
+    }
     .tool-field{
-      width:100%;padding:12px 10px;border-radius:14px;border:1px solid rgba(255,255,255,.12);
-      background:#0a1427;color:var(--text);outline:none;font-size:14px
+      width:100%;
+      padding:12px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0a1427;
+      color:var(--text);
+      outline:none;
+      font-size:14px;
     }
     .tool-field:focus{
       border-color:rgba(96,165,250,.5);
       box-shadow:0 0 0 4px rgba(96,165,250,.14);
       background:#0b172d;
     }
-    .actionsRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .heroStats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
-    .heroStat{border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:16px;padding:12px}
-    .heroStat .label{font-size:12px;color:var(--muted);margin-bottom:6px}
-    .heroStat .value{font-size:14px;font-weight:800;color:#fff;line-height:1.45}
+
+    .formGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .actionsRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
 
     .resultsCard{
-      margin-top:12px;padding:14px;border-radius:16px;
+      margin-top:12px;
+      padding:14px;
+      border-radius:16px;
       background:linear-gradient(180deg, rgba(96,165,250,.10), rgba(96,165,250,.04)), rgba(0,0,0,.12);
-      border:1px solid rgba(96,165,250,.28)
+      border:1px solid rgba(96,165,250,.28);
     }
-    .resultsTitle{color:#93c5fd;font-size:13px;font-weight:900;letter-spacing:.2px;text-transform:uppercase;margin-bottom:12px}
+    .resultsTitle{
+      color:#93c5fd;
+      font-size:13px;
+      font-weight:900;
+      letter-spacing:.2px;
+      text-transform:uppercase;
+      margin-bottom:12px;
+    }
+
     .resultItem{
       border:1px solid rgba(255,255,255,.08);
       background:rgba(255,255,255,.03);
@@ -146,47 +228,150 @@
       margin-bottom:12px;
     }
     .resultItem:last-child{margin-bottom:0}
-    .airportHead{
-      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-start;margin-bottom:10px
+
+    .resultHead{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+      margin-bottom:10px;
     }
-    .airportTitle{font-size:18px;font-weight:900;color:#fff;line-height:1.35}
-    .airportSub{font-size:13px;color:var(--muted);margin-top:3px}
-    .badgeRow{display:flex;gap:8px;flex-wrap:wrap}
-    .codeBadge{
-      display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);
-      color:var(--text);font-size:12px;font-weight:800
+    .resultTitle{
+      font-size:18px;
+      font-weight:900;
+      color:#fff;
+      line-height:1.35;
     }
-    .kv{display:grid;grid-template-columns:140px 1fr;gap:8px}
-    .k{color:var(--muted);font-size:12px;align-self:center;font-weight:700}
-    .v{color:#dbeafe;font-size:13px;font-weight:800;word-break:break-word;overflow-wrap:anywhere}
-    .helper{margin-top:12px;color:var(--muted);font-size:12px;line-height:1.65}
-    .emptyState,.warnBox{
-      margin-top:12px;padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.12);color:var(--muted);font-size:12px;line-height:1.65
+    .resultSub{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:3px;
     }
-    .sideSectionTitle{font-weight:900;margin-bottom:8px;font-size:15px}
-    .sideText{color:var(--muted);font-size:13px;line-height:1.65}
-    .relatedLinks{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px}
+
+    .badgeRow{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .codeBadge,.statusBadge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      font-size:12px;
+      font-weight:800;
+    }
+    .status-scheduled{color:#cbd5e1}
+    .status-active{color:#22c55e}
+    .status-landed{color:#19c37d}
+    .status-cancelled{color:#ef4444}
+    .status-delayed{color:#f59e0b}
+    .status-unknown{color:#94a3b8}
+
+    .kv{
+      display:grid;
+      grid-template-columns:160px 1fr;
+      gap:8px;
+    }
+    .k{
+      color:var(--muted);
+      font-size:12px;
+      align-self:center;
+      font-weight:700;
+    }
+    .v{
+      color:#dbeafe;
+      font-size:13px;
+      font-weight:800;
+      word-break:break-word;
+      overflow-wrap:anywhere;
+    }
+
+    .emptyState,.warnBox,.helper{
+      margin-top:12px;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.12);
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.65;
+    }
+    .helper{padding:0;border:0;background:transparent;margin-top:12px}
+
+    .sideSectionTitle{
+      font-weight:900;
+      margin-bottom:8px;
+      font-size:15px;
+    }
+    .sideText{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    .relatedLinks{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
     .relatedLinks a{
-      display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;
-      background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--text)
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:var(--text);
     }
-    .relatedLinks a:hover{background:rgba(255,255,255,.06);text-decoration:none}
-    .faqCard details{border-top:1px solid rgba(255,255,255,.10);padding:12px 0}
-    .faqCard details:first-of-type{border-top:0;padding-top:0}
-    .faqCard summary{cursor:pointer;font-weight:800;list-style:none;color:#fff}
+    .relatedLinks a:hover{
+      background:rgba(255,255,255,.06);
+      text-decoration:none;
+    }
+
+    .faqCard details{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:12px 0;
+    }
+    .faqCard details:first-of-type{
+      border-top:0;
+      padding-top:0;
+    }
+    .faqCard summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+      color:#fff;
+    }
     .faqCard summary::-webkit-details-marker{display:none}
 
+    #flightMap{
+      height:360px;
+      width:100%;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      margin-top:12px;
+    }
+
     @media (max-width:980px){
-      .tool-grid,.heroStats{grid-template-columns:1fr}
+      .tool-grid,.heroStats,.formGrid{grid-template-columns:1fr}
     }
     @media (max-width:520px){
       .kv{grid-template-columns:1fr}
-      .actionsRow .cta{width:100%}
+      .actionsRow .cta,.tabBtn{width:100%}
+      #flightMap{height:300px}
     }
   </style>
 </head>
+
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
@@ -214,158 +399,211 @@
       <ol>
         <li><a href="/">Home</a></li>
         <li><a href="/tools/tools.html">Tools</a></li>
-        <li><span aria-current="page">Airport Lookup</span></li>
+        <li><span aria-current="page">Airport Lookup & Flight Tracker</span></li>
       </ol>
     </nav>
 
     <section class="hero">
       <div>
-        <h1>Airport Lookup</h1>
+        <h1>Airport Lookup & Flight Tracker</h1>
         <p class="sub">
-          Search airports by city, airport name, IATA code, or ICAO code. Quickly find
-          airport details, country, timezone, coordinates, and travel-friendly basics.
+          Search airports by code, city, or name. Track flights by flight number or airport schedule,
+          view arrivals and departures, and show live aircraft position on a map when available.
         </p>
         <div class="badges" aria-label="Highlights">
-          <span class="badge">✈️ Airport directory</span>
-          <span class="badge">🌍 Country + city</span>
-          <span class="badge">🕒 Timezone</span>
-          <span class="badge">⚡ Fast search</span>
+          <span class="badge">✈️ Airport search</span>
+          <span class="badge">🛫 Flight status</span>
+          <span class="badge">🗺 Live map</span>
+          <span class="badge">⚡ Mobile-friendly</span>
         </div>
       </div>
 
       <div class="heroStats" aria-label="Quick overview">
         <div class="heroStat">
-          <div class="label">Search by</div>
-          <div class="value">Airport name, city, IATA, or ICAO</div>
+          <div class="label">Airport search</div>
+          <div class="value">Code, city, country, timezone, coordinates</div>
         </div>
         <div class="heroStat">
-          <div class="label">Includes</div>
-          <div class="value">Code, country, timezone, coordinates</div>
+          <div class="label">Flight tracker</div>
+          <div class="value">Flight number, arrivals, departures, status, gate</div>
+        </div>
+        <div class="heroStat">
+          <div class="label">Live map</div>
+          <div class="value">Aircraft marker when live position is available</div>
         </div>
         <div class="heroStat">
           <div class="label">Best for</div>
-          <div class="value">Travel planning, airport lookup, quick code checks</div>
-        </div>
-        <div class="heroStat">
-          <div class="label">Works on</div>
-          <div class="value">Desktop, tablet, and mobile</div>
+          <div class="value">Travel planning, pickups, airport checks, quick flight lookup</div>
         </div>
       </div>
     </section>
 
-    <section class="tool-grid" aria-label="Airport lookup">
+    <section class="tool-grid" aria-label="Airport and flight tracking tool">
       <div class="tool-box">
-        <label class="inputLabel" for="airportInput">Search airport, city, IATA, or ICAO</label>
-        <input
-          id="airportInput"
-          class="tool-field"
-          inputmode="text"
-          autocomplete="off"
-          spellcheck="false"
-          placeholder="Try PHX, LAX, Phoenix, Heathrow, JFK..." />
-
-        <div class="actionsRow">
-          <button class="cta primary" id="airportSearchBtn" type="button">Search</button>
-          <button class="cta ghost" id="airportClearBtn" type="button">Clear</button>
-          <button class="cta ghost" id="airportPopularBtn" type="button">Popular Airports</button>
+        <div class="tabRow" role="tablist" aria-label="Tool modes">
+          <button class="tabBtn active" id="tabAirport" type="button" data-panel="airportPanel">Airport Lookup</button>
+          <button class="tabBtn" id="tabFlight" type="button" data-panel="flightPanel">Flight Tracker</button>
         </div>
 
-        <div class="resultsCard" aria-live="polite">
-          <div class="resultsTitle">Results</div>
-          <div id="airportResults" class="emptyState">
-            Search for an airport by code, city, or name to view results.
+        <section class="panel active" id="airportPanel">
+          <label class="inputLabel" for="airportInput">Search airport, city, IATA, or ICAO</label>
+          <input
+            id="airportInput"
+            class="tool-field"
+            inputmode="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Try PHX, LAX, Phoenix, Heathrow, JFK..." />
+
+          <div class="actionsRow">
+            <button class="cta primary" id="airportSearchBtn" type="button">Search Airport</button>
+            <button class="cta ghost" id="airportClearBtn" type="button">Clear</button>
+            <button class="cta ghost" id="airportPopularBtn" type="button">Popular Airports</button>
           </div>
-        </div>
 
-        <div class="helper">
-          Tip: searching by exact IATA code like <strong>PHX</strong>, <strong>LAX</strong>, or <strong>JFK</strong> usually returns the fastest match.
-        </div>
+          <div class="resultsCard" aria-live="polite">
+            <div class="resultsTitle">Airport Results</div>
+            <div id="airportResults" class="emptyState">
+              Search for an airport by code, city, or name to view results.
+            </div>
+          </div>
+
+          <div class="helper">
+            Tip: exact IATA searches like <strong>PHX</strong>, <strong>LAX</strong>, and <strong>JFK</strong> return the strongest matches first.
+          </div>
+        </section>
+
+        <section class="panel" id="flightPanel">
+          <div class="formGrid">
+            <div>
+              <label class="inputLabel" for="flightNumberInput">Flight Number</label>
+              <input
+                id="flightNumberInput"
+                class="tool-field"
+                type="text"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="Example: AA123" />
+            </div>
+
+            <div>
+              <label class="inputLabel" for="scheduleAirportInput">Airport IATA Code</label>
+              <input
+                id="scheduleAirportInput"
+                class="tool-field"
+                type="text"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="Example: PHX" />
+            </div>
+
+            <div>
+              <label class="inputLabel" for="scheduleTypeSelect">Schedule Type</label>
+              <select id="scheduleTypeSelect" class="tool-field">
+                <option value="departure">Departures</option>
+                <option value="arrival">Arrivals</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="inputLabel" for="flightStatusFilter">Status Filter</label>
+              <select id="flightStatusFilter" class="tool-field">
+                <option value="">All statuses</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="active">Active</option>
+                <option value="landed">Landed</option>
+                <option value="cancelled">Cancelled</option>
+                <option value="diverted">Diverted</option>
+                <option value="incident">Incident</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="actionsRow">
+            <button class="cta primary" id="flightSearchBtn" type="button">Track Flight</button>
+            <button class="cta ghost" id="scheduleSearchBtn" type="button">Get Airport Schedule</button>
+            <button class="cta ghost" id="flightClearBtn" type="button">Clear</button>
+          </div>
+
+          <div class="resultsCard" aria-live="polite">
+            <div class="resultsTitle">Flight Results</div>
+            <div id="flightResults" class="emptyState">
+              Enter a flight number to track a flight, or enter an airport code to load arrivals or departures.
+            </div>
+          </div>
+
+          <div id="flightMap" aria-label="Live flight map"></div>
+
+          <div class="warnBox">
+            <strong>Map note:</strong> a live aircraft marker only appears when the flight data includes latitude and longitude.
+            Some flights may return status data without a live position.
+          </div>
+        </section>
       </div>
 
       <aside class="tool-box">
-        <div class="sideSectionTitle">What this tool does</div>
+        <div class="sideSectionTitle">What this page does</div>
         <div class="sideText">
-          Airport Lookup helps travelers quickly identify an airport by code, city, or name.
-          It is useful when checking flight details, planning routes, comparing nearby airports,
-          or confirming the correct airport code before booking.
+          This page combines airport directory search with real-time flight lookup.
+          You can search airport basics locally, then switch to flight tracking for live status,
+          airport schedules, and aircraft map view when live coordinates are available.
         </div>
 
-        <div class="sideSectionTitle" style="margin-top:14px;">IATA vs ICAO</div>
+        <div class="sideSectionTitle" style="margin-top:14px;">Best use cases</div>
         <div class="sideText">
-          IATA codes are the short three-letter codes most travelers recognize. ICAO codes are
-          four-letter aviation identifiers often used in operational and technical contexts.
+          Great for travelers, airport pickups, checking departures, confirming arrival timing,
+          and quickly identifying the right airport code before booking or planning.
         </div>
 
-        <div class="sideSectionTitle" style="margin-top:14px;">Good use cases</div>
+        <div class="sideSectionTitle" style="margin-top:14px;">Production note</div>
         <div class="sideText">
-          Great for travelers, airport code lookups, route planning, timezone checks, and quick
-          airport reference without clutter.
+          For production, move your flight API key to your backend or serverless proxy.
+          Public client-side API keys can be exposed in the browser.
         </div>
 
         <div class="relatedLinks">
+          <a href="/tools/travel-checklist-generator.html">Travel Checklist</a>
+          <a href="/tools/visa-requirement-checker.html">Visa Checker</a>
           <a href="/tools/time-zone-converter.html">Time Zone Converter</a>
           <a href="/tools/world-clock.html">World Clock</a>
-          <a href="/tools/travel-checklist-generator.html">Travel Checklist</a>
         </div>
       </aside>
     </section>
 
     <section class="contentCard">
-      <h2>Why airport lookup is useful</h2>
+      <h2>Why combine airport lookup and flight tracking</h2>
       <p>
-        Travelers often know a city or airline route, but not always the correct airport code.
-        This tool helps close that gap quickly by letting you search airports by airport name,
-        city, IATA code, or ICAO code in a clean travel-friendly format.
+        Travelers often need both static airport information and live flight information in one place.
+        Airport lookup helps confirm codes, timezone, and location, while flight tracking helps with
+        real-time status, estimated times, terminal details, and map context.
       </p>
       <p>
-        It is especially useful when booking flights, checking airport arrival details, confirming
-        the right airport for pickup or drop-off, or comparing multiple airports serving the same region.
+        That makes this page useful for travel planning, airport pickups, ride coordination, and quick flight checks
+        without forcing users to jump between multiple pages.
       </p>
-    </section>
-
-    <section class="contentCard">
-      <h2>Common real-world uses</h2>
-      <ul>
-        <li>Confirming the correct airport code before booking</li>
-        <li>Finding airports near a major city</li>
-        <li>Checking airport timezone before travel</li>
-        <li>Verifying coordinates for maps or logistics planning</li>
-        <li>Looking up IATA and ICAO codes quickly</li>
-      </ul>
-    </section>
-
-    <section class="relatedCard" aria-label="Related tools">
-      <h2>Related tools</h2>
-      <p>Use these tools together for a stronger travel planning workflow.</p>
-      <div class="relatedLinks">
-        <a href="/tools/travel-checklist-generator.html">Travel Checklist Generator</a>
-        <a href="/tools/visa-requirement-checker.html">Visa Requirement Checker</a>
-        <a href="/tools/time-zone-converter.html">Time Zone Converter</a>
-        <a href="/tools/world-clock.html">World Clock</a>
-      </div>
     </section>
 
     <section class="faqCard" aria-label="Frequently asked questions">
       <h2>FAQ</h2>
 
       <details>
-        <summary>What is an IATA code?</summary>
-        <p>An IATA code is a three-letter airport code used by airlines and travelers, such as PHX or LAX.</p>
+        <summary>Can I search by flight number?</summary>
+        <p>Yes. Enter a flight number like AA123 in the Flight Tracker tab.</p>
       </details>
 
       <details>
-        <summary>What is an ICAO code?</summary>
-        <p>An ICAO code is a four-letter airport identifier often used in aviation operations and flight planning.</p>
+        <summary>Can I check departures and arrivals by airport?</summary>
+        <p>Yes. Enter an airport IATA code like PHX and choose arrivals or departures.</p>
       </details>
 
       <details>
-        <summary>Can I search by city or airport name?</summary>
-        <p>Yes. You can search by city, airport name, IATA code, or ICAO code.</p>
+        <summary>Will every flight show a live map position?</summary>
+        <p>No. The map depends on the flight response including live latitude and longitude.</p>
       </details>
 
       <details>
-        <summary>Does this tool show live flight status?</summary>
-        <p>No. This version focuses on airport directory details such as codes, location, timezone, and coordinates.</p>
+        <summary>Can I use this without a flight API key?</summary>
+        <p>The airport lookup part works locally, but live flight status and map data require a flight API connection.</p>
       </details>
     </section>
 
