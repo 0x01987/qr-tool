@@ -1,407 +1,446 @@
-(function () {
-  "use strict";
+(() => {
+  'use strict';
 
   const FEEDS = [
-    {
-      id: "coindesk",
-      name: "CoinDesk",
-      url: "https://www.coindesk.com/arc/outboundfeeds/rss/"
-    },
-    {
-      id: "cointelegraph",
-      name: "Cointelegraph",
-      url: "https://cointelegraph.com/rss"
-    },
-    {
-      id: "decrypt",
-      name: "Decrypt",
-      url: "https://decrypt.co/feed"
-    },
-    {
-      id: "bitcoinmagazine",
-      name: "Bitcoin Magazine",
-      url: "https://bitcoinmagazine.com/.rss/full/"
-    },
-    {
-      id: "theblock",
-      name: "The Block",
-      url: "https://www.theblock.co/rss.xml"
-    }
+    { source: 'CoinDesk', url: 'https://www.coindesk.com/arc/outboundfeeds/rss/' },
+    { source: 'Cointelegraph', url: 'https://cointelegraph.com/rss' },
+    { source: 'Decrypt', url: 'https://decrypt.co/feed' },
+    { source: 'Bitcoin Magazine', url: 'https://bitcoinmagazine.com/.rss/full/' },
+    { source: 'The Block', url: 'https://www.theblock.co/rss.xml' }
   ];
 
-  const RSS2JSON_ENDPOINT = "https://api.rss2json.com/v1/api.json?rss_url=";
-  const ALLORIGINS_ENDPOINT = "https://api.allorigins.win/raw?url=";
+  const CATEGORY_RULES = [
+    { key: 'bitcoin', patterns: ['bitcoin', 'btc', 'satoshi'] },
+    { key: 'ethereum', patterns: ['ethereum', 'ether', 'eth'] },
+    { key: 'solana', patterns: ['solana', 'sol'] },
+    { key: 'defi', patterns: ['defi', 'decentralized finance', 'liquidity', 'yield farming', 'lending protocol'] },
+    { key: 'nft', patterns: ['nft', 'nfts', 'non-fungible'] },
+    { key: 'regulation', patterns: ['sec', 'cftc', 'regulation', 'regulator', 'compliance', 'lawsuit', 'policy', 'etf approval', 'etf'] },
+    { key: 'security', patterns: ['hack', 'exploit', 'breach', 'security', 'attack', 'wallet drain', 'phishing'] },
+    { key: 'exchange', patterns: ['exchange', 'binance', 'coinbase', 'kraken', 'bybit', 'okx'] },
+    { key: 'stablecoin', patterns: ['stablecoin', 'usdt', 'usdc', 'dai', 'tether', 'circle'] },
+    { key: 'layer2', patterns: ['layer 2', 'layer2', 'arbitrum', 'optimism', 'base', 'zksync', 'starknet'] },
+    { key: 'ai', patterns: ['ai', 'artificial intelligence', 'agent', 'machine learning'] }
+  ];
 
-  const SAVE_KEY = "instantqr_crypto_news_saved_v1";
-  const CACHE_KEY = "instantqr_crypto_news_cache_v1";
-  const CACHE_TTL_MS = 5 * 60 * 1000;
-
-  const CATEGORY_RULES = {
-    bitcoin: ["bitcoin", "btc", "satoshi"],
-    ethereum: ["ethereum", "eth", "ether", "eip"],
-    solana: ["solana", "sol", "jupiter", "raydium"],
-    defi: ["defi", "dex", "yield", "liquidity", "staking", "lending", "amm", "bridge", "swap"],
-    nft: ["nft", "nfts", "collectible", "opensea"],
-    regulation: ["sec", "cftc", "regulation", "regulatory", "law", "lawsuit", "etf", "compliance", "court"],
-    security: ["hack", "exploit", "scam", "phishing", "breach", "stolen", "drainer", "vulnerability", "malware", "attack"],
-    exchange: ["exchange", "binance", "coinbase", "kraken", "bybit", "okx", "bitfinex"],
-    stablecoin: ["stablecoin", "usdt", "usdc", "dai", "fdusd", "peg"],
-    layer2: ["layer 2", "layer2", "l2", "rollup", "arbitrum", "optimism", "base", "zk", "zksync", "starknet"],
-    ai: ["ai", "artificial intelligence", "agent", "agents"]
-  };
-
-  const state = {
-    items: [],
-    filtered: [],
-    search: "",
-    sort: "latest",
-    category: "all",
-    source: "all",
-    view: "all",
-    savedIds: loadSavedIds(),
-    lastUpdated: null
+  const STORAGE_KEYS = {
+    saved: 'instantqr_crypto_news_saved',
+    state: 'instantqr_crypto_news_state'
   };
 
   const els = {
-    searchInput: document.getElementById("searchInput"),
-    sortSelect: document.getElementById("sortSelect"),
-    categoryChips: document.getElementById("categoryChips"),
-    sourceChips: document.getElementById("sourceChips"),
-    viewChips: document.getElementById("viewChips"),
-    refreshBtn: document.getElementById("refreshBtn"),
-    clearBtn: document.getElementById("clearBtn"),
-    loadingState: document.getElementById("loadingState"),
-    emptyState: document.getElementById("emptyState"),
-    newsGrid: document.getElementById("newsGrid"),
-    statusDot: document.getElementById("statusDot"),
-    statusText: document.getElementById("statusText"),
-    countVisible: document.getElementById("countVisible"),
-    countTotal: document.getElementById("countTotal"),
-    countSaved: document.getElementById("countSaved")
+    searchInput: document.getElementById('searchInput'),
+    sortSelect: document.getElementById('sortSelect'),
+    categoryChips: document.getElementById('categoryChips'),
+    sourceChips: document.getElementById('sourceChips'),
+    viewChips: document.getElementById('viewChips'),
+    refreshBtn: document.getElementById('refreshBtn'),
+    clearBtn: document.getElementById('clearBtn'),
+    statusDot: document.getElementById('statusDot'),
+    statusText: document.getElementById('statusText'),
+    loadingState: document.getElementById('loadingState'),
+    emptyState: document.getElementById('emptyState'),
+    newsGrid: document.getElementById('newsGrid'),
+    countVisible: document.getElementById('countVisible'),
+    countTotal: document.getElementById('countTotal'),
+    countSaved: document.getElementById('countSaved')
   };
 
-  function init() {
-    bindEvents();
-    renderSourceChips();
-    renderCounts();
-    const cached = readCache();
-    if (cached && Array.isArray(cached.items) && cached.items.length) {
-      state.items = cached.items;
-      state.lastUpdated = cached.lastUpdated || null;
-      applyFiltersAndRender();
-      setStatus("Showing recent cached headlines while refreshing…", "loading");
-      refreshNews(false);
-    } else {
-      refreshNews(true);
-    }
-  }
+  const state = {
+    articles: [],
+    filtered: [],
+    saved: new Set(),
+    selectedCategory: 'all',
+    selectedSource: 'all',
+    selectedView: 'all',
+    search: '',
+    sort: 'latest'
+  };
 
-  function bindEvents() {
-    els.searchInput.addEventListener("input", debounce((e) => {
-      state.search = String(e.target.value || "").trim().toLowerCase();
-      applyFiltersAndRender();
-    }, 140));
-
-    els.sortSelect.addEventListener("change", (e) => {
-      state.sort = e.target.value || "latest";
-      applyFiltersAndRender();
-    });
-
-    els.categoryChips.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-category]");
-      if (!btn) return;
-      state.category = btn.dataset.category || "all";
-      setActiveChip(els.categoryChips, btn, "[data-category]");
-      applyFiltersAndRender();
-    });
-
-    els.sourceChips.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-source]");
-      if (!btn) return;
-      state.source = btn.dataset.source || "all";
-      setActiveChip(els.sourceChips, btn, "[data-source]");
-      applyFiltersAndRender();
-    });
-
-    els.viewChips.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-view]");
-      if (!btn) return;
-      state.view = btn.dataset.view || "all";
-      setActiveChip(els.viewChips, btn, "[data-view]");
-      applyFiltersAndRender();
-    });
-
-    els.refreshBtn.addEventListener("click", () => refreshNews(true));
-
-    els.clearBtn.addEventListener("click", () => {
-      state.search = "";
-      state.sort = "latest";
-      state.category = "all";
-      state.source = "all";
-      state.view = "all";
-
-      els.searchInput.value = "";
-      els.sortSelect.value = "latest";
-
-      resetChipGroup(els.categoryChips, "[data-category]", "all");
-      resetChipGroup(els.sourceChips, "[data-source]", "all");
-      resetChipGroup(els.viewChips, "[data-view]", "all");
-
-      applyFiltersAndRender();
-    });
-
-    els.newsGrid.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-save-id]");
-      if (!btn) return;
-
-      const id = btn.dataset.saveId;
-      if (!id) return;
-
-      toggleSaved(id);
-      updateSaveButton(btn, id);
-      renderCounts();
-
-      if (state.view === "saved") {
-        applyFiltersAndRender();
-      }
-    });
-  }
-
-  async function refreshNews(showLoadingCard) {
-    if (showLoadingCard) {
-      els.loadingState.hidden = false;
-      els.newsGrid.hidden = true;
-      els.emptyState.hidden = true;
-    }
-
-    setStatus("Loading crypto news…", "loading");
-
-    const results = await Promise.allSettled(FEEDS.map(fetchFeedItems));
-
-    const successItems = [];
-    const failedSources = [];
-
-    for (const result of results) {
-      if (result.status === "fulfilled") {
-        successItems.push(...result.value);
-      } else {
-        failedSources.push(result.reason?.sourceName || "Unknown source");
-      }
-    }
-
-    const normalized = dedupeItems(successItems)
-      .sort((a, b) => (b.publishedAtTs || 0) - (a.publishedAtTs || 0));
-
-    state.items = normalized;
-    state.lastUpdated = Date.now();
-
-    writeCache({
-      items: normalized,
-      lastUpdated: state.lastUpdated
-    });
-
-    renderSourceChips();
-    applyFiltersAndRender();
-
-    if (normalized.length && failedSources.length) {
-      setStatus(
-        `Loaded ${normalized.length} stories. Some sources were unavailable: ${failedSources.join(", ")}.`,
-        "warning"
-      );
-    } else if (normalized.length) {
-      setStatus(
-        `Loaded ${normalized.length} stories${state.lastUpdated ? ` • Updated ${formatRelativeTime(state.lastUpdated)}` : ""}.`,
-        "ok"
-      );
-    } else {
-      setStatus("Unable to load crypto news right now. Please try again.", "error");
-      els.loadingState.hidden = true;
-      els.newsGrid.hidden = true;
-      els.emptyState.hidden = false;
-      els.emptyState.textContent = "No news could be loaded right now. Please refresh in a moment.";
-    }
-  }
-
-  async function fetchFeedItems(feed) {
+  function loadSaved() {
     try {
-      const items = await fetchViaRss2Json(feed);
-      return items.map(item => normalizeItem(item, feed));
-    } catch (err1) {
-      try {
-        const items = await fetchViaAllOrigins(feed);
-        return items.map(item => normalizeItem(item, feed));
-      } catch (err2) {
-        const error = new Error(`Failed to load ${feed.name}`);
-        error.sourceName = feed.name;
-        throw error;
+      const raw = localStorage.getItem(STORAGE_KEYS.saved);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        state.saved = new Set(parsed);
       }
+    } catch (err) {
+      console.warn('Unable to load saved stories', err);
     }
   }
 
-  async function fetchViaRss2Json(feed) {
-    const url = `${RSS2JSON_ENDPOINT}${encodeURIComponent(feed.url)}`;
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Accept": "application/json"
-      },
-      cache: "no-store"
-    });
-
-    if (!response.ok) {
-      throw new Error(`rss2json failed for ${feed.name}`);
+  function saveSaved() {
+    try {
+      localStorage.setItem(STORAGE_KEYS.saved, JSON.stringify([...state.saved]));
+    } catch (err) {
+      console.warn('Unable to save stories', err);
     }
-
-    const data = await response.json();
-
-    if (!data || !Array.isArray(data.items)) {
-      throw new Error(`Invalid rss2json payload for ${feed.name}`);
-    }
-
-    return data.items;
   }
 
-  async function fetchViaAllOrigins(feed) {
-    const response = await fetch(`${ALLORIGINS_ENDPOINT}${encodeURIComponent(feed.url)}`, {
-      method: "GET",
-      headers: {
-        "Accept": "application/xml,text/xml,*/*"
-      },
-      cache: "no-store"
-    });
-
-    if (!response.ok) {
-      throw new Error(`AllOrigins failed for ${feed.name}`);
+  function loadUiState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEYS.state);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      state.selectedCategory = parsed.selectedCategory || 'all';
+      state.selectedSource = parsed.selectedSource || 'all';
+      state.selectedView = parsed.selectedView || 'all';
+      state.search = parsed.search || '';
+      state.sort = parsed.sort || 'latest';
+    } catch (err) {
+      console.warn('Unable to load UI state', err);
     }
-
-    const xmlText = await response.text();
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(xmlText, "text/xml");
-
-    const parserError = xml.querySelector("parsererror");
-    if (parserError) {
-      throw new Error(`XML parse failed for ${feed.name}`);
-    }
-
-    const itemNodes = Array.from(xml.querySelectorAll("channel > item, feed > entry"));
-    return itemNodes.map(node => parseXmlItem(node));
   }
 
-  function parseXmlItem(node) {
-    const getText = (selectors) => {
-      const list = Array.isArray(selectors) ? selectors : [selectors];
-      for (const sel of list) {
-        const el = node.querySelector(sel);
-        if (el && el.textContent) return el.textContent.trim();
-      }
-      return "";
-    };
-
-    let link = "";
-    const linkEl = node.querySelector("link");
-    if (linkEl) {
-      link = linkEl.getAttribute("href") || linkEl.textContent.trim() || "";
+  function saveUiState() {
+    try {
+      localStorage.setItem(STORAGE_KEYS.state, JSON.stringify({
+        selectedCategory: state.selectedCategory,
+        selectedSource: state.selectedSource,
+        selectedView: state.selectedView,
+        search: state.search,
+        sort: state.sort
+      }));
+    } catch (err) {
+      console.warn('Unable to save UI state', err);
     }
-
-    return {
-      title: getText(["title"]),
-      link,
-      pubDate: getText(["pubDate", "published", "updated"]),
-      author: getText(["author", "dc\\:creator"]),
-      description: getText(["description", "summary", "content"]),
-      thumbnail: ""
-    };
   }
 
-  function normalizeItem(raw, feed) {
-    const title = cleanText(raw.title || "Untitled story");
-    const link = sanitizeUrl(raw.link || "");
-    const description = cleanExcerpt(raw.description || raw.summary || raw.content || "");
-    const publishedRaw = raw.pubDate || raw.published || raw.updated || "";
-    const publishedAtTs = parseDateSafe(publishedRaw);
-    const author = cleanText(raw.author || "");
-    const category = detectCategories(`${title} ${description}`);
-    const id = buildId(link || `${feed.id}-${title}-${publishedAtTs}`);
+  function setStatus(kind, message) {
+    if (!els.statusText || !els.statusDot) return;
+    els.statusText.textContent = message;
+    els.statusDot.className = 'dot';
+    if (kind === 'loading') els.statusDot.classList.add('loading');
+    if (kind === 'error') els.statusDot.classList.add('error');
+  }
 
-    return {
-      id,
-      title,
-      link,
-      description,
-      author,
-      sourceId: feed.id,
-      sourceName: feed.name,
-      publishedAtRaw: publishedRaw,
-      publishedAtTs,
-      categories: category,
-      searchable: `${title} ${description} ${author} ${feed.name} ${category.join(" ")}`.toLowerCase()
-    };
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function shorten(text, max = 190) {
+    const clean = String(text || '').replace(/\s+/g, ' ').trim();
+    if (clean.length <= max) return clean;
+    return clean.slice(0, max - 1).trim() + '…';
+  }
+
+  function decodeHtml(html) {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html || '';
+    return txt.value;
+  }
+
+  function stripHtml(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html || '';
+    return (div.textContent || div.innerText || '').trim();
+  }
+
+  function normalizeUrl(url) {
+    try {
+      return new URL(url).toString();
+    } catch {
+      return '';
+    }
+  }
+
+  function buildId(article) {
+    try {
+      return btoa(unescape(encodeURIComponent(`${article.source}|${article.link}|${article.title}`))).slice(0, 120);
+    } catch {
+      return `${article.source}|${article.link}|${article.title}`.slice(0, 120);
+    }
   }
 
   function detectCategories(text) {
-    const hay = String(text || "").toLowerCase();
-    const matches = [];
+    const hay = (text || '').toLowerCase();
+    const found = [];
 
-    Object.entries(CATEGORY_RULES).forEach(([category, keywords]) => {
-      if (keywords.some(keyword => hay.includes(keyword))) {
-        matches.push(category);
+    for (const rule of CATEGORY_RULES) {
+      if (rule.patterns.some((p) => hay.includes(p))) {
+        found.push(rule.key);
       }
+    }
+
+    return found.length ? found : ['all'];
+  }
+
+  function timeAgo(dateString) {
+    const ts = Date.parse(dateString);
+    if (!Number.isFinite(ts)) return 'Unknown time';
+
+    const diff = Date.now() - ts;
+    const mins = Math.floor(diff / 60000);
+
+    if (mins < 1) return 'Just now';
+    if (mins < 60) return `${mins}m ago`;
+
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return `${hrs}h ago`;
+
+    const days = Math.floor(hrs / 24);
+    if (days < 30) return `${days}d ago`;
+
+    return new Date(ts).toLocaleDateString();
+  }
+
+  function normalizeItem(item, sourceName) {
+    const title = decodeHtml(item.title || '').trim();
+    const link = normalizeUrl(item.link || item.guid || item.url || '');
+    const rawDesc = item.description || item.content || item.contentSnippet || item.summary || '';
+    const description = shorten(stripHtml(rawDesc), 220);
+    const published = item.pubDate || item.isoDate || item.published || item.created || item.updated || '';
+    const source = sourceName || item.source || 'Unknown source';
+
+    if (!title || !link) return null;
+
+    const categories = detectCategories([
+      title,
+      description,
+      Array.isArray(item.categories) ? item.categories.join(' ') : item.categories || ''
+    ].join(' '));
+
+    const article = {
+      title,
+      link,
+      description,
+      published,
+      source,
+      categories,
+      id: ''
+    };
+
+    article.id = buildId(article);
+    return article;
+  }
+
+  async function fetchWithTimeout(url, options = {}, timeoutMs = 12000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+        cache: 'no-store'
+      });
+      return response;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  async function fetchViaRss2Json(feedUrl) {
+    const endpoint = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
+    const res = await fetchWithTimeout(endpoint);
+    if (!res.ok) throw new Error(`rss2json failed (${res.status})`);
+
+    const data = await res.json();
+    if (data.status && data.status !== 'ok') {
+      throw new Error(data.message || 'rss2json returned an error');
+    }
+
+    return Array.isArray(data.items) ? data.items : [];
+  }
+
+  async function fetchViaRssJsonVercel(feedUrl) {
+    const endpoint = `https://rssjson.vercel.app/api?url=${encodeURIComponent(feedUrl)}`;
+    const res = await fetchWithTimeout(endpoint);
+    if (!res.ok) throw new Error(`rssjson.vercel failed (${res.status})`);
+
+    const data = await res.json();
+    if (Array.isArray(data.items)) return data.items;
+    if (Array.isArray(data.feed?.items)) return data.feed.items;
+    if (Array.isArray(data.data?.items)) return data.data.items;
+
+    throw new Error('rssjson.vercel returned no items');
+  }
+
+  async function fetchViaAllOrigins(feedUrl) {
+    const endpoint = `https://api.allorigins.win/raw?url=${encodeURIComponent(feedUrl)}`;
+    const res = await fetchWithTimeout(endpoint);
+    if (!res.ok) throw new Error(`AllOrigins failed (${res.status})`);
+
+    const xml = await res.text();
+    if (!xml || (!xml.includes('<item') && !xml.includes('<entry'))) {
+      throw new Error('AllOrigins returned invalid XML');
+    }
+
+    return parseRssXml(xml);
+  }
+
+  function parseRssXml(xmlText) {
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(xmlText, 'text/xml');
+
+    if (xml.querySelector('parsererror')) {
+      throw new Error('Unable to parse RSS XML');
+    }
+
+    const items = [...xml.querySelectorAll('channel > item, feed > entry')];
+
+    return items.map((item) => {
+      const title = item.querySelector('title')?.textContent || '';
+      const linkNode = item.querySelector('link');
+      const link =
+        linkNode?.getAttribute('href') ||
+        linkNode?.textContent ||
+        item.querySelector('guid')?.textContent ||
+        '';
+
+      const description =
+        item.querySelector('description')?.textContent ||
+        item.querySelector('content')?.textContent ||
+        item.querySelector('summary')?.textContent ||
+        '';
+
+      const pubDate =
+        item.querySelector('pubDate')?.textContent ||
+        item.querySelector('published')?.textContent ||
+        item.querySelector('updated')?.textContent ||
+        '';
+
+      const categories = [...item.querySelectorAll('category')].map((n) => n.textContent || '');
+
+      return { title, link, description, pubDate, categories };
     });
-
-    return matches.length ? matches : ["general"];
   }
 
-  function applyFiltersAndRender() {
-    const search = state.search;
-    const category = state.category;
-    const source = state.source;
-    const view = state.view;
+  async function fetchFeed(feed) {
+    const strategies = [
+      fetchViaRss2Json,
+      fetchViaRssJsonVercel,
+      fetchViaAllOrigins
+    ];
 
-    let items = [...state.items];
+    const errors = [];
 
-    if (search) {
-      items = items.filter(item => item.searchable.includes(search));
+    for (const strategy of strategies) {
+      try {
+        const items = await strategy(feed.url);
+        return items
+          .map((item) => normalizeItem(item, feed.source))
+          .filter(Boolean);
+      } catch (err) {
+        errors.push(err?.message || 'Unknown fetch error');
+      }
     }
 
-    if (category !== "all") {
-      items = items.filter(item => item.categories.includes(category));
-    }
-
-    if (source !== "all") {
-      items = items.filter(item => item.sourceId === source);
-    }
-
-    if (view === "saved") {
-      items = items.filter(item => state.savedIds.includes(item.id));
-    }
-
-    items = sortItems(items, state.sort);
-    state.filtered = items;
-
-    renderNews(items);
-    renderCounts();
+    throw new Error(`${feed.source}: ${errors.join(' | ')}`);
   }
 
-  function sortItems(items, sortType) {
-    const list = [...items];
+  function dedupeArticles(items) {
+    const seen = new Set();
+    const out = [];
 
-    switch (sortType) {
-      case "oldest":
-        return list.sort((a, b) => (a.publishedAtTs || 0) - (b.publishedAtTs || 0));
-      case "source":
-        return list.sort((a, b) => a.sourceName.localeCompare(b.sourceName) || (b.publishedAtTs || 0) - (a.publishedAtTs || 0));
-      case "title":
-        return list.sort((a, b) => a.title.localeCompare(b.title));
-      case "latest":
+    for (const item of items) {
+      const key = `${item.link}|${item.title.toLowerCase()}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(item);
+    }
+
+    return out;
+  }
+
+  function sortArticles(items) {
+    const sorted = [...items];
+
+    switch (state.sort) {
+      case 'oldest':
+        sorted.sort((a, b) => (Date.parse(a.published) || 0) - (Date.parse(b.published) || 0));
+        break;
+      case 'source':
+        sorted.sort((a, b) => a.source.localeCompare(b.source) || a.title.localeCompare(b.title));
+        break;
+      case 'title':
+        sorted.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 'latest':
       default:
-        return list.sort((a, b) => (b.publishedAtTs || 0) - (a.publishedAtTs || 0));
+        sorted.sort((a, b) => (Date.parse(b.published) || 0) - (Date.parse(a.published) || 0));
+        break;
     }
+
+    return sorted;
   }
 
-  function renderNews(items) {
+  function applyFilters() {
+    const q = state.search.trim().toLowerCase();
+    let items = [...state.articles];
+
+    if (state.selectedCategory !== 'all') {
+      items = items.filter((item) => item.categories.includes(state.selectedCategory));
+    }
+
+    if (state.selectedSource !== 'all') {
+      items = items.filter((item) => item.source === state.selectedSource);
+    }
+
+    if (state.selectedView === 'saved') {
+      items = items.filter((item) => state.saved.has(item.id));
+    }
+
+    if (q) {
+      items = items.filter((item) => {
+        const bag = [
+          item.title,
+          item.description,
+          item.source,
+          item.categories.join(' ')
+        ].join(' ').toLowerCase();
+
+        return bag.includes(q);
+      });
+    }
+
+    state.filtered = sortArticles(items);
+    renderArticles();
+    updateStats();
+    saveUiState();
+  }
+
+  function updateStats() {
+    if (els.countVisible) els.countVisible.textContent = String(state.filtered.length);
+    if (els.countTotal) els.countTotal.textContent = String(state.articles.length);
+    if (els.countSaved) els.countSaved.textContent = String(state.saved.size);
+  }
+
+  function renderSourceChips() {
+    if (!els.sourceChips) return;
+
+    const sources = [...new Set(state.articles.map((a) => a.source))].sort((a, b) => a.localeCompare(b));
+
+    const html = [
+      `<button class="chip ${state.selectedSource === 'all' ? 'active' : ''}" type="button" data-source="all">All sources</button>`,
+      ...sources.map((source) =>
+        `<button class="chip ${state.selectedSource === source ? 'active' : ''}" type="button" data-source="${escapeHtml(source)}">${escapeHtml(source)}</button>`
+      )
+    ].join('');
+
+    els.sourceChips.innerHTML = html;
+
+    [...els.sourceChips.querySelectorAll('.chip')].forEach((btn) => {
+      btn.addEventListener('click', () => {
+        state.selectedSource = btn.dataset.source || 'all';
+        renderSourceChips();
+        applyFilters();
+      });
+    });
+  }
+
+  function renderArticles() {
+    if (!els.loadingState || !els.newsGrid || !els.emptyState) return;
+
     els.loadingState.hidden = true;
 
-    if (!items.length) {
+    if (!state.filtered.length) {
       els.newsGrid.hidden = true;
       els.emptyState.hidden = false;
       return;
@@ -410,275 +449,179 @@
     els.emptyState.hidden = true;
     els.newsGrid.hidden = false;
 
-    const html = items.map(item => {
-      const tags = [
-        item.sourceName,
-        ...item.categories.slice(0, 3).map(formatCategoryLabel)
-      ];
+    els.newsGrid.innerHTML = state.filtered.map((item) => {
+      const isSaved = state.saved.has(item.id);
+      const tags = item.categories
+        .filter((c) => c !== 'all')
+        .slice(0, 4)
+        .map((c) => `<span class="tag">${escapeHtml(c)}</span>`)
+        .join('');
 
       return `
         <article class="news-card">
           <div class="news-head">
-            <span class="source-badge">${escapeHtml(item.sourceName)}</span>
-            <span class="time-badge">${escapeHtml(formatRelativeTime(item.publishedAtTs || item.publishedAtRaw))}</span>
+            <span class="source-badge">${escapeHtml(item.source)}</span>
+            <span class="time-badge">${escapeHtml(timeAgo(item.published))}</span>
           </div>
 
           <h3 class="news-title">
-            <a href="${escapeAttribute(item.link || "#")}" target="_blank" rel="noopener noreferrer nofollow">
-              ${escapeHtml(item.title)}
-            </a>
+            <a href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.title)}</a>
           </h3>
 
-          <p class="news-desc">${escapeHtml(item.description || "Open the story to read the full article from the publisher.")}</p>
+          <p class="news-desc">${escapeHtml(item.description || 'No summary available.')}</p>
 
-          <div class="tags">
-            ${tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}
-          </div>
+          <div class="tags">${tags || '<span class="tag">crypto</span>'}</div>
 
           <div class="card-actions">
-            <a class="card-link" href="${escapeAttribute(item.link || "#")}" target="_blank" rel="noopener noreferrer nofollow">Open article</a>
-            <button
-              class="save-btn ${state.savedIds.includes(item.id) ? "saved" : ""}"
-              type="button"
-              data-save-id="${escapeAttribute(item.id)}"
-            >
-              ${state.savedIds.includes(item.id) ? "Saved" : "Save story"}
+            <a class="card-link" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">Read story</a>
+            <button class="save-btn ${isSaved ? 'saved' : ''}" type="button" data-id="${escapeHtml(item.id)}">
+              ${isSaved ? 'Saved' : 'Save'}
             </button>
           </div>
         </article>
       `;
-    }).join("");
+    }).join('');
 
-    els.newsGrid.innerHTML = html;
+    [...els.newsGrid.querySelectorAll('.save-btn')].forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        if (!id) return;
+
+        if (state.saved.has(id)) {
+          state.saved.delete(id);
+        } else {
+          state.saved.add(id);
+        }
+
+        saveSaved();
+        applyFilters();
+      });
+    });
   }
 
-  function renderSourceChips() {
-    const sourceMap = new Map();
-    state.items.forEach(item => {
-      if (!sourceMap.has(item.sourceId)) {
-        sourceMap.set(item.sourceId, item.sourceName);
-      }
+  function bindStaticControls() {
+    if (!els.searchInput || !els.sortSelect || !els.categoryChips || !els.viewChips || !els.refreshBtn || !els.clearBtn) {
+      console.warn('Crypto news aggregator: required DOM elements not found.');
+      return;
+    }
+
+    els.searchInput.value = state.search;
+    els.sortSelect.value = state.sort;
+
+    [...els.categoryChips.querySelectorAll('.chip')].forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.category === state.selectedCategory);
+      btn.addEventListener('click', () => {
+        state.selectedCategory = btn.dataset.category || 'all';
+        [...els.categoryChips.querySelectorAll('.chip')].forEach((n) => n.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilters();
+      });
     });
 
-    const dynamic = Array.from(sourceMap.entries())
-      .sort((a, b) => a[1].localeCompare(b[1]))
-      .map(([id, name]) => {
-        const active = state.source === id ? "active" : "";
-        return `<button class="chip ${active}" type="button" data-source="${escapeAttribute(id)}">${escapeHtml(name)}</button>`;
-      })
-      .join("");
+    [...els.viewChips.querySelectorAll('.chip')].forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.view === state.selectedView);
+      btn.addEventListener('click', () => {
+        state.selectedView = btn.dataset.view || 'all';
+        [...els.viewChips.querySelectorAll('.chip')].forEach((n) => n.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilters();
+      });
+    });
 
-    els.sourceChips.innerHTML = `
-      <button class="chip ${state.source === "all" ? "active" : ""}" type="button" data-source="all">All sources</button>
-      ${dynamic}
-    `;
+    els.searchInput.addEventListener('input', () => {
+      state.search = els.searchInput.value || '';
+      applyFilters();
+    });
+
+    els.sortSelect.addEventListener('change', () => {
+      state.sort = els.sortSelect.value || 'latest';
+      applyFilters();
+    });
+
+    els.refreshBtn.addEventListener('click', () => {
+      loadAllFeeds(true);
+    });
+
+    els.clearBtn.addEventListener('click', () => {
+      state.selectedCategory = 'all';
+      state.selectedSource = 'all';
+      state.selectedView = 'all';
+      state.search = '';
+      state.sort = 'latest';
+
+      els.searchInput.value = '';
+      els.sortSelect.value = 'latest';
+
+      [...els.categoryChips.querySelectorAll('.chip')].forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.category === 'all');
+      });
+
+      [...els.viewChips.querySelectorAll('.chip')].forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.view === 'all');
+      });
+
+      renderSourceChips();
+      applyFilters();
+    });
   }
 
-  function renderCounts() {
-    els.countVisible.textContent = String(state.filtered.length || 0);
-    els.countTotal.textContent = String(state.items.length || 0);
-    els.countSaved.textContent = String(state.savedIds.length || 0);
-  }
+  async function loadAllFeeds(isManualRefresh = false) {
+    if (!els.loadingState || !els.newsGrid || !els.emptyState) return;
 
-  function toggleSaved(id) {
-    const idx = state.savedIds.indexOf(id);
-    if (idx >= 0) {
-      state.savedIds.splice(idx, 1);
+    els.loadingState.hidden = false;
+    els.newsGrid.hidden = true;
+    els.emptyState.hidden = true;
+
+    setStatus('loading', isManualRefresh ? 'Refreshing crypto news…' : 'Loading crypto news…');
+
+    const results = await Promise.allSettled(FEEDS.map((feed) => fetchFeed(feed)));
+
+    const good = [];
+    const failures = [];
+
+    for (const result of results) {
+      if (result.status === 'fulfilled') {
+        good.push(...result.value);
+      } else {
+        failures.push(result.reason?.message || 'Unknown source error');
+      }
+    }
+
+    state.articles = dedupeArticles(good);
+    renderSourceChips();
+    applyFilters();
+
+    if (state.articles.length) {
+      if (failures.length) {
+        setStatus('loading', `Loaded ${state.articles.length} stories. Some sources failed, but partial results are available.`);
+      } else {
+        setStatus('ok', `Loaded ${state.articles.length} crypto stories from multiple sources.`);
+      }
     } else {
-      state.savedIds.unshift(id);
+      setStatus('error', 'Unable to load crypto news right now. All feed sources failed.');
+      els.loadingState.hidden = true;
+      els.newsGrid.hidden = true;
+      els.emptyState.hidden = false;
+      els.emptyState.textContent = 'Unable to fetch crypto news right now. Try Refresh news again in a moment.';
     }
 
-    state.savedIds = Array.from(new Set(state.savedIds));
-    localStorage.setItem(SAVE_KEY, JSON.stringify(state.savedIds));
-  }
+    updateStats();
 
-  function updateSaveButton(btn, id) {
-    const isSaved = state.savedIds.includes(id);
-    btn.classList.toggle("saved", isSaved);
-    btn.textContent = isSaved ? "Saved" : "Save story";
-  }
-
-  function setActiveChip(container, activeButton, selector) {
-    container.querySelectorAll(selector).forEach(btn => btn.classList.remove("active"));
-    activeButton.classList.add("active");
-  }
-
-  function resetChipGroup(container, selector, value) {
-    const target = container.querySelector(`${selector}[data-category="${value}"], ${selector}[data-source="${value}"], ${selector}[data-view="${value}"]`);
-    container.querySelectorAll(selector).forEach(btn => btn.classList.remove("active"));
-    if (target) target.classList.add("active");
-  }
-
-  function setStatus(message, type) {
-    els.statusText.textContent = message || "";
-    els.statusDot.classList.remove("loading", "error");
-
-    if (type === "loading" || type === "warning") {
-      els.statusDot.classList.add("loading");
-    } else if (type === "error") {
-      els.statusDot.classList.add("error");
+    if (failures.length) {
+      console.warn('Feed failures:', failures);
     }
   }
 
-  function dedupeItems(items) {
-    const seen = new Set();
-    const deduped = [];
-
-    for (const item of items) {
-      const key = item.link
-        ? item.link.toLowerCase().replace(/\/+$/, "")
-        : `${item.sourceId}:${item.title.toLowerCase()}`;
-
-      if (seen.has(key)) continue;
-      seen.add(key);
-      deduped.push(item);
-    }
-
-    return deduped;
+  function init() {
+    loadSaved();
+    loadUiState();
+    bindStaticControls();
+    loadAllFeeds(false);
   }
 
-  function loadSavedIds() {
-    try {
-      const raw = localStorage.getItem(SAVE_KEY);
-      const parsed = raw ? JSON.parse(raw) : [];
-      return Array.isArray(parsed) ? parsed : [];
-    } catch {
-      return [];
-    }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
-
-  function readCache() {
-    try {
-      const raw = localStorage.getItem(CACHE_KEY);
-      if (!raw) return null;
-
-      const parsed = JSON.parse(raw);
-      if (!parsed || !parsed.lastUpdated || !Array.isArray(parsed.items)) return null;
-
-      if ((Date.now() - parsed.lastUpdated) > CACHE_TTL_MS) {
-        return null;
-      }
-
-      return parsed;
-    } catch {
-      return null;
-    }
-  }
-
-  function writeCache(data) {
-    try {
-      localStorage.setItem(CACHE_KEY, JSON.stringify(data));
-    } catch {
-      // ignore localStorage quota errors
-    }
-  }
-
-  function parseDateSafe(value) {
-    const ts = Date.parse(value);
-    return Number.isFinite(ts) ? ts : 0;
-  }
-
-  function formatRelativeTime(input) {
-    const ts = typeof input === "number" ? input : parseDateSafe(input);
-    if (!ts) return "Date unavailable";
-
-    const diffMs = Date.now() - ts;
-    const diffMin = Math.floor(diffMs / 60000);
-    const diffHr = Math.floor(diffMs / 3600000);
-    const diffDay = Math.floor(diffMs / 86400000);
-
-    if (diffMin < 1) return "Just now";
-    if (diffMin < 60) return `${diffMin}m ago`;
-    if (diffHr < 24) return `${diffHr}h ago`;
-    if (diffDay < 30) return `${diffDay}d ago`;
-
-    return new Date(ts).toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "short",
-      day: "numeric"
-    });
-  }
-
-  function formatCategoryLabel(category) {
-    const map = {
-      bitcoin: "Bitcoin",
-      ethereum: "Ethereum",
-      solana: "Solana",
-      defi: "DeFi",
-      nft: "NFT",
-      regulation: "Regulation",
-      security: "Security",
-      exchange: "Exchange",
-      stablecoin: "Stablecoin",
-      layer2: "Layer 2",
-      ai: "AI",
-      general: "General"
-    };
-    return map[category] || category;
-  }
-
-  function buildId(seed) {
-    let hash = 0;
-    const str = String(seed || "");
-    for (let i = 0; i < str.length; i += 1) {
-      hash = ((hash << 5) - hash) + str.charCodeAt(i);
-      hash |= 0;
-    }
-    return `news_${Math.abs(hash)}`;
-  }
-
-  function cleanExcerpt(html) {
-    const text = cleanText(html);
-    if (!text) return "";
-    return text.length > 190 ? `${text.slice(0, 187).trim()}…` : text;
-  }
-
-  function cleanText(value) {
-    return String(value || "")
-      .replace(/<!\[CDATA\[|\]\]>/g, "")
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
-      .replace(/&nbsp;/gi, " ")
-      .replace(/&amp;/gi, "&")
-      .replace(/&quot;/gi, "\"")
-      .replace(/&#39;/gi, "'")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  function sanitizeUrl(value) {
-    try {
-      const url = new URL(value, window.location.origin);
-      if (url.protocol === "http:" || url.protocol === "https:") {
-        return url.href;
-      }
-      return "";
-    } catch {
-      return "";
-    }
-  }
-
-  function escapeHtml(value) {
-    return String(value || "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-  }
-
-  function escapeAttribute(value) {
-    return escapeHtml(value).replace(/`/g, "&#96;");
-  }
-
-  function debounce(fn, wait) {
-    let t = null;
-    return function (...args) {
-      clearTimeout(t);
-      t = setTimeout(() => fn.apply(this, args), wait);
-    };
-  }
-
-  document.addEventListener("DOMContentLoaded", init);
 })();
