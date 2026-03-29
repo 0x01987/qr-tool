@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'instantqr_world_clock_v2';
+  const STORAGE_KEY = 'instantqr_world_clock_v3';
 
   const DEFAULT_CLOCKS = [
     'America/Phoenix',
@@ -99,6 +99,7 @@
   let supportedTimezones = [];
   let map = null;
   let markerLayer = null;
+  const markerRegistry = new Map();
 
   function safeSupportedTimezones() {
     try {
@@ -106,9 +107,7 @@
         return Intl.supportedValuesOf('timeZone');
       }
     } catch (err) {}
-    return [
-      ...new Set([...PREFERRED_TIMEZONES, ...DEFAULT_CLOCKS])
-    ];
+    return [...new Set([...PREFERRED_TIMEZONES, ...DEFAULT_CLOCKS])];
   }
 
   function loadState() {
@@ -187,6 +186,13 @@
       hour12: state.format === '12'
     });
 
+    const mapTimeFormatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: timezone,
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: state.format === '12'
+    });
+
     const dateFormatter = new Intl.DateTimeFormat('en-US', {
       timeZone: timezone,
       weekday: 'short',
@@ -202,6 +208,7 @@
     });
 
     const time = timeFormatter.format(now);
+    const mapTime = mapTimeFormatter.format(now);
     const dateText = dateFormatter.format(now);
     const hourNum = Number(hourFormatter.format(now));
     const isBusiness = hourNum >= 9 && hourNum < 17;
@@ -210,6 +217,7 @@
 
     return {
       time,
+      mapTime,
       dateText,
       hourNum,
       isBusiness,
@@ -332,6 +340,7 @@
     state.maximizedClock = state.maximizedClock === timezone ? null : timezone;
     saveState();
     renderClocks();
+    updateMapTimesOnly();
   }
 
   function renderClocks() {
@@ -534,17 +543,39 @@
     return fallback[region] || { label: toLabel(timezone), country: toRegion(timezone), lat: 20, lon: 0 };
   }
 
+  function buildMarkerHtml(timezone, isActive) {
+    const parts = getTimeParts(timezone);
+    return `
+      <div class="clock-map-bubble ${isActive ? 'active' : ''}">
+        <span class="city">${escapeHtml(toLabel(timezone))}</span>
+        <span class="clock mono">${escapeHtml(parts.mapTime)}</span>
+        <span class="offset">${escapeHtml(parts.offset)}</span>
+      </div>
+    `;
+  }
+
   function renderMap() {
     initMap();
     if (!map || !markerLayer) return;
 
     markerLayer.clearLayers();
+    markerRegistry.clear();
 
     const bounds = [];
 
     state.clocks.forEach((timezone) => {
       const point = getMapPoint(timezone);
-      const marker = L.marker([point.lat, point.lon]);
+      const isActive = state.maximizedClock === timezone;
+
+      const icon = L.divIcon({
+        className: 'clock-map-label',
+        html: buildMarkerHtml(timezone, isActive),
+        iconSize: null,
+        iconAnchor: [58, 48],
+        popupAnchor: [0, -42]
+      });
+
+      const marker = L.marker([point.lat, point.lon], { icon });
       marker.bindPopup(buildPopupHtml(timezone));
 
       marker.on('click', () => {
@@ -552,24 +583,46 @@
       });
 
       markerLayer.addLayer(marker);
+      markerRegistry.set(timezone, marker);
       bounds.push([point.lat, point.lon]);
     });
 
     el.mapClockCount.textContent = `${state.clocks.length} ${state.clocks.length === 1 ? 'marker' : 'markers'}`;
 
     if (!state.clocks.length) {
-      el.mapStatusText.textContent = 'Add clocks to show them on the map. Click a marker to view the city, current time, and UTC offset.';
+      el.mapStatusText.textContent = 'Add clocks to show them on the map. Click a marker to focus the matching clock card and open details.';
       map.setView([18, 10], 2);
       return;
     }
 
-    el.mapStatusText.textContent = 'Map updated with your selected clocks. Click any marker to see the live local time and UTC offset.';
+    el.mapStatusText.textContent = 'Map updated with your selected clocks. Each label shows live local time directly on the map.';
 
     if (bounds.length === 1) {
       map.setView(bounds[0], 4);
     } else {
-      map.fitBounds(bounds, { padding: [35, 35] });
+      map.fitBounds(bounds, { padding: [40, 40] });
     }
+  }
+
+  function updateMapTimesOnly() {
+    if (!map || !markerRegistry.size) return;
+
+    markerRegistry.forEach((marker, timezone) => {
+      const isActive = state.maximizedClock === timezone;
+      marker.setIcon(L.divIcon({
+        className: 'clock-map-label',
+        html: buildMarkerHtml(timezone, isActive),
+        iconSize: null,
+        iconAnchor: [58, 48],
+        popupAnchor: [0, -42]
+      }));
+
+      if (marker.isPopupOpen()) {
+        marker.setPopupContent(buildPopupHtml(timezone));
+      }
+    });
+
+    el.mapClockCount.textContent = `${state.clocks.length} ${state.clocks.length === 1 ? 'marker' : 'markers'}`;
   }
 
   function focusMapMarker(timezone) {
@@ -579,14 +632,10 @@
     const point = getMapPoint(timezone);
     map.setView([point.lat, point.lon], 4);
 
-    markerLayer.eachLayer((layer) => {
-      const popup = layer.getPopup?.();
-      if (!popup) return;
-      const content = popup.getContent();
-      if (String(content).includes(timezone) || String(content).includes(toLabel(timezone))) {
-        layer.openPopup();
-      }
-    });
+    const marker = markerRegistry.get(timezone);
+    if (marker) {
+      marker.openPopup();
+    }
   }
 
   function renderAll() {
@@ -671,7 +720,7 @@
 
   function tick() {
     renderClocks();
-    renderMap();
+    updateMapTimesOnly();
     el.clockBadge.textContent = `Updated ${new Date().toLocaleTimeString()}`;
   }
 
