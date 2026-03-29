@@ -14,12 +14,11 @@
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460548141741256"
     crossorigin="anonymous"></script>
 
-  <!-- Core Meta -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
   <title>World Clock | Live Time in Any City + World Map | InstantQR</title>
-  <meta name="description" content="Free world clock with live local time for cities and time zones worldwide. Add clocks, switch 12 or 24 hour format, change themes, maximize clocks, copy time, and view clocks on an interactive world map." />
+  <meta name="description" content="Free world clock with live local time for cities and time zones worldwide. Add clocks, switch 12 or 24 hour format, change themes, maximize clocks, copy time, and view clocks on an interactive world map with live time labels." />
   <meta name="keywords" content="world clock, live world clock, city time, current time by city, local time, international clock, time zones, utc clock, business hours clock, world map clock" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -53,7 +52,6 @@
     crossorigin=""
   />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="InstantQR" />
   <meta property="og:locale" content="en_US" />
@@ -63,13 +61,11 @@
   <meta property="og:image" content="https://instantqr.io/assets/og-instantqr.png" />
   <meta property="og:image:alt" content="InstantQR World Clock tool" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="World Clock | Live Time in Any City + World Map | InstantQR" />
   <meta name="twitter:description" content="Free online world clock with live city time, 12 or 24 hour format, themes, maximize mode, and an interactive world map." />
   <meta name="twitter:image" content="https://instantqr.io/assets/og-instantqr.png" />
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -124,10 +120,10 @@
       },
       {
         "@type":"Question",
-        "name":"Does the world map update with my clocks?",
+        "name":"Does the map show live time directly?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"Yes. The map updates with markers for your currently selected clocks and shows live local time and UTC offset."
+          "text":"Yes. Each selected city can display its current local time directly in the map label."
         }
       }
     ]
@@ -550,7 +546,7 @@
     }
     #worldMap{
       width:100%;
-      height:460px;
+      height:480px;
       background:#0b1222;
     }
     .mapFooter{
@@ -578,6 +574,51 @@
       font-size:12px;
     }
 
+    .clock-map-label{
+      background:transparent;
+      border:none;
+    }
+    .clock-map-bubble{
+      min-width:116px;
+      max-width:160px;
+      padding:8px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(11,18,34,.96);
+      box-shadow:0 10px 28px rgba(0,0,0,.32);
+      color:#e5eefc;
+      backdrop-filter:blur(8px);
+      transform:translateY(-8px);
+    }
+    .clock-map-bubble .city{
+      display:block;
+      font-size:11px;
+      font-weight:800;
+      color:#cbd5e1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      margin-bottom:4px;
+    }
+    .clock-map-bubble .clock{
+      display:block;
+      font-size:18px;
+      line-height:1.1;
+      font-weight:900;
+      color:#93c5fd;
+      letter-spacing:.2px;
+    }
+    .clock-map-bubble .offset{
+      display:block;
+      margin-top:4px;
+      font-size:10px;
+      color:#94a3b8;
+    }
+    .clock-map-bubble.active{
+      border-color:rgba(34,197,94,.55);
+      box-shadow:0 0 0 1px rgba(34,197,94,.18), 0 10px 28px rgba(0,0,0,.36);
+    }
+
     @media (max-width: 980px){
       .world-grid,
       .miniGrid2{
@@ -591,7 +632,7 @@
         grid-template-columns:repeat(2, 1fr);
       }
       #worldMap{
-        height:380px;
+        height:400px;
       }
     }
     @media (max-width: 640px){
@@ -603,7 +644,14 @@
         width:100%;
       }
       #worldMap{
-        height:320px;
+        height:340px;
+      }
+      .clock-map-bubble{
+        min-width:104px;
+        padding:7px 9px;
+      }
+      .clock-map-bubble .clock{
+        font-size:16px;
       }
     }
   </style>
@@ -642,12 +690,12 @@
 
     <section class="world-grid" aria-label="World Clock">
       <section class="world-card">
-        <div class="pill">🌍 Live city time • 🕒 12/24-hour • 🗺 World map • 🔒 Saved locally</div>
+        <div class="pill">🌍 Live city time • 🕒 12/24-hour • 🗺 World map labels • 🔒 Saved locally</div>
 
         <h1>World Clock</h1>
         <p class="sub">
           Live local time for any city or IANA time zone. Add or remove clocks, switch between 12-hour and 24-hour format,
-          change theme colors, maximize one clock or the full grid, and view your selected clocks on an interactive world map.
+          change theme colors, maximize one clock or the full grid, and view your selected clocks on an interactive world map with time shown directly on the map.
         </p>
 
         <div class="controlsGrid" aria-label="World clock controls">
@@ -729,7 +777,7 @@
       <div class="panel-top">
         <div>
           <h2>World Map</h2>
-          <div class="hint" style="margin-top:6px;">Markers show your selected clocks and their live local times.</div>
+          <div class="hint" style="margin-top:6px;">Markers show your selected clocks with live time visible directly on the map.</div>
         </div>
         <div class="badge-soft" id="mapClockCount">0 markers</div>
       </div>
@@ -740,9 +788,9 @@
 
       <div class="mapFooter">
         <div class="mapHint" id="mapStatusText">
-          Add clocks to show them on the map. Click a marker to view the city, current time, and UTC offset.
+          Add clocks to show them on the map. Click a marker to focus the matching clock card and open details.
         </div>
-        <div class="mapBadge">Interactive map</div>
+        <div class="mapBadge">Live map labels</div>
       </div>
     </section>
 
@@ -766,6 +814,7 @@
           <li>Updates live every second</li>
           <li>Saves your selected clocks locally</li>
           <li>Shows selected clocks on an interactive world map</li>
+          <li>Displays live time directly on the map labels</li>
         </ul>
       </div>
 
@@ -798,8 +847,8 @@
       </details>
 
       <details>
-        <summary>Does the map update with my clocks?</summary>
-        <p>Yes. The map updates as your clocks change and shows live marker popups with current local time and UTC offset.</p>
+        <summary>Does the map show live time directly?</summary>
+        <p>Yes. Each selected city can display its current local time directly in the map label, and clicking the marker opens more detail.</p>
       </details>
     </section>
 
